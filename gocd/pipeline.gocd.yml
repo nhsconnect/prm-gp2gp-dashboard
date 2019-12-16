@@ -7,10 +7,10 @@ pipelines:
       git:
         type: configrepo
     stages:
-      - example_stage:
+      - build:
           clean_workspace: true
           jobs:
-            example_job:
+            npm_build:
               resources:
                 - docker
               tasks:
@@ -18,4 +18,4 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - echo hello
+                      - ./tasks build
