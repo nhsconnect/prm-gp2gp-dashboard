@@ -8,6 +8,10 @@ case "${command}" in
   _build)
       npm install
       npm run build
+      # GoCD can not archive directories with broken symlinks
+      # See: https://github.com/gocd/gocd/issues/1377#issuecomment-566103338
+      # The following command deletes them
+      find node_modules -type l -exec test ! -e {} \; -print | xargs rm
       ;;
   build)
       dojo "./tasks _build"
