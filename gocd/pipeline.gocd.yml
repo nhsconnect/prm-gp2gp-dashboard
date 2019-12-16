@@ -16,6 +16,8 @@ pipelines:
               artifacts:
                 - build:
                     source: public
+                - build:
+                    source: .cache
               tasks:
                 - exec:
                     command: /bin/bash
@@ -33,6 +35,10 @@ pipelines:
                     stage: build
                     job: npm_build
                     source: public
+                - fetch:
+                    stage: build
+                    job: npm_build
+                    source: .cache
                 - exec:
                     command: /bin/bash
                     arguments:
