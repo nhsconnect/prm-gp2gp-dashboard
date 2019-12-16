@@ -12,6 +12,12 @@ case "${command}" in
   build)
       dojo "./tasks _build"
       ;;
+  _deploy)
+      npm deploy
+      ;;
+  deploy)
+      dojo "./tasks _deploy"
+      ;;
   *)
       echo "Invalid command: '${command}'"
       exit 1

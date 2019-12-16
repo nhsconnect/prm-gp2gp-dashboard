@@ -13,9 +13,34 @@ pipelines:
             npm_build:
               resources:
                 - docker
+              artifacts:
+                - build:
+                    source: public
+                - build:
+                    source: node_modules
               tasks:
                 - exec:
                     command: /bin/bash
                     arguments:
                       - -c
                       - ./tasks build
+      - deploy:
+          clean_workspace: true
+          jobs:
+            gastby_deploy:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: build
+                    job: npm_build
+                    source: public
+                - fetch:
+                    stage: build
+                    job: npm_build
+                    source: node_modules
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks deploy
