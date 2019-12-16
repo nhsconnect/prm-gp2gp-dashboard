@@ -17,7 +17,7 @@ case "${command}" in
       dojo "./tasks _build"
       ;;
   _deploy)
-      npm deploy
+      npm run deploy
       ;;
   deploy)
       dojo "./tasks _deploy"
