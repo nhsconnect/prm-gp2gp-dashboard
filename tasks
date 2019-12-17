@@ -5,6 +5,13 @@ set -Eeo pipefail
 command="$1"
 
 case "${command}" in
+  _test)
+      npm install
+      npm run test
+      ;;
+  test)
+      dojo "./tasks _test"
+      ;;
   _build)
       npm install
       npm run build

@@ -10,6 +10,15 @@ pipelines:
       - build:
           clean_workspace: true
           jobs:
+            test:
+              resources:
+                - docker
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks test
             npm_build:
               resources:
                 - docker
