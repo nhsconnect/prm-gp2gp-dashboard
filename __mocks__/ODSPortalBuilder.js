@@ -1,4 +1,23 @@
-export const response = {
+import cloneDeep from "lodash/cloneDeep";
+
+export const practiceDataBuilder = ({
+  name = "",
+  town = "",
+  postCode = "",
+  lines = { AddrLn1: "" },
+} = {}) => {
+  const newResponse = cloneDeep(response);
+
+  newResponse.Organisation.Name = name;
+  let geoLoc = newResponse.Organisation.GeoLoc;
+  geoLoc.Location.PostCode = postCode;
+  geoLoc.Location.Town = town;
+  geoLoc.Location = { ...geoLoc.Location, ...lines };
+
+  return newResponse;
+};
+
+const response = {
   Organisation: {
     Name: "MARKET SQUARE SURGERY",
     Date: [
@@ -18,7 +37,6 @@ export const response = {
     GeoLoc: {
       Location: {
         AddrLn1: "WALTHAM ABBEY HEALTH CTRE",
-        AddrLn2: "13 SEWARDSTONE ROAD",
         Town: "WALTHAM ABBEY",
         County: "ESSEX",
         PostCode: "EN9 1NP",

@@ -6,23 +6,31 @@ export const fetchPracticeDataByODSCode = async ODSCode => {
   const response = await axios.get(
     `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/${ODSCode}`
   );
-  const org = response.data.Organisation;
-  const { AddrLn1, AddrLn2, AddrLn3, AddrLn4 } = org.GeoLoc.Location;
-  const name = startCase(toLower(org.Name));
 
-  const town = startCase(toLower(org.GeoLoc.Location.Town));
-  let lines = [AddrLn1, AddrLn2, AddrLn3, AddrLn4]
-    .filter(line => Boolean(line))
-    .map(line => startCase(toLower(line)))
-    .join(", ");
+  const org = response.data.Organisation;
+  const name = convertToTitleCase(org.Name);
+  const location = org.GeoLoc.Location;
+  const postCode = location.PostCode;
+  const town = convertToTitleCase(location.Town);
+  const lines = [];
+
+  Object.keys(location)
+    .sort()
+    .forEach(key => {
+      if (key.includes("AddrLn")) {
+        lines.push(convertToTitleCase(location[key]));
+      }
+    });
 
   return {
-    ODSCode: org.OrgId.extension,
+    ODSCode,
     name,
     address: {
-      lines,
-      postCode: org.GeoLoc.Location.PostCode,
+      postCode,
       town,
+      lines,
     },
   };
 };
+
+const convertToTitleCase = string => startCase(toLower(string));
