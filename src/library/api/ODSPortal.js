@@ -10,6 +10,7 @@ export const fetchPracticeDataByODSCode = async ODSCode => {
   const org = response.data.Organisation;
   const name = convertToTitleCase(org.Name);
   const location = org.GeoLoc.Location;
+  const odsCode = org.OrgId.extension
   const postCode = location.PostCode;
   const town = convertToTitleCase(location.Town);
   const lines = [];
@@ -23,7 +24,7 @@ export const fetchPracticeDataByODSCode = async ODSCode => {
     });
 
   return {
-    ODSCode,
+    ODSCode: odsCode,
     name,
     address: {
       postCode,

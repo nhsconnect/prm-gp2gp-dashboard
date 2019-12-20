@@ -13,3 +13,6 @@ public
 
 # Mac files
 .DS_Store
+
+# IntelliJ directory
+.idea/
