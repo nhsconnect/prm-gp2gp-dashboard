@@ -1,3 +1,5 @@
 import React from "react";
 
-export default () => <div>Hello world!!</div>;
+const Index = () => <div>Hello world!!</div>;
+
+export default Index;
