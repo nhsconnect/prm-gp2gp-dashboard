@@ -13,9 +13,17 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /assets/
-        }
-      }
-    }
-  ]
-}
+          include: /assets/,
+        },
+      },
+    },
+    "gatsby-transformer-json",
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "data",
+        path: `${__dirname}/src/data`,
+      },
+    },
+  ],
+};
