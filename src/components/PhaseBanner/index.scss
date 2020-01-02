@@ -1,0 +1,18 @@
+@import "node_modules/nhsuk-frontend/packages/nhsuk";
+
+.nhsuk-phase-banner {
+  color: $color_nhsuk-white;
+
+  &__text {
+    @include nhsuk-font(16);
+    margin: 0;
+
+    @include mq($until: tablet) {
+      @include nhsuk-font(14);
+    }
+  }
+
+  &__tag {
+    margin-right: 8px;
+  }
+}

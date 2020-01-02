@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
-import Logo from "../assets/logo.svg";
+import Logo from "../../assets/logo.svg";
+import PhaseBanner from "../PhaseBanner/index";
 
 const Header = () => {
   const data = useStaticQuery(
@@ -11,14 +12,19 @@ const Header = () => {
             node {
               childDataJson {
                 serviceName
+                phaseBanner {
+                  tag
+                  text
+                }
               }
             }
           }
         }
       }
     `
-  );
-  const serviceName = data.allFile.edges[0].node.childDataJson.serviceName;
+  ).allFile.edges[0].node.childDataJson;
+  const serviceName = data.serviceName;
+  const phaseBanner = data.phaseBanner;
 
   return (
     <header className="nhsuk-header nhsuk-header--transactional" role="banner">
@@ -36,6 +42,9 @@ const Header = () => {
             {serviceName}
           </Link>
         </div>
+      </div>
+      <div className="nhsuk-width-container nhsuk-u-margin-bottom-3">
+        <PhaseBanner tag={phaseBanner.tag}>{phaseBanner.text}</PhaseBanner>
       </div>
     </header>
   );
