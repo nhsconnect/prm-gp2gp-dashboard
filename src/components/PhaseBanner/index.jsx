@@ -3,8 +3,8 @@ import "./index.scss";
 
 const PhaseBanner = ({ tag, children }) => (
   <div className="nhsuk-phase-banner">
-    <p className="nhsuk-phase-banner__text">
-      <strong className="nhsuk-phase-banner__tag">{tag}</strong>
+    <p className="nhsuk-body-s nhsuk-u-margin-bottom-3">
+      <strong className="nhsuk-u-margin-right-3">{tag}</strong>
       {children}
     </p>
   </div>
