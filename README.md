@@ -2,8 +2,8 @@
 
 
 ## Dependencies
-- `Node.js 12.14.0`
-- `npm 6.13.4`
+- `Node.js 12.13`
+- `npm 6.12`
 - `git`
 
 ## How to run the site locally
