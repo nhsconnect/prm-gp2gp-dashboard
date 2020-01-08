@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import NotFound from "../404";
 
 describe("404 page", () => {
-  it("Contains a title and a text paragraph", () => {
+  it("contains a title and a text paragraph", () => {
     const title = "Not found";
     const text = "If you entered a web address please check it was correct.";
     const data = {

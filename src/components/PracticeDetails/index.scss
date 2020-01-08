@@ -1,4 +1,22 @@
+@import "node_modules/nhsuk-frontend/packages/nhsuk";
+
 .gp2gp-practice-details {
+  &__name {
+    position: relative;
+    padding-right: 24px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: inline-block;
+      border-right: 4px solid $color_nhsuk_black;
+      height: 75%;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+    }
+  }
+
   &__address-line {
     display: block;
   }

@@ -20,7 +20,7 @@ exports.createPages = async ({ graphql, actions }) => {
   ODSCodes.forEach(ODSCode => {
     createPage({
       path: `/practice/${ODSCode}`,
-      component: path.resolve("src/templates/index.js"),
+      component: path.resolve("src/templates/practice.js"),
       context: {
         ODSCode,
       },
