@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PracticeDetails from "../components/PracticeDetails/index";
-import { fetchPracticeDataByODSCode } from "../library/api/ODSPortal";
+import { getPracticeDetails } from "../library/api/ODSPortal";
 
 const Practice = ({ pageContext }) => {
   const [practiceDetails, setPracticeDetails] = useState({
@@ -8,7 +8,7 @@ const Practice = ({ pageContext }) => {
   });
   useEffect(() => {
     (async () => {
-      const data = await fetchPracticeDataByODSCode(pageContext.ODSCode);
+      const data = await getPracticeDetails(pageContext.ODSCode);
       setPracticeDetails(data);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

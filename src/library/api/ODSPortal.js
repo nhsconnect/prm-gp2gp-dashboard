@@ -2,15 +2,23 @@ import axios from "axios";
 import startCase from "lodash/startCase";
 import toLower from "lodash/toLower";
 
-export const fetchPracticeDataByODSCode = async ODSCode => {
-  const response = await axios.get(
-    `https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/${ODSCode}`
-  );
+const ODS_PORTAL_URL =
+  "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations";
 
-  const org = response.data.Organisation;
+export const fetchPracticeDataByODSCode = async (
+  ODSCode,
+  url = ODS_PORTAL_URL
+) => {
+  const response = await axios.get(`${url}/${ODSCode}`);
+
+  return response.data;
+};
+
+export const transformPracticeData = data => {
+  const org = data.Organisation;
   const name = convertToTitleCase(org.Name);
   const location = org.GeoLoc.Location;
-  const odsCode = org.OrgId.extension
+  const ODSCode = org.OrgId.extension;
   const postCode = location.PostCode;
   const town = convertToTitleCase(location.Town);
   const lines = [];
@@ -24,7 +32,7 @@ export const fetchPracticeDataByODSCode = async ODSCode => {
     });
 
   return {
-    ODSCode: odsCode,
+    ODSCode,
     name,
     address: {
       postCode,
@@ -32,6 +40,13 @@ export const fetchPracticeDataByODSCode = async ODSCode => {
       lines,
     },
   };
+};
+
+export const getPracticeDetails = async ODSCode => {
+  const response = await fetchPracticeDataByODSCode(ODSCode);
+  const transformedResponse = transformPracticeData(response);
+
+  return transformedResponse;
 };
 
 const convertToTitleCase = string => startCase(toLower(string));
