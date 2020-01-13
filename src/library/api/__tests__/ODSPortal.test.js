@@ -4,6 +4,7 @@ import {
   transformPracticeData,
 } from "../ODSPortal";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
+import { mockAPIResponse } from "../../../../__mocks__/api";
 
 describe("fetchPracticeDataByODSCode", () => {
   it("returns a successful ODS portal response", async () => {
@@ -121,13 +122,3 @@ describe("transformPracticeData", () => {
     expect(practiceData.address.lines[2]).toEqual(transformedLine3);
   });
 });
-
-const mockAPIResponse = (status, response) => {
-  moxios.wait(() => {
-    let request = moxios.requests.mostRecent();
-    request.respondWith({
-      status,
-      response,
-    });
-  });
-};
