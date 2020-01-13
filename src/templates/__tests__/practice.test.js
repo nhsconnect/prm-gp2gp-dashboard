@@ -21,7 +21,7 @@ describe("Practice template", () => {
       name: "Burton Croft Surgery",
       town: "Leeds",
       postCode: "LS6 2AF",
-      lines: { AddrLn1: "1 Shire Oak Street", AddrLn2: "Headingley" },
+      lines: { line1: "1 Shire Oak Street", line2: "Headingley" },
     };
 
     const statusCode = 200;
@@ -39,10 +39,10 @@ describe("Practice template", () => {
     expect(getByText(transformedPracticeDetails.town)).toBeInTheDocument();
     expect(getByText(transformedPracticeDetails.postCode)).toBeInTheDocument();
     expect(
-      getByText(transformedPracticeDetails.lines.AddrLn1)
+      getByText(transformedPracticeDetails.lines.line1)
     ).toBeInTheDocument();
     expect(
-      getByText(transformedPracticeDetails.lines.AddrLn2)
+      getByText(transformedPracticeDetails.lines.line2)
     ).toBeInTheDocument();
 
     moxios.uninstall();
