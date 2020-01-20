@@ -1,6 +1,5 @@
 import axios from "axios";
-import startCase from "lodash/startCase";
-import toLower from "lodash/toLower";
+import capitalize from "lodash/capitalize";
 
 const ODS_PORTAL_URL =
   "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations";
@@ -49,4 +48,4 @@ export const getPracticeDetails = async ODSCode => {
   return transformedResponse;
 };
 
-const convertToTitleCase = string => startCase(toLower(string));
+const convertToTitleCase = string => string.replace(/\w+/g, capitalize);

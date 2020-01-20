@@ -38,6 +38,15 @@ describe("transformPracticeData", () => {
     expect(practiceData.name).toEqual(transformedName);
   });
 
+  it("returns practice name in title case without removing special characters", async () => {
+    const name = "MARKET, SQUARE";
+    const transformedName = "Market, Square";
+    const ODSPortalResponse = practiceDataBuilder({ name });
+    const practiceData = transformPracticeData(ODSPortalResponse);
+
+    expect(practiceData.name).toEqual(transformedName);
+  });
+
   it("returns practice post code", async () => {
     const postCode = "H65 B64";
     const ODSPortalResponse = practiceDataBuilder({ postCode });
