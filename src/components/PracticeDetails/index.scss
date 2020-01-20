@@ -3,17 +3,13 @@
 .gp2gp-practice-details {
   &__name {
     position: relative;
-    padding-right: 24px;
+    padding-right: 12px;
 
     &:after {
       content: "";
-      position: absolute;
-      display: inline-block;
-      border-right: 4px solid $color_nhsuk_black;
-      height: 75%;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 10px;
+      border-right: 4px solid #212b32;
+      height: 100%;
+      padding-left: 12px;
     }
   }
 
