@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PracticeDetails from "../components/PracticeDetails/index";
 import { getPracticeDetails } from "../library/api/ODSPortal";
+import { convertMonthNumberToText } from "../library/common/index";
 
 const Practice = ({ pageContext }) => {
   const [practiceDetails, setPracticeDetails] = useState({
@@ -15,8 +16,15 @@ const Practice = ({ pageContext }) => {
   }, []);
 
   const { name, ODSCode, address } = practiceDetails;
+  const month = convertMonthNumberToText(pageContext.month);
+  const year = pageContext.year;
 
-  return <PracticeDetails name={name} ODSCode={ODSCode} address={address} />;
+  return (
+    <React.Fragment>
+      <PracticeDetails name={name} ODSCode={ODSCode} address={address} />
+      <h2 className="nhsuk-heading-m">{month} {year}</h2>
+    </React.Fragment>
+  );
 };
 
 export default Practice;

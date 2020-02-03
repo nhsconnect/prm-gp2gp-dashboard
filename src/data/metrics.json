@@ -1,0 +1,85 @@
+{
+  "generatedOn": "2020-02-03",
+  "practices": [
+    {
+      "ods": "B81004",
+      "metrics": [
+        {
+          "year": 2019,
+          "month": 12,
+          "requestor": {
+            "timeToIntegrateSla": {
+              "within3Days": 5,
+              "within8Days": 12,
+              "beyond8Days": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "ods": "A83009",
+      "metrics": [
+        {
+          "year": 2019,
+          "month": 12,
+          "requestor": {
+            "timeToIntegrateSla": {
+              "within3Days": 6,
+              "within8Days": 2,
+              "beyond8Days": 12
+            }
+          }
+        }
+      ]
+    },
+    {
+      "ods": "B86055",
+      "metrics": [
+        {
+          "year": 2019,
+          "month": 12,
+          "requestor": {
+            "timeToIntegrateSla": {
+              "within3Days": 9,
+              "within8Days": 1,
+              "beyond8Days": 4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "ods": "B86030",
+      "metrics": [
+        {
+          "year": 2019,
+          "month": 12,
+          "requestor": {
+            "timeToIntegrateSla": {
+              "within3Days": 13,
+              "within8Days": 14,
+              "beyond8Days": 7
+            }
+          }
+        }
+      ]
+    },
+    {
+      "ods": "Y00159",
+      "metrics": [
+        {
+          "year": 2019,
+          "month": 12,
+          "requestor": {
+            "timeToIntegrateSla": {
+              "within3Days": 8,
+              "within8Days": 2,
+              "beyond8Days": 5
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
