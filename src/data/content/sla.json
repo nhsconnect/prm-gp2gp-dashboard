@@ -1,0 +1,7 @@
+{
+  "title": "Your practice integrating records",
+  "subtitle": "Number of days records were integrated within",
+  "within3Days": "< 3 DAYS",
+  "within8Days": "< 8 DAYS",
+  "beyond8Days": "> 8 DAYS"
+}
