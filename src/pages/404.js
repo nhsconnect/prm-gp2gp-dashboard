@@ -2,7 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 
 const NotFound = ({ data }) => {
-  const { title, text } = data.allFile.edges[0].node.childDataJson;
+  const { title, text } = data.allFile.edges[0].node.childContentJson;
 
   return (
     <React.Fragment>
@@ -17,7 +17,7 @@ export const query = graphql`
     allFile(filter: { name: { eq: "404" } }) {
       edges {
         node {
-          childDataJson {
+          childContentJson {
             title
             text
           }

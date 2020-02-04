@@ -22,7 +22,10 @@ const Practice = ({ pageContext }) => {
   return (
     <React.Fragment>
       <PracticeDetails name={name} ODSCode={ODSCode} address={address} />
-      <h2 className="nhsuk-heading-m">{month} {year}</h2>
+      <hr />
+      <h2 className="nhsuk-heading-m">
+        {month} {year}
+      </h2>
     </React.Fragment>
   );
 };

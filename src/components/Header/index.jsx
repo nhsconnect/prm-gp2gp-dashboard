@@ -10,7 +10,7 @@ const Header = () => {
         allFile(filter: { name: { eq: "header" } }) {
           edges {
             node {
-              childDataJson {
+              childContentJson {
                 serviceName
                 phaseBanner {
                   tag
@@ -22,7 +22,7 @@ const Header = () => {
         }
       }
     `
-  ).allFile.edges[0].node.childDataJson;
+  ).allFile.edges[0].node.childContentJson;
   const serviceName = data.serviceName;
   const phaseBanner = data.phaseBanner;
 

@@ -4,10 +4,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      allFile(filter: {name: {eq: "metrics"}}) {
+      allFile(filter: { name: { eq: "practiceSummaries" } }) {
         edges {
           node {
-            childDataJson {
+            childMetricsJson {
               practices {
                 ods
                 metrics {
@@ -28,10 +28,11 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
-  const practices = result.data.allFile.edges[0].node.childDataJson.practices;
+  const practices =
+    result.data.allFile.edges[0].node.childMetricsJson.practices;
 
   practices.forEach(practice => {
-    latestMetrics = practice.metrics[0]
+    latestMetrics = practice.metrics[0];
 
     createPage({
       path: `/practice/${practice.ods}`,
@@ -40,7 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
         ODSCode: practice.ods,
         year: latestMetrics.year,
         month: latestMetrics.month,
-        metrics: latestMetrics.requestor.timeToIntegrateSla
+        metrics: latestMetrics.requestor.timeToIntegrateSla,
       },
     });
   });
