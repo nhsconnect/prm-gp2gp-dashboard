@@ -13,7 +13,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 metrics {
                   year
                   month
-                  requestor {
+                  requester {
                     timeToIntegrateSla {
                       within3Days
                       within8Days
@@ -41,7 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
         ODSCode: practice.ods,
         year: latestMetrics.year,
         month: latestMetrics.month,
-        metrics: latestMetrics.requestor.timeToIntegrateSla,
+        metrics: latestMetrics.requester.timeToIntegrateSla,
       },
     });
   });

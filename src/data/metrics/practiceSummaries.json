@@ -7,7 +7,7 @@
         {
           "year": 2019,
           "month": 12,
-          "requestor": {
+          "requester": {
             "timeToIntegrateSla": {
               "within3Days": 5,
               "within8Days": 12,
@@ -23,7 +23,7 @@
         {
           "year": 2019,
           "month": 12,
-          "requestor": {
+          "requester": {
             "timeToIntegrateSla": {
               "within3Days": 6,
               "within8Days": 2,
@@ -39,7 +39,7 @@
         {
           "year": 2019,
           "month": 12,
-          "requestor": {
+          "requester": {
             "timeToIntegrateSla": {
               "within3Days": 9,
               "within8Days": 1,
@@ -55,7 +55,7 @@
         {
           "year": 2019,
           "month": 12,
-          "requestor": {
+          "requester": {
             "timeToIntegrateSla": {
               "within3Days": 13,
               "within8Days": 14,
@@ -71,7 +71,7 @@
         {
           "year": 2019,
           "month": 12,
-          "requestor": {
+          "requester": {
             "timeToIntegrateSla": {
               "within3Days": 8,
               "within8Days": 2,

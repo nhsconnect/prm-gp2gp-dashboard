@@ -1,5 +1,6 @@
 import React from "react";
 import moxios from "moxios";
+import * as Gatsby from "gatsby";
 import { render } from "@testing-library/react";
 import { waitForDomChange } from "@testing-library/dom";
 import Practice from "../practice";
@@ -23,13 +24,40 @@ describe("Practice template", () => {
       postCode: "LS6 2AF",
       lines: { line1: "1 Shire Oak Street", line2: "Headingley" },
     };
+    const practiceData = {
+      ODSCode: "B86030",
+      year: 2019,
+      month: 11,
+      metrics: {
+        "within3Days": 5,
+        "within8Days": 12,
+        "beyond8Days": 3
+      }
+    }
+
+    const useStaticQuery = jest.spyOn(Gatsby, 'useStaticQuery');
+    useStaticQuery.mockImplementation(() => ({
+      allFile: {
+        edges: [{
+          node: {
+            childContentJson: {
+              title: "Your practice integrating records",
+              subtitle: "Number of days records were integrated within",
+              within3Days: "< 3 DAYS",
+              within8Days: "< 8 DAYS",
+              beyond8Days: "> 8 DAYS"
+            }
+          }
+        }]
+      }
+    }));
 
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(practiceDetails);
     mockAPIResponse(statusCode, mockedResponse);
 
     const { getByText } = render(
-      <Practice pageContext={{ ODSCode: practiceDetails.ODSCode }} />
+      <Practice pageContext={practiceData} />
     );
 
     await waitForDomChange();
