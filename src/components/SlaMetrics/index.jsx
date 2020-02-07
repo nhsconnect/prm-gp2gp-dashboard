@@ -3,8 +3,8 @@ import "./index.scss";
 
 
 const SlaMetric = ({ label, value }) => (
-  <div className="gp2gp-sla-metrics__item"><span className="nhsuk-body-s nhsuk-u-margin-bottom-0">{label}</span>
-    <span className="nhsuk-body-s">{value}</span></div>
+  <div className="gp2gp-sla-metrics__item"><span className="nhsuk-body-m nhsuk-u-margin-bottom-0">{label}</span>
+    <span className="nhsuk-body-m">{value}</span></div>
 )
 
 const SlaMetrics = ({ title, subtitle, metrics }) => (
