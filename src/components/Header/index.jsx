@@ -43,7 +43,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <div className="nhsuk-width-container nhsuk-u-margin-bottom-3">
+      <div className="nhsuk-width-container nhsuk-u-padding-bottom-3">
         <PhaseBanner tag={phaseBanner.tag}>{phaseBanner.text}</PhaseBanner>
       </div>
     </header>
