@@ -1,33 +1,17 @@
 {
-  "generatedOn": "2020-02-03",
+  "generatedOn": "2020-02-11T15:27:28.123826+00:00",
   "practices": [
     {
-      "ods": "B81004",
+      "ods": "Y00159",
       "metrics": [
         {
-          "year": 2019,
-          "month": 12,
+          "year": 2020,
+          "month": 1,
           "requester": {
             "timeToIntegrateSla": {
-              "within3Days": 5,
-              "within8Days": 12,
-              "beyond8Days": 3
-            }
-          }
-        }
-      ]
-    },
-    {
-      "ods": "A83009",
-      "metrics": [
-        {
-          "year": 2019,
-          "month": 12,
-          "requester": {
-            "timeToIntegrateSla": {
-              "within3Days": 6,
-              "within8Days": 2,
-              "beyond8Days": 12
+              "within3Days": 88,
+              "within8Days": 7,
+              "beyond8Days": 1
             }
           }
         }
@@ -37,13 +21,13 @@
       "ods": "B86055",
       "metrics": [
         {
-          "year": 2019,
-          "month": 12,
+          "year": 2020,
+          "month": 1,
           "requester": {
             "timeToIntegrateSla": {
-              "within3Days": 9,
-              "within8Days": 1,
-              "beyond8Days": 4
+              "within3Days": 2,
+              "within8Days": 7,
+              "beyond8Days": 5
             }
           }
         }
@@ -53,29 +37,45 @@
       "ods": "B86030",
       "metrics": [
         {
-          "year": 2019,
-          "month": 12,
+          "year": 2020,
+          "month": 1,
           "requester": {
             "timeToIntegrateSla": {
-              "within3Days": 13,
-              "within8Days": 14,
-              "beyond8Days": 7
+              "within3Days": 74,
+              "within8Days": 9,
+              "beyond8Days": 0
             }
           }
         }
       ]
     },
     {
-      "ods": "Y00159",
+      "ods": "B81004",
       "metrics": [
         {
-          "year": 2019,
-          "month": 12,
+          "year": 2020,
+          "month": 1,
           "requester": {
             "timeToIntegrateSla": {
-              "within3Days": 8,
-              "within8Days": 2,
-              "beyond8Days": 5
+              "within3Days": 31,
+              "within8Days": 13,
+              "beyond8Days": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "ods": "A83009",
+      "metrics": [
+        {
+          "year": 2020,
+          "month": 1,
+          "requester": {
+            "timeToIntegrateSla": {
+              "within3Days": 31,
+              "within8Days": 1,
+              "beyond8Days": 0
             }
           }
         }
