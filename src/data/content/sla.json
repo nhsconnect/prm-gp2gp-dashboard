@@ -1,7 +1,7 @@
 {
   "title": "Your practice integrating records",
-  "subtitle": "Number of days records were integrated within",
-  "within3Days": "\u2264 3 DAYS",
-  "within8Days": "\u2264 8 DAYS",
-  "beyond8Days": "\u003E 8 DAYS"
+  "subtitle": "Number of records integrated:",
+  "within3Days": "within 3 days",
+  "within8Days": "within 8 days",
+  "beyond8Days": "beyond 8 days"
 }
