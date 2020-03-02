@@ -33,6 +33,10 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-get-metrics
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
                       - ./tasks dojo-build
       - deploy:
           clean_workspace: true
