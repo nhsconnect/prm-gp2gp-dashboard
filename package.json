@@ -10,10 +10,12 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "getMetrics": "node scripts/get-metrics.js",
     "deploy": "gatsby-plugin-s3 deploy",
     "test": "jest"
   },
   "dependencies": {
+    "aws-sdk": "^2.630.0",
     "gatsby": "^2.18.8",
     "gatsby-plugin-layout": "^1.1.18",
     "gatsby-plugin-react-svg": "^2.1.2",

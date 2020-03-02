@@ -16,3 +16,6 @@ public
 
 # IntelliJ directory
 .idea/
+
+# Metrics
+src/data/metrics

@@ -18,7 +18,7 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks test
+                      - ./tasks dojo-test
             npm_build:
               resources:
                 - docker
@@ -32,7 +32,8 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks build
+                      - ./tasks dojo-get-metrics
+                      - ./tasks dojo-build
       - deploy:
           clean_workspace: true
           jobs:
@@ -52,4 +53,4 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks deploy
+                      - ./tasks dojo-deploy

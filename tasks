@@ -5,26 +5,33 @@ set -Eeo pipefail
 command="$1"
 
 case "${command}" in
-  _test)
+  test)
       npm install
       npm run test
       ;;
-  test)
-      dojo "./tasks _test"
+  dojo-test)
+      dojo "./tasks test"
       ;;
-  _build)
+  build)
       npm install
       npm run build
       ;;
-  build)
-      dojo "./tasks _build"
+  dojo-build)
+      dojo "./tasks build"
       ;;
-  _deploy)
+  get-metrics)
+      npm install
+      npm run getMetrics
+      ;;
+  dojo-get-metrics)
+      dojo "./tasks get-metrics"
+      ;;
+  deploy)
       npm install
       npm run deploy
       ;;
-  deploy)
-      dojo "./tasks _deploy"
+  dojo-deploy)
+      dojo "./tasks deploy"
       ;;
   *)
       echo "Invalid command: '${command}'"
