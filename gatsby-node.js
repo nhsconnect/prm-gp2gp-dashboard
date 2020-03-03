@@ -4,12 +4,13 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      allFile(filter: { name: { eq: "practiceSummaries" } }) {
+      allFile(filter: { name: { eq: "practiceMetrics" } }) {
         edges {
           node {
             childMetricsJson {
               practices {
-                ods
+                odsCode
+                name
                 metrics {
                   year
                   month
@@ -35,10 +36,11 @@ exports.createPages = async ({ graphql, actions }) => {
     latestMetrics = practice.metrics[0];
 
     createPage({
-      path: `/practice/${practice.ods}`,
+      path: `/practice/${practice.odsCode}`,
       component: path.resolve("src/templates/practice.js"),
       context: {
-        ODSCode: practice.ods,
+        ODSCode: practice.odsCode,
+        name: practice.name,
         year: latestMetrics.year,
         month: latestMetrics.month,
         metrics: latestMetrics.requester.timeToIntegrateSla,

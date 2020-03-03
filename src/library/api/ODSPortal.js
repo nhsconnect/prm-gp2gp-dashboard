@@ -1,5 +1,5 @@
 import axios from "axios";
-import capitalize from "lodash/capitalize";
+import { convertToTitleCase } from "../common/index";
 
 const ODS_PORTAL_URL =
   "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations";
@@ -15,7 +15,6 @@ export const fetchPracticeDataByODSCode = async (
 
 export const transformPracticeData = data => {
   const org = data.Organisation;
-  const name = convertToTitleCase(org.Name);
   const location = org.GeoLoc.Location;
   const ODSCode = org.OrgId.extension;
   const postCode = location.PostCode;
@@ -32,7 +31,6 @@ export const transformPracticeData = data => {
 
   return {
     ODSCode,
-    name,
     address: {
       postCode,
       town,
@@ -47,5 +45,3 @@ export const getPracticeDetails = async ODSCode => {
 
   return transformedResponse;
 };
-
-const convertToTitleCase = string => string.replace(/\w+/g, capitalize);
