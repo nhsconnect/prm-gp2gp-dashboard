@@ -5,7 +5,7 @@ import "./index.scss";
 const PracticeDetails = ({ name, ODSCode, address }) => (
   <div className="gp2gp-practice-details">
     <h1 className="nhsuk-heading-l">
-      {!!name && <span className="gp2gp-practice-details__name">{name}</span>}
+      <span className="gp2gp-practice-details__name">{name}</span>
       <span>{ODSCode}</span>
     </h1>
     {!!address && (

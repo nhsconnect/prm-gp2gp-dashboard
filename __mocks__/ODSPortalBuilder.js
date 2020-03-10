@@ -1,16 +1,11 @@
 import cloneDeep from "lodash/cloneDeep";
 
 export const practiceDataBuilder = ({
-  ODSCode = "",
-  name = "",
   town = "",
   postCode = "",
   lines = { AddrLn1: "" },
 } = {}) => {
   const newResponse = cloneDeep(response);
-
-  newResponse.Organisation.OrgId.extension = ODSCode;
-  newResponse.Organisation.Name = name;
   const geoLoc = newResponse.Organisation.GeoLoc;
   geoLoc.Location = {
     ...geoLoc.Location,
@@ -20,7 +15,7 @@ export const practiceDataBuilder = ({
   };
 
   return newResponse;
-}
+};
 
 const response = {
   Organisation: {
@@ -178,4 +173,4 @@ const response = {
       ],
     },
   },
-}
+};
