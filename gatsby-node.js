@@ -39,7 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/practice/${practice.odsCode}`,
       component: path.resolve("src/templates/practice.js"),
       context: {
-        ODSCode: practice.odsCode,
+        odsCode: practice.odsCode,
         name: practice.name,
         year: latestMetrics.year,
         month: latestMetrics.month,

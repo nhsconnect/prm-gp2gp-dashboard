@@ -5,20 +5,20 @@ import PracticeDetails from "../PracticeDetails/index";
 describe("PracticeDetails component", () => {
   it("displays practice name and ODS code", () => {
     const name = "Hall Green Health";
-    const ODSCode = "Y00159";
+    const odsCode = "Y00159";
     const { getByText } = render(
-      <PracticeDetails name={name} ODSCode={ODSCode} />
+      <PracticeDetails name={name} odsCode={odsCode} />
     );
 
     expect(getByText(name)).toBeInTheDocument();
-    expect(getByText(ODSCode)).toBeInTheDocument();
+    expect(getByText(odsCode)).toBeInTheDocument();
   });
 
   it("displays only practice ODS code when the name is not provided", () => {
-    const ODSCode = "Y00159";
-    const { getByText } = render(<PracticeDetails ODSCode={ODSCode} />);
+    const odsCode = "Y00159";
+    const { getByText } = render(<PracticeDetails odsCode={odsCode} />);
 
-    expect(getByText(ODSCode)).toBeInTheDocument();
+    expect(getByText(odsCode)).toBeInTheDocument();
   });
 
   it("displays practice address in the correct order", () => {

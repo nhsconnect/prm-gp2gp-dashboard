@@ -21,13 +21,13 @@ describe("useApi", () => {
 
   it("returns mock on a successful api call", async () => {
     moxios.install();
-    const ODSCode = "B86030";
+    const odsCode = "B86030";
     const statusCode = 200;
-    const mockedResponse = practiceDataBuilder({ ODSCode });
+    const mockedResponse = practiceDataBuilder({ odsCode });
     mockAPIResponse(statusCode, mockedResponse);
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useApi(`http://test.com/${ODSCode}`)
+      useApi(`http://test.com/${odsCode}`)
     );
     await waitForNextUpdate();
 

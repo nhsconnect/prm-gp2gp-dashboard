@@ -14,7 +14,7 @@ import { useApi } from "../library/hooks";
 
 const Practice = ({ pageContext }) => {
   const [isLoading, apiData, apiErr] = useApi(
-    `${ODS_PORTAL_URL}/${pageContext.ODSCode}`
+    `${ODS_PORTAL_URL}/${pageContext.odsCode}`
   );
 
   const graphQlData = useStaticQuery(graphql`
@@ -35,7 +35,7 @@ const Practice = ({ pageContext }) => {
     }
   `).allFile.edges[0].node.childContentJson;
 
-  const { name, ODSCode, month, year, metrics } = pageContext;
+  const { name, odsCode, month, year, metrics } = pageContext;
   const formattedName = convertToTitleCase(name);
   const monthName = convertMonthNumberToText(month);
   const labelledMetrics = [
@@ -55,11 +55,11 @@ const Practice = ({ pageContext }) => {
   return (
     <React.Fragment>
       {isLoading | apiErr ? (
-        <PracticeDetails name={formattedName} ODSCode={ODSCode} />
+        <PracticeDetails name={formattedName} odsCode={odsCode} />
       ) : (
         <PracticeDetails
           name={formattedName}
-          ODSCode={ODSCode}
+          odsCode={odsCode}
           address={transformPracticeAddress(
             apiData.Organisation.GeoLoc.Location
           )}

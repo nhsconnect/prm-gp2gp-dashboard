@@ -2,11 +2,11 @@ import React from "react";
 import isEmpty from "lodash/isEmpty";
 import "./index.scss";
 
-const PracticeDetails = ({ name, ODSCode, address }) => (
+const PracticeDetails = ({ name, odsCode, address }) => (
   <div className="gp2gp-practice-details">
     <h1 className="nhsuk-heading-l">
       <span className="gp2gp-practice-details__name">{name}</span>
-      <span>{ODSCode}</span>
+      <span>{odsCode}</span>
     </h1>
     {!!address && (
       <address data-testid="practice-details-address">

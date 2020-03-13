@@ -11,19 +11,19 @@ describe("Practice template", () => {
   it("renders practice details correctly", async () => {
     moxios.install();
     const ODSPracticeData = {
-      ODSCode: "B86030",
+      odsCode: "B86030",
       town: "LEEDS",
       postCode: "LS6 2AF",
       lines: { AddrLn1: "1 SHIRE OAK STREET", AddrLn2: "HEADINGLEY" },
     };
     const expectedODSPracticeData = {
-      ODSCode: "B86030",
+      odsCode: "B86030",
       town: "Leeds",
       postCode: "LS6 2AF",
       lines: { line1: "1 Shire Oak Street", line2: "Headingley" },
     };
     const pipelinePracticeData = {
-      ODSCode: "B86030",
+      odsCode: "B86030",
       name: "BURTON CROFT SURGERY",
       year: 2019,
       month: 11,
@@ -64,7 +64,7 @@ describe("Practice template", () => {
 
     await waitForDomChange();
 
-    expect(getByText(expectedODSPracticeData.ODSCode)).toBeInTheDocument();
+    expect(getByText(expectedODSPracticeData.odsCode)).toBeInTheDocument();
     expect(getByText(expectedPracticeName)).toBeInTheDocument();
     expect(getByText(expectedODSPracticeData.town)).toBeInTheDocument();
     expect(getByText(expectedODSPracticeData.postCode)).toBeInTheDocument();
