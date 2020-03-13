@@ -17,5 +17,5 @@ public
 # IntelliJ directory
 .idea/
 
-# Metrics
-src/data/metrics
+# Practice data
+src/data/practices/

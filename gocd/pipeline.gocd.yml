@@ -37,6 +37,11 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
+                      - ./tasks dojo-get-metadata
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
                       - ./tasks dojo-build
       - deploy:
           clean_workspace: true

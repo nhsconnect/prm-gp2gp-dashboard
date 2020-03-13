@@ -26,6 +26,13 @@ case "${command}" in
   dojo-get-metrics)
       dojo "./tasks get-metrics"
       ;;
+  get-metadata)
+      npm install
+      npm run getMetadata
+      ;;
+  dojo-get-metadata)
+      dojo "./tasks get-metadata"
+      ;;
   deploy)
       npm install
       npm run deploy

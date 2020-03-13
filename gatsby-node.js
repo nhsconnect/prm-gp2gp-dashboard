@@ -7,7 +7,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allFile(filter: { name: { eq: "practiceMetrics" } }) {
         edges {
           node {
-            childMetricsJson {
+            childPracticesJson {
               practices {
                 odsCode
                 name
@@ -30,7 +30,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   const practices =
-    result.data.allFile.edges[0].node.childMetricsJson.practices;
+    result.data.allFile.edges[0].node.childPracticesJson.practices;
 
   practices.forEach(practice => {
     latestMetrics = practice.metrics[0];
