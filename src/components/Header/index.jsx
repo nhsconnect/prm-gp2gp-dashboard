@@ -12,6 +12,7 @@ const Header = () => {
             node {
               childContentJson {
                 serviceName
+                homepageLinkLabel
                 phaseBanner {
                   tag
                   text
@@ -23,23 +24,19 @@ const Header = () => {
       }
     `
   ).allFile.edges[0].node.childContentJson;
-  const serviceName = data.serviceName;
-  const phaseBanner = data.phaseBanner;
+  const { homepageLinkLabel, serviceName, phaseBanner } = data;
 
   return (
-    <header className="nhsuk-header nhsuk-header--transactional" role="banner">
+    <header className="nhsuk-header" role="banner">
       <div className="nhsuk-width-container nhsuk-header__container">
-        <div className="nhsuk-header__logo nhsuk-header__logo--only">
-          <Link className="nhsuk-header__link" to="/" aria-label="NHS homepage">
-            <Logo />
-          </Link>
-        </div>
-        <div className="nhsuk-header__transactional-service-name nhsuk-header__transactional-service-name--long">
+        <div className="nhsuk-header__logo">
           <Link
-            className="nhsuk-header__transactional-service-name--link"
-            to="/"
+            className="nhsuk-header__link nhsuk-header__link--service "
+            href="/"
+            aria-label={homepageLinkLabel}
           >
-            {serviceName}
+            <Logo />
+            <span className="nhsuk-header__service-name">{serviceName}</span>
           </Link>
         </div>
       </div>

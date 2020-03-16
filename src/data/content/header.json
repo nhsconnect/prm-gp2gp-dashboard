@@ -1,5 +1,6 @@
 {
   "serviceName": "GP2GP Service Dashboard",
+  "homepageLinkLabel": "NHS GP2GP Service Dashboard homepage",
   "phaseBanner": {
     "tag": "ALPHA",
     "text": "This is a new service. Content and structure are subject to change."
