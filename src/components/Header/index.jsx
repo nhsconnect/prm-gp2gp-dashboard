@@ -29,9 +29,9 @@ const Header = () => {
   return (
     <header className="nhsuk-header" role="banner">
       <div className="nhsuk-width-container nhsuk-header__container">
-        <div className="nhsuk-header__logo">
+        <div className="nhsuk-header__logo nhsuk-header__logo--only">
           <Link
-            className="nhsuk-header__link nhsuk-header__link--service "
+            className="nhsuk-header__link nhsuk-header__link--service"
             href="/"
             aria-label={homepageLinkLabel}
           >
