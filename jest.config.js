@@ -11,4 +11,5 @@ module.exports = {
     __PATH_PREFIX__: "",
   },
   setupFilesAfterEnv: ["<rootDir>/setup-test-env.js"],
+  clearMocks: true,
 };

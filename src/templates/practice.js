@@ -19,7 +19,7 @@ const Practice = ({ pageContext }) => {
 
   const graphQlData = useStaticQuery(graphql`
     query {
-      allFile(filter: { name: { eq: "sla" } }) {
+      allFile(filter: { name: { eq: "slaMetrics" } }) {
         edges {
           node {
             childContentJson {

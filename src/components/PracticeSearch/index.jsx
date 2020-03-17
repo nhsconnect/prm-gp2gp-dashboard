@@ -34,7 +34,9 @@ const PracticeSearch = () => {
       return;
     }
 
-    const practice = data.find(item => item.odsCode === inputValue);
+    const practice = data.find(
+      item => item.odsCode === inputValue.toUpperCase()
+    );
 
     if (practice) {
       navigate(`/practice/${practice.odsCode}`);
@@ -47,11 +49,12 @@ const PracticeSearch = () => {
     <div className="gp2gp-practice-search">
       <Form onSubmit={handleSubmit}>
         <Input
-          id="input-ods-code"
+          id="practice-search-input"
           width="10"
           error={inputError}
-          hint="Enter a ODS code"
+          hint="Enter an ODS code"
           onChange={e => setInputValue(e.currentTarget.value)}
+          data-testid="practice-search-input"
         >
           <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
             Search for a GP practice
@@ -60,6 +63,7 @@ const PracticeSearch = () => {
         <Button
           className="gp2gp-practice-search__button nhsuk-u-margin-top-3"
           type="submit"
+          data-testid="practice-search-button"
         >
           Search
         </Button>
