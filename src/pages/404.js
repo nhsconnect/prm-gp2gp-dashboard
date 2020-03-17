@@ -1,14 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { graphql } from "gatsby";
 
 const NotFound = ({ data }) => {
   const { title, text } = data.allFile.edges[0].node.childContentJson;
 
   return (
-    <React.Fragment>
+    <Fragment>
       <h1>{title}</h1>
       <p>{text}</p>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

@@ -7,8 +7,6 @@ module.exports = {
         region: "eu-west-2",
       },
     },
-    "gatsby-plugin-sass",
-    "gatsby-plugin-layout",
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -17,7 +15,6 @@ module.exports = {
         },
       },
     },
-    "gatsby-transformer-json",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -32,5 +29,9 @@ module.exports = {
         path: `${__dirname}/src/data/practices`,
       },
     },
+    "gatsby-plugin-sass",
+    "gatsby-plugin-layout",
+    "gatsby-plugin-react-helmet",
+    "gatsby-transformer-json",
   ],
 };

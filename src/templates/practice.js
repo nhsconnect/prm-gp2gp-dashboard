@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import PracticeDetails from "../components/PracticeDetails/index";
 import {
@@ -53,7 +53,7 @@ const Practice = ({ pageContext }) => {
     },
   ];
   return (
-    <React.Fragment>
+    <Fragment>
       {isLoading | apiErr ? (
         <PracticeDetails name={formattedName} odsCode={odsCode} />
       ) : (
@@ -74,7 +74,7 @@ const Practice = ({ pageContext }) => {
         subtitle={graphQlData.subtitle}
         metrics={labelledMetrics}
       />
-    </React.Fragment>
+    </Fragment>
   );
 };
 
