@@ -63,9 +63,7 @@ describe("PracticeSearch component", () => {
     });
     fireEvent.click(getByTestId("practice-search-button"));
 
-    expect(
-      container.querySelector("#practice-search-input-error")
-    ).toBeInTheDocument();
+    expect(getByTestId("practice-search-error")).toBeInTheDocument();
   });
 
   it("displays an error on invalid ODS code input", () => {
@@ -77,8 +75,6 @@ describe("PracticeSearch component", () => {
     });
     fireEvent.click(getByTestId("practice-search-button"));
 
-    expect(
-      container.querySelector("#practice-search-input-error")
-    ).toBeInTheDocument();
+    expect(getByTestId("practice-search-error")).toBeInTheDocument();
   });
 });

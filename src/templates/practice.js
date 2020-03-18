@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import PracticeDetails from "../components/PracticeDetails/index";
+import PracticeDetails from "../components/PracticeDetails";
 import {
   ODS_PORTAL_URL,
   transformPracticeAddress,

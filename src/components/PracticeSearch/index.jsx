@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useStaticQuery, graphql, navigate } from "gatsby";
-import { Button, Form, Input } from "nhsuk-react-components";
+import Form from "../Form";
+import Button from "../Button";
+import Input from "../Input";
 import "./index.scss";
 
 const PracticeSearch = () => {
@@ -47,23 +49,23 @@ const PracticeSearch = () => {
 
   return (
     <div className="gp2gp-practice-search">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <Input
-          id="practice-search-input"
-          width="10"
-          error={inputError}
+          className="nhsuk-input--width-10"
+          testid="practice-search"
+          type="text"
           hint="Enter an ODS code"
+          error={inputError}
           onChange={e => setInputValue(e.currentTarget.value)}
-          data-testid="practice-search-input"
         >
           <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
             Search for a GP practice
           </h1>
         </Input>
         <Button
-          className="gp2gp-practice-search__button nhsuk-u-margin-top-3"
+          className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
           type="submit"
-          data-testid="practice-search-button"
+          testid="practice-search-button"
         >
           Search
         </Button>

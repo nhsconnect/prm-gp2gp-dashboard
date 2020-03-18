@@ -32,7 +32,7 @@ const Header = () => {
         <div className="nhsuk-header__logo nhsuk-header__logo--only">
           <Link
             className="nhsuk-header__link nhsuk-header__link--service"
-            href="/"
+            to="/"
             aria-label={homepageLinkLabel}
           >
             <Logo />

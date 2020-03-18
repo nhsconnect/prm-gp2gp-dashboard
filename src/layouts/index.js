@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { Helmet } from "react-helmet";
-import Header from "../components/Header/index";
+import Header from "../components/Header";
 import "./index.scss";
 
 const Layout = ({ children }) => {
