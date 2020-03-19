@@ -12,7 +12,9 @@ const PracticeSearch = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        allFile(filter: { name: { eq: "practiceMetadata" } }) {
+        practiceMetadata: allFile(
+          filter: { name: { eq: "practiceMetadata" } }
+        ) {
           edges {
             node {
               childPracticesJson {
@@ -23,27 +25,48 @@ const PracticeSearch = () => {
             }
           }
         }
+        content: allFile(filter: { name: { eq: "practiceSearch" } }) {
+          edges {
+            node {
+              childContentJson {
+                inputLabel
+                inputHint
+                inputErrorMessage
+                buttonLabel
+              }
+            }
+          }
+        }
       }
     `
-  ).allFile.edges[0].node.childPracticesJson.practices;
+  );
+
+  const practices =
+    data.practiceMetadata.edges[0].node.childPracticesJson.practices;
+  const {
+    inputLabel,
+    inputHint,
+    inputErrorMessage,
+    buttonLabel,
+  } = data.content.edges[0].node.childContentJson;
 
   const handleSubmit = e => {
     e.preventDefault();
     const inputLength = inputValue.length;
 
     if (inputLength < 5 || inputLength > 6) {
-      setInputError("Please enter a valid ODS code");
+      setInputError(inputErrorMessage);
       return;
     }
 
-    const practice = data.find(
+    const practice = practices.find(
       item => item.odsCode === inputValue.toUpperCase()
     );
 
     if (practice) {
       navigate(`/practice/${practice.odsCode}`);
     } else {
-      setInputError("Please enter a valid ODS code");
+      setInputError(inputErrorMessage);
     }
   };
 
@@ -54,12 +77,12 @@ const PracticeSearch = () => {
           className="nhsuk-input--width-10"
           testid="practice-search"
           type="text"
-          hint="Enter an ODS code"
+          hint={inputHint}
           error={inputError}
           onChange={e => setInputValue(e.currentTarget.value)}
         >
           <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
-            Search for a GP practice
+            {inputLabel}
           </h1>
         </Input>
         <Button
@@ -67,7 +90,7 @@ const PracticeSearch = () => {
           type="submit"
           testid="practice-search-button"
         >
-          Search
+          {buttonLabel}
         </Button>
       </Form>
     </div>

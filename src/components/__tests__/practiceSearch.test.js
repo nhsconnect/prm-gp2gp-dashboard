@@ -1,13 +1,13 @@
 import React from "react";
 import * as Gatsby from "gatsby";
-import { render, fireEvent, cleanup } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import PracticeSearch from "../PracticeSearch/index";
 
 describe("PracticeSearch component", () => {
   beforeEach(() => {
     const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
     useStaticQuery.mockImplementation(() => ({
-      allFile: {
+      practiceMetadata: {
         edges: [
           {
             node: {
@@ -17,6 +17,20 @@ describe("PracticeSearch component", () => {
                     odsCode: "A12345",
                   },
                 ],
+              },
+            },
+          },
+        ],
+      },
+      content: {
+        edges: [
+          {
+            node: {
+              childContentJson: {
+                inputLabel: "a label",
+                inputHint: "a hint",
+                inputErrorMessage: "an error message",
+                buttonLabel: "a button label",
               },
             },
           },
@@ -56,7 +70,7 @@ describe("PracticeSearch component", () => {
 
   it("displays an error on non existing ODS code input", () => {
     const invalidOdsCode = "A12346";
-    const { container, getByTestId } = render(<PracticeSearch />);
+    const { getByTestId } = render(<PracticeSearch />);
 
     fireEvent.change(getByTestId("practice-search-input"), {
       target: { value: invalidOdsCode },
@@ -68,7 +82,7 @@ describe("PracticeSearch component", () => {
 
   it("displays an error on invalid ODS code input", () => {
     const invalidOdsCode = "A123";
-    const { container, getByTestId } = render(<PracticeSearch />);
+    const { getByTestId } = render(<PracticeSearch />);
 
     fireEvent.change(getByTestId("practice-search-input"), {
       target: { value: invalidOdsCode },

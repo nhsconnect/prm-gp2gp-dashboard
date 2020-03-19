@@ -1,0 +1,6 @@
+{
+  "inputLabel": "Search for a GP practice",
+  "inputHint": "Enter an ODS code",
+  "inputErrorMessage": "Please enter a valid ODS code",
+  "buttonLabel": "Search"
+}
