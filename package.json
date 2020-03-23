@@ -4,16 +4,21 @@
   "description": "GP2GP Service Dashboard",
   "version": "1.0.0",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
+    "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "getMetrics": "node scripts/get-s3-data.js --datatype metrics",
-    "getMetadata": "node scripts/get-s3-data.js --datatype metadata",
     "deploy": "gatsby-plugin-s3 deploy",
-    "test": "jest"
+    "test": "jest",
+    "format": "prettier --write \"**/*.{js,jsx,scss,md}\"",
+    "checkFormat": "prettier --check \"**/*.{js,jsx,scss,md}\"",
+    "getMetrics": "node scripts/get-s3-data.js --datatype metrics",
+    "getMetadata": "node scripts/get-s3-data.js --datatype metadata"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run checkFormat && npm test && npm run build"
+    }
   },
   "dependencies": {
     "aws-sdk": "^2.637.0",
@@ -40,10 +45,11 @@
     "@testing-library/react-hooks": "^3.2.1",
     "babel-jest": "^25.1.0",
     "babel-preset-gatsby": "^0.2.35",
+    "husky": "^4.2.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.1.0",
     "moxios": "^0.4.0",
-    "prettier": "^1.19.1",
+    "prettier": "1.19.1",
     "react-test-renderer": "^16.13.0"
   }
 }
