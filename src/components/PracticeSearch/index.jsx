@@ -43,19 +43,14 @@ const PracticeSearch = () => {
 
   const practices =
     data.practiceMetadata.edges[0].node.childPracticesJson.practices;
-  const {
-    inputLabel,
-    inputHint,
-    inputErrorMessage,
-    buttonLabel,
-  } = data.content.edges[0].node.childContentJson;
+  const content = data.content.edges[0].node.childContentJson;
 
   const handleSubmit = e => {
     e.preventDefault();
     const inputLength = inputValue.length;
 
     if (inputLength < 5 || inputLength > 6) {
-      setInputError(inputErrorMessage);
+      setInputError(content.inputErrorMessage);
       return;
     }
 
@@ -66,7 +61,7 @@ const PracticeSearch = () => {
     if (practice) {
       navigate(`/practice/${practice.odsCode}`);
     } else {
-      setInputError(inputErrorMessage);
+      setInputError(content.inputErrorMessage);
     }
   };
 
@@ -77,12 +72,12 @@ const PracticeSearch = () => {
           className="nhsuk-input--width-10"
           testid="practice-search"
           type="text"
-          hint={inputHint}
+          hint={content.inputHint}
           error={inputError}
           onChange={e => setInputValue(e.currentTarget.value)}
         >
           <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
-            {inputLabel}
+            {content.inputLabel}
           </h1>
         </Input>
         <Button
@@ -90,7 +85,7 @@ const PracticeSearch = () => {
           type="submit"
           testid="practice-search-button"
         >
-          {buttonLabel}
+          {content.buttonLabel}
         </Button>
       </Form>
     </div>

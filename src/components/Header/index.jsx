@@ -4,7 +4,7 @@ import Logo from "../../assets/logo.svg";
 import PhaseBanner from "../PhaseBanner/index";
 
 const Header = () => {
-  const data = useStaticQuery(
+  const content = useStaticQuery(
     graphql`
       query {
         allFile(filter: { name: { eq: "header" } }) {
@@ -24,7 +24,6 @@ const Header = () => {
       }
     `
   ).allFile.edges[0].node.childContentJson;
-  const { homepageLinkLabel, serviceName, phaseBanner } = data;
 
   return (
     <header className="nhsuk-header" role="banner">
@@ -33,15 +32,19 @@ const Header = () => {
           <Link
             className="nhsuk-header__link nhsuk-header__link--service"
             to="/"
-            aria-label={homepageLinkLabel}
+            aria-label={content.homepageLinkLabel}
           >
             <Logo />
-            <span className="nhsuk-header__service-name">{serviceName}</span>
+            <span className="nhsuk-header__service-name">
+              {content.serviceName}
+            </span>
           </Link>
         </div>
       </div>
       <div className="nhsuk-width-container nhsuk-u-padding-bottom-3">
-        <PhaseBanner tag={phaseBanner.tag}>{phaseBanner.text}</PhaseBanner>
+        <PhaseBanner tag={content.phaseBanner.tag}>
+          {content.phaseBanner.text}
+        </PhaseBanner>
       </div>
     </header>
   );

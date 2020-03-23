@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { useStaticQuery, graphql } from "gatsby";
 import PracticeDetails from "../components/PracticeDetails";
 import {
   ODS_PORTAL_URL,
@@ -17,41 +16,10 @@ const Practice = ({ pageContext }) => {
     `${ODS_PORTAL_URL}/${pageContext.odsCode}`
   );
 
-  const graphQlData = useStaticQuery(graphql`
-    query {
-      allFile(filter: { name: { eq: "slaMetrics" } }) {
-        edges {
-          node {
-            childContentJson {
-              title
-              subtitle
-              within3Days
-              within8Days
-              beyond8Days
-            }
-          }
-        }
-      }
-    }
-  `).allFile.edges[0].node.childContentJson;
-
   const { name, odsCode, month, year, metrics } = pageContext;
   const formattedName = convertToTitleCase(name);
   const monthName = convertMonthNumberToText(month);
-  const labelledMetrics = [
-    {
-      label: graphQlData.within3Days,
-      value: metrics.within3Days,
-    },
-    {
-      label: graphQlData.within8Days,
-      value: metrics.within8Days,
-    },
-    {
-      label: graphQlData.beyond8Days,
-      value: metrics.beyond8Days,
-    },
-  ];
+
   return (
     <Fragment>
       {isLoading | apiErr ? (
@@ -69,11 +37,7 @@ const Practice = ({ pageContext }) => {
       <h2 className="nhsuk-heading-m">
         {monthName} {year}
       </h2>
-      <SlaMetrics
-        title={graphQlData.title}
-        subtitle={graphQlData.subtitle}
-        metrics={labelledMetrics}
-      />
+      <SlaMetrics metrics={metrics} />
     </Fragment>
   );
 };
