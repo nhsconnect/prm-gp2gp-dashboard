@@ -5,6 +5,7 @@ module.exports = {
       options: {
         bucketName: "prm-gp2gp-dashboard-dev",
         region: "eu-west-2",
+        parallelLimit: 1000,
       },
     },
     {
