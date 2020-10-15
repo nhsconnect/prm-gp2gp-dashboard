@@ -3,12 +3,12 @@
 set -Eeo pipefail
 
 task="$1"
-stack_env="$2"
+deployment_env="$2"
 
 function check_env {
     if [ "$1" != "dev" ] && [ "$1" != "prod" ]; then
-        echo "Usage: $0 TASK STACK-ENVIRONMENT"
-        echo "STACK-ENVIRONMENT must be dev or prod"
+        echo "Usage: $0 TASK DEPLOYMENT-ENVIRONMENT"
+        echo "DEPLOYMENT-ENVIRONMENT must be dev or prod"
         exit 1
     fi
 }
@@ -22,11 +22,13 @@ case "${task}" in
       dojo "./tasks test"
       ;;
   build)
+      check_env ${deployment_env}
+      export ENVIRONMENT=${deployment_env}
       npm install
       npm run build
       ;;
   dojo-build)
-      dojo "./tasks build"
+      dojo "./tasks build ${deployment_env}"
       ;;
   get-metrics)
       npm install
@@ -43,12 +45,11 @@ case "${task}" in
       dojo "./tasks get-metadata"
       ;;
   deploy)
-      check_env ${stack_env}
       npm install
-      ENVIRONMENT=${stack_env} npm run deploy
+      npm run deploy
       ;;
   dojo-deploy)
-      dojo "./tasks deploy ${stack_env}"
+      dojo "./tasks deploy"
       ;;
   *)
       echo "Invalid command: '${task}'"
