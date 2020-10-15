@@ -49,7 +49,7 @@ pipelines:
       - deploy_dev:
           clean_workspace: true
           jobs:
-            gastby_deploy:
+            deploy:
               resources:
                 - docker
               tasks:
@@ -99,7 +99,7 @@ pipelines:
             type: manual
             allow_only_on_success: true
           jobs:
-            gastby_deploy:
+            deploy:
               resources:
                 - docker
               tasks:
