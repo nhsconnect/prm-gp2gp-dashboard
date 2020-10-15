@@ -5,6 +5,14 @@ set -Eeo pipefail
 task="$1"
 stack_env="$2"
 
+function check_env {
+    if [ "$1" != "dev" ] && [ "$1" != "prod" ]; then
+        echo "Usage: $0 TASK STACK-ENVIRONMENT"
+        echo "STACK-ENVIRONMENT must be dev or prod"
+        exit 1
+    fi
+}
+
 case "${task}" in
   test)
       npm install
@@ -36,6 +44,7 @@ case "${task}" in
       ;;
   deploy)
       export ENVIRONMENT=${stack_env}
+      check_env ${ENVIRONMENT}
       npm install
       npm run deploy
       ;;
