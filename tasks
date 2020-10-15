@@ -43,10 +43,9 @@ case "${task}" in
       dojo "./tasks get-metadata"
       ;;
   deploy)
-      export ENVIRONMENT=${stack_env}
-      check_env ${ENVIRONMENT}
+      check_env ${stack_env}
       npm install
-      npm run deploy
+      ENVIRONMENT=${stack_env} npm run deploy
       ;;
   dojo-deploy)
       dojo "./tasks deploy ${stack_env}"
