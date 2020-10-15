@@ -35,12 +35,12 @@ case "${task}" in
       dojo "./tasks get-metadata"
       ;;
   deploy)
+      export ENVIRONMENT=${stack_env}
       npm install
       npm run deploy
       ;;
   dojo-deploy)
-      export ENVIRONMENT=${stack_env}
-      dojo "./tasks deploy"
+      dojo "./tasks deploy ${stack_env}"
       ;;
   *)
       echo "Invalid command: '${task}'"
