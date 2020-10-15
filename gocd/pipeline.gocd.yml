@@ -7,7 +7,7 @@ pipelines:
       git:
         type: configrepo
     stages:
-      - build:
+      - test:
           clean_workspace: true
           jobs:
             test:
@@ -19,6 +19,8 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-test
+      - build_dev:
+          clean_workspace: true
             npm_build:
               resources:
                 - docker
@@ -43,7 +45,7 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-build dev
-      - deploy:
+      - deploy_dev:
           clean_workspace: true
           jobs:
             gastby_deploy:
@@ -51,11 +53,60 @@ pipelines:
                 - docker
               tasks:
                 - fetch:
-                    stage: build
+                    stage: build_dev
                     job: npm_build
                     source: public
                 - fetch:
-                    stage: build
+                    stage: build_dev
+                    job: npm_build
+                    source: .cache
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-deploy
+      - build_prod:
+          clean_workspace: true
+            npm_build:
+              resources:
+                - docker
+              artifacts:
+                - build:
+                    source: public
+                - build:
+                    source: .cache
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-metrics prod
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-metadata prod
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-build prod
+      - deploy_prod:
+          clean_workspace: true
+          approval:
+            type: manual
+            allow_only_on_success: true
+          jobs:
+            gastby_deploy:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: build_prod
+                    job: npm_build
+                    source: public
+                - fetch:
+                    stage: build_prod
                     job: npm_build
                     source: .cache
                 - exec:
