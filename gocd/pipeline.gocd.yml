@@ -42,7 +42,7 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-build
+                      - ./tasks dojo-build dev
       - deploy:
           clean_workspace: true
           jobs:
@@ -62,4 +62,4 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-deploy dev
+                      - ./tasks dojo-deploy
