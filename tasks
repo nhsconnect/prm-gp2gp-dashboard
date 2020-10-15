@@ -2,9 +2,10 @@
 
 set -Eeo pipefail
 
-command="$1"
+task="$1"
+stack_env="$2"
 
-case "${command}" in
+case "${task}" in
   test)
       npm install
       npm run test
@@ -38,10 +39,11 @@ case "${command}" in
       npm run deploy
       ;;
   dojo-deploy)
+      export ENVIRONMENT=${stack_env}
       dojo "./tasks deploy"
       ;;
   *)
-      echo "Invalid command: '${command}'"
+      echo "Invalid command: '${task}'"
       exit 1
       ;;
 esac
