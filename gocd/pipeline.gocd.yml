@@ -32,12 +32,12 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-get-metrics
+                      - ./tasks dojo-get-metrics dev
                 - exec:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-get-metadata
+                      - ./tasks dojo-get-metadata dev
                 - exec:
                     command: /bin/bash
                     arguments:

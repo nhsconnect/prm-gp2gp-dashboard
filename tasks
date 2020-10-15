@@ -31,18 +31,22 @@ case "${task}" in
       dojo "./tasks build ${deployment_env}"
       ;;
   get-metrics)
+      check_env ${deployment_env}
+      export ENVIRONMENT=${deployment_env}
       npm install
       npm run getMetrics
       ;;
   dojo-get-metrics)
-      dojo "./tasks get-metrics"
+      dojo "./tasks get-metrics ${deployment_env}"
       ;;
   get-metadata)
+      check_env ${deployment_env}
+      export ENVIRONMENT=${deployment_env}
       npm install
       npm run getMetadata
       ;;
   dojo-get-metadata)
-      dojo "./tasks get-metadata"
+      dojo "./tasks get-metadata ${deployment_env}"
       ;;
   deploy)
       npm install
