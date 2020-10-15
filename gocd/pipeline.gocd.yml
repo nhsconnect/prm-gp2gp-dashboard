@@ -21,30 +21,31 @@ pipelines:
                       - ./tasks dojo-test
       - build_dev:
           clean_workspace: true
-          npm_build:
-            resources:
-              - docker
-            artifacts:
-              - build:
-                  source: public
-              - build:
-                  source: .cache
-            tasks:
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks dojo-get-metrics dev
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks dojo-get-metadata dev
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks dojo-build dev
+          jobs:
+            npm_build:
+              resources:
+                - docker
+              artifacts:
+                - build:
+                    source: public
+                - build:
+                    source: .cache
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-metrics dev
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-metadata dev
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-build dev
       - deploy_dev:
           clean_workspace: true
           jobs:
@@ -67,30 +68,31 @@ pipelines:
                       - ./tasks dojo-deploy
       - build_prod:
           clean_workspace: true
-          npm_build:
-            resources:
-              - docker
-            artifacts:
-              - build:
-                  source: public
-              - build:
-                  source: .cache
-            tasks:
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks dojo-get-metrics prod
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks dojo-get-metadata prod
-              - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ./tasks dojo-build prod
+          jobs:
+            npm_build:
+              resources:
+                - docker
+              artifacts:
+                - build:
+                    source: public
+                - build:
+                    source: .cache
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-metrics prod
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-metadata prod
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-build prod
       - deploy_prod:
           clean_workspace: true
           approval:
