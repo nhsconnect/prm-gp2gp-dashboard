@@ -13,6 +13,12 @@ function check_env {
     fi
 }
 
+function setup_env {
+    DEPLOYMENT_ENV="$1"
+    check_env "$1"
+    export DEPLOYMENT_ENV="$1"
+}
+
 case "${task}" in
   test)
       npm install
@@ -22,8 +28,7 @@ case "${task}" in
       dojo "./tasks test"
       ;;
   build)
-      check_env ${deployment_env}
-      export ENVIRONMENT=${deployment_env}
+      setup_env ${deployment_env}
       npm install
       npm run build
       ;;
@@ -31,8 +36,7 @@ case "${task}" in
       dojo "./tasks build ${deployment_env}"
       ;;
   get-metrics)
-      check_env ${deployment_env}
-      export ENVIRONMENT=${deployment_env}
+      setup_env ${deployment_env}
       npm install
       npm run getMetrics
       ;;
@@ -40,8 +44,7 @@ case "${task}" in
       dojo "./tasks get-metrics ${deployment_env}"
       ;;
   get-metadata)
-      check_env ${deployment_env}
-      export ENVIRONMENT=${deployment_env}
+      setup_env ${deployment_env}
       npm install
       npm run getMetadata
       ;;
