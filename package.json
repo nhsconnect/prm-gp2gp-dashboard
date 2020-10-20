@@ -4,7 +4,7 @@
   "description": "GP2GP Service Dashboard",
   "version": "1.0.0",
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "DEPLOYMENT_ENV=dev gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
@@ -23,7 +23,7 @@
   "dependencies": {
     "aws-sdk": "^2.637.0",
     "classnames": "^2.2.6",
-    "gatsby": "^2.24.64",
+    "gatsby": "^2.24.83",
     "gatsby-plugin-layout": "^1.1.23",
     "gatsby-plugin-react-helmet": "^3.1.24",
     "gatsby-plugin-react-svg": "^3.0.0",
