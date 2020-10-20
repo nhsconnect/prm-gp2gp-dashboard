@@ -9,7 +9,7 @@ import {
   convertToTitleCase,
 } from "../library/common/index";
 import SlaMetrics from "../components/SlaMetrics";
-import { useApi } from "../library/hooks";
+import { useApi } from "../library/hooks/useApi";
 
 const Practice = ({ pageContext }) => {
   const [isLoading, apiData, apiErr] = useApi(

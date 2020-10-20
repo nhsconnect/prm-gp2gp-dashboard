@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
 import moxios from "moxios";
-import { mockAPIResponse } from "../../../../__mocks__/api";
-import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
+import { mockAPIResponse } from "../../../../../__mocks__/api";
+import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { useApi } from "../index";
 
 describe("useApi", () => {
