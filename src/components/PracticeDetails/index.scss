@@ -1,4 +1,9 @@
-@import "node_modules/nhsuk-frontend/packages/nhsuk";
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+
+@import "node_modules/nhsuk-frontend/packages/components/button/button";
+@import "node_modules/nhsuk-frontend/packages/components/input/input";
+@import "node_modules/nhsuk-frontend/packages/components/hint/hint";
 
 .gp2gp-practice-details {
   &__name {
