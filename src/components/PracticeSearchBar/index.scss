@@ -1,0 +1,8 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+@import "node_modules/nhsuk-frontend/packages/components/input/input";
+
+.react-autosuggest__input {
+  @extend .nhsuk-input;
+  max-width: 40rem;
+}

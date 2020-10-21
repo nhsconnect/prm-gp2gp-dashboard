@@ -3,6 +3,7 @@ import Autosuggest from "react-autosuggest";
 
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import Input from "../Input";
+import "./index.scss";
 
 const renderSuggestion = suggestion => <div>{suggestion}</div>;
 
