@@ -3,9 +3,14 @@ import * as Gatsby from "gatsby";
 import { render, fireEvent } from "@testing-library/react";
 import PracticeSearch from "../PracticeSearch/index";
 
-jest.mock("../../data/practices/practiceMetadata.json", () => ({
-  practices: [{ odsCode: "A12345", name: "Test Practice" }],
-}));
+jest.mock(
+  "../../data/practices/practiceMetadata.json",
+  () => ({
+    practices: [{ odsCode: "A12345", name: "Test Practice" }],
+  }),
+  { virtual: true }
+);
+
 describe("PracticeSearch component", () => {
   it("navigates to a practice page on upper case existing ODS code input", () => {
     const validOdsCode = "A12345";
