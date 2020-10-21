@@ -5,10 +5,7 @@ const PROD_ENV = "prod";
 const DEV_ENV = "dev";
 
 const getEnv = () => {
-  const PROD_HOSTNAME =
-    "prm-gp2gp-dashboard-dev.s3-website.eu-west-2.amazonaws.com";
-
-  return window.location.hostname === PROD_HOSTNAME ? PROD_ENV : DEV_ENV;
+  return process.env.GATSBY_ENV || "dev";
 };
 
 const getUrlParam = paramName => {

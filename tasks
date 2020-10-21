@@ -16,6 +16,7 @@ function check_env {
 function setup_env {
     DEPLOYMENT_ENV="$1"
     check_env "$1"
+    export GATSBY_ENV="$1"
     export DEPLOYMENT_ENV="$1"
 }
 

@@ -16,6 +16,8 @@ describe("useFeatureToggle", () => {
       hostname: "localhost",
       search: "",
     };
+
+    process.env.GATSBY_ENV = "dev";
   });
 
   afterAll(() => {
@@ -43,16 +45,14 @@ describe("useFeatureToggle", () => {
     });
 
     it("returns false when requesting feature enabled in dev but disabled in prod", async () => {
-      global.window.location.hostname =
-        "prm-gp2gp-dashboard-dev.s3-website.eu-west-2.amazonaws.com";
+      process.env.GATSBY_ENV = "prod";
       const { result } = renderHook(() => useFeatureToggle("F_NEW_FEATURE"));
       const isNewFeatureEnabled = result.current;
       expect(isNewFeatureEnabled).toBe(false);
     });
 
     it("returns true when requesting feature enabled in prod but disabled in dev", async () => {
-      global.window.location.hostname =
-        "prm-gp2gp-dashboard-dev.s3-website.eu-west-2.amazonaws.com";
+      process.env.GATSBY_ENV = "prod";
       const { result } = renderHook(() => useFeatureToggle("F_SECOND_FEATURE"));
       const isNewFeatureEnabled = result.current;
       expect(isNewFeatureEnabled).toBe(true);
@@ -89,8 +89,7 @@ describe("useFeatureToggle", () => {
     });
 
     it("returns false when the URL parameter is true but in prod environment", async () => {
-      global.window.location.hostname =
-        "prm-gp2gp-dashboard-dev.s3-website.eu-west-2.amazonaws.com";
+      process.env.GATSBY_ENV = "prod";
       global.window.location.search = "?f_new_feature=true";
       const { result } = renderHook(() => useFeatureToggle("F_NEW_FEATURE"));
       const isNewFeatureEnabled = result.current;
