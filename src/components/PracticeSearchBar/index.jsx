@@ -1,25 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import Autosuggest from "react-autosuggest";
+
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import Input from "../Input";
 
-const PracticeSearchBar = ({ inputError, setInputValue }) => {
+const renderSuggestion = suggestion => <div>{suggestion}</div>;
+
+const PracticeSearchBar = ({ inputError, setInputValue, testid }) => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
+  const [autosuggestValue, setAutosuggestValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions([]);
+  };
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const inputProps = {
+    value: autosuggestValue,
+    onChange: (event, { newValue }) => {
+      setAutosuggestValue(newValue);
+    },
+  };
 
   return newSearch ? (
-    "NEW SEARCH"
+    <Autosuggest
+      suggestions={suggestions}
+      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+      onSuggestionsClearRequested={onSuggestionsClearRequested}
+      getSuggestionValue={value => value}
+      renderSuggestion={renderSuggestion}
+      inputProps={inputProps}
+    />
   ) : (
     <Input
-      className="nhsuk-input--width-10"
-      testid="practice-search"
-      type="text"
-      hint={"Enter an ODS code"}
       error={inputError}
+      className="nhsuk-input--width-10"
+      testid={testid}
       onChange={e => setInputValue(e.currentTarget.value)}
-    >
-      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
-        Search for a GP practice
-      </h1>
-    </Input>
+    />
   );
 };
 

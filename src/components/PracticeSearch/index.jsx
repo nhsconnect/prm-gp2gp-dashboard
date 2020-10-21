@@ -32,13 +32,33 @@ const PracticeSearch = () => {
     }
   };
 
+  const testid = "practice-search";
+
   return (
     <div className="gp2gp-practice-search">
+      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
+        Search for a GP practice
+      </h1>
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
-        <PracticeSearchBar
-          inputError={inputError}
-          setInputValue={setInputValue}
-        />
+        <label date-testid={`${testid}-label`}>
+          <span className="nhsuk-hint" data-testid={`${testid}-hint`}>
+            Enter an ODS code
+          </span>
+          {inputError && (
+            <span
+              className="nhsuk-error-message"
+              data-testid={`${testid}-error`}
+              role="alert"
+            >
+              {inputError}
+            </span>
+          )}
+          <PracticeSearchBar
+            inputError={inputError}
+            setInputValue={setInputValue}
+            testid={testid}
+          />
+        </label>
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
           type="submit"
