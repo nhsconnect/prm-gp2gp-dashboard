@@ -4,7 +4,7 @@
   "description": "GP2GP Service Dashboard",
   "version": "1.0.0",
   "scripts": {
-    "develop": "DEPLOYMENT_ENV=dev gatsby develop",
+    "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
