@@ -1,56 +1,23 @@
 import React, { useState } from "react";
-import { useStaticQuery, graphql, navigate } from "gatsby";
+import { navigate } from "gatsby";
 import Form from "../Form";
 import Button from "../Button";
-import Input from "../Input";
+import PracticeSearchBar from "../PracticeSearchBar";
+import practiceMetadata from "../../data/practices/practiceMetadata.json";
 import "./index.scss";
 
 const PracticeSearch = () => {
   const [inputValue, setInputValue] = useState("");
   const [inputError, setInputError] = useState(null);
 
-  const data = useStaticQuery(
-    graphql`
-      query {
-        practiceMetadata: allFile(
-          filter: { name: { eq: "practiceMetadata" } }
-        ) {
-          edges {
-            node {
-              childPracticesJson {
-                practices {
-                  odsCode
-                }
-              }
-            }
-          }
-        }
-        content: allFile(filter: { name: { eq: "practiceSearch" } }) {
-          edges {
-            node {
-              childContentJson {
-                inputLabel
-                inputHint
-                inputErrorMessage
-                buttonLabel
-              }
-            }
-          }
-        }
-      }
-    `
-  );
-
-  const practices =
-    data.practiceMetadata.edges[0].node.childPracticesJson.practices;
-  const content = data.content.edges[0].node.childContentJson;
+  const practices = practiceMetadata.practices;
 
   const handleSubmit = e => {
     e.preventDefault();
     const inputLength = inputValue.length;
 
     if (inputLength < 5 || inputLength > 6) {
-      setInputError(content.inputErrorMessage);
+      setInputError("Please enter a valid ODS code");
       return;
     }
 
@@ -61,31 +28,23 @@ const PracticeSearch = () => {
     if (practice) {
       navigate(`/practice/${practice.odsCode}`);
     } else {
-      setInputError(content.inputErrorMessage);
+      setInputError("Please enter a valid ODS code");
     }
   };
 
   return (
     <div className="gp2gp-practice-search">
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
-        <Input
-          className="nhsuk-input--width-10"
-          testid="practice-search"
-          type="text"
-          hint={content.inputHint}
-          error={inputError}
-          onChange={e => setInputValue(e.currentTarget.value)}
-        >
-          <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
-            {content.inputLabel}
-          </h1>
-        </Input>
+        <PracticeSearchBar
+          inputError={inputError}
+          setInputValue={setInputValue}
+        />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
           type="submit"
           testid="practice-search-button"
         >
-          {content.buttonLabel}
+          Search
         </Button>
       </Form>
     </div>

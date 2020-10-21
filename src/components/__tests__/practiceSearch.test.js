@@ -3,42 +3,10 @@ import * as Gatsby from "gatsby";
 import { render, fireEvent } from "@testing-library/react";
 import PracticeSearch from "../PracticeSearch/index";
 
+jest.mock("../../data/practices/practiceMetadata.json", () => ({
+  practices: [{ odsCode: "A12345", name: "Test Practice" }],
+}));
 describe("PracticeSearch component", () => {
-  beforeEach(() => {
-    const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
-    useStaticQuery.mockImplementation(() => ({
-      practiceMetadata: {
-        edges: [
-          {
-            node: {
-              childPracticesJson: {
-                practices: [
-                  {
-                    odsCode: "A12345",
-                  },
-                ],
-              },
-            },
-          },
-        ],
-      },
-      content: {
-        edges: [
-          {
-            node: {
-              childContentJson: {
-                inputLabel: "a label",
-                inputHint: "a hint",
-                inputErrorMessage: "an error message",
-                buttonLabel: "a button label",
-              },
-            },
-          },
-        ],
-      },
-    }));
-  });
-
   it("navigates to a practice page on upper case existing ODS code input", () => {
     const validOdsCode = "A12345";
     const { getByTestId } = render(<PracticeSearch />);
