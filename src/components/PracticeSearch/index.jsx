@@ -34,6 +34,10 @@ const PracticeSearch = () => {
 
   const testid = "practice-search";
 
+  const uniqueSearchKey = "test";
+  const getSuggestionValue = value => value[uniqueSearchKey];
+  const renderSuggestion = suggestion => <div></div>;
+
   return (
     <div className="gp2gp-practice-search">
       <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
@@ -45,6 +49,11 @@ const PracticeSearch = () => {
           setInputValue={setInputValue}
           testid={testid}
           inputLabelText="Enter an ODS code"
+          sourceDocuments={[]}
+          searchKeys={[]}
+          uniqueSearchKey={uniqueSearchKey}
+          renderSuggestion={renderSuggestion}
+          getSuggestionValue={getSuggestionValue}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"

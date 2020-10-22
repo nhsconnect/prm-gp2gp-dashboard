@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Autosuggest from "react-autosuggest";
+import * as JsSearch from "js-search";
 
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import Input from "../Input";
 import "./index.scss";
-
-const renderSuggestion = suggestion => <div>{suggestion}</div>;
 
 const PracticeSearchBar = ({
   inputError,
@@ -13,14 +12,27 @@ const PracticeSearchBar = ({
   testid,
   sourceDocuments,
   inputLabelText,
+  searchKeys,
+  uniqueSearchKey,
+  renderSuggestion,
+  getSuggestionValue,
 }) => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
   const [autosuggestValue, setAutosuggestValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [search, setSearch] = useState();
+
+  useEffect(() => {
+    const newSearchFromJsSearch = new JsSearch.Search(uniqueSearchKey);
+    newSearchFromJsSearch.addIndex(searchKeys);
+    newSearchFromJsSearch.addDocuments(sourceDocuments);
+    setSearch(newSearchFromJsSearch);
+  }, []);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions([]);
+    setSuggestions(search.search(value));
   };
+
   const onSuggestionsClearRequested = () => {
     setSuggestions([]);
   };
@@ -51,7 +63,7 @@ const PracticeSearchBar = ({
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={value => value}
+          getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
         />
