@@ -7,19 +7,21 @@ import "./index.scss";
 
 const PracticeSearchBar = ({
   inputError,
-  setInputValue,
+  setSelectedValue,
   testid,
   inputLabelText,
   renderSuggestion,
   getSuggestionValue,
   search,
+  setInputTextValue,
+  inputTextValue,
+  selectedValue,
 }) => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
-  const [autosuggestValue, setAutosuggestValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(search.search(value));
+    setSuggestions(search.search(value).slice(0, 5));
   };
 
   const onSuggestionsClearRequested = () => {
@@ -27,9 +29,17 @@ const PracticeSearchBar = ({
   };
 
   const inputProps = {
-    value: autosuggestValue,
+    value: inputTextValue,
     onChange: (_, { newValue }) => {
-      setAutosuggestValue(newValue);
+      // This overrides the ODS code when the user has just selected an option and then edits the input
+      if (
+        newValue !== selectedValue.name &&
+        selectedValue.name !== "" &&
+        selectedValue.name !== undefined
+      ) {
+        setSelectedValue({ odsCode: newValue });
+      }
+      setInputTextValue(newValue);
     },
   };
 
@@ -61,7 +71,7 @@ const PracticeSearchBar = ({
           error={inputError}
           className="nhsuk-input--width-10"
           testid={testid}
-          onChange={e => setInputValue(e.currentTarget.value)}
+          onChange={e => setSelectedValue(e.currentTarget.value)}
         />
       )}
     </label>

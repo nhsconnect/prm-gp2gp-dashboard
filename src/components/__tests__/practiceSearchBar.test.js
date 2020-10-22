@@ -10,11 +10,15 @@ describe("PracticeSearchBar component", () => {
 
   it("updates input value with text that the user has inputted", () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+    const mockSetInputValue = jest.fn();
     const { getByLabelText } = render(
       <PracticeSearchBar
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={value => value.name}
+        setInputTextValue={mockSetInputValue}
+        inputTextValue=""
+        selectedValue=""
         search={{
           search: () => [],
         }}
@@ -22,23 +26,32 @@ describe("PracticeSearchBar component", () => {
     );
     const input = getByLabelText(inputLabelText);
     userEvent.type(input, "app");
-    expect(input).toHaveValue("app");
+    expect(mockSetInputValue).toHaveBeenCalledWith("a");
+    expect(mockSetInputValue).toHaveBeenCalledWith("p");
+    expect(mockSetInputValue).toHaveBeenCalledWith("p");
   });
 
-  it("populates input with selected value from suggestion list", async () => {
+  it("sets input value when selecting value from suggestion list", async () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+    const mockSetInputValue = jest.fn();
     const { getByLabelText, getByText } = render(
       <PracticeSearchBar
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
-        getSuggestionValue={value => value.name}
+        getSuggestionValue={suggestion => suggestion.name}
+        setInputTextValue={mockSetInputValue}
+        inputTextValue="a"
+        selectedValue=""
         search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
       />
     );
+
     const input = getByLabelText(inputLabelText);
-    await userEvent.type(input, "app");
+    userEvent.click(input);
+
     const suggestion = getByText("apple");
     userEvent.click(suggestion);
-    expect(input).toHaveValue("apple");
+
+    expect(mockSetInputValue).toHaveBeenCalledWith("apple");
   });
 });

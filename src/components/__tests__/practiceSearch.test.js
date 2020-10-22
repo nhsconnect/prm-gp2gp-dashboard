@@ -1,7 +1,9 @@
 import React from "react";
 import * as Gatsby from "gatsby";
 import { render, fireEvent } from "@testing-library/react";
-import PracticeSearch from "../PracticeSearch/index";
+import userEvent from "@testing-library/user-event";
+import PracticeSearch from "../PracticeSearch";
+import * as featureToggle from "../../library/hooks/useFeatureToggle";
 
 jest.mock(
   "../../data/practices/practiceMetadata.json",
@@ -12,56 +14,147 @@ jest.mock(
 );
 
 describe("PracticeSearch component", () => {
-  it("navigates to a practice page on upper case existing ODS code input", () => {
-    const validOdsCode = "A12345";
-    const { getByTestId } = render(<PracticeSearch />);
+  const validOdsCode = "A12345";
+  const validPracticeName = "Test Practice";
 
-    fireEvent.change(getByTestId("practice-search-input"), {
-      target: { value: validOdsCode },
+  describe("Simple input component", () => {
+    beforeAll(() => {
+      featureToggle.useFeatureToggle = jest.fn().mockReturnValue(false);
     });
-    fireEvent.click(getByTestId("practice-search-button"));
+    it("navigates to a practice page on upper case existing ODS code input", () => {
+      const { getByTestId } = render(<PracticeSearch />);
 
-    expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-    expect(Gatsby.navigate).toHaveBeenCalledWith(`/practice/${validOdsCode}`);
+      fireEvent.change(getByTestId("practice-search-input"), {
+        target: { value: validOdsCode },
+      });
+      fireEvent.click(getByTestId("practice-search-button"));
+
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(`/practice/${validOdsCode}`);
+    });
+
+    it("navigates to a practice page on lower case existing ODS code input", () => {
+      const lowerCaseOdsCode = "a12345";
+      const upperCaseOdsCode = "A12345";
+      const { getByTestId } = render(<PracticeSearch />);
+
+      fireEvent.change(getByTestId("practice-search-input"), {
+        target: { value: lowerCaseOdsCode },
+      });
+      fireEvent.click(getByTestId("practice-search-button"));
+
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(
+        `/practice/${upperCaseOdsCode}`
+      );
+    });
+
+    it("displays an error on non existing ODS code input", () => {
+      const invalidOdsCode = "A12346";
+      const { getByTestId } = render(<PracticeSearch />);
+
+      fireEvent.change(getByTestId("practice-search-input"), {
+        target: { value: invalidOdsCode },
+      });
+      fireEvent.click(getByTestId("practice-search-button"));
+
+      expect(getByTestId("practice-search-error")).toBeInTheDocument();
+    });
+
+    it("displays an error on invalid ODS code input", () => {
+      const invalidOdsCode = "A123";
+      const { getByTestId } = render(<PracticeSearch />);
+
+      fireEvent.change(getByTestId("practice-search-input"), {
+        target: { value: invalidOdsCode },
+      });
+      fireEvent.click(getByTestId("practice-search-button"));
+
+      expect(getByTestId("practice-search-error")).toBeInTheDocument();
+    });
   });
 
-  it("navigates to a practice page on lower case existing ODS code input", () => {
-    const lowerCaseOdsCode = "a12345";
-    const upperCaseOdsCode = "A12345";
-    const { getByTestId } = render(<PracticeSearch />);
+  const inputLabelText = "Enter an ODS code";
 
-    fireEvent.change(getByTestId("practice-search-input"), {
-      target: { value: lowerCaseOdsCode },
+  describe("Autosuggest component", () => {
+    beforeAll(() => {
+      featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     });
-    fireEvent.click(getByTestId("practice-search-button"));
 
-    expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-    expect(Gatsby.navigate).toHaveBeenCalledWith(
-      `/practice/${upperCaseOdsCode}`
-    );
-  });
+    it("navigates to a practice page when searching for and selecting an ods code", async () => {
+      const { getByLabelText, getByText } = render(<PracticeSearch />);
 
-  it("displays an error on non existing ODS code input", () => {
-    const invalidOdsCode = "A12346";
-    const { getByTestId } = render(<PracticeSearch />);
+      const input = getByLabelText(inputLabelText);
+      await userEvent.type(input, "A123");
 
-    fireEvent.change(getByTestId("practice-search-input"), {
-      target: { value: invalidOdsCode },
+      const suggestion = getByText("Test Practice | A12345");
+      userEvent.click(suggestion);
+
+      const submitButton = getByText("Search");
+      userEvent.click(submitButton);
+
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(`/practice/${"A12345"}`);
     });
-    fireEvent.click(getByTestId("practice-search-button"));
 
-    expect(getByTestId("practice-search-error")).toBeInTheDocument();
-  });
+    it("navigates to a practice page on existing practice name input", async () => {
+      const { getByLabelText, getByText } = render(<PracticeSearch />);
 
-  it("displays an error on invalid ODS code input", () => {
-    const invalidOdsCode = "A123";
-    const { getByTestId } = render(<PracticeSearch />);
+      const input = getByLabelText(inputLabelText);
+      await userEvent.type(input, validPracticeName);
 
-    fireEvent.change(getByTestId("practice-search-input"), {
-      target: { value: invalidOdsCode },
+      const suggestion = getByText(`${validPracticeName} | ${validOdsCode}`);
+      userEvent.click(suggestion);
+
+      const submitButton = getByText("Search");
+      userEvent.click(submitButton);
+
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(`/practice/${validOdsCode}`);
     });
-    fireEvent.click(getByTestId("practice-search-button"));
 
-    expect(getByTestId("practice-search-error")).toBeInTheDocument();
+    it("navigates to a practice page when typing valid ods code and not selecting", async () => {
+      const { getByLabelText, getByText } = render(<PracticeSearch />);
+
+      const input = getByLabelText(inputLabelText);
+      await userEvent.type(input, validOdsCode);
+
+      const submitButton = getByText("Search");
+      userEvent.click(submitButton);
+
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(`/practice/${validOdsCode}`);
+    });
+
+    it("displays error message when user alters input text after selecting a suggestion", async () => {
+      const { getByLabelText, getByText } = render(<PracticeSearch />);
+
+      const input = getByLabelText(inputLabelText);
+      await userEvent.type(input, validOdsCode);
+
+      const suggestion = getByText(`${validPracticeName} | ${validOdsCode}`);
+      userEvent.click(suggestion);
+
+      await userEvent.type(input, "Wrong");
+
+      const submitButton = getByText("Search");
+      userEvent.click(submitButton);
+
+      expect(getByText("Please enter a valid ODS code")).toBeInTheDocument();
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    });
+
+    it("displays an error on invalid ODS code input", async () => {
+      const { getByLabelText, getByText } = render(<PracticeSearch />);
+
+      const input = getByLabelText(inputLabelText);
+      await userEvent.type(input, "B00000");
+
+      const submitButton = getByText("Search");
+      userEvent.click(submitButton);
+
+      expect(getByText("Please enter a valid ODS code")).toBeInTheDocument();
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    });
   });
 });

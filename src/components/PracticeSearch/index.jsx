@@ -5,26 +5,52 @@ import Form from "../Form";
 import Button from "../Button";
 import PracticeSearchBar from "../PracticeSearchBar";
 import { useSearch } from "../../library/hooks/useSearch";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import practiceMetadata from "../../data/practices/practiceMetadata.json";
 import "./index.scss";
 
+const uniqueSearchKey = "name";
 const searchKeys = ["name", "odsCode"];
+const renderSuggestion = suggestion => {
+  return (
+    <>
+      {suggestion.name} | {suggestion.odsCode}
+    </>
+  );
+};
+
+const testid = "practice-search";
+
+const practices = practiceMetadata.practices;
 
 const PracticeSearch = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
+  const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
+  const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
+
+  const getSuggestionValue = value => {
+    setSelectedValue(value);
+    return value[uniqueSearchKey];
+  };
+
   const search = useSearch({
     uniqueSearchKey: "odsCode",
     searchKeys,
-    sourceDocuments: practiceMetadata.practices,
+    sourceDocuments: practices,
   });
-
-  const practices = practiceMetadata.practices;
 
   const handleSubmit = e => {
     e.preventDefault();
-    const inputLength = inputValue.length;
+    let odsCode;
+    if (newSearch) {
+      odsCode = selectedValue.odsCode || inputTextValue;
+    } else {
+      odsCode = selectedValue;
+    }
+
+    const inputLength = odsCode.length;
 
     if (inputLength < 5 || inputLength > 6) {
       setInputError("Please enter a valid ODS code");
@@ -32,7 +58,7 @@ const PracticeSearch = () => {
     }
 
     const practice = practices.find(
-      item => item.odsCode === inputValue.toUpperCase()
+      item => item.odsCode === odsCode.toUpperCase()
     );
 
     if (practice) {
@@ -40,14 +66,6 @@ const PracticeSearch = () => {
     } else {
       setInputError("Please enter a valid ODS code");
     }
-  };
-
-  const testid = "practice-search";
-
-  const uniqueSearchKey = "name";
-  const getSuggestionValue = value => value[uniqueSearchKey];
-  const renderSuggestion = suggestion => {
-    return <>{suggestion.name}</>;
   };
 
   return (
@@ -58,12 +76,15 @@ const PracticeSearch = () => {
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <PracticeSearchBar
           inputError={inputError}
-          setInputValue={setInputValue}
+          setSelectedValue={setSelectedValue}
+          selectedValue={selectedValue}
           testid={testid}
           inputLabelText="Enter an ODS code"
           search={search}
           renderSuggestion={renderSuggestion}
           getSuggestionValue={getSuggestionValue}
+          inputTextValue={inputTextValue}
+          setInputTextValue={setInputTextValue}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
