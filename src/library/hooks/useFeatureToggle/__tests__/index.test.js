@@ -102,5 +102,21 @@ describe("useFeatureToggle", () => {
       const isNewFeatureEnabled = result.current;
       expect(isNewFeatureEnabled).toBe(true);
     });
+
+    it("overrides default config when there are multiple URL params", async () => {
+      global.window.location.search =
+        "?F_NEW_FEATURE=false&F_SECOND_FEATURE=true";
+      const { result: firstResult } = renderHook(() =>
+        useFeatureToggle("F_NEW_FEATURE")
+      );
+      const { result: secondResult } = renderHook(() =>
+        useFeatureToggle("F_SECOND_FEATURE")
+      );
+      const isFirstFeatureEnabled = firstResult.current;
+      const isSecondFeatureEnabled = secondResult.current;
+
+      expect(isFirstFeatureEnabled).toBe(false);
+      expect(isSecondFeatureEnabled).toBe(true);
+    });
   });
 });
