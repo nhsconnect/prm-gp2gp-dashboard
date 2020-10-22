@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Logo from "../../assets/logo.svg";
 import PhaseBanner from "../PhaseBanner/index";
+import "./index.scss";
 
 const Header = () => {
   const content = useStaticQuery(
