@@ -68,6 +68,9 @@ pipelines:
                       - ./tasks dojo-deploy
       - build_prod:
           clean_workspace: true
+          approval:
+            type: manual
+            allow_only_on_success: true
           jobs:
             npm_build:
               resources:
@@ -95,9 +98,6 @@ pipelines:
                       - ./tasks dojo-build prod
       - deploy_prod:
           clean_workspace: true
-          approval:
-            type: manual
-            allow_only_on_success: true
           jobs:
             deploy:
               resources:
