@@ -1,3 +1,8 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+
+@import "node_modules/nhsuk-frontend/packages/components/error-message/error-message";
+
 .gp2gp-practice-search {
   .nhsuk-label {
     margin-bottom: 0;
