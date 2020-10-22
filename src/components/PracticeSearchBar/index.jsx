@@ -7,7 +7,13 @@ import "./index.scss";
 
 const renderSuggestion = suggestion => <div>{suggestion}</div>;
 
-const PracticeSearchBar = ({ inputError, setInputValue, testid }) => {
+const PracticeSearchBar = ({
+  inputError,
+  setInputValue,
+  testid,
+  sourceDocuments,
+  inputLabelText,
+}) => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
   const [autosuggestValue, setAutosuggestValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -26,22 +32,38 @@ const PracticeSearchBar = ({ inputError, setInputValue, testid }) => {
     },
   };
 
-  return newSearch ? (
-    <Autosuggest
-      suggestions={suggestions}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      getSuggestionValue={value => value}
-      renderSuggestion={renderSuggestion}
-      inputProps={inputProps}
-    />
-  ) : (
-    <Input
-      error={inputError}
-      className="nhsuk-input--width-10"
-      testid={testid}
-      onChange={e => setInputValue(e.currentTarget.value)}
-    />
+  return (
+    <label date-testid={`${testid}-label`}>
+      <span className="nhsuk-hint" data-testid={`${testid}-hint`}>
+        {inputLabelText}
+      </span>
+      {inputError && (
+        <span
+          className="nhsuk-error-message"
+          data-testid={`${testid}-error`}
+          role="alert"
+        >
+          {inputError}
+        </span>
+      )}
+      {newSearch ? (
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={value => value}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+      ) : (
+        <Input
+          error={inputError}
+          className="nhsuk-input--width-10"
+          testid={testid}
+          onChange={e => setInputValue(e.currentTarget.value)}
+        />
+      )}
+    </label>
   );
 };
 
