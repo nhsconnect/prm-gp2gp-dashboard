@@ -2,7 +2,9 @@ import React from "react";
 import moxios from "moxios";
 import * as Gatsby from "gatsby";
 import { render } from "@testing-library/react";
-import { waitForDomChange } from "@testing-library/dom";
+import { waitFor } from "@testing-library/dom";
+import { act } from "react-dom/test-utils";
+
 import Practice from "../practice";
 import { mockAPIResponse } from "../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../__mocks__/ODSPortalBuilder";
@@ -62,15 +64,20 @@ describe("Practice template", () => {
       <Practice pageContext={pipelinePracticeData} />
     );
 
-    await waitForDomChange();
-
-    expect(getByText(expectedODSPracticeData.odsCode)).toBeInTheDocument();
-    expect(getByText(expectedPracticeName)).toBeInTheDocument();
-    expect(getByText(expectedODSPracticeData.town)).toBeInTheDocument();
-    expect(getByText(expectedODSPracticeData.postCode)).toBeInTheDocument();
-    expect(getByText(expectedODSPracticeData.lines.line1)).toBeInTheDocument();
-    expect(getByText(expectedODSPracticeData.lines.line2)).toBeInTheDocument();
-
+    await act(async () => {
+      await waitFor(() => {
+        expect(getByText(expectedODSPracticeData.odsCode)).toBeInTheDocument();
+        expect(getByText(expectedPracticeName)).toBeInTheDocument();
+        expect(getByText(expectedODSPracticeData.town)).toBeInTheDocument();
+        expect(getByText(expectedODSPracticeData.postCode)).toBeInTheDocument();
+        expect(
+          getByText(expectedODSPracticeData.lines.line1)
+        ).toBeInTheDocument();
+        expect(
+          getByText(expectedODSPracticeData.lines.line2)
+        ).toBeInTheDocument();
+      });
+    });
     moxios.uninstall();
   });
 });
