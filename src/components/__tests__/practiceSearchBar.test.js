@@ -6,23 +6,18 @@ import PracticeSearchBar from "../PracticeSearchBar/index";
 import * as featureToggle from "../../library/hooks/useFeatureToggle";
 
 describe("PracticeSearchBar component", () => {
-  const SOURCE_SUGGESTION_LIST = [
-    { name: "apple" },
-    { name: "banana" },
-    { name: "mango" },
-  ];
   const inputLabelText = "Enter value";
 
   it("updates input value with text that the user has inputted", () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     const { getByLabelText } = render(
       <PracticeSearchBar
-        sourceDocuments={SOURCE_SUGGESTION_LIST}
         inputLabelText={inputLabelText}
-        searchKeys={["name"]}
-        uniqueSearchKey="name"
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={value => value.name}
+        search={{
+          search: () => [],
+        }}
       />
     );
     const input = getByLabelText(inputLabelText);
@@ -34,12 +29,10 @@ describe("PracticeSearchBar component", () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     const { getByLabelText, getByText } = render(
       <PracticeSearchBar
-        sourceDocuments={SOURCE_SUGGESTION_LIST}
         inputLabelText={inputLabelText}
-        searchKeys={["name"]}
-        uniqueSearchKey="name"
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={value => value.name}
+        search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
       />
     );
     const input = getByLabelText(inputLabelText);

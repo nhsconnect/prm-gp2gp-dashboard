@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { navigate } from "gatsby";
+
 import Form from "../Form";
 import Button from "../Button";
 import PracticeSearchBar from "../PracticeSearchBar";
+import { useSearch } from "../../library/hooks/useSearch";
+
 import practiceMetadata from "../../data/practices/practiceMetadata.json";
 import "./index.scss";
+
+const searchKeys = ["name", "odsCode"];
 
 const PracticeSearch = () => {
   const [inputValue, setInputValue] = useState("");
   const [inputError, setInputError] = useState(null);
+  const search = useSearch({
+    uniqueSearchKey: "odsCode",
+    searchKeys,
+    sourceDocuments: practiceMetadata.practices,
+  });
 
   const practices = practiceMetadata.practices;
 
@@ -34,9 +44,11 @@ const PracticeSearch = () => {
 
   const testid = "practice-search";
 
-  const uniqueSearchKey = "test";
+  const uniqueSearchKey = "name";
   const getSuggestionValue = value => value[uniqueSearchKey];
-  const renderSuggestion = suggestion => <div></div>;
+  const renderSuggestion = suggestion => {
+    return <>{suggestion.name}</>;
+  };
 
   return (
     <div className="gp2gp-practice-search">
@@ -49,9 +61,7 @@ const PracticeSearch = () => {
           setInputValue={setInputValue}
           testid={testid}
           inputLabelText="Enter an ODS code"
-          sourceDocuments={[]}
-          searchKeys={[]}
-          uniqueSearchKey={uniqueSearchKey}
+          search={search}
           renderSuggestion={renderSuggestion}
           getSuggestionValue={getSuggestionValue}
         />
