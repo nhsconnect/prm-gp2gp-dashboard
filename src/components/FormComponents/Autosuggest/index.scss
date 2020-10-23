@@ -14,6 +14,11 @@
   margin: 2px 0;
 }
 
+.react-autosuggest__input--error {
+  @extend .react-autosuggest__input;
+  @extend .nhsuk-input--error;
+}
+
 .react-autosuggest__input--focused {
   margin: 0px;
 }
@@ -48,6 +53,7 @@
   list-style: none;
   padding: 0.5rem 0 0.5rem 1.6rem;
   margin-bottom: 0;
+  cursor: pointer;
 
   &:last-child {
     border: none;

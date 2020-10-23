@@ -34,6 +34,9 @@ const Autosuggest = ({
       onAutosuggestInputChange(newValue);
       setInputTextValue(newValue);
     },
+    className: inputError
+      ? "react-autosuggest__input--error"
+      : "react-autosuggest__input",
   };
 
   return (

@@ -5,33 +5,17 @@ import Header from "../components/Header";
 import "./index.scss";
 
 const Layout = ({ children }) => {
-  const content = useStaticQuery(
-    graphql`
-      query {
-        allFile(filter: { name: { eq: "header" } }) {
-          edges {
-            node {
-              childContentJson {
-                serviceName
-              }
-            }
-          }
-        }
-      }
-    `
-  ).allFile.edges[0].node.childContentJson;
-
   return (
-    <Fragment>
+    <>
       <Helmet>
         <html lang="en" />
-        <title>{content.serviceName}</title>
+        <title>GP2GP Service Dashboard</title>
       </Helmet>
       <Header />
       <div className="nhsuk-width-container">
         <main className="nhsuk-main-wrapper">{children}</main>
       </div>
-    </Fragment>
+    </>
   );
 };
 
