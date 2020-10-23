@@ -13,9 +13,9 @@ const PracticeSearchBar = ({
   renderSuggestion,
   getSuggestionValue,
   search,
+  inputTextValue = "",
+  onAutosuggestInputChange = () => {},
   setInputTextValue,
-  inputTextValue,
-  selectedValue,
 }) => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
   const [suggestions, setSuggestions] = useState([]);
@@ -31,14 +31,7 @@ const PracticeSearchBar = ({
   const inputProps = {
     value: inputTextValue,
     onChange: (_, { newValue }) => {
-      // This overrides the ODS code when the user has just selected an option and then edits the input
-      if (
-        newValue !== selectedValue.name &&
-        selectedValue.name !== "" &&
-        selectedValue.name !== undefined
-      ) {
-        setSelectedValue({ odsCode: newValue });
-      }
+      onAutosuggestInputChange(newValue);
       setInputTextValue(newValue);
     },
   };
@@ -71,7 +64,7 @@ const PracticeSearchBar = ({
           error={inputError}
           className="nhsuk-input--width-10"
           testid={testid}
-          onChange={e => setSelectedValue(e.currentTarget.value)}
+          onChange={e => setSelectedValue({ odsCode: e.currentTarget.value })}
         />
       )}
     </label>

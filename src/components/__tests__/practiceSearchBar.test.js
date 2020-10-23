@@ -16,12 +16,10 @@ describe("PracticeSearchBar component", () => {
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={value => value.name}
-        setInputTextValue={mockSetInputValue}
-        inputTextValue=""
-        selectedValue=""
         search={{
           search: () => [],
         }}
+        setInputTextValue={mockSetInputValue}
       />
     );
     const input = getByLabelText(inputLabelText);
@@ -41,7 +39,6 @@ describe("PracticeSearchBar component", () => {
         getSuggestionValue={suggestion => suggestion.name}
         setInputTextValue={mockSetInputValue}
         inputTextValue="a"
-        selectedValue=""
         search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
       />
     );
@@ -53,5 +50,26 @@ describe("PracticeSearchBar component", () => {
     userEvent.click(suggestion);
 
     expect(mockSetInputValue).toHaveBeenCalledWith("apple");
+  });
+
+  it("runs the onAutosuggestInputChange callback if it has been passed in", async () => {
+    featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+    const mockSetInputValue = jest.fn();
+    const mockOnAutosuggestInputChange = jest.fn();
+    const { getByLabelText, getByText } = render(
+      <PracticeSearchBar
+        inputLabelText={inputLabelText}
+        renderSuggestion={suggestion => <div>{suggestion.name}</div>}
+        getSuggestionValue={suggestion => suggestion.name}
+        setInputTextValue={mockSetInputValue}
+        onAutosuggestInputChange={mockOnAutosuggestInputChange}
+        search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
+      />
+    );
+
+    const input = getByLabelText(inputLabelText);
+    userEvent.type(input, "a");
+
+    expect(mockOnAutosuggestInputChange).toHaveBeenCalledWith("a");
   });
 });

@@ -5,7 +5,6 @@ import Form from "../Form";
 import Button from "../Button";
 import PracticeSearchBar from "../PracticeSearchBar";
 import { useSearch } from "../../library/hooks/useSearch";
-import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import practiceMetadata from "../../data/practices/practiceMetadata.json";
 import "./index.scss";
@@ -25,15 +24,9 @@ const testid = "practice-search";
 const practices = practiceMetadata.practices;
 
 const PracticeSearch = () => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState({ odsCode: "" });
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
-  const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
-
-  const getSuggestionValue = value => {
-    setSelectedValue(value);
-    return value[uniqueSearchKey];
-  };
 
   const search = useSearch({
     uniqueSearchKey: "odsCode",
@@ -41,14 +34,22 @@ const PracticeSearch = () => {
     sourceDocuments: practices,
   });
 
+  const getSuggestionValue = value => {
+    setSelectedValue(value);
+    return value[uniqueSearchKey];
+  };
+
+  const onAutosuggestInputChange = newValue => {
+    // This overrides the ODS code when the user has just selected an option and then edits the input
+    if (selectedValue.name && newValue !== selectedValue.name) {
+      setSelectedValue({ odsCode: newValue });
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    let odsCode;
-    if (newSearch) {
-      odsCode = selectedValue.odsCode || inputTextValue;
-    } else {
-      odsCode = selectedValue;
-    }
+
+    const odsCode = selectedValue.odsCode || inputTextValue;
 
     const inputLength = odsCode.length;
 
@@ -77,14 +78,14 @@ const PracticeSearch = () => {
         <PracticeSearchBar
           inputError={inputError}
           setSelectedValue={setSelectedValue}
-          selectedValue={selectedValue}
           testid={testid}
           inputLabelText="Enter an ODS code"
-          search={search}
           renderSuggestion={renderSuggestion}
           getSuggestionValue={getSuggestionValue}
           inputTextValue={inputTextValue}
+          search={search}
           setInputTextValue={setInputTextValue}
+          onAutosuggestInputChange={onAutosuggestInputChange}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
