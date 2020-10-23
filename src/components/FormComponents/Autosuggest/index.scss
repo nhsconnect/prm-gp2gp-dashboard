@@ -5,22 +5,19 @@
 
 .react-autosuggest__container {
   max-width: 40rem;
+  position: relative;
 }
 
 .react-autosuggest__input {
   @extend .nhsuk-input;
-  padding: 1.3rem 0;
+  padding: 0.7rem 0;
   padding-left: 1rem;
-  margin: 2px 0;
+  height: auto;
 }
 
 .react-autosuggest__input--error {
   @extend .react-autosuggest__input;
   @extend .nhsuk-input--error;
-}
-
-.react-autosuggest__input--focused {
-  margin: 0px;
 }
 
 .react-autosuggest__suggestions-container {
@@ -29,12 +26,15 @@
 
 .react-autosuggest__suggestions-container--open {
   position: absolute;
+  left: 0;
+  right: 0;
   max-width: inherit;
   max-height: 24rem;
   overflow: scroll;
   z-index: 5;
   padding-left: 0;
   width: 100%;
+  margin-top: -2px;
   border: 2px solid $nhsuk-form-border-color;
 }
 
@@ -51,7 +51,7 @@
   border-top: 1px solid $nhsuk-border-color;
   border-bottom: 1px solid $nhsuk-border-color;
   list-style: none;
-  padding: 0.5rem 0 0.5rem 1.6rem;
+  padding: 0.5rem 1rem 0.5rem 1.6rem;
   margin-bottom: 0;
   cursor: pointer;
 
