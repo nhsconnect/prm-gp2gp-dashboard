@@ -3,18 +3,26 @@ import { navigate } from "gatsby";
 
 import Form from "../Form";
 import Button from "../Button";
-import PracticeSearchBar from "../PracticeSearchBar";
+import AutosuggestSearch from "../AutosuggestSearch";
 import { useSearch } from "../../library/hooks/useSearch";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import practiceMetadata from "../../data/practices/practiceMetadata.json";
 import "./index.scss";
 
-const uniqueSearchKey = "name";
+const uniqueSearchKey = "odsCode";
 const searchKeys = ["name", "odsCode"];
+
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+
 const renderSuggestion = suggestion => {
   return (
     <>
-      {suggestion.name} | {suggestion.odsCode}
+      {toTitleCase(suggestion.name)} | {suggestion.odsCode}
     </>
   );
 };
@@ -28,58 +36,58 @@ const PracticeSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
 
+  const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
+
   const search = useSearch({
-    uniqueSearchKey: "odsCode",
+    uniqueSearchKey: uniqueSearchKey,
     searchKeys,
     sourceDocuments: practices,
   });
 
   const getSuggestionValue = value => {
-    setSelectedValue(value);
-    return value[uniqueSearchKey];
+    setSelectedValue({ ...value, name: toTitleCase(value.name) });
+    return `${toTitleCase(value["name"])} | ${value["odsCode"]}`;
   };
 
   const onAutosuggestInputChange = newValue => {
     // This overrides the ODS code when the user has just selected an option and then edits the input
-    if (selectedValue.name && newValue !== selectedValue.name) {
-      setSelectedValue({ odsCode: newValue });
+    if (selectedValue.name && toTitleCase(newValue) !== selectedValue.name) {
+      setSelectedValue({});
     }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const odsCode = selectedValue.odsCode || inputTextValue;
+    const searchVal = selectedValue.odsCode || inputTextValue;
 
-    const inputLength = odsCode.length;
+    const result = search.search(searchVal);
 
-    if (inputLength < 5 || inputLength > 6) {
-      setInputError("Please enter a valid ODS code");
-      return;
-    }
-
-    const practice = practices.find(
-      item => item.odsCode === odsCode.toUpperCase()
-    );
-
-    if (practice) {
-      navigate(`/practice/${practice.odsCode}`);
-    } else {
-      setInputError("Please enter a valid ODS code");
+    if (result.length === 0) {
+      setInputError(
+        newSearch
+          ? "Please enter a valid practice name or ODS code"
+          : "Please enter a valid ODS code"
+      );
+    } else if (result.length > 1) {
+      setInputError(
+        `Multiple results matching '${searchVal}'. Please select an option from the dropdown.`
+      );
+    } else if (result.length === 1) {
+      const odsCode = result[0].odsCode;
+      navigate(`/practice/${odsCode}`);
     }
   };
 
   return (
     <div className="gp2gp-practice-search">
-      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
-        Search for a GP practice
-      </h1>
+      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">Search</h1>
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
-        <PracticeSearchBar
+        <AutosuggestSearch
           inputError={inputError}
           setSelectedValue={setSelectedValue}
           testid={testid}
-          inputLabelText="Enter an ODS code"
+          inputLabelText="Enter a practice name or ODS code"
           renderSuggestion={renderSuggestion}
           getSuggestionValue={getSuggestionValue}
           inputTextValue={inputTextValue}

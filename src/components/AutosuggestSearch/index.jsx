@@ -5,7 +5,7 @@ import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import Input from "../Input";
 import "./index.scss";
 
-const PracticeSearchBar = ({
+const AutosuggestSearch = ({
   inputError,
   setSelectedValue,
   testid,
@@ -21,7 +21,7 @@ const PracticeSearchBar = ({
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(search.search(value).slice(0, 5));
+    setSuggestions(search.search(value).slice(0, 500));
   };
 
   const onSuggestionsClearRequested = () => {
@@ -39,7 +39,7 @@ const PracticeSearchBar = ({
   return (
     <label date-testid={`${testid}-label`}>
       <span className="nhsuk-hint" data-testid={`${testid}-hint`}>
-        {inputLabelText}
+        {newSearch ? inputLabelText : "Enter an ODS code"}
       </span>
       {inputError && (
         <span
@@ -71,4 +71,4 @@ const PracticeSearchBar = ({
   );
 };
 
-export default PracticeSearchBar;
+export default AutosuggestSearch;
