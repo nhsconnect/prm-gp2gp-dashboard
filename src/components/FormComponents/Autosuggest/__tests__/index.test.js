@@ -2,17 +2,17 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import AutosuggestSearch from "../AutosuggestSearch/index";
-import * as featureToggle from "../../library/hooks/useFeatureToggle";
+import Autosuggest from "../index";
+import * as featureToggle from "../../../../library/hooks/useFeatureToggle";
 
-describe("AutosuggestSearch component", () => {
+describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";
 
   it("updates input value with text that the user has inputted", () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     const mockSetInputValue = jest.fn();
     const { getByLabelText } = render(
-      <AutosuggestSearch
+      <Autosuggest
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={value => value.name}
@@ -33,7 +33,7 @@ describe("AutosuggestSearch component", () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     const mockSetInputValue = jest.fn();
     const { getByLabelText, getByText } = render(
-      <AutosuggestSearch
+      <Autosuggest
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={suggestion => suggestion.name}
@@ -57,7 +57,7 @@ describe("AutosuggestSearch component", () => {
     const mockSetInputValue = jest.fn();
     const mockOnAutosuggestInputChange = jest.fn();
     const { getByLabelText, getByText } = render(
-      <AutosuggestSearch
+      <Autosuggest
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
         getSuggestionValue={suggestion => suggestion.name}

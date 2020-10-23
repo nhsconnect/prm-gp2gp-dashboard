@@ -2,11 +2,11 @@ import React from "react";
 import * as Gatsby from "gatsby";
 import { render, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import PracticeSearch from "../PracticeSearch";
-import * as featureToggle from "../../library/hooks/useFeatureToggle";
+import PracticeSearch from "../index";
+import * as featureToggle from "../../../library/hooks/useFeatureToggle";
 
 jest.mock(
-  "../../data/practices/practiceMetadata.json",
+  "../../../data/practices/practiceMetadata.json",
   () => ({
     practices: [
       { odsCode: "A12345", name: "Test Practice" },

@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import PracticeDetails from "../PracticeDetails/index";
+import PracticeDetails from "../index";
 
 describe("PracticeDetails component", () => {
   it("displays practice name and ODS code", () => {

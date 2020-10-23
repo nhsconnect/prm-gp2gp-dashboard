@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { navigate } from "gatsby";
 
-import Form from "../Form";
-import Button from "../Button";
-import AutosuggestSearch from "../AutosuggestSearch";
+import Form from "../FormComponents/Form";
+import Button from "../FormComponents/Button";
+import Autosuggest from "../FormComponents/Autosuggest";
 import { useSearch } from "../../library/hooks/useSearch";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
@@ -83,7 +83,7 @@ const PracticeSearch = () => {
     <div className="gp2gp-practice-search">
       <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">Search</h1>
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
-        <AutosuggestSearch
+        <Autosuggest
           inputError={inputError}
           setSelectedValue={setSelectedValue}
           testid={testid}

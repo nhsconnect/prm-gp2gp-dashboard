@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Autosuggest from "react-autosuggest";
+import ReactAutosuggest from "react-autosuggest";
 
-import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 import Input from "../Input";
 import "./index.scss";
 
-const AutosuggestSearch = ({
+const Autosuggest = ({
   inputError,
   setSelectedValue,
   testid,
@@ -51,7 +51,7 @@ const AutosuggestSearch = ({
         </span>
       )}
       {newSearch ? (
-        <Autosuggest
+        <ReactAutosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
@@ -71,4 +71,4 @@ const AutosuggestSearch = ({
   );
 };
 
-export default AutosuggestSearch;
+export default Autosuggest;
