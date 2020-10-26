@@ -13,11 +13,25 @@
   padding: 0.7rem 0;
   padding-left: 1rem;
   height: auto;
+
+  &:focus {
+    border: 2px solid $nhsuk-focus-text-color;
+    box-shadow: inset 0 0 0 2px $nhsuk-focus-text-color,
+      0 0 0 4px $nhsuk-focus-color;
+    -webkit-box-shadow: inset 0 0 0 2px $nhsuk-focus-text-color,
+      0 0 0 4px $nhsuk-focus-color;
+    -moz-box-shadow: inset 0 0 0 2px $nhsuk-focus-text-color,
+      0 0 0 4px $nhsuk-focus-color;
+  }
 }
 
 .react-autosuggest__input--error {
   @extend .react-autosuggest__input;
-  @extend .nhsuk-input--error;
+
+  border: 2px solid $nhsuk-error-color;
+  box-shadow: inset 0 0 0 2px $nhsuk-error-color;
+  -webkit-box-shadow: inset 0 0 0 2px $nhsuk-error-color;
+  -moz-box-shadow: inset 0 0 0 2px $nhsuk-error-color;
 }
 
 .react-autosuggest__suggestions-container {
