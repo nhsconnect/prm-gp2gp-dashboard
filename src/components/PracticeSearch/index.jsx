@@ -20,11 +20,7 @@ function toTitleCase(str) {
 }
 
 const renderSuggestion = suggestion => {
-  return (
-    <>
-      {toTitleCase(suggestion.name)} | {suggestion.odsCode}
-    </>
-  );
+  return `${toTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
 };
 
 const testid = "practice-search";
@@ -32,7 +28,6 @@ const testid = "practice-search";
 const practices = practiceMetadata.practices;
 
 const PracticeSearch = () => {
-  const [selectedValue, setSelectedValue] = useState({ odsCode: "" });
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
 
@@ -44,38 +39,28 @@ const PracticeSearch = () => {
     sourceDocuments: practices,
   });
 
-  const getSuggestionValue = value => {
-    setSelectedValue({ ...value, name: toTitleCase(value.name) });
+  const getFormattedSelectionText = value => {
     return `${toTitleCase(value["name"])} | ${value["odsCode"]}`;
-  };
-
-  const onAutosuggestInputChange = newValue => {
-    // This overrides the ODS code when the user has just selected an option and then edits the input
-    if (selectedValue.name && toTitleCase(newValue) !== selectedValue.name) {
-      setSelectedValue({});
-    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const searchVal = selectedValue.odsCode || inputTextValue;
+    const result = search.search(inputTextValue);
 
-    const result = search.search(searchVal);
-
-    if (result.length === 0) {
+    if (result.length === 1) {
+      const odsCode = result[0].odsCode;
+      navigate(`/practice/${odsCode}`);
+    } else if (result.length > 1) {
+      setInputError(
+        `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
+      );
+    } else {
       setInputError(
         newSearch
           ? "Please enter a valid practice name or ODS code"
           : "Please enter a valid ODS code"
       );
-    } else if (result.length > 1) {
-      setInputError(
-        `Multiple results matching '${searchVal}'. Please select an option from the dropdown.`
-      );
-    } else if (result.length === 1) {
-      const odsCode = result[0].odsCode;
-      navigate(`/practice/${odsCode}`);
     }
   };
 
@@ -85,15 +70,14 @@ const PracticeSearch = () => {
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <Autosuggest
           inputError={inputError}
-          setSelectedValue={setSelectedValue}
           testid={testid}
           inputLabelText="Enter a practice name or ODS code"
           renderSuggestion={renderSuggestion}
-          getSuggestionValue={getSuggestionValue}
+          getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
           search={search}
           setInputTextValue={setInputTextValue}
-          onAutosuggestInputChange={onAutosuggestInputChange}
+          maxResults={500}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"

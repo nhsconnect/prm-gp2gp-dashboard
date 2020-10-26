@@ -7,21 +7,20 @@ import "./index.scss";
 
 const Autosuggest = ({
   inputError,
-  setSelectedValue,
   testid,
   inputLabelText,
   renderSuggestion,
-  getSuggestionValue,
+  getFormattedSelectionText,
   search,
   inputTextValue = "",
-  onAutosuggestInputChange = () => {},
   setInputTextValue,
+  maxResults,
 }) => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(search.search(value).slice(0, 500));
+    setSuggestions(search.search(value).slice(0, maxResults));
   };
 
   const onSuggestionsClearRequested = () => {
@@ -31,7 +30,6 @@ const Autosuggest = ({
   const inputProps = {
     value: inputTextValue,
     onChange: (_, { newValue }) => {
-      onAutosuggestInputChange(newValue);
       setInputTextValue(newValue);
     },
     className: inputError
@@ -58,7 +56,7 @@ const Autosuggest = ({
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
+          getSuggestionValue={getFormattedSelectionText}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
         />
@@ -67,7 +65,7 @@ const Autosuggest = ({
           error={inputError}
           className="nhsuk-input--width-10"
           testid={testid}
-          onChange={e => setSelectedValue({ odsCode: e.currentTarget.value })}
+          onChange={e => setInputTextValue(e.currentTarget.value)}
         />
       )}
     </label>

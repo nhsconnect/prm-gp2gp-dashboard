@@ -1,9 +1,11 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 
 import Autosuggest from "../index";
 import * as featureToggle from "../../../../library/hooks/useFeatureToggle";
+import { queryAllByRole } from "@testing-library/dom";
 
 describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";
@@ -15,7 +17,7 @@ describe("Autosuggest component", () => {
       <Autosuggest
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
-        getSuggestionValue={value => value.name}
+        getFormattedSelectionText={value => value.name}
         search={{
           search: () => [],
         }}
@@ -36,7 +38,7 @@ describe("Autosuggest component", () => {
       <Autosuggest
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
-        getSuggestionValue={suggestion => suggestion.name}
+        getFormattedSelectionText={suggestion => suggestion.name}
         setInputTextValue={mockSetInputValue}
         inputTextValue="a"
         search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
@@ -52,24 +54,37 @@ describe("Autosuggest component", () => {
     expect(mockSetInputValue).toHaveBeenCalledWith("apple");
   });
 
-  it("runs the onAutosuggestInputChange callback if it has been passed in", async () => {
+  it("limits results when maxResults is set", async () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     const mockSetInputValue = jest.fn();
-    const mockOnAutosuggestInputChange = jest.fn();
-    const { getByLabelText, getByText } = render(
+    const { getByLabelText, queryByText, getAllByRole } = render(
       <Autosuggest
         inputLabelText={inputLabelText}
         renderSuggestion={suggestion => <div>{suggestion.name}</div>}
-        getSuggestionValue={suggestion => suggestion.name}
+        getFormattedSelectionText={suggestion => suggestion.name}
         setInputTextValue={mockSetInputValue}
-        onAutosuggestInputChange={mockOnAutosuggestInputChange}
-        search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
+        inputTextValue="a"
+        search={{
+          search: jest
+            .fn()
+            .mockReturnValue([
+              { name: "apple" },
+              { name: "banana" },
+              { name: "pear" },
+            ]),
+        }}
+        maxResults={2}
       />
     );
 
     const input = getByLabelText(inputLabelText);
-    userEvent.type(input, "a");
+    userEvent.click(input);
 
-    expect(mockOnAutosuggestInputChange).toHaveBeenCalledWith("a");
+    const suggestion = queryByText("pear");
+    const listItems = getAllByRole("option");
+
+    expect(suggestion).not.toBeInTheDocument();
+
+    expect(listItems.length).toBe(2);
   });
 });
