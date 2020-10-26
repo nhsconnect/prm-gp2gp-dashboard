@@ -68,6 +68,7 @@
   padding: 0.5rem 1rem 0.5rem 1.6rem;
   margin-bottom: 0;
   cursor: pointer;
+  font-weight: bolder;
 
   &:last-child {
     border: none;
@@ -77,5 +78,11 @@
 .react-autosuggest__suggestion--highlighted {
   background-color: $color_nhsuk-blue;
   border-color: $color_nhsuk-blue;
-  color: white;
+  color: $color_nhsuk-white;
+}
+
+.text-match--highlighted {
+  background-color: transparent;
+  font-weight: normal;
+  color: inherit;
 }

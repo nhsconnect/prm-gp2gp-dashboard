@@ -19,10 +19,6 @@ function toTitleCase(str) {
   });
 }
 
-const renderSuggestion = suggestion => {
-  return `${toTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
-};
-
 const testid = "practice-search";
 
 const practices = practiceMetadata.practices;
@@ -38,6 +34,10 @@ const PracticeSearch = () => {
     searchKeys,
     sourceDocuments: practices,
   });
+
+  const getSuggestionListItemText = suggestion => {
+    return `${toTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
+  };
 
   const getFormattedSelectionText = value => {
     return `${toTitleCase(value["name"])} | ${value["odsCode"]}`;
@@ -72,7 +72,7 @@ const PracticeSearch = () => {
           inputError={inputError}
           testid={testid}
           inputLabelText="Enter a practice name or ODS code"
-          renderSuggestion={renderSuggestion}
+          getSuggestionListItemText={getSuggestionListItemText}
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
           search={search}

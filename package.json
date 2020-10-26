@@ -38,7 +38,8 @@
     "react": "^16.13.0",
     "react-autosuggest": "^10.0.3",
     "react-dom": "^16.13.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.26.3",

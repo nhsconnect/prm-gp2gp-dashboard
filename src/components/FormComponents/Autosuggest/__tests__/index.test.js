@@ -16,7 +16,7 @@ describe("Autosuggest component", () => {
     const { getByLabelText } = render(
       <Autosuggest
         inputLabelText={inputLabelText}
-        renderSuggestion={suggestion => <div>{suggestion.name}</div>}
+        getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={value => value.name}
         search={{
           search: () => [],
@@ -34,10 +34,10 @@ describe("Autosuggest component", () => {
   it("sets input value when selecting value from suggestion list", async () => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
     const mockSetInputValue = jest.fn();
-    const { getByLabelText, getByText } = render(
+    const { getByLabelText, getByRole } = render(
       <Autosuggest
         inputLabelText={inputLabelText}
-        renderSuggestion={suggestion => <div>{suggestion.name}</div>}
+        getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={suggestion => suggestion.name}
         setInputTextValue={mockSetInputValue}
         inputTextValue="a"
@@ -48,7 +48,7 @@ describe("Autosuggest component", () => {
     const input = getByLabelText(inputLabelText);
     userEvent.click(input);
 
-    const suggestion = getByText("apple");
+    const suggestion = getByRole("option");
     userEvent.click(suggestion);
 
     expect(mockSetInputValue).toHaveBeenCalledWith("apple");
@@ -60,7 +60,7 @@ describe("Autosuggest component", () => {
     const { getByLabelText, queryByText, getAllByRole } = render(
       <Autosuggest
         inputLabelText={inputLabelText}
-        renderSuggestion={suggestion => <div>{suggestion.name}</div>}
+        getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={suggestion => suggestion.name}
         setInputTextValue={mockSetInputValue}
         inputTextValue="a"
@@ -86,5 +86,91 @@ describe("Autosuggest component", () => {
     expect(suggestion).not.toBeInTheDocument();
 
     expect(listItems.length).toBe(2);
+  });
+
+  describe("text substring highlighting", () => {
+    it("applies text-match--highlighted class to substring of suggestion that matches input text", async () => {
+      featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByText } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          setInputTextValue={mockSetInputValue}
+          inputTextValue="app"
+          search={{
+            search: jest.fn().mockReturnValue([{ name: "apple" }]),
+          }}
+          maxResults={2}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
+      const suggestionSubstring = getByText("app");
+      expect(suggestionSubstring).toBeInTheDocument();
+      expect(suggestionSubstring.className).toContain(
+        "text-match--highlighted"
+      );
+    });
+
+    it("applies text-match--highlighted class despite different casing", async () => {
+      featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByText } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          setInputTextValue={mockSetInputValue}
+          inputTextValue="APP"
+          search={{
+            search: jest.fn().mockReturnValue([{ name: "apple" }]),
+          }}
+          maxResults={2}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
+      const suggestionSubstring = getByText("app");
+      expect(suggestionSubstring).toBeInTheDocument();
+      expect(suggestionSubstring.className).toContain(
+        "text-match--highlighted"
+      );
+    });
+
+    it("returns two text-match--highlighted spans that match text input with multiple words", async () => {
+      featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByText } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          setInputTextValue={mockSetInputValue}
+          inputTextValue="ap le"
+          search={{
+            search: jest.fn().mockReturnValue([{ name: "apple" }]),
+          }}
+          maxResults={2}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
+      const suggestionSubstring = getByText("ap");
+      expect(suggestionSubstring).toBeInTheDocument();
+      expect(suggestionSubstring.className).toContain(
+        "text-match--highlighted"
+      );
+
+      const suggestionSubstringSecond = getByText("le");
+      expect(suggestionSubstringSecond).toBeInTheDocument();
+      expect(suggestionSubstringSecond.className).toContain(
+        "text-match--highlighted"
+      );
+    });
   });
 });

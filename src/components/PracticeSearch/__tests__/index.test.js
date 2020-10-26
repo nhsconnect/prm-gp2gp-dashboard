@@ -92,7 +92,7 @@ describe("PracticeSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, "A123");
 
-      const suggestion = getByText("Test Practice | A12345");
+      const suggestion = getByText("Test Practice |");
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -110,7 +110,7 @@ describe("PracticeSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validPracticeName);
 
-      const suggestion = getByText(`${validPracticeName} | ${validOdsCode}`);
+      const suggestion = getByText(`| ${validOdsCode}`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -154,7 +154,7 @@ describe("PracticeSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validOdsCode);
 
-      const suggestion = getByText(`${validPracticeName} | ${validOdsCode}`);
+      const suggestion = getByText(validOdsCode);
       userEvent.click(suggestion);
 
       await userEvent.type(input, "Wrong");

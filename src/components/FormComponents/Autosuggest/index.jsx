@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactAutosuggest from "react-autosuggest";
+import Highlighter from "react-highlight-words";
 
 import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 import Input from "../Input";
@@ -9,7 +10,7 @@ const Autosuggest = ({
   inputError,
   testid,
   inputLabelText,
-  renderSuggestion,
+  getSuggestionListItemText,
   getFormattedSelectionText,
   search,
   inputTextValue = "",
@@ -35,6 +36,17 @@ const Autosuggest = ({
     className: inputError
       ? "react-autosuggest__input--error"
       : "react-autosuggest__input",
+  };
+
+  const renderSuggestion = (suggestion, { query }) => {
+    return (
+      <Highlighter
+        highlightClassName="text-match--highlighted"
+        searchWords={query.split(" ")}
+        textToHighlight={getSuggestionListItemText(suggestion)}
+        autoEscape={true}
+      />
+    );
   };
 
   return (
