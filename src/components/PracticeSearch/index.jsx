@@ -48,19 +48,24 @@ const PracticeSearch = () => {
 
     const result = search.search(inputTextValue);
 
-    if (result.length === 1) {
-      const odsCode = result[0].odsCode;
-      navigate(`/practice/${odsCode}`);
-    } else if (result.length > 1) {
-      setInputError(
-        `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
-      );
+    if (newSearch) {
+      if (result.length === 1) {
+        const odsCode = result[0].odsCode;
+        navigate(`/practice/${odsCode}`);
+      } else if (result.length > 1) {
+        setInputError(
+          `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
+        );
+      } else {
+        setInputError("Please enter a valid practice name or ODS code");
+      }
     } else {
-      setInputError(
-        newSearch
-          ? "Please enter a valid practice name or ODS code"
-          : "Please enter a valid ODS code"
-      );
+      if (result.length === 1) {
+        const odsCode = result[0].odsCode;
+        navigate(`/practice/${odsCode}`);
+      } else {
+        setInputError("Please enter a valid ODS code");
+      }
     }
   };
 
