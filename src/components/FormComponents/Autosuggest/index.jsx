@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactAutosuggest from "react-autosuggest";
 import Highlighter from "react-highlight-words";
 
-import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 import Input from "../Input";
 import "./index.scss";
 
@@ -16,8 +15,8 @@ const Autosuggest = ({
   inputTextValue = "",
   setInputTextValue,
   maxResults,
+  newSearchToggle,
 }) => {
-  const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = ({ value }) => {
@@ -63,7 +62,7 @@ const Autosuggest = ({
           {inputError}
         </span>
       )}
-      {newSearch ? (
+      {newSearchToggle ? (
         <ReactAutosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}

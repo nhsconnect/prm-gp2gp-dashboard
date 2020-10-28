@@ -82,6 +82,7 @@ const PracticeSearch = () => {
           search={search}
           setInputTextValue={setInputTextValue}
           maxResults={100}
+          newSearchToggle={newSearch}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
