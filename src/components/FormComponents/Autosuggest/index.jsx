@@ -52,7 +52,7 @@ const Autosuggest = ({
   return (
     <label date-testid={`${testid}-label`}>
       <span className="nhsuk-hint" data-testid={`${testid}-hint`}>
-        {newSearch ? inputLabelText : "Enter an ODS code"}
+        {inputLabelText}
       </span>
       {inputError && (
         <span

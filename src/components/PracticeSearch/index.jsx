@@ -30,7 +30,7 @@ const PracticeSearch = () => {
   const newSearch = useFeatureToggle("F_PRACTICE_NAME_SEARCH");
 
   const search = useSearch({
-    uniqueSearchKey: uniqueSearchKey,
+    uniqueSearchKey,
     searchKeys,
     sourceDocuments: practices,
   });
@@ -71,13 +71,17 @@ const PracticeSearch = () => {
         <Autosuggest
           inputError={inputError}
           testid={testid}
-          inputLabelText="Enter a practice name or ODS code"
+          inputLabelText={
+            newSearch
+              ? "Enter a practice name or ODS code"
+              : "Enter an ODS code"
+          }
           getSuggestionListItemText={getSuggestionListItemText}
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
           search={search}
           setInputTextValue={setInputTextValue}
-          maxResults={500}
+          maxResults={100}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
