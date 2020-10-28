@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Helmet } from "react-helmet";
 import PracticeDetails from "../components/PracticeDetails";
 import {
   ODS_PORTAL_URL,
@@ -22,6 +23,7 @@ const Practice = ({ pageContext }) => {
 
   return (
     <Fragment>
+      <Helmet title={`${formattedName} | ${odsCode}`} />
       {isLoading | apiErr ? (
         <PracticeDetails name={formattedName} odsCode={odsCode} />
       ) : (

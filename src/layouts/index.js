@@ -8,7 +8,6 @@ const Layout = ({ children }) => {
     <>
       <Helmet>
         <html lang="en" />
-        <title>GP2GP Service Dashboard</title>
       </Helmet>
       <Header />
       <div className="nhsuk-width-container">
