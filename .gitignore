@@ -17,5 +17,5 @@ public
 # IntelliJ directory
 .idea/
 
-# Practice data
+# Organisation data
 src/data/organisations/
