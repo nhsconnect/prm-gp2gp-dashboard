@@ -1,34 +1,34 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import PracticeDetails from "../index";
+import OrganisationDetails from "../index";
 
-describe("PracticeDetails component", () => {
-  it("displays practice name and ODS code", () => {
+describe("OrganisationDetails component", () => {
+  it("displays organisation name and ODS code", () => {
     const name = "Hall Green Health";
     const odsCode = "Y00159";
     const { getByText } = render(
-      <PracticeDetails name={name} odsCode={odsCode} />
+      <OrganisationDetails name={name} odsCode={odsCode} />
     );
 
     expect(getByText(name)).toBeInTheDocument();
     expect(getByText(odsCode)).toBeInTheDocument();
   });
 
-  it("displays only practice ODS code when the name is not provided", () => {
+  it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const { getByText } = render(<PracticeDetails odsCode={odsCode} />);
+    const { getByText } = render(<OrganisationDetails odsCode={odsCode} />);
 
     expect(getByText(odsCode)).toBeInTheDocument();
   });
 
-  it("displays practice address in the correct order", () => {
+  it("displays organisation address in the correct order", () => {
     const address = {
       lines: ["15", "Austhorpe Road", "Crossgates"],
       postCode: "LS15 8BA",
       town: "Leeds",
     };
-    const testId = "practice-details-address";
-    const { getByTestId } = render(<PracticeDetails address={address} />);
+    const testId = "organisation-details-address";
+    const { getByTestId } = render(<OrganisationDetails address={address} />);
     const addressNode = getByTestId(testId).children;
 
     expect(addressNode[0]).toHaveTextContent(address.lines[0]);
@@ -38,15 +38,15 @@ describe("PracticeDetails component", () => {
     expect(addressNode[4]).toHaveTextContent(address.postCode);
   });
 
-  it("displays practice address correctly with one address line", () => {
+  it("displays organisation address correctly with one address line", () => {
     const address = {
       lines: ["15 Austhorpe Road"],
       postCode: "LS15 8BA",
       town: "Leeds",
     };
-    const testId = "practice-details-address";
+    const testId = "organisation-details-address";
     const { getByText, getByTestId } = render(
-      <PracticeDetails address={address} />
+      <OrganisationDetails address={address} />
     );
     const addressNode = getByTestId(testId).children;
 
@@ -56,14 +56,14 @@ describe("PracticeDetails component", () => {
     expect(getByText(address.town)).toBeInTheDocument();
   });
 
-  it("displays practice post code and town if there are no address lines", () => {
+  it("displays organisation post code and town if there are no address lines", () => {
     const address = {
       postCode: "LS15 8BA",
       town: "Leeds",
     };
-    const testId = "practice-details-address";
+    const testId = "organisation-details-address";
     const { getByText, getByTestId } = render(
-      <PracticeDetails address={address} />
+      <OrganisationDetails address={address} />
     );
     const addressNode = getByTestId(testId).children;
 

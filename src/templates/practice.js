@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
-import PracticeDetails from "../components/PracticeDetails";
+import OrganisationDetails from "../components/OrganisationDetails";
 import {
   ODS_PORTAL_URL,
   transformPracticeAddress,
@@ -25,9 +25,9 @@ const Practice = ({ pageContext }) => {
     <Fragment>
       <Helmet title={`${formattedName} | ${odsCode}`} />
       {isLoading | apiErr ? (
-        <PracticeDetails name={formattedName} odsCode={odsCode} />
+        <OrganisationDetails name={formattedName} odsCode={odsCode} />
       ) : (
-        <PracticeDetails
+        <OrganisationDetails
           name={formattedName}
           odsCode={odsCode}
           address={transformPracticeAddress(

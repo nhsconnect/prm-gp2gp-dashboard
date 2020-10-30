@@ -1,36 +1,12 @@
 const path = require("path");
+const organisationMetadata = require("./src/data/organisations/organisationMetadata.json");
+const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
 
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
-  const result = await graphql(`
-    query {
-      allFile(filter: { name: { eq: "practiceMetrics" } }) {
-        edges {
-          node {
-            childPracticesJson {
-              practices {
-                odsCode
-                name
-                metrics {
-                  year
-                  month
-                  requester {
-                    timeToIntegrateSla {
-                      within3Days
-                      within8Days
-                      beyond8Days
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
-  const practices =
-    result.data.allFile.edges[0].node.childPracticesJson.practices;
+
+  const practices = practiceMetrics.practices;
+  const ccgs = organisationMetadata.ccgs;
 
   practices.forEach(practice => {
     latestMetrics = practice.metrics[0];
@@ -44,6 +20,17 @@ exports.createPages = async ({ graphql, actions }) => {
         year: latestMetrics.year,
         month: latestMetrics.month,
         metrics: latestMetrics.requester.timeToIntegrateSla,
+      },
+    });
+  });
+
+  ccgs.forEach(ccg => {
+    createPage({
+      path: `/ccg/${ccg.odsCode}`,
+      component: path.resolve("src/templates/ccg.js"),
+      context: {
+        odsCode: ccg.odsCode,
+        name: ccg.name,
       },
     });
   });

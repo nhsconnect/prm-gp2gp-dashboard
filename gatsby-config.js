@@ -27,7 +27,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "practices",
-        path: `${__dirname}/src/data/practices`,
+        path: `${__dirname}/src/data/organisations`,
       },
     },
     "gatsby-plugin-sass",

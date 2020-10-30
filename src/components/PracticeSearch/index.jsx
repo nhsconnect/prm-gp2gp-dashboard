@@ -7,7 +7,7 @@ import Autosuggest from "../FormComponents/Autosuggest";
 import { useSearch } from "../../library/hooks/useSearch";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
-import practiceMetadata from "../../data/practices/practiceMetadata.json";
+import organisationMetadata from "../../data/organisations/organisationMetadata.json";
 import "./index.scss";
 
 const uniqueSearchKey = "odsCode";
@@ -21,7 +21,7 @@ function toTitleCase(str) {
 
 const testid = "practice-search";
 
-const practices = practiceMetadata.practices;
+const practices = organisationMetadata.practices;
 
 const PracticeSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");

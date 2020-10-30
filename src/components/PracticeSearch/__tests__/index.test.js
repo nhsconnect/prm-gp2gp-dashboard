@@ -6,7 +6,7 @@ import PracticeSearch from "../index";
 import * as featureToggle from "../../../library/hooks/useFeatureToggle";
 
 jest.mock(
-  "../../../data/practices/practiceMetadata.json",
+  "../../../data/organisations/organisationMetadata.json",
   () => ({
     practices: [
       { odsCode: "A12345", name: "Test Practice" },
