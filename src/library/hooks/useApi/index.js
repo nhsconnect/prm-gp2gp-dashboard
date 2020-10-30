@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const useApi = url => {
+export const useApi = (url, params = null) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +9,7 @@ export const useApi = url => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, { params });
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

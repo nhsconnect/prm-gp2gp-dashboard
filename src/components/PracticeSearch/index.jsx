@@ -6,18 +6,13 @@ import Button from "../FormComponents/Button";
 import Autosuggest from "../FormComponents/Autosuggest";
 import { useSearch } from "../../library/hooks/useSearch";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import { convertToTitleCase } from "../../library/common/index";
 
 import organisationMetadata from "../../data/organisations/organisationMetadata.json";
 import "./index.scss";
 
 const uniqueSearchKey = "odsCode";
 const searchKeys = ["name", "odsCode"];
-
-function toTitleCase(str) {
-  return str.replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
 
 const testid = "practice-search";
 
@@ -36,11 +31,11 @@ const PracticeSearch = () => {
   });
 
   const getSuggestionListItemText = suggestion => {
-    return `${toTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
+    return `${convertToTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
   };
 
   const getFormattedSelectionText = value => {
-    return `${toTitleCase(value["name"])} | ${value["odsCode"]}`;
+    return `${convertToTitleCase(value["name"])} | ${value["odsCode"]}`;
   };
 
   const handleSubmit = e => {

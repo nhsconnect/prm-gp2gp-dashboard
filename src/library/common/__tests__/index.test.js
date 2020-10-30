@@ -36,4 +36,11 @@ describe("convertToTitleCase", () => {
 
     expect(actual).toEqual(expected);
   });
+
+  it("does not convert acronyms to title case", async () => {
+    const actual = convertToTitleCase("NHS ENGLAND GP PRACTICE");
+    const expected = "NHS England GP Practice";
+
+    expect(actual).toEqual(expected);
+  });
 });

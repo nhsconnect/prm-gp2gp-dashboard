@@ -6,4 +6,11 @@ export const convertMonthNumberToText = number => {
   return months[number - 1];
 };
 
-export const convertToTitleCase = string => string.replace(/\w+/g, capitalize);
+export const convertToTitleCase = string => {
+  const acronyms = ["NHS", "CCG", "GP"];
+
+  return string
+    .split(" ")
+    .map(word => (acronyms.includes(word) ? word : capitalize(word)))
+    .join(" ");
+};
