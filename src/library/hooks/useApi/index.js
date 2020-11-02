@@ -18,6 +18,8 @@ export const useApi = (url, params = null) => {
       }
     };
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   return [isLoading, data, error];
