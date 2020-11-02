@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useSearch } from "../../library/hooks/useSearch";
 import PracticeRow from "../PracticeRow";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
+  const [filteredPractices, setFilteredPractices] = useState(null);
   const search = useSearch({
     uniqueSearchKey: "odsCode",
     searchKeys: ["odsCode"],
     sourceDocuments: validPractices,
   });
 
-  const isPracticeValid = odsCode => {
-    const result = search.search(odsCode);
-    return result.length !== 0;
-  };
-
-  const renderPracticeRows = () => {
-    if (!!ccgPractices) {
-      const rows = ccgPractices.map(org => {
-        if (isPracticeValid(org.OrgId)) {
-          return (
-            <PracticeRow key={org.OrgId} odsCode={org.OrgId} name={org.Name} />
-          );
-        }
-
-        return null;
-      });
-
-      return rows;
+  useEffect(() => {
+    if (!!ccgPractices && !!search.search) {
+      const practices = ccgPractices.filter(
+        ccg => search.search(ccg.OrgId).length > 0
+      );
+      setFilteredPractices(practices);
     }
-  };
+  }, [ccgPractices, search]);
 
-  return (
+  return !filteredPractices ? (
+    <p>Loading...</p>
+  ) : !filteredPractices.length ? (
+    <p>No practices found</p>
+  ) : (
     <table>
       <thead>
         <tr>
           <th>Practice Name</th>
         </tr>
       </thead>
-      <tbody>{renderPracticeRows()}</tbody>
+      <tbody>
+        {filteredPractices.map(org => (
+          <PracticeRow key={org.OrgId} odsCode={org.OrgId} name={org.Name} />
+        ))}
+      </tbody>
     </table>
   );
 };
