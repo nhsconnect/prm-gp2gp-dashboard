@@ -3,7 +3,6 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Autosuggest from "../index";
-import * as featureToggle from "../../../../library/hooks/useFeatureToggle";
 
 describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";
@@ -19,7 +18,6 @@ describe("Autosuggest component", () => {
           search: () => [],
         }}
         setInputTextValue={mockSetInputValue}
-        newSearchToggle={true}
       />
     );
     const input = getByLabelText(inputLabelText);
@@ -39,7 +37,6 @@ describe("Autosuggest component", () => {
         setInputTextValue={mockSetInputValue}
         inputTextValue="a"
         search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
-        newSearchToggle={true}
       />
     );
 
@@ -71,7 +68,6 @@ describe("Autosuggest component", () => {
             ]),
         }}
         maxResults={2}
-        newSearchToggle={true}
       />
     );
 
@@ -100,7 +96,6 @@ describe("Autosuggest component", () => {
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
           maxResults={2}
-          newSearchToggle={true}
         />
       );
 
@@ -126,7 +121,6 @@ describe("Autosuggest component", () => {
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
           maxResults={2}
-          newSearchToggle={true}
         />
       );
 
@@ -152,7 +146,6 @@ describe("Autosuggest component", () => {
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
           maxResults={2}
-          newSearchToggle={true}
         />
       );
 

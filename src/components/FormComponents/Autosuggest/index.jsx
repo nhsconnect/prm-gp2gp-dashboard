@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import ReactAutosuggest from "react-autosuggest";
 import Highlighter from "react-highlight-words";
 
-import Input from "../Input";
 import "./index.scss";
 
 const Autosuggest = ({
   inputError,
-  testid,
   inputLabelText,
   getSuggestionListItemText,
   getFormattedSelectionText,
@@ -15,7 +13,6 @@ const Autosuggest = ({
   inputTextValue = "",
   setInputTextValue,
   maxResults,
-  newSearchToggle,
 }) => {
   const [suggestions, setSuggestions] = useState([]);
 
@@ -49,36 +46,21 @@ const Autosuggest = ({
   };
 
   return (
-    <label date-testid={`${testid}-label`}>
-      <span className="nhsuk-hint" data-testid={`${testid}-hint`}>
-        {inputLabelText}
-      </span>
+    <label>
+      <span className="nhsuk-hint">{inputLabelText}</span>
       {inputError && (
-        <span
-          className="nhsuk-error-message"
-          data-testid={`${testid}-error`}
-          role="alert"
-        >
+        <span className="nhsuk-error-message" role="alert">
           {inputError}
         </span>
       )}
-      {newSearchToggle ? (
-        <ReactAutosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={getFormattedSelectionText}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-        />
-      ) : (
-        <Input
-          error={inputError}
-          className="nhsuk-input--width-10"
-          testid={testid}
-          onChange={e => setInputTextValue(e.currentTarget.value)}
-        />
-      )}
+      <ReactAutosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getFormattedSelectionText}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+      />
     </label>
   );
 };
