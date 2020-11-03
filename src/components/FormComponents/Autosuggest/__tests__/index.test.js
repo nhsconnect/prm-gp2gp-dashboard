@@ -82,6 +82,79 @@ describe("Autosuggest component", () => {
     expect(listItems.length).toBe(2);
   });
 
+  describe("when multiSection is true", () => {
+    it("will display section title and suggestion", () => {
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByText, getByRole } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          setInputTextValue={mockSetInputValue}
+          inputTextValue="a"
+          search={{
+            search: jest.fn().mockReturnValue([
+              {
+                title: "fruits",
+                fruits: [{ name: "apple" }],
+              },
+            ]),
+          }}
+          maxResults={3}
+          multiSection={true}
+          renderSectionTitle={section => section.title}
+          getSectionSuggestions={section => section.fruits}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
+
+      const sectionTitleComponent = getByText("fruits");
+      expect(sectionTitleComponent).toBeInTheDocument();
+      const suggestion = getByRole("option", { name: "a pple" });
+      expect(suggestion).toBeInTheDocument();
+    });
+
+    it("will display each section title and associated suggestions", () => {
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByText, getByRole } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          setInputTextValue={mockSetInputValue}
+          inputTextValue="e"
+          search={{
+            search: jest.fn().mockReturnValue([
+              {
+                title: "fruits",
+                fruits: [{ name: "apple" }],
+              },
+              {
+                title: "clothes",
+                fruits: [{ name: "trousers" }, { name: "blouse" }],
+              },
+            ]),
+          }}
+          maxResults={3}
+          multiSection={true}
+          renderSectionTitle={section => section.title}
+          getSectionSuggestions={section => section.fruits}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
+
+      expect(getByText("fruits")).toBeInTheDocument();
+      expect(getByText("clothes")).toBeInTheDocument();
+      expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
+      expect(getByRole("option", { name: "trous e rs" })).toBeInTheDocument();
+      expect(getByRole("option", { name: "blous e" })).toBeInTheDocument();
+    });
+  });
+
   describe("text substring highlighting", () => {
     it("applies text-match--highlighted class to substring of suggestion that matches input text", async () => {
       const mockSetInputValue = jest.fn();

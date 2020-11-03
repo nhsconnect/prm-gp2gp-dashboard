@@ -13,6 +13,9 @@ const Autosuggest = ({
   inputTextValue = "",
   setInputTextValue,
   maxResults,
+  multiSection,
+  renderSectionTitle,
+  getSectionSuggestions,
 }) => {
   const [suggestions, setSuggestions] = useState([]);
 
@@ -45,6 +48,10 @@ const Autosuggest = ({
     );
   };
 
+  const multiSectionProps = multiSection
+    ? { multiSection, renderSectionTitle, getSectionSuggestions }
+    : {};
+
   return (
     <label>
       <span className="nhsuk-hint">{inputLabelText}</span>
@@ -60,6 +67,7 @@ const Autosuggest = ({
         getSuggestionValue={getFormattedSelectionText}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
+        {...multiSectionProps}
       />
     </label>
   );
