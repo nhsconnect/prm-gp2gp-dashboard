@@ -27,7 +27,7 @@ describe("CCG template", () => {
 
     const statusCode = 200;
     const mockedResponse = {
-      Organisations: [{ OrgId: "A12345", Name: "A Practice" }],
+      Organisations: [{ OrgId: "A12345", Name: "A PRACTICE" }],
     };
     const expectedPracticeName = "A Practice | A12345";
 
