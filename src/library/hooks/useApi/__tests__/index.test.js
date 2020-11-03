@@ -12,8 +12,7 @@ describe("useApi", () => {
     const { result, waitForNextUpdate } = renderHook(() =>
       useApi("http://test.com/")
     );
-    const isLoading = result.current[0];
-    expect(isLoading).toBeTruthy();
+    expect(result.current.isLoading).toBeTruthy();
 
     await waitForNextUpdate();
     moxios.uninstall();
@@ -31,7 +30,7 @@ describe("useApi", () => {
     );
     await waitForNextUpdate();
 
-    const [isLoading, data, error] = result.current;
+    const { isLoading, data, error } = result.current;
 
     expect(isLoading).toBeFalsy();
     expect(data).toEqual(mockedResponse);
@@ -50,7 +49,7 @@ describe("useApi", () => {
 
     await waitForNextUpdate();
 
-    const [isLoading, data, error] = result.current;
+    const { isLoading, data, error } = result.current;
 
     expect(isLoading).toBeFalsy();
     expect(data).toBeNull();

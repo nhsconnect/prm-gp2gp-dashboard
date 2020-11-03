@@ -13,7 +13,7 @@ import SlaMetrics from "../components/SlaMetrics";
 import { useApi } from "../library/hooks/useApi";
 
 const Practice = ({ pageContext }) => {
-  const [isLoading, apiData, apiErr] = useApi(
+  const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${pageContext.odsCode}`
   );
 
@@ -24,15 +24,13 @@ const Practice = ({ pageContext }) => {
   return (
     <Fragment>
       <Helmet title={`${formattedName} | ${odsCode}`} />
-      {isLoading | apiErr ? (
+      {isLoading | error ? (
         <OrganisationDetails name={formattedName} odsCode={odsCode} />
       ) : (
         <OrganisationDetails
           name={formattedName}
           odsCode={odsCode}
-          address={transformPracticeAddress(
-            apiData.Organisation.GeoLoc.Location
-          )}
+          address={transformPracticeAddress(data.Organisation.GeoLoc.Location)}
         />
       )}
       <hr />

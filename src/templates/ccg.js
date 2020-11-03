@@ -13,7 +13,7 @@ const Ccg = ({ pageContext }) => {
   const { name, odsCode } = pageContext;
   const formattedName = convertToTitleCase(name);
 
-  const [, apiData, apiErr] = useApi(ODS_PORTAL_URL, {
+  const { data, error } = useApi(ODS_PORTAL_URL, {
     RelTypeId: "RE4",
     TargetOrgId: odsCode,
     RelStatus: "active",
@@ -25,10 +25,10 @@ const Ccg = ({ pageContext }) => {
       <Helmet title={`${formattedName} | ${odsCode}`} />
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       <PracticeTable
-        ccgPractices={apiData?.Organisations}
+        ccgPractices={data?.Organisations}
         validPractices={organisationMetadata.practices}
       />
-      {apiErr && `${apiErr} Error loading practices`}
+      {error && `${error} Error loading practices`}
     </>
   );
 };
