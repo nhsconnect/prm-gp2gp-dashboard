@@ -15,7 +15,7 @@ const searchKeys = ["name", "odsCode"];
 
 const practices = organisationMetadata.practices;
 
-const PracticeSearch = () => {
+const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
 
@@ -75,4 +75,4 @@ const PracticeSearch = () => {
   );
 };
 
-export default PracticeSearch;
+export default OrganisationSearch;

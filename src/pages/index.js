@@ -1,11 +1,11 @@
 import React from "react";
-import PracticeSearch from "../components/PracticeSearch";
+import OrganisationSearch from "../components/OrganisationSearch";
 import { Helmet } from "react-helmet";
 
 const Index = () => (
   <>
     <Helmet title="GP2GP Service Dashboard" />
-    <PracticeSearch />
+    <OrganisationSearch />
   </>
 );
 
