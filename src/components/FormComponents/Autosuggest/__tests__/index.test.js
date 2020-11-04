@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Autosuggest from "../index";
+import { Search } from "../../../../library/utils/search";
 
 describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";
@@ -36,7 +37,7 @@ describe("Autosuggest component", () => {
     });
   });
 
-  it("sets input value when selecting value from suggestion list", async () => {
+  it("sets input value when selecting value from suggestion list", () => {
     const mockSetInputValue = jest.fn();
     const { getByLabelText, getByRole } = render(
       <Autosuggest
@@ -61,37 +62,36 @@ describe("Autosuggest component", () => {
     });
   });
 
-  it("limits results when maxResults is set", async () => {
-    const mockSetInputValue = jest.fn();
-    const { getByLabelText, queryByText, getAllByRole } = render(
-      <Autosuggest
-        inputLabelText={inputLabelText}
-        getSuggestionListItemText={suggestion => suggestion.name}
-        getFormattedSelectionText={suggestion => suggestion.name}
-        onInputChange={mockSetInputValue}
-        inputTextValue="a"
-        itemSearch={{
-          search: jest
-            .fn()
-            .mockReturnValue([
-              { name: "apple" },
-              { name: "banana" },
-              { name: "pear" },
-            ]),
-        }}
-        maxResults={2}
-      />
-    );
+  describe("when maxResults is passed", () => {
+    it("limits results to maxResults value", () => {
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, queryByText, getAllByRole } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          onInputChange={mockSetInputValue}
+          inputTextValue="a"
+          itemSearch={
+            new Search(
+              ["name"],
+              [{ name: "apple" }, { name: "banana" }, { name: "pear" }]
+            )
+          }
+          maxResults={2}
+        />
+      );
 
-    const input = getByLabelText(inputLabelText);
-    userEvent.click(input);
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
 
-    const suggestion = queryByText("pear");
-    const listItems = getAllByRole("option");
+      const suggestion = queryByText("pear");
+      const listItems = getAllByRole("option");
 
-    expect(suggestion).not.toBeInTheDocument();
+      expect(suggestion).not.toBeInTheDocument();
 
-    expect(listItems.length).toBe(2);
+      expect(listItems.length).toBe(2);
+    });
   });
 
   describe("when multiSection is true", () => {
@@ -112,7 +112,6 @@ describe("Autosuggest component", () => {
               },
             ]),
           }}
-          maxResults={3}
           multiSection={true}
           renderSectionTitle={section => section.title}
           getSectionSuggestions={section => section.fruits}
@@ -149,7 +148,6 @@ describe("Autosuggest component", () => {
               },
             ]),
           }}
-          maxResults={3}
           multiSection={true}
           renderSectionTitle={section => section.title}
           getSectionSuggestions={section => section.fruits}
@@ -168,7 +166,7 @@ describe("Autosuggest component", () => {
   });
 
   describe("text substring highlighting", () => {
-    it("applies text-match--highlighted class to substring of suggestion that matches input text", async () => {
+    it("applies text-match--highlighted class to substring of suggestion that matches input text", () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText } = render(
         <Autosuggest
@@ -180,7 +178,6 @@ describe("Autosuggest component", () => {
           itemSearch={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
-          maxResults={2}
         />
       );
 
@@ -193,7 +190,7 @@ describe("Autosuggest component", () => {
       );
     });
 
-    it("applies text-match--highlighted class despite different casing", async () => {
+    it("applies text-match--highlighted class despite different casing", () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText } = render(
         <Autosuggest
@@ -205,7 +202,6 @@ describe("Autosuggest component", () => {
           itemSearch={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
-          maxResults={2}
         />
       );
 
@@ -218,7 +214,7 @@ describe("Autosuggest component", () => {
       );
     });
 
-    it("returns two text-match--highlighted spans that match text input with multiple words", async () => {
+    it("returns two text-match--highlighted spans that match text input with multiple words", () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText } = render(
         <Autosuggest
@@ -230,7 +226,6 @@ describe("Autosuggest component", () => {
           itemSearch={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
-          maxResults={2}
         />
       );
 

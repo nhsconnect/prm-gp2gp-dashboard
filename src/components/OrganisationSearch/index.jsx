@@ -40,7 +40,10 @@ const OrganisationSearch = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const result = organisationSearch.search(selectedOdsCode || inputTextValue);
+    const result = organisationSearch.search(
+      selectedOdsCode || inputTextValue,
+      2
+    );
 
     if (result.length === 1) {
       const odsCode = result[0].odsCode;

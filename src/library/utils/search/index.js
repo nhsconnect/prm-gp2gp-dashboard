@@ -6,7 +6,8 @@ export class Search {
     this.fuse = new Fuse(list, options);
   }
 
-  search(value) {
-    return this.fuse.search(value).map(resultItem => resultItem.item);
+  search(value, maxLimit) {
+    const result = this.fuse.search(value).slice(0, maxLimit);
+    return result.map(resultItem => resultItem.item);
   }
 }

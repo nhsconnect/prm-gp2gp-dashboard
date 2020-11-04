@@ -20,7 +20,7 @@ const Autosuggest = ({
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(itemSearch.search(value).slice(0, maxResults));
+    setSuggestions(itemSearch.search(value, maxResults));
   };
 
   const onSuggestionsClearRequested = () => {

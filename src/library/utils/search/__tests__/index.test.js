@@ -11,21 +11,21 @@ describe("Search", () => {
     { name: "grape", colour: "purple" },
   ];
 
-  it("returns correct suggestions when searched", async () => {
+  it("returns correct suggestions when searched", () => {
     const fruitSearch = new Search([testKey], testDocuments);
 
     const suggestions = fruitSearch.search("app");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
-  it("returns correct suggestions when searching substring", async () => {
+  it("returns correct suggestions when searching substring", () => {
     const fruitSearch = new Search([testKey], testDocuments);
 
     const suggestions = fruitSearch.search("ppl");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
-  it("returns multiple suggestions when search matches multiple documents", async () => {
+  it("returns multiple suggestions when search matches multiple documents", () => {
     const fruitSearch = new Search([testKey], testDocuments);
 
     const suggestions = fruitSearch.search("pea");
@@ -35,7 +35,7 @@ describe("Search", () => {
     ]);
   });
 
-  it("returns matching suggestions from multiple keys", async () => {
+  it("returns matching suggestions from multiple keys", () => {
     const fruitSearch = new Search(
       [testKey, additionalSearchKey],
       testDocuments
@@ -49,7 +49,7 @@ describe("Search", () => {
     ]);
   });
 
-  it("returns matching suggestions from nested array", async () => {
+  it("returns matching suggestions from nested array", () => {
     const testNestedDocuments = [
       {
         fruits: [{ name: "mango" }],
@@ -70,6 +70,16 @@ describe("Search", () => {
         fruits: [{ name: "mango" }],
       },
       { fruits: [{ name: "banana" }] },
+    ]);
+  });
+
+  it("returns subset of matching suggestions when the maxLimit is passed", () => {
+    const fruitSearch = new Search([testKey], testDocuments);
+
+    const suggestions = fruitSearch.search("a", 2);
+    expect(suggestions).toEqual([
+      { name: "apple", colour: "green" },
+      { name: "banana", colour: "yellow" },
     ]);
   });
 });
