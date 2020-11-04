@@ -14,7 +14,7 @@ describe("Autosuggest component", () => {
         inputLabelText={inputLabelText}
         getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={value => value.name}
-        search={{
+        itemSearch={{
           search: () => [],
         }}
         onInputChange={mockSetInputValue}
@@ -45,7 +45,7 @@ describe("Autosuggest component", () => {
         getFormattedSelectionText={suggestion => suggestion.name}
         onInputChange={mockSetInputValue}
         inputTextValue="a"
-        search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
+        itemSearch={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
       />
     );
 
@@ -70,7 +70,7 @@ describe("Autosuggest component", () => {
         getFormattedSelectionText={suggestion => suggestion.name}
         onInputChange={mockSetInputValue}
         inputTextValue="a"
-        search={{
+        itemSearch={{
           search: jest
             .fn()
             .mockReturnValue([
@@ -104,7 +104,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="a"
-          search={{
+          itemSearch={{
             search: jest.fn().mockReturnValue([
               {
                 title: "fruits",
@@ -137,7 +137,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="e"
-          search={{
+          itemSearch={{
             search: jest.fn().mockReturnValue([
               {
                 title: "fruits",
@@ -177,7 +177,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="app"
-          search={{
+          itemSearch={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
           maxResults={2}
@@ -202,7 +202,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="APP"
-          search={{
+          itemSearch={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
           maxResults={2}
@@ -227,7 +227,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="ap le"
-          search={{
+          itemSearch={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
           }}
           maxResults={2}

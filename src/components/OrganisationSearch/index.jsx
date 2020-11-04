@@ -4,26 +4,22 @@ import { navigate } from "gatsby";
 import Form from "../FormComponents/Form";
 import Button from "../FormComponents/Button";
 import Autosuggest from "../FormComponents/Autosuggest";
-import { useSearch } from "../../library/hooks/useSearch";
+import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
 import organisationSearchContent from "../../data/content/organisationSearch.json";
 import organisationMetadata from "../../data/organisations/organisationMetadata.json";
 import "./index.scss";
 
-const searchKeys = ["name", "odsCode"];
-
-const practices = organisationMetadata.practices;
-
 const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
   const [selectedOdsCode, setSelectedOdsCode] = useState("");
 
-  const search = useSearch({
-    keys: searchKeys,
-    list: practices,
-  });
+  const organisationSearch = new Search(
+    ["name", "odsCode"],
+    organisationMetadata.practices
+  );
 
   const getSuggestionListItemText = suggestion => {
     return `${convertToTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
@@ -44,7 +40,7 @@ const OrganisationSearch = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const result = search.search(selectedOdsCode || inputTextValue);
+    const result = organisationSearch.search(selectedOdsCode || inputTextValue);
 
     if (result.length === 1) {
       const odsCode = result[0].odsCode;
@@ -70,7 +66,7 @@ const OrganisationSearch = () => {
           getSuggestionListItemText={getSuggestionListItemText}
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
-          search={search}
+          itemSearch={organisationSearch}
           maxResults={100}
           onInputChange={onInputChange}
         />

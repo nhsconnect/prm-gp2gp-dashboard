@@ -1,17 +1,14 @@
 import React from "react";
 
-import { useSearch } from "../../library/hooks/useSearch";
+import { Search } from "../../library/utils/search/index";
 import PracticeRow from "../PracticeRow";
 import practiceTableContent from "../../data/content/practiceTable.json";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
-  const search = useSearch({
-    keys: ["odsCode"],
-    list: validPractices,
-  });
+  const practiceSearch = new Search(["odsCode"], validPractices);
 
   const filteredPractices = ccgPractices?.filter(
-    ccg => search.search(ccg.OrgId).length > 0
+    ccg => practiceSearch.search(ccg.OrgId).length > 0
   );
 
   return !filteredPractices ? (

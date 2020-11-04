@@ -1,7 +1,6 @@
-import { renderHook } from "@testing-library/react-hooks";
-import { useSearch } from "../index";
+import { Search } from "../index";
 
-describe("useSearch", () => {
+describe("Search", () => {
   const testKey = "name";
   const additionalSearchKey = "colour";
   const testDocuments = [
@@ -13,44 +12,23 @@ describe("useSearch", () => {
   ];
 
   it("returns correct suggestions when searched", async () => {
-    const { result } = renderHook(() =>
-      useSearch({
-        keys: [testKey],
-        list: testDocuments,
-      })
-    );
+    const fruitSearch = new Search([testKey], testDocuments);
 
-    const search = result.current;
-
-    const suggestions = search.search("app");
+    const suggestions = fruitSearch.search("app");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns correct suggestions when searching substring", async () => {
-    const { result } = renderHook(() =>
-      useSearch({
-        keys: [testKey],
-        list: testDocuments,
-      })
-    );
+    const fruitSearch = new Search([testKey], testDocuments);
 
-    const search = result.current;
-
-    const suggestions = search.search("ppl");
+    const suggestions = fruitSearch.search("ppl");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns multiple suggestions when search matches multiple documents", async () => {
-    const { result } = renderHook(() =>
-      useSearch({
-        keys: [testKey],
-        list: testDocuments,
-      })
-    );
+    const fruitSearch = new Search([testKey], testDocuments);
 
-    const search = result.current;
-
-    const suggestions = search.search("pea");
+    const suggestions = fruitSearch.search("pea");
     expect(suggestions).toEqual([
       { name: "peach", colour: "pink" },
       { name: "pear", colour: "green" },
@@ -58,16 +36,12 @@ describe("useSearch", () => {
   });
 
   it("returns matching suggestions from multiple keys", async () => {
-    const { result } = renderHook(() =>
-      useSearch({
-        keys: [testKey, additionalSearchKey],
-        list: testDocuments,
-      })
+    const fruitSearch = new Search(
+      [testKey, additionalSearchKey],
+      testDocuments
     );
 
-    const search = result.current;
-
-    const suggestions = search.search("gr");
+    const suggestions = fruitSearch.search("gr");
     expect(suggestions).toEqual([
       { name: "apple", colour: "green" },
       { name: "pear", colour: "green" },
@@ -88,16 +62,9 @@ describe("useSearch", () => {
       },
     ];
 
-    const { result } = renderHook(() =>
-      useSearch({
-        keys: ["fruits.name"],
-        list: testNestedDocuments,
-      })
-    );
+    const fruitSearch = new Search(["fruits.name"], testNestedDocuments);
 
-    const search = result.current;
-
-    const suggestions = search.search("an");
+    const suggestions = fruitSearch.search("an");
     expect(suggestions).toEqual([
       {
         fruits: [{ name: "mango" }],
