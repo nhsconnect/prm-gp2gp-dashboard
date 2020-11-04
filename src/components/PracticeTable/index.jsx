@@ -7,13 +7,11 @@ import practiceTableContent from "../../data/content/practiceTable.json";
 const PracticeTable = ({ ccgPractices, validPractices }) => {
   const practiceSearch = new Search(["odsCode"], validPractices);
 
-  const filteredPractices = ccgPractices?.filter(
+  const filteredPractices = ccgPractices.filter(
     ccg => practiceSearch.search(ccg.OrgId).length > 0
   );
 
-  return !filteredPractices ? (
-    <p>{practiceTableContent.loadingMessage}</p>
-  ) : !filteredPractices.length ? (
+  return filteredPractices.length === 0 ? (
     <p>{practiceTableContent.noResultsMessage}</p>
   ) : (
     <table>

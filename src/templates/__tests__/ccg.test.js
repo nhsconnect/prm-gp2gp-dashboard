@@ -44,4 +44,28 @@ describe("CCG template", () => {
     });
     moxios.uninstall();
   });
+
+  it("displays error when API is down", async () => {
+    moxios.install();
+    const pipelineCCGData = {
+      odsCode: "12A",
+      name: "BURTON CCG",
+    };
+    const expectedCCGName = "Burton CCG";
+
+    const statusCode = 500;
+
+    mockAPIResponse(statusCode);
+
+    const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
+
+    await act(async () => {
+      await waitFor(() => {
+        expect(getByText(pipelineCCGData.odsCode)).toBeInTheDocument();
+        expect(getByText(expectedCCGName)).toBeInTheDocument();
+        expect(getByText("Error loading practice list")).toBeInTheDocument();
+      });
+    });
+    moxios.uninstall();
+  });
 });
