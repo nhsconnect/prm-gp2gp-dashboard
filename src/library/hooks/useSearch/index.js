@@ -1,20 +1,13 @@
-import { useState, useEffect } from "react";
-import * as JsSearch from "js-search";
+import Fuse from "fuse.js";
 
-export const useSearch = ({ uniqueSearchKey, searchKeys, sourceDocuments }) => {
-  const [search, setSearch] = useState({});
+export const useSearch = ({ keys, list }) => {
+  const options = { isCaseSensitive: false, threshold: 0.1, keys };
 
-  useEffect(() => {
-    const newSearchFromJsSearch = new JsSearch.Search(uniqueSearchKey);
-    newSearchFromJsSearch.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+  const fuse = new Fuse(list, options);
 
-    searchKeys.map(searchKey => newSearchFromJsSearch.addIndex(searchKey));
-    newSearchFromJsSearch.addDocuments(sourceDocuments);
+  const search = arg => {
+    return fuse.search(arg).map(resultItem => resultItem.item);
+  };
 
-    setSearch(newSearchFromJsSearch);
-
-    // eslint-disable-next-line
-  }, []);
-
-  return search;
+  return { search };
 };

@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useSearch } from "../../library/hooks/useSearch";
 import PracticeRow from "../PracticeRow";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
-  const [filteredPractices, setFilteredPractices] = useState(null);
   const search = useSearch({
-    uniqueSearchKey: "odsCode",
-    searchKeys: ["odsCode"],
-    sourceDocuments: validPractices,
+    keys: ["odsCode"],
+    list: validPractices,
   });
 
-  useEffect(() => {
-    if (!!ccgPractices && !!search.search) {
-      const practices = ccgPractices.filter(
-        ccg => search.search(ccg.OrgId).length > 0
-      );
-      setFilteredPractices(practices);
-    }
-  }, [ccgPractices, search]);
+  const filteredPractices = ccgPractices?.filter(
+    ccg => search.search(ccg.OrgId).length > 0
+  );
 
   return !filteredPractices ? (
     <p>Loading...</p>

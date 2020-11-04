@@ -23,6 +23,7 @@
   "dependencies": {
     "aws-sdk": "^2.637.0",
     "classnames": "^2.2.6",
+    "fuse.js": "^6.4.3",
     "gatsby": "^2.24.83",
     "gatsby-plugin-layout": "^1.1.23",
     "gatsby-plugin-react-helmet": "^3.3.14",
@@ -31,7 +32,6 @@
     "gatsby-plugin-sass": "^2.1.30",
     "gatsby-source-filesystem": "^2.1.53",
     "gatsby-transformer-json": "^2.2.27",
-    "js-search": "^2.0.0",
     "lodash": "^4.17.20",
     "nhsuk-frontend": "^3.0.3",
     "node-sass": "^4.14.1",

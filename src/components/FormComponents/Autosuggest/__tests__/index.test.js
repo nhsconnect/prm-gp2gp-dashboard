@@ -17,14 +17,23 @@ describe("Autosuggest component", () => {
         search={{
           search: () => [],
         }}
-        setInputTextValue={mockSetInputValue}
+        onInputChange={mockSetInputValue}
       />
     );
     const input = getByLabelText(inputLabelText);
     userEvent.type(input, "app");
-    expect(mockSetInputValue).toHaveBeenCalledWith("a");
-    expect(mockSetInputValue).toHaveBeenCalledWith("p");
-    expect(mockSetInputValue).toHaveBeenCalledWith("p");
+    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+      method: expect.anything(),
+      newValue: "a",
+    });
+    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+      method: expect.anything(),
+      newValue: "p",
+    });
+    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+      method: expect.anything(),
+      newValue: "p",
+    });
   });
 
   it("sets input value when selecting value from suggestion list", async () => {
@@ -34,7 +43,7 @@ describe("Autosuggest component", () => {
         inputLabelText={inputLabelText}
         getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={suggestion => suggestion.name}
-        setInputTextValue={mockSetInputValue}
+        onInputChange={mockSetInputValue}
         inputTextValue="a"
         search={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
       />
@@ -46,7 +55,10 @@ describe("Autosuggest component", () => {
     const suggestion = getByRole("option");
     userEvent.click(suggestion);
 
-    expect(mockSetInputValue).toHaveBeenCalledWith("apple");
+    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+      method: expect.anything(),
+      newValue: "apple",
+    });
   });
 
   it("limits results when maxResults is set", async () => {
@@ -56,7 +68,7 @@ describe("Autosuggest component", () => {
         inputLabelText={inputLabelText}
         getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={suggestion => suggestion.name}
-        setInputTextValue={mockSetInputValue}
+        onInputChange={mockSetInputValue}
         inputTextValue="a"
         search={{
           search: jest
@@ -90,7 +102,7 @@ describe("Autosuggest component", () => {
           inputLabelText={inputLabelText}
           getSuggestionListItemText={suggestion => suggestion.name}
           getFormattedSelectionText={suggestion => suggestion.name}
-          setInputTextValue={mockSetInputValue}
+          onInputChange={mockSetInputValue}
           inputTextValue="a"
           search={{
             search: jest.fn().mockReturnValue([
@@ -123,7 +135,7 @@ describe("Autosuggest component", () => {
           inputLabelText={inputLabelText}
           getSuggestionListItemText={suggestion => suggestion.name}
           getFormattedSelectionText={suggestion => suggestion.name}
-          setInputTextValue={mockSetInputValue}
+          onInputChange={mockSetInputValue}
           inputTextValue="e"
           search={{
             search: jest.fn().mockReturnValue([
@@ -163,7 +175,7 @@ describe("Autosuggest component", () => {
           inputLabelText={inputLabelText}
           getSuggestionListItemText={suggestion => suggestion.name}
           getFormattedSelectionText={suggestion => suggestion.name}
-          setInputTextValue={mockSetInputValue}
+          onInputChange={mockSetInputValue}
           inputTextValue="app"
           search={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
@@ -188,7 +200,7 @@ describe("Autosuggest component", () => {
           inputLabelText={inputLabelText}
           getSuggestionListItemText={suggestion => suggestion.name}
           getFormattedSelectionText={suggestion => suggestion.name}
-          setInputTextValue={mockSetInputValue}
+          onInputChange={mockSetInputValue}
           inputTextValue="APP"
           search={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),
@@ -213,7 +225,7 @@ describe("Autosuggest component", () => {
           inputLabelText={inputLabelText}
           getSuggestionListItemText={suggestion => suggestion.name}
           getFormattedSelectionText={suggestion => suggestion.name}
-          setInputTextValue={mockSetInputValue}
+          onInputChange={mockSetInputValue}
           inputTextValue="ap le"
           search={{
             search: jest.fn().mockReturnValue([{ name: "apple" }]),

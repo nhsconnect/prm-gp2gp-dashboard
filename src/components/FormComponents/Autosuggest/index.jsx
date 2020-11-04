@@ -11,7 +11,7 @@ const Autosuggest = ({
   getFormattedSelectionText,
   search,
   inputTextValue = "",
-  setInputTextValue,
+  onInputChange,
   maxResults,
   multiSection,
   renderSectionTitle,
@@ -29,9 +29,7 @@ const Autosuggest = ({
 
   const inputProps = {
     value: inputTextValue,
-    onChange: (_, { newValue }) => {
-      setInputTextValue(newValue);
-    },
+    onChange: onInputChange,
     className: inputError
       ? "react-autosuggest__input--error"
       : "react-autosuggest__input",

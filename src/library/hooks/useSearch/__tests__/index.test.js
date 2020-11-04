@@ -15,45 +15,42 @@ describe("useSearch", () => {
   it("returns correct suggestions when searched", async () => {
     const { result } = renderHook(() =>
       useSearch({
-        uniqueSearchKey: testKey,
-        searchKeys: [testKey],
-        sourceDocuments: testDocuments,
+        keys: [testKey],
+        list: testDocuments,
       })
     );
 
-    const searchJs = result.current;
+    const search = result.current;
 
-    const suggestions = searchJs.search("app");
+    const suggestions = search.search("app");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns correct suggestions when searching substring", async () => {
     const { result } = renderHook(() =>
       useSearch({
-        uniqueSearchKey: testKey,
-        searchKeys: [testKey],
-        sourceDocuments: testDocuments,
+        keys: [testKey],
+        list: testDocuments,
       })
     );
 
-    const searchJs = result.current;
+    const search = result.current;
 
-    const suggestions = searchJs.search("ppl");
+    const suggestions = search.search("ppl");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns multiple suggestions when search matches multiple documents", async () => {
     const { result } = renderHook(() =>
       useSearch({
-        uniqueSearchKey: testKey,
-        searchKeys: [testKey],
-        sourceDocuments: testDocuments,
+        keys: [testKey],
+        list: testDocuments,
       })
     );
 
-    const searchJs = result.current;
+    const search = result.current;
 
-    const suggestions = searchJs.search("pea");
+    const suggestions = search.search("pea");
     expect(suggestions).toEqual([
       { name: "peach", colour: "pink" },
       { name: "pear", colour: "green" },
@@ -63,19 +60,49 @@ describe("useSearch", () => {
   it("returns matching suggestions from multiple keys", async () => {
     const { result } = renderHook(() =>
       useSearch({
-        uniqueSearchKey: testKey,
-        searchKeys: [testKey, additionalSearchKey],
-        sourceDocuments: testDocuments,
+        keys: [testKey, additionalSearchKey],
+        list: testDocuments,
       })
     );
 
-    const searchJs = result.current;
+    const search = result.current;
 
-    const suggestions = searchJs.search("gr");
+    const suggestions = search.search("gr");
     expect(suggestions).toEqual([
       { name: "apple", colour: "green" },
       { name: "pear", colour: "green" },
       { name: "grape", colour: "purple" },
+    ]);
+  });
+
+  it("returns matching suggestions from nested array", async () => {
+    const testNestedDocuments = [
+      {
+        fruits: [{ name: "mango" }],
+      },
+      {
+        fruits: [{ name: "banana" }],
+      },
+      {
+        fruits: [{ name: "grape" }],
+      },
+    ];
+
+    const { result } = renderHook(() =>
+      useSearch({
+        keys: ["fruits.name"],
+        list: testNestedDocuments,
+      })
+    );
+
+    const search = result.current;
+
+    const suggestions = search.search("an");
+    expect(suggestions).toEqual([
+      {
+        fruits: [{ name: "mango" }],
+      },
+      { fruits: [{ name: "banana" }] },
     ]);
   });
 });

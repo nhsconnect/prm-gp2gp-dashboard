@@ -10,7 +10,6 @@ import { convertToTitleCase } from "../../library/common/index";
 import organisationMetadata from "../../data/organisations/organisationMetadata.json";
 import "./index.scss";
 
-const uniqueSearchKey = "odsCode";
 const searchKeys = ["name", "odsCode"];
 
 const practices = organisationMetadata.practices;
@@ -18,11 +17,11 @@ const practices = organisationMetadata.practices;
 const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
+  const [selectedOdsCode, setSelectedOdsCode] = useState("");
 
   const search = useSearch({
-    uniqueSearchKey,
-    searchKeys,
-    sourceDocuments: practices,
+    keys: searchKeys,
+    list: practices,
   });
 
   const getSuggestionListItemText = suggestion => {
@@ -30,13 +29,21 @@ const OrganisationSearch = () => {
   };
 
   const getFormattedSelectionText = value => {
+    setSelectedOdsCode(value["odsCode"]);
     return `${convertToTitleCase(value["name"])} | ${value["odsCode"]}`;
+  };
+
+  const onInputChange = (_, { newValue, method }) => {
+    if (method === "type") {
+      setSelectedOdsCode("");
+    }
+    setInputTextValue(newValue);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const result = search.search(inputTextValue);
+    const result = search.search(selectedOdsCode || inputTextValue);
 
     if (result.length === 1) {
       const odsCode = result[0].odsCode;
@@ -61,8 +68,8 @@ const OrganisationSearch = () => {
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
           search={search}
-          setInputTextValue={setInputTextValue}
           maxResults={100}
+          onInputChange={onInputChange}
         />
         <Button
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
