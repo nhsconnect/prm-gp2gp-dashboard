@@ -1,0 +1,6 @@
+{
+  "inputLabel": "Enter a practice name or ODS code",
+  "inputErrorMessage": "Please enter a valid practice name or ODS code",
+  "buttonLabel": "Search",
+  "heading": "Search"
+}

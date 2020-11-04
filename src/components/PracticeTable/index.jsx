@@ -2,6 +2,7 @@ import React from "react";
 
 import { useSearch } from "../../library/hooks/useSearch";
 import PracticeRow from "../PracticeRow";
+import practiceTableContent from "../../data/content/practiceTable.json";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
   const search = useSearch({
@@ -14,14 +15,14 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
   );
 
   return !filteredPractices ? (
-    <p>Loading...</p>
+    <p>{practiceTableContent.loadingMessage}</p>
   ) : !filteredPractices.length ? (
-    <p>No practices found</p>
+    <p>{practiceTableContent.noResultsMessage}</p>
   ) : (
     <table>
       <thead>
         <tr>
-          <th>Practice Name</th>
+          <th>{practiceTableContent.firstColumnName}</th>
         </tr>
       </thead>
       <tbody>

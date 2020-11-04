@@ -7,6 +7,7 @@ import Autosuggest from "../FormComponents/Autosuggest";
 import { useSearch } from "../../library/hooks/useSearch";
 import { convertToTitleCase } from "../../library/common/index";
 
+import organisationSearchContent from "../../data/content/organisationSearch.json";
 import organisationMetadata from "../../data/organisations/organisationMetadata.json";
 import "./index.scss";
 
@@ -53,17 +54,19 @@ const OrganisationSearch = () => {
         `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
       );
     } else {
-      setInputError("Please enter a valid practice name or ODS code");
+      setInputError(organisationSearchContent.inputErrorMessage);
     }
   };
 
   return (
     <div className="gp2gp-practice-search">
-      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">Search</h1>
+      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
+        {organisationSearchContent.heading}
+      </h1>
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <Autosuggest
           inputError={inputError}
-          inputLabelText="Enter a practice name or ODS code"
+          inputLabelText={organisationSearchContent.inputLabel}
           getSuggestionListItemText={getSuggestionListItemText}
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
@@ -75,7 +78,7 @@ const OrganisationSearch = () => {
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
           type="submit"
         >
-          Search
+          {organisationSearchContent.buttonLabel}
         </Button>
       </Form>
     </div>

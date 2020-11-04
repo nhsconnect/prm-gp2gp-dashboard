@@ -53,6 +53,6 @@ describe("PracticeTable component", () => {
       />
     );
 
-    expect(getByText("No practices found")).toBeInTheDocument();
+    expect(getByText("No GP practices found")).toBeInTheDocument();
   });
 });
