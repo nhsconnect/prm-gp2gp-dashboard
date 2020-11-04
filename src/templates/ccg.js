@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 
 import OrganisationDetails from "../components/OrganisationDetails";
-import { convertToTitleCase } from "../library/common/index";
+import { convertToTitleCase } from "../library/utils/convertToTitleCase/index";
 import PracticeTable from "../components/PracticeTable";
 import { ODS_PORTAL_URL } from "../library/api/ODSPortal";
 import { useApi } from "../library/hooks/useApi";

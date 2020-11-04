@@ -5,10 +5,8 @@ import {
   ODS_PORTAL_URL,
   transformPracticeAddress,
 } from "../library/api/ODSPortal";
-import {
-  convertMonthNumberToText,
-  convertToTitleCase,
-} from "../library/common/index";
+import { convertToTitleCase } from "../library/utils/convertToTitleCase/index";
+import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText/index";
 import SlaMetrics from "../components/SlaMetrics";
 import { useApi } from "../library/hooks/useApi";
 

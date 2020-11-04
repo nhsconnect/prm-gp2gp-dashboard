@@ -1,4 +1,4 @@
-import { convertToTitleCase } from "../common/index";
+import { convertToTitleCase } from "../utils/convertToTitleCase/index";
 
 export const ODS_PORTAL_URL =
   "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations";

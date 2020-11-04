@@ -5,7 +5,7 @@ import Form from "../FormComponents/Form";
 import Button from "../FormComponents/Button";
 import Autosuggest from "../FormComponents/Autosuggest";
 import { useSearch } from "../../library/hooks/useSearch";
-import { convertToTitleCase } from "../../library/common/index";
+import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
 import organisationSearchContent from "../../data/content/organisationSearch.json";
 import organisationMetadata from "../../data/organisations/organisationMetadata.json";
