@@ -23,7 +23,8 @@ jest.mock(
 describe("OrganisationSearch component", () => {
   const validPracticeOdsCode = "A12345";
   const validPracticeName = "Test Practice";
-  const inputLabelText = "Enter a practice name or ODS code";
+  const inputLabelText =
+    "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name";
   const validCCGOdsCode = "12A";
   const validCCGName = "Test CCG";
 
@@ -182,7 +183,7 @@ describe("OrganisationSearch component", () => {
     userEvent.click(submitButton);
 
     expect(
-      getByText("Please enter a valid practice name or ODS code")
+      getByText("Please enter a valid ODS code, practice name or CCG name")
     ).toBeInTheDocument();
     expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
   });
@@ -199,7 +200,7 @@ describe("OrganisationSearch component", () => {
     userEvent.click(submitButton);
 
     expect(
-      getByText("Please enter a valid practice name or ODS code")
+      getByText("Please enter a valid ODS code, practice name or CCG name")
     ).toBeInTheDocument();
     expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
   });

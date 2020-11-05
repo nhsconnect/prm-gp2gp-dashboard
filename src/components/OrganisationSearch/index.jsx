@@ -14,10 +14,19 @@ import "./index.scss";
 
 const practiceSearch = new Search(
   ["name", "odsCode"],
-  organisationMetadata.practices
+  organisationMetadata.practices.map(item => ({
+    ...item,
+    path: `/practice/${item.odsCode}`,
+  }))
 );
 
-const ccgSearch = new Search(["name", "odsCode"], organisationMetadata.ccgs);
+const ccgSearch = new Search(
+  ["name", "odsCode"],
+  organisationMetadata.ccgs.map(item => ({
+    ...item,
+    path: `/ccg/${item.odsCode}`,
+  }))
+);
 
 const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
@@ -29,16 +38,12 @@ const OrganisationSearch = () => {
     return isSearchByCCGOn
       ? [
           {
-            title: "ccgs",
-            organisations: ccgSearch
-              .search(value, 50)
-              .map(item => ({ ...item, path: `/ccg/${item.odsCode}` })),
+            title: "Clinical Commissioning Group",
+            organisations: ccgSearch.search(value, 50),
           },
           {
-            title: "practices",
-            organisations: practiceSearch
-              .search(value, 50)
-              .map(item => ({ ...item, path: `/practice/${item.odsCode}` })),
+            title: "GP practice",
+            organisations: practiceSearch.search(value, 50),
           },
         ]
       : practiceSearch.search(value, 100);
@@ -89,7 +94,7 @@ const OrganisationSearch = () => {
           `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
         );
       } else {
-        setInputError(organisationSearchContent.inputErrorMessage);
+        setInputError("Please enter a valid practice name or ODS code");
       }
     }
   };
@@ -102,7 +107,11 @@ const OrganisationSearch = () => {
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <Autosuggest
           inputError={inputError}
-          inputLabelText={organisationSearchContent.inputLabel}
+          inputLabelText={
+            isSearchByCCGOn
+              ? organisationSearchContent.inputLabel
+              : "Enter a practice name or ODS code"
+          }
           getSuggestionListItemText={getSuggestionListItemText}
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
