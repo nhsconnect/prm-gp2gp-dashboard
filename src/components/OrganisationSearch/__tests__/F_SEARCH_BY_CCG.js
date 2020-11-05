@@ -20,7 +20,7 @@ jest.mock(
   { virtual: true }
 );
 
-describe("OrganisationSearch component", () => {
+describe("OrganisationSearch component with F_SEARCH_BY_CCG toggled off", () => {
   const validPracticeOdsCode = "A12345";
   const validPracticeName = "Test Practice";
   const inputLabelText = "Enter a practice name or ODS code";
@@ -28,7 +28,7 @@ describe("OrganisationSearch component", () => {
   const validCCGName = "Test CCG";
 
   beforeAll(() => {
-    featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
+    featureToggle.useFeatureToggle = jest.fn().mockReturnValue(false);
   });
 
   describe("navigation to practice page", () => {
@@ -101,68 +101,22 @@ describe("OrganisationSearch component", () => {
     });
   });
 
-  describe("navigation to CCG page", () => {
-    it("when searching for and selecting an ods code", async () => {
-      const { getByLabelText, getByText, getByRole } = render(
-        <OrganisationSearch />
-      );
+  it("when searching for a ods code will not return a result", async () => {
+    const { getByLabelText, queryByText } = render(<OrganisationSearch />);
 
-      const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validCCGOdsCode);
+    const input = getByLabelText(inputLabelText);
+    await userEvent.type(input, validCCGOdsCode);
 
-      const suggestion = getByText(`${validCCGName} |`);
-      userEvent.click(suggestion);
+    expect(queryByText(`${validCCGName} |`)).toBeNull();
+  });
 
-      const submitButton = getByRole("button", { name: "Search" });
-      userEvent.click(submitButton);
+  it("on existing CCG name input will not return a result", async () => {
+    const { getByLabelText, queryByText } = render(<OrganisationSearch />);
 
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/ccg/${validCCGOdsCode}`);
-    });
+    const input = getByLabelText(inputLabelText);
+    await userEvent.type(input, validCCGName);
 
-    it("on existing CCG name input", async () => {
-      const { getByLabelText, getByText, getByRole } = render(
-        <OrganisationSearch />
-      );
-
-      const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validCCGName);
-
-      const suggestion = getByText(`| ${validCCGOdsCode}`);
-      userEvent.click(suggestion);
-
-      const submitButton = getByRole("button", { name: "Search" });
-      userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/ccg/${validCCGOdsCode}`);
-    });
-
-    it("when typing valid ods code and not selecting", async () => {
-      const { getByLabelText, getByRole } = render(<OrganisationSearch />);
-
-      const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validCCGOdsCode);
-
-      const submitButton = getByRole("button", { name: "Search" });
-      userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/ccg/${validCCGOdsCode}`);
-    });
-
-    it("entering partial search with one result", async () => {
-      const { getByLabelText, getByRole } = render(<OrganisationSearch />);
-
-      const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, "13");
-
-      const submitButton = getByRole("button", { name: "Search" });
-      userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith("/ccg/13B");
-    });
+    expect(queryByText(`| ${validCCGOdsCode}`)).toBeNull();
   });
 
   it("displays error message when user alters input text after selecting a suggestion", async () => {

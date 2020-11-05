@@ -1,1 +1,6 @@
-{}
+{
+  "F_SEARCH_BY_CCG": {
+    "dev": false,
+    "prod": false
+  }
+}

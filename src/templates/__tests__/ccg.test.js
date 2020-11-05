@@ -17,8 +17,15 @@ jest.mock(
 );
 
 describe("CCG template", () => {
-  it("renders CCG details correctly", async () => {
+  beforeAll(() => {
     moxios.install();
+  });
+
+  afterAll(() => {
+    moxios.uninstall();
+  });
+
+  it("renders CCG details correctly", async () => {
     const pipelineCCGData = {
       odsCode: "12A",
       name: "BURTON CCG",
@@ -42,11 +49,9 @@ describe("CCG template", () => {
         expect(getByText(expectedPracticeName)).toBeInTheDocument();
       });
     });
-    moxios.uninstall();
   });
 
   it("displays error when API is down", async () => {
-    moxios.install();
     const pipelineCCGData = {
       odsCode: "12A",
       name: "BURTON CCG",
@@ -66,6 +71,5 @@ describe("CCG template", () => {
         expect(getByText("Error loading practice list")).toBeInTheDocument();
       });
     });
-    moxios.uninstall();
   });
 });

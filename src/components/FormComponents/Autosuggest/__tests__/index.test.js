@@ -15,9 +15,7 @@ describe("Autosuggest component", () => {
         inputLabelText={inputLabelText}
         getSuggestionListItemText={suggestion => suggestion.name}
         getFormattedSelectionText={value => value.name}
-        itemSearch={{
-          search: () => [],
-        }}
+        findSuggestions={() => []}
         onInputChange={mockSetInputValue}
       />
     );
@@ -46,7 +44,7 @@ describe("Autosuggest component", () => {
         getFormattedSelectionText={suggestion => suggestion.name}
         onInputChange={mockSetInputValue}
         inputTextValue="a"
-        itemSearch={{ search: jest.fn().mockReturnValue([{ name: "apple" }]) }}
+        findSuggestions={() => [{ name: "apple" }]}
       />
     );
 
@@ -62,38 +60,6 @@ describe("Autosuggest component", () => {
     });
   });
 
-  describe("when maxResults is passed", () => {
-    it("limits results to maxResults value", () => {
-      const mockSetInputValue = jest.fn();
-      const { getByLabelText, queryByText, getAllByRole } = render(
-        <Autosuggest
-          inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
-          onInputChange={mockSetInputValue}
-          inputTextValue="a"
-          itemSearch={
-            new Search(
-              ["name"],
-              [{ name: "apple" }, { name: "banana" }, { name: "pear" }]
-            )
-          }
-          maxResults={2}
-        />
-      );
-
-      const input = getByLabelText(inputLabelText);
-      userEvent.click(input);
-
-      const suggestion = queryByText("pear");
-      const listItems = getAllByRole("option");
-
-      expect(suggestion).not.toBeInTheDocument();
-
-      expect(listItems.length).toBe(2);
-    });
-  });
-
   describe("when multiSection is true", () => {
     it("will display section title and suggestion", () => {
       const mockSetInputValue = jest.fn();
@@ -104,14 +70,12 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="a"
-          itemSearch={{
-            search: jest.fn().mockReturnValue([
-              {
-                title: "fruits",
-                fruits: [{ name: "apple" }],
-              },
-            ]),
-          }}
+          findSuggestions={() => [
+            {
+              title: "fruits",
+              fruits: [{ name: "apple" }],
+            },
+          ]}
           multiSection={true}
           renderSectionTitle={section => section.title}
           getSectionSuggestions={section => section.fruits}
@@ -136,18 +100,16 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="e"
-          itemSearch={{
-            search: jest.fn().mockReturnValue([
-              {
-                title: "fruits",
-                fruits: [{ name: "apple" }],
-              },
-              {
-                title: "clothes",
-                fruits: [{ name: "trousers" }, { name: "blouse" }],
-              },
-            ]),
-          }}
+          findSuggestions={() => [
+            {
+              title: "fruits",
+              fruits: [{ name: "apple" }],
+            },
+            {
+              title: "clothes",
+              fruits: [{ name: "trousers" }, { name: "blouse" }],
+            },
+          ]}
           multiSection={true}
           renderSectionTitle={section => section.title}
           getSectionSuggestions={section => section.fruits}
@@ -175,9 +137,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="app"
-          itemSearch={{
-            search: jest.fn().mockReturnValue([{ name: "apple" }]),
-          }}
+          findSuggestions={() => [{ name: "apple" }]}
         />
       );
 
@@ -199,9 +159,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="APP"
-          itemSearch={{
-            search: jest.fn().mockReturnValue([{ name: "apple" }]),
-          }}
+          findSuggestions={() => [{ name: "apple" }]}
         />
       );
 
@@ -223,9 +181,7 @@ describe("Autosuggest component", () => {
           getFormattedSelectionText={suggestion => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="ap le"
-          itemSearch={{
-            search: jest.fn().mockReturnValue([{ name: "apple" }]),
-          }}
+          findSuggestions={() => [{ name: "apple" }]}
         />
       );
 

@@ -9,10 +9,9 @@ const Autosuggest = ({
   inputLabelText,
   getSuggestionListItemText,
   getFormattedSelectionText,
-  itemSearch,
   inputTextValue = "",
+  findSuggestions,
   onInputChange,
-  maxResults,
   multiSection,
   renderSectionTitle,
   getSectionSuggestions,
@@ -20,7 +19,8 @@ const Autosuggest = ({
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(itemSearch.search(value, maxResults));
+    const suggestions = findSuggestions(value);
+    setSuggestions(suggestions);
   };
 
   const onSuggestionsClearRequested = () => {

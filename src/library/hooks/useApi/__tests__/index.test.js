@@ -5,8 +5,15 @@ import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { useApi } from "../index";
 
 describe("useApi", () => {
-  it("returns a loading state for a pending api call", async () => {
+  beforeAll(() => {
     moxios.install();
+  });
+
+  afterAll(() => {
+    moxios.uninstall();
+  });
+
+  it("returns a loading state for a pending api call", async () => {
     mockAPIResponse();
 
     const { result, waitForNextUpdate } = renderHook(() =>
@@ -15,11 +22,9 @@ describe("useApi", () => {
     expect(result.current.isLoading).toBeTruthy();
 
     await waitForNextUpdate();
-    moxios.uninstall();
   });
 
   it("returns mock on a successful api call", async () => {
-    moxios.install();
     const odsCode = "B86030";
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder({ odsCode });
@@ -35,11 +40,9 @@ describe("useApi", () => {
     expect(isLoading).toBeFalsy();
     expect(data).toEqual(mockedResponse);
     expect(error).toBeNull();
-    moxios.uninstall();
   });
 
   it("returns an error from a failed api call", async () => {
-    moxios.install();
     const statusCode = 404;
     mockAPIResponse(statusCode);
 
@@ -54,7 +57,5 @@ describe("useApi", () => {
     expect(isLoading).toBeFalsy();
     expect(data).toBeNull();
     expect(error).toBeDefined();
-
-    moxios.uninstall();
   });
 });
