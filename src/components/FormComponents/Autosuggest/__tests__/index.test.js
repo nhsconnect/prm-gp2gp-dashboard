@@ -103,16 +103,16 @@ describe("Autosuggest component", () => {
           findSuggestions={() => [
             {
               title: "fruits",
-              fruits: [{ name: "apple" }],
+              items: [{ name: "apple" }],
             },
             {
               title: "clothes",
-              fruits: [{ name: "trousers" }, { name: "blouse" }],
+              items: [{ name: "trousers" }, { name: "blouse" }],
             },
           ]}
           multiSection={true}
           renderSectionTitle={section => section.title}
-          getSectionSuggestions={section => section.fruits}
+          getSectionSuggestions={section => section.items}
         />
       );
 
@@ -124,6 +124,39 @@ describe("Autosuggest component", () => {
       expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
       expect(getByRole("option", { name: "trous e rs" })).toBeInTheDocument();
       expect(getByRole("option", { name: "blous e" })).toBeInTheDocument();
+    });
+
+    it("will not display section title when there are no suggestions", () => {
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByText, getByRole, queryByText } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={suggestion => suggestion.name}
+          getFormattedSelectionText={suggestion => suggestion.name}
+          onInputChange={mockSetInputValue}
+          inputTextValue="e"
+          findSuggestions={() => [
+            {
+              title: "fruits",
+              items: [{ name: "apple" }],
+            },
+            {
+              title: "clothes",
+              items: [],
+            },
+          ]}
+          multiSection={true}
+          renderSectionTitle={section => section.title}
+          getSectionSuggestions={section => section.items}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      userEvent.click(input);
+
+      expect(getByText("fruits")).toBeInTheDocument();
+      expect(queryByText("clothes")).toBeNull();
+      expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
     });
   });
 

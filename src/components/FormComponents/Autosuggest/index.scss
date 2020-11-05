@@ -2,6 +2,8 @@
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 
 @import "node_modules/nhsuk-frontend/packages/components/input/input";
+@import "node_modules/nhsuk-frontend/packages/core/styles/typography";
+@import "node_modules/nhsuk-frontend/packages/core/utilities/spacing";
 
 .react-autosuggest__container {
   max-width: 40rem;
@@ -51,6 +53,8 @@
   width: 100%;
   margin-top: -2px;
   border: 2px solid $nhsuk-form-border-color;
+  background-color: $color_nhsuk-white;
+  color: $nhsuk-text-color;
 }
 
 .react-autosuggest__suggestions-list {
@@ -61,19 +65,12 @@
 }
 
 .react-autosuggest__suggestion {
-  background-color: $color_nhsuk-white;
-  color: $nhsuk-text-color;
-  border-top: 1px solid $nhsuk-border-color;
-  border-bottom: 1px solid $nhsuk-border-color;
+  border-bottom: 2px solid $nhsuk-border-color;
   list-style: none;
   padding: 0.5rem 1rem 0.5rem 1.6rem;
   margin-bottom: 0;
   cursor: pointer;
   font-weight: bolder;
-
-  &:last-child {
-    border: none;
-  }
 }
 
 .react-autosuggest__suggestion--highlighted {
@@ -86,4 +83,11 @@
   background-color: transparent;
   font-weight: normal;
   color: inherit;
+}
+
+.react-autosuggest__section-title {
+  @extend .nhsuk-body-s;
+  @extend .nhsuk-u-margin-bottom-1;
+  @extend .nhsuk-u-margin-top-2;
+  @extend .nhsuk-u-margin-left-3;
 }
