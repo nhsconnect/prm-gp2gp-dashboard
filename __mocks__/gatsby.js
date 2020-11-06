@@ -5,23 +5,16 @@ module.exports = {
   ...gatsby,
   navigate: jest.fn(),
   graphql: jest.fn(),
-  Link: jest
-    .fn()
-    .mockImplementation(
-      ({
-        activeClassName,
-        activeStyle,
-        getProps,
-        innerRef,
-        partiallyActive,
-        ref,
-        replace,
-        to,
-        ...rest
-      }) =>
-        React.createElement("a", {
-          ...rest,
-          href: to,
-        })
-    ),
+  Link: jest.fn().mockImplementation(({ to, onClick, ...rest }) => {
+    const onClickWithoutDefault = ev => {
+      ev.preventDefault();
+      if (onClick) onClick(ev);
+    };
+
+    return React.createElement("a", {
+      href: to,
+      onClick: onClickWithoutDefault,
+      ...rest,
+    });
+  }),
 };

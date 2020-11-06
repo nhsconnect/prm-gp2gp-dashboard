@@ -7,7 +7,7 @@ import PracticeTable from "../components/PracticeTable";
 import { ODS_PORTAL_URL } from "../library/api/ODSPortal";
 import { useApi } from "../library/hooks/useApi";
 
-import organisationMetadata from "../data/organisations/organisationMetadata.json";
+import practiceMetrics from "../data/organisations/practiceMetrics.json";
 import ccgContent from "../data/content/ccg.json";
 
 const Ccg = ({ pageContext }) => {
@@ -32,7 +32,7 @@ const Ccg = ({ pageContext }) => {
       ) : (
         <PracticeTable
           ccgPractices={data?.Organisations}
-          validPractices={organisationMetadata.practices}
+          validPractices={practiceMetrics.practices}
         />
       )}
     </>

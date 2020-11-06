@@ -5,10 +5,10 @@ import PracticeRow from "../PracticeRow";
 import practiceTableContent from "../../data/content/practiceTable.json";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
-  const practiceSearch = new Search(["odsCode"], validPractices);
+  const practiceSearch = new Search(["OrgId"], ccgPractices);
 
-  const filteredPractices = ccgPractices.filter(
-    ccg => practiceSearch.search(ccg.OrgId).length > 0
+  const filteredPractices = validPractices.filter(
+    practice => practiceSearch.search(practice.odsCode).length > 0
   );
 
   return filteredPractices.length === 0 ? (
@@ -18,11 +18,19 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
       <thead>
         <tr>
           <th>{practiceTableContent.firstColumnName}</th>
+          <th>{practiceTableContent.secondColumnName}</th>
+          <th>{practiceTableContent.thirdColumnName}</th>
+          <th>{practiceTableContent.fourthColumnName}</th>
         </tr>
       </thead>
       <tbody>
-        {filteredPractices.map(org => (
-          <PracticeRow key={org.OrgId} odsCode={org.OrgId} name={org.Name} />
+        {filteredPractices.map(({ odsCode, name, metrics }) => (
+          <PracticeRow
+            key={odsCode}
+            odsCode={odsCode}
+            name={name}
+            metrics={metrics[0].requester.timeToIntegrateSla}
+          />
         ))}
       </tbody>
     </table>

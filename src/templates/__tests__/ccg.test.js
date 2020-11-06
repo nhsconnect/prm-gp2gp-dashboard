@@ -9,9 +9,25 @@ import Ccg from "../ccg";
 import { mockAPIResponse } from "../../../__mocks__/api";
 
 jest.mock(
-  "../../data/organisations/organisationMetadata.json",
+  "../../data/organisations/practiceMetrics.json",
   () => ({
-    practices: [{ odsCode: "A12345", name: "A Practice" }],
+    practices: [
+      {
+        odsCode: "A12345",
+        name: "A Practice",
+        metrics: [
+          {
+            requester: {
+              timeToIntegrateSla: {
+                within3Days: 3,
+                within8Days: 2,
+                beyond8Days: 0,
+              },
+            },
+          },
+        ],
+      },
+    ],
   }),
   { virtual: true }
 );

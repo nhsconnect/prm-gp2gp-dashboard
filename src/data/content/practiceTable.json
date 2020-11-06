@@ -1,4 +1,7 @@
 {
   "noResultsMessage": "No GP practices found",
-  "firstColumnName": "Practice Name"
+  "firstColumnName": "Practice name",
+  "secondColumnName": "Within 3 days",
+  "thirdColumnName": "Within 8 days",
+  "fourthColumnName": "Beyond 8 day target"
 }

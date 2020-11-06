@@ -5,11 +5,15 @@ import userEvent from "@testing-library/user-event";
 import PracticeRow from "../index";
 
 describe("PracticeRow component", () => {
-  it("navigates to a practice page when a link is clicked", async () => {
+  it("navigates to a practice page when a link is clicked", () => {
     const { getByRole } = render(
       <table>
         <tbody>
-          <PracticeRow odsCode="A12345" name="A PRACTICE" />
+          <PracticeRow
+            odsCode="A12345"
+            name="A PRACTICE"
+            metrics={{ within3Days: 5, within8Days: 1, beyond8Days: 0 }}
+          />
         </tbody>
       </table>
     );
@@ -24,5 +28,26 @@ describe("PracticeRow component", () => {
       expect.objectContaining({ to: "/practice/A12345" }),
       expect.anything()
     );
+  });
+
+  it("displays practice SLA metrics in correct order", () => {
+    const { getAllByRole } = render(
+      <table>
+        <tbody>
+          <PracticeRow
+            odsCode="A12345"
+            name="A PRACTICE"
+            metrics={{ within3Days: 5, within8Days: 1, beyond8Days: 0 }}
+          />
+        </tbody>
+      </table>
+    );
+
+    const allCells = getAllByRole("cell");
+
+    expect(allCells[0].firstChild.textContent).toBe("A Practice | A12345");
+    expect(allCells[1].textContent).toBe("5");
+    expect(allCells[2].textContent).toBe("1");
+    expect(allCells[3].textContent).toBe("0");
   });
 });

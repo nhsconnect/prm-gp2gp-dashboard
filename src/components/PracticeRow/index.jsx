@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
-const PracticeRow = ({ odsCode, name }) => {
+const PracticeRow = ({ odsCode, name, metrics }) => {
   const formattedName = convertToTitleCase(name);
 
   return (
@@ -13,6 +13,9 @@ const PracticeRow = ({ odsCode, name }) => {
           {formattedName} | {odsCode}
         </Link>
       </td>
+      <td>{metrics.within3Days}</td>
+      <td>{metrics.within8Days}</td>
+      <td>{metrics.beyond8Days}</td>
     </tr>
   );
 };
