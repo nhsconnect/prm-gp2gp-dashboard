@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import PracticeTable from "../index";
+import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 describe("PracticeTable component", () => {
   it("displays multiple valid practices", () => {
@@ -9,21 +10,7 @@ describe("PracticeTable component", () => {
       { OrgId: "B12345", Name: "GP Practice 2" },
     ];
     const validPractices = [
-      {
-        odsCode: "A12345",
-        name: "GP Practice",
-        metrics: [
-          {
-            requester: {
-              timeToIntegrateSla: {
-                within3Days: 3,
-                within8Days: 2,
-                beyond8Days: 0,
-              },
-            },
-          },
-        ],
-      },
+      ...practiceMetricsMock,
       {
         odsCode: "B12345",
         name: "GP Practice 2",
@@ -57,28 +44,11 @@ describe("PracticeTable component", () => {
       { OrgId: "A12345", Name: "GP Practice" },
       { OrgId: "B12345", Name: "GP Practice 2" },
     ];
-    const validPractices = [
-      {
-        odsCode: "A12345",
-        name: "GP Practice",
-        metrics: [
-          {
-            requester: {
-              timeToIntegrateSla: {
-                within3Days: 3,
-                within8Days: 2,
-                beyond8Days: 0,
-              },
-            },
-          },
-        ],
-      },
-    ];
 
     const { queryByText, getByText } = render(
       <PracticeTable
         ccgPractices={ccgPractices}
-        validPractices={validPractices}
+        validPractices={practiceMetricsMock}
       />
     );
 
@@ -102,28 +72,11 @@ describe("PracticeTable component", () => {
 
   it("displays table headers", () => {
     const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
-    const validPractices = [
-      {
-        odsCode: "A12345",
-        name: "GP Practice",
-        metrics: [
-          {
-            requester: {
-              timeToIntegrateSla: {
-                within3Days: 3,
-                within8Days: 2,
-                beyond8Days: 0,
-              },
-            },
-          },
-        ],
-      },
-    ];
 
     const { getByText } = render(
       <PracticeTable
         ccgPractices={ccgPractices}
-        validPractices={validPractices}
+        validPractices={practiceMetricsMock}
       />
     );
 

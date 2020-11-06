@@ -1,0 +1,17 @@
+[
+  {
+    "odsCode": "A12345",
+    "name": "GP Practice",
+    "metrics": [
+      {
+        "requester": {
+          "timeToIntegrateSla": {
+            "within3Days": 3,
+            "within8Days": 2,
+            "beyond8Days": 0
+          }
+        }
+      }
+    ]
+  }
+]
