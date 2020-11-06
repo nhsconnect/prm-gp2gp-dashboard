@@ -54,8 +54,8 @@ const OrganisationSearch = () => {
   };
 
   const getFormattedSelectionText = value => {
-    setSelectedOdsCode(value["odsCode"]);
-    return `${convertToTitleCase(value["name"])} | ${value["odsCode"]}`;
+    setSelectedOdsCode(value.odsCode);
+    return `${convertToTitleCase(value.name)} | ${value.odsCode}`;
   };
 
   const onInputChange = (_, { newValue, method }) => {

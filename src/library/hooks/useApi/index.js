@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const useApi = (url, params = null) => {
+export const useApi = (url, params) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
-        const response = await axios.get(url, { params });
+        const apiParams = params ? { params } : null;
+        const response = await axios.get(url, apiParams);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
         setError(error.response.status);
         setIsLoading(false);
       }
-    };
-    fetchData();
+    })();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);

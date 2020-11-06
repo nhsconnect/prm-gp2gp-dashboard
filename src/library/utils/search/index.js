@@ -7,7 +7,8 @@ export class Search {
   }
 
   search(value, maxLimit) {
-    const result = this.fuse.search(value).slice(0, maxLimit);
+    const searchOptions = maxLimit ? { limit: maxLimit } : {};
+    const result = this.fuse.search(value, searchOptions);
     return result.map(resultItem => resultItem.item);
   }
 }

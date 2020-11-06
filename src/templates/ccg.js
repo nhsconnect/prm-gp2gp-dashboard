@@ -33,7 +33,6 @@ const Ccg = ({ pageContext }) => {
         <PracticeTable
           ccgPractices={data?.Organisations}
           validPractices={organisationMetadata.practices}
-          isLoading={isLoading}
         />
       )}
     </>
