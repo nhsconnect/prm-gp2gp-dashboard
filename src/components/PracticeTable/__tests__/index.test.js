@@ -6,10 +6,10 @@ import * as featureToggle from "../../../library/hooks/useFeatureToggle/index";
 
 jest.mock("../../../data/content/practiceTable.json", () => ({
   noResultsMessage: "No GP practices found",
-  firstColumnName: "Practice name",
-  secondColumnName: "Within 3 days",
-  thirdColumnName: "Within 8 days",
-  fourthColumnName: "Beyond 8 day target",
+  firstColumnName: "Practice name ",
+  secondColumnName: "Within 3 days ",
+  thirdColumnName: "Within 8 days ",
+  fourthColumnName: "Beyond 8 days ",
   description: "Test description of the practice table contents",
 }));
 
@@ -135,5 +135,26 @@ describe("PracticeTable component", () => {
     expect(
       getByText("Test description of the practice table contents")
     ).toBeInTheDocument();
+  });
+
+  it("display practices ordered by Beyond 8 day SLA", () => {
+    const ccgPractices = [
+      { OrgId: "A12345", Name: "GP Practice" },
+      { OrgId: "A12346", Name: "Second GP Practice" },
+      { OrgId: "A12347", Name: "Third GP Practice" },
+    ];
+
+    const { getByText, getAllByRole } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    expect(allRows[1]).toHaveTextContent("Beyond 8 days 10");
+    expect(allRows[2]).toHaveTextContent("Beyond 8 days 3");
+    expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
   });
 });

@@ -18,6 +18,12 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
   if (filteredPractices.length === 0)
     return <p>{practiceTableContent.noResultsMessage}</p>;
 
+  filteredPractices.sort(
+    (firstEl, secondEl) =>
+      secondEl.metrics[0].requester.timeToIntegrateSla.beyond8Days -
+      firstEl.metrics[0].requester.timeToIntegrateSla.beyond8Days
+  );
+
   const { year, month } = filteredPractices[0].metrics[0];
 
   return (

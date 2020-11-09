@@ -15,5 +15,39 @@
         }
       }
     ]
+  },
+  {
+    "odsCode": "A12346",
+    "name": "Second GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requester": {
+          "timeToIntegrateSla": {
+            "within3Days": 5,
+            "within8Days": 6,
+            "beyond8Days": 10
+          }
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12347",
+    "name": "Third GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requester": {
+          "timeToIntegrateSla": {
+            "within3Days": 20,
+            "within8Days": 11,
+            "beyond8Days": 3
+          }
+        }
+      }
+    ]
   }
 ]
