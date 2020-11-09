@@ -13,9 +13,13 @@ const PracticeRow = ({ odsCode, name, metrics }) => {
           {formattedName} | {odsCode}
         </Link>
       </td>
-      <td>{metrics.within3Days}</td>
-      <td>{metrics.within8Days}</td>
-      <td>{metrics.beyond8Days}</td>
+      {metrics && (
+        <>
+          <td>{metrics.within3Days}</td>
+          <td>{metrics.within8Days}</td>
+          <td>{metrics.beyond8Days}</td>
+        </>
+      )}
     </tr>
   );
 };

@@ -3,9 +3,11 @@ import React from "react";
 import { Search } from "../../library/utils/search/index";
 import PracticeRow from "../PracticeRow";
 import practiceTableContent from "../../data/content/practiceTable.json";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
   const practiceSearch = new Search(["OrgId"], ccgPractices);
+  const isShowPracticeDataOn = useFeatureToggle("F_SHOW_PRACTICE_DATA");
 
   const filteredPractices = validPractices.filter(
     practice => practiceSearch.search(practice.odsCode).length > 0
@@ -18,9 +20,13 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
       <thead>
         <tr>
           <th>{practiceTableContent.firstColumnName}</th>
-          <th>{practiceTableContent.secondColumnName}</th>
-          <th>{practiceTableContent.thirdColumnName}</th>
-          <th>{practiceTableContent.fourthColumnName}</th>
+          {isShowPracticeDataOn && (
+            <>
+              <th>{practiceTableContent.secondColumnName}</th>
+              <th>{practiceTableContent.thirdColumnName}</th>
+              <th>{practiceTableContent.fourthColumnName}</th>
+            </>
+          )}
         </tr>
       </thead>
       <tbody>
@@ -29,7 +35,9 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
             key={odsCode}
             odsCode={odsCode}
             name={name}
-            metrics={metrics[0].requester.timeToIntegrateSla}
+            metrics={
+              isShowPracticeDataOn && metrics[0].requester.timeToIntegrateSla
+            }
           />
         ))}
       </tbody>
