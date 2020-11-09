@@ -2,3 +2,8 @@
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 
 @import "node_modules/nhsuk-frontend/packages/components/tables/tables";
+
+.gp2gp-practice-table {
+  @extend .nhsuk-table-responsive;
+  border-top: 2px solid $nhsuk-border-color;
+}

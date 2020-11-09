@@ -26,9 +26,9 @@ const Ccg = ({ pageContext }) => {
       <Helmet title={`${formattedName} | ${odsCode}`} />
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       {isLoading ? (
-        <p>{ccgContent.loadingMessage}</p>
+        <p className="nhsuk-body">{ccgContent.loadingMessage}</p>
       ) : error ? (
-        <p>{ccgContent.errorMessage}</p>
+        <p className="nhsuk-body">{ccgContent.errorMessage}</p>
       ) : (
         <PracticeTable
           ccgPractices={data?.Organisations}

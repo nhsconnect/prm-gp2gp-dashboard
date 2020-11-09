@@ -21,37 +21,47 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
   const { year, month } = filteredPractices[0].metrics[0];
 
   return (
-    <table className="nhsuk-table-responsive" aria-describedby="table-title">
+    <>
       {isShowPracticeDataOn && (
-        <caption id="table-title" className="nhsuk-table__caption">
-          Practice performance for {convertMonthNumberToText(month)} {year}
-        </caption>
+        <p className="nhsuk-body-m nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-5">
+          {practiceTableContent.description}
+        </p>
       )}
-      <thead className="nhsuk-table__head">
-        <tr>
-          <th>{practiceTableContent.firstColumnName}</th>
-          {isShowPracticeDataOn && (
-            <>
-              <th>{practiceTableContent.secondColumnName}</th>
-              <th>{practiceTableContent.thirdColumnName}</th>
-              <th>{practiceTableContent.fourthColumnName}</th>
-            </>
-          )}
-        </tr>
-      </thead>
-      <tbody className="nhsuk-table__body">
-        {filteredPractices.map(({ odsCode, name, metrics }) => (
-          <PracticeRow
-            key={odsCode}
-            odsCode={odsCode}
-            name={name}
-            metrics={
-              isShowPracticeDataOn && metrics[0].requester.timeToIntegrateSla
-            }
-          />
-        ))}
-      </tbody>
-    </table>
+      <table className="gp2gp-practice-table" aria-describedby="table-title">
+        {isShowPracticeDataOn && (
+          <caption
+            id="table-title"
+            className="nhsuk-table__caption nhsuk-u-margin-bottom-4"
+          >
+            Practice performance for {convertMonthNumberToText(month)} {year}
+          </caption>
+        )}
+        <thead className="nhsuk-table__head">
+          <tr>
+            <th>{practiceTableContent.firstColumnName}</th>
+            {isShowPracticeDataOn && (
+              <>
+                <th>{practiceTableContent.secondColumnName}</th>
+                <th>{practiceTableContent.thirdColumnName}</th>
+                <th>{practiceTableContent.fourthColumnName}</th>
+              </>
+            )}
+          </tr>
+        </thead>
+        <tbody className="nhsuk-table__body">
+          {filteredPractices.map(({ odsCode, name, metrics }) => (
+            <PracticeRow
+              key={odsCode}
+              odsCode={odsCode}
+              name={name}
+              metrics={
+                isShowPracticeDataOn && metrics[0].requester.timeToIntegrateSla
+              }
+            />
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 export default PracticeTable;

@@ -4,10 +4,20 @@ import PracticeTable from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import * as featureToggle from "../../../library/hooks/useFeatureToggle/index";
 
+jest.mock("../../../data/content/practiceTable.json", () => ({
+  noResultsMessage: "No GP practices found",
+  firstColumnName: "Practice name",
+  secondColumnName: "Within 3 days",
+  thirdColumnName: "Within 8 days",
+  fourthColumnName: "Beyond 8 day target",
+  description: "Test description of the practice table contents",
+}));
+
 describe("PracticeTable component", () => {
   beforeAll(() => {
     featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
   });
+
   it("displays multiple valid practices", () => {
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },
@@ -109,6 +119,21 @@ describe("PracticeTable component", () => {
 
     expect(
       getByText("Practice performance for February 2020")
+    ).toBeInTheDocument();
+  });
+
+  it("displays table description", () => {
+    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
+
+    const { getByText } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    expect(
+      getByText("Test description of the practice table contents")
     ).toBeInTheDocument();
   });
 });
