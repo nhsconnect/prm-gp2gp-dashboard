@@ -34,5 +34,13 @@ module.exports = {
     "gatsby-plugin-layout",
     "gatsby-plugin-react-helmet",
     "gatsby-transformer-json",
+    {
+      resolve: "gatsby-plugin-typescript",
+      options: {
+        isTSX: true,
+        jsxPragma: `jsx`,
+        allExtensions: true,
+      },
+    },
   ],
 };
