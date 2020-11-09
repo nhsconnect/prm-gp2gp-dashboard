@@ -77,6 +77,29 @@ describe("PracticeTable component", () => {
   it("displays table headers", () => {
     const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
 
+    const { getByRole } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    expect(
+      getByRole("columnheader", { name: "Practice name" })
+    ).toBeInTheDocument();
+    expect(
+      getByRole("columnheader", { name: "Within 3 days" })
+    ).toBeInTheDocument();
+    expect(
+      getByRole("columnheader", { name: "Within 8 days" })
+    ).toBeInTheDocument();
+    expect(
+      getByRole("columnheader", { name: "Beyond 8 day target" })
+    ).toBeInTheDocument();
+  });
+  it("displays table title", () => {
+    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
+
     const { getByText } = render(
       <PracticeTable
         ccgPractices={ccgPractices}
@@ -84,9 +107,8 @@ describe("PracticeTable component", () => {
       />
     );
 
-    expect(getByText("Practice name")).toBeInTheDocument();
-    expect(getByText("Within 3 days")).toBeInTheDocument();
-    expect(getByText("Within 8 days")).toBeInTheDocument();
-    expect(getByText("Beyond 8 day target")).toBeInTheDocument();
+    expect(
+      getByText("Practice performance for February 2020")
+    ).toBeInTheDocument();
   });
 });

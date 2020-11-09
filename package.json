@@ -33,7 +33,7 @@
     "gatsby-source-filesystem": "^2.1.53",
     "gatsby-transformer-json": "^2.2.27",
     "lodash": "^4.17.20",
-    "nhsuk-frontend": "^3.0.3",
+    "nhsuk-frontend": "^4.0.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.0",
     "react-autosuggest": "^10.0.3",

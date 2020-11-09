@@ -4,6 +4,8 @@ import { Search } from "../../library/utils/search/index";
 import PracticeRow from "../PracticeRow";
 import practiceTableContent from "../../data/content/practiceTable.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import "./index.scss";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
   const practiceSearch = new Search(["OrgId"], ccgPractices);
@@ -13,11 +15,19 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
     practice => practiceSearch.search(practice.odsCode).length > 0
   );
 
-  return filteredPractices.length === 0 ? (
-    <p>{practiceTableContent.noResultsMessage}</p>
-  ) : (
-    <table>
-      <thead>
+  if (filteredPractices.length === 0)
+    return <p>{practiceTableContent.noResultsMessage}</p>;
+
+  const { year, month } = filteredPractices[0].metrics[0];
+
+  return (
+    <table className="nhsuk-table-responsive" aria-describedby="table-title">
+      {isShowPracticeDataOn && (
+        <caption id="table-title" className="nhsuk-table__caption">
+          Practice performance for {convertMonthNumberToText(month)} {year}
+        </caption>
+      )}
+      <thead className="nhsuk-table__head">
         <tr>
           <th>{practiceTableContent.firstColumnName}</th>
           {isShowPracticeDataOn && (
@@ -29,7 +39,7 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
           )}
         </tr>
       </thead>
-      <tbody>
+      <tbody className="nhsuk-table__body">
         {filteredPractices.map(({ odsCode, name, metrics }) => (
           <PracticeRow
             key={odsCode}

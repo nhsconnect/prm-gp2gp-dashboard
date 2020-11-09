@@ -4,7 +4,7 @@
     "prod": false
   },
   "F_SHOW_PRACTICE_DATA": {
-    "dev": false,
+    "dev": true,
     "prod": false
   }
 }

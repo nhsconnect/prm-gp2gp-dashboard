@@ -17,6 +17,8 @@ jest.mock(
         name: "A Practice",
         metrics: [
           {
+            year: 2020,
+            month: 2,
             requester: {
               timeToIntegrateSla: {
                 within3Days: 3,

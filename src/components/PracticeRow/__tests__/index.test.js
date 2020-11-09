@@ -45,9 +45,9 @@ describe("PracticeRow component", () => {
 
     const allCells = getAllByRole("cell");
 
-    expect(allCells[0].firstChild.textContent).toBe("A Practice | A12345");
-    expect(allCells[1].textContent).toBe("5");
-    expect(allCells[2].textContent).toBe("1");
-    expect(allCells[3].textContent).toBe("0");
+    expect(allCells[0]).toHaveTextContent("A Practice | A12345");
+    expect(allCells[1]).toHaveTextContent("5");
+    expect(allCells[2]).toHaveTextContent("1");
+    expect(allCells[3]).toHaveTextContent("0");
   });
 });
