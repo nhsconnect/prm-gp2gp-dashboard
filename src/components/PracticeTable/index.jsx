@@ -8,7 +8,7 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import "./index.scss";
 
 const PracticeTable = ({ ccgPractices, validPractices }) => {
-  const practiceSearch = new Search(["OrgId"], ccgPractices);
+  const practiceSearch = new Search("OrgId", ["OrgId"], ccgPractices);
   const isShowPracticeDataOn = useFeatureToggle("F_SHOW_PRACTICE_DATA");
 
   const filteredPractices = validPractices.filter(

@@ -13,6 +13,7 @@ import organisationMetadata from "../../data/organisations/organisationMetadata.
 import "./index.scss";
 
 const practiceSearch = new Search(
+  "odsCode",
   ["name", "odsCode"],
   organisationMetadata.practices.map(item => ({
     ...item,
@@ -21,6 +22,7 @@ const practiceSearch = new Search(
 );
 
 const ccgSearch = new Search(
+  "odsCode",
   ["name", "odsCode"],
   organisationMetadata.ccgs.map(item => ({
     ...item,

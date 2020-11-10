@@ -1,14 +1,17 @@
-import Fuse from "fuse.js";
+import * as JsSearch from "js-search";
 
 export class Search {
-  constructor(keys, list) {
-    const options = { isCaseSensitive: false, threshold: 0.1, keys };
-    this.fuse = new Fuse(list, options);
+  constructor(uniqueKey, indexNames, list) {
+    this.jsSearch = new JsSearch.Search(uniqueKey);
+    this.jsSearch.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
+    indexNames.forEach(indexName => {
+      this.jsSearch.addIndex(indexName);
+    });
+    this.jsSearch.addDocuments(list);
   }
 
   search(value, maxLimit) {
-    const searchOptions = maxLimit ? { limit: maxLimit } : {};
-    const result = this.fuse.search(value, searchOptions);
-    return result.map(resultItem => resultItem.item);
+    const result = this.jsSearch.search(value);
+    return maxLimit ? result.slice(0, maxLimit) : result;
   }
 }

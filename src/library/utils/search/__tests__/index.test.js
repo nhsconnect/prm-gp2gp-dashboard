@@ -2,7 +2,7 @@ import { Search } from "../index";
 
 describe("Search", () => {
   const testKey = "name";
-  const additionalSearchKey = "colour";
+  const indexName = "colour";
   const testDocuments = [
     { name: "apple", colour: "green" },
     { name: "peach", colour: "pink" },
@@ -12,21 +12,21 @@ describe("Search", () => {
   ];
 
   it("returns correct suggestions when searched", () => {
-    const fruitSearch = new Search([testKey], testDocuments);
+    const fruitSearch = new Search(testKey, [testKey], testDocuments);
 
     const suggestions = fruitSearch.search("app");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns correct suggestions when searching substring", () => {
-    const fruitSearch = new Search([testKey], testDocuments);
+    const fruitSearch = new Search(testKey, [testKey], testDocuments);
 
     const suggestions = fruitSearch.search("ppl");
     expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns multiple suggestions when search matches multiple documents", () => {
-    const fruitSearch = new Search([testKey], testDocuments);
+    const fruitSearch = new Search(testKey, [testKey], testDocuments);
 
     const suggestions = fruitSearch.search("pea");
     expect(suggestions).toEqual([
@@ -37,7 +37,8 @@ describe("Search", () => {
 
   it("returns matching suggestions from multiple keys", () => {
     const fruitSearch = new Search(
-      [testKey, additionalSearchKey],
+      testKey,
+      [testKey, indexName],
       testDocuments
     );
 
@@ -49,37 +50,23 @@ describe("Search", () => {
     ]);
   });
 
-  it("returns matching suggestions from nested array", () => {
-    const testNestedDocuments = [
-      {
-        fruits: [{ name: "mango" }],
-      },
-      {
-        fruits: [{ name: "banana" }],
-      },
-      {
-        fruits: [{ name: "grape" }],
-      },
-    ];
+  it("returns a results when there is a partial match", () => {
+    const fruitSearch = new Search(
+      testKey,
+      [testKey, indexName],
+      testDocuments
+    );
 
-    const fruitSearch = new Search(["fruits.name"], testNestedDocuments);
-
-    const suggestions = fruitSearch.search("an");
-    expect(suggestions).toEqual([
-      {
-        fruits: [{ name: "mango" }],
-      },
-      { fruits: [{ name: "banana" }] },
-    ]);
+    const suggestions = fruitSearch.search("apple | gree");
+    expect(suggestions).toEqual([{ name: "apple", colour: "green" }]);
   });
 
   it("returns subset of matching suggestions when the maxLimit is passed", () => {
-    const fruitSearch = new Search([testKey], testDocuments);
+    const fruitSearch = new Search(testKey, [testKey], testDocuments);
 
     const suggestions = fruitSearch.search("a", 2);
-    expect(suggestions).toEqual([
-      { name: "apple", colour: "green" },
-      { name: "banana", colour: "yellow" },
-    ]);
+    expect(suggestions).toContainEqual({ name: "banana", colour: "yellow" });
+    expect(suggestions).toContainEqual({ name: "apple", colour: "green" });
+    expect(suggestions.length).toBe(2);
   });
 });
