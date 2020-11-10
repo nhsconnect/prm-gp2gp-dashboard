@@ -1,5 +1,5 @@
 import flags from "../../../../flags.json";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 
 const PROD_ENV = "prod";
 const DEV_ENV = "dev";
@@ -32,7 +32,7 @@ const getDevFeatureToggle = featureFlagName => {
 export const useFeatureToggle = featureFlagName => {
   const [featureIsOn, setFeatureIsOn] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (getEnv() === PROD_ENV) {
       setFeatureIsOn(getProdFeatureToggle(featureFlagName));
     } else {
