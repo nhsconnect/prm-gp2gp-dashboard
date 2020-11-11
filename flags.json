@@ -1,10 +1,1 @@
-{
-  "F_SEARCH_BY_CCG": {
-    "dev": true,
-    "prod": false
-  },
-  "F_SHOW_PRACTICE_DATA": {
-    "dev": true,
-    "prod": false
-  }
-}
+{}

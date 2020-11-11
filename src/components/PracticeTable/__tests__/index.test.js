@@ -2,13 +2,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import PracticeTable from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
-import * as featureToggle from "../../../library/hooks/useFeatureToggle/index";
 
 describe("PracticeTable component", () => {
-  beforeAll(() => {
-    featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
-  });
-
   it("displays multiple valid practices", () => {
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },

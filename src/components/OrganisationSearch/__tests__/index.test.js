@@ -3,7 +3,6 @@ import * as Gatsby from "gatsby";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import OrganisationSearch from "../index";
-import * as featureToggle from "../../../library/hooks/useFeatureToggle/index";
 
 jest.mock(
   "../../../data/organisations/organisationMetadata.json",
@@ -27,10 +26,6 @@ describe("OrganisationSearch component", () => {
     "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name";
   const validCCGOdsCode = "12A";
   const validCCGName = "Test CCG";
-
-  beforeAll(() => {
-    featureToggle.useFeatureToggle = jest.fn().mockReturnValue(true);
-  });
 
   describe("navigation to practice page", () => {
     it("when searching for and selecting an ods code", async () => {

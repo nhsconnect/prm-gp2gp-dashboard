@@ -22,19 +22,15 @@ const PracticeRow = ({ odsCode, name, metrics }) => {
           {formattedName} | {odsCode}
         </Link>
       </TableCell>
-      {metrics && (
-        <>
-          <TableCell title={practiceTableContent.secondColumnName}>
-            {metrics.within3Days}
-          </TableCell>
-          <TableCell title={practiceTableContent.thirdColumnName}>
-            {metrics.within8Days}
-          </TableCell>
-          <TableCell title={practiceTableContent.fourthColumnName}>
-            {metrics.beyond8Days}
-          </TableCell>
-        </>
-      )}
+      <TableCell title={practiceTableContent.secondColumnName}>
+        {metrics.within3Days}
+      </TableCell>
+      <TableCell title={practiceTableContent.thirdColumnName}>
+        {metrics.within8Days}
+      </TableCell>
+      <TableCell title={practiceTableContent.fourthColumnName}>
+        {metrics.beyond8Days}
+      </TableCell>
     </tr>
   );
 };

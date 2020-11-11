@@ -6,7 +6,6 @@ import Button from "../FormComponents/Button";
 import Autosuggest from "../FormComponents/Autosuggest";
 import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
-import { useFeatureToggle } from "../../library/hooks/useFeatureToggle/index";
 
 import organisationSearchContent from "../../data/content/organisationSearch.json";
 import organisationMetadata from "../../data/organisations/organisationMetadata.json";
@@ -34,22 +33,17 @@ const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
   const [selectedOdsCode, setSelectedOdsCode] = useState("");
-  const isSearchByCCGOn = useFeatureToggle("F_SEARCH_BY_CCG");
 
-  const findSuggestions = value => {
-    return isSearchByCCGOn
-      ? [
-          {
-            title: "Clinical Commissioning Group",
-            organisations: ccgSearch.search(value, 50),
-          },
-          {
-            title: "GP practice",
-            organisations: practiceSearch.search(value, 50),
-          },
-        ]
-      : practiceSearch.search(value, 100);
-  };
+  const findSuggestions = value => [
+    {
+      title: "Clinical Commissioning Group",
+      organisations: ccgSearch.search(value, 50),
+    },
+    {
+      title: "GP practice",
+      organisations: practiceSearch.search(value, 50),
+    },
+  ];
 
   const getSuggestionListItemText = suggestion => {
     return `${convertToTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
@@ -72,32 +66,19 @@ const OrganisationSearch = () => {
 
     const result = findSuggestions(selectedOdsCode || inputTextValue);
 
-    if (isSearchByCCGOn) {
-      const allSearchResults = [
-        ...result[0].organisations,
-        ...result[1].organisations,
-      ];
+    const allSearchResults = [
+      ...result[0].organisations,
+      ...result[1].organisations,
+    ];
 
-      if (allSearchResults.length === 1) {
-        navigate(allSearchResults[0].path);
-      } else if (allSearchResults.length > 1) {
-        setInputError(
-          `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
-        );
-      } else {
-        setInputError(organisationSearchContent.inputErrorMessage);
-      }
+    if (allSearchResults.length === 1) {
+      navigate(allSearchResults[0].path);
+    } else if (allSearchResults.length > 1) {
+      setInputError(
+        `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
+      );
     } else {
-      if (result.length === 1) {
-        const odsCode = result[0].odsCode;
-        navigate(`/practice/${odsCode}`);
-      } else if (result.length > 1) {
-        setInputError(
-          `Multiple results matching '${inputTextValue}'. Please select an option from the dropdown.`
-        );
-      } else {
-        setInputError("Please enter a valid practice name or ODS code");
-      }
+      setInputError(organisationSearchContent.inputErrorMessage);
     }
   };
 
@@ -109,17 +90,13 @@ const OrganisationSearch = () => {
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <Autosuggest
           inputError={inputError}
-          inputLabelText={
-            isSearchByCCGOn
-              ? organisationSearchContent.inputLabel
-              : "Enter a practice name or ODS code"
-          }
+          inputLabelText={organisationSearchContent.inputLabel}
           getSuggestionListItemText={getSuggestionListItemText}
           getFormattedSelectionText={getFormattedSelectionText}
           inputTextValue={inputTextValue}
           findSuggestions={findSuggestions}
           onInputChange={onInputChange}
-          multiSection={isSearchByCCGOn}
+          multiSection={true}
           renderSectionTitle={section => section.title}
           getSectionSuggestions={section => section.organisations}
         />
