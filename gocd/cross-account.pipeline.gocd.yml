@@ -67,7 +67,7 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-deploy
+                      - ./tasks dojo-deploy dev
       - build_prod:
           clean_workspace: true
           approval:
@@ -117,4 +117,4 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-deploy
+                      - ./tasks dojo-deploy prod
