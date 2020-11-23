@@ -6,6 +6,8 @@ pipelines:
     materials:
       git:
         type: configrepo
+    environment_variables:
+      SHARED_ACCOUNT: 0
     stages:
       - test:
           clean_workspace: true
