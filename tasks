@@ -5,6 +5,35 @@ set -Eeo pipefail
 task="$1"
 deployment_env="$2"
 
+function assume_role {
+    if [ ${SHARED_ACCOUNT} == 1 ]; then
+      return 0
+    elif [ "${deployment_env}" == "dev" ]; then
+      export AWS_ACCOUNT="dev"
+    elif [ "${deployment_env}" == "prod" ]; then
+      export AWS_ACCOUNT="preprod"
+    else
+      echo "deployment_env=${deployment_env} is not supported"
+      exit 2
+    fi
+
+    role_arn=$(aws ssm get-parameters --region ${aws_region} --names /registrations/${AWS_ACCOUNT}/user-input/cross-account-admin-role --query Parameters[0].Value --output text)
+    session_name="registrations-dashboard-${AWS_ACCOUNT}-session"
+
+    echo "Assuming ${AWS_ACCOUNT} role..."
+
+    sts=( $(
+        aws sts assume-role \
+        --role-arn $role_arn \
+        --role-session-name $session_name \
+        --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
+        --output text
+    ) )
+    export AWS_ACCESS_KEY_ID=${sts[0]}
+    export AWS_SECRET_ACCESS_KEY=${sts[1]}
+    export AWS_SESSION_TOKEN=${sts[2]}
+}
+
 function check_env {
     if [ "$1" != "dev" ] && [ "$1" != "prod" ]; then
         echo "Usage: $0 TASK DEPLOYMENT-ENVIRONMENT"
@@ -13,11 +42,19 @@ function check_env {
     fi
 }
 
+function get_bucket {
+    if [ ${SHARED_ACCOUNT} == 1 ]; then
+        echo "prm-gp2gp-dashboard-${deployment_env}"
+    else
+        echo "prm-service-dashboard-${deployment_env}"
+    fi
+}
+
 function setup_env {
-    DEPLOYMENT_ENV="$1"
     check_env "$1"
     export GATSBY_ENV="$1"
     export DEPLOYMENT_ENV="$1"
+    export DEPLOYMENT_BUCKET=$(get_bucket)
 }
 
 case "${task}" in
@@ -53,6 +90,7 @@ case "${task}" in
       dojo "./tasks get-metadata ${deployment_env}"
       ;;
   deploy)
+      assume_role
       npm install
       npm run deploy
       ;;

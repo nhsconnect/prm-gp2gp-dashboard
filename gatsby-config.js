@@ -3,7 +3,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-s3",
       options: {
-        bucketName: `prm-gp2gp-dashboard-${process.env.DEPLOYMENT_ENV}`,
+        bucketName: `${process.env.DEPLOYMENT_BUCKET}`,
         region: "eu-west-2",
         parallelLimit: 1000,
       },
