@@ -95,7 +95,7 @@ case "${task}" in
       npm run deploy
       ;;
   dojo-deploy)
-      dojo "./tasks deploy"
+      dojo "./tasks deploy ${deployment_env}"
       ;;
   *)
       echo "Invalid command: '${task}'"
