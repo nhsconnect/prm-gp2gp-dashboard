@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { navigate } from "gatsby";
 
 import Form from "../FormComponents/Form";
-import Button from "../FormComponents/Button";
+import Button from "../Button";
 import Autosuggest from "../FormComponents/Autosuggest";
 import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";

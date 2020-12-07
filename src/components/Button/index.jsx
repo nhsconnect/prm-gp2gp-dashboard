@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 
-const Button = ({ className, children, type, testid }) => (
+const Button = ({ className, children, type, onClick }) => (
   <button
     className={classNames("nhsuk-button", className)}
     type={type}
-    data-testid={testid}
+    onClick={onClick}
   >
     {children}
   </button>

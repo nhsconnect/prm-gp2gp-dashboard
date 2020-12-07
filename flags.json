@@ -1,1 +1,6 @@
-{}
+{
+  "F_COOKIE_BANNER": {
+    "dev": false,
+    "prod": false
+  }
+}
