@@ -35,9 +35,27 @@ describe("CookieBanner component", () => {
 
     const { getByRole } = render(<CookieBanner />);
 
-    const agreeButton = getByRole("button");
+    const agreeButton = getByRole("button", {
+      name: "I'm OK with analytics cookies",
+    });
     userEvent.click(agreeButton);
 
     expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true");
+  });
+
+  it("sets consent to false if disagree button pressed", () => {
+    const mockSetCookie = jest.fn();
+    jest
+      .spyOn(cookies, "useCookies")
+      .mockImplementation(() => [{}, mockSetCookie]);
+
+    const { getByRole } = render(<CookieBanner />);
+
+    const disagreeButton = getByRole("button", {
+      name: "Do not use analytics cookies",
+    });
+    userEvent.click(disagreeButton);
+
+    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false");
   });
 });

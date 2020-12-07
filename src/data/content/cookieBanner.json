@@ -1,3 +1,8 @@
 {
-  "agreeButton": "I'm OK with analytics cookies"
+  "agreeButton": "I'm OK with analytics cookies",
+  "disagreeButton": "Do not use analytics cookies",
+  "heading": "Cookies on the GP2GP Service Dashboard",
+  "text1": "We've put some small files called cookies on your device to make our site work.",
+  "text2": "We'd also like to use analytics cookies. These send anonymous information about how our site is used to a service called Google Analytics. We use this information to improve our site.",
+  "text3": "Let us know if this is OK. We'll use a cookie to save your choice."
 }

@@ -1,0 +1,18 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+@import "node_modules/nhsuk-frontend/packages/core/objects/width-container";
+@import "node_modules/nhsuk-frontend/packages/core/elements/links";
+@import "node_modules/nhsuk-frontend/packages/core/styles/typography";
+
+.gp2gp-cookie-banner {
+  background: white;
+  position: relative;
+  box-shadow: 0 0 4px 0 #212b32;
+  padding: 24px 0 0;
+  width: 100%;
+  z-index: 1;
+
+  .nhsuk-width-container {
+    max-width: 1100px;
+  }
+}
