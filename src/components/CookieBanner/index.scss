@@ -3,16 +3,32 @@
 @import "node_modules/nhsuk-frontend/packages/core/objects/width-container";
 @import "node_modules/nhsuk-frontend/packages/core/elements/links";
 @import "node_modules/nhsuk-frontend/packages/core/styles/typography";
+@import "node_modules/nhsuk-frontend/packages/core/settings/colours";
 
 .gp2gp-cookie-banner {
-  background: white;
+  background: $color_nhsuk-white;
   position: relative;
-  box-shadow: 0 0 4px 0 #212b32;
-  padding: 24px 0 0;
+  box-shadow: 0 0 4px 0 $color_nhsuk-black;
+  padding: 24px 0 0 0;
   width: 100%;
   z-index: 1;
 
   .nhsuk-width-container {
     max-width: 1100px;
+  }
+}
+
+.gp2gp-success-banner {
+  background-color: $color_nhsuk-green;
+  color: $color_nhsuk-white;
+  padding: 8px 0 8px 0;
+  position: relative;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: $color_nhsuk-white;
   }
 }
