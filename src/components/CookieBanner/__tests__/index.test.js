@@ -9,6 +9,12 @@ jest.mock("react-cookie", () => ({
 }));
 
 describe("CookieBanner component", () => {
+  beforeAll(() => {
+    global.Date.now = jest.fn(() =>
+      new Date("2020-12-08T11:30:00.000Z").getTime()
+    );
+  });
+
   it("displays cookie banner if cookies are not set", () => {
     jest.spyOn(cookies, "useCookies").mockImplementation(() => [{}, () => {}]);
 
@@ -27,7 +33,7 @@ describe("CookieBanner component", () => {
     expect(queryByLabelText("Accept cookies")).not.toBeInTheDocument();
   });
 
-  it("sets consent to true if agree button pressed", () => {
+  it("sets consent to true and the cookie expiry date if agree button pressed", () => {
     const mockSetCookie = jest.fn();
     jest
       .spyOn(cookies, "useCookies")
@@ -40,13 +46,15 @@ describe("CookieBanner component", () => {
     });
     userEvent.click(agreeButton);
 
-    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true");
+    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true", {
+      expires: new Date(2021, 2, 8, 11, 30),
+    });
 
     const confirmationBanner = getByLabelText("Cookie setting success");
     expect(confirmationBanner).toBeInTheDocument();
   });
 
-  it("sets consent to false if disagree button pressed", () => {
+  it("sets consent to false and the cookie expiry date if disagree button pressed", () => {
     const mockSetCookie = jest.fn();
     jest
       .spyOn(cookies, "useCookies")
@@ -59,7 +67,9 @@ describe("CookieBanner component", () => {
     });
     userEvent.click(disagreeButton);
 
-    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false");
+    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false", {
+      expires: new Date(2021, 2, 8, 11, 30),
+    });
 
     const confirmationBanner = getByLabelText("Cookie setting success");
     expect(confirmationBanner).toBeInTheDocument();
