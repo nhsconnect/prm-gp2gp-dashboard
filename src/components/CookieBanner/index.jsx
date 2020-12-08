@@ -40,7 +40,10 @@ const CookieBanner = () => {
   return (
     <>
       {isClicked && (
-        <div className="gp2gp-success-banner">
+        <div
+          className="gp2gp-success-banner"
+          aria-label="Cookie setting success"
+        >
           <div className="nhsuk-width-container">
             <p>
               You can change your cookie settings at any time using our{" "}

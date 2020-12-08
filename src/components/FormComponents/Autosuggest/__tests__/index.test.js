@@ -3,7 +3,6 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Autosuggest from "../index";
-import { Search } from "../../../../library/utils/search";
 
 describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";

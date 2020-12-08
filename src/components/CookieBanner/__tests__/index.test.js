@@ -33,7 +33,7 @@ describe("CookieBanner component", () => {
       .spyOn(cookies, "useCookies")
       .mockImplementation(() => [{}, mockSetCookie]);
 
-    const { getByRole } = render(<CookieBanner />);
+    const { getByRole, getByLabelText } = render(<CookieBanner />);
 
     const agreeButton = getByRole("button", {
       name: "I'm OK with analytics cookies",
@@ -41,6 +41,9 @@ describe("CookieBanner component", () => {
     userEvent.click(agreeButton);
 
     expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true");
+
+    const confirmationBanner = getByLabelText("Cookie setting success");
+    expect(confirmationBanner).toBeInTheDocument();
   });
 
   it("sets consent to false if disagree button pressed", () => {
@@ -49,7 +52,7 @@ describe("CookieBanner component", () => {
       .spyOn(cookies, "useCookies")
       .mockImplementation(() => [{}, mockSetCookie]);
 
-    const { getByRole } = render(<CookieBanner />);
+    const { getByRole, getByLabelText } = render(<CookieBanner />);
 
     const disagreeButton = getByRole("button", {
       name: "Do not use analytics cookies",
@@ -57,5 +60,8 @@ describe("CookieBanner component", () => {
     userEvent.click(disagreeButton);
 
     expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false");
+
+    const confirmationBanner = getByLabelText("Cookie setting success");
+    expect(confirmationBanner).toBeInTheDocument();
   });
 });
