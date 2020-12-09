@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
       <div className="nhsuk-width-container">
         <main className="nhsuk-main-wrapper">{children}</main>
       </div>
-      <Footer />
+      {isCookieBannerOn && <Footer />}
     </>
   );
 };
