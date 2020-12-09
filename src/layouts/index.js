@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import "./index.scss";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 
-const Layout = ({ children }) => {
+const Layout = ({ path, children }) => {
   const isCookieBannerOn = useFeatureToggle("F_COOKIE_BANNER");
 
   return (
@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
       <Helmet>
         <html lang="en" />
       </Helmet>
-      {isCookieBannerOn && <CookieBanner />}
+      {isCookieBannerOn && <CookieBanner path={path} />}
       <Header />
       <div className="nhsuk-width-container">
         <main className="nhsuk-main-wrapper">{children}</main>
