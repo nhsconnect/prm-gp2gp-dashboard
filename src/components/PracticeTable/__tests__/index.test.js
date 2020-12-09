@@ -108,14 +108,14 @@ describe("PracticeTable component", () => {
     ).toBeInTheDocument();
   });
 
-  it("display practices ordered by Beyond 8 day SLA", () => {
+  it("displays practices ordered by Beyond 8 day SLA", () => {
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },
       { OrgId: "A12346", Name: "Second GP Practice" },
       { OrgId: "A12347", Name: "Third GP Practice" },
     ];
 
-    const { getByText, getAllByRole } = render(
+    const { getAllByRole } = render(
       <PracticeTable
         ccgPractices={ccgPractices}
         validPractices={practiceMetricsMock}

@@ -19,9 +19,11 @@
   "details": {
     "summary": "Cookies needed for the NHS website to work",
     "table": {
-      "column1": "Cookie Name",
-      "column2": "Purpose",
-      "column3": "Expiry",
+      "headers": [
+        "Cookie Name",
+        "Purpose",
+        "Expiry"
+      ],
       "rows": [
         [
           "nhsuk-cookie-consent",
