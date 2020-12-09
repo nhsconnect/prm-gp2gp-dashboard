@@ -4,6 +4,7 @@ import { addMonths } from "date-fns";
 import cookieBannerContent from "../../data/content/cookieBanner.json";
 import Button from "../Button";
 import "./index.scss";
+import { Link } from "gatsby";
 
 const AcceptCookies = ({ handleAgree, handleDisagree }) => (
   <div aria-label="Accept cookies" className="gp2gp-cookie-banner">
@@ -13,7 +14,8 @@ const AcceptCookies = ({ handleAgree, handleDisagree }) => (
       <p>{cookieBannerContent.text2}</p>
       <p>
         {cookieBannerContent.text3} You can{" "}
-        <a href="#">read more about our cookies</a> before you choose.
+        <Link to="/cookies-policy">read more about our cookies</Link> before you
+        choose.
       </p>
       <Button className="nhsuk-u-margin-right-4" onClick={handleAgree}>
         {cookieBannerContent.agreeButton}
@@ -54,7 +56,7 @@ const CookieBanner = () => {
           <div className="nhsuk-width-container">
             <p>
               You can change your cookie settings at any time using our{" "}
-              <a href="#">cookies page</a>.
+              <Link to="/cookies-policy">cookies page</Link>.
             </p>
           </div>
         </div>

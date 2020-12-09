@@ -74,4 +74,33 @@ describe("CookieBanner component", () => {
     const confirmationBanner = getByLabelText("Cookie setting success");
     expect(confirmationBanner).toBeInTheDocument();
   });
+
+  it("navigates to cookies policy page when read more link is clicked", () => {
+    jest.spyOn(cookies, "useCookies").mockImplementation(() => [{}, () => {}]);
+
+    const { getByRole } = render(<CookieBanner />);
+
+    const cookiePageLink = getByRole("link", {
+      name: "read more about our cookies",
+    });
+
+    expect(cookiePageLink.getAttribute("href")).toBe("/cookies-policy");
+  });
+
+  it("navigates to cookies policy page when cookies page link is clicked", () => {
+    jest.spyOn(cookies, "useCookies").mockImplementation(() => [{}, () => {}]);
+
+    const { getByRole } = render(<CookieBanner />);
+
+    const agreeButton = getByRole("button", {
+      name: "I'm OK with analytics cookies",
+    });
+    userEvent.click(agreeButton);
+
+    const cookiePageLink = getByRole("link", {
+      name: "cookies page",
+    });
+
+    expect(cookiePageLink.getAttribute("href")).toBe("/cookies-policy");
+  });
 });

@@ -21,13 +21,8 @@ describe("PracticeRow component", () => {
     const practicePageLink = getByRole("link", {
       name: "A Practice | A12345",
     });
-    userEvent.click(practicePageLink);
 
-    expect(Gatsby.Link).toHaveBeenCalledTimes(1);
-    expect(Gatsby.Link).toHaveBeenCalledWith(
-      expect.objectContaining({ to: "/practice/A12345" }),
-      expect.anything()
-    );
+    expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
   });
 
   it("displays practice SLA metrics in correct order", () => {
