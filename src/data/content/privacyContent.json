@@ -1,0 +1,53 @@
+{
+  "title": "Your privacy",
+  "subheading": "Your privacy is important to us. This privacy policy covers what we collect and how we use, share and store your information.",
+  "text1": "This page tells you:",
+  "list": {
+    "item1": "about the information we may collect",
+    "item2": "how we keep your data secure",
+    "item3": "who we share your data with",
+    "item4": "about your rights to see or change information we hold about you"
+  },
+  "section1": {
+    "heading": "Information we may collect",
+    "text1": "You can leave feedback on some pages of the website or on a user survey. You can choose to share your email address if you want a reply. Otherwise, we collect and store feedback anonymously.",
+    "subsection1": {
+      "heading": "Cookies",
+      "text1": "Our website uses cookies. These are small files saved on your phone, tablet or computer when you visit a website. They store information about how you use the website, such as the pages you visit.",
+      "text2": "The law says that we can store cookies on your device if they are strictly necessary to make our website work. For all other types of cookies we need your permission before we can use them on your device.",
+      "text3": "We like to use analytics cookies which measure how you use our website and help us improve our service for future users but we only use these cookies if you say it's OK.",
+      "cookieLink": "Read our cookie policy",
+      "text4": " to find out more about the cookies we use and tell us if we can put analytics cookies on your device.",
+      "text5": "We sometimes use tools on other organisations' websites to collect data or to ask for feedback. These tools set their own cookies."
+    }
+  },
+  "section2": {
+    "heading": "Keeping your personal data secure",
+    "text1": "We convert your data into secure code (encrypt it) and store it on secure servers in England. A partner organisation is providing hosting services but has no say in how the information is used. There are no legal ways for their employees to see the data. Only approved people in the NHS digital service manual team can see it.",
+    "text2": "If you shared your email with us as part of a survey, we will delete it after 2 years. At that point no one can identify you in the survey data."
+  },
+  "section3": {
+    "heading": "Data sharing",
+    "text1": "NHS Digital may share anonymous information on how the service is used with the Department of Health and Social Care, NHS England, clinical commissioning groups (CCGs), and the National Clinical Governance Group.",
+    "subsection1": {
+      "heading": "Legal powers",
+      "text1": "When you give us personal information, we may pass it on if the law says we must. ",
+      "text2": "If you make a claim against us, we and other third parties such as our solicitors may need to look at this information.",
+      "text3": "We will not share your personal information with anyone else without your permission for any other reason."
+    }
+  },
+  "section4": {
+    "heading": "Your rights",
+    "text1": "You can:",
+    "list": {
+      "item1": "find out what information we hold about you, ask us to correct it if it's wrong, or delete it by emailing ",
+      "email": "gp2gp@nhs.net",
+      "item2": {
+        "text1": "contact the ",
+        "link": "Information Commissioner's Office",
+        "text2": ", Wycliffe House Water Lane, Wilmslow SK9 5AF if you want to make a complaint about how we have managed your data"
+      }
+    },
+    "text2": "NHS Digital, 1 Trevelyan Square, Boar Lane, Leeds, LS1 6AE is the Data Controller for the NHS digital service manual under data protection legislation. We will process your data in line with data protection legislation."
+  }
+}

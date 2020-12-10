@@ -13,6 +13,11 @@ const Footer = () => (
               Cookies
             </Link>
           </li>
+          <li className="nhsuk-footer__list-item">
+            <Link className="nhsuk-footer__list-item-link" to="/your-privacy">
+              Your privacy
+            </Link>
+          </li>
         </ul>
         <p className="nhsuk-footer__copyright">&copy; Crown copyright</p>
       </div>
