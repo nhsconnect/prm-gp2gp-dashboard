@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { addMonths } from "date-fns";
+import { subHours, addMonths } from "date-fns";
 import cookieBannerContent from "../../data/content/cookieBanner.json";
 import Button from "../Button";
 import "./index.scss";
@@ -37,7 +37,10 @@ const CookieBanner = ({ path }) => {
 
   const setCookieConsent = consent => {
     const expiryDate = addMonths(new Date(Date.now()), 3);
-    setCookie("nhsuk-cookie-consent", consent, { expires: expiryDate });
+    const expiryDateMinusDaylightSavings = subHours(expiryDate, 1);
+    setCookie("nhsuk-cookie-consent", consent, {
+      expires: expiryDateMinusDaylightSavings,
+    });
   };
 
   const handleAgree = () => {

@@ -47,7 +47,7 @@ describe("CookieBanner component", () => {
     userEvent.click(agreeButton);
 
     expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true", {
-      expires: new Date(2021, 2, 8, 11, 30),
+      expires: new Date(2021, 2, 8, 10, 30),
     });
 
     const confirmationBanner = getByLabelText("Cookie setting success");
@@ -68,7 +68,7 @@ describe("CookieBanner component", () => {
     userEvent.click(disagreeButton);
 
     expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false", {
-      expires: new Date(2021, 2, 8, 11, 30),
+      expires: new Date(2021, 2, 8, 10, 30),
     });
 
     const confirmationBanner = getByLabelText("Cookie setting success");
