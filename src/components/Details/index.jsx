@@ -8,8 +8,8 @@ const Details = ({ summary, headers, rows }) => (
     </summary>
     <div className="nhsuk-details__text">
       <div className="nhsuk-table-responsive">
-        <table>
-          <thead>
+        <table className="nhsuk-table">
+          <thead className="nhsuk-table__head">
             <tr>
               {headers?.map(header => (
                 <th scope="col" key={header}>
@@ -18,11 +18,24 @@ const Details = ({ summary, headers, rows }) => (
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="nhsuk-table__body">
             {rows?.map((row, rowIndex) => (
-              <tr key={`row-${rowIndex}`}>
+              <tr
+                role="row"
+                className="nhsuk-table__row"
+                key={`row-${rowIndex}`}
+              >
                 {row?.map((cell, cellIndex) => (
-                  <td key={`row-${rowIndex}-cell-${cellIndex}`}>{cell}</td>
+                  <td
+                    role="cell"
+                    className="nhsuk-table__cell"
+                    key={`row-${rowIndex}-cell-${cellIndex}`}
+                  >
+                    <span className="nhsuk-table-responsive__heading">
+                      {headers[cellIndex]}
+                    </span>
+                    {cell}
+                  </td>
                 ))}
               </tr>
             ))}

@@ -53,7 +53,7 @@ const YourPrivacy = () => {
         <ul>
           <li>
             {section4.list.item1}{" "}
-            <a href="mailto:gp2gp@nhs.net">{section4.list.email}</a>
+            <a href={`mailto:${section4.list.email}`}>{section4.list.email}</a>
           </li>
           <li>
             {section4.list.item2.text1}
