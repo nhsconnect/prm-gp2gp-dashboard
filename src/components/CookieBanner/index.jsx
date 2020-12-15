@@ -7,7 +7,7 @@ import "./index.scss";
 import { Link } from "gatsby";
 
 const AcceptCookies = ({ handleAgree, handleDisagree }) => (
-  <div aria-label="Accept cookies" className="gp2gp-cookie-banner">
+  <div aria-label="Cookie banner" className="gp2gp-cookie-banner">
     <div className="nhsuk-width-container">
       <h2 className="nhsuk-heading-s">{cookieBannerContent.heading}</h2>
       <p>{cookieBannerContent.text1}</p>
@@ -58,7 +58,7 @@ const CookieBanner = ({ path }) => {
       {isClicked && (
         <div
           className="gp2gp-success-banner"
-          aria-label="Cookie setting success"
+          aria-label="Cookie setting success banner"
         >
           <div className="nhsuk-width-container">
             <p>

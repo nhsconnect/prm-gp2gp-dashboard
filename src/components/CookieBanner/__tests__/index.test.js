@@ -20,7 +20,7 @@ describe("CookieBanner component", () => {
 
     const { getByLabelText } = render(<CookieBanner />);
 
-    expect(getByLabelText("Accept cookies")).toBeInTheDocument();
+    expect(getByLabelText("Cookie banner")).toBeInTheDocument();
   });
 
   it("does not display cookie banner if cookies are set", () => {
@@ -30,7 +30,7 @@ describe("CookieBanner component", () => {
 
     const { queryByLabelText } = render(<CookieBanner />);
 
-    expect(queryByLabelText("Accept cookies")).not.toBeInTheDocument();
+    expect(queryByLabelText("Cookie banner")).not.toBeInTheDocument();
   });
 
   it("sets consent to true and the cookie expiry date if agree button pressed", () => {
@@ -50,7 +50,7 @@ describe("CookieBanner component", () => {
       expires: new Date(2021, 2, 8, 10, 30),
     });
 
-    const confirmationBanner = getByLabelText("Cookie setting success");
+    const confirmationBanner = getByLabelText("Cookie setting success banner");
     expect(confirmationBanner).toBeInTheDocument();
   });
 
@@ -71,7 +71,7 @@ describe("CookieBanner component", () => {
       expires: new Date(2021, 2, 8, 10, 30),
     });
 
-    const confirmationBanner = getByLabelText("Cookie setting success");
+    const confirmationBanner = getByLabelText("Cookie setting success banner");
     expect(confirmationBanner).toBeInTheDocument();
   });
 

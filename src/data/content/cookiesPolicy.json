@@ -13,22 +13,18 @@
       "item1": "make our website work",
       "item2": "measure how you use our website, such as which links you click on (analytics cookies), if you give us permission"
     },
-    "text2": "We do not use any other cookies, for example, cookies that remember your settings or cookies that help with health campaigns.",
+    "text2": "We do not use any other cookies, for example, cookies that help with health campaigns.",
     "text3": "We sometimes use tools on other organisations' websites to collect data or to ask for feedback. These tools set their own cookies."
   },
   "details": {
-    "summary": "Cookies needed for the NHS website to work",
+    "summary": "Cookies needed for this website to work",
     "table": {
-      "headers": [
-        "Cookie Name",
-        "Purpose",
-        "Expiry"
-      ],
+      "headers": ["Cookie Name", "Purpose", "Expiry"],
       "rows": [
         [
           "nhsuk-cookie-consent",
           "Remembers if you used our cookies banner",
-          "If you do not interact with cookie banner it will expire when you close the browser. If you interact with the banner the cookie will expire after 3 months."
+          "This cookie will not be set until you interact with the cookie banner. If you interact with the banner the cookie will expire after 3 months."
         ]
       ]
     }
