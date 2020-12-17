@@ -18,6 +18,14 @@ const Footer = () => (
               Your privacy
             </Link>
           </li>
+          <li className="nhsuk-footer__list-item">
+            <Link
+              className="nhsuk-footer__list-item-link"
+              to="/accessibility-statement"
+            >
+              Accessibility statement
+            </Link>
+          </li>
         </ul>
         <p className="nhsuk-footer__copyright">&copy; Crown copyright</p>
       </div>

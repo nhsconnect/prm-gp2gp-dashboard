@@ -1,5 +1,5 @@
 {
-  "F_COOKIE_BANNER": {
+  "F_COOKIE_BANNER_AND_FOOTER": {
     "dev": true,
     "prod": false
   }
