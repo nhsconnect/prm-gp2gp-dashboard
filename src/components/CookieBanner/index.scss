@@ -34,5 +34,9 @@
     &:visited {
       color: $color_nhsuk-white;
     }
+
+    &:hover {
+      color: $color_nhsuk-black;
+    }
   }
 }
