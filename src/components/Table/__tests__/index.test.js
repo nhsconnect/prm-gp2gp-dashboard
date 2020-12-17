@@ -1,18 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import PracticeTable from "../index";
 import Table from "../index";
 
 describe("Table component", () => {
   const headers = ["fruit ", "colour ", "quantity "];
-
-  it("displays table headers", () => {
-    const { getByRole } = render(<Table headers={headers} />);
-
-    expect(getByRole("columnheader", { name: "fruit" })).toBeInTheDocument();
-    expect(getByRole("columnheader", { name: "colour" })).toBeInTheDocument();
-    expect(getByRole("columnheader", { name: "quantity" })).toBeInTheDocument();
-  });
 
   it("displays table headers in the correct order", () => {
     const { getAllByRole } = render(<Table headers={headers} />);
