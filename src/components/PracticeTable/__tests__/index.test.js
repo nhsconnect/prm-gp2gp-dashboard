@@ -70,44 +70,6 @@ describe("PracticeTable component", () => {
     expect(getByText("No GP practices found")).toBeInTheDocument();
   });
 
-  it("displays table headers", () => {
-    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
-
-    const { getByRole } = render(
-      <PracticeTable
-        ccgPractices={ccgPractices}
-        validPractices={practiceMetricsMock}
-      />
-    );
-
-    expect(
-      getByRole("columnheader", { name: "Practice name" })
-    ).toBeInTheDocument();
-    expect(
-      getByRole("columnheader", { name: "Within 3 days" })
-    ).toBeInTheDocument();
-    expect(
-      getByRole("columnheader", { name: "Within 8 days" })
-    ).toBeInTheDocument();
-    expect(
-      getByRole("columnheader", { name: "Beyond 8 days" })
-    ).toBeInTheDocument();
-  });
-  it("displays table title", () => {
-    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
-
-    const { getByText } = render(
-      <PracticeTable
-        ccgPractices={ccgPractices}
-        validPractices={practiceMetricsMock}
-      />
-    );
-
-    expect(
-      getByText("Practice performance for February 2020")
-    ).toBeInTheDocument();
-  });
-
   it("displays practices ordered by Beyond 8 day SLA", () => {
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },
@@ -127,5 +89,22 @@ describe("PracticeTable component", () => {
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 10");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 3");
     expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
+  });
+
+  it("navigates to a practice page when a link is clicked", () => {
+    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
+
+    const { getByRole } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    const practicePageLink = getByRole("link", {
+      name: "GP Practice | A12345",
+    });
+
+    expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
   });
 });

@@ -1,8 +1,10 @@
 {
   "noResultsMessage": "No GP practices found",
-  "firstColumnName": "Practice name ",
-  "secondColumnName": "Within 3 days ",
-  "thirdColumnName": "Within 8 days ",
-  "fourthColumnName": "Beyond 8 days ",
+  "tableHeaders": [
+    "Practice name ",
+    "Within 3 days ",
+    "Within 8 days ",
+    "Beyond 8 days "
+  ],
   "description": "The data below shows the GP2GP service performance for the practices within this Clinical Commissioning Group (CCG). The data covers any GP2GP requests that were made between the first and last day of the month."
 }
