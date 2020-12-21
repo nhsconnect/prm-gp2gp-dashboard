@@ -1,32 +1,53 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Details from "../components/Details";
-import cookiesPolicyContent from "../data/content/cookiesPolicy.json";
 
 const CookiesPolicy = () => {
-  const { title, section1, section2, details } = cookiesPolicyContent;
-
   return (
     <>
       <Helmet title="Cookies policy - GP2GP Service Dashboard" />
       <section>
-        <h1>{title}</h1>
-        <h2>{section1.heading}</h2>
-        <p>{section1.text1}</p>
-        <p>{section1.text2}</p>
-        <p>{section1.text3}</p>
-        <h2>{section2.heading}</h2>
-        <p>{section2.text1}</p>
+        <h1>Cookie Policy</h1>
+        <h2>What are cookies?</h2>
+        <p>
+          Cookies are files saved on your phone, tablet or computer when you
+          visit a website.
+        </p>
+        <p>
+          They store information about how you use the website, such as the
+          pages you visit.
+        </p>
+        <p>
+          Cookies are not viruses or computer programs. They are very small so
+          do not take up much space.
+        </p>
+        <h2>How we use cookies</h2>
+        <p>We only use cookies to:</p>
         <ul>
-          <li>{section2.list.item1}</li>
-          <li>{section2.list.item2}</li>
+          <li>make our website work</li>
+          <li>
+            measure how you use our website, such as which links you click on
+            (analytics cookies), if you give us permission
+          </li>
         </ul>
-        <p>{section2.text2}</p>
-        <p>{section2.text3}</p>
+        <p>
+          We do not use any other cookies, for example, cookies that help with
+          health campaigns.
+        </p>
+        <p>
+          We sometimes use tools on other organisations' websites to collect
+          data or to ask for feedback. These tools set their own cookies.
+        </p>
         <Details
-          summary={details.summary}
-          headers={details.table.headers}
-          rows={details.table.rows}
+          summary="Cookies needed for this website to work"
+          headers={["Cookie Name", "Purpose", "Expiry"]}
+          rows={[
+            [
+              "nhsuk-cookie-consent",
+              "Remembers if you used our cookies banner",
+              "This cookie will not be set until you interact with the cookie banner. If you interact with the banner the cookie will expire after 3 months.",
+            ],
+          ]}
         />
       </section>
     </>
