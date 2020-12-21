@@ -49,6 +49,37 @@ const CookiesPolicy = () => {
             ],
           ]}
         />
+        <h2>Cookies that measure website use</h2>
+        <p>
+          We also like to use analytics cookies. These cookies store anonymous
+          information about how you use our website, such as which pages you
+          visit or what you click on.
+        </p>
+        <Details
+          summary="List of cookies that measure website use"
+          headers={["Cookie Name", "Purpose", "Expiry"]}
+          rows={[
+            [
+              "_ga",
+              "Used by Google Analytics. Tells us how you use our website.",
+              "2 years",
+            ],
+            [
+              "_gid",
+              "Used by Google Analytics. Sets a unique ID for your session to help tell us how you use our website.",
+              "1 day",
+            ],
+            [
+              "_gat",
+              "Used by Google Analytics. Helps stop Google Analytics web servers crashing when collecting information on how you use our website.",
+              "1 min",
+            ],
+          ]}
+        />
+        <p>
+          We'll only use these cookies if you say it's OK. We'll use a cookie to
+          save your settings.
+        </p>
       </section>
     </>
   );
