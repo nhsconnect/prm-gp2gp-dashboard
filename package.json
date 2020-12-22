@@ -25,7 +25,6 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
     "gatsby": "^2.24.83",
-    "gatsby-plugin-gdpr-cookies": "^1.0.11",
     "gatsby-plugin-layout": "^1.1.23",
     "gatsby-plugin-react-helmet": "^3.3.14",
     "gatsby-plugin-react-svg": "^3.0.0",
