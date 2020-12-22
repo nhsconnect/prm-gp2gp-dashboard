@@ -8,8 +8,12 @@ module.exports = {
           cookieName: "nhsuk-cookie-consent",
           anonymize: true,
         },
+        googleTagManager: {
+          trackingId: process.env.DEPLOYMENT_ENV == "dev" ? "G-X6RDS1EV0Q" : "",
+          cookieName: "nhsuk-cookie-consent",
+        },
+        environments: ["production", "development"],
       },
-      environments: ["production", "development"],
     },
     {
       resolve: "gatsby-plugin-s3",
