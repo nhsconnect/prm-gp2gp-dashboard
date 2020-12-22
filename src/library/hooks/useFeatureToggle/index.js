@@ -1,12 +1,9 @@
 import flags from "../../../../flags.json";
 import { useState, useEffect } from "react";
+import getEnv from "../../utils/getEnv";
 
 const PROD_ENV = "prod";
 const DEV_ENV = "dev";
-
-const getEnv = () => {
-  return process.env.GATSBY_ENV || "dev";
-};
 
 const getUrlParam = paramName => {
   const params = new URLSearchParams(window.location.search.toLowerCase());

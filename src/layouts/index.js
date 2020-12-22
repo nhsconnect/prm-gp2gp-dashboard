@@ -8,8 +8,9 @@ import Footer from "../components/Footer";
 import "./index.scss";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { setupAnalytics } from "../library/setupAnalytics/";
+import getEnv from "../library/utils/getEnv";
 
-const trackingId = process.env.DEPLOYMENT_ENV === "dev" ? "G-X6RDS1EV0Q" : "";
+const trackingId = getEnv() === "dev" ? "G-X6RDS1EV0Q" : "";
 
 const Layout = ({ path, children }) => {
   const isCookieBannerOn = useFeatureToggle("F_COOKIE_BANNER_AND_FOOTER");
