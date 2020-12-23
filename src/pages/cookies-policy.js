@@ -66,13 +66,13 @@ const CookiesPolicy = () => {
             ],
             [
               "_gid",
-              "Used by Google Analytics. Sets a unique ID for your session to help tell us how you use our website.",
+              "Used by Google Analytics. Tells us how you use our website.",
               "1 day",
             ],
             [
-              "_gat",
-              "Used by Google Analytics. Helps stop Google Analytics web servers crashing when collecting information on how you use our website.",
-              "1 min",
+              "_ga_<container-id>",
+              "Used by Google Analytics. Persists session state.",
+              "3 months",
             ],
           ]}
         />
