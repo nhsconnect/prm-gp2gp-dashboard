@@ -9,8 +9,10 @@ import "./index.scss";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { setupAnalytics } from "../library/setupAnalytics/";
 import getEnv from "../library/utils/getEnv";
+import analytics from "../../analytics-config.json";
 
-const trackingId = getEnv() === "dev" ? "G-X6RDS1EV0Q" : "";
+const trackingId =
+  getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
 
 const Layout = ({ path, children }) => {
   const isCookieBannerOn = useFeatureToggle("F_COOKIE_BANNER_AND_FOOTER");
