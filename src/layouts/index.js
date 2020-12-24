@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import CookieBanner from "../components/CookieBanner";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { ErrorBoundary } from "../components/ErrorBoundary";
 import "./index.scss";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { setupAnalytics } from "../library/setupAnalytics/";
@@ -35,12 +36,14 @@ const Layout = ({ path, children }) => {
           src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
         ></script>
       </Helmet>
-      {isCookieBannerOn && <CookieBanner path={path} />}
-      <Header />
-      <div className="nhsuk-width-container">
-        <main className="nhsuk-main-wrapper">{children}</main>
-      </div>
-      {isCookieBannerOn && <Footer />}
+      <ErrorBoundary>
+        {isCookieBannerOn && <CookieBanner path={path} />}
+        <Header />
+        <div className="nhsuk-width-container">
+          <main className="nhsuk-main-wrapper">{children}</main>
+        </div>
+        {isCookieBannerOn && <Footer />}
+      </ErrorBoundary>
     </>
   );
 };
