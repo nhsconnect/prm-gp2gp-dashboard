@@ -1,31 +1,11 @@
 import React from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
+import { Link } from "gatsby";
 import Logo from "../../assets/logo.svg";
 import PhaseBanner from "../PhaseBanner/index";
 import "./index.scss";
+import content from "../../data/content/header.json";
 
 const Header = () => {
-  const content = useStaticQuery(
-    graphql`
-      query {
-        allFile(filter: { name: { eq: "header" } }) {
-          edges {
-            node {
-              childContentJson {
-                serviceName
-                homepageLinkLabel
-                phaseBanner {
-                  tag
-                  text
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-  ).allFile.edges[0].node.childContentJson;
-
   return (
     <header className="nhsuk-header" role="banner">
       <div className="nhsuk-width-container nhsuk-header__container">

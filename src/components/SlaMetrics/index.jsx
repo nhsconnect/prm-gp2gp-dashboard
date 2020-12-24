@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.scss";
-import { useStaticQuery, graphql } from "gatsby";
+import content from "../../data/content/slaMetrics.json";
 
 const SlaMetric = ({ label, value }) => (
   <div className="gp2gp-sla-metrics__item">
@@ -10,24 +10,6 @@ const SlaMetric = ({ label, value }) => (
 );
 
 const SlaMetrics = ({ metrics }) => {
-  const content = useStaticQuery(graphql`
-    query {
-      allFile(filter: { name: { eq: "slaMetrics" } }) {
-        edges {
-          node {
-            childContentJson {
-              title
-              subtitle
-              within3Days
-              within8Days
-              beyond8Days
-            }
-          }
-        }
-      }
-    }
-  `).allFile.edges[0].node.childContentJson;
-
   return (
     <div className="gp2gp-sla-metrics">
       <h3 className="nhsuk-body-m nhsuk-u-margin-bottom-0">{content.title}</h3>
