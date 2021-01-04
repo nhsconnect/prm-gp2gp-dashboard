@@ -37,25 +37,6 @@ describe("Practice template", () => {
     };
     const expectedPracticeName = "Burton Croft Surgery";
 
-    const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
-    useStaticQuery.mockImplementation(() => ({
-      allFile: {
-        edges: [
-          {
-            node: {
-              childContentJson: {
-                title: "Your practice integrating records",
-                subtitle: "Number of days records were integrated within",
-                within3Days: "< 3 DAYS",
-                within8Days: "< 8 DAYS",
-                beyond8Days: "> 8 DAYS",
-              },
-            },
-          },
-        ],
-      },
-    }));
-
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
