@@ -1,8 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import Details from "../components/Details";
+import Radios from "../components/Radios";
 
-const CookiesPolicy = () => {
+const CookiesPolicy: FC = () => {
   return (
     <>
       <Helmet title="Cookies policy - GP2GP Service Dashboard" />
