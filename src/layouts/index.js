@@ -11,14 +11,15 @@ import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { setupAnalytics } from "../library/setupAnalytics/";
 import getEnv from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
+import { NHS_COOKIE_NAME } from "../library/constants";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
 
 const Layout = ({ path, children }) => {
   const isCookieBannerOn = useFeatureToggle("F_COOKIE_BANNER_AND_FOOTER");
-  const [cookies] = useCookies(["nhsuk-cookie-consent"]);
-  const hasCookieConsent = cookies["nhsuk-cookie-consent"] === "true";
+  const [cookies] = useCookies([NHS_COOKIE_NAME]);
+  const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
 
   useEffect(() => {
     setupAnalytics({

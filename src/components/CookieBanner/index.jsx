@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { subHours, addMonths } from "date-fns";
-import cookieBannerContent from "../../data/content/cookieBanner.json";
-import Button from "../Button";
-import "./index.scss";
 import { Link } from "gatsby";
+import "./index.scss";
+import cookieBannerContent from "../../data/content/cookieBanner.json";
+import { getCookieExpiryDate } from "../../library/utils/getCookieExpiryDate";
+import { NHS_COOKIE_NAME } from "../../library/constants";
+import Button from "../Button";
 
 const AcceptCookies = ({ handleAgree, handleDisagree }) => (
   <div aria-label="Cookie banner" className="gp2gp-cookie-banner">
@@ -28,7 +29,7 @@ const AcceptCookies = ({ handleAgree, handleDisagree }) => (
 );
 
 const CookieBanner = ({ path }) => {
-  const [cookies, setCookie] = useCookies(["nhsuk-cookie-consent"]);
+  const [cookies, setCookie] = useCookies([NHS_COOKIE_NAME]);
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
@@ -36,10 +37,9 @@ const CookieBanner = ({ path }) => {
   }, [path]);
 
   const setCookieConsent = consent => {
-    const expiryDate = addMonths(new Date(Date.now()), 3);
-    const expiryDateMinusDaylightSavings = subHours(expiryDate, 1);
-    setCookie("nhsuk-cookie-consent", consent, {
-      expires: expiryDateMinusDaylightSavings,
+    const expiryDate = getCookieExpiryDate();
+    setCookie(NHS_COOKIE_NAME, consent, {
+      expires: expiryDate,
     });
   };
 
@@ -68,7 +68,7 @@ const CookieBanner = ({ path }) => {
           </div>
         </div>
       )}
-      {!cookies["nhsuk-cookie-consent"] ? (
+      {!cookies[NHS_COOKIE_NAME] ? (
         <AcceptCookies
           handleAgree={handleAgree}
           handleDisagree={handleDisagree}

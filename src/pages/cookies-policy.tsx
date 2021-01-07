@@ -1,8 +1,21 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
+import { useCookies } from "react-cookie";
 import Details from "../components/Details";
+import Radios from "../components/Radios";
+import { getCookieExpiryDate } from "../library/utils/getCookieExpiryDate";
+import { NHS_COOKIE_NAME } from "../library/constants";
 
 const CookiesPolicy: FC = () => {
+  const [cookies, setCookie] = useCookies([NHS_COOKIE_NAME]);
+
+  const saveCookieSettings = (value: string) => {
+    const expiryDate = getCookieExpiryDate();
+    setCookie(NHS_COOKIE_NAME, value, {
+      expires: expiryDate,
+    });
+  };
+
   return (
     <>
       <Helmet title="Cookies policy - GP2GP Service Dashboard" />
@@ -43,7 +56,7 @@ const CookiesPolicy: FC = () => {
           headers={["Cookie Name", "Purpose", "Expiry"]}
           rows={[
             [
-              "nhsuk-cookie-consent",
+              NHS_COOKIE_NAME,
               "Remembers if you used our cookies banner",
               "This cookie will not be set until you interact with the cookie banner. If you interact with the banner the cookie will expire after 3 months.",
             ],
@@ -80,6 +93,24 @@ const CookiesPolicy: FC = () => {
           We'll only use these cookies if you say it's OK. We'll use a cookie to
           save your settings.
         </p>
+        <Radios
+          title="Tell us if we can use analytics cookies"
+          options={[
+            {
+              displayValue: "Use cookies to measure my website use",
+              value: "true",
+            },
+            {
+              displayValue: "Do not use cookies to measure my website use",
+              value: "false",
+            },
+          ]}
+          buttonLabel="Save my cookie settings"
+          callback={saveCookieSettings}
+          defaultValue={
+            cookies[NHS_COOKIE_NAME] ? cookies[NHS_COOKIE_NAME] : "false"
+          }
+        />
       </section>
     </>
   );
