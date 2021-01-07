@@ -33,12 +33,13 @@ module.exports = {
     "gatsby-plugin-sass",
     "gatsby-plugin-layout",
     "gatsby-plugin-react-helmet",
+    "gatsby-plugin-typescript-checker",
     "gatsby-transformer-json",
     {
       resolve: "gatsby-plugin-typescript",
       options: {
         isTSX: true,
-        jsxPragma: `jsx`,
+        jsxPragma: `react`,
         allExtensions: true,
       },
     },
