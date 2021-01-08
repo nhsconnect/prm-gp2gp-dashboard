@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import { Link } from "gatsby";
 import "./index.scss";
 
 type RadioOption = {
@@ -9,7 +10,8 @@ type RadioOption = {
 type RadiosProps = {
   title: string;
   options: RadioOption[];
-  buttonLabel: string;
+  linkLabel: string;
+  redirectURL: string;
   callback: (selectedOption: string) => void;
   defaultValue?: string;
 };
@@ -17,7 +19,8 @@ type RadiosProps = {
 const Radios: FC<RadiosProps> = ({
   title,
   options,
-  buttonLabel,
+  linkLabel,
+  redirectURL,
   callback,
   defaultValue = "",
 }) => {
@@ -52,14 +55,16 @@ const Radios: FC<RadiosProps> = ({
           );
         })}
       </div>
-      <a
+      <Link
         onClick={() => {
           callback(selectedValue);
         }}
-        href={"#"}
+        className="nhsuk-button nhsuk-u-margin-top-6"
+        type="submit"
+        to={redirectURL}
       >
-        {buttonLabel}
-      </a>
+        {linkLabel}
+      </Link>
     </fieldset>
   );
 };

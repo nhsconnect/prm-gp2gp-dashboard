@@ -8,7 +8,13 @@ describe("Radios component", () => {
     const title = "This is a radio section";
 
     const { getByText } = render(
-      <Radios title={title} options={[]} buttonLabel="" callback={() => {}} />
+      <Radios
+        title={title}
+        options={[]}
+        linkLabel=""
+        redirectURL="#"
+        callback={() => {}}
+      />
     );
 
     expect(getByText("This is a radio section")).toBeInTheDocument();
@@ -18,7 +24,13 @@ describe("Radios component", () => {
     const options = [{ displayValue: "First option", value: "" }];
 
     const { getByRole } = render(
-      <Radios title="" options={options} buttonLabel="" callback={() => {}} />
+      <Radios
+        title=""
+        options={options}
+        linkLabel=""
+        redirectURL="#"
+        callback={() => {}}
+      />
     );
 
     const radioOption = getByRole("radio", { name: "First option" });
@@ -34,7 +46,13 @@ describe("Radios component", () => {
     ];
 
     const { getAllByRole } = render(
-      <Radios title="" options={options} buttonLabel="" callback={() => {}} />
+      <Radios
+        title=""
+        options={options}
+        linkLabel=""
+        redirectURL="#"
+        callback={() => {}}
+      />
     );
 
     const radioOptions = getAllByRole("radio");
@@ -53,14 +71,15 @@ describe("Radios component", () => {
       <Radios
         title=""
         options={options}
-        buttonLabel="Submit setting"
+        linkLabel="Submit setting"
+        redirectURL="#"
         callback={callback}
         defaultValue={"on"}
       />
     );
 
-    const submitButton = getByRole("link", { name: "Submit setting" });
-    userEvent.click(submitButton);
+    const submitSettingsLink = getByRole("link", { name: "Submit setting" });
+    userEvent.click(submitSettingsLink);
 
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith("on");
@@ -77,19 +96,38 @@ describe("Radios component", () => {
       <Radios
         title=""
         options={options}
-        buttonLabel="Submit setting"
+        linkLabel="Submit setting"
+        redirectURL="#"
         callback={callback}
         defaultValue="on"
       />
     );
 
     const secondOption = getByRole("radio", { name: "Second option" });
-    const submitButton = getByRole("link", { name: "Submit setting" });
+    const submitSettingsLink = getByRole("link", { name: "Submit setting" });
 
     userEvent.click(secondOption);
-    userEvent.click(submitButton);
+    userEvent.click(submitSettingsLink);
 
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenCalledWith("off");
+  });
+
+  it("navigates to redirect URL", () => {
+    const title = "This is a radio section";
+
+    const { getByRole } = render(
+      <Radios
+        title={title}
+        options={[]}
+        linkLabel="Submit setting"
+        redirectURL="/test-page"
+        callback={() => {}}
+      />
+    );
+
+    const submitSettingsLink = getByRole("link", { name: "Submit setting" });
+
+    expect(submitSettingsLink.getAttribute("href")).toBe("/test-page");
   });
 });

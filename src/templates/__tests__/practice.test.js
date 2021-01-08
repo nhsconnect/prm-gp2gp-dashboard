@@ -1,6 +1,5 @@
 import React from "react";
 import moxios from "moxios";
-import * as Gatsby from "gatsby";
 import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import { act } from "react-dom/test-utils";

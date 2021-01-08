@@ -105,7 +105,8 @@ const CookiesPolicy: FC = () => {
               value: "false",
             },
           ]}
-          buttonLabel="Save my cookie settings"
+          linkLabel="Save my cookie settings"
+          redirectURL="/cookie-confirmation"
           callback={saveCookieSettings}
           defaultValue={
             cookies[NHS_COOKIE_NAME] ? cookies[NHS_COOKIE_NAME] : "false"
