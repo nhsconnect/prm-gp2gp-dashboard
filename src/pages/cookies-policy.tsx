@@ -19,7 +19,7 @@ const CookiesPolicy: FC = () => {
   return (
     <>
       <Helmet title="Cookies policy - GP2GP Service Dashboard" />
-      <section>
+      <div className="nhsuk-u-reading-width">
         <h1>Cookie Policy</h1>
         <h2>What are cookies?</h2>
         <p>
@@ -112,7 +112,7 @@ const CookiesPolicy: FC = () => {
             cookies[NHS_COOKIE_NAME] ? cookies[NHS_COOKIE_NAME] : "false"
           }
         />
-      </section>
+      </div>
     </>
   );
 };

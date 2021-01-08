@@ -1,12 +1,12 @@
 import { Link } from "gatsby";
-import React from "react";
+import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-const YourPrivacy = () => {
+const YourPrivacy: FC = () => {
   return (
     <>
       <Helmet title="Your Privacy - GP2GP Service Dashboard" />
-      <section>
+      <div className="nhsuk-u-reading-width">
         <h1>Your privacy</h1>
         <p className="nhsuk-lede-text">
           Your privacy is important to us. This privacy policy covers what we
@@ -106,7 +106,7 @@ const YourPrivacy = () => {
           legislation. We will process your data in line with data protection
           legislation.
         </p>
-      </section>
+      </div>
     </>
   );
 };
