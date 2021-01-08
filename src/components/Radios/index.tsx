@@ -26,9 +26,11 @@ const Radios: FC<RadiosProps> = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState(defaultValue);
   return (
-    <fieldset className="nhsuk-fieldset">
-      <legend className="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-        <h3 className="nhsuk-fieldset__heading">{title}</h3>
+    <fieldset className="gp2gp-fieldset">
+      <legend className="gp2gp-fieldset__legend">
+        <h3 className="nhsuk-fieldset__heading nhsuk-u-margin-bottom-4 nhsuk-u-padding-top-2">
+          {title}
+        </h3>
       </legend>
       <div className="nhsuk-radios">
         {options.map((option, index) => {
