@@ -1,7 +1,14 @@
-import React from "react";
+import { String } from "aws-sdk/clients/networkmanager";
+import React, { FC } from "react";
 import "./index.scss";
 
-const Table = ({ headers, captionText, rows }) => (
+type TableProps = {
+  headers: string[];
+  captionText?: string;
+  rows: string[][];
+};
+
+const Table: FC<TableProps> = ({ headers, captionText, rows }) => (
   <table
     className="gp2gp-table"
     {...(captionText ? { "aria-describedby": "table-title" } : {})}

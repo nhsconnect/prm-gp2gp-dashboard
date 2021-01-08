@@ -1,8 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 import Table from "../Table";
 import "./index.scss";
 
-const Details = ({ summary, headers, rows }) => (
+type DetailsProps = {
+  summary: string;
+  headers: string[];
+  rows: string[][];
+};
+
+const Details: FC<DetailsProps> = ({ summary, headers, rows }) => (
   <details className="nhsuk-details">
     <summary className="nhsuk-details__summary">
       <span className="nhsuk-details__summary-text">{summary}</span>

@@ -5,8 +5,14 @@ import Table from "../index";
 describe("Table component", () => {
   const headers = ["fruit ", "colour ", "quantity "];
 
+  const rows = [
+    ["banana ", "yellow ", "2"],
+    ["mango ", "orange ", "3"],
+    ["melon ", "yellow ", "1"],
+  ];
+
   it("displays table headers in the correct order", () => {
-    const { getAllByRole } = render(<Table headers={headers} />);
+    const { getAllByRole } = render(<Table headers={headers} rows={rows} />);
 
     const allHeaders = getAllByRole("columnheader");
 
@@ -17,13 +23,7 @@ describe("Table component", () => {
   });
 
   it("displays rows in correct order", () => {
-    const fruits = [
-      ["banana ", "yellow ", 2],
-      ["mango ", "orange ", 3],
-      ["melon ", "yellow ", 1],
-    ];
-
-    const { getAllByRole } = render(<Table headers={headers} rows={fruits} />);
+    const { getAllByRole } = render(<Table headers={headers} rows={rows} />);
 
     const allRows = getAllByRole("row");
 
@@ -41,7 +41,7 @@ describe("Table component", () => {
 
   it("displays table caption when passed in", () => {
     const { getByText, getByRole } = render(
-      <Table headers={headers} captionText="Fruits Caption" />
+      <Table headers={headers} captionText="Fruits Caption" rows={rows} />
     );
 
     const table = getByRole("table");

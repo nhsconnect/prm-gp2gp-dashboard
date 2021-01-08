@@ -6,7 +6,9 @@ describe("Details component", () => {
   it("displays details summary", () => {
     const summary = "This is a table";
 
-    const { getByText } = render(<Details summary={summary} />);
+    const { getByText } = render(
+      <Details summary={summary} headers={[]} rows={[]} />
+    );
 
     expect(getByText("This is a table")).toBeInTheDocument();
   });
