@@ -27,7 +27,7 @@ describe("useApi", () => {
   it("returns mock on a successful api call", async () => {
     const odsCode = "B86030";
     const statusCode = 200;
-    const mockedResponse = practiceDataBuilder({ odsCode });
+    const mockedResponse = practiceDataBuilder();
     mockAPIResponse(statusCode, mockedResponse);
 
     const { result, waitForNextUpdate } = renderHook(() =>

@@ -16,7 +16,9 @@ describe("OrganisationDetails component", () => {
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const { getByText } = render(<OrganisationDetails odsCode={odsCode} />);
+    const { getByText } = render(
+      <OrganisationDetails name="" odsCode={odsCode} />
+    );
 
     expect(getByText(odsCode)).toBeInTheDocument();
   });
@@ -28,7 +30,9 @@ describe("OrganisationDetails component", () => {
       town: "Leeds",
     };
     const testId = "organisation-details-address";
-    const { getByTestId } = render(<OrganisationDetails address={address} />);
+    const { getByTestId } = render(
+      <OrganisationDetails name="" odsCode="" address={address} />
+    );
     const addressNode = getByTestId(testId).children;
 
     expect(addressNode[0]).toHaveTextContent(address.lines[0]);
@@ -46,7 +50,7 @@ describe("OrganisationDetails component", () => {
     };
     const testId = "organisation-details-address";
     const { getByText, getByTestId } = render(
-      <OrganisationDetails address={address} />
+      <OrganisationDetails name="" odsCode="" address={address} />
     );
     const addressNode = getByTestId(testId).children;
 
@@ -63,7 +67,7 @@ describe("OrganisationDetails component", () => {
     };
     const testId = "organisation-details-address";
     const { getByText, getByTestId } = render(
-      <OrganisationDetails address={address} />
+      <OrganisationDetails name="" odsCode="" address={address} />
     );
     const addressNode = getByTestId(testId).children;
 

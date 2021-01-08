@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
 import OrganisationDetails from "../components/OrganisationDetails";
@@ -10,9 +10,18 @@ import { useApi } from "../library/hooks/useApi";
 import practiceMetrics from "../data/organisations/practiceMetrics.json";
 import ccgContent from "../data/content/ccg.json";
 
-const Ccg = ({ pageContext }) => {
+type PageContext = {
+  odsCode: string;
+  name: string;
+};
+
+type CcgProps = {
+  pageContext: PageContext;
+};
+
+const Ccg: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode } = pageContext;
-  const formattedName = convertToTitleCase(name);
+  const formattedName: string = convertToTitleCase(name);
 
   const { data, error, isLoading } = useApi(ODS_PORTAL_URL, {
     RelTypeId: "RE4",

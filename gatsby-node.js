@@ -27,7 +27,7 @@ exports.createPages = async ({ actions }) => {
   ccgs.forEach(ccg => {
     createPage({
       path: `/ccg/${ccg.odsCode}`,
-      component: path.resolve("src/templates/ccg.js"),
+      component: path.resolve("src/templates/ccg.tsx"),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,

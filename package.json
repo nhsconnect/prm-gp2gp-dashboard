@@ -52,6 +52,7 @@
     "@testing-library/react-hooks": "^3.2.1",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
+    "@types/moxios": "^0.4.9",
     "babel-jest": "^25.1.0",
     "babel-preset-gatsby": "^0.2.35",
     "husky": "^4.2.3",
