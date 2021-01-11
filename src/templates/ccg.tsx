@@ -7,12 +7,12 @@ import PracticeTable from "../components/PracticeTable";
 import { ODS_PORTAL_URL } from "../library/api/ODSPortal";
 import { useApi } from "../library/hooks/useApi";
 
-import practiceMetrics from "../data/organisations/practiceMetrics.json";
 import ccgContent from "../data/content/ccg.json";
 
 type PageContext = {
   odsCode: string;
   name: string;
+  validPractices: any;
 };
 
 type CcgProps = {
@@ -20,7 +20,7 @@ type CcgProps = {
 };
 
 const Ccg: FC<CcgProps> = ({ pageContext }) => {
-  const { name, odsCode } = pageContext;
+  const { name, odsCode, validPractices } = pageContext;
   const formattedName: string = convertToTitleCase(name);
 
   const { data, error, isLoading } = useApi(ODS_PORTAL_URL, {
@@ -41,7 +41,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
       ) : (
         <PracticeTable
           ccgPractices={data?.Organisations}
-          validPractices={practiceMetrics.practices}
+          validPractices={validPractices}
         />
       )}
     </>

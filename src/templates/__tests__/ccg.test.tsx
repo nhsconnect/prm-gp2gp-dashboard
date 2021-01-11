@@ -7,32 +7,7 @@ import { act } from "react-dom/test-utils";
 
 import Ccg from "../ccg";
 import { mockAPIResponse } from "../../../__mocks__/api";
-
-jest.mock(
-  "../../data/organisations/practiceMetrics.json",
-  () => ({
-    practices: [
-      {
-        odsCode: "A12345",
-        name: "A Practice",
-        metrics: [
-          {
-            year: 2020,
-            month: 2,
-            requester: {
-              timeToIntegrateSla: {
-                within3Days: 3,
-                within8Days: 2,
-                beyond8Days: 0,
-              },
-            },
-          },
-        ],
-      },
-    ],
-  }),
-  { virtual: true }
-);
+import practiceMetricsMock from "../../../__mocks__/practiceMetricsMock.json";
 
 describe("CCG template", () => {
   beforeAll(() => {
@@ -47,14 +22,15 @@ describe("CCG template", () => {
     const pipelineCCGData = {
       odsCode: "12A",
       name: "BURTON CCG",
+      validPractices: practiceMetricsMock,
     };
     const expectedCCGName = "Burton CCG";
 
     const statusCode = 200;
     const mockedResponse = {
-      Organisations: [{ OrgId: "A12345", Name: "A PRACTICE" }],
+      Organisations: [{ OrgId: "A12345", Name: "GP PRACTICE" }],
     };
-    const expectedPracticeName = "A Practice | A12345";
+    const expectedPracticeName = "GP Practice | A12345";
 
     mockAPIResponse(statusCode, mockedResponse);
 
@@ -73,6 +49,7 @@ describe("CCG template", () => {
     const pipelineCCGData = {
       odsCode: "12A",
       name: "BURTON CCG",
+      validPractices: practiceMetricsMock,
     };
     const expectedCCGName = "Burton CCG";
 

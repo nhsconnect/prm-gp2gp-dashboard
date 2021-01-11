@@ -31,6 +31,7 @@ exports.createPages = async ({ actions }) => {
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
+        validPractices: practiceMetrics.practices,
       },
     });
   });
