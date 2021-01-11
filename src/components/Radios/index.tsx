@@ -41,6 +41,7 @@ const Radios: FC<RadiosProps> = ({
                 className="nhsuk-radios__input"
                 id={optionId}
                 type="radio"
+                name="radio-input"
                 value={option.value}
                 checked={option.value === selectedValue}
                 onChange={() => {
