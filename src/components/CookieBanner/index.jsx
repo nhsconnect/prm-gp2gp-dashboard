@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useCookies } from "react-cookie";
 import { Link } from "gatsby";
 import "./index.scss";
@@ -31,6 +31,11 @@ const AcceptCookies = ({ handleAgree, handleDisagree }) => (
 const CookieBanner = ({ path }) => {
   const [cookies, setCookie] = useCookies([NHS_COOKIE_NAME]);
   const [isClicked, setIsClicked] = useState(false);
+  const successBannerRef = useCallback(node => {
+    if (node !== null) {
+      node.focus();
+    }
+  }, []);
 
   useEffect(() => {
     setIsClicked(false);
@@ -61,7 +66,7 @@ const CookieBanner = ({ path }) => {
           aria-label="Cookie setting success banner"
         >
           <div className="nhsuk-width-container">
-            <p>
+            <p ref={successBannerRef} tabIndex={-1}>
               You can change your cookie settings at any time using our{" "}
               <Link to="/cookies-policy">cookies page</Link>.
             </p>
