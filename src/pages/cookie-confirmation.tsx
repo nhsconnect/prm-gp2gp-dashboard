@@ -8,12 +8,12 @@ const CookieConfirmation: FC = () => {
       <Helmet title="Your cookie settings have been saved - GP2GP Service Dashboard" />
       <div className="nhsuk-u-reading-width">
         <h1>Your cookie settings have been saved</h1>
-        <p>We'll save your settings for 3 months.</p>
+        <p>We'll save your settings for three months.</p>
         <p>
           We'll ask you if you're still OK with us using cookies when either:
         </p>
         <ul>
-          <li>it's been a year since you last saved your settings</li>
+          <li>it's been three months since you last saved your settings</li>
           <li>we add any new cookies or change the cookies we use</li>
         </ul>
         <p>

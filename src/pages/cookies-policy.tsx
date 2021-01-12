@@ -58,7 +58,7 @@ const CookiesPolicy: FC = () => {
             [
               NHS_COOKIE_NAME,
               "Remembers if you used our cookies banner",
-              "This cookie will not be set until you interact with the cookie banner. If you interact with the banner the cookie will expire after 3 months.",
+              "This cookie will not be set until you interact with the cookie banner. If you interact with the banner the cookie will expire after three months.",
             ],
           ]}
         />
