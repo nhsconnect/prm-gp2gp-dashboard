@@ -31,6 +31,8 @@ const AcceptCookies = ({ handleAgree, handleDisagree }) => (
 const CookieBanner = ({ path }) => {
   const [cookies, setCookie] = useCookies([NHS_COOKIE_NAME]);
   const [isClicked, setIsClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   const successBannerRef = useCallback(node => {
     if (node !== null) {
       node.focus();
@@ -39,6 +41,7 @@ const CookieBanner = ({ path }) => {
 
   useEffect(() => {
     setIsClicked(false);
+    setIsLoading(false);
   }, [path]);
 
   const setCookieConsent = consent => {
@@ -73,7 +76,7 @@ const CookieBanner = ({ path }) => {
           </div>
         </div>
       )}
-      {!cookies[NHS_COOKIE_NAME] ? (
+      {!cookies[NHS_COOKIE_NAME] && !isLoading ? (
         <AcceptCookies
           handleAgree={handleAgree}
           handleDisagree={handleDisagree}
