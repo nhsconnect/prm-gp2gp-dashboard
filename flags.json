@@ -1,1 +1,6 @@
-{}
+{
+  "F_FEEDBACK_BANNER": {
+    "dev": true,
+    "prod": false
+  }
+}

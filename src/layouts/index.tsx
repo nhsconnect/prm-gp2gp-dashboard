@@ -10,7 +10,10 @@ import "./index.scss";
 import { setupAnalytics } from "../library/setupAnalytics";
 import getEnv from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
+import emphasisBoxContent from "../data/content/emphasisBox.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
+import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
+import EmphasisBox from "../components/EmphasisBox";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -20,10 +23,22 @@ type LayoutProps = {
   childeren: ReactNode;
 };
 
+const FeedbackBanner: FC = () => (
+  <EmphasisBox title={emphasisBoxContent.title}>
+    <p>
+      {emphasisBoxContent.text1}
+      <a href={emphasisBoxContent.linkUrl}>{emphasisBoxContent.linkText}</a>
+      {emphasisBoxContent.text2}
+    </p>
+  </EmphasisBox>
+);
+
 const Layout: FC<LayoutProps> = ({ path, children }) => {
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
+  const isFeedbackBannerOn = useFeatureToggle("F_FEEDBACK_BANNER");
   const isOnCookiePage = path === "/cookies-policy/";
+  const isOnHomePage = path === "/";
 
   useEffect(() => {
     setupAnalytics({
@@ -45,7 +60,11 @@ const Layout: FC<LayoutProps> = ({ path, children }) => {
         {!isOnCookiePage && <CookieBanner path={path} />}
         <Header />
         <div className="nhsuk-width-container">
-          <main className="nhsuk-main-wrapper">{children}</main>
+          <main className="nhsuk-main-wrapper">
+            {isFeedbackBannerOn && !isOnHomePage && <FeedbackBanner />}
+            {children}
+            {isFeedbackBannerOn && isOnHomePage && <FeedbackBanner />}
+          </main>
         </div>
         <Footer />
       </ErrorBoundary>
