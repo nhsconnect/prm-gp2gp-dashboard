@@ -5,15 +5,14 @@ import { Helmet } from "react-helmet";
 import CookieBanner from "../components/CookieBanner";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import FeedbackBanner from "../components/FeedbackBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import "./index.scss";
 import { setupAnalytics } from "../library/setupAnalytics";
 import getEnv from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
-import emphasisBoxContent from "../data/content/emphasisBox.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
-import EmphasisBox from "../components/EmphasisBox";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -22,16 +21,6 @@ type LayoutProps = {
   path: string;
   childeren: ReactNode;
 };
-
-const FeedbackBanner: FC = () => (
-  <EmphasisBox title={emphasisBoxContent.title}>
-    <p>
-      {emphasisBoxContent.text1}
-      <a href={emphasisBoxContent.linkUrl}>{emphasisBoxContent.linkText}</a>
-      {emphasisBoxContent.text2}
-    </p>
-  </EmphasisBox>
-);
 
 const Layout: FC<LayoutProps> = ({ path, children }) => {
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
