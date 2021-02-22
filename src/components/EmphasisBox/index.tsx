@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import "./index.scss";
 
 type EmphasisBoxProps = {
   title?: string;
+  children?: ReactNode;
 };
 
 const EmphasisBox: FC<EmphasisBoxProps> = ({ title, children }) => {
