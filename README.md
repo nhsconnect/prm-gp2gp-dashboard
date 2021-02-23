@@ -14,3 +14,7 @@ GP2GP metrics and metadata are required to build the dashboard. To retrieve thes
 2. `cd prm-gp2gp-dashboard`
 3. `./tasks get-metrics <environment> && ./tasks get-metadata <environment>` only available environments are dev or prod.
 4. `npm run develop`
+
+## Updating for a new month
+
+When updating for a new month the keys will need to be changed in s3-config.json and steps 3-4 above will need to be rerun.
