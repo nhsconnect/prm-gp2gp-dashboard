@@ -7,6 +7,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
+          "integrated": {
+            "transferCount": 5,
+            "within3Days": 3,
+            "within8Days": 2,
+            "beyond8Days": 0
+          },
           "timeToIntegrateSla": {
             "within3Days": 3,
             "within8Days": 2,
@@ -24,6 +30,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
+          "integrated": {
+            "transferCount": 21,
+            "within3Days": 5,
+            "within8Days": 6,
+            "beyond8Days": 10
+          },
           "timeToIntegrateSla": {
             "within3Days": 5,
             "within8Days": 6,
@@ -41,6 +53,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
+          "integrated": {
+            "transferCount": 34,
+            "within3Days": 20,
+            "within8Days": 11,
+            "beyond8Days": 3
+          },
           "timeToIntegrateSla": {
             "within3Days": 20,
             "within8Days": 11,

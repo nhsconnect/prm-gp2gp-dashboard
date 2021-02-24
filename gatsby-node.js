@@ -12,10 +12,13 @@ exports.createPages = async ({ actions }) => {
 
   practices.forEach(practice => {
     const latestMetrics = practice.metrics[0];
-    const isPracticeIntegratedTransferCountOn =
-      featureToggles["F_PRACTICE_INTEGRATED_TRANSFER_COUNT"][
-        process.env.GATSBY_ENV || "dev"
-      ];
+
+    const getToggle = async() => {
+      return await featureToggles["F_PRACTICE_INTEGRATED_TRANSFER_COUNT"][
+      process.env.GATSBY_ENV || "dev"
+          ];
+    }
+    const isPracticeIntegratedTransferCountOn = getToggle()
 
     createPage({
       path: `/practice/${practice.odsCode}`,
