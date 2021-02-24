@@ -1,6 +1,7 @@
 const path = require("path");
 const organisationMetadata = require("./src/data/organisations/organisationMetadata.json");
 const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
+const featureToggles = require("./flags.json");
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
@@ -9,7 +10,11 @@ exports.createPages = async ({ actions }) => {
   const ccgs = organisationMetadata.ccgs;
 
   practices.forEach(practice => {
-    latestMetrics = practice.metrics[0];
+    const latestMetrics = practice.metrics[0];
+    const isPracticeIntegratedTransferCountOn =
+      featureToggles["F_PRACTICE_INTEGRATED_TRANSFER_COUNT"][
+        process.env.GATSBY_ENV || "dev"
+      ];
 
     createPage({
       path: `/practice/${practice.odsCode}`,
@@ -19,7 +24,9 @@ exports.createPages = async ({ actions }) => {
         name: practice.name,
         year: latestMetrics.year,
         month: latestMetrics.month,
-        metrics: latestMetrics.requester.timeToIntegrateSla,
+        metrics: isPracticeIntegratedTransferCountOn
+          ? latestMetrics.requester.integrated
+          : latestMetrics.requester.timeToIntegrateSla,
       },
     });
   });

@@ -1,4 +1,3 @@
-import { String } from "aws-sdk/clients/networkmanager";
 import React, { FC } from "react";
 import "./index.scss";
 

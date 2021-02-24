@@ -9,10 +9,16 @@ import { convertToTitleCase } from "../library/utils/convertToTitleCase/index";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText/index";
 import SlaMetrics from "../components/SlaMetrics";
 import { useApi } from "../library/hooks/useApi";
+import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
+import Table from "../components/Table";
+import slaMetricsContent from "../data/content/slaMetrics.json";
 
 const Practice = ({ pageContext }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${pageContext.odsCode}`
+  );
+  const isPracticeIntegratedTransferCountOn = useFeatureToggle(
+    "F_PRACTICE_INTEGRATED_TRANSFER_COUNT"
   );
 
   const { name, odsCode, month, year, metrics } = pageContext;
@@ -35,7 +41,21 @@ const Practice = ({ pageContext }) => {
       <h2 className="nhsuk-heading-m">
         {monthName} {year}
       </h2>
-      <SlaMetrics metrics={metrics} />
+      {isPracticeIntegratedTransferCountOn ? (
+        <Table
+          headers={slaMetricsContent.tableHeaders}
+          rows={[
+            [
+              metrics.transferCount,
+              metrics.within3Days,
+              metrics.within8Days,
+              metrics.beyond8Days,
+            ],
+          ]}
+        />
+      ) : (
+        <SlaMetrics metrics={metrics} />
+      )}
     </Fragment>
   );
 };
