@@ -12,7 +12,7 @@
     "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,scss,md,tsx}\"",
     "checkFormat": "prettier --check \"**/*.{js,jsx,scss,md,tsx}\"",
-    "getMetrics": "node scripts/get-s3-data.js --datatype metrics",
+    "getPracticeMetrics": "node scripts/get-s3-data.js --datatype practiceMetrics",
     "getMetadata": "node scripts/get-s3-data.js --datatype metadata"
   },
   "husky": {

@@ -79,7 +79,7 @@ case "${task}" in
   get-metrics)
       setup_env ${deployment_env}
       npm install
-      npm run getMetrics
+      npm run getPracticeMetrics
       ;;
   dojo-get-metrics)
       dojo "./tasks get-metrics ${deployment_env}"
