@@ -42,4 +42,10 @@ exports.createPages = async ({ actions }) => {
       },
     });
   });
+
+  createPage({
+    path: "/national-gp2gp-statistics",
+    component: path.resolve("src/templates/national-gp2gp-statistics.tsx"),
+    context: {},
+  });
 };
