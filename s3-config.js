@@ -9,4 +9,8 @@ module.exports = {
     key: "v2/2021/1/organisationMetadata.json",
     outputFile: "organisationMetadata.json",
   },
+  nationalMetrics: {
+    key: "v2/2021/1/nationalMetrics.json",
+    outputFile: "nationalMetrics.json",
+  },
 };
