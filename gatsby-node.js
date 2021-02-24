@@ -50,8 +50,7 @@ exports.createPages = async ({ actions }) => {
     path: "/national-gp2gp-statistics",
     component: path.resolve("src/templates/national-gp2gp-statistics.tsx"),
     context: {
-      year: latestNationalMetrics.year,
-      month: latestNationalMetrics.month,
+      ...latestNationalMetrics,
     },
   });
 };
