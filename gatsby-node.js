@@ -1,6 +1,7 @@
 const path = require("path");
 const organisationMetadata = require("./src/data/organisations/organisationMetadata.json");
 const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
+const nationalMetrics = require("./src/data/organisations/nationalMetrics.json");
 const featureToggles = require("./flags.json");
 
 exports.createPages = async ({ actions }) => {
@@ -43,9 +44,14 @@ exports.createPages = async ({ actions }) => {
     });
   });
 
+  const latestNationalMetrics = nationalMetrics.metrics[0];
+
   createPage({
     path: "/national-gp2gp-statistics",
     component: path.resolve("src/templates/national-gp2gp-statistics.tsx"),
-    context: {},
+    context: {
+      year: latestNationalMetrics.year,
+      month: latestNationalMetrics.month,
+    },
   });
 };

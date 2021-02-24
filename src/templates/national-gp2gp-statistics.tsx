@@ -1,8 +1,22 @@
 import React, { FC } from "react";
+import { Helmet } from "react-helmet";
+import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 
-const NationalStatistics: FC = () => {
+type PageContext = {
+  year: number;
+  month: number;
+};
+
+type NationalStatisticsProps = {
+  pageContext: PageContext;
+};
+
+const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
+  const { month, year } = pageContext;
+  const monthName = convertMonthNumberToText(month);
   return (
     <>
+      <Helmet title="National Statistics" />
       <h1>National data on GP2GP performance</h1>
       <p>The data below shows the GP2GP performance nationally</p>
       <p>
@@ -12,6 +26,9 @@ const NationalStatistics: FC = () => {
         that have been initiated in this time period and will be integrated in
         the future, which will not be represented in this data.
       </p>
+      <h2 className="nhsuk-heading-m">
+        GP2GP Performance for {monthName} {year}
+      </h2>
     </>
   );
 };
