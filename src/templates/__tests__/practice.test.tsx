@@ -3,6 +3,7 @@ import moxios from "moxios";
 import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import { when } from "jest-when";
+import { mocked } from "ts-jest/utils";
 
 import Practice from "../practice";
 import { mockAPIResponse } from "../../../__mocks__/api";
@@ -10,14 +11,12 @@ import { practiceDataBuilder } from "../../../__mocks__/ODSPortalBuilder";
 import slaMetricsContent from "../../data/content/slaMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
-jest.mock("../../library/hooks/useFeatureToggle", () => ({
-  useFeatureToggle: jest.fn(),
-}));
+jest.mock("../../library/hooks/useFeatureToggle");
 
 describe("Practice template", () => {
   beforeAll(() => {
     moxios.install();
-    when(useFeatureToggle)
+    when(mocked(useFeatureToggle))
       .calledWith("F_PRACTICE_INTEGRATED_TRANSFER_COUNT")
       .mockReturnValue(true);
   });
@@ -108,7 +107,7 @@ describe("Practice template", () => {
   });
 
   it("renders practice details and metrics correctly without transferCount when F_PRACTICE_INTEGRATED_TRANSFER_COUNT is toggled off", async () => {
-    when(useFeatureToggle)
+    when(mocked(useFeatureToggle))
       .calledWith("F_PRACTICE_INTEGRATED_TRANSFER_COUNT")
       .mockReturnValue(false);
 

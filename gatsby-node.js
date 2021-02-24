@@ -18,7 +18,7 @@ exports.createPages = async ({ actions }) => {
 
     createPage({
       path: `/practice/${practice.odsCode}`,
-      component: path.resolve("src/templates/practice.js"),
+      component: path.resolve("src/templates/practice.tsx"),
       context: {
         odsCode: practice.odsCode,
         name: practice.name,

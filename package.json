@@ -52,6 +52,7 @@
     "@testing-library/react-hooks": "^4.0.0",
     "@testing-library/user-event": "^12.6.0",
     "@types/jest": "^26.0.15",
+    "@types/jest-when": "^2.7.2",
     "@types/moxios": "^0.4.10",
     "@types/react-dom": "^17.0.0",
     "babel-jest": "^25.1.0",
