@@ -5,19 +5,33 @@ import {
   ODS_PORTAL_URL,
   transformPracticeAddress,
 } from "../library/api/ODSPortal";
-import { convertToTitleCase } from "../library/utils/convertToTitleCase/index";
-import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText/index";
+import { convertToTitleCase } from "../library/utils/convertToTitleCase";
+import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 import SlaMetrics from "../components/SlaMetrics";
 import { useApi } from "../library/hooks/useApi";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import Table from "../components/Table";
 import slaMetricsContent from "../data/content/slaMetrics.json";
 
-type PracticeMetrics = {
-  transferCount?: number;
+type IntegratedPracticeMetricsProps = {
+  transferCount: number;
   within3Days: number;
   within8Days: number;
   beyond8Days: number;
+};
+
+type IntegratedPracticeMetrics = {
+  integrated: IntegratedPracticeMetricsProps;
+};
+
+type SlaMetricsPropsDeprecated = {
+  within3Days: number;
+  within8Days: number;
+  beyond8Days: number;
+};
+
+type SlaMetricsDeprecated = {
+  timeToIntegrateSla: SlaMetricsPropsDeprecated;
 };
 
 type PageContext = {
@@ -25,7 +39,7 @@ type PageContext = {
   name: string;
   year: number;
   month: number;
-  metrics: PracticeMetrics;
+  metrics: IntegratedPracticeMetrics | SlaMetricsDeprecated;
 };
 
 type PracticeProps = {
@@ -66,15 +80,19 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
           rows={[
             [
               // @ts-ignore
-              metrics.transferCount.toString(),
-              metrics.within3Days.toString(),
-              metrics.within8Days.toString(),
-              metrics.beyond8Days.toString(),
+              metrics.integrated.transferCount.toString(),
+              // @ts-ignore
+              metrics.integrated.within3Days.toString(),
+              // @ts-ignore
+              metrics.integrated.within8Days.toString(),
+              // @ts-ignore
+              metrics.integrated.beyond8Days.toString(),
             ],
           ]}
         />
       ) : (
-        <SlaMetrics metrics={metrics} />
+        // @ts-ignore
+        <SlaMetrics metrics={metrics.timeToIntegrateSla} />
       )}
     </>
   );

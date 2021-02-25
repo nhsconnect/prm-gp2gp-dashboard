@@ -40,10 +40,12 @@ describe("Practice template", () => {
     year: 2019,
     month: 11,
     metrics: {
-      transferCount: 20,
-      within3Days: 5,
-      within8Days: 12,
-      beyond8Days: 3,
+      integrated: {
+        transferCount: 20,
+        within3Days: 5,
+        within8Days: 12,
+        beyond8Days: 3,
+      },
     },
   };
 
@@ -83,25 +85,25 @@ describe("Practice template", () => {
         getAllByText(slaMetricsContent.tableHeaders[0])[0]
       ).toBeInTheDocument();
       expect(
-        getByText(pipelinePracticeData.metrics.transferCount)
+        getByText(pipelinePracticeData.metrics.integrated.transferCount)
       ).toBeInTheDocument();
       expect(
         getAllByText(slaMetricsContent.tableHeaders[1])[0]
       ).toBeInTheDocument();
       expect(
-        getByText(pipelinePracticeData.metrics.within3Days)
+        getByText(pipelinePracticeData.metrics.integrated.within3Days)
       ).toBeInTheDocument();
       expect(
         getAllByText(slaMetricsContent.tableHeaders[2])[0]
       ).toBeInTheDocument();
       expect(
-        getByText(pipelinePracticeData.metrics.within8Days)
+        getByText(pipelinePracticeData.metrics.integrated.within8Days)
       ).toBeInTheDocument();
       expect(
         getAllByText(slaMetricsContent.tableHeaders[3])[0]
       ).toBeInTheDocument();
       expect(
-        getByText(pipelinePracticeData.metrics.beyond8Days)
+        getByText(pipelinePracticeData.metrics.integrated.beyond8Days)
       ).toBeInTheDocument();
     });
   });
@@ -110,6 +112,21 @@ describe("Practice template", () => {
     when(mocked(useFeatureToggle))
       .calledWith("F_PRACTICE_INTEGRATED_TRANSFER_COUNT")
       .mockReturnValue(false);
+
+    const pipelinePracticeDataOld = {
+      odsCode: "B86030",
+      name: "BURTON CROFT SURGERY",
+      year: 2019,
+      month: 11,
+      metrics: {
+        timeToIntegrateSla: {
+          transferCount: 20,
+          within3Days: 5,
+          within8Days: 12,
+          beyond8Days: 3,
+        },
+      },
+    };
 
     const expectedODSPracticeData = {
       odsCode: "B86030",
@@ -127,7 +144,7 @@ describe("Practice template", () => {
     mockAPIResponse(statusCode, mockedResponse);
 
     const { getByText, queryByText } = render(
-      <Practice pageContext={pipelinePracticeData} />
+      <Practice pageContext={pipelinePracticeDataOld} />
     );
 
     await waitFor(() => {
@@ -143,11 +160,15 @@ describe("Practice template", () => {
       ).toBeInTheDocument();
 
       expect(
-        getByText(pipelinePracticeData.metrics.within3Days)
+        getByText(
+          pipelinePracticeDataOld.metrics.timeToIntegrateSla.within3Days
+        )
       ).toBeInTheDocument();
       expect(getByText(slaMetricsContent.within3Days)).toBeInTheDocument();
       expect(
-        queryByText(pipelinePracticeData.metrics.transferCount)
+        queryByText(
+          pipelinePracticeDataOld.metrics.timeToIntegrateSla.transferCount
+        )
       ).not.toBeInTheDocument();
       expect(
         queryByText(slaMetricsContent.tableHeaders[0])
