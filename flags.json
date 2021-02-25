@@ -1,8 +1,4 @@
 {
-  "F_FEEDBACK_BANNER": {
-    "dev": true,
-    "prod": false
-  },
   "F_PRACTICE_INTEGRATED_TRANSFER_COUNT": {
     "dev": false,
     "prod": false

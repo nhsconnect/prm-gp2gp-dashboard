@@ -25,7 +25,6 @@ type LayoutProps = {
 const Layout: FC<LayoutProps> = ({ path, children }) => {
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
-  const isFeedbackBannerOn = useFeatureToggle("F_FEEDBACK_BANNER");
   const isOnCookiePage = path === "/cookies-policy/";
   const isOnHomePage = path === "/";
 
@@ -50,9 +49,9 @@ const Layout: FC<LayoutProps> = ({ path, children }) => {
         <Header />
         <div className="nhsuk-width-container">
           <main className="nhsuk-main-wrapper">
-            {isFeedbackBannerOn && !isOnHomePage && <FeedbackBanner />}
+            {!isOnHomePage && <FeedbackBanner />}
             {children}
-            {isFeedbackBannerOn && isOnHomePage && <FeedbackBanner />}
+            {isOnHomePage && <FeedbackBanner />}
           </main>
         </div>
         <Footer />
