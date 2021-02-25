@@ -24,12 +24,14 @@ type IntegratedPracticeMetrics = {
   integrated: IntegratedPracticeMetricsProps;
 };
 
+// TODO: Remove as part of PRMT-1366 cleanup
 type SlaMetricsPropsDeprecated = {
   within3Days: number;
   within8Days: number;
   beyond8Days: number;
 };
 
+// TODO: Remove as part of PRMT-1366 cleanup
 type SlaMetricsDeprecated = {
   timeToIntegrateSla: SlaMetricsPropsDeprecated;
 };
@@ -39,6 +41,7 @@ type PageContext = {
   name: string;
   year: number;
   month: number;
+  // TODO: Remove as part of PRMT-1366 cleanup
   metrics: IntegratedPracticeMetrics | SlaMetricsDeprecated;
 };
 
@@ -79,6 +82,7 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
           headers={slaMetricsContent.tableHeaders}
           rows={[
             [
+              // TODO: Remove as part of PRMT-1366 cleanup
               // @ts-ignore
               metrics.integrated.transferCount.toString(),
               // @ts-ignore
