@@ -18,8 +18,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run checkFormat && npm test && npm run build"
+      "pre-commit": "lint-staged && npm test && npm run build"
     }
+  },
+  "lint-staged": {
+    "*": "prettier --write"
   },
   "dependencies": {
     "@types/react-helmet": "^6.1.0",
