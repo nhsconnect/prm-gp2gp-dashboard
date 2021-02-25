@@ -6,8 +6,8 @@
   "beyond8Days": "beyond 8 days",
   "tableHeaders": [
     "Total successful integrations",
-    "within 3 days",
-    "within 8 days",
-    "beyond 8 days"
+    "Within 3 days",
+    "Within 8 days",
+    "Beyond 8 days"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "F_PRACTICE_INTEGRATED_TRANSFER_COUNT": {
-    "dev": false,
+    "dev": true,
     "prod": false
   }
 }

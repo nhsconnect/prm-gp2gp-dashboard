@@ -1,0 +1,19 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/colours";
+
+.gp2gp-ccg-table {
+  .nhsuk-table__col,
+  .nhsuk-table__cell {
+    white-space: initial;
+  }
+
+  .nhsuk-table__col-0,
+  .nhsuk-table__row .nhsuk-table__cell:first-child {
+    text-align: left;
+  }
+
+  .nhsuk-table__col-1 {
+    border-right: 2px solid $color_nhsuk-grey-4;
+    max-width: 200px;
+    white-space: initial;
+  }
+}

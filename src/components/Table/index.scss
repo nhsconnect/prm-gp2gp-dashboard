@@ -6,4 +6,10 @@
   @extend .nhsuk-table-responsive;
   @extend .nhsuk-table;
   padding-bottom: 3rem;
+
+  .nhsuk-table__col,
+  .nhsuk-table__cell {
+    vertical-align: bottom;
+    text-align: right;
+  }
 }

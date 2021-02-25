@@ -22,8 +22,12 @@ const Table: FC<TableProps> = ({ headers, captionText, rows }) => (
     ) : null}
     <thead className="nhsuk-table__head">
       <tr>
-        {headers?.map(header => (
-          <th scope="col" key={header}>
+        {headers?.map((header, columnIndex) => (
+          <th
+            scope="col"
+            key={header}
+            className={`nhsuk-table__col nhsuk-table__col-${columnIndex}`}
+          >
             {header}
           </th>
         ))}

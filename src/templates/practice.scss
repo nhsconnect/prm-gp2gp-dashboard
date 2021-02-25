@@ -1,0 +1,9 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/colours";
+
+.gp2gp-practice-table {
+  .nhsuk-table__col-0 {
+    border-right: 2px solid $color_nhsuk-grey-4;
+    max-width: 150px;
+    white-space: initial;
+  }
+}
