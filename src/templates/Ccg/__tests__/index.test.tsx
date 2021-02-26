@@ -5,9 +5,9 @@ import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import { act } from "react-dom/test-utils";
 
-import Ccg from "../ccg";
-import { mockAPIResponse } from "../../../__mocks__/api";
-import practiceMetricsMock from "../../../__mocks__/practiceMetricsMock.json";
+import Ccg from "..";
+import { mockAPIResponse } from "../../../../__mocks__/api";
+import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 describe("CCG template", () => {
   beforeAll(() => {

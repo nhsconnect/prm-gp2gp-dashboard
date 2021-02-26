@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import NationalStatistics from "../national-gp2gp-statistics";
+import NationalStatistics from "..";
 
 describe("National GP2GP Statistics template", () => {
   const pipelineNationalData = {

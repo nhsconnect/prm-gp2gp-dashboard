@@ -1,18 +1,18 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import OrganisationDetails from "../components/OrganisationDetails";
+import OrganisationDetails from "../../components/OrganisationDetails";
 import {
   ODS_PORTAL_URL,
   transformPracticeAddress,
-} from "../library/api/ODSPortal";
-import { convertToTitleCase } from "../library/utils/convertToTitleCase";
-import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
-import SlaMetrics from "../components/SlaMetrics";
-import { useApi } from "../library/hooks/useApi";
-import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
-import Table from "../components/Table";
-import slaMetricsContent from "../data/content/slaMetrics.json";
-import "./practice.scss";
+} from "../../library/api/ODSPortal";
+import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import SlaMetrics from "../../components/SlaMetrics";
+import { useApi } from "../../library/hooks/useApi";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import Table from "../../components/Table";
+import slaMetricsContent from "../../data/content/slaMetrics.json";
+import "./index.scss";
 
 type IntegratedPracticeMetricsProps = {
   transferCount: number;

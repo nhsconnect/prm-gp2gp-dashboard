@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import Table from "../components/Table";
-import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
+import Table from "../../components/Table";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 
 type PageContext = {
   year: number;

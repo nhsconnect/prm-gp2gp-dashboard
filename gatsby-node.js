@@ -14,7 +14,7 @@ exports.createPages = async ({ actions }) => {
 
     createPage({
       path: `/practice/${practice.odsCode}`,
-      component: path.resolve("src/templates/practice.tsx"),
+      component: path.resolve("src/templates/Practice/index.tsx"),
       context: {
         odsCode: practice.odsCode,
         name: practice.name,
@@ -28,7 +28,7 @@ exports.createPages = async ({ actions }) => {
   ccgs.forEach(ccg => {
     createPage({
       path: `/ccg/${ccg.odsCode}`,
-      component: path.resolve("src/templates/ccg.tsx"),
+      component: path.resolve("src/templates/Ccg/index.tsx"),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
@@ -41,7 +41,7 @@ exports.createPages = async ({ actions }) => {
 
   createPage({
     path: "/national-gp2gp-statistics",
-    component: path.resolve("src/templates/national-gp2gp-statistics.tsx"),
+    component: path.resolve("src/templates/NationalStatistics/index.tsx"),
     context: {
       ...latestNationalMetrics,
     },
