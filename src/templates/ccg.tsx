@@ -39,12 +39,10 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
       ) : error ? (
         <p className="nhsuk-body">{ccgContent.errorMessage}</p>
       ) : (
-        <div className={"gp2gp-ccg-table"}>
-          <PracticeTable
-            ccgPractices={data?.Organisations}
-            validPractices={validPractices}
-          />
-        </div>
+        <PracticeTable
+          ccgPractices={data?.Organisations}
+          validPractices={validPractices}
+        />
       )}
     </>
   );

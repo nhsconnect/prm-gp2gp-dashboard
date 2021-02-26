@@ -79,24 +79,23 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
         {monthName} {year}
       </h2>
       {isPracticeIntegratedTransferCountOn ? (
-        <div className={"gp2gp-practice-table"}>
-          <Table
-            headers={slaMetricsContent.tableHeaders}
-            rows={[
-              [
-                // TODO: Remove as part of PRMT-1366 cleanup
-                // @ts-ignore
-                metrics.integrated.transferCount.toString(),
-                // @ts-ignore
-                metrics.integrated.within3Days.toString(),
-                // @ts-ignore
-                metrics.integrated.within8Days.toString(),
-                // @ts-ignore
-                metrics.integrated.beyond8Days.toString(),
-              ],
-            ]}
-          />
-        </div>
+        <Table
+          className={"gp2gp-practice-table"}
+          headers={slaMetricsContent.tableHeaders}
+          rows={[
+            [
+              // TODO: Remove as part of PRMT-1366 cleanup
+              // @ts-ignore
+              metrics.integrated.transferCount.toString(),
+              // @ts-ignore
+              metrics.integrated.within3Days.toString(),
+              // @ts-ignore
+              metrics.integrated.within8Days.toString(),
+              // @ts-ignore
+              metrics.integrated.beyond8Days.toString(),
+            ],
+          ]}
+        />
       ) : (
         // @ts-ignore
         <SlaMetrics metrics={metrics.timeToIntegrateSla} />

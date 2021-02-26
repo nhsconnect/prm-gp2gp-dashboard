@@ -76,6 +76,7 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
         {practiceTableContent.description}
       </p>
       <Table
+        className={"gp2gp-ccg-table"}
         captionText={tableCaptionText}
         headers={
           isPracticeIntegratedTransferCountOn

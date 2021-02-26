@@ -1,15 +1,17 @@
 import React, { FC } from "react";
 import "./index.scss";
+import classNames from "classnames";
 
 type TableProps = {
   headers: string[];
   captionText?: string;
   rows: string[][];
+  className?: string;
 };
 
-const Table: FC<TableProps> = ({ headers, captionText, rows }) => (
+const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
   <table
-    className="gp2gp-table"
+    className={classNames("gp2gp-table", className)}
     {...(captionText ? { "aria-describedby": "table-title" } : {})}
   >
     {captionText ? (
