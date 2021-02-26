@@ -1,4 +1,4 @@
-import React, { useEffect, FC, ReactNode } from "react";
+import React, { useEffect, useState, FC, ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 
@@ -12,21 +12,25 @@ import { setupAnalytics } from "../library/setupAnalytics";
 import getEnv from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
-import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
 
 type LayoutProps = {
   path: string;
-  childeren: ReactNode;
+  children: ReactNode;
 };
 
 const Layout: FC<LayoutProps> = ({ path, children }) => {
+  const [hasMounted, setHasMounted] = useState(false);
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
   const isOnHomePage = path === "/";
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     setupAnalytics({
@@ -34,6 +38,10 @@ const Layout: FC<LayoutProps> = ({ path, children }) => {
       trackingId,
     });
   }, [hasCookieConsent]);
+
+  if (!hasMounted) {
+    return null;
+  }
 
   return (
     <>

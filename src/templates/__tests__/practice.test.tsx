@@ -14,7 +14,7 @@ import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 jest.mock("../../library/hooks/useFeatureToggle");
 
 describe("Practice template", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     moxios.install();
     when(mocked(useFeatureToggle))
       .calledWith("F_PRACTICE_INTEGRATED_TRANSFER_COUNT")
@@ -172,6 +172,24 @@ describe("Practice template", () => {
       ).not.toBeInTheDocument();
       expect(
         queryByText(slaMetricsContent.tableHeaders[0])
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it("does not render practice address when API responds with an error", async () => {
+    const expectedPracticeName = "Burton Croft Surgery";
+    const statusCode = 500;
+    mockAPIResponse(statusCode);
+
+    const { getByText, queryByTestId } = render(
+      <Practice pageContext={pipelinePracticeData} />
+    );
+
+    await waitFor(() => {
+      expect(getByText(pipelinePracticeData.odsCode)).toBeInTheDocument();
+      expect(getByText(expectedPracticeName)).toBeInTheDocument();
+      expect(
+        queryByTestId("organisation-details-address")
       ).not.toBeInTheDocument();
     });
   });
