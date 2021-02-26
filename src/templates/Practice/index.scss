@@ -6,4 +6,10 @@
     max-width: 150px;
     white-space: initial;
   }
+
+  .nhsuk-table__col,
+  .nhsuk-table__cell {
+    vertical-align: bottom;
+    text-align: right;
+  }
 }
