@@ -3,10 +3,6 @@ import { render } from "@testing-library/react";
 import Layout from "../index";
 
 describe("Layout component", () => {
-  beforeEach(() => {
-    // supress svg warning
-    jest.spyOn(console, "error").mockImplementation(() => {});
-  });
   it("displays layout components on the home page", () => {
     const { getByTestId, getByRole, getByLabelText } = render(
       <Layout path="/">
@@ -34,7 +30,7 @@ describe("Layout component", () => {
   it("should not display cookie banner on the cookie page", async () => {
     const { queryByLabelText } = render(
       <Layout path="/cookies-policy/">
-        <div></div>
+        <div> </div>
       </Layout>
     );
 
