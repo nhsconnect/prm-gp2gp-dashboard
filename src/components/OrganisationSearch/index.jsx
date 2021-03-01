@@ -101,6 +101,7 @@ const OrganisationSearch = () => {
           getSectionSuggestions={section => section.organisations}
         />
         <Button
+          dataTestId="gp2gp-practice-search__button"
           className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
           type="submit"
         >

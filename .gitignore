@@ -19,3 +19,7 @@ public
 
 # Organisation data
 src/data/organisations/
+
+# Cypress artifacts
+e2e/screenshots/
+e2e/videos/

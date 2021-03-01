@@ -6,7 +6,7 @@ module.exports = {
   moduleNameMapper: {
     ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
   },
-  testPathIgnorePatterns: ["node_modules", ".cache", "public"],
+  testPathIgnorePatterns: ["node_modules", ".cache", "public", "e2e"],
   transformIgnorePatterns: ["node_modules/(?!(gatsby)/)"],
   globals: {
     __PATH_PREFIX__: "",
