@@ -11,7 +11,7 @@ describe("Homepage", () => {
     cy.get("#react-autowhatever-1-section-0-item-0").click();
     cy.get("[data-testid='gp2gp-practice-search__button']").click();
 
-    cy.contains("Total successful integrations");
+    cy.contains("Successful integrations");
     cy.contains("67");
     cy.contains("Bolton Community Practice | Y03079").click();
 
@@ -19,7 +19,7 @@ describe("Homepage", () => {
     cy.contains("Waters Meeting Road");
     cy.contains("Bolton");
     cy.contains("BL1 8TT");
-    cy.contains("Total successful integrations");
+    cy.contains("Successful integrations");
     cy.contains("67");
   });
 });

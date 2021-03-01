@@ -57,7 +57,7 @@ describe("PracticeTable component", () => {
 
     expect(getByText("GP Practice | A12345")).toBeInTheDocument();
     expect(getByText("GP Practice 2 | B12345")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent("Total successful integrations 7");
+    expect(allRows[1]).toHaveTextContent("Successful integrations 7");
     expect(allRows[1]).toHaveTextContent("Within 3 days 0");
     expect(allRows[1]).toHaveTextContent("Within 8 days 2");
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 5");
@@ -139,9 +139,7 @@ describe("PracticeTable component", () => {
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 3");
     expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
     expect(queryByText("21")).not.toBeInTheDocument();
-    expect(
-      queryByText("Total successful integrations")
-    ).not.toBeInTheDocument();
+    expect(queryByText("Successful integrations")).not.toBeInTheDocument();
   });
 
   it("navigates to a practice page when a link is clicked", () => {
