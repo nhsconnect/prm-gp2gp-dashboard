@@ -68,6 +68,14 @@ case "${task}" in
   dojo-test)
       dojo "./tasks test"
       ;;
+  test-e2e)
+      npm install
+      npm run build
+      npm run test:e2e:ci
+      ;;
+  dojo-test-e2e)
+      dojo "./tasks test-e2e"
+      ;;
   build)
       setup_env ${deployment_env}
       npm install
