@@ -1,9 +1,6 @@
 {
   "title": "Your practice integrating records",
   "subtitle": "Number of records integrated:",
-  "within3Days": "within 3 days",
-  "within8Days": "within 8 days",
-  "beyond8Days": "beyond 8 days",
   "tableHeaders": [
     "Successful integrations",
     "Within 3 days",

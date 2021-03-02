@@ -1,21 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 
 import PracticeTable from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
-import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
-
-jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("PracticeTable component", () => {
-  beforeAll(() => {
-    when(mocked(useFeatureToggle))
-      .calledWith("F_PRACTICE_INTEGRATED_TRANSFER_COUNT")
-      .mockReturnValue(true);
-  });
-
   it("displays multiple valid practices", () => {
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },
@@ -31,11 +20,6 @@ describe("PracticeTable component", () => {
             requester: {
               integrated: {
                 transferCount: 7,
-                within3Days: 0,
-                within8Days: 2,
-                beyond8Days: 5,
-              },
-              timeToIntegrateSla: {
                 within3Days: 0,
                 within8Days: 2,
                 beyond8Days: 5,
@@ -113,33 +97,6 @@ describe("PracticeTable component", () => {
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 10");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 3");
     expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
-  });
-
-  it("displays practices ordered by Beyond 8 day SLA without transfer count when F_PRACTICE_INTEGRATED_TRANSFER_COUNT is toggled off", () => {
-    when(mocked(useFeatureToggle))
-      .calledWith("F_PRACTICE_INTEGRATED_TRANSFER_COUNT")
-      .mockReturnValue(false);
-
-    const ccgPractices = [
-      { OrgId: "A12345", Name: "GP Practice" },
-      { OrgId: "A12346", Name: "Second GP Practice" },
-      { OrgId: "A12347", Name: "Third GP Practice" },
-    ];
-
-    const { getAllByRole, queryByText } = render(
-      <PracticeTable
-        ccgPractices={ccgPractices}
-        validPractices={practiceMetricsMock}
-      />
-    );
-
-    const allRows = getAllByRole("row");
-
-    expect(allRows[1]).toHaveTextContent("Beyond 8 days 10");
-    expect(allRows[2]).toHaveTextContent("Beyond 8 days 3");
-    expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
-    expect(queryByText("21")).not.toBeInTheDocument();
-    expect(queryByText("Successful integrations")).not.toBeInTheDocument();
   });
 
   it("navigates to a practice page when a link is clicked", () => {
