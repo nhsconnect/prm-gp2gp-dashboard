@@ -10,17 +10,21 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import { useApi } from "../../library/hooks/useApi";
 import Table from "../../components/Table";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import "./index.scss";
 
-type IntegratedPracticeMetricsProps = {
+type IntegratedPracticeMetrics = {
   transferCount: number;
+  within3DaysPercentage: number | null;
+  within8DaysPercentage: number | null;
+  beyond8DaysPercentage: number | null;
   within3Days: number;
   within8Days: number;
   beyond8Days: number;
 };
 
-type IntegratedPracticeMetrics = {
-  integrated: IntegratedPracticeMetricsProps;
+type PracticeMetrics = {
+  integrated: IntegratedPracticeMetrics;
 };
 
 type PageContext = {
@@ -28,16 +32,37 @@ type PageContext = {
   name: string;
   year: number;
   month: number;
-  metrics: IntegratedPracticeMetrics;
+  metrics: PracticeMetrics;
 };
 
 type PracticeProps = {
   pageContext: PageContext;
 };
 
+const _generate_row_data = (integratedMetrics: IntegratedPracticeMetrics) => {
+  return [
+    [
+      integratedMetrics.transferCount.toString(),
+      integratedMetrics.within3DaysPercentage
+        ? `${integratedMetrics.within3DaysPercentage.toString()}%`
+        : "—",
+      integratedMetrics.within8DaysPercentage
+        ? `${integratedMetrics.within8DaysPercentage.toString()}%`
+        : "—",
+      integratedMetrics.beyond8DaysPercentage
+        ? `${integratedMetrics.beyond8DaysPercentage.toString()}%`
+        : "—",
+    ],
+  ];
+};
+
 const Practice: FC<PracticeProps> = ({ pageContext }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${pageContext.odsCode}`
+  );
+
+  const isIntegratedPercentageOn = useFeatureToggle(
+    "F_PRACTICE_SLA_PERCENTAGE"
   );
 
   const { name, odsCode, month, year, metrics } = pageContext;
@@ -62,15 +87,23 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
       </h2>
       <Table
         className={"gp2gp-practice-table"}
-        headers={slaMetricsContent.tableHeaders}
-        rows={[
-          [
-            metrics.integrated.transferCount.toString(),
-            metrics.integrated.within3Days.toString(),
-            metrics.integrated.within8Days.toString(),
-            metrics.integrated.beyond8Days.toString(),
-          ],
-        ]}
+        headers={
+          isIntegratedPercentageOn
+            ? slaMetricsContent.tableHeaders
+            : slaMetricsContent.tableHeadersDeprecated
+        }
+        rows={
+          isIntegratedPercentageOn
+            ? _generate_row_data(metrics.integrated)
+            : [
+                [
+                  metrics.integrated.transferCount.toString(),
+                  metrics.integrated.within3Days.toString(),
+                  metrics.integrated.within8Days.toString(),
+                  metrics.integrated.beyond8Days.toString(),
+                ],
+              ]
+        }
       />
     </>
   );

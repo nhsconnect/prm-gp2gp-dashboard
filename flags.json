@@ -1,1 +1,6 @@
-{}
+{
+  "F_PRACTICE_SLA_PERCENTAGE": {
+    "dev": true,
+    "prod": false
+  }
+}
