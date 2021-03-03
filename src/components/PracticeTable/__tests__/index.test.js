@@ -1,11 +1,73 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
+import { when } from "jest-when";
+import { mocked } from "ts-jest/utils";
+
 import PracticeTable from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
+import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
+
+jest.mock("../../../library/hooks/useFeatureToggle");
+
 describe("PracticeTable component", () => {
+  beforeAll(() => {
+    when(mocked(useFeatureToggle))
+      .calledWith("F_PRACTICE_SLA_PERCENTAGE")
+      .mockReturnValue(true);
+  });
+
   it("displays multiple valid practices", () => {
+    const ccgPractices = [
+      { OrgId: "A12345", Name: "GP Practice" },
+      { OrgId: "B12345", Name: "GP Practice 2" },
+    ];
+    const validPractices = [
+      ...practiceMetricsMock,
+      {
+        odsCode: "B12345",
+        name: "GP Practice 2",
+        metrics: [
+          {
+            requester: {
+              integrated: {
+                transferCount: 7,
+                within3Days: 0,
+                within8Days: 2,
+                beyond8Days: 5,
+                within3DaysPercentage: 0,
+                within8DaysPercentage: 28.6,
+                beyond8DaysPercentage: 71.4,
+              },
+            },
+          },
+        ],
+      },
+    ];
+
+    const { getByText, getAllByRole } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={validPractices}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    expect(getByText("GP Practice | A12345")).toBeInTheDocument();
+    expect(getByText("GP Practice 2 | B12345")).toBeInTheDocument();
+    expect(allRows[1]).toHaveTextContent("Total successful integrations 7");
+    expect(allRows[1]).toHaveTextContent("Within 3 days 0%");
+    expect(allRows[1]).toHaveTextContent("Within 8 days 28.6%");
+    expect(allRows[1]).toHaveTextContent("Beyond 8 days 71.4%");
+  });
+
+  it("displays multiple valid practices when F_PRACTICE_SLA_PERCENTAGE off", () => {
+    when(mocked(useFeatureToggle))
+      .calledWith("F_PRACTICE_SLA_PERCENTAGE")
+      .mockReturnValue(false);
+
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },
       { OrgId: "B12345", Name: "GP Practice 2" },

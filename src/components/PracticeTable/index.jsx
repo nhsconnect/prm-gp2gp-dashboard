@@ -5,8 +5,10 @@ import { Search } from "../../library/utils/search/index";
 import practiceTableContent from "../../data/content/practiceTable.json";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
+import { addPercentageSign } from "../../library/utils/addPercentageSign/index";
 import "./index.scss";
 import Table from "../Table";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 const PracticeLink = ({ odsCode, name }) => {
   const formattedName = convertToTitleCase(name);
@@ -23,6 +25,10 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
     practice => practiceSearch.search(practice.odsCode).length > 0
   );
 
+  const isIntegratedPercentageOn = useFeatureToggle(
+    "F_PRACTICE_SLA_PERCENTAGE"
+  );
+
   if (filteredPractices.length === 0)
     return <p>{practiceTableContent.noResultsMessage}</p>;
 
@@ -37,13 +43,21 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
   const practiceTableRows = filteredPractices.map(
     ({ odsCode, name, metrics }) => {
       const slaMetrics = metrics[0].requester.integrated;
-      return [
-        <PracticeLink odsCode={odsCode} name={name} />,
-        slaMetrics.transferCount,
-        slaMetrics.within3Days,
-        slaMetrics.within8Days,
-        slaMetrics.beyond8Days,
-      ];
+      return isIntegratedPercentageOn
+        ? [
+            <PracticeLink odsCode={odsCode} name={name} />,
+            slaMetrics.transferCount,
+            addPercentageSign(slaMetrics.within3DaysPercentage),
+            addPercentageSign(slaMetrics.within8DaysPercentage),
+            addPercentageSign(slaMetrics.beyond8DaysPercentage),
+          ]
+        : [
+            <PracticeLink odsCode={odsCode} name={name} />,
+            slaMetrics.transferCount,
+            slaMetrics.within3Days,
+            slaMetrics.within8Days,
+            slaMetrics.beyond8Days,
+          ];
     }
   );
 
@@ -56,10 +70,15 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
       <p className="nhsuk-body-m nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-5">
         {practiceTableContent.description}
       </p>
+
       <Table
         className="gp2gp-ccg-table"
         captionText={tableCaptionText}
-        headers={practiceTableContent.tableHeaders}
+        headers={
+          isIntegratedPercentageOn
+            ? practiceTableContent.tableHeaders
+            : practiceTableContent.tableHeadersDeprecated
+        }
         rows={practiceTableRows}
       />
     </>

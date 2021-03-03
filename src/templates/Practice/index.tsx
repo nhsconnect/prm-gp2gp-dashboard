@@ -7,10 +7,12 @@ import {
 } from "../../library/api/ODSPortal";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import { addPercentageSign } from "../../library/utils/addPercentageSign/index";
 import { useApi } from "../../library/hooks/useApi";
 import Table from "../../components/Table";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+
 import "./index.scss";
 
 type IntegratedPracticeMetrics = {
@@ -43,15 +45,9 @@ const _generate_row_data = (integratedMetrics: IntegratedPracticeMetrics) => {
   return [
     [
       integratedMetrics.transferCount.toString(),
-      integratedMetrics.within3DaysPercentage
-        ? `${integratedMetrics.within3DaysPercentage.toString()}%`
-        : "—",
-      integratedMetrics.within8DaysPercentage
-        ? `${integratedMetrics.within8DaysPercentage.toString()}%`
-        : "—",
-      integratedMetrics.beyond8DaysPercentage
-        ? `${integratedMetrics.beyond8DaysPercentage.toString()}%`
-        : "—",
+      addPercentageSign(integratedMetrics.within3DaysPercentage),
+      addPercentageSign(integratedMetrics.within8DaysPercentage),
+      addPercentageSign(integratedMetrics.beyond8DaysPercentage),
     ],
   ];
 };

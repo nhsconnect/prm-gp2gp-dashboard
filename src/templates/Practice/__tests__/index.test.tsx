@@ -163,7 +163,7 @@ describe("Practice template", () => {
     );
 
     await waitFor(() => {
-      const dashElements = getAllByText("—");
+      const dashElements = getAllByText("n/a");
       expect(dashElements[0]).toBeInTheDocument();
       expect(dashElements.length).toBe(3);
     });

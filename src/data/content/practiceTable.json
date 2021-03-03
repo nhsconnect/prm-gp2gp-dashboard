@@ -1,8 +1,15 @@
 {
   "noResultsMessage": "No GP practices found",
-  "tableHeaders": [
+  "tableHeadersDeprecated": [
     "Practice name ",
     "Successful integrations ",
+    "Within 3 days ",
+    "Within 8 days ",
+    "Beyond 8 days "
+  ],
+  "tableHeaders": [
+    "Practice name ",
+    "Total successful integrations ",
     "Within 3 days ",
     "Within 8 days ",
     "Beyond 8 days "
