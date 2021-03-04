@@ -69,6 +69,7 @@ case "${task}" in
       dojo "./tasks test"
       ;;
   test-e2e)
+      npm install
       npm run test:e2e:ci
       ;;
   dojo-test-e2e)
