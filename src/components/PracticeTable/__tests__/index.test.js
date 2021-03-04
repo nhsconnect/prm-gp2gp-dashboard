@@ -12,7 +12,7 @@ import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("PracticeTable component", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     when(mocked(useFeatureToggle))
       .calledWith("F_PRACTICE_SLA_PERCENTAGE")
       .mockReturnValue(true);
@@ -140,7 +140,32 @@ describe("PracticeTable component", () => {
     expect(getByText("No GP practices found")).toBeInTheDocument();
   });
 
-  it("displays practices ordered by Beyond 8 day SLA", () => {
+  it("displays practices ordered by Beyond 8 day Percentage SLA", () => {
+    const ccgPractices = [
+      { OrgId: "A12345", Name: "GP Practice" },
+      { OrgId: "A12346", Name: "Second GP Practice" },
+      { OrgId: "A12347", Name: "Third GP Practice" },
+    ];
+
+    const { getAllByRole } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
+    expect(allRows[2]).toHaveTextContent("Beyond 8 days 8.8%");
+    expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
+  });
+
+  it("displays practices ordered by Beyond 8 day SLA when F_PRACTICE_SLA_PERCENTAGE off", () => {
+    when(mocked(useFeatureToggle))
+      .calledWith("F_PRACTICE_SLA_PERCENTAGE")
+      .mockReturnValue(false);
+
     const ccgPractices = [
       { OrgId: "A12345", Name: "GP Practice" },
       { OrgId: "A12346", Name: "Second GP Practice" },

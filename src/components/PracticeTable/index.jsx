@@ -19,6 +19,23 @@ const PracticeLink = ({ odsCode, name }) => {
   );
 };
 
+const _sort_practices_by_beyond8Days = (
+  filteredPractices,
+  isIntegratedPercentageOn
+) => {
+  isIntegratedPercentageOn
+    ? filteredPractices.sort(
+        (firstEl, secondEl) =>
+          secondEl.metrics[0].requester.integrated.beyond8DaysPercentage -
+          firstEl.metrics[0].requester.integrated.beyond8DaysPercentage
+      )
+    : filteredPractices.sort(
+        (firstEl, secondEl) =>
+          secondEl.metrics[0].requester.integrated.beyond8Days -
+          firstEl.metrics[0].requester.integrated.beyond8Days
+      );
+};
+
 const PracticeTable = ({ ccgPractices, validPractices }) => {
   const practiceSearch = new Search("OrgId", ["OrgId"], ccgPractices);
   const filteredPractices = validPractices.filter(
@@ -32,11 +49,7 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
   if (filteredPractices.length === 0)
     return <p>{practiceTableContent.noResultsMessage}</p>;
 
-  filteredPractices.sort(
-    (firstEl, secondEl) =>
-      secondEl.metrics[0].requester.integrated.beyond8Days -
-      firstEl.metrics[0].requester.integrated.beyond8Days
-  );
+  _sort_practices_by_beyond8Days(filteredPractices, isIntegratedPercentageOn);
 
   const { year, month } = filteredPractices[0].metrics[0];
 
