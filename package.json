@@ -54,6 +54,7 @@
     "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^7.0.4",
     "@testing-library/dom": "^7.29.2",
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.3",
