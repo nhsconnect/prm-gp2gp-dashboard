@@ -59,11 +59,8 @@ const _sort_practices_by_beyond8Days = (
         const secondPracticeBeyond8Days =
           secondEl.metrics[0].requester.integrated.beyond8DaysPercentage;
 
-        if (
-          secondPracticeBeyond8Days === null ||
-          firstPracticeBeyond8Days === null
-        )
-          return 1;
+        if (firstPracticeBeyond8Days === null) return 1;
+        if (secondPracticeBeyond8Days === null) return -1;
 
         return secondPracticeBeyond8Days - firstPracticeBeyond8Days;
       })

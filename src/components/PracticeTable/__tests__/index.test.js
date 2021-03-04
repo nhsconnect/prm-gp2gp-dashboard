@@ -146,6 +146,8 @@ describe("PracticeTable component", () => {
       { OrgId: "A12346", Name: "Second GP Practice" },
       { OrgId: "A12347", Name: "Third GP Practice" },
       { OrgId: "A12348", Name: "Fourth GP Practice" },
+      { OrgId: "A12349", Name: "Fifth GP Practice" },
+      { OrgId: "A12350", Name: "Sixth GP Practice" },
     ];
 
     const { getAllByRole } = render(
@@ -158,10 +160,12 @@ describe("PracticeTable component", () => {
     const allRows = getAllByRole("row");
 
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
-    expect(allRows[2]).toHaveTextContent("Beyond 8 days 8.8%");
-    expect(allRows[3]).toHaveTextContent("Beyond 8 days 0%");
-    expect(allRows[4]).toHaveTextContent("Beyond 8 days n/a");
-    expect(allRows.length).toBe(5);
+    expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
+    expect(allRows[3]).toHaveTextContent("Beyond 8 days 8.8%");
+    expect(allRows[4]).toHaveTextContent("Beyond 8 days 0%");
+    expect(allRows[5]).toHaveTextContent("Beyond 8 days 0%");
+    expect(allRows[6]).toHaveTextContent("Beyond 8 days n/a");
+    expect(allRows.length).toBe(7);
   });
 
   it("displays practices ordered by Beyond 8 day SLA when F_PRACTICE_SLA_PERCENTAGE off", () => {
