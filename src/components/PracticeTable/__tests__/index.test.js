@@ -57,7 +57,7 @@ describe("PracticeTable component", () => {
 
     expect(getByText("GP Practice | A12345")).toBeInTheDocument();
     expect(getByText("GP Practice 2 | B12345")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent("Total successful integrations 7");
+    expect(allRows[1]).toHaveTextContent("Total integrations 7");
     expect(allRows[1]).toHaveTextContent("Within 3 days 0%");
     expect(allRows[1]).toHaveTextContent("Within 8 days 28.6%");
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 71.4%");

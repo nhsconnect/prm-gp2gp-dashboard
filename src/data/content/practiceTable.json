@@ -9,7 +9,7 @@
   ],
   "tableHeaders": [
     "Practice name ",
-    "Total successful integrations ",
+    "Total integrations ",
     "Within 3 days ",
     "Within 8 days ",
     "Beyond 8 days "
