@@ -159,7 +159,7 @@ describe("PracticeTable component", () => {
 
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 8.8%");
-    expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
+    expect(allRows[3]).toHaveTextContent("Beyond 8 days 0%");
     expect(allRows[4]).toHaveTextContent("Beyond 8 days n/a");
     expect(allRows.length).toBe(5);
   });

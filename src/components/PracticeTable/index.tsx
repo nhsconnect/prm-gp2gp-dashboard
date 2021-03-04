@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Link } from "gatsby";
 
 import { Search } from "../../library/utils/search/index";
@@ -10,7 +10,36 @@ import "./index.scss";
 import Table from "../Table";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
-const PracticeLink = ({ odsCode, name }) => {
+type IntegratedPracticeMetrics = {
+  transferCount: number;
+  within3DaysPercentage: number | null;
+  within8DaysPercentage: number | null;
+  beyond8DaysPercentage: number | null;
+  within3Days: number;
+  within8Days: number;
+  beyond8Days: number;
+};
+
+type PracticeMetrics = {
+  year: number;
+  month: number;
+  requester: {
+    integrated: IntegratedPracticeMetrics;
+  };
+};
+
+type Practice = {
+  odsCode: string;
+  name: string;
+  metrics: PracticeMetrics[];
+};
+
+type PracticeTableProps = {
+  ccgPractices: { odsCode: string; name: string }[];
+  validPractices: Practice[];
+};
+
+const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   const formattedName = convertToTitleCase(name);
   return (
     <Link to={`/practice/${odsCode}`}>
@@ -20,15 +49,24 @@ const PracticeLink = ({ odsCode, name }) => {
 };
 
 const _sort_practices_by_beyond8Days = (
-  filteredPractices,
-  isIntegratedPercentageOn
+  filteredPractices: Practice[],
+  isIntegratedPercentageOn: boolean
 ) => {
   isIntegratedPercentageOn
-    ? filteredPractices.sort(
-        (firstEl, secondEl) =>
-          secondEl.metrics[0].requester.integrated.beyond8DaysPercentage -
-          firstEl.metrics[0].requester.integrated.beyond8DaysPercentage
-      )
+    ? filteredPractices.sort((firstEl, secondEl) => {
+        const firstPracticeBeyond8Days =
+          firstEl.metrics[0].requester.integrated.beyond8DaysPercentage;
+        const secondPracticeBeyond8Days =
+          secondEl.metrics[0].requester.integrated.beyond8DaysPercentage;
+
+        if (
+          secondPracticeBeyond8Days === null ||
+          firstPracticeBeyond8Days === null
+        )
+          return 1;
+
+        return secondPracticeBeyond8Days - firstPracticeBeyond8Days;
+      })
     : filteredPractices.sort(
         (firstEl, secondEl) =>
           secondEl.metrics[0].requester.integrated.beyond8Days -
@@ -36,7 +74,10 @@ const _sort_practices_by_beyond8Days = (
       );
 };
 
-const PracticeTable = ({ ccgPractices, validPractices }) => {
+const PracticeTable: FC<PracticeTableProps> = ({
+  ccgPractices,
+  validPractices,
+}) => {
   const practiceSearch = new Search("OrgId", ["OrgId"], ccgPractices);
   const filteredPractices = validPractices.filter(
     practice => practiceSearch.search(practice.odsCode).length > 0
@@ -54,7 +95,7 @@ const PracticeTable = ({ ccgPractices, validPractices }) => {
   const { year, month } = filteredPractices[0].metrics[0];
 
   const practiceTableRows = filteredPractices.map(
-    ({ odsCode, name, metrics }) => {
+    ({ odsCode, name, metrics }: Practice) => {
       const slaMetrics = metrics[0].requester.integrated;
       return isIntegratedPercentageOn
         ? [

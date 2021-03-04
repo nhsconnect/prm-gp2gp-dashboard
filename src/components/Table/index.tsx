@@ -5,7 +5,7 @@ import classNames from "classnames";
 type TableProps = {
   headers: string[];
   captionText?: string;
-  rows: string[][];
+  rows: (string | number | JSX.Element)[][];
   className?: string;
 };
 
