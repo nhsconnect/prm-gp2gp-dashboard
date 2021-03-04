@@ -31,7 +31,7 @@ describe("E2E Tests", () => {
 
     cy.findByLabelText(
       "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-    ).type("b");
+    ).type("bolton");
     cy.contains("li", "CCG")
       .parent()
       .parent()
