@@ -48,6 +48,26 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-build dev
+      - test_e2e:
+          clean_workspace: true
+          jobs:
+            test:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: build_dev
+                    job: npm_build
+                    source: public
+                - fetch:
+                    stage: build_dev
+                    job: npm_build
+                    source: .cache
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-test-e2e
       - deploy_dev:
           clean_workspace: true
           jobs:
