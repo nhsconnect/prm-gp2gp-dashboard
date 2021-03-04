@@ -54,6 +54,9 @@ pipelines:
             test:
               resources:
                 - docker
+              artifacts:
+                - build:
+                    source: e2e/screenshots
               tasks:
                 - fetch:
                     stage: build_dev
