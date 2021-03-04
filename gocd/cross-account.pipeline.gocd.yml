@@ -56,7 +56,7 @@ pipelines:
                 - docker
               artifacts:
                 - build:
-                    source: e2e/screenshots
+                    source: e2e/videos
               tasks:
                 - fetch:
                     stage: build_dev
