@@ -61,5 +61,26 @@
         }
       }
     ]
+  },
+  {
+    "odsCode": "A12348",
+    "name": "Fourth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requester": {
+          "integrated": {
+            "transferCount": 0,
+            "within3DaysPercentage": null,
+            "within8DaysPercentage": null,
+            "beyond8DaysPercentage": null,
+            "within3Days": 0,
+            "within8Days": 0,
+            "beyond8Days": 0
+          }
+        }
+      }
+    ]
   }
 ]
