@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.scss";
 
 export const TableGroupHeading = ({
   columnGapNumber,
@@ -9,8 +10,12 @@ export const TableGroupHeading = ({
 }) => {
   return (
     <tr>
-      <th colSpan={columnGapNumber} scope="colgroup"></th>
-      <th colSpan={3} scope="colgroup">
+      <th
+        colSpan={columnGapNumber}
+        scope="colgroup"
+        className="table_group_heading__gap"
+      ></th>
+      <th colSpan={3} scope="colgroup" className="table_group_heading__header">
         {groupHeading}
       </th>
     </tr>

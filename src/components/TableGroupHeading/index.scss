@@ -1,0 +1,14 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/colours";
+
+.gp2gp-table {
+  .table_group_heading__gap {
+    border-bottom: none;
+    margin-right: 1rem;
+    border-right: 2px solid $color_nhsuk-grey-4;
+  }
+
+  .table_group_heading__header {
+    border-bottom: none;
+    padding-left: 2rem;
+  }
+}
