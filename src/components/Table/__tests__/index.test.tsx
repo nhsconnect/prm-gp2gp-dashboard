@@ -22,6 +22,30 @@ describe("Table component", () => {
     expect(allHeaders.length).toBe(3);
   });
 
+  it("displays extra table header grouping when passed in", () => {
+    const HeaderGrouping = () => (
+      <tr>
+        <th>qualities</th>
+      </tr>
+    );
+
+    const { getAllByRole } = render(
+      <Table
+        headers={headers}
+        rows={rows}
+        headerGroupingComponent={<HeaderGrouping />}
+      />
+    );
+
+    const allHeaders = getAllByRole("columnheader");
+
+    expect(allHeaders[0]).toHaveTextContent("qualities");
+    expect(allHeaders[1]).toHaveTextContent("fruit");
+    expect(allHeaders[2]).toHaveTextContent("colour");
+    expect(allHeaders[3]).toHaveTextContent("quantity");
+    expect(allHeaders.length).toBe(4);
+  });
+
   it("displays rows in correct order", () => {
     const { getAllByRole } = render(<Table headers={headers} rows={rows} />);
 
