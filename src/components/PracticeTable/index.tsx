@@ -131,7 +131,7 @@ const PracticeTable: FC<PracticeTableProps> = ({
           captionText={tableCaptionText}
           headerGroupingComponent={
             <TableGroupHeading
-              columnGapNumber={practiceTableContent.tableHeaders.length - 3}
+              columnGapNumber={2}
               groupHeading="Percentage Completed"
             />
           }

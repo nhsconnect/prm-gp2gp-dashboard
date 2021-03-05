@@ -142,6 +142,23 @@ describe("Practice template", () => {
     });
   });
 
+  it("display table headers correctly", () => {
+    const { getAllByRole } = render(
+      <Practice pageContext={pipelinePracticeData} />
+    );
+
+    const allColumnHeaders = getAllByRole("columnheader");
+
+    expect(allColumnHeaders[0]).toBeEmptyDOMElement();
+    expect(allColumnHeaders[1]).toHaveTextContent("Percentage Completed");
+    expect(allColumnHeaders[2]).toHaveTextContent("Total integrations");
+    expect(allColumnHeaders[3]).toHaveTextContent("Within 3 days");
+    expect(allColumnHeaders[4]).toHaveTextContent("Within 8 days");
+    expect(allColumnHeaders[5]).toHaveTextContent("Beyond 8 days");
+
+    expect(allColumnHeaders.length).toBe(6);
+  });
+
   it("renders placeholders when there is no transfers", async () => {
     const pipelinePracticeNoTransferData = {
       ...pipelinePracticeData,

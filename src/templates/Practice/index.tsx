@@ -10,6 +10,7 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import { addPercentageSign } from "../../library/utils/addPercentageSign/index";
 import { useApi } from "../../library/hooks/useApi";
 import Table from "../../components/Table";
+import { TableGroupHeading } from "../../components/TableGroupHeading";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
@@ -81,26 +82,32 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
       <h2 className="nhsuk-heading-m">
         {monthName} {year}
       </h2>
-      <Table
-        className={"gp2gp-practice-table"}
-        headers={
-          isIntegratedPercentageOn
-            ? slaMetricsContent.tableHeaders
-            : slaMetricsContent.tableHeadersDeprecated
-        }
-        rows={
-          isIntegratedPercentageOn
-            ? _generate_row_data(metrics.integrated)
-            : [
-                [
-                  metrics.integrated.transferCount.toString(),
-                  metrics.integrated.within3Days.toString(),
-                  metrics.integrated.within8Days.toString(),
-                  metrics.integrated.beyond8Days.toString(),
-                ],
-              ]
-        }
-      />
+      {isIntegratedPercentageOn ? (
+        <Table
+          className={"gp2gp-practice-table"}
+          headers={slaMetricsContent.tableHeaders}
+          rows={_generate_row_data(metrics.integrated)}
+          headerGroupingComponent={
+            <TableGroupHeading
+              columnGapNumber={1}
+              groupHeading="Percentage Completed"
+            />
+          }
+        />
+      ) : (
+        <Table
+          className={"gp2gp-practice-table"}
+          headers={slaMetricsContent.tableHeadersDeprecated}
+          rows={[
+            [
+              metrics.integrated.transferCount.toString(),
+              metrics.integrated.within3Days.toString(),
+              metrics.integrated.within8Days.toString(),
+              metrics.integrated.beyond8Days.toString(),
+            ],
+          ]}
+        />
+      )}
     </>
   );
 };
