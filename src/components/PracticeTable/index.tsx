@@ -52,23 +52,25 @@ const _sort_practices_by_beyond8Days = (
   filteredPractices: Practice[],
   isIntegratedPercentageOn: boolean
 ) => {
-  isIntegratedPercentageOn
-    ? filteredPractices.sort((firstEl, secondEl) => {
-        const firstPracticeBeyond8Days =
-          firstEl.metrics[0].requester.integrated.beyond8DaysPercentage;
-        const secondPracticeBeyond8Days =
-          secondEl.metrics[0].requester.integrated.beyond8DaysPercentage;
+  if (isIntegratedPercentageOn) {
+    filteredPractices.sort((firstEl, secondEl) => {
+      const firstPracticeBeyond8Days =
+        firstEl.metrics[0].requester.integrated.beyond8DaysPercentage;
+      const secondPracticeBeyond8Days =
+        secondEl.metrics[0].requester.integrated.beyond8DaysPercentage;
 
-        if (firstPracticeBeyond8Days === null) return 1;
-        if (secondPracticeBeyond8Days === null) return -1;
+      if (firstPracticeBeyond8Days === null) return 1;
+      if (secondPracticeBeyond8Days === null) return -1;
 
-        return secondPracticeBeyond8Days - firstPracticeBeyond8Days;
-      })
-    : filteredPractices.sort(
-        (firstEl, secondEl) =>
-          secondEl.metrics[0].requester.integrated.beyond8Days -
-          firstEl.metrics[0].requester.integrated.beyond8Days
-      );
+      return secondPracticeBeyond8Days - firstPracticeBeyond8Days;
+    });
+  } else {
+    filteredPractices.sort(
+      (firstEl, secondEl) =>
+        secondEl.metrics[0].requester.integrated.beyond8Days -
+        firstEl.metrics[0].requester.integrated.beyond8Days
+    );
+  }
 };
 
 const PracticeTable: FC<PracticeTableProps> = ({
