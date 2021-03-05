@@ -9,6 +9,7 @@ import { addPercentageSign } from "../../library/utils/addPercentageSign/index";
 import "./index.scss";
 import Table from "../Table";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import { TableGroupHeading } from "../TableGroupHeading";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -124,16 +125,27 @@ const PracticeTable: FC<PracticeTableProps> = ({
         {practiceTableContent.description}
       </p>
 
-      <Table
-        className="gp2gp-ccg-table"
-        captionText={tableCaptionText}
-        headers={
-          isIntegratedPercentageOn
-            ? practiceTableContent.tableHeaders
-            : practiceTableContent.tableHeadersDeprecated
-        }
-        rows={practiceTableRows}
-      />
+      {isIntegratedPercentageOn ? (
+        <Table
+          className="gp2gp-ccg-table"
+          captionText={tableCaptionText}
+          headerGroupingComponent={
+            <TableGroupHeading
+              columnGapNumber={practiceTableContent.tableHeaders.length - 3}
+              groupHeading="Percentage Completed"
+            />
+          }
+          headers={practiceTableContent.tableHeaders}
+          rows={practiceTableRows}
+        />
+      ) : (
+        <Table
+          className="gp2gp-ccg-table"
+          captionText={tableCaptionText}
+          headers={practiceTableContent.tableHeadersDeprecated}
+          rows={practiceTableRows}
+        />
+      )}
     </>
   );
 };

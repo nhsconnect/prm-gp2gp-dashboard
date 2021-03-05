@@ -57,10 +57,10 @@ describe("PracticeTable component", () => {
 
     expect(getByText("GP Practice | A12345")).toBeInTheDocument();
     expect(getByText("GP Practice 2 | B12345")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent("Total integrations 7");
-    expect(allRows[1]).toHaveTextContent("Within 3 days 0%");
-    expect(allRows[1]).toHaveTextContent("Within 8 days 28.6%");
-    expect(allRows[1]).toHaveTextContent("Beyond 8 days 71.4%");
+    expect(allRows[2]).toHaveTextContent("Total integrations 7");
+    expect(allRows[2]).toHaveTextContent("Within 3 days 0%");
+    expect(allRows[2]).toHaveTextContent("Within 8 days 28.6%");
+    expect(allRows[2]).toHaveTextContent("Beyond 8 days 71.4%");
   });
 
   it("displays multiple valid practices when F_PRACTICE_SLA_PERCENTAGE off", () => {
@@ -159,13 +159,13 @@ describe("PracticeTable component", () => {
 
     const allRows = getAllByRole("row");
 
-    expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
-    expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
-    expect(allRows[3]).toHaveTextContent("Beyond 8 days 8.8%");
-    expect(allRows[4]).toHaveTextContent("Beyond 8 days 0%");
+    expect(allRows[2]).toHaveTextContent("Beyond 8 days 47.6%");
+    expect(allRows[3]).toHaveTextContent("Beyond 8 days 25%");
+    expect(allRows[4]).toHaveTextContent("Beyond 8 days 8.8%");
     expect(allRows[5]).toHaveTextContent("Beyond 8 days 0%");
-    expect(allRows[6]).toHaveTextContent("Beyond 8 days n/a");
-    expect(allRows.length).toBe(7);
+    expect(allRows[6]).toHaveTextContent("Beyond 8 days 0%");
+    expect(allRows[7]).toHaveTextContent("Beyond 8 days n/a");
+    expect(allRows.length).toBe(8);
   });
 
   it("displays practices ordered by Beyond 8 day SLA when F_PRACTICE_SLA_PERCENTAGE off", () => {
@@ -191,6 +191,29 @@ describe("PracticeTable component", () => {
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 10");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 3");
     expect(allRows[3]).toHaveTextContent("Beyond 8 days 0");
+  });
+
+  it("display headers correctly", () => {
+    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
+
+    const { getAllByRole } = render(
+      <PracticeTable
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    const allColumnHeaders = getAllByRole("columnheader");
+
+    expect(allColumnHeaders[0]).toBeEmptyDOMElement();
+    expect(allColumnHeaders[1]).toHaveTextContent("Percentage Completed");
+    expect(allColumnHeaders[2]).toHaveTextContent("Practice name");
+    expect(allColumnHeaders[3]).toHaveTextContent("Total integrations");
+    expect(allColumnHeaders[4]).toHaveTextContent("Within 3 days");
+    expect(allColumnHeaders[5]).toHaveTextContent("Within 8 days");
+    expect(allColumnHeaders[6]).toHaveTextContent("Beyond 8 days");
+
+    expect(allColumnHeaders.length).toBe(7);
   });
 
   it("navigates to a practice page when a link is clicked", () => {
