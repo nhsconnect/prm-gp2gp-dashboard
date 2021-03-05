@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import Table from "../../components/Table";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 
 type PageContext = {
@@ -8,6 +9,9 @@ type PageContext = {
   month: number;
   transferCount: number;
   integrated: IntegratedStats;
+  // TODO: Make it not optional as part of PRMT-1489 cleanup
+  failed?: FailedStats;
+  pending?: PendingStats;
   paperFallback: PaperStats;
 };
 
@@ -17,6 +21,16 @@ type IntegratedStats = {
   within3Days: number;
   within8Days: number;
   beyond8Days: number;
+};
+
+type FailedStats = {
+  transferCount: number;
+  transferPercentage: number;
+};
+
+type PendingStats = {
+  transferCount: number;
+  transferPercentage: number;
 };
 
 type PaperStats = {
@@ -29,8 +43,20 @@ type NationalStatisticsProps = {
 };
 
 const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
-  const { month, year, transferCount, integrated, paperFallback } = pageContext;
+  const {
+    month,
+    year,
+    transferCount,
+    integrated,
+    paperFallback,
+    failed,
+    pending,
+  } = pageContext;
   const monthName = convertMonthNumberToText(month);
+  const isFailedAndPendingTransfersOn = useFeatureToggle(
+    "F_FAILED_AND_PENDING_TRANSFERS"
+  );
+
   return (
     <>
       <Helmet title="National Statistics" />
@@ -86,6 +112,56 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
         <li>Count: {paperFallback.transferCount}</li>
         <li>Percent: {paperFallback.transferPercentage}%</li>
       </ul>
+      {isFailedAndPendingTransfersOn && (
+        <>
+          <h3 className="nhsuk-heading-s">Failed transfers</h3>
+          <p>
+            Technical errors such as large attachment failures that trigger the
+            paper fallback process.
+          </p>
+          <ul>
+            <li>
+              Count:{" "}
+              {
+                // TODO: Remove as part of PRMT-1489 cleanup
+                // @ts-ignore
+                failed.transferCount
+              }
+            </li>
+            <li>
+              Percent:{" "}
+              {
+                // @ts-ignore
+                failed.transferPercentage
+              }
+              %
+            </li>
+          </ul>
+          <h3 className="nhsuk-heading-s">Pending transfers</h3>
+          <p>
+            Any transfers that trigger the paper fallback due to never being
+            actioned by a human or unreported technical errors.
+          </p>
+          <ul>
+            <li>
+              Count:{" "}
+              {
+                // TODO: Remove as part of PRMT-1489 cleanup
+                // @ts-ignore
+                pending.transferCount
+              }
+            </li>
+            <li>
+              Percent:{" "}
+              {
+                // @ts-ignore
+                pending.transferPercentage
+              }
+              %
+            </li>
+          </ul>
+        </>
+      )}
     </>
   );
 };
