@@ -55,23 +55,29 @@ describe("E2E Tests", () => {
 
         // CCG Page
         cy.contains("Practice performance");
+
         cy.contains("Practice name");
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-0"]').contains(
+          /.+/g
+        );
 
         cy.contains("Successful integrations");
-        cy.get('[data-testid="nhsuk-table__cell-0-0"]').contains(/[\d]+/g);
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-1"]').contains(
+          /[\d]+/g
+        );
 
         cy.contains("Within 3 days");
-        cy.get('[data-testid="nhsuk-table__cell-0-1"]').contains(
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-2"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Within 8 days");
-        cy.get('[data-testid="nhsuk-table__cell-0-2"]').contains(
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-3"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Beyond 8 days");
-        cy.get('[data-testid="nhsuk-table__cell-0-3"]').contains(
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-4"]').contains(
           /^(.+%|n\/a)$/g
         );
         cy.checkAccessibility();
@@ -111,20 +117,22 @@ describe("E2E Tests", () => {
         cy.contains("Practice performance");
 
         cy.contains("Successful integrations");
-        cy.get('[data-testid="nhsuk-table__cell-0-0"]').contains(/[\d]+/g);
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-0"]').contains(
+          /[\d]+/g
+        );
 
         cy.contains("Within 3 days");
-        cy.get('[data-testid="nhsuk-table__cell-0-1"]').contains(
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-1"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Within 8 days");
-        cy.get('[data-testid="nhsuk-table__cell-0-2"]').contains(
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-2"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Beyond 8 days");
-        cy.get('[data-testid="nhsuk-table__cell-0-3"]').contains(
+        cy.get('[data-testid="nhsuk-table__cell--row-0-col-3"]').contains(
           /^(.+%|n\/a)$/g
         );
 
