@@ -1,6 +1,4 @@
 describe("E2E Tests", () => {
-  beforeEach(() => {});
-
   const viewPorts = [
     { device: "Desktop", width: 1280, height: 720 },
     { device: "Mobile", width: 320, height: 480 },
@@ -10,38 +8,42 @@ describe("E2E Tests", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
+        cy.visit("/");
+        cy.injectAxe();
       });
 
-      it("displays the cookie banner on the homepage and navigates to the cookie policy page", () => {
-        cy.visit("/");
-
+      it("displays the home page with the search input", () => {
         cy.contains("h1", "Search");
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        );
+        cy.contains("button", "Search");
+        cy.checkAccessibility();
+      });
+
+      it("displays the cookie banner and navigates to the cookie policy page", () => {
         cy.contains("Do not use analytics cookies").click();
         cy.contains(
           "You can change your cookie settings at any time using our cookies page."
         );
         cy.contains("a", "cookies page").click();
         cy.contains("h1", "Cookie Policy");
+        cy.checkAccessibility();
       });
 
       it("displays the feedback form", () => {
-        cy.visit("/");
-
         cy.contains("Tell us what you think");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });
 
       it("displays the validation error when there is no input", () => {
-        cy.visit("/");
-
         cy.contains("button", "Search").click();
         cy.contains("Please enter a valid ODS code, practice name or CCG name");
+        cy.checkAccessibility();
       });
 
       it("searches and navigates to the CCG page and then navigates to an individual practice page", () => {
-        cy.visit("/");
-
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("bolton");
@@ -58,6 +60,7 @@ describe("E2E Tests", () => {
         cy.contains("Within 3 days");
         cy.contains("Within 8 days");
         cy.contains("Beyond 8 days");
+        cy.checkAccessibility();
 
         // Navigate to Practice page
         cy.contains("td", /Practice|Centre/g)
@@ -73,8 +76,6 @@ describe("E2E Tests", () => {
       });
 
       it("searches and navigates to an individual practice page", () => {
-        cy.visit("/");
-
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("Bolton Community Practice");
@@ -99,6 +100,7 @@ describe("E2E Tests", () => {
         cy.contains("Within 3 days");
         cy.contains("Within 8 days");
         cy.contains("Beyond 8 days");
+        cy.checkAccessibility();
       });
 
       //TODO: national metrics
@@ -111,18 +113,17 @@ describe("E2E Tests", () => {
       });
 
       it("displays your privacy page", () => {
-        cy.visit("/");
         cy.contains("a", "Your privacy").click();
         cy.contains("h1", "Your privacy");
         cy.contains("Information we may collect");
+        cy.checkAccessibility();
       });
 
       it("displays accessibility statement page", () => {
-        cy.visit("/");
-
         cy.contains("a", "Accessibility statement").click();
         cy.contains("h1", "Accessibility statement");
         cy.contains("How accessible this website is");
+        cy.checkAccessibility();
       });
     });
   });

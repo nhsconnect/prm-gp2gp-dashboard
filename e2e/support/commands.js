@@ -1,4 +1,5 @@
 import "@testing-library/cypress/add-commands";
+import "cypress-axe";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -25,3 +26,25 @@ import "@testing-library/cypress/add-commands";
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+// Print cypress-axe violations to the terminal
+function printAccessibilityViolations(violations) {
+  cy.task(
+    "table",
+    violations.map(({ id, impact, description, nodes }) => ({
+      impact,
+      description: `${description} (${id})`,
+      nodes: nodes.length,
+    }))
+  );
+}
+
+Cypress.Commands.add(
+  "checkAccessibility",
+  {
+    prevSubject: "optional",
+  },
+  (subject, { skipFailures = true } = {}) => {
+    cy.checkA11y(subject, null, printAccessibilityViolations, skipFailures);
+  }
+);
