@@ -97,9 +97,17 @@ describe("E2E Tests", () => {
         cy.contains("Practice performance");
 
         cy.contains("Successful integrations");
+        cy.get('[data-testid="nhsuk-table__cell-0-0"]').contains(/[\d]+/g);
+
         cy.contains("Within 3 days");
+        // cy.get('[data-testid="nhsuk-table__cell-0-1"]').contains(/^((\d+|(\d+\.\d+))%|n\/a)$/g)
+
         cy.contains("Within 8 days");
+        // cy.get('[data-testid="nhsuk-table__cell-0-2"]').contains(/^((\d+|(\d+\.\d+))%|n\/a)$/g)
+
         cy.contains("Beyond 8 days");
+        // cy.get('[data-testid="nhsuk-table__cell-0-3"]').contains(/^((\d+|(\d+\.\d+))%|n\/a)$/g)
+
         cy.checkAccessibility();
       });
 

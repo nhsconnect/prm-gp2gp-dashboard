@@ -40,6 +40,7 @@ const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
         <tr role="row" className="nhsuk-table__row" key={`row-${rowIndex}`}>
           {row?.map((cell, cellIndex) => (
             <td
+              data-testid={`nhsuk-table__cell-${rowIndex}-${cellIndex}`}
               key={`cell-${rowIndex}-${cellIndex}`}
               role="cell"
               className="nhsuk-table__cell"
