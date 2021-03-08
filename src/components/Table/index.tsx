@@ -4,19 +4,12 @@ import classNames from "classnames";
 
 type TableProps = {
   headers: string[];
-  headerGroupingComponent?: JSX.Element;
   captionText?: string;
   rows: (string | number | JSX.Element)[][];
   className?: string;
 };
 
-const Table: FC<TableProps> = ({
-  headers,
-  headerGroupingComponent,
-  captionText,
-  rows,
-  className,
-}) => (
+const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
   <table
     className={classNames("gp2gp-table", className)}
     {...(captionText ? { "aria-describedby": "table-title" } : {})}
@@ -30,7 +23,6 @@ const Table: FC<TableProps> = ({
       </caption>
     ) : null}
     <thead className="nhsuk-table__head">
-      {headerGroupingComponent || null}
       <tr>
         {headers?.map((header, columnIndex) => (
           <th
