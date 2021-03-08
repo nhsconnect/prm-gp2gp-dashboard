@@ -65,6 +65,10 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
   const formattedName = convertToTitleCase(name);
   const monthName = convertMonthNumberToText(month);
 
+  const tableCaptionText = `Practice performance for ${convertMonthNumberToText(
+    month
+  )} ${year}`;
+
   return (
     <>
       <Helmet title={`${formattedName} | ${odsCode}`} />
@@ -78,12 +82,10 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
         />
       )}
       <hr />
-      <h2 className="nhsuk-heading-m">
-        {monthName} {year}
-      </h2>
       <Table
         className={"gp2gp-practice-table"}
         headers={slaMetricsContent.tableHeaders}
+        captionText={tableCaptionText}
         rows={
           isIntegratedPercentageOn
             ? _generate_row_data(metrics.integrated)

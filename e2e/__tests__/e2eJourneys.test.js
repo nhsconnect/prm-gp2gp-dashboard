@@ -78,6 +78,8 @@ describe("E2E Tests", () => {
     cy.contains("Bolton");
     cy.contains("BL1 8TT");
 
+    cy.contains("Practice performance");
+
     cy.contains("Successful integrations");
     cy.contains("Within 3 days");
     cy.contains("Within 8 days");

@@ -123,7 +123,6 @@ const PracticeTable: FC<PracticeTableProps> = ({
       <p className="nhsuk-body-m nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-5">
         {practiceTableContent.description}
       </p>
-
       <Table
         className="gp2gp-ccg-table"
         captionText={tableCaptionText}
