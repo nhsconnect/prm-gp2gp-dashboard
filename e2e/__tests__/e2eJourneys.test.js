@@ -57,27 +57,23 @@ describe("E2E Tests", () => {
         cy.contains("Practice performance");
 
         cy.contains("Practice name");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-0"]').contains(
-          /.+/g
-        );
+        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(/.+/g);
 
         cy.contains("Successful integrations");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-1"]').contains(
-          /[\d]+/g
-        );
+        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(/[\d]+/g);
 
         cy.contains("Within 3 days");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-2"]').contains(
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Within 8 days");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-3"]').contains(
+        cy.get('[data-testid="table__cell--row-0-col-3"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Beyond 8 days");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-4"]').contains(
+        cy.get('[data-testid="table__cell--row-0-col-4"]').contains(
           /^(.+%|n\/a)$/g
         );
         cy.checkAccessibility();
@@ -117,30 +113,36 @@ describe("E2E Tests", () => {
         cy.contains("Practice performance");
 
         cy.contains("Successful integrations");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-0"]').contains(
-          /[\d]+/g
-        );
+        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(/[\d]+/g);
 
         cy.contains("Within 3 days");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-1"]').contains(
+        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Within 8 days");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-2"]').contains(
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.contains("Beyond 8 days");
-        cy.get('[data-testid="nhsuk-table__cell--row-0-col-3"]').contains(
+        cy.get('[data-testid="table__cell--row-0-col-3"]').contains(
           /^(.+%|n\/a)$/g
         );
 
         cy.checkAccessibility();
       });
 
-      //TODO: national metrics
-      xit("displays national metrics page", () => {});
+      it("displays national metrics page", () => {
+        cy.visit("/national-gp2gp-statistics");
+
+        cy.contains("h1", "National data on GP2GP performance");
+        cy.contains("h3", "Total number of transfers initiated");
+        cy.contains("h3", "SLA Bandings/Metrics");
+        cy.contains("h3", "Total paper fall back rate");
+        cy.contains("h3", "Failed transfers");
+        cy.contains("h3", "Pending transfers");
+      });
 
       it("displays 404 not found page", () => {
         cy.visit("/some-page", { failOnStatusCode: false });
