@@ -149,7 +149,7 @@ describe("Practice template", () => {
 
     const allColumnHeaders = getAllByRole("columnheader");
 
-    expect(allColumnHeaders[0]).toHaveTextContent("Total integrations");
+    expect(allColumnHeaders[0]).toHaveTextContent("Successful integrations");
     expect(allColumnHeaders[1]).toHaveTextContent("Within 3 days");
     expect(allColumnHeaders[2]).toHaveTextContent("Within 8 days");
     expect(allColumnHeaders[3]).toHaveTextContent("Beyond 8 days");
@@ -181,37 +181,6 @@ describe("Practice template", () => {
       const dashElements = getAllByText("n/a");
       expect(dashElements[0]).toBeInTheDocument();
       expect(dashElements.length).toBe(3);
-    });
-  });
-
-  it("renders metrics correctly when F_PRACTICE_SLA_PERCENTAGE is toggled off", async () => {
-    when(mocked(useFeatureToggle))
-      .calledWith("F_PRACTICE_SLA_PERCENTAGE")
-      .mockReturnValue(false);
-
-    const { getByText, getAllByText } = render(
-      <Practice pageContext={pipelinePracticeData} />
-    );
-
-    await waitFor(() => {
-      expect(
-        getAllByText(slaMetricsContent.tableHeadersDeprecated[0])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(practiceIntegratedData.transferCount)
-      ).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeadersDeprecated[1])[0]
-      ).toBeInTheDocument();
-      expect(getByText(practiceIntegratedData.within3Days)).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeadersDeprecated[2])[0]
-      ).toBeInTheDocument();
-      expect(getByText(practiceIntegratedData.within8Days)).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeadersDeprecated[3])[0]
-      ).toBeInTheDocument();
-      expect(getByText(practiceIntegratedData.beyond8Days)).toBeInTheDocument();
     });
   });
 });

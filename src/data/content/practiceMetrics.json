@@ -1,14 +1,8 @@
 {
   "title": "Your practice integrating records",
   "subtitle": "Number of records integrated:",
-  "tableHeadersDeprecated": [
-    "Successful integrations",
-    "Within 3 days",
-    "Within 8 days",
-    "Beyond 8 days"
-  ],
   "tableHeaders": [
-    "Total integrations",
+    "Successful integrations",
     "Within 3 days",
     "Within 8 days",
     "Beyond 8 days"

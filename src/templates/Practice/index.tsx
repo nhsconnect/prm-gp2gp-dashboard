@@ -83,11 +83,7 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
       </h2>
       <Table
         className={"gp2gp-practice-table"}
-        headers={
-          isIntegratedPercentageOn
-            ? slaMetricsContent.tableHeaders
-            : slaMetricsContent.tableHeadersDeprecated
-        }
+        headers={slaMetricsContent.tableHeaders}
         rows={
           isIntegratedPercentageOn
             ? _generate_row_data(metrics.integrated)

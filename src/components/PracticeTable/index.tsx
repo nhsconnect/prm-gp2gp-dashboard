@@ -127,11 +127,7 @@ const PracticeTable: FC<PracticeTableProps> = ({
       <Table
         className="gp2gp-ccg-table"
         captionText={tableCaptionText}
-        headers={
-          isIntegratedPercentageOn
-            ? practiceTableContent.tableHeaders
-            : practiceTableContent.tableHeadersDeprecated
-        }
+        headers={practiceTableContent.tableHeaders}
         rows={practiceTableRows}
       />
     </>
