@@ -14,6 +14,7 @@ import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
+import { AboutThisDataContent } from "./AboutThisDataContent";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -99,6 +100,7 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
               ]
         }
       />
+      <AboutThisDataContent />
     </>
   );
 };
