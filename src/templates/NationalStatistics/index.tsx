@@ -78,7 +78,7 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
         whether the request was successful or failed.
       </p>
       <ul>
-        <li>Count: {transferCount}</li>
+        <li>{`Count: ${transferCount}`}</li>
       </ul>
       <h3 className="nhsuk-heading-s">Successfully integrated records</h3>
       <p>
@@ -86,8 +86,8 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
         perspective, whether it’s in the 8 day SLA or not.
       </p>
       <ul>
-        <li>Count: {integrated.transferCount}</li>
-        <li>Percent: {integrated.transferPercentage}%</li>
+        <li>{`Count: ${integrated.transferCount}`}</li>
+        <li>{`Percent: ${integrated.transferPercentage}%`}</li>
       </ul>
       <h3 className="nhsuk-heading-s">SLA Bandings/Metrics</h3>
       <p>
@@ -104,13 +104,22 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
           ],
         ]}
       />
-      <h3 className="nhsuk-heading-s">Total paper fall back rate</h3>
-      <p>
-        Records not integrated within 8 days trigger the paper fallback process.
-      </p>
+      <h3 className="nhsuk-heading-s">Total paper fallback rate</h3>
+      {isFailedAndPendingTransfersOn ? (
+        <p>
+          Records not integrated within 8 days that trigger the paper fallback
+          process. This includes records successfully integrated beyond 8 days,
+          failed transfers and pending transfers.
+        </p>
+      ) : (
+        <p>
+          Records not integrated within 8 days that trigger the paper fallback
+          process.
+        </p>
+      )}
       <ul>
-        <li>Count: {paperFallback.transferCount}</li>
-        <li>Percent: {paperFallback.transferPercentage}%</li>
+        <li>{`Count: ${paperFallback.transferCount}`}</li>
+        <li>{`Percent: ${paperFallback.transferPercentage}%`}</li>
       </ul>
       {isFailedAndPendingTransfersOn && (
         <>
@@ -121,20 +130,13 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
           </p>
           <ul>
             <li>
-              Count:{" "}
-              {
-                // TODO: Remove as part of PRMT-1489 cleanup
-                // @ts-ignore
-                failed.transferCount
-              }
+              {// TODO: Remove as part of PRMT-1489 cleanup
+              // @ts-ignore
+              `Count: ${failed.transferCount}`}
             </li>
             <li>
-              Percent:{" "}
-              {
-                // @ts-ignore
-                failed.transferPercentage
-              }
-              %
+              {// @ts-ignore
+              `Percent: ${failed.transferPercentage}%`}
             </li>
           </ul>
           <h3 className="nhsuk-heading-s">Pending transfers</h3>
@@ -144,20 +146,13 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
           </p>
           <ul>
             <li>
-              Count:{" "}
-              {
-                // TODO: Remove as part of PRMT-1489 cleanup
-                // @ts-ignore
-                pending.transferCount
-              }
+              {// TODO: Remove as part of PRMT-1489 cleanup
+              // @ts-ignore
+              `Count: ${pending.transferCount}`}
             </li>
             <li>
-              Percent:{" "}
-              {
-                // @ts-ignore
-                pending.transferPercentage
-              }
-              %
+              {// @ts-ignore
+              `Percent: ${pending.transferPercentage}%`}
             </li>
           </ul>
         </>

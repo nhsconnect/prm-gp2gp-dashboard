@@ -139,7 +139,7 @@ describe("E2E Tests", () => {
         cy.contains("h1", "National data on GP2GP performance");
         cy.contains("h3", "Total number of transfers initiated");
         cy.contains("h3", "SLA Bandings/Metrics");
-        cy.contains("h3", "Total paper fall back rate");
+        cy.contains("h3", "Total paper fallback rate");
         cy.contains("h3", "Failed transfers");
         cy.contains("h3", "Pending transfers");
       });
