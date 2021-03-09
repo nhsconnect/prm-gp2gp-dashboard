@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 
 const Index: FC = () => (
   <>
-    <Helmet title="GP2GP Service Dashboard" />
+    <Helmet title="GP Registrations Data Platform" />
     <OrganisationSearch />
   </>
 );

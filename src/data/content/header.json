@@ -1,8 +1,8 @@
 {
-  "serviceName": "GP2GP Service Dashboard",
-  "homepageLinkLabel": "NHS GP2GP Service Dashboard homepage",
+  "serviceName": "GP Registrations Data Platform",
+  "homepageLinkLabel": "NHS GP Registrations Data Platform homepage",
   "phaseBanner": {
-    "tag": "ALPHA",
+    "tag": "Private Beta",
     "text": "This is a new service. Content and structure are subject to change."
   }
 }

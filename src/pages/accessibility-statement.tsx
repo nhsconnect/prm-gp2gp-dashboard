@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 
 const AccessibilityStatement: FC = () => (
   <>
-    <Helmet title="Accessibility statement- GP2GP Service Dashboard" />
+    <Helmet title="Accessibility statement- GP Registrations Data Platform" />
     <div className="nhsuk-u-reading-width">
       <h1>Accessibility statement</h1>
       <h2>How you can use this website</h2>
