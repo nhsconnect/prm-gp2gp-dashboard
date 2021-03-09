@@ -1,0 +1,6 @@
+{
+  "title": "GP2GP patient record transfers data",
+  "subtitle": "This platform provides monthly data about GP2GP transfers for practices in England.",
+  "descriptionTitle": "About",
+  "description": "This platform shows monthly integration data for practices individually and grouped by Clinical Commissioning Group (CCG). It shows how long it took practices to integrate the records they received."
+}

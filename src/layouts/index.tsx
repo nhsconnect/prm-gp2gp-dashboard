@@ -19,14 +19,36 @@ const trackingId =
 type LayoutProps = {
   path: string;
   children: ReactNode;
+  pageContext: {
+    layout: "general" | "homepage";
+  };
 };
 
-const Layout: FC<LayoutProps> = ({ path, children }) => {
+// const HomepageContent: FC = ({ children }) => (
+//   <div className="nhsuk-width-container">
+//     <main className="nhsuk-main-wrapper">
+//       {children}
+//       <FeedbackBanner />
+//     </main>
+//   </div>
+// );
+
+const GeneralContent: FC = ({ children }) => {
+  return (
+    <div className="nhsuk-width-container">
+      <main className="nhsuk-main-wrapper">
+        <FeedbackBanner />
+        {children}
+      </main>
+    </div>
+  );
+};
+
+const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [hasMounted, setHasMounted] = useState(false);
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
-  const isOnHomePage = path === "/";
 
   useEffect(() => {
     setHasMounted(true);
@@ -55,13 +77,11 @@ const Layout: FC<LayoutProps> = ({ path, children }) => {
       <ErrorBoundary>
         {!isOnCookiePage && <CookieBanner path={path} />}
         <Header />
-        <div className="nhsuk-width-container">
-          <main className="nhsuk-main-wrapper">
-            {!isOnHomePage && <FeedbackBanner />}
-            {children}
-            {isOnHomePage && <FeedbackBanner />}
-          </main>
-        </div>
+        {pageContext.layout === "homepage" ? (
+          children
+        ) : (
+          <GeneralContent>{children}</GeneralContent>
+        )}
         <Footer />
       </ErrorBoundary>
     </>

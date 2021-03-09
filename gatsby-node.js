@@ -21,6 +21,7 @@ exports.createPages = async ({ actions }) => {
         year: latestMetrics.year,
         month: latestMetrics.month,
         metrics: latestMetrics.requester,
+        layout: "general",
       },
     });
   });
@@ -33,6 +34,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         validPractices: practiceMetrics.practices,
+        layout: "general",
       },
     });
   });
@@ -44,6 +46,21 @@ exports.createPages = async ({ actions }) => {
     component: path.resolve("src/templates/NationalStatistics/index.tsx"),
     context: {
       ...latestNationalMetrics,
+      layout: "general",
+    },
+  });
+};
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage } = actions;
+
+  const layout = page.path === "/" ? "homepage" : "general";
+
+  createPage({
+    ...page,
+    context: {
+      ...page.context,
+      layout,
     },
   });
 };

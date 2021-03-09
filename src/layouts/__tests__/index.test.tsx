@@ -5,7 +5,7 @@ import Layout from "../index";
 describe("Layout component", () => {
   it("displays layout components on the home page", () => {
     const { getByTestId, getByRole, getByLabelText } = render(
-      <Layout path="/">
+      <Layout path="/" pageContext={{ layout: "homepage" }}>
         <div data-testid="test-div">
           <h1>This is title</h1>
         </div>
@@ -29,7 +29,7 @@ describe("Layout component", () => {
 
   it("should not display cookie banner on the cookie page", async () => {
     const { queryByLabelText } = render(
-      <Layout path="/cookies-policy/">
+      <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
         <div> </div>
       </Layout>
     );
