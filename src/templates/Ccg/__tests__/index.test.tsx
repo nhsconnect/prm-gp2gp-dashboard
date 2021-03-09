@@ -45,6 +45,27 @@ describe("CCG template", () => {
     });
   });
 
+  it("displays CCG 'About this data' header correctly", async () => {
+    const pipelineCCGData = {
+      odsCode: "12A",
+      name: "BURTON CCG",
+      validPractices: practiceMetricsMock,
+    };
+
+    const statusCode = 200;
+    const mockedResponse = {
+      Organisations: [{ OrgId: "A12345", Name: "GP PRACTICE" }],
+    };
+
+    mockAPIResponse(statusCode, mockedResponse);
+
+    const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
+
+    await waitFor(() => {
+      expect(getByText("About this data")).toBeInTheDocument();
+    });
+  });
+
   it("displays error when API is down", async () => {
     const pipelineCCGData = {
       odsCode: "12A",

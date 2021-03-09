@@ -8,6 +8,7 @@ import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
 import ccgContent from "../../data/content/ccg.json";
 import "./index.scss";
+import { AboutThisDataContent } from "./AboutThisDataContent";
 
 type PageContext = {
   odsCode: string;
@@ -30,20 +31,29 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
     Limit: 1000,
   });
 
-  return (
-    <>
-      <Helmet title={`${formattedName} | ${odsCode}`} />
-      <OrganisationDetails name={formattedName} odsCode={odsCode} />
-      {isLoading ? (
-        <p className="nhsuk-body">{ccgContent.loadingMessage}</p>
-      ) : error ? (
-        <p className="nhsuk-body">{ccgContent.errorMessage}</p>
-      ) : (
+  function getContent() {
+    if (isLoading) {
+      return <p className="nhsuk-body">{ccgContent.loadingMessage}</p>;
+    }
+    if (error) {
+      return <p className="nhsuk-body">{ccgContent.errorMessage}</p>;
+    }
+    return (
+      <div>
         <PracticeTable
           ccgPractices={data?.Organisations}
           validPractices={validPractices}
         />
-      )}
+        <AboutThisDataContent />
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <Helmet title={`${formattedName} | ${odsCode}`} />
+      <OrganisationDetails name={formattedName} odsCode={odsCode} />
+      {getContent()}
     </>
   );
 };
