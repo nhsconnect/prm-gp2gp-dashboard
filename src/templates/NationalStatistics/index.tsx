@@ -78,7 +78,7 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
         whether the request was successful or failed.
       </p>
       <ul>
-        <li>{`Count: ${transferCount}`}</li>
+        <li data-testid="national-statistics__initiated-count">{`Count: ${transferCount}`}</li>
       </ul>
       <h3 className="nhsuk-heading-s">Successfully integrated records</h3>
       <p>
@@ -86,8 +86,8 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
         perspective, whether it’s in the 8 day SLA or not.
       </p>
       <ul>
-        <li>{`Count: ${integrated.transferCount}`}</li>
-        <li>{`Percent: ${integrated.transferPercentage}%`}</li>
+        <li data-testid="national-statistics__integrated-count">{`Count: ${integrated.transferCount}`}</li>
+        <li data-testid="national-statistics__integrated-percent">{`Percent: ${integrated.transferPercentage}%`}</li>
       </ul>
       <h3 className="nhsuk-heading-s">SLA Bandings/Metrics</h3>
       <p>
@@ -118,8 +118,8 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
         </p>
       )}
       <ul>
-        <li>{`Count: ${paperFallback.transferCount}`}</li>
-        <li>{`Percent: ${paperFallback.transferPercentage}%`}</li>
+        <li data-testid="national-statistics__paper-fallback-count">{`Count: ${paperFallback.transferCount}`}</li>
+        <li data-testid="national-statistics__paper-fallback-percent">{`Percent: ${paperFallback.transferPercentage}%`}</li>
       </ul>
       {isFailedAndPendingTransfersOn && (
         <>
@@ -129,12 +129,12 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
             paper fallback process.
           </p>
           <ul>
-            <li>
+            <li data-testid="national-statistics__failed-count">
               {// TODO: Remove as part of PRMT-1489 cleanup
               // @ts-ignore
               `Count: ${failed.transferCount}`}
             </li>
-            <li>
+            <li data-testid="national-statistics__failed-percent">
               {// @ts-ignore
               `Percent: ${failed.transferPercentage}%`}
             </li>
@@ -145,12 +145,12 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
             actioned by a human or unreported technical errors.
           </p>
           <ul>
-            <li>
+            <li data-testid="national-statistics__pending-count">
               {// TODO: Remove as part of PRMT-1489 cleanup
               // @ts-ignore
               `Count: ${pending.transferCount}`}
             </li>
-            <li>
+            <li data-testid="national-statistics__pending-percent">
               {// @ts-ignore
               `Percent: ${pending.transferPercentage}%`}
             </li>
