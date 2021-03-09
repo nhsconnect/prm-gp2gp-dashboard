@@ -31,21 +31,22 @@ describe("National GP2GP Statistics template", () => {
       .mockReturnValue(true);
   });
 
-  it("renders National data on GP2GP performance title", () => {
+  it("renders national statistics overview correctly", () => {
     const { getByText } = render(
       <NationalStatistics pageContext={pipelineNationalData} />
     );
-    expect(getByText("National data on GP2GP performance")).toBeInTheDocument();
-  });
 
-  it("renders National statistics correctly", () => {
-    const { getByText } = render(
-      <NationalStatistics pageContext={pipelineNationalData} />
-    );
+    expect(getByText("National data on GP2GP performance")).toBeInTheDocument();
     expect(getByText("GP2GP Performance for January 2021")).toBeInTheDocument();
     expect(
       getByText(`Count: ${pipelineNationalData.transferCount}`)
     ).toBeInTheDocument();
+  });
+
+  it("renders integrated transfers correctly", () => {
+    const { getByText } = render(
+      <NationalStatistics pageContext={pipelineNationalData} />
+    );
 
     expect(
       getByText(`Count: ${pipelineNationalData.integrated.transferCount}`)
@@ -55,6 +56,12 @@ describe("National GP2GP Statistics template", () => {
         `Percent: ${pipelineNationalData.integrated.transferPercentage}%`
       )
     ).toBeInTheDocument();
+  });
+
+  it("renders SLA metrics correctly", () => {
+    const { getByText } = render(
+      <NationalStatistics pageContext={pipelineNationalData} />
+    );
 
     expect(
       getByText(pipelineNationalData.integrated.within3Days)
@@ -65,6 +72,12 @@ describe("National GP2GP Statistics template", () => {
     expect(
       getByText(pipelineNationalData.integrated.beyond8Days)
     ).toBeInTheDocument();
+  });
+
+  it("renders paper fallback correctly", () => {
+    const { getByText } = render(
+      <NationalStatistics pageContext={pipelineNationalData} />
+    );
 
     expect(
       getByText(`Count: ${pipelineNationalData.paperFallback.transferCount}`)
@@ -74,6 +87,12 @@ describe("National GP2GP Statistics template", () => {
         `Percent: ${pipelineNationalData.paperFallback.transferPercentage}%`
       )
     ).toBeInTheDocument();
+  });
+
+  it("renders failed transfers correctly", () => {
+    const { getByText } = render(
+      <NationalStatistics pageContext={pipelineNationalData} />
+    );
 
     expect(
       getByText(`Count: ${pipelineNationalData.failed.transferCount}`)
@@ -81,6 +100,12 @@ describe("National GP2GP Statistics template", () => {
     expect(
       getByText(`Percent: ${pipelineNationalData.failed.transferPercentage}%`)
     ).toBeInTheDocument();
+  });
+
+  it("renders pending transfers correctly", () => {
+    const { getByText } = render(
+      <NationalStatistics pageContext={pipelineNationalData} />
+    );
 
     expect(
       getByText(`Count: ${pipelineNationalData.pending.transferCount}`)
