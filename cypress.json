@@ -6,5 +6,6 @@
   "supportFile": "e2e/support",
   "videosFolder": "e2e/videos",
   "screenshotsFolder": "e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "testFiles": "**/*.e2e.test.*"
 }
