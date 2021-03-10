@@ -64,19 +64,21 @@ describe("E2E Journey Tests", () => {
         cy.contains("Successful integrations");
         cy.get('[data-testid="table__cell--row-0-col-1"]').contains(/[\d]+/g);
 
+        const validMetricAsPercentOrNA = /(.+%|n\/a)/;
+
         cy.contains("Within 3 days");
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains(
-          /^(.+%|n\/a)$/g
+          validMetricAsPercentOrNA
         );
 
         cy.contains("Within 8 days");
         cy.get('[data-testid="table__cell--row-0-col-3"]').contains(
-          /^(.+%|n\/a)$/g
+          validMetricAsPercentOrNA
         );
 
         cy.contains("Beyond 8 days");
         cy.get('[data-testid="table__cell--row-0-col-4"]').contains(
-          /^(.+%|n\/a)$/g
+          validMetricAsPercentOrNA
         );
         cy.checkAccessibility();
 
@@ -115,21 +117,27 @@ describe("E2E Journey Tests", () => {
         cy.contains("Practice performance");
 
         cy.contains("Successful integrations");
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(/[\d]+/g);
+
+        const validNumber = /[\d]+/g;
+        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
+          validNumber
+        );
+
+        const validMetricAsPercentOrNA = /(.+%|n\/a)/;
 
         cy.contains("Within 3 days");
         cy.get('[data-testid="table__cell--row-0-col-1"]').contains(
-          /^(.+%|n\/a)$/g
+          validMetricAsPercentOrNA
         );
 
         cy.contains("Within 8 days");
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains(
-          /^(.+%|n\/a)$/g
+          validMetricAsPercentOrNA
         );
 
         cy.contains("Beyond 8 days");
         cy.get('[data-testid="table__cell--row-0-col-3"]').contains(
-          /^(.+%|n\/a)$/g
+          validMetricAsPercentOrNA
         );
 
         cy.checkAccessibility();
