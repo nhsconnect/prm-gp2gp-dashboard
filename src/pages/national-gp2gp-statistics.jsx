@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import Table from "../components/Table";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
 
-const NationalStatistics: FC = () => {
+const NationalStatistics = () => {
   const {
     month,
     year,
