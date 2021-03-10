@@ -8,16 +8,9 @@ type TableProps = {
   captionText?: string;
   rows: (string | number | JSX.Element)[][];
   className?: string;
-  hideCaption?: boolean;
 };
 
-const Table: FC<TableProps> = ({
-  headers,
-  captionText,
-  rows,
-  className,
-  hideCaption,
-}) => (
+const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
   <table
     className={classNames("gp2gp-table", className)}
     {...(captionText ? { "aria-describedby": "table-title" } : {})}
@@ -25,10 +18,7 @@ const Table: FC<TableProps> = ({
     {captionText ? (
       <caption
         id="table-title"
-        className={classnames(
-          hideCaption && "hide-caption",
-          "nhsuk-table__caption nhsuk-u-margin-bottom-4"
-        )}
+        className="nhsuk-table__caption nhsuk-u-margin-bottom-4"
       >
         {captionText}
       </caption>

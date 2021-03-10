@@ -8,7 +8,7 @@ import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
 import ccgContent from "../../data/content/ccg.json";
 import "./index.scss";
-import { AboutThisDataContent } from "./AboutThisDataContent";
+import { AboutThisDataContent } from "../common/AboutThisDataContent";
 
 type PageContext = {
   odsCode: string;
@@ -40,6 +40,12 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
     }
     return (
       <div>
+        <p className="nhsuk-body">
+          The table below shows the time to integrate for records received by
+          the practices within this Clinical Commissioning Group (CCG). More
+          information <a href={"#about-this-data"}>about this data</a>.
+        </p>
+
         <PracticeTable
           ccgPractices={data?.Organisations}
           validPractices={validPractices}

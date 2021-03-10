@@ -7,14 +7,14 @@ import {
 } from "../../library/api/ODSPortal";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { addPercentageSign } from "../../library/utils/addPercentageSign/index";
+import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useApi } from "../../library/hooks/useApi";
 import Table from "../../components/Table";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
-import { AboutThisDataContent } from "./AboutThisDataContent";
+import { AboutThisDataContent } from "../common/AboutThisDataContent";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -64,7 +64,6 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
 
   const { name, odsCode, month, year, metrics } = pageContext;
   const formattedName = convertToTitleCase(name);
-  const monthName = convertMonthNumberToText(month);
 
   const tableCaptionText = `Practice performance for ${convertMonthNumberToText(
     month
@@ -83,6 +82,13 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
         />
       )}
       <hr />
+
+      <p className="nhsuk-body">
+        The table below shows the time to integrate for records received by the
+        practice. More information{" "}
+        <a href={"#about-this-data"}>about this data</a>.
+      </p>
+
       <Table
         className={"gp2gp-practice-table"}
         headers={slaMetricsContent.tableHeaders}

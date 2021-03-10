@@ -95,6 +95,24 @@ describe("E2E Journey Tests", () => {
           });
       });
 
+      it("searches and navigates to the CCG page and then navigates to an individual practice page", () => {
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        ).type("bolton");
+        cy.contains("li", "CCG")
+          .parent()
+          .parent()
+          .click();
+        cy.contains("button", "Search").click();
+
+        // CCG Page
+        cy.contains("Practice performance");
+
+        cy.contains("Practice name");
+
+        cy.checkAccessibility();
+      });
+
       it("searches and navigates to an individual practice page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"

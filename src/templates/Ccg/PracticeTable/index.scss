@@ -1,7 +1,2 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
-@import "node_modules/nhsuk-frontend/packages/core/utilities/typography";
-
-.nhsuk-body-sub-heading-link a {
-  @extend .nhsuk-u-font-size-19;
-}
