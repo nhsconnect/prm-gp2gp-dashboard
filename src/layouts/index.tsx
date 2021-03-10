@@ -12,6 +12,8 @@ import { setupAnalytics } from "../library/setupAnalytics";
 import getEnv from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
+import HeroBanner from "../components/HeroBanner";
+import homepageContent from "../data/content/homepage.json";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -19,14 +21,44 @@ const trackingId =
 type LayoutProps = {
   path: string;
   children: ReactNode;
+  pageContext: {
+    layout: "general" | "homepage";
+  };
 };
 
-const Layout: FC<LayoutProps> = ({ path, children }) => {
+type ContentProps = {
+  children: ReactNode;
+};
+
+const HomepageContent: FC<ContentProps> = ({ children }) => (
+  <>
+    <HeroBanner
+      title={homepageContent.title}
+      subtitle={homepageContent.subtitle}
+    />
+    <div className="nhsuk-width-container">
+      <main className="nhsuk-main-wrapper">
+        {children}
+        <FeedbackBanner />
+      </main>
+    </div>
+  </>
+);
+
+const GeneralContent: FC<ContentProps> = ({ children }) => (
+  <div className="nhsuk-width-container">
+    <main className="nhsuk-main-wrapper">
+      <FeedbackBanner />
+      {children}
+    </main>
+  </div>
+);
+
+const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [hasMounted, setHasMounted] = useState(false);
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
-  const isOnHomePage = path === "/";
 
   useEffect(() => {
     setHasMounted(true);
@@ -55,13 +87,11 @@ const Layout: FC<LayoutProps> = ({ path, children }) => {
       <ErrorBoundary>
         {!isOnCookiePage && <CookieBanner path={path} />}
         <Header />
-        <div className="nhsuk-width-container">
-          <main className="nhsuk-main-wrapper">
-            {!isOnHomePage && <FeedbackBanner />}
-            {children}
-            {isOnHomePage && <FeedbackBanner />}
-          </main>
-        </div>
+        {pageContext.layout === "homepage" ? (
+          <HomepageContent>{children}</HomepageContent>
+        ) : (
+          <GeneralContent>{children}</GeneralContent>
+        )}
         <Footer />
       </ErrorBoundary>
     </>

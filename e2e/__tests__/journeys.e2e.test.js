@@ -13,7 +13,9 @@ describe("E2E Journey Tests", () => {
       });
 
       it("displays the home page with the search input", () => {
-        cy.contains("h1", "Search");
+        cy.contains("h1", "GP2GP patient record transfers data");
+        cy.contains("h2", "About");
+        cy.contains("h2", "Search");
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         );

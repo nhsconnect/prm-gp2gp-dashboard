@@ -84,9 +84,9 @@ const OrganisationSearch = () => {
 
   return (
     <div className="gp2gp-practice-search">
-      <h1 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
+      <h2 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
         {organisationSearchContent.heading}
-      </h1>
+      </h2>
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
         <Autosuggest
           inputError={inputError}
