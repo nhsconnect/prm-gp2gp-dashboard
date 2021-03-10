@@ -4,12 +4,14 @@
 @import "node_modules/nhsuk-frontend/packages/components/error-message/error-message";
 
 .gp2gp-practice-search {
+  margin: 3rem 0 4rem;
+
   .nhsuk-label {
     margin-bottom: 0;
   }
 
   .nhsuk-hint {
-    margin-top: 4px;
+    margin-top: 0.8rem;
   }
 
   &__button {
