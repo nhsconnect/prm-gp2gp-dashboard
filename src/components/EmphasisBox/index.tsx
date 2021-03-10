@@ -10,7 +10,11 @@ const EmphasisBox: FC<EmphasisBoxProps> = ({ title, children }) => {
   return (
     <div className="gp2gp-emphasis-box">
       {!!title && (
-        <strong role="heading" className="gp2gp-emphasis-box__heading">
+        <strong
+          role="heading"
+          aria-level={3}
+          className="gp2gp-emphasis-box__heading"
+        >
           {title}
         </strong>
       )}
