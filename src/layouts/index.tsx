@@ -12,6 +12,8 @@ import { setupAnalytics } from "../library/setupAnalytics";
 import getEnv from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
+import HeroBanner from "../components/HeroBanner";
+import homepageContent from "../data/content/homepage.json";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -24,25 +26,33 @@ type LayoutProps = {
   };
 };
 
-// const HomepageContent: FC = ({ children }) => (
-//   <div className="nhsuk-width-container">
-//     <main className="nhsuk-main-wrapper">
-//       {children}
-//       <FeedbackBanner />
-//     </main>
-//   </div>
-// );
+type ContentProps = {
+  children: ReactNode;
+};
 
-const GeneralContent: FC = ({ children }) => {
-  return (
+const HomepageContent: FC<ContentProps> = ({ children }) => (
+  <>
+    <HeroBanner
+      title={homepageContent.title}
+      subtitle={homepageContent.subtitle}
+    />
     <div className="nhsuk-width-container">
       <main className="nhsuk-main-wrapper">
-        <FeedbackBanner />
         {children}
+        <FeedbackBanner />
       </main>
     </div>
-  );
-};
+  </>
+);
+
+const GeneralContent: FC<ContentProps> = ({ children }) => (
+  <div className="nhsuk-width-container">
+    <main className="nhsuk-main-wrapper">
+      <FeedbackBanner />
+      {children}
+    </main>
+  </div>
+);
 
 const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [hasMounted, setHasMounted] = useState(false);
@@ -78,7 +88,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
         {!isOnCookiePage && <CookieBanner path={path} />}
         <Header />
         {pageContext.layout === "homepage" ? (
-          children
+          <HomepageContent>{children}</HomepageContent>
         ) : (
           <GeneralContent>{children}</GeneralContent>
         )}
