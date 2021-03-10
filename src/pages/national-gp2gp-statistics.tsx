@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Table from "../components/Table";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
+// @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
 
 const NationalStatistics = () => {
