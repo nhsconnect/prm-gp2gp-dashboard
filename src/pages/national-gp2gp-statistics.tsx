@@ -1,48 +1,11 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import Table from "../../components/Table";
-import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
-import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import Table from "../components/Table";
+import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
+import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
+import nationalMetrics from "../data/organisations/nationalMetrics.json";
 
-type PageContext = {
-  year: number;
-  month: number;
-  transferCount: number;
-  integrated: IntegratedStats;
-  // TODO: Make it not optional as part of PRMT-1489 cleanup
-  failed?: FailedStats;
-  pending?: PendingStats;
-  paperFallback: PaperStats;
-};
-
-type IntegratedStats = {
-  transferCount: number;
-  transferPercentage: number;
-  within3Days: number;
-  within8Days: number;
-  beyond8Days: number;
-};
-
-type FailedStats = {
-  transferCount: number;
-  transferPercentage: number;
-};
-
-type PendingStats = {
-  transferCount: number;
-  transferPercentage: number;
-};
-
-type PaperStats = {
-  transferCount: number;
-  transferPercentage: number;
-};
-
-type NationalStatisticsProps = {
-  pageContext: PageContext;
-};
-
-const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
+const NationalStatistics: FC = () => {
   const {
     month,
     year,
@@ -51,7 +14,7 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
     paperFallback,
     failed,
     pending,
-  } = pageContext;
+  } = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
   const isFailedAndPendingTransfersOn = useFeatureToggle(
     "F_FAILED_AND_PENDING_TRANSFERS"
@@ -130,13 +93,10 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
           </p>
           <ul>
             <li data-testid="national-statistics__failed-count">
-              {// TODO: Remove as part of PRMT-1489 cleanup
-              // @ts-ignore
-              `Count: ${failed.transferCount}`}
+              {`Count: ${failed.transferCount}`}
             </li>
             <li data-testid="national-statistics__failed-percent">
-              {// @ts-ignore
-              `Percent: ${failed.transferPercentage}%`}
+              {`Percent: ${failed.transferPercentage}%`}
             </li>
           </ul>
           <h3 className="nhsuk-heading-s">Pending transfers</h3>
@@ -146,13 +106,10 @@ const NationalStatistics: FC<NationalStatisticsProps> = ({ pageContext }) => {
           </p>
           <ul>
             <li data-testid="national-statistics__pending-count">
-              {// TODO: Remove as part of PRMT-1489 cleanup
-              // @ts-ignore
-              `Count: ${pending.transferCount}`}
+              {`Count: ${pending.transferCount}`}
             </li>
             <li data-testid="national-statistics__pending-percent">
-              {// @ts-ignore
-              `Percent: ${pending.transferPercentage}%`}
+              {`Percent: ${pending.transferPercentage}%`}
             </li>
           </ul>
         </>
