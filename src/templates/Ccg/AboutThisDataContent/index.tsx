@@ -1,8 +1,8 @@
 import React from "react";
 
 export const AboutThisDataContent = () => (
-  <div>
-    <h2>About this data</h2>
+  <>
+    <h2 id={"about-this-data"}>About this data</h2>
     <p>
       The Data Platform is updated 14 days after the end of the month. This is
       so we can identify whether transfers started at the end of the month were
@@ -52,5 +52,5 @@ export const AboutThisDataContent = () => (
       When records are not integrated within 8 days, GP2GP requests that a full
       paper copy is printed and sent to the practice.
     </p>
-  </div>
+  </>
 );

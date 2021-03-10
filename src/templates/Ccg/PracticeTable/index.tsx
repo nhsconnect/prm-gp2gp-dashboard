@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
-import { Search } from "../../library/utils/search/index";
-import practiceTableContent from "../../data/content/practiceTable.json";
-import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
-import { addPercentageSign } from "../../library/utils/addPercentageSign/index";
+import { Search } from "../../../library/utils/search";
+import practiceTableContent from "../../../data/content/practiceTable.json";
+import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
+import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
+import { addPercentageSign } from "../../../library/utils/addPercentageSign";
 import "./index.scss";
-import Table from "../Table";
-import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import Table from "../../../components/Table";
+import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -114,7 +114,7 @@ const PracticeTable: FC<PracticeTableProps> = ({
     }
   );
 
-  const tableCaptionText = `Practice performance for ${convertMonthNumberToText(
+  const tableCaptionTextForScreenReader = `Table of practice performance for ${convertMonthNumberToText(
     month
   )} ${year}`;
 
@@ -123,9 +123,22 @@ const PracticeTable: FC<PracticeTableProps> = ({
       <p className="nhsuk-body-m nhsuk-u-margin-top-6 nhsuk-u-margin-bottom-5">
         {practiceTableContent.description}
       </p>
+
+      <h2>
+        Practice performance for {convertMonthNumberToText(month)} {year}
+      </h2>
+
+      <div
+        id="table-title-sub-heading"
+        className="nhsuk-body-sub-heading-link nhsuk-u-margin-bottom-4"
+      >
+        <a href={"#about-this-data"}>More information about this data</a>
+      </div>
+
       <Table
         className="gp2gp-ccg-table"
-        captionText={tableCaptionText}
+        captionText={tableCaptionTextForScreenReader}
+        hideCaption={true}
         headers={practiceTableContent.tableHeaders}
         rows={practiceTableRows}
       />

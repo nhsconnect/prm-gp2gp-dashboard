@@ -5,11 +5,11 @@ import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
 
 import PracticeTable from "../index";
-import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
+import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
-import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
+import { useFeatureToggle } from "../../../../library/hooks/useFeatureToggle";
 
-jest.mock("../../../library/hooks/useFeatureToggle");
+jest.mock("../../../../library/hooks/useFeatureToggle");
 
 describe("PracticeTable component", () => {
   beforeEach(() => {
@@ -124,6 +124,39 @@ describe("PracticeTable component", () => {
 
     expect(getByText("GP Practice | A12345")).toBeInTheDocument();
     expect(queryByText("GP Practice 2 | B12345")).not.toBeInTheDocument();
+  });
+
+  it("should display table heading with the month and year", () => {
+    const ccgPractice = [{ OrgId: "B12345", Name: "GP Practice 2" }];
+
+    const aPractice = [
+      {
+        odsCode: "B12345",
+        name: "GP Practice 2",
+        metrics: [
+          {
+            year: 2000,
+            month: 2,
+            requester: {
+              integrated: {
+                transferCount: 7,
+                within3DaysPercentage: 0,
+                within8DaysPercentage: 28.6,
+                beyond8DaysPercentage: 71.4,
+              },
+            },
+          },
+        ],
+      },
+    ];
+
+    const { getByText } = render(
+      <PracticeTable ccgPractices={ccgPractice} validPractices={aPractice} />
+    );
+
+    expect(
+      getByText("Practice performance for February 2000")
+    ).toBeInTheDocument();
   });
 
   it("displays a message if there are no valid practices", () => {

@@ -1,15 +1,23 @@
 import React, { FC } from "react";
 import "./index.scss";
 import classNames from "classnames";
+import classnames from "classnames";
 
 type TableProps = {
   headers: string[];
   captionText?: string;
   rows: (string | number | JSX.Element)[][];
   className?: string;
+  hideCaption?: boolean;
 };
 
-const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
+const Table: FC<TableProps> = ({
+  headers,
+  captionText,
+  rows,
+  className,
+  hideCaption,
+}) => (
   <table
     className={classNames("gp2gp-table", className)}
     {...(captionText ? { "aria-describedby": "table-title" } : {})}
@@ -17,7 +25,10 @@ const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
     {captionText ? (
       <caption
         id="table-title"
-        className="nhsuk-table__caption nhsuk-u-margin-bottom-4"
+        className={classnames(
+          hideCaption && "hide-caption",
+          "nhsuk-table__caption nhsuk-u-margin-bottom-4"
+        )}
       >
         {captionText}
       </caption>

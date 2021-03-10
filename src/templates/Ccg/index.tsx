@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 
 import OrganisationDetails from "../../components/OrganisationDetails";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import PracticeTable from "../../components/PracticeTable";
+import PracticeTable from "./PracticeTable";
 import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
 import ccgContent from "../../data/content/ccg.json";
