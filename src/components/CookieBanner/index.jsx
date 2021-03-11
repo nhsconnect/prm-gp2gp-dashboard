@@ -8,7 +8,7 @@ import { NHS_COOKIE_NAME } from "../../library/constants";
 import Button from "../Button";
 
 const AcceptCookies = ({ handleAgree, handleDisagree }) => (
-  <div aria-label="Cookie banner" className="gp2gp-cookie-banner">
+  <section aria-label="Cookie banner" className="gp2gp-cookie-banner">
     <div className="nhsuk-width-container">
       <h2 className="nhsuk-heading-s">{cookieBannerContent.heading}</h2>
       <p>{cookieBannerContent.text1}</p>
@@ -25,7 +25,7 @@ const AcceptCookies = ({ handleAgree, handleDisagree }) => (
         {cookieBannerContent.disagreeButton}
       </Button>
     </div>
-  </div>
+  </section>
 );
 
 const CookieBanner = ({ path }) => {
@@ -64,7 +64,7 @@ const CookieBanner = ({ path }) => {
   return (
     <>
       {isClicked && (
-        <div
+        <section
           className="gp2gp-success-banner"
           aria-label="Cookie setting success banner"
         >
@@ -74,7 +74,7 @@ const CookieBanner = ({ path }) => {
               <Link to="/cookies-policy">cookies page</Link>.
             </p>
           </div>
-        </div>
+        </section>
       )}
       {!cookies[NHS_COOKIE_NAME] && !isLoading ? (
         <AcceptCookies
