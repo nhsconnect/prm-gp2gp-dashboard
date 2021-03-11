@@ -11,7 +11,7 @@ type NationalStatisticsMetric = {
   month: number;
   transferCount: number;
   integrated: IntegratedStats;
-  // TODO: Make it not optional as part of PRMT-1489 cleanup
+  // TODO: Make it not optional as part of PRMT-1489 cleanup and remove ?. instances
   failed?: FailedStats;
   pending?: PendingStats;
   paperFallback: PaperStats;
@@ -128,10 +128,10 @@ const NationalStatistics = () => {
           </p>
           <ul>
             <li data-testid="national-statistics__failed-count">
-              {`Count: ${failed.transferCount}`}
+              {`Count: ${failed?.transferCount}`}
             </li>
             <li data-testid="national-statistics__failed-percent">
-              {`Percent: ${failed.transferPercentage}%`}
+              {`Percent: ${failed?.transferPercentage}%`}
             </li>
           </ul>
           <h3 className="nhsuk-heading-s">Pending transfers</h3>
@@ -141,10 +141,10 @@ const NationalStatistics = () => {
           </p>
           <ul>
             <li data-testid="national-statistics__pending-count">
-              {`Count: ${pending.transferCount}`}
+              {`Count: ${pending?.transferCount}`}
             </li>
             <li data-testid="national-statistics__pending-percent">
-              {`Percent: ${pending.transferPercentage}%`}
+              {`Percent: ${pending?.transferPercentage}%`}
             </li>
           </ul>
         </>
