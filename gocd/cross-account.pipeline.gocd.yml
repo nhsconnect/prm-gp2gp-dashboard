@@ -9,10 +9,10 @@ pipelines:
     environment_variables:
       SHARED_ACCOUNT: 0
     stages:
-      - test:
+      - install_dependencies:
           clean_workspace: true
           jobs:
-            test:
+            install_dependencies:
               resources:
                 - docker
               tasks:
@@ -20,15 +20,26 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-test
+                      - ./tasks dojo-install
+              artifacts:
+                - build:
+                    source: node_modules
+      - test:
+          clean_workspace: true
+          jobs:
+            test:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: install_dependencies
+                    job: install_dependencies
+                    source: node_modules
                 - exec:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ls
-              artifacts:
-                - build:
-                    source: node_modules
+                      - ./tasks dojo-test
       - build_dev:
           clean_workspace: true
           jobs:
@@ -42,8 +53,8 @@ pipelines:
                     source: .cache
               tasks:
                 - fetch:
-                    stage: test
-                    job: test
+                    stage: install_dependencies
+                    job: install_dependencies
                     source: node_modules
                 - exec:
                     command: /bin/bash
@@ -71,8 +82,8 @@ pipelines:
                     source: e2e/videos
               tasks:
                 - fetch:
-                    stage: test
-                    job: test
+                    stage: install_dependencies
+                    job: install_dependencies
                     source: node_modules
                 - fetch:
                     stage: build_dev
@@ -123,8 +134,8 @@ pipelines:
                     source: .cache
               tasks:
                 - fetch:
-                    stage: test
-                    job: test
+                    stage: install_dependencies
+                    job: install_dependencies
                     source: node_modules
                 - exec:
                     command: /bin/bash
