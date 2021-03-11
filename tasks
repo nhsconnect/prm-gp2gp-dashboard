@@ -62,7 +62,7 @@ function setup_env {
 
 case "${task}" in
   install)
-      npm run install
+      npm install
       ;;
   dojo-install)
       dojo "./tasks install"
