@@ -1,9 +1,6 @@
-describe("National Statistics Page", () => {
-  const viewPorts = [
-    { device: "Desktop", width: 1280, height: 720 },
-    { device: "Mobile", width: 320, height: 480 },
-  ];
+const { viewPorts } = require("../support/common");
 
+describe("National statistics page", () => {
   viewPorts.map(viewPort => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
