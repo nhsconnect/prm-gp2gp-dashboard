@@ -42,25 +42,16 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
     return (
       <div>
         <p className="nhsuk-body">
-          The table below shows the time to integrate for records received by
-          the practices within this Clinical Commissioning Group (CCG). More
-          information <a href={"#about-this-data"}>about this data</a>.
+          {ccgContent.tableDescription} More information{" "}
+          <a href={"#about-this-data"}>about this data</a>.
         </p>
 
         <Expander
-          title={"Why integrate within 8 days?"}
+          title={ccgContent.expanderTitle}
           content={
             <>
-              <p>
-                When records are not integrated within 8 days, GP2GP requests
-                that a full paper copy is printed and sent to the practice.
-              </p>
-              <p>
-                This increases the burden on both the sending and receiving
-                practices. Sending practices have to print and send the record.
-                Receiving practices have to summarise the paper copy and find
-                space to file it.
-              </p>
+              <p>{ccgContent.expanderFirstParagraph}</p>
+              <p>{ccgContent.expanderSecondParagraph}</p>
             </>
           }
         />

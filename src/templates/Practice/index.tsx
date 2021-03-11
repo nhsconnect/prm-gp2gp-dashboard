@@ -7,6 +7,7 @@ import {
 } from "../../library/api/ODSPortal";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import practice from "../../data/content/practice.json";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useApi } from "../../library/hooks/useApi";
 import Table from "../../components/Table";
@@ -87,25 +88,16 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
       <hr />
 
       <p className="nhsuk-body">
-        The table below shows the time to integrate for records received by the
-        practice. More information{" "}
+        {practice.practiceDescription} More information{" "}
         <a href={"#about-this-data"}>about this data</a>.
       </p>
 
       <Expander
-        title={"Why integrate within 8 days?"}
+        title={practice.expanderTitle}
         content={
           <>
-            <p>
-              When records are not integrated within 8 days, GP2GP requests that
-              a full paper copy is printed and sent to the practice.
-            </p>
-            <p>
-              This increases the burden on both the sending and receiving
-              practices. Sending practices have to print and send the record.
-              Receiving practices have to summarise the paper copy and find
-              space to file it.
-            </p>
+            <p>{practice.expanderFirstParagraph}</p>
+            <p>{practice.expanderSecondParagraph}</p>
           </>
         }
       />
