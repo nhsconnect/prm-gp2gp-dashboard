@@ -21,6 +21,11 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-test
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ls
               artifacts:
                 - build:
                     source: node_modules
