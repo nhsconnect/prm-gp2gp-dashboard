@@ -6,6 +6,40 @@ import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToT
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
 
+type NationalStatisticsMetric = {
+  year: number;
+  month: number;
+  transferCount: number;
+  integrated: IntegratedStats;
+  // TODO: Make it not optional as part of PRMT-1489 cleanup
+  failed?: FailedStats;
+  pending?: PendingStats;
+  paperFallback: PaperStats;
+};
+
+type IntegratedStats = {
+  transferCount: number;
+  transferPercentage: number;
+  within3Days: number;
+  within8Days: number;
+  beyond8Days: number;
+};
+
+type FailedStats = {
+  transferCount: number;
+  transferPercentage: number;
+};
+
+type PendingStats = {
+  transferCount: number;
+  transferPercentage: number;
+};
+
+type PaperStats = {
+  transferCount: number;
+  transferPercentage: number;
+};
+
 const NationalStatistics = () => {
   const {
     month,
@@ -15,7 +49,7 @@ const NationalStatistics = () => {
     paperFallback,
     failed,
     pending,
-  } = nationalMetrics.metrics[0];
+  }: NationalStatisticsMetric = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
   const isFailedAndPendingTransfersOn = useFeatureToggle(
     "F_FAILED_AND_PENDING_TRANSFERS"
