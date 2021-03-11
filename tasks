@@ -61,19 +61,15 @@ function setup_env {
 }
 
 case "${task}" in
-  install)
-      npm install
-      ;;
-  dojo-install)
-      dojo "./tasks install"
-      ;;
   test)
+      npm install
       npm run test
       ;;
   dojo-test)
       dojo "./tasks test"
       ;;
   test-e2e)
+      npm install
       npm run test:e2e:ci
       ;;
   dojo-test-e2e)
@@ -81,6 +77,7 @@ case "${task}" in
       ;;
   build)
       setup_env ${deployment_env}
+      npm install
       npm run build
       ;;
   dojo-build)
@@ -88,6 +85,7 @@ case "${task}" in
       ;;
   get-metrics)
       setup_env ${deployment_env}
+      npm install
       npm run getPracticeMetrics
       npm run getNationalMetrics
       ;;
@@ -96,12 +94,14 @@ case "${task}" in
       ;;
   get-metadata)
       setup_env ${deployment_env}
+      npm install
       npm run getMetadata
       ;;
   dojo-get-metadata)
       dojo "./tasks get-metadata ${deployment_env}"
       ;;
   deploy)
+      npm install
       npm run deploy
       ;;
   dojo-deploy)
