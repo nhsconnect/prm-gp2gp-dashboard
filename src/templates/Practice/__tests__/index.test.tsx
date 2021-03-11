@@ -10,6 +10,7 @@ import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 import slaMetricsContent from "../../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
@@ -139,6 +140,29 @@ describe("Practice template", () => {
       expect(
         getByText(`${practiceIntegratedData.beyond8DaysPercentage}%`)
       ).toBeInTheDocument();
+    });
+  });
+
+  it("should display expander with the correct content", async () => {
+    const statusCode = 200;
+    const mockedResponse = practiceDataBuilder(ODSPracticeData);
+    mockAPIResponse(statusCode, mockedResponse);
+
+    const { getByText } = render(
+      <Practice pageContext={pipelinePracticeData} />
+    );
+
+    await waitFor(() => {
+      const expanderTitle = getByText("Why integrate within 8 days?");
+      const expanderContent = getByText(
+        "This increases the burden on both the sending and receiving",
+        { exact: false }
+      );
+      expect(expanderTitle).toBeInTheDocument();
+      expect(expanderContent).not.toBeVisible();
+
+      userEvent.click(expanderTitle);
+      expect(expanderContent).toBeVisible();
     });
   });
 

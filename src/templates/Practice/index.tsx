@@ -15,6 +15,7 @@ import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
 import { AboutThisDataContent } from "../../components/AboutThisDataContent";
+import { Expander } from "../../components/Expander";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -91,6 +92,23 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
         <a href={"#about-this-data"}>about this data</a>.
       </p>
 
+      <Expander
+        title={"Why integrate within 8 days?"}
+        content={
+          <>
+            <p>
+              When records are not integrated within 8 days, GP2GP requests that
+              a full paper copy is printed and sent to the practice.
+            </p>
+            <p>
+              This increases the burden on both the sending and receiving
+              practices. Sending practices have to print and send the record.
+              Receiving practices have to summarise the paper copy and find
+              space to file it.
+            </p>
+          </>
+        }
+      />
       <Table
         className={"gp2gp-practice-table"}
         headers={slaMetricsContent.tableHeaders}
