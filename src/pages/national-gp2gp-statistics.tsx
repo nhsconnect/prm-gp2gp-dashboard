@@ -23,7 +23,7 @@ const NationalStatistics = () => {
 
   return (
     <>
-      <Helmet title="National Statistics" />
+      <Helmet title="National Statistics - GP Registrations Data Platform" />
       <h1>National data on GP2GP performance</h1>
       <p>The data below shows the GP2GP performance nationally</p>
       <p>

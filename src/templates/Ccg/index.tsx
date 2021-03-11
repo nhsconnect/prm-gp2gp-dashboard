@@ -57,7 +57,9 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
 
   return (
     <>
-      <Helmet title={`${formattedName} | ${odsCode}`} />
+      <Helmet
+        title={`${formattedName} | ${odsCode} - GP Registrations Data Platform`}
+      />
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       {getContent()}
     </>
