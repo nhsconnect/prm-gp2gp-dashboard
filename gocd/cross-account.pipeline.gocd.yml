@@ -21,6 +21,9 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-test
+              artifacts:
+                - build:
+                    source: node_modules
       - build_dev:
           clean_workspace: true
           jobs:
@@ -33,6 +36,10 @@ pipelines:
                 - build:
                     source: .cache
               tasks:
+                - fetch:
+                    stage: test
+                    job: test
+                    source: node_modules
                 - exec:
                     command: /bin/bash
                     arguments:
@@ -51,13 +58,17 @@ pipelines:
       - test_e2e:
           clean_workspace: true
           jobs:
-            test:
+            test_e2e:
               resources:
                 - docker
               artifacts:
                 - build:
                     source: e2e/videos
               tasks:
+                - fetch:
+                    stage: test
+                    job: test
+                    source: node_modules
                 - fetch:
                     stage: build_dev
                     job: npm_build
@@ -106,6 +117,10 @@ pipelines:
                 - build:
                     source: .cache
               tasks:
+                - fetch:
+                    stage: test
+                    job: test
+                    source: node_modules
                 - exec:
                     command: /bin/bash
                     arguments:
