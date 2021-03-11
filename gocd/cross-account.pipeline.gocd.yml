@@ -15,15 +15,20 @@ pipelines:
             install_dependencies:
               resources:
                 - docker
+              artifacts:
+                - build:
+                    source: node_modules
               tasks:
                 - exec:
                     command: /bin/bash
                     arguments:
                       - -c
                       - ./tasks dojo-install
-              artifacts:
-                - build:
-                    source: node_modules
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ls
       - test:
           clean_workspace: true
           jobs:
