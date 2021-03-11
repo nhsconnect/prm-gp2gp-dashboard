@@ -38,7 +38,7 @@ describe("National GP2GP Statistics template", () => {
       .mockReturnValue(true);
   });
 
-  it.only("renders national statistics overview correctly", () => {
+  it("renders national statistics overview correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
     expect(getByText("National data on GP2GP performance")).toBeInTheDocument();

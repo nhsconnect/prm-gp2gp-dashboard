@@ -11,7 +11,7 @@ type NationalStatisticsMetric = {
   month: number;
   transferCount: number;
   integrated: IntegratedStats;
-  // TODO: Make it not optional as part of PRMT-1489 cleanup and remove ?. instances
+  // TODO: Make it not optional as part of PRMT-1489 cleanup
   failed?: FailedStats;
   pending?: PendingStats;
   paperFallback: PaperStats;
@@ -65,7 +65,11 @@ const NationalStatistics = () => {
         we can identify whether transfers initiated on the last day of the month
         were integrated within the 8 day SLA. There may be some transfers that
         have been initiated in this time period and will be integrated in the
-        future, which will not be represented in this data.
+        future, which will
+        {isFailedAndPendingTransfersOn
+          ? "be represented as pending transfers"
+          : "not be represented"}
+        in this data.
       </p>
       <h2 className="nhsuk-heading-m">
         GP2GP Performance for {monthName} {year}
@@ -128,10 +132,12 @@ const NationalStatistics = () => {
           </p>
           <ul>
             <li data-testid="national-statistics__failed-count">
-              {`Count: ${failed?.transferCount}`}
+              {// @ts-ignore
+              `Count: ${failed.transferCount}`}
             </li>
             <li data-testid="national-statistics__failed-percent">
-              {`Percent: ${failed?.transferPercentage}%`}
+              {// @ts-ignore
+              `Percent: ${failed.transferPercentage}%`}
             </li>
           </ul>
           <h3 className="nhsuk-heading-s">Pending transfers</h3>
@@ -141,10 +147,12 @@ const NationalStatistics = () => {
           </p>
           <ul>
             <li data-testid="national-statistics__pending-count">
-              {`Count: ${pending?.transferCount}`}
+              {// @ts-ignore
+              `Count: ${pending.transferCount}`}
             </li>
             <li data-testid="national-statistics__pending-percent">
-              {`Percent: ${pending?.transferPercentage}%`}
+              {// @ts-ignore
+              `Percent: ${pending.transferPercentage}%`}
             </li>
           </ul>
         </>
