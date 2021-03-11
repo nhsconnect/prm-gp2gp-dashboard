@@ -14,7 +14,7 @@ import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
-import { AboutThisDataContent } from "../common/AboutThisDataContent";
+import { AboutThisDataContent } from "../../components/AboutThisDataContent";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;

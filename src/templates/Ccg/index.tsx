@@ -3,13 +3,13 @@ import { Helmet } from "react-helmet";
 
 import OrganisationDetails from "../../components/OrganisationDetails";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import PracticeTable from "./PracticeTable";
+import PracticeTable from "../../components/CCGPracticeTable";
 import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
 import ccgContent from "../../data/content/ccg.json";
 import "./index.scss";
-import { AboutThisDataContent } from "../common/AboutThisDataContent";
-import { Expander } from "../../components/Exapander";
+import { AboutThisDataContent } from "../../components/AboutThisDataContent";
+import { Expander } from "../../components/Expander";
 
 type PageContext = {
   odsCode: string;
@@ -76,9 +76,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
 
   return (
     <>
-      <Helmet
-        title={`${formattedName} | ${odsCode} - GP Registrations Data Platform`}
-      />
+      <Helmet title={`${formattedName} | ${odsCode}`} />
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       {getContent()}
     </>

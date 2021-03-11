@@ -5,11 +5,11 @@ import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
 
 import PracticeTable from "../index";
-import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
+import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
-import { useFeatureToggle } from "../../../../library/hooks/useFeatureToggle";
+import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 
-jest.mock("../../../../library/hooks/useFeatureToggle");
+jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("PracticeTable component", () => {
   beforeEach(() => {

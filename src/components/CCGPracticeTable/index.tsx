@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
-import { Search } from "../../../library/utils/search";
-import practiceTableContent from "../../../data/content/practiceTable.json";
-import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
-import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
-import { addPercentageSign } from "../../../library/utils/addPercentageSign";
+import { Search } from "../../library/utils/search";
+import practiceTableContent from "../../data/content/practiceTable.json";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
+import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import "./index.scss";
-import Table from "../../../components/Table";
-import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
+import Table from "../Table";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
