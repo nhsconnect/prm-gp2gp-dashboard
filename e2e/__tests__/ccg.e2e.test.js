@@ -22,6 +22,9 @@ describe("CCG page", () => {
         // CCG Page
         cy.contains("Practice performance");
 
+        cy.contains("Why integrate within 8 days?").click();
+        cy.contains("When records are not integrated within 8 days");
+
         cy.contains("Practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(/.+/g);
 

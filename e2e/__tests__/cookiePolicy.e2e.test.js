@@ -17,6 +17,10 @@ describe("Cookie page", () => {
         cy.contains("a", "cookies page").click();
         cy.contains("h1", "Cookie Policy");
         cy.checkAccessibility();
+
+        cy.contains("Save my cookie settings").click();
+        cy.contains("h1", "Your cookie settings have been saved");
+        cy.checkAccessibility();
       });
     });
   });

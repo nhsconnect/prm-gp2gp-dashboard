@@ -28,6 +28,9 @@ describe("Practice page", () => {
         cy.contains("Bolton");
         cy.contains("BL1 8TT");
 
+        cy.contains("Why integrate within 8 days?").click();
+        cy.contains("When records are not integrated within 8 days");
+
         cy.contains("Practice performance");
 
         cy.contains("Successful integrations");
