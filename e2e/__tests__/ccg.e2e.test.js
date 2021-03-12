@@ -61,6 +61,24 @@ describe("CCG page", () => {
             cy.contains("h1", odsCode);
           });
       });
+
+      it("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
+        cy.intercept("GET", "https://directory.spineservices.nhs.uk/ORD", {
+          statusCode: 400,
+        });
+
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        ).type("bolton");
+        cy.contains("li", "CCG")
+          .parent()
+          .parent()
+          .click();
+        cy.contains("button", "Search").click();
+
+        // CCG Page
+        cy.contains("Error loading practice list");
+      });
     });
   });
 });
