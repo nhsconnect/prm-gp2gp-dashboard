@@ -12,6 +12,9 @@ export const AboutThisDataContent = () => (
       Transfers that are pending integration when the Data Platform is updated
       are not included, even if they are integrated at a later date.
     </p>
+    <p>
+      Values presented as percentages are rounded to the nearest decimal place.
+    </p>
     <h3>Successful integrations</h3>
     <p>All GP2GP transfers that were:</p>
     <ul>
