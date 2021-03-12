@@ -2,15 +2,12 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
 import OrganisationDetails from "../../components/OrganisationDetails";
-import PracticeTable from "../../components/CCGPracticeTable";
-import { AboutThisDataContent } from "../../components/AboutThisDataContent";
-import { Expander } from "../../components/Expander";
+import { CcgPageContent } from "../../components/CcgPageContent";
 import { Practice } from "../Practice/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
 import ccgContent from "../../data/content/ccg.json";
-import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import "./index.scss";
 
 type PageContext = {
@@ -22,36 +19,6 @@ type PageContext = {
 type CcgProps = {
   pageContext: PageContext;
 };
-
-type CcgContentProps = {
-  organisations: any;
-  validPractices: Practice[];
-};
-
-const CcgContent: FC<CcgContentProps> = ({ organisations, validPractices }) => (
-  <>
-    <p className="nhsuk-body">
-      {ccgContent.tableDescription} More information{" "}
-      <a href="#about-this-data">about this data</a>.
-    </p>
-
-    <Expander
-      title={eightDayExpanderContent.title}
-      content={
-        <>
-          <p>{eightDayExpanderContent.firstParagraph}</p>
-          <p>{eightDayExpanderContent.secondParagraph}</p>
-        </>
-      }
-    />
-
-    <PracticeTable
-      ccgPractices={organisations}
-      validPractices={validPractices}
-    />
-    <AboutThisDataContent />
-  </>
-);
 
 const Ccg: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode, validPractices } = pageContext;
@@ -73,8 +40,8 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
       ) : error ? (
         <p className="nhsuk-body">{ccgContent.errorMessage}</p>
       ) : (
-        <CcgContent
-          organisations={data.Organisations}
+        <CcgPageContent
+          ccgPractices={data.Organisations}
           validPractices={validPractices}
         />
       )}

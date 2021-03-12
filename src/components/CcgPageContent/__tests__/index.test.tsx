@@ -1,17 +1,18 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
 
-import PracticeTable from "../index";
+import { CcgPageContent } from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
-describe("PracticeTable component", () => {
+describe("CcgPageContent component", () => {
   beforeEach(() => {
     when(mocked(useFeatureToggle))
       .calledWith("F_PRACTICE_SLA_PERCENTAGE")
@@ -30,6 +31,8 @@ describe("PracticeTable component", () => {
         name: "GP Practice 2",
         metrics: [
           {
+            year: 2020,
+            month: 1,
             requester: {
               integrated: {
                 transferCount: 7,
@@ -47,7 +50,7 @@ describe("PracticeTable component", () => {
     ];
 
     const { getByText, getAllByRole } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
         validPractices={validPractices}
       />
@@ -79,9 +82,14 @@ describe("PracticeTable component", () => {
         name: "GP Practice 2",
         metrics: [
           {
+            year: 2020,
+            month: 1,
             requester: {
               integrated: {
                 transferCount: 7,
+                within3DaysPercentage: 0,
+                within8DaysPercentage: 28.6,
+                beyond8DaysPercentage: 71.4,
                 within3Days: 0,
                 within8Days: 2,
                 beyond8Days: 5,
@@ -93,7 +101,7 @@ describe("PracticeTable component", () => {
     ];
 
     const { getByText, getAllByRole } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
         validPractices={validPractices}
       />
@@ -116,7 +124,7 @@ describe("PracticeTable component", () => {
     ];
 
     const { queryByText, getByText } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
         validPractices={practiceMetricsMock}
       />
@@ -143,6 +151,9 @@ describe("PracticeTable component", () => {
                 within3DaysPercentage: 0,
                 within8DaysPercentage: 28.6,
                 beyond8DaysPercentage: 71.4,
+                within3Days: 0,
+                within8Days: 2,
+                beyond8Days: 5,
               },
             },
           },
@@ -151,7 +162,7 @@ describe("PracticeTable component", () => {
     ];
 
     const { getByText } = render(
-      <PracticeTable ccgPractices={ccgPractice} validPractices={aPractice} />
+      <CcgPageContent ccgPractices={ccgPractice} validPractices={aPractice} />
     );
 
     expect(
@@ -160,13 +171,12 @@ describe("PracticeTable component", () => {
   });
 
   it("displays a message if there are no valid practices", () => {
-    const ccgPractices = [{ OrgId: "B12345", Name: "GP Practice 2" }];
-    const validPractices = [{ odsCode: "A12345", name: "GP Practice" }];
+    const ccgPractices = [{ OrgId: "A12360", Name: "GP Practice" }];
 
     const { getByText } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
-        validPractices={validPractices}
+        validPractices={practiceMetricsMock}
       />
     );
 
@@ -184,7 +194,7 @@ describe("PracticeTable component", () => {
     ];
 
     const { getAllByRole } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
         validPractices={practiceMetricsMock}
       />
@@ -213,7 +223,7 @@ describe("PracticeTable component", () => {
     ];
 
     const { getAllByRole } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
         validPractices={practiceMetricsMock}
       />
@@ -230,7 +240,7 @@ describe("PracticeTable component", () => {
     const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
 
     const { getByRole } = render(
-      <PracticeTable
+      <CcgPageContent
         ccgPractices={ccgPractices}
         validPractices={practiceMetricsMock}
       />
@@ -241,5 +251,60 @@ describe("PracticeTable component", () => {
     });
 
     expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
+  });
+
+  it("displays CCG 'About this data' header correctly", () => {
+    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
+
+    const { getByText } = render(
+      <CcgPageContent
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    expect(getByText("About this data")).toBeInTheDocument();
+  });
+
+  it("should display expander with the correct content", () => {
+    const ccgPractices = [{ OrgId: "A12345", Name: "GP Practice" }];
+
+    const { getByText } = render(
+      <CcgPageContent
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    const expanderTitle = getByText("Why integrate within 8 days?");
+    const expanderContent = getByText(
+      "This increases the burden on both the sending and receiving",
+      { exact: false }
+    );
+    expect(expanderTitle).toBeInTheDocument();
+    expect(expanderContent).not.toBeVisible();
+
+    userEvent.click(expanderTitle);
+    expect(expanderContent).toBeVisible();
+  });
+
+  it("does not display 'About this data' and 8 Day SLA expander when there are no GP practices", () => {
+    const ccgPractices = [{ OrgId: "A12360", Name: "GP Practice" }];
+
+    const { getByText, queryByText } = render(
+      <CcgPageContent
+        ccgPractices={ccgPractices}
+        validPractices={practiceMetricsMock}
+      />
+    );
+
+    expect(getByText("No GP practices found")).toBeInTheDocument();
+    expect(queryByText("About this data")).not.toBeInTheDocument();
+
+    const expanderTitle = "Why integrate within 8 days?";
+    const expanderContent =
+      "This increases the burden on both the sending and receiving";
+    expect(queryByText(expanderTitle)).not.toBeInTheDocument();
+    expect(queryByText(expanderContent)).not.toBeInTheDocument();
   });
 });

@@ -1,14 +1,20 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
-import { Search } from "../../library/utils/search";
+import Table from "../Table";
+import { AboutThisDataContent } from "../AboutThisDataContent";
+import { Expander } from "../Expander";
+
 import practiceTableContent from "../../data/content/practiceTable.json";
+import ccgContent from "../../data/content/ccg.json";
+import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
+
+import { Search } from "../../library/utils/search";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
-import "./index.scss";
-import Table from "../Table";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import "./index.scss";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -34,8 +40,8 @@ type Practice = {
   metrics: PracticeMetrics[];
 };
 
-type PracticeTableProps = {
-  ccgPractices: { odsCode: string; name: string }[];
+type CcgPageContentProps = {
+  ccgPractices: { OrgId: string; Name: string }[];
   validPractices: Practice[];
 };
 
@@ -73,7 +79,7 @@ const _sort_practices_by_beyond8Days = (
   }
 };
 
-const PracticeTable: FC<PracticeTableProps> = ({
+const CcgPageContent: FC<CcgPageContentProps> = ({
   ccgPractices,
   validPractices,
 }) => {
@@ -120,14 +126,30 @@ const PracticeTable: FC<PracticeTableProps> = ({
 
   return (
     <>
+      <p className="nhsuk-body">
+        {ccgContent.tableDescription} More information{" "}
+        <a href="#about-this-data">about this data</a>.
+      </p>
+
+      <Expander
+        title={eightDayExpanderContent.title}
+        content={
+          <>
+            <p>{eightDayExpanderContent.firstParagraph}</p>
+            <p>{eightDayExpanderContent.secondParagraph}</p>
+          </>
+        }
+      />
+
       <Table
         className="gp2gp-ccg-table"
         captionText={tableCaptionText}
         headers={practiceTableContent.tableHeaders}
         rows={practiceTableRows}
       />
+      <AboutThisDataContent />
     </>
   );
 };
 
-export default PracticeTable;
+export { CcgPageContent };
