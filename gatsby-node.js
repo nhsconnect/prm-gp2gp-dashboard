@@ -9,17 +9,11 @@ exports.createPages = async ({ actions }) => {
   const ccgs = organisationMetadata.ccgs;
 
   practices.forEach(practice => {
-    const latestMetrics = practice.metrics[0];
-
     createPage({
       path: `/practice/${practice.odsCode}`,
       component: path.resolve("src/templates/Practice/index.tsx"),
       context: {
-        odsCode: practice.odsCode,
-        name: practice.name,
-        year: latestMetrics.year,
-        month: latestMetrics.month,
-        metrics: latestMetrics.requester,
+        practice,
         layout: "general",
       },
     });

@@ -36,27 +36,33 @@ describe("Practice template", () => {
     },
   };
 
-  const pipelinePracticeData = {
-    odsCode: "B86030",
-    name: "BURTON CROFT SURGERY",
-    year: 2019,
-    month: 11,
-    metrics: {
-      integrated: {
-        transferCount: 20,
-        within3DaysPercentage: 25,
-        within8DaysPercentage: 60,
-        beyond8DaysPercentage: 15,
-        within3Days: 5,
-        within8Days: 12,
-        beyond8Days: 3,
-      },
+  const practicePageContext = {
+    practice: {
+      odsCode: "B86030",
+      name: "BURTON CROFT SURGERY",
+      metrics: [
+        {
+          year: 2019,
+          month: 11,
+          requester: {
+            integrated: {
+              transferCount: 20,
+              within3DaysPercentage: 25,
+              within8DaysPercentage: 60,
+              beyond8DaysPercentage: 15,
+              within3Days: 5,
+              within8Days: 12,
+              beyond8Days: 3,
+            },
+          },
+        },
+      ],
     },
+    layout: "general",
   };
 
-  const {
-    metrics: { integrated: practiceIntegratedData },
-  } = pipelinePracticeData;
+  const practiceIntegratedData =
+    practicePageContext.practice.metrics[0].requester.integrated;
 
   it("renders practice details correctly", async () => {
     const expectedODSPracticeData = {
@@ -75,7 +81,7 @@ describe("Practice template", () => {
     mockAPIResponse(statusCode, mockedResponse);
 
     const { getByText } = render(
-      <Practice pageContext={pipelinePracticeData} />
+      <Practice pageContext={practicePageContext} />
     );
 
     await waitFor(() => {
@@ -98,11 +104,13 @@ describe("Practice template", () => {
     mockAPIResponse(statusCode);
 
     const { getByText, queryByTestId } = render(
-      <Practice pageContext={pipelinePracticeData} />
+      <Practice pageContext={practicePageContext} />
     );
 
     await waitFor(() => {
-      expect(getByText(pipelinePracticeData.odsCode)).toBeInTheDocument();
+      expect(
+        getByText(practicePageContext.practice.odsCode)
+      ).toBeInTheDocument();
       expect(getByText(expectedPracticeName)).toBeInTheDocument();
       expect(
         queryByTestId("organisation-details-address")
@@ -112,7 +120,7 @@ describe("Practice template", () => {
 
   it("renders metrics correctly", async () => {
     const { getByText, getAllByText } = render(
-      <Practice pageContext={pipelinePracticeData} />
+      <Practice pageContext={practicePageContext} />
     );
 
     await waitFor(() => {
@@ -149,7 +157,7 @@ describe("Practice template", () => {
     mockAPIResponse(statusCode, mockedResponse);
 
     const { getByText } = render(
-      <Practice pageContext={pipelinePracticeData} />
+      <Practice pageContext={practicePageContext} />
     );
 
     await waitFor(() => {
@@ -168,7 +176,7 @@ describe("Practice template", () => {
 
   it("display table headers correctly", () => {
     const { getAllByRole } = render(
-      <Practice pageContext={pipelinePracticeData} />
+      <Practice pageContext={practicePageContext} />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -182,23 +190,33 @@ describe("Practice template", () => {
   });
 
   it("renders placeholders when there is no transfers", async () => {
-    const pipelinePracticeNoTransferData = {
-      ...pipelinePracticeData,
-      metrics: {
-        integrated: {
-          transferCount: 0,
-          within3DaysPercentage: null,
-          within8DaysPercentage: null,
-          beyond8DaysPercentage: null,
-          within3Days: 0,
-          within8Days: 0,
-          beyond8Days: 0,
-        },
+    const practicePageContextNoTransferData = {
+      practice: {
+        odsCode: "B86030",
+        name: "BURTON CROFT SURGERY",
+        metrics: [
+          {
+            year: 2019,
+            month: 11,
+            requester: {
+              integrated: {
+                transferCount: 0,
+                within3DaysPercentage: null,
+                within8DaysPercentage: null,
+                beyond8DaysPercentage: null,
+                within3Days: 0,
+                within8Days: 0,
+                beyond8Days: 0,
+              },
+            },
+          },
+        ],
       },
+      layout: "general",
     };
 
     const { getAllByText } = render(
-      <Practice pageContext={pipelinePracticeNoTransferData} />
+      <Practice pageContext={practicePageContextNoTransferData} />
     );
 
     await waitFor(() => {

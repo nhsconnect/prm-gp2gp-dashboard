@@ -1,22 +1,23 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import OrganisationDetails from "../../components/OrganisationDetails";
+import Table from "../../components/Table";
+import { AboutThisDataContent } from "../../components/AboutThisDataContent";
+import { Expander } from "../../components/Expander";
+
 import {
   ODS_PORTAL_URL,
   transformPracticeAddress,
 } from "../../library/api/ODSPortal";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import practice from "../../data/content/practice.json";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
-import { useApi } from "../../library/hooks/useApi";
-import Table from "../../components/Table";
-import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+import { useApi } from "../../library/hooks/useApi";
 
+import practiceContent from "../../data/content/practice.json";
+import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import "./index.scss";
-import { AboutThisDataContent } from "../../components/AboutThisDataContent";
-import { Expander } from "../../components/Expander";
 
 type IntegratedPracticeMetrics = {
   transferCount: number;
@@ -29,15 +30,22 @@ type IntegratedPracticeMetrics = {
 };
 
 type PracticeMetrics = {
-  integrated: IntegratedPracticeMetrics;
+  year: number;
+  month: number;
+  requester: {
+    integrated: IntegratedPracticeMetrics;
+  };
+};
+
+export type Practice = {
+  odsCode: string;
+  name: string;
+  metrics: PracticeMetrics[];
 };
 
 type PageContext = {
-  odsCode: string;
-  name: string;
-  year: number;
-  month: number;
-  metrics: PracticeMetrics;
+  practice: Practice;
+  layout: string;
 };
 
 type PracticeProps = {
@@ -55,16 +63,20 @@ const _generate_row_data = (integratedMetrics: IntegratedPracticeMetrics) => {
   ];
 };
 
-const Practice: FC<PracticeProps> = ({ pageContext }) => {
+const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { isLoading, data, error } = useApi(
-    `${ODS_PORTAL_URL}/${pageContext.odsCode}`
+    `${ODS_PORTAL_URL}/${practice.odsCode}`
   );
 
   const isIntegratedPercentageOn = useFeatureToggle(
     "F_PRACTICE_SLA_PERCENTAGE"
   );
 
-  const { name, odsCode, month, year, metrics } = pageContext;
+  const {
+    name,
+    odsCode,
+    metrics: [{ month, year, requester }],
+  } = practice;
   const formattedName = convertToTitleCase(name);
 
   const tableCaptionText = `Practice performance for ${convertMonthNumberToText(
@@ -88,16 +100,16 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
       <hr />
 
       <p className="nhsuk-body">
-        {practice.practiceDescription} More information{" "}
+        {practiceContent.practiceDescription} More information{" "}
         <a href={"#about-this-data"}>about this data</a>.
       </p>
 
       <Expander
-        title={practice.expanderTitle}
+        title={practiceContent.expanderTitle}
         content={
           <>
-            <p>{practice.expanderFirstParagraph}</p>
-            <p>{practice.expanderSecondParagraph}</p>
+            <p>{practiceContent.expanderFirstParagraph}</p>
+            <p>{practiceContent.expanderSecondParagraph}</p>
           </>
         }
       />
@@ -107,13 +119,13 @@ const Practice: FC<PracticeProps> = ({ pageContext }) => {
         captionText={tableCaptionText}
         rows={
           isIntegratedPercentageOn
-            ? _generate_row_data(metrics.integrated)
+            ? _generate_row_data(requester.integrated)
             : [
                 [
-                  metrics.integrated.transferCount.toString(),
-                  metrics.integrated.within3Days.toString(),
-                  metrics.integrated.within8Days.toString(),
-                  metrics.integrated.beyond8Days.toString(),
+                  requester.integrated.transferCount.toString(),
+                  requester.integrated.within3Days.toString(),
+                  requester.integrated.within8Days.toString(),
+                  requester.integrated.beyond8Days.toString(),
                 ],
               ]
         }
