@@ -15,7 +15,7 @@ import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import { useApi } from "../../library/hooks/useApi";
 
-import practiceContent from "../../data/content/practice.json";
+import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import "./index.scss";
 
@@ -100,16 +100,17 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       <hr />
 
       <p className="nhsuk-body">
-        {practiceContent.practiceDescription} More information{" "}
+        The table below shows the time to integrate for records received by the
+        practice. More information{" "}
         <a href={"#about-this-data"}>about this data</a>.
       </p>
 
       <Expander
-        title={practiceContent.expanderTitle}
+        title={eightDayExpanderContent.title}
         content={
           <>
-            <p>{practiceContent.expanderFirstParagraph}</p>
-            <p>{practiceContent.expanderSecondParagraph}</p>
+            <p>{eightDayExpanderContent.firstParagraph}</p>
+            <p>{eightDayExpanderContent.secondParagraph}</p>
           </>
         }
       />

@@ -10,6 +10,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
 import ccgContent from "../../data/content/ccg.json";
+import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import "./index.scss";
 
 type PageContext = {
@@ -35,11 +36,11 @@ const CcgContent: FC<CcgContentProps> = ({ organisations, validPractices }) => (
     </p>
 
     <Expander
-      title={ccgContent.expanderTitle}
+      title={eightDayExpanderContent.title}
       content={
         <>
-          <p>{ccgContent.expanderFirstParagraph}</p>
-          <p>{ccgContent.expanderSecondParagraph}</p>
+          <p>{eightDayExpanderContent.firstParagraph}</p>
+          <p>{eightDayExpanderContent.secondParagraph}</p>
         </>
       }
     />
