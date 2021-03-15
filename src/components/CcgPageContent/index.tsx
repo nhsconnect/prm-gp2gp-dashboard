@@ -5,10 +5,7 @@ import Table from "../Table";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import { Expander } from "../Expander";
 
-import {
-  PracticeType,
-  IntegratedPracticeMetricsType,
-} from "../../templates/Practice/practice.types";
+import { PracticeType } from "../../templates/Practice/practice.types";
 
 import practiceTableContent from "../../data/content/practiceTable.json";
 import ccgContent from "../../data/content/ccg.json";

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 
 import OrganisationDetails from "../../components/OrganisationDetails";
 import { CcgPageContent } from "../../components/CcgPageContent";
-import { Practice } from "../Practice/index";
+import { PracticeType } from "../Practice/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { ODS_PORTAL_URL } from "../../library/api/ODSPortal";
 import { useApi } from "../../library/hooks/useApi";
@@ -13,7 +13,7 @@ import "./index.scss";
 type PageContext = {
   odsCode: string;
   name: string;
-  validPractices: Practice[];
+  validPractices: PracticeType[];
 };
 
 type CcgProps = {
