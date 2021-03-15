@@ -58,46 +58,63 @@ const NationalStatistics = () => {
   return (
     <>
       <Helmet title="National Statistics - GP Registrations Data Platform" />
-      <h1>National data on GP2GP performance</h1>
-      <p>The data below shows the GP2GP performance nationally</p>
+      <h1>National GP2GP patient record transfers data</h1>
       <p>
-        The data is updated monthly, 14 days after the end of the month, so that
-        we can identify whether transfers initiated on the last day of the month
-        were integrated within the 8 day SLA. There may be some transfers that
-        have been initiated in this time period and will be integrated in the
-        future, which will
-        {isFailedAndPendingTransfersOn
-          ? "be represented as pending transfers"
-          : "not be represented"}
-        in this data.
+        This page provides monthly national data about GP2GP transfers for
+        practices in England.
       </p>
-      <h2 className="nhsuk-heading-m">
-        GP2GP Performance for {monthName} {year}
-      </h2>
-      <h3 className="nhsuk-heading-s">Total number of transfers initiated</h3>
       <p>
-        This includes all GP2GP transfers that were started, regardless of
-        whether the request was successful or failed.
+        The Data Platform is updated 14 days after the end of the month. This is
+        so we can identify whether transfers started at the end of the month
+        were integrated within the 8 day SLA.
+      </p>
+      <p>
+        Values presented as percentages are rounded to the nearest two decimal
+        places.
+      </p>
+      <h2>
+        GP2GP National Performance for {monthName} {year}
+      </h2>
+      <p>
+        Figures are based on transfers started between the 1st and the last day
+        of the month, inclusive.
+      </p>
+      <h3>Transfers started</h3>
+      <p>
+        Transfers that were started, regardless of whether the request was
+        successful or failed.
       </p>
       <ul>
         <li data-testid="national-statistics__initiated-count">{`Count: ${transferCount}`}</li>
       </ul>
-      <h3 className="nhsuk-heading-s">Successfully integrated records</h3>
+      <h3>Successful integrations</h3>
       <p>
-        Any transfer that was successfully completed from a technical
-        perspective, whether it’s in the 8 day SLA or not.
+        Transfers that were integrated (filed or suppressed) by the receiving
+        practice before the Data Platform was updated.
       </p>
       <ul>
         <li data-testid="national-statistics__integrated-count">{`Count: ${integrated.transferCount}`}</li>
         <li data-testid="national-statistics__integrated-percent">{`Percent: ${integrated.transferPercentage}%`}</li>
       </ul>
-      <h3 className="nhsuk-heading-s">SLA Bandings/Metrics</h3>
+      <h3>Integration times</h3>
+      <h4>Within 3 days</h4>
       <p>
-        Records integrated, regardless of how long it took and whether they
-        triggered the paper process.
+        The number of successful integrations that were integrated (filed or
+        suppressed) within 3 days of the practice receiving the record.
+      </p>
+      <h4>Within 8 days</h4>
+      <p>
+        The number of successful integrations that were integrated (filed or
+        suppressed) within 8 days of the practice receiving the record.
+      </p>
+      <h4>Beyond 8 days</h4>
+      <p>
+        The number of successful integrations that were integrated (filed or
+        suppressed) beyond 8 days of the practice receiving the record. These
+        transfers result in the paper fallback process being triggered.
       </p>
       <Table
-        headers={["within 3 days", "within 8 days", "beyond 8 days"]}
+        headers={["Within 3 days", "Within 8 days", "Beyond 8 days"]}
         rows={[
           [
             integrated.within3Days.toString(),
@@ -106,29 +123,12 @@ const NationalStatistics = () => {
           ],
         ]}
       />
-      <h3 className="nhsuk-heading-s">Total paper fallback rate</h3>
-      {isFailedAndPendingTransfersOn ? (
-        <p>
-          Records not integrated within 8 days that trigger the paper fallback
-          process. This includes records successfully integrated beyond 8 days,
-          failed transfers and pending transfers.
-        </p>
-      ) : (
-        <p>
-          Records not integrated within 8 days that trigger the paper fallback
-          process.
-        </p>
-      )}
-      <ul>
-        <li data-testid="national-statistics__paper-fallback-count">{`Count: ${paperFallback.transferCount}`}</li>
-        <li data-testid="national-statistics__paper-fallback-percent">{`Percent: ${paperFallback.transferPercentage}%`}</li>
-      </ul>
       {isFailedAndPendingTransfersOn && (
         <>
-          <h3 className="nhsuk-heading-s">Failed transfers</h3>
+          <h3>Technical failures</h3>
           <p>
-            Technical errors such as large attachment failures that trigger the
-            paper fallback process.
+            Records that fail to transfer due to technical error. These
+            transfers result in the paper fallback process being triggered.
           </p>
           <ul>
             <li data-testid="national-statistics__failed-count">
@@ -140,10 +140,21 @@ const NationalStatistics = () => {
               `Percent: ${failed.transferPercentage}%`}
             </li>
           </ul>
-          <h3 className="nhsuk-heading-s">Pending transfers</h3>
+          <h3>Pending transfers</h3>
+          <p>Transfers that either:</p>
+          <ul>
+            <li>
+              have not been integrated by the time the Data Platform is updated,
+              or
+            </li>
+            <li>have an unreported technical error</li>
+          </ul>
           <p>
-            Any transfers that trigger the paper fallback due to never being
-            actioned by a human or unreported technical errors.
+            These transfers result in the paper fallback process being
+            triggered. Because the Data Platform is updated 14 days after the
+            end of the month, all transfers that have not been integrated will
+            be beyond the 8 day SLA and will have triggered the paper fallback
+            process.
           </p>
           <ul>
             <li data-testid="national-statistics__pending-count">
@@ -157,6 +168,27 @@ const NationalStatistics = () => {
           </ul>
         </>
       )}
+      <h3>Paper fallback transfers</h3>
+      <p>
+        Transfers that triggered the paper fallback process. The paper fallback
+        process is triggered when a record is not received electronically, or is
+        received but not integrated within 8 days.
+      </p>
+      <p>This includes:</p>
+      <ul>
+        <li>records successfully integrated beyond 8 days</li>
+        <li>technical failures</li>
+        <li>pending transfers</li>
+      </ul>
+      <p>
+        The Data Platform is updated 14 days after the end of the month. This is
+        so we can identify whether transfers started at the end of the month
+        were integrated within the 8 day SLA.
+      </p>
+      <ul>
+        <li data-testid="national-statistics__paper-fallback-count">{`Count: ${paperFallback.transferCount}`}</li>
+        <li data-testid="national-statistics__paper-fallback-percent">{`Percent: ${paperFallback.transferPercentage}%`}</li>
+      </ul>
     </>
   );
 };

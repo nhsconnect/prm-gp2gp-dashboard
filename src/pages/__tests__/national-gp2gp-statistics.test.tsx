@@ -41,8 +41,12 @@ describe("National GP2GP Statistics template", () => {
   it("renders national statistics overview correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("National data on GP2GP performance")).toBeInTheDocument();
-    expect(getByText("GP2GP Performance for January 2021")).toBeInTheDocument();
+    expect(
+      getByText("National GP2GP patient record transfers data")
+    ).toBeInTheDocument();
+    expect(
+      getByText("GP2GP National Performance for January 2021")
+    ).toBeInTheDocument();
     expect(getByText("Count: 223033")).toBeInTheDocument();
   });
 
@@ -88,7 +92,9 @@ describe("National GP2GP Statistics template", () => {
       .mockReturnValue(false);
 
     const { getByText, queryByText } = render(<NationalStatistics />);
-    expect(getByText("GP2GP Performance for January 2021")).toBeInTheDocument();
+    expect(
+      getByText("GP2GP National Performance for January 2021")
+    ).toBeInTheDocument();
     expect(getByText("Count: 223033")).toBeInTheDocument();
 
     expect(getByText("Count: 205233")).toBeInTheDocument();

@@ -10,14 +10,14 @@ describe("National statistics page", () => {
       });
 
       it("displays national metrics contents", () => {
-        cy.contains("h1", "National data on GP2GP performance");
+        cy.contains("h1", "National GP2GP patient record transfers data");
 
-        cy.contains("h3", "Total number of transfers initiated");
+        cy.contains("h3", "Transfers started");
         cy.get('[data-testid="national-statistics__initiated-count"]').contains(
           /^(Count: (.+))$/
         );
 
-        cy.contains("h3", "Successfully integrated records");
+        cy.contains("h3", "Successful integrations");
         cy.get(
           '[data-testid="national-statistics__integrated-count"]'
         ).contains(/^(Count: (.+))$/);
@@ -25,23 +25,15 @@ describe("National statistics page", () => {
           '[data-testid="national-statistics__integrated-percent"]'
         ).contains(/^(Percent: (.+)%)$/);
 
-        cy.contains("h3", "SLA Bandings/Metrics");
-        cy.contains("within 3 days");
+        cy.contains("h3", "Integration times");
+        cy.contains("Within 3 days");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(/.+/g);
-        cy.contains("within 8 days");
+        cy.contains("Within 8 days");
         cy.get('[data-testid="table__cell--row-0-col-1"]').contains(/.+/g);
-        cy.contains("beyond 8 days");
+        cy.contains("Beyond 8 days");
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains(/.+/g);
 
-        cy.contains("h3", "Total paper fallback rate");
-        cy.get(
-          '[data-testid="national-statistics__paper-fallback-count"]'
-        ).contains(/^(Count: (.+))$/);
-        cy.get(
-          '[data-testid="national-statistics__paper-fallback-percent"]'
-        ).contains(/^(Percent: (.+)%)$/);
-
-        cy.contains("h3", "Failed transfers");
+        cy.contains("h3", "Technical failures");
         cy.get('[data-testid="national-statistics__failed-count"]').contains(
           /^(Count: (.+))$/
         );
@@ -56,6 +48,14 @@ describe("National statistics page", () => {
         cy.get('[data-testid="national-statistics__pending-percent"]').contains(
           /^(Percent: (.+)%)$/
         );
+
+        cy.contains("h3", "Paper fallback transfers");
+        cy.get(
+          '[data-testid="national-statistics__paper-fallback-count"]'
+        ).contains(/^(Count: (.+))$/);
+        cy.get(
+          '[data-testid="national-statistics__paper-fallback-percent"]'
+        ).contains(/^(Percent: (.+)%)$/);
 
         cy.checkAccessibility();
       });
