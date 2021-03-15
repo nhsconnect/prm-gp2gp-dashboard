@@ -5,6 +5,8 @@ import Table from "../../components/Table";
 import { AboutThisDataContent } from "../../components/AboutThisDataContent";
 import { Expander } from "../../components/Expander";
 
+import { IntegratedPracticeMetricsType, PracticeType } from "./practice.types";
+
 import {
   ODS_PORTAL_URL,
   transformPracticeAddress,
@@ -19,32 +21,8 @@ import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import "./index.scss";
 
-type IntegratedPracticeMetrics = {
-  transferCount: number;
-  within3DaysPercentage: number | null;
-  within8DaysPercentage: number | null;
-  beyond8DaysPercentage: number | null;
-  within3Days: number;
-  within8Days: number;
-  beyond8Days: number;
-};
-
-type PracticeMetrics = {
-  year: number;
-  month: number;
-  requester: {
-    integrated: IntegratedPracticeMetrics;
-  };
-};
-
-export type Practice = {
-  odsCode: string;
-  name: string;
-  metrics: PracticeMetrics[];
-};
-
 type PageContext = {
-  practice: Practice;
+  practice: PracticeType;
   layout: string;
 };
 
@@ -52,7 +30,9 @@ type PracticeProps = {
   pageContext: PageContext;
 };
 
-const _generate_row_data = (integratedMetrics: IntegratedPracticeMetrics) => {
+const _generate_row_data = (
+  integratedMetrics: IntegratedPracticeMetricsType
+) => {
   return [
     [
       integratedMetrics.transferCount.toString(),

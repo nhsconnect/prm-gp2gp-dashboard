@@ -5,6 +5,11 @@ import Table from "../Table";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import { Expander } from "../Expander";
 
+import {
+  PracticeType,
+  IntegratedPracticeMetricsType,
+} from "../../templates/Practice/practice.types";
+
 import practiceTableContent from "../../data/content/practiceTable.json";
 import ccgContent from "../../data/content/ccg.json";
 import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
@@ -16,33 +21,9 @@ import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import "./index.scss";
 
-type IntegratedPracticeMetrics = {
-  transferCount: number;
-  within3DaysPercentage: number | null;
-  within8DaysPercentage: number | null;
-  beyond8DaysPercentage: number | null;
-  within3Days: number;
-  within8Days: number;
-  beyond8Days: number;
-};
-
-type PracticeMetrics = {
-  year: number;
-  month: number;
-  requester: {
-    integrated: IntegratedPracticeMetrics;
-  };
-};
-
-type Practice = {
-  odsCode: string;
-  name: string;
-  metrics: PracticeMetrics[];
-};
-
 type CcgPageContentProps = {
   ccgPractices: { OrgId: string; Name: string }[];
-  validPractices: Practice[];
+  validPractices: PracticeType[];
 };
 
 const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
@@ -55,7 +36,7 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
 };
 
 const _sort_practices_by_beyond8Days = (
-  filteredPractices: Practice[],
+  filteredPractices: PracticeType[],
   isIntegratedPercentageOn: boolean
 ) => {
   if (isIntegratedPercentageOn) {
@@ -100,7 +81,7 @@ const CcgPageContent: FC<CcgPageContentProps> = ({
   const { year, month } = filteredPractices[0].metrics[0];
 
   const practiceTableRows = filteredPractices.map(
-    ({ odsCode, name, metrics }: Practice) => {
+    ({ odsCode, name, metrics }: PracticeType) => {
       const slaMetrics = metrics[0].requester.integrated;
       return isIntegratedPercentageOn
         ? [
