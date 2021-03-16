@@ -34,8 +34,8 @@ export const AboutThisDataContent = () => (
     </ul>
     <h3>Within 3 days</h3>
     <p>
-      The percentage of the total integrations that were integrated (filed or
-      suppressed) within 3 days of the practice receiving the record.
+      The percentage of the successful integrations that were integrated (filed
+      or suppressed) within 3 days of the practice receiving the record.
     </p>
     <p>
       3 days is considered best practice for integrating or suppressing records
@@ -43,13 +43,13 @@ export const AboutThisDataContent = () => (
     </p>
     <h3>Within 8 days</h3>
     <p>
-      The percentage of the total integrations that were integrated (filed or
-      suppressed) within 8 days of the practice receiving the record.
+      The percentage of the successful integrations that were integrated (filed
+      or suppressed) within 8 days of the practice receiving the record.
     </p>
     <h3>Beyond 8 days</h3>
     <p>
-      The percentage of the total integrations that were integrated (filed or
-      suppressed) beyond 8 days of the practice receiving the record.
+      The percentage of the successful integrations that were integrated (filed
+      or suppressed) beyond 8 days of the practice receiving the record.
     </p>
     <p>
       When records are not integrated within 8 days, GP2GP requests that a full
