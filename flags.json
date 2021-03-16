@@ -5,6 +5,6 @@
   },
   "F_FAILED_AND_PENDING_TRANSFERS": {
     "dev": true,
-    "prod": false
+    "prod": true
   }
 }
