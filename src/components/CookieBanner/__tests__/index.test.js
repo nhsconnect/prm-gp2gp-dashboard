@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as cookies from "react-cookie";
-import CookieBanner from "../index";
+import { CookieBanner } from "../";
 
 jest.mock("react-cookie", () => ({
   useCookies: jest.fn(),

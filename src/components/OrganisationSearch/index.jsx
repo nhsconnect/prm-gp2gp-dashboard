@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { navigate } from "gatsby";
 
-import Form from "../common/FormComponents/Form";
-import Button from "../common/Button";
-import Autosuggest from "../common/FormComponents/Autosuggest";
+import { Form } from "../common/FormComponents/Form";
+import { Button } from "../common/Button";
+import { Autosuggest } from "../common/FormComponents/Autosuggest";
 import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
@@ -29,7 +29,7 @@ const ccgSearch = new Search(
   }))
 );
 
-const OrganisationSearch = () => {
+export const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
   const [selectedOdsCode, setSelectedOdsCode] = useState("");
@@ -111,5 +111,3 @@ const OrganisationSearch = () => {
     </div>
   );
 };
-
-export default OrganisationSearch;

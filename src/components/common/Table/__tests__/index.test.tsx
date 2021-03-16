@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Table from "../index";
+import { Table } from "../";
 
 describe("Table component", () => {
   const headers = ["fruit ", "colour ", "quantity "];

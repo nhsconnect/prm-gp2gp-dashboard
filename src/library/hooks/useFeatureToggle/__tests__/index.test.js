@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useFeatureToggle } from "../index";
+import { useFeatureToggle } from "../";
 
 jest.mock("../../../../../flags.json", () => ({
   F_NEW_FEATURE: { dev: true, prod: false },

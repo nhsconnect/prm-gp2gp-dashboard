@@ -2,6 +2,7 @@ import React from "react";
 import moxios from "moxios";
 import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
 
@@ -10,7 +11,6 @@ import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 import slaMetricsContent from "../../../data/content/practiceMetrics.json";
 import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
-import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 

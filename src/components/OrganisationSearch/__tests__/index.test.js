@@ -2,7 +2,7 @@ import React from "react";
 import * as Gatsby from "gatsby";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import OrganisationSearch from "../index";
+import { OrganisationSearch } from "../";
 
 jest.mock(
   "../../../data/organisations/organisationMetadata.json",

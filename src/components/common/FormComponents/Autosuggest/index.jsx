@@ -4,7 +4,7 @@ import Highlighter from "react-highlight-words";
 
 import "./index.scss";
 
-const Autosuggest = ({
+export const Autosuggest = ({
   inputError,
   inputLabelText,
   getSuggestionListItemText,
@@ -75,5 +75,3 @@ const Autosuggest = ({
     </label>
   );
 };
-
-export default Autosuggest;

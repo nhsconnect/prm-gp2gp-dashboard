@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import OrganisationSearch from "../components/OrganisationSearch";
+import { OrganisationSearch } from "../components/OrganisationSearch";
 import { Helmet } from "react-helmet";
 import homepageContent from "../data/content/homepage.json";
 

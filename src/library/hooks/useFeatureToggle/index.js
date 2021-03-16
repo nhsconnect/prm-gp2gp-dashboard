@@ -1,6 +1,6 @@
 import flags from "../../../../flags.json";
 import { useState, useEffect } from "react";
-import getEnv from "../../utils/getEnv";
+import { getEnv } from "../../utils/getEnv";
 
 const PROD_ENV = "prod";
 const DEV_ENV = "dev";

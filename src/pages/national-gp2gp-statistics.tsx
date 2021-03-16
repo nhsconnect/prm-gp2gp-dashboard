@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Table from "../components/common/Table";
+import { Table } from "../components/common/Table";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 // @ts-ignore

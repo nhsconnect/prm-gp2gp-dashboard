@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
 
-import { CcgPageContent } from "../index";
+import { CcgPageContent } from "../";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";

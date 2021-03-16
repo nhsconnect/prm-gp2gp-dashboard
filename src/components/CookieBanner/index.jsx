@@ -5,30 +5,9 @@ import "./index.scss";
 import cookieBannerContent from "../../data/content/cookieBanner.json";
 import { getCookieExpiryDate } from "../../library/utils/getCookieExpiryDate";
 import { NHS_COOKIE_NAME } from "../../library/constants";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 
-const AcceptCookies = ({ handleAgree, handleDisagree }) => (
-  <section aria-label="Cookie banner" className="gp2gp-cookie-banner">
-    <div className="nhsuk-width-container">
-      <h2 className="nhsuk-heading-s">{cookieBannerContent.heading}</h2>
-      <p>{cookieBannerContent.text1}</p>
-      <p>{cookieBannerContent.text2}</p>
-      <p>
-        {cookieBannerContent.text3} You can{" "}
-        <Link to="/cookies-policy">read more about our cookies</Link> before you
-        choose.
-      </p>
-      <Button className="nhsuk-u-margin-right-4" onClick={handleAgree}>
-        {cookieBannerContent.agreeButton}
-      </Button>
-      <Button onClick={handleDisagree}>
-        {cookieBannerContent.disagreeButton}
-      </Button>
-    </div>
-  </section>
-);
-
-const CookieBanner = ({ path }) => {
+export const CookieBanner = ({ path }) => {
   const [cookies, setCookie] = useCookies([NHS_COOKIE_NAME]);
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -86,4 +65,23 @@ const CookieBanner = ({ path }) => {
   );
 };
 
-export default CookieBanner;
+const AcceptCookies = ({ handleAgree, handleDisagree }) => (
+  <section aria-label="Cookie banner" className="gp2gp-cookie-banner">
+    <div className="nhsuk-width-container">
+      <h2 className="nhsuk-heading-s">{cookieBannerContent.heading}</h2>
+      <p>{cookieBannerContent.text1}</p>
+      <p>{cookieBannerContent.text2}</p>
+      <p>
+        {cookieBannerContent.text3} You can{" "}
+        <Link to="/cookies-policy">read more about our cookies</Link> before you
+        choose.
+      </p>
+      <Button className="nhsuk-u-margin-right-4" onClick={handleAgree}>
+        {cookieBannerContent.agreeButton}
+      </Button>
+      <Button onClick={handleDisagree}>
+        {cookieBannerContent.disagreeButton}
+      </Button>
+    </div>
+  </section>
+);

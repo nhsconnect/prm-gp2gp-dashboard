@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import EmphasisBox from "../index";
+import { EmphasisBox } from "../";
 
 describe("EmphasisBox component", () => {
   it("displays children", () => {

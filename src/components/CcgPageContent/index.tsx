@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
-import Table from "../common/Table";
+import { Table } from "../common/Table";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import { Expander } from "../common/Expander";
 
@@ -57,7 +57,7 @@ const _sort_practices_by_beyond8Days = (
   }
 };
 
-const CcgPageContent: FC<CcgPageContentProps> = ({
+export const CcgPageContent: FC<CcgPageContentProps> = ({
   ccgPractices,
   validPractices,
 }) => {
@@ -129,5 +129,3 @@ const CcgPageContent: FC<CcgPageContentProps> = ({
     </>
   );
 };
-
-export { CcgPageContent };

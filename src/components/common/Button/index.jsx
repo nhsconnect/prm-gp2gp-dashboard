@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-const Button = ({ className, children, type, onClick, dataTestId }) => (
+export const Button = ({ className, children, type, onClick, dataTestId }) => (
   <button
     data-testid={dataTestId}
     className={classNames("nhsuk-button", className)}
@@ -11,5 +11,3 @@ const Button = ({ className, children, type, onClick, dataTestId }) => (
     {children}
   </button>
 );
-
-export default Button;

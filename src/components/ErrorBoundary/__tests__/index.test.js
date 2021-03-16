@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { ErrorBoundary } from "../index";
+import { ErrorBoundary } from "../";
 
 describe("ErrorBoundary", () => {
   it('renders "Oops, something went wrong." when an error is thrown', () => {

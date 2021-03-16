@@ -9,7 +9,12 @@ type TableProps = {
   className?: string;
 };
 
-const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
+export const Table: FC<TableProps> = ({
+  headers,
+  captionText,
+  rows,
+  className,
+}) => (
   <table
     className={classNames("gp2gp-table", className)}
     {...(captionText ? { "aria-describedby": "table-title" } : {})}
@@ -56,5 +61,3 @@ const Table: FC<TableProps> = ({ headers, captionText, rows, className }) => (
     </tbody>
   </table>
 );
-
-export default Table;

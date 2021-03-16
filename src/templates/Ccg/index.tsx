@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import OrganisationDetails from "../../components/OrganisationDetails";
+import { OrganisationDetails } from "../../components/OrganisationDetails";
 import { CcgPageContent } from "../../components/CcgPageContent";
 import { PracticeType } from "../Practice/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";

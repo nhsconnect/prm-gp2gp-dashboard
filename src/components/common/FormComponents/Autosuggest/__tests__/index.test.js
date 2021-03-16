@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import Autosuggest from "../index";
+import { Autosuggest } from "../";
 
 describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";

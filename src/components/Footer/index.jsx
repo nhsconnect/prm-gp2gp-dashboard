@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import "./index.scss";
 
-const Footer = () => (
+export const Footer = () => (
   <footer role="contentinfo">
     <div className="nhsuk-footer">
       <div className="nhsuk-width-container">
@@ -32,5 +32,3 @@ const Footer = () => (
     </div>
   </footer>
 );
-
-export default Footer;

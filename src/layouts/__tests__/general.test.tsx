@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
 
-import Layout from "../index";
+import Layout from "../";
 import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 
 jest.mock("../../library/hooks/useFeatureToggle");

@@ -1,5 +1,1 @@
-const getEnv = () => {
-  return process.env.GATSBY_ENV || "dev";
-};
-
-export default getEnv;
+export const getEnv = () => process.env.GATSBY_ENV || "dev";

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import Table from "../Table";
+import { Table } from "../Table";
 import "./index.scss";
 
 type DetailsProps = {
@@ -8,7 +8,7 @@ type DetailsProps = {
   rows: string[][];
 };
 
-const Details: FC<DetailsProps> = ({ summary, headers, rows }) => (
+export const Details: FC<DetailsProps> = ({ summary, headers, rows }) => (
   <details className="nhsuk-details">
     <summary className="nhsuk-details__summary">
       <span className="nhsuk-details__summary-text">{summary}</span>
@@ -18,5 +18,3 @@ const Details: FC<DetailsProps> = ({ summary, headers, rows }) => (
     </div>
   </details>
 );
-
-export default Details;

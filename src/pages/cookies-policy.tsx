@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { useCookies } from "react-cookie";
-import Details from "../components/common/Details";
-import Radios from "../components/common/FormComponents/Radios";
+import { Radios } from "../components/common/FormComponents/Radios";
+import { Details } from "../components/common/Details";
 import { getCookieExpiryDate } from "../library/utils/getCookieExpiryDate";
 import { NHS_COOKIE_NAME } from "../library/constants";
 

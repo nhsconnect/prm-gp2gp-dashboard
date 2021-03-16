@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import OrganisationDetails from "../index";
+import { OrganisationDetails } from "../";
 
 describe("OrganisationDetails component", () => {
   it("displays organisation name and ODS code", () => {

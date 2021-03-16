@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import EmphasisBox from "../common/EmphasisBox";
+import { EmphasisBox } from "../common/EmphasisBox";
 import feedbackBannerContent from "../../data/content/feedbackBanner.json";
 
-const FeedbackBanner: FC = () => (
+export const FeedbackBanner: FC = () => (
   <EmphasisBox title={feedbackBannerContent.title}>
     <p>
       {feedbackBannerContent.text1}
@@ -13,4 +13,3 @@ const FeedbackBanner: FC = () => (
     </p>
   </EmphasisBox>
 );
-export default FeedbackBanner;

@@ -3,17 +3,17 @@ import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
 
-import CookieBanner from "../components/CookieBanner";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import FeedbackBanner from "../components/FeedbackBanner";
+import { CookieBanner } from "../components/CookieBanner";
+import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
+import { FeedbackBanner } from "../components/FeedbackBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
-import HeroBanner from "../components/common/HeroBanner";
+import { HeroBanner } from "../components/common/HeroBanner";
 import { setupAnalytics } from "../library/setupAnalytics";
-import getEnv from "../library/utils/getEnv";
 import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
-import { NHS_COOKIE_NAME } from "../library/constants";
+import { getEnv } from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
+import { NHS_COOKIE_NAME } from "../library/constants";
 import homepageContent from "../data/content/homepage.json";
 import "./index.scss";
 

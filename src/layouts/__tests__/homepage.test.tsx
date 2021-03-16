@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Layout from "../index";
+import Layout from "../";
 
 describe("Homepage layout", () => {
   it("displays header and footer", () => {

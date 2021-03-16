@@ -6,7 +6,7 @@ type EmphasisBoxProps = {
   children?: ReactNode;
 };
 
-const EmphasisBox: FC<EmphasisBoxProps> = ({ title, children }) => {
+export const EmphasisBox: FC<EmphasisBoxProps> = ({ title, children }) => {
   return (
     <div className="gp2gp-emphasis-box">
       {!!title && (
@@ -22,5 +22,3 @@ const EmphasisBox: FC<EmphasisBoxProps> = ({ title, children }) => {
     </div>
   );
 };
-
-export default EmphasisBox;

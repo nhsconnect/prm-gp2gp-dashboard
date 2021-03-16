@@ -16,7 +16,7 @@ type RadiosProps = {
   defaultValue?: string;
 };
 
-const Radios: FC<RadiosProps> = ({
+export const Radios: FC<RadiosProps> = ({
   title,
   options,
   linkLabel,
@@ -69,5 +69,3 @@ const Radios: FC<RadiosProps> = ({
     </fieldset>
   );
 };
-
-export default Radios;

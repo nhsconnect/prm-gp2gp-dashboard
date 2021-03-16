@@ -14,7 +14,7 @@ type OrganisationDetailsProps = {
   address?: Address;
 };
 
-const OrganisationDetails: FC<OrganisationDetailsProps> = ({
+export const OrganisationDetails: FC<OrganisationDetailsProps> = ({
   name,
   odsCode,
   address,
@@ -45,5 +45,3 @@ const OrganisationDetails: FC<OrganisationDetailsProps> = ({
     )}
   </div>
 );
-
-export default OrganisationDetails;

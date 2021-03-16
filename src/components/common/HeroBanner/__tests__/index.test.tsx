@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import HeroBanner from "../index";
+import { HeroBanner } from "../";
 
 describe("HeroBanner component", () => {
   it("displays title and subtitle", () => {

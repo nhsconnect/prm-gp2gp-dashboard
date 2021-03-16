@@ -6,7 +6,7 @@ type HeroBannerProps = {
   subtitle: string;
 };
 
-const HeroBanner: FC<HeroBannerProps> = ({ title, subtitle }) => (
+export const HeroBanner: FC<HeroBannerProps> = ({ title, subtitle }) => (
   <section className="nhsuk-hero">
     <div className="nhsuk-width-container nhsuk-hero--border">
       <div className="nhsuk-grid-row">
@@ -20,5 +20,3 @@ const HeroBanner: FC<HeroBannerProps> = ({ title, subtitle }) => (
     </div>
   </section>
 );
-
-export default HeroBanner;

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "gatsby";
 import Logo from "../../assets/logo.svg";
-import PhaseBanner from "../common/PhaseBanner/index";
+import { PhaseBanner } from "../common/PhaseBanner/";
 import "./index.scss";
 import content from "../../data/content/header.json";
 
-const Header = () => {
+export const Header = () => {
   return (
     <header className="nhsuk-header" role="banner">
       <div className="nhsuk-width-container nhsuk-header__container">
@@ -30,5 +30,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;
