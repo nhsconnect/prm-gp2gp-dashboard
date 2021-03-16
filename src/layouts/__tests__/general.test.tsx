@@ -1,8 +1,20 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import { when } from "jest-when";
+import { mocked } from "ts-jest/utils";
+
 import Layout from "../index";
+import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
+
+jest.mock("../../library/hooks/useFeatureToggle");
 
 describe("General layout", () => {
+  beforeEach(() => {
+    when(mocked(useFeatureToggle))
+      .calledWith("F_BACK_TO_SEARCH_LINK")
+      .mockReturnValue(true);
+  });
+
   it("displays header and footer", () => {
     const { getByRole } = render(
       <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
@@ -85,5 +97,37 @@ describe("General layout", () => {
     });
 
     expect(heroBannerHeading).not.toBeInTheDocument();
+  });
+
+  it("displays back to search link", () => {
+    const { getByRole } = render(
+      <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
+        <p>This is a paragraph.</p>
+      </Layout>
+    );
+
+    const backToSearchLink = getByRole("link", {
+      name: "Back to search",
+    });
+
+    expect(backToSearchLink).toBeInTheDocument();
+  });
+
+  it("does not display back to search link when F_BACK_TO_SEARCH_LINK is off", () => {
+    when(mocked(useFeatureToggle))
+      .calledWith("F_BACK_TO_SEARCH_LINK")
+      .mockReturnValue(false);
+
+    const { queryByRole } = render(
+      <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
+        <p>This is a paragraph.</p>
+      </Layout>
+    );
+
+    const backToSearchLink = queryByRole("link", {
+      name: "Back to search",
+    });
+
+    expect(backToSearchLink).not.toBeInTheDocument();
   });
 });

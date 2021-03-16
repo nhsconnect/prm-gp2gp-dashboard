@@ -71,4 +71,18 @@ describe("Homepage layout", () => {
 
     expect(heroBannerHeading).toBeInTheDocument();
   });
+
+  it("does not display back to search link", () => {
+    const { queryByRole } = render(
+      <Layout path="/" pageContext={{ layout: "homepage" }}>
+        <p>This is a paragraph.</p>
+      </Layout>
+    );
+
+    const backToSearchLink = queryByRole("link", {
+      name: "Back to search",
+    });
+
+    expect(backToSearchLink).not.toBeInTheDocument();
+  });
 });

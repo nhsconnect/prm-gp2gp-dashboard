@@ -1,19 +1,21 @@
 import React, { useEffect, useState, FC, ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
+import { Link } from "gatsby";
 
 import CookieBanner from "../components/CookieBanner";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FeedbackBanner from "../components/FeedbackBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
-import "./index.scss";
+import HeroBanner from "../components/common/HeroBanner";
 import { setupAnalytics } from "../library/setupAnalytics";
 import getEnv from "../library/utils/getEnv";
-import analytics from "../../analytics-config.json";
+import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { NHS_COOKIE_NAME } from "../library/constants";
-import HeroBanner from "../components/common/HeroBanner";
+import analytics from "../../analytics-config.json";
 import homepageContent from "../data/content/homepage.json";
+import "./index.scss";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -45,14 +47,29 @@ const HomepageContent: FC<ContentProps> = ({ children }) => (
   </>
 );
 
-const GeneralContent: FC<ContentProps> = ({ children }) => (
-  <div className="nhsuk-width-container">
-    <main className="nhsuk-main-wrapper">
-      <FeedbackBanner />
-      {children}
-    </main>
-  </div>
-);
+const GeneralContent: FC<ContentProps> = ({ children }) => {
+  const isBackToSearchLinkOn = useFeatureToggle("F_BACK_TO_SEARCH_LINK");
+
+  return (
+    <div className="nhsuk-width-container">
+      {isBackToSearchLinkOn && (
+        <Link className="gp2gp-breadcrumb" to="/">
+          Back to search
+        </Link>
+      )}
+      <main
+        className={
+          isBackToSearchLinkOn
+            ? "nhsuk-main-wrapper nhsuk-u-padding-top-4"
+            : "nhsuk-main-wrapper"
+        }
+      >
+        <FeedbackBanner />
+        {children}
+      </main>
+    </div>
+  );
+};
 
 const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [hasMounted, setHasMounted] = useState(false);
