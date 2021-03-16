@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import "./index.scss";
 import classNames from "classnames";
-import classnames from "classnames";
 
 type TableProps = {
   headers: string[];

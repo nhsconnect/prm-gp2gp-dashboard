@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import EmphasisBox from "../EmphasisBox";
+import EmphasisBox from "../common/EmphasisBox";
 import feedbackBannerContent from "../../data/content/feedbackBanner.json";
 
 const FeedbackBanner: FC = () => (

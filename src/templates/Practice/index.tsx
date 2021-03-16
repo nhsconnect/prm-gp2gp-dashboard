@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import OrganisationDetails from "../../components/OrganisationDetails";
-import Table from "../../components/Table";
+import Table from "../../components/common/Table";
 import { AboutThisDataContent } from "../../components/AboutThisDataContent";
-import { Expander } from "../../components/Expander";
+import { Expander } from "../../components/common/Expander";
 
 import { IntegratedPracticeMetricsType, PracticeType } from "./practice.types";
 

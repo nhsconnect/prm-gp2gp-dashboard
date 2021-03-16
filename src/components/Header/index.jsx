@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import Logo from "../../assets/logo.svg";
-import PhaseBanner from "../PhaseBanner/index";
+import PhaseBanner from "../common/PhaseBanner/index";
 import "./index.scss";
 import content from "../../data/content/header.json";
 

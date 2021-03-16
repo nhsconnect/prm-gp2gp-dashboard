@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
-import Table from "../Table";
+import Table from "../common/Table";
 import { AboutThisDataContent } from "../AboutThisDataContent";
-import { Expander } from "../Expander";
+import { Expander } from "../common/Expander";
 
 import { PracticeType } from "../../templates/Practice/practice.types";
 

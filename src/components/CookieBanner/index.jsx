@@ -5,7 +5,7 @@ import "./index.scss";
 import cookieBannerContent from "../../data/content/cookieBanner.json";
 import { getCookieExpiryDate } from "../../library/utils/getCookieExpiryDate";
 import { NHS_COOKIE_NAME } from "../../library/constants";
-import Button from "../Button";
+import Button from "../common/Button";
 
 const AcceptCookies = ({ handleAgree, handleDisagree }) => (
   <section aria-label="Cookie banner" className="gp2gp-cookie-banner">

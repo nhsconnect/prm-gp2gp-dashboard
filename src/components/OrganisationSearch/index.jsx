@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { navigate } from "gatsby";
 
-import Form from "../FormComponents/Form";
-import Button from "../Button";
-import Autosuggest from "../FormComponents/Autosuggest";
+import Form from "../common/FormComponents/Form";
+import Button from "../common/Button";
+import Autosuggest from "../common/FormComponents/Autosuggest";
 import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
