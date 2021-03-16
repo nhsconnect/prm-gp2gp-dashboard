@@ -111,6 +111,7 @@ describe("General layout", () => {
     });
 
     expect(backToSearchLink).toBeInTheDocument();
+    expect(backToSearchLink.getAttribute("href")).toBe("/");
   });
 
   it("does not display back to search link when F_BACK_TO_SEARCH_LINK is off", () => {

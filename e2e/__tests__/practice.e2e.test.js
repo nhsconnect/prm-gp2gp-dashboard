@@ -9,7 +9,7 @@ describe("Practice page", () => {
         cy.injectAxe();
       });
 
-      it("searches and navigates to an individual practice page", () => {
+      it("searches, navigates to an individual practice page and goes back to home page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("Bolton Community Practice");
@@ -58,6 +58,9 @@ describe("Practice page", () => {
         );
 
         cy.checkAccessibility();
+
+        cy.contains("a", "Back to search").click();
+        cy.contains("h1", "GP2GP patient record transfers data");
       });
     });
   });
