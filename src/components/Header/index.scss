@@ -2,3 +2,8 @@
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 
 @import "node_modules/nhsuk-frontend/packages/components/header/header";
+
+.gp2gp-header__link {
+  @extend .nhsuk-header__link--service;
+  max-width: 100%;
+}
