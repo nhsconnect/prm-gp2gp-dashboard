@@ -5,5 +5,5 @@
 
 .gp2gp-header__link {
   @extend .nhsuk-header__link--service;
-  max-width: 100%;
+  max-width: 100% !important;
 }
