@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe("Practice page", () => {
+describe.only("Practice page", () => {
   viewPorts.map(viewPort => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
@@ -36,30 +36,31 @@ describe("Practice page", () => {
         cy.contains("Successful integrations");
 
         const validNumber = /[\d]+/g;
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          validNumber
-        );
+        cy.get("[data-testid=table__cell--row-0-col-0]").contains(validNumber);
 
         const validMetricAsPercentOrNA = /(.+%|n\/a)/;
 
         cy.contains("Within 3 days");
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(
+        cy.get("[data-testid=table__cell--row-0-col-1]").contains(
           validMetricAsPercentOrNA
         );
 
         cy.contains("Within 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains(
+        cy.get("[data-testid=table__cell--row-0-col-2]").contains(
           validMetricAsPercentOrNA
         );
 
         cy.contains("Beyond 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-3"]').contains(
+        cy.get("[data-testid=table__cell--row-0-col-3]").contains(
           validMetricAsPercentOrNA
         );
 
         cy.checkAccessibility();
 
-        cy.contains("a", "Back to search").click();
+        cy.contains(
+          `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,
+          "Back to search"
+        ).click();
         cy.contains("h1", "GP2GP patient record transfers data");
       });
     });

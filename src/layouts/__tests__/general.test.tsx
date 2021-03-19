@@ -100,15 +100,15 @@ describe("General layout", () => {
   });
 
   it("displays back to search link", () => {
-    const { getByRole } = render(
+    const { getAllByRole } = render(
       <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
         <p>This is a paragraph.</p>
       </Layout>
     );
 
-    const backToSearchLink = getByRole("link", {
+    const backToSearchLink = getAllByRole("link", {
       name: "Back to search",
-    });
+    })[0];
 
     expect(backToSearchLink).toBeInTheDocument();
     expect(backToSearchLink.getAttribute("href")).toBe("/");

@@ -1,6 +1,7 @@
 @import "node_modules/nhsuk-frontend/packages/core/all";
+@import "node_modules/nhsuk-frontend/packages/components/breadcrumb/breadcrumb";
 
-.gp2gp-breadcrumb {
-  display: inline-block;
-  margin-top: 1rem;
+.gp2gp-nhsuk-breadcrumb {
+  background-color: transparent;
+  padding-top: 20px;
 }
