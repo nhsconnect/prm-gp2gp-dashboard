@@ -3,23 +3,17 @@ import moxios from "moxios";
 import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 
 import Practice from "..";
 import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 import slaMetricsContent from "../../../data/content/practiceMetrics.json";
-import { useFeatureToggle } from "../../../library/hooks/useFeatureToggle";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("Practice template", () => {
   beforeEach(() => {
     moxios.install();
-    when(mocked(useFeatureToggle))
-      .calledWith("F_PRACTICE_SLA_PERCENTAGE")
-      .mockReturnValue(true);
   });
 
   afterAll(() => {

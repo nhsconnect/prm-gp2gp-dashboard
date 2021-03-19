@@ -1,8 +1,4 @@
 {
-  "F_PRACTICE_SLA_PERCENTAGE": {
-    "dev": true,
-    "prod": true
-  },
   "F_FAILED_AND_PENDING_TRANSFERS": {
     "dev": true,
     "prod": true

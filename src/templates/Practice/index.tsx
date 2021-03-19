@@ -14,7 +14,6 @@ import {
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
-import { useFeatureToggle } from "../../library/hooks/useFeatureToggle";
 import { useApi } from "../../library/hooks/useApi";
 
 import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
@@ -46,10 +45,6 @@ const _generate_row_data = (
 const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${practice.odsCode}`
-  );
-
-  const isIntegratedPercentageOn = useFeatureToggle(
-    "F_PRACTICE_SLA_PERCENTAGE"
   );
 
   const {
@@ -98,18 +93,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         className={"gp2gp-practice-table"}
         headers={slaMetricsContent.tableHeaders}
         captionText={tableCaptionText}
-        rows={
-          isIntegratedPercentageOn
-            ? _generate_row_data(requester.integrated)
-            : [
-                [
-                  requester.integrated.transferCount.toString(),
-                  requester.integrated.within3Days.toString(),
-                  requester.integrated.within8Days.toString(),
-                  requester.integrated.beyond8Days.toString(),
-                ],
-              ]
-        }
+        rows={_generate_row_data(requester.integrated)}
       />
       <AboutThisDataContent />
     </>
