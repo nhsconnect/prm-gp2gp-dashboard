@@ -70,7 +70,7 @@ case "${task}" in
       ;;
   test-e2e)
       npm install
-      npm run test:e2e:ci
+      npm run test:e2e:ci -- -- video=true
       ;;
   dojo-test-e2e)
       dojo "./tasks test-e2e"
