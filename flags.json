@@ -1,8 +1,4 @@
 {
-  "F_FAILED_AND_PENDING_TRANSFERS": {
-    "dev": true,
-    "prod": true
-  },
   "F_BACK_TO_SEARCH_LINK": {
     "dev": true,
     "prod": false

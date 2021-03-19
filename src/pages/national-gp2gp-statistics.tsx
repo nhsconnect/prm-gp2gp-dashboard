@@ -1,7 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Table } from "../components/common/Table";
-import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
@@ -11,9 +10,8 @@ type NationalStatisticsMetric = {
   month: number;
   transferCount: number;
   integrated: IntegratedStats;
-  // TODO: Make it not optional as part of PRMT-1489 cleanup
-  failed?: FailedStats;
-  pending?: PendingStats;
+  failed: FailedStats;
+  pending: PendingStats;
   paperFallback: PaperStats;
 };
 
@@ -51,9 +49,6 @@ const NationalStatistics = () => {
     pending,
   }: NationalStatisticsMetric = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
-  const isFailedAndPendingTransfersOn = useFeatureToggle(
-    "F_FAILED_AND_PENDING_TRANSFERS"
-  );
 
   return (
     <>
@@ -123,51 +118,41 @@ const NationalStatistics = () => {
           ],
         ]}
       />
-      {isFailedAndPendingTransfersOn && (
-        <>
-          <h3>Technical failures</h3>
-          <p>
-            Records that fail to transfer due to technical error. These
-            transfers result in the paper fallback process being triggered.
-          </p>
-          <ul>
-            <li data-testid="national-statistics__failed-count">
-              {// @ts-ignore
-              `Count: ${failed.transferCount}`}
-            </li>
-            <li data-testid="national-statistics__failed-percent">
-              {// @ts-ignore
-              `Percent: ${failed.transferPercentage}%`}
-            </li>
-          </ul>
-          <h3>Pending transfers</h3>
-          <p>Transfers that either:</p>
-          <ul>
-            <li>
-              have not been integrated by the time the Data Platform is updated,
-              or
-            </li>
-            <li>have an unreported technical error</li>
-          </ul>
-          <p>
-            These transfers result in the paper fallback process being
-            triggered. Because the Data Platform is updated 14 days after the
-            end of the month, all transfers that have not been integrated will
-            be beyond the 8 day SLA and will have triggered the paper fallback
-            process.
-          </p>
-          <ul>
-            <li data-testid="national-statistics__pending-count">
-              {// @ts-ignore
-              `Count: ${pending.transferCount}`}
-            </li>
-            <li data-testid="national-statistics__pending-percent">
-              {// @ts-ignore
-              `Percent: ${pending.transferPercentage}%`}
-            </li>
-          </ul>
-        </>
-      )}
+      <h3>Technical failures</h3>
+      <p>
+        Records that fail to transfer due to technical error. These transfers
+        result in the paper fallback process being triggered.
+      </p>
+      <ul>
+        <li data-testid="national-statistics__failed-count">
+          {`Count: ${failed.transferCount}`}
+        </li>
+        <li data-testid="national-statistics__failed-percent">
+          {`Percent: ${failed.transferPercentage}%`}
+        </li>
+      </ul>
+      <h3>Pending transfers</h3>
+      <p>Transfers that either:</p>
+      <ul>
+        <li>
+          have not been integrated by the time the Data Platform is updated, or
+        </li>
+        <li>have an unreported technical error</li>
+      </ul>
+      <p>
+        These transfers result in the paper fallback process being triggered.
+        Because the Data Platform is updated 14 days after the end of the month,
+        all transfers that have not been integrated will be beyond the 8 day SLA
+        and will have triggered the paper fallback process.
+      </p>
+      <ul>
+        <li data-testid="national-statistics__pending-count">
+          {`Count: ${pending.transferCount}`}
+        </li>
+        <li data-testid="national-statistics__pending-percent">
+          {`Percent: ${pending.transferPercentage}%`}
+        </li>
+      </ul>
       <h3>Paper fallback transfers</h3>
       <p>
         Transfers that triggered the paper fallback process. The paper fallback
