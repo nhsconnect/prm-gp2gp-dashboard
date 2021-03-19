@@ -74,18 +74,10 @@ const BackToLink = ({ text, link }: { text: string; link: string }) => (
 );
 
 const GeneralContent: FC<ContentProps> = ({ children }) => {
-  const isBackToSearchLinkOn = useFeatureToggle("F_BACK_TO_SEARCH_LINK");
-
   return (
     <div className="nhsuk-width-container">
-      {isBackToSearchLinkOn && <BackToLink link="/" text="Back to search" />}
-      <main
-        className={
-          isBackToSearchLinkOn
-            ? "nhsuk-main-wrapper nhsuk-u-padding-top-2"
-            : "nhsuk-main-wrapper"
-        }
-      >
+        <BackToLink link="/" text="Back to search" />
+        <main className={"nhsuk-main-wrapper nhsuk-u-padding-top-2"}>
         <FeedbackBanner />
         {children}
       </main>
