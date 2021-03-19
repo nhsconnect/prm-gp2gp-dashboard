@@ -9,8 +9,6 @@ import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 import slaMetricsContent from "../../../data/content/practiceMetrics.json";
 
-jest.mock("../../../library/hooks/useFeatureToggle");
-
 describe("Practice template", () => {
   beforeEach(() => {
     moxios.install();
