@@ -8,5 +8,5 @@
   "screenshotsFolder": "e2e/screenshots",
   "chromeWebSecurity": false,
   "testFiles": "**/*.e2e.test.*",
-  "video": false
+  "video": true
 }
