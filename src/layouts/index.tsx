@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, ReactNode } from "react";
+import React, { useEffect, FC, ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
@@ -10,15 +10,13 @@ import { FeedbackBanner } from "../components/FeedbackBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import { HeroBanner } from "../components/common/HeroBanner";
 import { setupAnalytics } from "../library/setupAnalytics";
-import isEmpty from "lodash/isEmpty";
 import { getEnv } from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
 import {
-  defaultToggleState,
-  FeatureToggles,
-  useFeatureToggles,
-} from "../library/hooks/useFeatureToggle/useFeatureToggles";
+  FeatureTogglesContext,
+  useFetchFeatureToggles,
+} from "../library/hooks/useFeatureToggle/";
 import homepageContent from "../data/content/homepage.json";
 import "./index.scss";
 
@@ -36,10 +34,6 @@ type LayoutProps = {
 type ContentProps = {
   children: ReactNode;
 };
-
-export const FeatureTogglesContext = React.createContext<FeatureToggles>(
-  defaultToggleState
-);
 
 const HomepageContent: FC<ContentProps> = ({ children }) => (
   <>
@@ -99,7 +93,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
 
-  const toggles = useFeatureToggles();
+  const { toggles, isLoadingToggles } = useFetchFeatureToggles();
 
   useEffect(() => {
     setupAnalytics({
@@ -108,7 +102,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
     });
   }, [hasCookieConsent]);
 
-  if (isEmpty(toggles)) {
+  if (isLoadingToggles) {
     return null;
   }
 

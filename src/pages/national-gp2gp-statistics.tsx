@@ -4,7 +4,7 @@ import { Table } from "../components/common/Table";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
-import { FeatureTogglesContext } from "../layouts";
+import { FeatureTogglesContext } from "../library/hooks/useFeatureToggle/";
 
 type NationalStatisticsMetric = {
   year: number;
