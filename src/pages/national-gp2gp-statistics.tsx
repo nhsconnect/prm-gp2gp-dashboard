@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { Table } from "../components/common/Table";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
+import { FeatureTogglesContext } from "../layouts";
 
 type NationalStatisticsMetric = {
   year: number;
@@ -49,6 +50,10 @@ const NationalStatistics = () => {
     pending,
   }: NationalStatisticsMetric = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
+
+  const { showSomePage } = useContext(FeatureTogglesContext);
+  console.log({ showSomePage });
+  //testing
 
   return (
     <>
