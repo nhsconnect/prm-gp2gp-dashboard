@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, ReactNode } from "react";
+import React, { useEffect, FC, ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
@@ -10,10 +10,13 @@ import { FeedbackBanner } from "../components/FeedbackBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import { HeroBanner } from "../components/common/HeroBanner";
 import { setupAnalytics } from "../library/setupAnalytics";
-import { useFeatureToggle } from "../library/hooks/useFeatureToggle";
 import { getEnv } from "../library/utils/getEnv";
 import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
+import {
+  FeatureTogglesContext,
+  useFetchFeatureToggles,
+} from "../library/hooks/useFeatureToggle/";
 import homepageContent from "../data/content/homepage.json";
 import "./index.scss";
 
@@ -76,8 +79,8 @@ const BackToLink = ({ text, link }: { text: string; link: string }) => (
 const GeneralContent: FC<ContentProps> = ({ children }) => {
   return (
     <div className="nhsuk-width-container">
-        <BackToLink link="/" text="Back to search" />
-        <main className={"nhsuk-main-wrapper nhsuk-u-padding-top-2"}>
+      <BackToLink link="/" text="Back to search" />
+      <main className={"nhsuk-main-wrapper nhsuk-u-padding-top-2"}>
         <FeedbackBanner />
         {children}
       </main>
@@ -86,14 +89,11 @@ const GeneralContent: FC<ContentProps> = ({ children }) => {
 };
 
 const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
-  const [hasMounted, setHasMounted] = useState(false);
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  const { toggles, isLoadingToggles } = useFetchFeatureToggles();
 
   useEffect(() => {
     setupAnalytics({
@@ -102,7 +102,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
     });
   }, [hasCookieConsent]);
 
-  if (!hasMounted) {
+  if (isLoadingToggles) {
     return null;
   }
 
@@ -115,16 +115,23 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
           src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
         ></script>
       </Helmet>
-      <ErrorBoundary>
-        {!isOnCookiePage && <CookieBanner path={path} />}
-        <Header />
-        {pageContext.layout === "homepage" ? (
-          <HomepageContent>{children}</HomepageContent>
-        ) : (
-          <GeneralContent>{children}</GeneralContent>
-        )}
-        <Footer />
-      </ErrorBoundary>
+      <FeatureTogglesContext.Provider value={toggles}>
+        <ErrorBoundary>
+          {!isOnCookiePage && <CookieBanner path={path} />}
+          <Header />
+          <div className="nhsuk-width-container">
+            <main className="nhsuk-main-wrapper">
+              {pageContext.layout === "homepage" ? (
+                <HomepageContent>{children}</HomepageContent>
+              ) : (
+                <GeneralContent>{children}</GeneralContent>
+              )}
+            </main>
+          </div>
+
+          <Footer />
+        </ErrorBoundary>
+      </FeatureTogglesContext.Provider>
     </>
   );
 };

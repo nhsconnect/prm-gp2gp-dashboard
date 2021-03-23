@@ -1,23 +1,25 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import Layout from "../";
 
 describe("Homepage layout", () => {
-  it("displays header and footer", () => {
+  it("displays header and footer", async () => {
     const { getByRole } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>
         <p>This is a paragraph.</p>
       </Layout>
     );
 
-    const header = getByRole("banner");
-    const footer = getByRole("contentinfo");
+    await waitFor(() => {
+      const header = getByRole("banner");
+      const footer = getByRole("contentinfo");
 
-    expect(header).toBeInTheDocument();
-    expect(footer).toBeInTheDocument();
+      expect(header).toBeInTheDocument();
+      expect(footer).toBeInTheDocument();
+    });
   });
 
-  it("displays children", () => {
+  it("displays children", async () => {
     const { getByTestId, getByText } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>
         <div data-testid="test-div">
@@ -26,63 +28,73 @@ describe("Homepage layout", () => {
       </Layout>
     );
 
-    const testDiv = getByTestId("test-div");
+    await waitFor(() => {
+      const testDiv = getByTestId("test-div");
 
-    expect(testDiv).toBeInTheDocument();
-    expect(getByText("This is title")).toBeInTheDocument();
+      expect(testDiv).toBeInTheDocument();
+      expect(getByText("This is title")).toBeInTheDocument();
+    });
   });
 
-  it("displays cookie banner", () => {
+  it("displays cookie banner", async () => {
     const { getByLabelText } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>
         <p>This is a paragraph.</p>
       </Layout>
     );
 
-    const cookieBanner = getByLabelText("Cookie banner");
+    await waitFor(() => {
+      const cookieBanner = getByLabelText("Cookie banner");
 
-    expect(cookieBanner).toBeInTheDocument();
+      expect(cookieBanner).toBeInTheDocument();
+    });
   });
 
-  it("displays feedback banner", () => {
+  it("displays feedback banner", async () => {
     const { getByRole } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>
         <p>This is a paragraph.</p>
       </Layout>
     );
 
-    const feedbackBannerHeading = getByRole("heading", {
-      name: "Tell us what you think",
-    });
+    await waitFor(() => {
+      const feedbackBannerHeading = getByRole("heading", {
+        name: "Tell us what you think",
+      });
 
-    expect(feedbackBannerHeading).toBeInTheDocument();
+      expect(feedbackBannerHeading).toBeInTheDocument();
+    });
   });
 
-  it("displays hero banner", () => {
+  it("displays hero banner", async () => {
     const { getByRole } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>
         <p>This is a paragraph.</p>
       </Layout>
     );
 
-    const heroBannerHeading = getByRole("heading", {
-      name: "GP2GP patient record transfers data",
-    });
+    await waitFor(() => {
+      const heroBannerHeading = getByRole("heading", {
+        name: "GP2GP patient record transfers data",
+      });
 
-    expect(heroBannerHeading).toBeInTheDocument();
+      expect(heroBannerHeading).toBeInTheDocument();
+    });
   });
 
-  it("does not display back to search link", () => {
+  it("does not display back to search link", async () => {
     const { queryByRole } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>
         <p>This is a paragraph.</p>
       </Layout>
     );
 
-    const backToSearchLink = queryByRole("link", {
-      name: "Back to search",
-    });
+    await waitFor(() => {
+      const backToSearchLink = queryByRole("link", {
+        name: "Back to search",
+      });
 
-    expect(backToSearchLink).not.toBeInTheDocument();
+      expect(backToSearchLink).not.toBeInTheDocument();
+    });
   });
 });

@@ -4,6 +4,7 @@ import { Table } from "../components/common/Table";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
+import { useFeatureToggles } from "../library/hooks/useFeatureToggle/";
 
 type NationalStatisticsMetric = {
   year: number;
@@ -49,6 +50,10 @@ const NationalStatistics = () => {
     pending,
   }: NationalStatisticsMetric = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
+
+  const { showSomePage } = useFeatureToggles();
+  console.log({ showSomePage });
+  //testing
 
   return (
     <>
