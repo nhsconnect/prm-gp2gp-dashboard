@@ -7,6 +7,39 @@ import {
   FeatureToggles,
 } from "..";
 
+function Features() {
+  const { newFeature, secondNewFeature } = useFeatureToggles();
+
+  return (
+    <>
+      {newFeature && <p>New Feature</p>}
+      {secondNewFeature && <p>Second Feature</p>}
+    </>
+  );
+}
+
+function FeatureTogglesReadFromFile() {
+  const { toggles, isLoadingToggles } = useFetchFeatureToggles();
+  if (isLoadingToggles) return <p>Test loading text</p>;
+  return (
+    <FeatureTogglesContext.Provider value={toggles}>
+      <Features />
+    </FeatureTogglesContext.Provider>
+  );
+}
+
+function renderFeatureTogglesReadFromFile() {
+  return render(<FeatureTogglesReadFromFile />);
+}
+
+function renderFeatureToggle(toggles: FeatureToggles) {
+  return render(
+    <FeatureTogglesContext.Provider value={toggles}>
+      <Features />
+    </FeatureTogglesContext.Provider>
+  );
+}
+
 jest.mock("../../../../../featureToggles.json", () => ({
   dev: {
     newFeature: true,
@@ -37,39 +70,6 @@ describe.only("Feature Toggling Functionality", () => {
   afterAll(() => {
     global.window.location = ORIGINAL_LOCATION;
   });
-
-  function Features() {
-    const { newFeature, secondNewFeature } = useFeatureToggles();
-
-    return (
-      <>
-        {newFeature && <p>New Feature</p>}
-        {secondNewFeature && <p>Second Feature</p>}
-      </>
-    );
-  }
-
-  function FeatureTest() {
-    const { toggles, isLoadingToggles } = useFetchFeatureToggles();
-    if (isLoadingToggles) return <p>Test loading text</p>;
-    return (
-      <FeatureTogglesContext.Provider value={toggles}>
-        <Features />
-      </FeatureTogglesContext.Provider>
-    );
-  }
-
-  function renderFeatureTogglesReadFromFile() {
-    return render(<FeatureTest />);
-  }
-
-  function renderFeatureToggle(toggles: FeatureToggles) {
-    return render(
-      <FeatureTogglesContext.Provider value={toggles}>
-        <Features />
-      </FeatureTogglesContext.Provider>
-    );
-  }
 
   describe("useFeatureToggles", () => {
     it("does not display features when no feature toggles are on", () => {
@@ -109,15 +109,88 @@ describe.only("Feature Toggling Functionality", () => {
       process.env.GATSBY_ENV = "prod";
       const { queryByText, getByText } = renderFeatureTogglesReadFromFile();
       await waitFor(() => {
-        expect(queryByText("New Feature")).not.toBeInTheDocument();
         expect(getByText("Second Feature")).toBeInTheDocument();
+        expect(queryByText("New Feature")).not.toBeInTheDocument();
       });
     });
 
     it("displays some Loading text before reading JSON file", async () => {
-      const { getByText } = renderFeatureTogglesReadFromFile();
+      const { getByText, queryByText } = renderFeatureTogglesReadFromFile();
       expect(getByText("Test loading text")).toBeInTheDocument();
-      await waitFor(() => expect(getByText("New Feature")).toBeInTheDocument());
+      await waitFor(() => {
+        expect(queryByText("Test loading text")).not.toBeInTheDocument();
+        expect(getByText("New Feature")).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("URL query parameter overrides", () => {
+    it("displays Second Feature when URL parameter overrides file config in dev", async () => {
+      global.window.location.search = "?secondnewfeature=true";
+      const { getByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(getByText("Second Feature")).toBeInTheDocument();
+      });
+    });
+
+    it("displays Second Feature when uppercase URL parameter overrides file config in dev", async () => {
+      global.window.location.search = "?SECONDNEWFEATURE=TRUE";
+      const { getByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(getByText("Second Feature")).toBeInTheDocument();
+      });
+    });
+
+    it("does not display New Feature when URL parameter overrides file config in dev", async () => {
+      global.window.location.search = "?newFeature=false";
+
+      const { queryByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(queryByText("Test loading text")).not.toBeInTheDocument();
+        expect(queryByText("New Feature")).not.toBeInTheDocument();
+      });
+    });
+
+    it("displays New Feature when URL parameter matches file config in dev", async () => {
+      global.window.location.search = "?newFeature=true";
+      const { getByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(getByText("New Feature")).toBeInTheDocument();
+      });
+    });
+
+    it("overrides file config when there are multiple URL params in dev", async () => {
+      global.window.location.search = "?newFeature=false&secondnewfeature=true";
+      const { getByText, queryByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(getByText("Second Feature")).toBeInTheDocument();
+        expect(queryByText("New Feature")).not.toBeInTheDocument();
+      });
+    });
+
+    it("does not display Second Feature when URL parameter matches the file config in dev", async () => {
+      global.window.location.search = "?secondnewfeature=false";
+      const { queryByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(queryByText("Test loading text")).not.toBeInTheDocument();
+        expect(queryByText("Second Feature")).not.toBeInTheDocument();
+      });
+    });
+
+    it("displays Second Feature despite URL parameter override when in prod", async () => {
+      process.env.GATSBY_ENV = "prod";
+      global.window.location.search = "?secondnewfeature=false";
+      const { getByText } = renderFeatureTogglesReadFromFile();
+
+      await waitFor(() => {
+        expect(getByText("Second Feature")).toBeInTheDocument();
+      });
     });
   });
 });
