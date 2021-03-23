@@ -119,16 +119,11 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
         <ErrorBoundary>
           {!isOnCookiePage && <CookieBanner path={path} />}
           <Header />
-          <div className="nhsuk-width-container">
-            <main className="nhsuk-main-wrapper">
-              {pageContext.layout === "homepage" ? (
-                <HomepageContent>{children}</HomepageContent>
-              ) : (
-                <GeneralContent>{children}</GeneralContent>
-              )}
-            </main>
-          </div>
-
+          {pageContext.layout === "homepage" ? (
+            <HomepageContent>{children}</HomepageContent>
+          ) : (
+            <GeneralContent>{children}</GeneralContent>
+          )}
           <Footer />
         </ErrorBoundary>
       </FeatureTogglesContext.Provider>
