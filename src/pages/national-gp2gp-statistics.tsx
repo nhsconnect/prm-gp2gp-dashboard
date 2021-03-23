@@ -51,10 +51,6 @@ const NationalStatistics = () => {
   }: NationalStatisticsMetric = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
 
-  const { showSomePage } = useFeatureToggles();
-  console.log({ showSomePage });
-  //testing
-
   return (
     <>
       <Helmet title="National Statistics - GP Registrations Data Platform" />
