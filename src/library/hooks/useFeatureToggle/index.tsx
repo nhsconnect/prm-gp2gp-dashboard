@@ -2,16 +2,9 @@ import featureTogglesJson from "../../../../featureToggles.json";
 import { useState, useEffect, createContext, useContext } from "react";
 import { getEnv } from "../../utils/getEnv";
 
-// TODO: fix below
-export type FeatureToggles = any;
+export type FeatureTogglesType = Record<string, boolean>;
 
-export const defaultToggleState = {
-  showSomePage: false,
-};
-
-export const FeatureTogglesContext = createContext<FeatureToggles>(
-  defaultToggleState
-);
+export const FeatureTogglesContext = createContext<FeatureTogglesType>({});
 
 const PROD_ENV = "prod";
 const DEV_ENV = "dev";
@@ -21,27 +14,30 @@ const getUrlParam = (paramName: string) => {
   return params.get(paramName.toLowerCase());
 };
 
-const getDevFeatureToggles = async (): Promise<FeatureToggles> => {
-  const featureToggles = await featureTogglesJson[DEV_ENV];
+const getDevFeatureToggles = async (): Promise<FeatureTogglesType> => {
+  const defaultFeatureToggles = await featureTogglesJson[DEV_ENV];
 
-  Object.keys(featureToggles).map(featureToggleName => {
-    const urlParam = getUrlParam(featureToggleName);
-    if (urlParam === "true" || urlParam === "false") {
-      // @ts-ignore
-      featureToggles[featureToggleName] = urlParam === "true";
-    }
-  });
-  // @ts-ignore
-  return featureToggles;
+  const urlParamToggleOverrides = Object.keys(defaultFeatureToggles).reduce(
+    (acc, featureToggleName) => {
+      const urlParam = getUrlParam(featureToggleName);
+      if (urlParam === "true" || urlParam === "false") {
+        // @ts-ignore
+        acc[featureToggleName] = urlParam === "true";
+      }
+      return acc;
+    },
+    {}
+  );
+
+  return { ...defaultFeatureToggles, ...urlParamToggleOverrides };
 };
 
 export function useFetchFeatureToggles() {
-  const [toggles, setToggles] = useState<FeatureToggles>(defaultToggleState);
-  const [isLoading, setIsLoading] = useState(true);
+  const [toggles, setToggles] = useState<FeatureTogglesType>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async function() {
-      // @ts-ignore
       const featureToggles =
         getEnv() === DEV_ENV
           ? await getDevFeatureToggles()
@@ -54,6 +50,6 @@ export function useFetchFeatureToggles() {
   return { toggles, isLoadingToggles: isLoading };
 }
 
-export function useFeatureToggles(): FeatureToggles {
+export function useFeatureToggles(): FeatureTogglesType {
   return useContext(FeatureTogglesContext);
 }

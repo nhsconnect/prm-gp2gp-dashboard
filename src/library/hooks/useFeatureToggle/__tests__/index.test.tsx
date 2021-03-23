@@ -4,7 +4,7 @@ import {
   useFeatureToggles,
   FeatureTogglesContext,
   useFetchFeatureToggles,
-  FeatureToggles,
+  FeatureTogglesType,
 } from "..";
 
 function Features() {
@@ -32,7 +32,7 @@ function renderFeatureTogglesReadFromFile() {
   return render(<FeatureTogglesReadFromFile />);
 }
 
-function renderFeatureToggle(toggles: FeatureToggles) {
+function renderFeatureToggle(toggles: FeatureTogglesType) {
   return render(
     <FeatureTogglesContext.Provider value={toggles}>
       <Features />
