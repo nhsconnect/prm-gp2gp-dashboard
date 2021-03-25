@@ -1,4 +1,8 @@
 {
-  "dev": {},
-  "prod": {}
+  "dev": {
+    "showSomePage": true
+  },
+  "prod": {
+    "showSomePage": true
+  }
 }
