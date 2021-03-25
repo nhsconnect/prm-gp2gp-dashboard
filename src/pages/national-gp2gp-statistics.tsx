@@ -4,7 +4,6 @@ import { Table } from "../components/common/Table";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
-import { useFeatureToggles } from "../library/hooks/useFeatureToggle";
 
 type NationalStatisticsMetric = {
   year: number;
@@ -50,8 +49,6 @@ const NationalStatistics = () => {
     pending,
   }: NationalStatisticsMetric = nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
-
-  const { showSomePage } = useFeatureToggles();
 
   return (
     <>
@@ -111,21 +108,16 @@ const NationalStatistics = () => {
         suppressed) beyond 8 days of the practice receiving the record. These
         transfers result in the paper fallback process being triggered.
       </p>
-
-      {//feature toggle testing
-      showSomePage && (
-        <Table
-          headers={["Within 3 days", "Within 8 days", "Beyond 8 days"]}
-          rows={[
-            [
-              integrated.within3Days.toString(),
-              integrated.within8Days.toString(),
-              integrated.beyond8Days.toString(),
-            ],
-          ]}
-        />
-      )}
-
+      <Table
+        headers={["Within 3 days", "Within 8 days", "Beyond 8 days"]}
+        rows={[
+          [
+            integrated.within3Days.toString(),
+            integrated.within8Days.toString(),
+            integrated.beyond8Days.toString(),
+          ],
+        ]}
+      />
       <h3>Technical failures</h3>
       <p>
         Records that fail to transfer due to technical error. These transfers

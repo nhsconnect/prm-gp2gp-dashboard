@@ -2,12 +2,6 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import NationalStatistics from "../national-gp2gp-statistics";
-import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
-
-jest.mock("../../library/hooks/useFeatureToggle");
-
-import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 jest.mock(
   "../../data/organisations/nationalMetrics.json",
@@ -34,11 +28,6 @@ jest.mock(
 );
 
 describe("National GP2GP Statistics template", () => {
-  beforeEach(() => {
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showSomePage: true });
-  });
   it("renders national statistics overview correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
