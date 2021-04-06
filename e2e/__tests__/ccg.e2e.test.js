@@ -50,14 +50,14 @@ describe("CCG page", () => {
         cy.checkAccessibility();
 
         // Navigate to Practice page
-        cy.contains("td", /Practice|Centre/g)
+        cy.contains("td", /Practice|Centre/)
           .first()
           .then($el => {
             const practiceName = $el.text();
-            cy.contains(practiceName).click();
-
             const odsCode = practiceName.split("|")[1].trim();
-            cy.url().should("include", `/${odsCode}`);
+            cy.contains("a", odsCode).click({ force: true });
+
+            cy.url().should("include", `practice/${odsCode}`);
             cy.contains("h1", odsCode);
           });
       });

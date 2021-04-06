@@ -18,6 +18,7 @@
     "test:e2e:ci": "CYPRESS_BASE_URL=http://localhost:9000 start-server-and-test serve http://localhost:9000 e2e",
     "format": "prettier --write \"**/*.{js,jsx,json,scss,md,ts,tsx}\"",
     "getPracticeMetrics": "node scripts/get-s3-data.js --datatype practiceMetrics",
+    "getPracticeMetrics:stub": "node scripts/get-stub-data.js --datatype practiceMetrics",
     "getNationalMetrics": "node scripts/get-s3-data.js --datatype nationalMetrics",
     "getMetadata": "node scripts/get-s3-data.js --datatype metadata"
   },
