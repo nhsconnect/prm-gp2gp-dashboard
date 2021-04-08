@@ -38,7 +38,7 @@ describe("Practice page", () => {
 
         cy.contains("Successful integrations");
 
-        cy.get("[data-testid=table__cell--row-0-col-0]").contains(6);
+        cy.get("[data-testid=table__cell--row-0-col-0]").contains(2);
 
         cy.contains("Within 3 days");
         cy.get("[data-testid=table__cell--row-0-col-1]").contains("50%");
@@ -47,7 +47,7 @@ describe("Practice page", () => {
         cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
 
         cy.contains("Beyond 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-3]").contains("n/a");
+        cy.get("[data-testid=table__cell--row-0-col-3]").contains("0%");
 
         cy.checkAccessibility();
 

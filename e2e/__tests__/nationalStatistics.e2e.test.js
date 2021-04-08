@@ -14,48 +14,48 @@ describe("National statistics page", () => {
 
         cy.contains("h3", "Transfers started");
         cy.get('[data-testid="national-statistics__initiated-count"]').contains(
-          /^(Count: (.+))$/
+          "Count: 6"
         );
 
         cy.contains("h3", "Successful integrations");
         cy.get(
           '[data-testid="national-statistics__integrated-count"]'
-        ).contains(/^(Count: (.+))$/);
+        ).contains("Count: 5");
         cy.get(
           '[data-testid="national-statistics__integrated-percent"]'
-        ).contains(/^(Percent: (.+)%)$/);
+        ).contains("Percent: 83.33%");
 
         cy.contains("h3", "Integration times");
         cy.contains("Within 3 days");
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(/.+/g);
+        cy.get('[data-testid="table__cell--row-0-col-0"]').contains("2");
         cy.contains("Within 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(/.+/g);
+        cy.get('[data-testid="table__cell--row-0-col-1"]').contains("2");
         cy.contains("Beyond 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains(/.+/g);
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("1");
 
         cy.contains("h3", "Technical failures");
         cy.get('[data-testid="national-statistics__failed-count"]').contains(
-          /^(Count: (.+))$/
+          "Count: 1"
         );
         cy.get('[data-testid="national-statistics__failed-percent"]').contains(
-          /^(Percent: (.+)%)$/
+          "Percent: 16.67%"
         );
 
         cy.contains("h3", "Pending transfers");
         cy.get('[data-testid="national-statistics__pending-count"]').contains(
-          /^(Count: (.+))$/
+          "Count: 0"
         );
         cy.get('[data-testid="national-statistics__pending-percent"]').contains(
-          /^(Percent: (.+)%)$/
+          "Percent: 0%"
         );
 
         cy.contains("h3", "Paper fallback transfers");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-count"]'
-        ).contains(/^(Count: (.+))$/);
+        ).contains("Count: 2");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-percent"]'
-        ).contains(/^(Percent: (.+)%)$/);
+        ).contains("Percent: 33.33%");
 
         cy.checkAccessibility();
       });

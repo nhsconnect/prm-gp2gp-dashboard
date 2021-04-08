@@ -15,7 +15,7 @@ async function makeApiCall(url) {
   return JSON.stringify(jsonResponse);
 }
 
-export async function getStubData(outputFileDirectory, stubbedJsonUrl) {
+async function getStubData(outputFileDirectory, stubbedJsonUrl) {
   try {
     const data = await makeApiCall(stubbedJsonUrl);
 
@@ -40,3 +40,5 @@ const outputFileDirectory = config.outputPath + outputFileName;
 const stubbedJsonUrl = `https://raw.githubusercontent.com/nhsconnect/prm-gp2gp-data-pipeline/master/tests/e2e/platform_metrics_calculator/test_platform_metrics_calculator_pipeline/expected_json_output/${outputFileName}`;
 
 getStubData(outputFileDirectory, stubbedJsonUrl);
+
+module.exports = { getStubData };
