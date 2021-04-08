@@ -5,20 +5,17 @@ import { mockAPIResponse } from "../../__mocks__/api";
 import util from "util";
 import yargs from "yargs";
 
-jest.mock("fs", () => ({
-  promises: {
-    writeFile: jest.fn(),
-  },
-}));
+jest.mock("fs");
+const spy = jest.spyOn(console, "info").mockImplementation();
 
 jest.mock("yargs", () => ({
   argv: {
-    writeFile: jest.fn(),
+    datatype: "practiceMetrics",
   },
 }));
 
 jest.mock("util", () => ({
-  promisify: jest.fn(func => func),
+  promisify: jest.fn((func: any) => func),
 }));
 
 describe("getStubData", () => {
@@ -30,11 +27,22 @@ describe("getStubData", () => {
     moxios.uninstall();
   });
 
-  it("test", async () => {
+  afterAll(() => {
+    spy.mockRestore();
+  });
+
+  it("writes to specified file path with API response JSON ", async () => {
     const data = { dummy: "data" };
     mockAPIResponse(200, data);
-    // TODO: Fix below
-    // await getStubData("filepath/file.json", "https://url")
-    // expect(fs.promises.writeFile).toHaveBeenCalledTimes(1);
+    await getStubData("filepath/file.json", "https://url");
+    expect(fs.writeFile).toHaveBeenCalledTimes(1);
+    expect(fs.writeFile).toHaveBeenCalledWith(
+      "filepath/file.json",
+      JSON.stringify(data)
+    );
+    expect(spy).toHaveBeenCalledWith(
+      "Successfully wrote stubbed JSON data from data-pipeline to: ",
+      "filepath/file.json"
+    );
   });
 });
