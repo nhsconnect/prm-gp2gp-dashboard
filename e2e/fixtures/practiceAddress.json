@@ -1,0 +1,17 @@
+{
+  "Organisation": {
+    "Name": "Test GP Practice With Integrations",
+    "OrgId": {
+      "extension": "A12347"
+    },
+    "GeoLoc": {
+      "Location": {
+        "AddrLn1": "123 Some Address",
+        "Town": "Some Town",
+        "County": "Some County",
+        "PostCode": "BL3 5DP",
+        "Country": "ENGLAND"
+      }
+    }
+  }
+}

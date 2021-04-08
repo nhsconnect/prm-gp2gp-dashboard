@@ -18,6 +18,11 @@ async function makeApiCall(url) {
 export async function getStubData(outputFileDirectory, stubbedJsonUrl) {
   try {
     const data = await makeApiCall(stubbedJsonUrl);
+
+    if (!fs.existsSync(config.outputPath)) {
+      await fs.mkdirSync(config.outputPath);
+    }
+
     await writeFile(outputFileDirectory, data);
 
     console.info(

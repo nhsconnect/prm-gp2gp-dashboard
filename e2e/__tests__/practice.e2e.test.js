@@ -10,23 +10,26 @@ describe("Practice page", () => {
       });
 
       it("searches, navigates to an individual practice page and goes back to home page", () => {
+        cy.intercept(
+          "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/A12347",
+          { fixture: "practiceAddress.json" }
+        );
+
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-        ).type("Bolton Community Practice");
-        cy.contains("li", "Bolton Community Practice")
+        ).type("Test GP Practice With Some Integrations | A12347");
+        cy.contains("li", "Test GP Practice With Some Integrations")
           .parent()
           .parent()
           .click();
 
         cy.contains("button", "Search").click();
 
-        //TODO: Make data agnostic
-        cy.contains("h1", "Bolton Community Practice");
-        cy.contains("Y03079");
-        cy.contains("Waters Meeting Health Centre");
-        cy.contains("Waters Meeting Road");
-        cy.contains("Bolton");
-        cy.contains("BL1 8TT");
+        cy.contains("h1", "Test GP Practice With Some Integrations");
+        cy.contains("A12347");
+        cy.contains("123 Some Address");
+        cy.contains("Some Town");
+        cy.contains("BL3 5DP");
 
         cy.contains("Why integrate within 8 days?").click();
         cy.contains("When records are not integrated within 8 days");
@@ -35,25 +38,16 @@ describe("Practice page", () => {
 
         cy.contains("Successful integrations");
 
-        const validNumber = /[\d]+/g;
-        cy.get("[data-testid=table__cell--row-0-col-0]").contains(validNumber);
-
-        const validMetricAsPercentOrNA = /(.+%|n\/a)/;
+        cy.get("[data-testid=table__cell--row-0-col-0]").contains(6);
 
         cy.contains("Within 3 days");
-        cy.get("[data-testid=table__cell--row-0-col-1]").contains(
-          validMetricAsPercentOrNA
-        );
+        cy.get("[data-testid=table__cell--row-0-col-1]").contains("50%");
 
         cy.contains("Within 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-2]").contains(
-          validMetricAsPercentOrNA
-        );
+        cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
 
         cy.contains("Beyond 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-3]").contains(
-          validMetricAsPercentOrNA
-        );
+        cy.get("[data-testid=table__cell--row-0-col-3]").contains("n/a");
 
         cy.checkAccessibility();
 

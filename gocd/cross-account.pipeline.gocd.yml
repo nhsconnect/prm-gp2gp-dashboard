@@ -21,6 +21,31 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-test
+      - test_e2e:
+          clean_workspace: true
+          jobs:
+            test:
+              resources:
+                - docker
+              artifacts:
+                - build:
+                    source: e2e/videos
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-stubs
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-build dev
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-test-e2e
       - build_dev:
           clean_workspace: true
           jobs:
@@ -48,29 +73,6 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-build dev
-      - test_e2e:
-          clean_workspace: true
-          jobs:
-            test:
-              resources:
-                - docker
-              artifacts:
-                - build:
-                    source: e2e/videos
-              tasks:
-                - fetch:
-                    stage: build_dev
-                    job: npm_build
-                    source: public
-                - fetch:
-                    stage: build_dev
-                    job: npm_build
-                    source: .cache
-                - exec:
-                    command: /bin/bash
-                    arguments:
-                      - -c
-                      - ./tasks dojo-test-e2e
       - deploy_dev:
           clean_workspace: true
           jobs:

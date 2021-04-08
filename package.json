@@ -20,7 +20,10 @@
     "getPracticeMetrics": "node scripts/get-s3-data.js --datatype practiceMetrics",
     "getPracticeMetrics:stub": "node scripts/get-stub-data.js --datatype practiceMetrics",
     "getNationalMetrics": "node scripts/get-s3-data.js --datatype nationalMetrics",
-    "getMetadata": "node scripts/get-s3-data.js --datatype metadata"
+    "getNationalMetrics:stub": "node scripts/get-stub-data.js --datatype nationalMetrics",
+    "getMetadata": "node scripts/get-s3-data.js --datatype metadata",
+    "getMetadata:stub": "node scripts/get-stub-data.js --datatype metadata",
+    "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub && npm run getMetadata:stub"
   },
   "husky": {
     "hooks": {
