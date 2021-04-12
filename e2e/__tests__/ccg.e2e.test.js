@@ -1,4 +1,5 @@
 const { viewPorts } = require("../support/common");
+const { organisations } = require("/local-mocks/mocks.js");
 
 describe("CCG page", () => {
   viewPorts.map(viewPort => {
@@ -10,11 +11,7 @@ describe("CCG page", () => {
       });
 
       it("searches and navigates to the CCG page and then navigates to an individual practice page", () => {
-        cy.intercept(
-          "GET",
-          "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000",
-          { fixture: "ccgPractices.json" }
-        );
+        cy.intercept("GET", "/organisations", organisations);
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
@@ -49,14 +46,16 @@ describe("CCG page", () => {
         cy.get('[data-testid="table__cell--row-0-col-4"]').contains("33.3%");
         cy.checkAccessibility();
 
-        // Navigate to Practice page
-        cy.contains("a", "Test GP Practice With Integrations | A12345").click();
-        cy.url().should("include", "practice/A12345");
-        cy.contains("h1", "Test GP Practice With Integrations");
-        cy.contains("h1", "A12345");
+        cy.contains("a", "Test GP Practice With Integrations | A12345")
+          .should("have.attr", "href")
+          .and("contains", "practice/A12345");
       });
 
       it("searches and navigates to the CCG page with no practices associated to that ccg", () => {
+        cy.intercept("GET", "/organisations", {
+          Organisations: [],
+        });
+
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("test ccg without");
@@ -66,12 +65,11 @@ describe("CCG page", () => {
           .click();
         cy.contains("button", "Search").click();
 
-        // CCG Page
         cy.contains("No GP practices found");
       });
 
       it("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
-        cy.intercept("GET", "https://directory.spineservices.nhs.uk/ORD", {
+        cy.intercept("GET", "/organisations", {
           statusCode: 400,
         });
 
@@ -84,7 +82,6 @@ describe("CCG page", () => {
           .click();
         cy.contains("button", "Search").click();
 
-        // CCG Page
         cy.contains("Error loading practice list");
       });
     });

@@ -1,4 +1,5 @@
 const { viewPorts } = require("../support/common");
+const { practicesWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
 describe("Practice page", () => {
   viewPorts.map(viewPort => {
@@ -10,10 +11,7 @@ describe("Practice page", () => {
       });
 
       it("searches, navigates to an individual practice page and goes back to home page", () => {
-        cy.intercept(
-          "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations/A12347",
-          { fixture: "practiceAddress.json" }
-        );
+        cy.intercept("/organisations/A12347", practicesWithSomeIntegrations);
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
