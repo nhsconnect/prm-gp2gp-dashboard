@@ -26,7 +26,13 @@ describe("getStubData", () => {
 
   afterEach(() => {
     axiosMock.reset();
+    consoleLogSpy.mockReset();
+    consoleErrorSpy.mockReset();
+  });
+
+  afterAll(() => {
     consoleLogSpy.mockRestore();
+    consoleErrorSpy.mockRestore();
   });
 
   it("writes to specified file path with API response JSON ", async () => {
@@ -41,13 +47,22 @@ describe("getStubData", () => {
       "filepath/file.json",
       JSON.stringify(data)
     );
+  });
+
+  it("logs when successfully stubbed JSON files", async () => {
+    const data = { dummy: "data" };
+    const urlStub = "https://url";
+
+    axiosMock.onGet(urlStub).reply(200, data);
+
+    await getStubData("filepath/file.json", urlStub);
     expect(consoleLogSpy).toHaveBeenCalledWith(
       "Successfully wrote stubbed JSON data from data-pipeline to: ",
       "filepath/file.json"
     );
   });
 
-  it("Logs an error when it fails to fetch the json file", async () => {
+  it("logs an error when it fails to fetch the json file", async () => {
     const data = { dummy: "data" };
     const urlStub = "https://url";
 
@@ -60,6 +75,7 @@ describe("getStubData", () => {
       expect(consoleErrorSpy).toHaveBeenCalledWith(
         "An error occurred: Error: Request failed with status code 400"
       );
+      expect(consoleLogSpy).toHaveBeenCalledTimes(0);
     }
   });
 });
