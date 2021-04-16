@@ -5,3 +5,11 @@
   background-color: transparent;
   padding-top: 20px;
 }
+
+.app-homepage-content {
+  @extend .nhsuk-main-wrapper;
+}
+
+.app-homepage.nhsuk-main-wrapper {
+  padding-top: 0;
+}

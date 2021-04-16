@@ -38,16 +38,19 @@ type ContentProps = {
 
 const HomepageContent: FC<ContentProps> = ({ children }) => (
   <>
-    <HeroBanner
-      title={homepageContent.title}
-      subtitle={homepageContent.subtitle}
-    />
-    <div className="nhsuk-width-container">
-      <main className="nhsuk-main-wrapper">
-        {children}
-        <FeedbackBanner />
-      </main>
-    </div>
+    {/*keeping consistent with nhs.uk and their styling on the home page with the hero banner*/}
+    <main className="nhsuk-main-wrapper app-homepage" id="maincontent">
+      <HeroBanner
+        title={homepageContent.title}
+        subtitle={homepageContent.subtitle}
+      />
+      <section className="nhsuk-section app-homepage-content">
+        <div className="nhsuk-width-container">
+          {children}
+          <FeedbackBanner />
+        </div>
+      </section>
+    </main>
   </>
 );
 
@@ -81,7 +84,10 @@ const GeneralContent: FC<ContentProps> = ({ children }) => {
   return (
     <div className="nhsuk-width-container">
       <BackToLink link="/" text="Back to search" />
-      <main className={"nhsuk-main-wrapper nhsuk-u-padding-top-2"}>
+      <main
+        className="nhsuk-main-wrapper nhsuk-u-padding-top-2"
+        id="maincontent"
+      >
         <FeedbackBanner />
         {children}
       </main>
