@@ -19,6 +19,7 @@ import {
 } from "../library/hooks/useFeatureToggle/";
 import homepageContent from "../data/content/homepage.json";
 import "./index.scss";
+import { SkipLink } from "../components/SkipLink";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -118,6 +119,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
       <FeatureTogglesContext.Provider value={toggles}>
         <ErrorBoundary>
           {!isOnCookiePage && <CookieBanner path={path} />}
+          <SkipLink />
           <Header />
           {pageContext.layout === "homepage" ? (
             <HomepageContent>{children}</HomepageContent>
