@@ -13,3 +13,14 @@
 .app-homepage.nhsuk-main-wrapper {
   padding-top: 0;
 }
+
+.nhsuk-header__container {
+  padding-left: 0;
+
+  .gp2gp-header__link {
+    @include mq($until: tablet) {
+      display: block;
+    }
+  }
+}
+
