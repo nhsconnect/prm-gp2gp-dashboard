@@ -44,7 +44,7 @@ const HomepageContent: FC<ContentProps> = ({ children }) => (
         title={homepageContent.title}
         subtitle={homepageContent.subtitle}
       />
-      <section className="nhsuk-section app-homepage-content">
+      <section className="app-homepage-content">
         <div className="nhsuk-width-container">
           {children}
           <FeedbackBanner />
@@ -84,11 +84,13 @@ const GeneralContent: FC<ContentProps> = ({ children }) => {
   return (
     <div className="nhsuk-width-container">
       <BackToLink link="/" text="Back to search" />
+      <section aria-label="Feedback banner">
+        <FeedbackBanner />
+      </section>
       <main
         className="nhsuk-main-wrapper nhsuk-u-padding-top-2"
         id="maincontent"
       >
-        <FeedbackBanner />
         {children}
       </main>
     </div>

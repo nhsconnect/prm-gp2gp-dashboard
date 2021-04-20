@@ -30,7 +30,7 @@ export const SkipLink: FC = () => {
   };
 
   return (
-    // needs maincontent as an id on <main> for when Javascript is disabled
+    // needs maincontent as an id on <main> for when Javascript is disabled or screen reader used
     <a className="nhsuk-skip-link" href="#maincontent" onClick={handleSkipLink}>
       Skip to main content
     </a>
