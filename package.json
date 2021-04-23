@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "develop": "gatsby develop",
-    "audit": "npm-auditor-ci --threshold moderate",
+    "audit": "npm-auditor-ci --threshold high",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
