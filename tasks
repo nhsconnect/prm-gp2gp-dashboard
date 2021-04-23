@@ -108,6 +108,13 @@ case "${task}" in
       assume_role
       dojo "./tasks deploy ${deployment_env}"
       ;;
+  dep)
+      npm install
+      npm audit --audit-level=high > audit-output.txt
+      ;;
+  dojo-dep)
+      dojo "./tasks dep"
+      ;;
   *)
       echo "Invalid command: '${task}'"
       exit 1
