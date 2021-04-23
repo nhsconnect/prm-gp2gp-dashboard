@@ -110,7 +110,7 @@ case "${task}" in
       ;;
   dep)
       npm install
-      npm audit --audit-level=high > audit-output.txt
+      npm run audit > audit-output.txt
       ;;
   dojo-dep)
       dojo "./tasks dep"

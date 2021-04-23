@@ -1,5 +1,6 @@
 # Logs
 npm-debug.log*
+audit-output.txt
 
 # Dependency directories
 node_modules/
