@@ -30,6 +30,7 @@
     "*.{js,jsx,json,scss,md,ts,tsx}": "prettier --write"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@types/react-helmet": "^6.1.0",
     "aws-sdk": "^2.637.0",
     "classnames": "^2.2.6",
