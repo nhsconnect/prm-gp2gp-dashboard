@@ -1,10 +1,9 @@
 import { convertToTitleCase } from "../utils/convertToTitleCase/index";
 
-const isDevEnvironment =
-  process.env.NODE_ENV && process.env.NODE_ENV === "development";
-export const ODS_PORTAL_URL = isDevEnvironment
-  ? "http://localhost:3000/organisations"
-  : "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations";
+export const ODS_PORTAL_URL =
+  process.env.GATSBY_ACTIVE_ENV === "dev"
+    ? "http://localhost:3000/organisations"
+    : "https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations";
 
 export const transformPracticeAddress = location => {
   const postCode = location.PostCode;

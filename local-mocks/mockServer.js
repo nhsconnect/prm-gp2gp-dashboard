@@ -30,5 +30,5 @@ server.get("/organisations", (request, response) => {
 });
 
 server.listen(port, () => {
-  console.log("JSON Server is running");
+  console.log(`JSON Server is running on port: http://localhost:${port}`);
 });
