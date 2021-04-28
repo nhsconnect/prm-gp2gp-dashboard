@@ -5,9 +5,9 @@
   "version": "1.0.0",
   "scripts": {
     "mockServer": "node local-mocks/mockServer.js",
-    "develop": "GATSBY_ACTIVE_ENV=dev concurrently --kill-others \"npm run mockServer\" \"gatsby develop\"",
+    "develop": "GATSBY_ODS_PORTAL_URL=http://localhost:3000/organisations concurrently --kill-others \"npm run mockServer\" \"gatsby develop\"",
     "develop:ci": "gatsby develop",
-    "build": "GATSBY_ACTIVE_ENV=dev gatsby build",
+    "build": "GATSBY_ODS_PORTAL_URL=http://localhost:3000/organisations gatsby build",
     "audit": "npm-auditor-ci --threshold high",
     "build:ci": "gatsby build",
     "serve": "concurrently --kill-others \"npm run mockServer\" \"gatsby serve\"",
@@ -19,7 +19,7 @@
     "e2e:open": "./node_modules/.bin/cypress open",
     "test:e2e": "start-server-and-test 'gatsby develop' http://localhost:8000 e2e",
     "test:e2e:open": "start-server-and-test 'gatsby develop' http://localhost:8000 e2e:open",
-    "test:e2e:ci": "CYPRESS_BASE_URL=http://localhost:9000 start-server-and-test 'gatsby serve' http://localhost:9000 e2e",
+    "test:e2e:built": "CYPRESS_BASE_URL=http://localhost:9000 start-server-and-test 'gatsby serve' http://localhost:9000 e2e",
     "format": "prettier --write \"**/*.{js,jsx,json,scss,md,ts,tsx}\"",
     "getPracticeMetrics:ci": "node scripts/get-s3-data.js --datatype practiceMetrics",
     "getPracticeMetrics:stub": "node scripts/get-stub-data.js --datatype practiceMetrics",
@@ -32,7 +32,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged && npm test",
-      "pre-push": "npm run build:ci && npm run test:e2e:ci"
+      "pre-push": "npm run build && npm run test:e2e:built"
     }
   },
   "lint-staged": {
