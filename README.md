@@ -19,7 +19,7 @@ GP2GP metrics and metadata are required to build the dashboard. To retrieve thes
 
 1. `npm install`
 2. `npm run develop`
-3. `npm run e2e:open` (in a seperate terminal)
+3. `npm run e2e:open` (in a separate terminal)
 
 This will open the cypress test runner. To run the e2e tests in ci mode use `./tasks dojo-test-e2e`
 

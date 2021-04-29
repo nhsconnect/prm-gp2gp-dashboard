@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe.only("Practice page", () => {
+describe("Practice page", () => {
   viewPorts.map(viewPort => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
