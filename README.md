@@ -33,9 +33,7 @@ To retrieve these files from S3 you will need to be authenticated with AWS. It w
    - Only available environments are dev or prod.
 2. `npm run develop:ci`
 
-If you would then like to run the E2E tests, run `npm run test:e2e:open`
-
-Note - due to the nature of the E2E tests relying on having stubbed data, you will need to ensure you have the stubbed data rather than S3 data before committing.
+Note: due to the nature of the E2E tests relying on having stubbed data, the E2E tests will fail if you have S3 data rather than stubbed data.
 
 ### Running the production build of the site
 
@@ -53,14 +51,20 @@ Note: Hot-reloading is not enabled, therefore after any changes are made you wil
 
 ## End to end (E2E) tests
 
+Note: due to the nature of the E2E tests relying on having stubbed data, you will need to ensure you have the stubbed data rather than S3 data when running E2E tests.
+
+### Development build
+
 1. `npm install`
-2. `npm run develop` - ensure you have the stubbed data.
+2. `npm run develop`
 3. `npm run e2e:open` (in a separate terminal)
    - This will open the Cypress test runner.
 
+### Production/CI build
+
 To run the E2E tests in CI mode, run `npm run build:ci` then run `./tasks dojo-test-e2e`. If you'd like to run the E2E tests in CI mode and open the Cypress test runner, run `npm run build:ci` and then `npm test:e2e:open`.
 
-If cypress has not been fully installed by npm you can force it to install the cypress binary by running `./node_modules/.bin/cypress install`.
+If Cypress has not been fully installed by npm you can force it to install the cypress binary by running `./node_modules/.bin/cypress install`.
 
 ## Updating for a new month
 
