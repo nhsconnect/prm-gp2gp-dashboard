@@ -16,13 +16,14 @@
 
 GP2GP metrics and metadata JSON files are then required to build the dashboard. There are two options - to either retrieve them from the Data Pipeline Github repo, or to download them from S3. Below are instructions for both:
 
-#### Retrieving required JSON files from Data Pipeline Github Repo
+#### Retrieving required JSON files from Data Pipeline Github Repo (stubbed data)
 
 1. Run `./tasks get-stubs`
 2. Look inside `src/data/organisations` and there should be the following JSON files - nationalMetrics.json, organisationMetrics.json and practiceMetrics.json
 3. Run `npm run develop`
-   - N.B. This will run a local mock server that will mock API calls made dynamically on page load.
+   - This will run a local mock server that will mock API calls made dynamically on page load.
    - It will then build, with hot-reloading enabled and with test CCG and GP practices.
+   - E2E tests are configured to test against this stubbed data.
 
 #### Retrieving required JSON files from S3
 
@@ -30,22 +31,34 @@ To retrieve these files from S3 you will need to be authenticated with AWS. It w
 
 1. `./tasks get-metrics <environment> && ./tasks get-metadata <environment>`
    - Only available environments are dev or prod.
-2. `npm run develop`
+2. `npm run develop:ci`
+
+If you would then like to run the E2E tests, run `npm run test:e2e:open`
+
+Note - due to the nature of the E2E tests relying on having stubbed data, you will need to ensure you have the stubbed data rather than S3 data before committing.
 
 ### Running the production build of the site
 
+Note: Hot-reloading is not enabled, therefore after any changes are made you will need to repeat the above steps.
+
+#### With stubbed data
+
 1. `npm run build`
 2. `npm run serve`
-   - N.B. Hot-reloading is not enabled, therefore after any changes are made you will need to repeat the above steps.
+
+#### With S3 data
+
+1. `npm run build:ci`
+2. `npm run serve:ci`
 
 ## End to end (E2E) tests
 
 1. `npm install`
-2. `npm run develop`
+2. `npm run develop` - ensure you have the stubbed data.
 3. `npm run e2e:open` (in a separate terminal)
    - This will open the Cypress test runner.
 
-To run the E2E tests in CI mode, run `npm run build` then run `./tasks dojo-test-e2e`. If you'd like to run the E2E tests in CI mode and open the Cypress test runner, run `npm run build` and then `npm test:e2e:open`.
+To run the E2E tests in CI mode, run `npm run build:ci` then run `./tasks dojo-test-e2e`. If you'd like to run the E2E tests in CI mode and open the Cypress test runner, run `npm run build:ci` and then `npm test:e2e:open`.
 
 If cypress has not been fully installed by npm you can force it to install the cypress binary by running `./node_modules/.bin/cypress install`.
 
