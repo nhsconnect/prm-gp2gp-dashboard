@@ -3,40 +3,31 @@ import { render } from "@testing-library/react";
 
 import { PracticeTableWithSort } from "../";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
+import { when } from "jest-when";
+import { mocked } from "ts-jest/utils";
+
+jest.mock("../../../library/hooks/useFeatureToggle");
+
+import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 
 describe("PracticeTableWithSort component", () => {
-  it("should display table heading with the month and year", () => {
-    const aPractice = [
-      {
-        odsCode: "B12345",
-        name: "GP Practice 2",
-        metrics: [
-          {
-            year: 2000,
-            month: 2,
-            requester: {
-              integrated: {
-                transferCount: 7,
-                within3DaysPercentage: 0,
-                within8DaysPercentage: 28.6,
-                beyond8DaysPercentage: 71.4,
-                within3Days: 0,
-                within8Days: 2,
-                beyond8Days: 5,
-              },
-            },
-          },
-        ],
-      },
-    ];
+  beforeEach(() => {
+    when(mocked(useFeatureToggles))
+      .calledWith()
+      .mockReturnValue({ practiceTableWithSort: true });
+  });
 
-    const { getByText } = render(
-      <PracticeTableWithSort filteredPractices={aPractice} />
+  it("should display table heading with the month and year", () => {
+    const { getByRole } = render(
+      <PracticeTableWithSort filteredPractices={practiceMetricsMock} />
     );
 
-    expect(
-      getByText("Practice performance for February 2000")
-    ).toBeInTheDocument();
+    const tableHeading = getByRole("heading", {
+      name: "Practice performance for February 2020",
+      level: 3,
+    });
+
+    expect(tableHeading).toBeInTheDocument();
   });
 
   it("displays practices ordered by Beyond 8 day Percentage SLA", () => {

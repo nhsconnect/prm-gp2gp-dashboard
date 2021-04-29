@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import { Expander } from "../common/Expander";
+import { PracticeTableWithSort } from "../PracticeTableWithSort";
 
 import { PracticeType } from "../../templates/Practice/practice.types";
 
@@ -11,7 +12,6 @@ import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import { Search } from "../../library/utils/search";
 
 import "./index.scss";
-import { PracticeTableWithSort } from "../PracticeTableWithSort";
 
 type CcgPageContentProps = {
   ccgPractices: { OrgId: string; Name: string }[];

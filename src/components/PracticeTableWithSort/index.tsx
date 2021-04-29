@@ -1,11 +1,15 @@
-import { PracticeType } from "../../templates/Practice/practice.types";
 import React, { FC, useState } from "react";
-import { Table } from "../common/Table";
-import practiceTableContent from "../../data/content/practiceTable.json";
-import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { Link } from "gatsby";
+import { Table } from "../common/Table";
+
+import { PracticeType } from "../../templates/Practice/practice.types";
+
+import practiceTableContent from "../../data/content/practiceTable.json";
+
+import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 type TableWithSortProps = {
   filteredPractices: PracticeType[];
@@ -38,11 +42,13 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   filteredPractices,
 }) => {
   const [practices] = useState(filteredPractices);
+  const { practiceTableWithSort } = useFeatureToggles();
+
   _sort_practices_by_beyond8Days(practices);
 
   const { year, month } = filteredPractices[0].metrics[0];
 
-  const tableCaptionText = `Practice performance for ${convertMonthNumberToText(
+  const tableTitle = `Practice performance for ${convertMonthNumberToText(
     month
   )} ${year}`;
 
@@ -59,10 +65,19 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     }
   );
 
-  return (
+  return practiceTableWithSort ? (
+    <>
+      <h3>{tableTitle}</h3>
+      <Table
+        className="gp2gp-ccg-table"
+        headers={practiceTableContent.tableHeaders}
+        rows={practiceTableRows}
+      />
+    </>
+  ) : (
     <Table
       className="gp2gp-ccg-table"
-      captionText={tableCaptionText}
+      captionText={tableTitle}
       headers={practiceTableContent.tableHeaders}
       rows={practiceTableRows}
     />

@@ -1,4 +1,8 @@
 {
-  "dev": {},
-  "prod": {}
+  "dev": {
+    "practiceTableWithSort": true
+  },
+  "prod": {
+    "practiceTableWithSort": false
+  }
 }
