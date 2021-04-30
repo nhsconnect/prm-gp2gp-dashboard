@@ -1,10 +1,9 @@
 import React, { FC, useState } from "react";
 import { Link } from "gatsby";
 import { Table } from "../common/Table";
+import { Select } from "../common/Select";
 
 import { PracticeType } from "../../templates/Practice/practice.types";
-
-import practiceTableContent from "../../data/content/practiceTable.json";
 
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
@@ -13,6 +12,8 @@ import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 type TableWithSortProps = {
   filteredPractices: PracticeType[];
+  headers: string[];
+  sortByOptions: { displayText: string; value: string }[];
 };
 
 const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
@@ -40,6 +41,8 @@ const _sort_practices_by_beyond8Days = (filteredPractices: PracticeType[]) => {
 
 export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   filteredPractices,
+  headers,
+  sortByOptions,
 }) => {
   const [practices] = useState(filteredPractices);
   const { practiceTableWithSort } = useFeatureToggles();
@@ -68,9 +71,15 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   return practiceTableWithSort ? (
     <>
       <h3>{tableTitle}</h3>
+      <Select
+        label="Sort by"
+        options={sortByOptions}
+        id="sortBySelect"
+        defaultValue="beyond8DaysPercentage"
+      />
       <Table
         className="gp2gp-ccg-table"
-        headers={practiceTableContent.tableHeaders}
+        headers={headers}
         rows={practiceTableRows}
       />
     </>
@@ -78,7 +87,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     <Table
       className="gp2gp-ccg-table"
       captionText={tableTitle}
-      headers={practiceTableContent.tableHeaders}
+      headers={headers}
       rows={practiceTableRows}
     />
   );
