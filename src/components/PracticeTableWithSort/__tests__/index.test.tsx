@@ -25,6 +25,7 @@ describe("PracticeTableWithSort component", () => {
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
+        orderSelect={practiceTableContent.orderSelect}
       />
     );
 
@@ -36,12 +37,13 @@ describe("PracticeTableWithSort component", () => {
     expect(tableHeading).toBeInTheDocument();
   });
 
-  it("displays practices ordered by Beyond 8 day Percentage SLA by default", () => {
+  it("displays practices ordered by Beyond 8 day Percentage SLA by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
+        orderSelect={practiceTableContent.orderSelect}
       />
     );
 
@@ -50,8 +52,11 @@ describe("PracticeTableWithSort component", () => {
     const sortBySelect = getByRole("combobox", {
       name: "Sort by",
     });
-
+    const orderSelect = getByRole("combobox", {
+      name: "Order",
+    });
     expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
+    expect(orderSelect).toHaveValue("descending");
 
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
@@ -68,6 +73,7 @@ describe("PracticeTableWithSort component", () => {
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
+        orderSelect={practiceTableContent.orderSelect}
       />
     );
 
@@ -84,6 +90,7 @@ describe("PracticeTableWithSort component", () => {
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
+        orderSelect={practiceTableContent.orderSelect}
       />
     );
 
@@ -106,12 +113,13 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows.length).toBe(7);
   });
 
-  it("displays practices ordered by practice name when selected", () => {
+  it("displays practices ordered by practice name in ascending order when selected", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
+        orderSelect={practiceTableContent.orderSelect}
       />
     );
 
@@ -121,16 +129,22 @@ describe("PracticeTableWithSort component", () => {
       name: "Sort by",
     });
 
+    const orderSelect = getByRole("combobox", {
+      name: "Order",
+    });
+
     userEvent.selectOptions(sortBySelect, "practiceName");
+    userEvent.selectOptions(orderSelect, "ascending");
 
     expect(sortBySelect).toHaveValue("practiceName");
+    expect(orderSelect).toHaveValue("ascending");
 
-    expect(allRows[1]).toHaveTextContent("Third GP Practice");
-    expect(allRows[2]).toHaveTextContent("Sixth GP Practice");
-    expect(allRows[3]).toHaveTextContent("Second GP Practice");
-    expect(allRows[4]).toHaveTextContent("GP Practice");
-    expect(allRows[5]).toHaveTextContent("Fourth GP Practice");
-    expect(allRows[6]).toHaveTextContent("Fifth GP Practice");
+    expect(allRows[1]).toHaveTextContent("Fifth GP Practice");
+    expect(allRows[2]).toHaveTextContent("Fourth GP Practice");
+    expect(allRows[3]).toHaveTextContent("GP Practice");
+    expect(allRows[4]).toHaveTextContent("Second GP Practice");
+    expect(allRows[5]).toHaveTextContent("Sixth GP Practice");
+    expect(allRows[6]).toHaveTextContent("Third GP Practice");
     expect(allRows.length).toBe(7);
   });
 
@@ -144,7 +158,8 @@ describe("PracticeTableWithSort component", () => {
         <PracticeTableWithSort
           filteredPractices={practiceMetricsMock}
           headers={practiceTableContent.headers}
-          sortBySelect={{ defaultValue: "", options: [] }}
+          sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
+          orderSelect={{ defaultValue: "descending", options: [] }}
         />
       );
 
@@ -163,6 +178,7 @@ describe("PracticeTableWithSort component", () => {
           filteredPractices={practiceMetricsMock}
           headers={practiceTableContent.headers}
           sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
+          orderSelect={{ defaultValue: "descending", options: [] }}
         />
       );
 
