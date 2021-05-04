@@ -192,5 +192,33 @@ describe("PracticeTableWithSort component", () => {
       expect(allRows[6]).toHaveTextContent("Beyond 8 days n/a");
       expect(allRows.length).toBe(7);
     });
+
+    it("does not display sort by and order selects when practiceTableWithSort feature toggle is off", () => {
+      when(mocked(useFeatureToggles))
+        .calledWith()
+        .mockReturnValue({ practiceTableWithSort: false });
+
+      const { queryByRole } = render(
+        <PracticeTableWithSort
+          filteredPractices={practiceMetricsMock}
+          headers={practiceTableContent.headers}
+          sortBySelect={{
+            defaultValue: "beyond8DaysPercentage",
+            options: [],
+          }}
+          orderSelect={{ defaultValue: "descending", options: [] }}
+        />
+      );
+
+      const sortBySelect = queryByRole("combobox", {
+        name: "Sort by",
+      });
+      const orderSelect = queryByRole("combobox", {
+        name: "Order",
+      });
+
+      expect(sortBySelect).not.toBeInTheDocument();
+      expect(orderSelect).not.toBeInTheDocument();
+    });
   });
 });

@@ -17,6 +17,7 @@ describe("Select component", () => {
         options={fruitOptions}
         id="fruitSelect"
         defaultValue="pomegranate"
+        handleValueChange={() => {}}
       />
     );
 
@@ -34,6 +35,7 @@ describe("Select component", () => {
         options={fruitOptions}
         id="fruitSelect"
         defaultValue="pomegranate"
+        handleValueChange={() => {}}
       />
     );
 

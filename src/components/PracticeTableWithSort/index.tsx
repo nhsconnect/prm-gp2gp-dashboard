@@ -31,33 +31,39 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   );
 };
 
-const _sortBySelectedField = (
-  practices: any[],
-  fieldName: string,
-  order: string
-) => {
+const _sortInAscendingOrder = (firstEl: any, secondEl: any) => {
+  if (firstEl === null) return -1;
+  if (secondEl === null) return 1;
+
+  if (secondEl < firstEl) return 1;
+  if (secondEl > firstEl) return -1;
+  return 0;
+};
+
+const _sortInDescendingOrder = (firstEl: any, secondEl: any) => {
+  if (firstEl === null) return 1;
+  if (secondEl === null) return -1;
+
+  if (secondEl < firstEl) return -1;
+  if (secondEl > firstEl) return 1;
+  return 0;
+};
+
+const _sortPractices = (practices: any[], fieldName: string, order: string) => {
   return practices.sort((firstEl, secondEl) => {
-    const firstPracticeSelectedField =
+    const firstField =
       fieldName === "practiceName"
         ? firstEl.name
         : firstEl.metrics[0].requester.integrated[fieldName];
-    const secondPracticeSelectedField =
+
+    const secondField =
       fieldName === "practiceName"
         ? secondEl.name
         : secondEl.metrics[0].requester.integrated[fieldName];
 
-    if (firstPracticeSelectedField === null)
-      return order === "ascending" ? -1 : 1;
-    if (secondPracticeSelectedField === null)
-      return order === "ascending" ? 1 : -1;
-
-    if (secondPracticeSelectedField < firstPracticeSelectedField) {
-      return order === "ascending" ? 1 : -1;
-    }
-    if (secondPracticeSelectedField > firstPracticeSelectedField) {
-      return order === "ascending" ? -1 : 1;
-    }
-    return 0;
+    if (order === "ascending")
+      return _sortInAscendingOrder(firstField, secondField);
+    else return _sortInDescendingOrder(firstField, secondField);
   });
 };
 
@@ -69,13 +75,8 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 }) => {
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
-
   const [practices, setPractices] = useState(() =>
-    _sortBySelectedField(
-      filteredPractices,
-      sortBySelect.defaultValue,
-      orderSelect.defaultValue
-    )
+    _sortPractices(filteredPractices, selectedField, selectedOrder)
   );
   const { practiceTableWithSort } = useFeatureToggles();
 
@@ -99,12 +100,12 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   const handleSortByValueChange = (value: string) => {
-    setPractices([..._sortBySelectedField(practices, value, selectedOrder)]);
+    setPractices([..._sortPractices(practices, value, selectedOrder)]);
     setSelectedField(value);
   };
 
   const handleOrderValueChange = (value: string) => {
-    setPractices([..._sortBySelectedField(practices, selectedField, value)]);
+    setPractices([..._sortPractices(practices, selectedField, value)]);
     setSelectedOrder(value);
   };
 
