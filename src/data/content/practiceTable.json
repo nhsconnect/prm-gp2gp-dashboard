@@ -7,26 +7,29 @@
     "Within 8 days ",
     "Beyond 8 days "
   ],
-  "sortByOptions": [
-    {
-      "displayText": "Practice name",
-      "value": "practiceName"
-    },
-    {
-      "displayText": "Successful integrations",
-      "value": "successfulIntegrations"
-    },
-    {
-      "displayText": "Within 3 days",
-      "value": "within3DaysPercentage"
-    },
-    {
-      "displayText": "Within 8 days",
-      "value": "within8DaysPercentage"
-    },
-    {
-      "displayText": "Beyond 8 days",
-      "value": "beyond8DaysPercentage"
-    }
-  ]
+  "sortBySelect": {
+    "defaultValue": "beyond8DaysPercentage",
+    "options": [
+      {
+        "displayText": "Practice name",
+        "value": "practiceName"
+      },
+      {
+        "displayText": "Successful integrations",
+        "value": "transferCount"
+      },
+      {
+        "displayText": "Within 3 days",
+        "value": "within3DaysPercentage"
+      },
+      {
+        "displayText": "Within 8 days",
+        "value": "within8DaysPercentage"
+      },
+      {
+        "displayText": "Beyond 8 days",
+        "value": "beyond8DaysPercentage"
+      }
+    ]
+  }
 }

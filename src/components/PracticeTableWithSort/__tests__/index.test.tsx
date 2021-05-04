@@ -10,6 +10,7 @@ import { mocked } from "ts-jest/utils";
 jest.mock("../../../library/hooks/useFeatureToggle");
 
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import userEvent from "@testing-library/user-event";
 
 describe("PracticeTableWithSort component", () => {
   beforeEach(() => {
@@ -23,7 +24,7 @@ describe("PracticeTableWithSort component", () => {
       <PracticeTableWithSort
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
-        sortByOptions={practiceTableContent.sortByOptions}
+        sortBySelect={practiceTableContent.sortBySelect}
       />
     );
 
@@ -40,16 +41,17 @@ describe("PracticeTableWithSort component", () => {
       <PracticeTableWithSort
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
-        sortByOptions={practiceTableContent.sortByOptions}
+        sortBySelect={practiceTableContent.sortBySelect}
       />
     );
 
     const allRows = getAllByRole("row");
-    const beyond8DaysPercentageOption = getByRole("option", {
-      name: "Beyond 8 days",
+
+    const sortBySelect = getByRole("combobox", {
+      name: "Sort by",
     });
 
-    expect(beyond8DaysPercentageOption).toHaveAttribute("selected");
+    expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
 
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
@@ -65,7 +67,7 @@ describe("PracticeTableWithSort component", () => {
       <PracticeTableWithSort
         filteredPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
-        sortByOptions={practiceTableContent.sortByOptions}
+        sortBySelect={practiceTableContent.sortBySelect}
       />
     );
 
@@ -74,6 +76,34 @@ describe("PracticeTableWithSort component", () => {
     });
 
     expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
+  });
+
+  it("displays practices ordered by Within 3 days percentage SLA when selected", () => {
+    const { getAllByRole, getByRole } = render(
+      <PracticeTableWithSort
+        filteredPractices={practiceMetricsMock}
+        headers={practiceTableContent.headers}
+        sortBySelect={practiceTableContent.sortBySelect}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    const sortBySelect = getByRole("combobox", {
+      name: "Sort by",
+    });
+
+    userEvent.selectOptions(sortBySelect, "within3DaysPercentage");
+
+    expect(sortBySelect).toHaveValue("within3DaysPercentage");
+
+    expect(allRows[1]).toHaveTextContent("Within 3 days 60%");
+    expect(allRows[2]).toHaveTextContent("Within 3 days 58.8%");
+    expect(allRows[3]).toHaveTextContent("Within 3 days 23.8%");
+    expect(allRows[4]).toHaveTextContent("Within 3 days 16.7%");
+    expect(allRows[5]).toHaveTextContent("Within 3 days 0%");
+    expect(allRows[6]).toHaveTextContent("Within 3 days n/a");
+    expect(allRows.length).toBe(7);
   });
 
   describe("practiceTableWithSort toggled off", () => {
@@ -86,7 +116,7 @@ describe("PracticeTableWithSort component", () => {
         <PracticeTableWithSort
           filteredPractices={practiceMetricsMock}
           headers={practiceTableContent.headers}
-          sortByOptions={[]}
+          sortBySelect={{ defaultValue: "", options: [] }}
         />
       );
 
@@ -104,7 +134,7 @@ describe("PracticeTableWithSort component", () => {
         <PracticeTableWithSort
           filteredPractices={practiceMetricsMock}
           headers={practiceTableContent.headers}
-          sortByOptions={[]}
+          sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
         />
       );
 

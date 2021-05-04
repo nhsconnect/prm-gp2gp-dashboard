@@ -13,7 +13,10 @@ import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 type TableWithSortProps = {
   filteredPractices: PracticeType[];
   headers: string[];
-  sortByOptions: { displayText: string; value: string }[];
+  sortBySelect: {
+    defaultValue: string;
+    options: { displayText: string; value: string }[];
+  };
 };
 
 const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
@@ -25,29 +28,29 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   );
 };
 
-const _sort_practices_by_beyond8Days = (filteredPractices: PracticeType[]) => {
-  filteredPractices.sort((firstEl, secondEl) => {
-    const firstPracticeBeyond8Days =
-      firstEl.metrics[0].requester.integrated.beyond8DaysPercentage;
-    const secondPracticeBeyond8Days =
-      secondEl.metrics[0].requester.integrated.beyond8DaysPercentage;
+const _sortBySelectedField = (practices: any[], fieldName: string) => {
+  return practices.sort((firstEl, secondEl) => {
+    const firstPracticeSelectedField =
+      firstEl.metrics[0].requester.integrated[fieldName];
+    const secondPracticeSelectedField =
+      secondEl.metrics[0].requester.integrated[fieldName];
 
-    if (firstPracticeBeyond8Days === null) return 1;
-    if (secondPracticeBeyond8Days === null) return -1;
+    if (firstPracticeSelectedField === null) return 1;
+    if (secondPracticeSelectedField === null) return -1;
 
-    return secondPracticeBeyond8Days - firstPracticeBeyond8Days;
+    return secondPracticeSelectedField - firstPracticeSelectedField;
   });
 };
 
 export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   filteredPractices,
   headers,
-  sortByOptions,
+  sortBySelect,
 }) => {
-  const [practices] = useState(filteredPractices);
+  const [practices, setPractices] = useState(() =>
+    _sortBySelectedField(filteredPractices, sortBySelect.defaultValue)
+  );
   const { practiceTableWithSort } = useFeatureToggles();
-
-  _sort_practices_by_beyond8Days(practices);
 
   const { year, month } = filteredPractices[0].metrics[0];
 
@@ -68,14 +71,19 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     }
   );
 
+  const handleSortByValueChange = (value: string) => {
+    setPractices([..._sortBySelectedField(practices, value)]);
+  };
+
   return practiceTableWithSort ? (
     <>
       <h3>{tableTitle}</h3>
       <Select
         label="Sort by"
-        options={sortByOptions}
+        options={sortBySelect.options}
         id="sortBySelect"
-        defaultValue="beyond8DaysPercentage"
+        defaultValue={sortBySelect.defaultValue}
+        handleValueChange={handleSortByValueChange}
       />
       <Table
         className="gp2gp-ccg-table"

@@ -20,11 +20,11 @@ describe("Select component", () => {
       />
     );
 
-    const pomegranateOption = getByRole("option", {
-      name: "Pomegranate",
+    const fruitSelect = getByRole("combobox", {
+      name: "Select fruit",
     });
 
-    expect(pomegranateOption).toHaveAttribute("selected");
+    expect(fruitSelect).toHaveValue("pomegranate");
   });
 
   it("selects value when clicked", () => {
@@ -40,12 +40,9 @@ describe("Select component", () => {
     const fruitSelect = getByRole("combobox", {
       name: "Select fruit",
     });
-    const pomegranateOption = getByRole("option", {
-      name: "Pomegranate",
-    });
 
-    userEvent.selectOptions(fruitSelect, "pomegranate");
+    userEvent.selectOptions(fruitSelect, "blueberry");
 
-    expect(pomegranateOption).toHaveAttribute("selected");
+    expect(fruitSelect).toHaveValue("blueberry");
   });
 });

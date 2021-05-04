@@ -50,7 +50,7 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({
       <PracticeTableWithSort
         filteredPractices={filteredPractices}
         headers={practiceTableContent.headers}
-        sortByOptions={practiceTableContent.sortByOptions}
+        sortBySelect={practiceTableContent.sortBySelect}
       />
       <AboutThisDataContent />
     </>
