@@ -31,14 +31,24 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
 const _sortBySelectedField = (practices: any[], fieldName: string) => {
   return practices.sort((firstEl, secondEl) => {
     const firstPracticeSelectedField =
-      firstEl.metrics[0].requester.integrated[fieldName];
+      fieldName === "practiceName"
+        ? firstEl.name
+        : firstEl.metrics[0].requester.integrated[fieldName];
     const secondPracticeSelectedField =
-      secondEl.metrics[0].requester.integrated[fieldName];
+      fieldName === "practiceName"
+        ? secondEl.name
+        : secondEl.metrics[0].requester.integrated[fieldName];
 
     if (firstPracticeSelectedField === null) return 1;
     if (secondPracticeSelectedField === null) return -1;
 
-    return secondPracticeSelectedField - firstPracticeSelectedField;
+    if (secondPracticeSelectedField < firstPracticeSelectedField) {
+      return -1;
+    }
+    if (secondPracticeSelectedField > firstPracticeSelectedField) {
+      return 1;
+    }
+    return 0;
   });
 };
 

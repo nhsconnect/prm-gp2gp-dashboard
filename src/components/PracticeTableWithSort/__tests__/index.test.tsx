@@ -106,6 +106,34 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows.length).toBe(7);
   });
 
+  it("displays practices ordered by practice name when selected", () => {
+    const { getAllByRole, getByRole } = render(
+      <PracticeTableWithSort
+        filteredPractices={practiceMetricsMock}
+        headers={practiceTableContent.headers}
+        sortBySelect={practiceTableContent.sortBySelect}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    const sortBySelect = getByRole("combobox", {
+      name: "Sort by",
+    });
+
+    userEvent.selectOptions(sortBySelect, "practiceName");
+
+    expect(sortBySelect).toHaveValue("practiceName");
+
+    expect(allRows[1]).toHaveTextContent("Third GP Practice");
+    expect(allRows[2]).toHaveTextContent("Sixth GP Practice");
+    expect(allRows[3]).toHaveTextContent("Second GP Practice");
+    expect(allRows[4]).toHaveTextContent("GP Practice");
+    expect(allRows[5]).toHaveTextContent("Fourth GP Practice");
+    expect(allRows[6]).toHaveTextContent("Fifth GP Practice");
+    expect(allRows.length).toBe(7);
+  });
+
   describe("practiceTableWithSort toggled off", () => {
     it("should display table caption with the month and year when practiceTableWithSort feature toggle is off", () => {
       when(mocked(useFeatureToggles))
