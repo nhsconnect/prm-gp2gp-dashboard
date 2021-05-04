@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
@@ -75,9 +75,10 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 }) => {
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
-  const [practices, setPractices] = useState(() =>
-    _sortPractices(filteredPractices, selectedField, selectedOrder)
-  );
+  const sortedPractices = useMemo(() => {
+    return _sortPractices(filteredPractices, selectedField, selectedOrder);
+  }, [filteredPractices, selectedField, selectedOrder]);
+
   const { practiceTableWithSort } = useFeatureToggles();
 
   const { year, month } = filteredPractices[0].metrics[0];
@@ -86,7 +87,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     month
   )} ${year}`;
 
-  const practiceTableRows = practices.map(
+  const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: PracticeType) => {
       const slaMetrics = metrics[0].requester.integrated;
       return [
@@ -100,12 +101,10 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   const handleSortByValueChange = (value: string) => {
-    setPractices([..._sortPractices(practices, value, selectedOrder)]);
     setSelectedField(value);
   };
 
   const handleOrderValueChange = (value: string) => {
-    setPractices([..._sortPractices(practices, selectedField, value)]);
     setSelectedOrder(value);
   };
 
