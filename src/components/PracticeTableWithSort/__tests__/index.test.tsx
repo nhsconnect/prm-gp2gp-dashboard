@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import { PracticeTableWithSort } from "../";
+import { SortOrder } from "../../PracticeTableWithSort";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
 import { when } from "jest-when";
@@ -56,7 +57,7 @@ describe("PracticeTableWithSort component", () => {
       name: "Order",
     });
     expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
-    expect(orderSelect).toHaveValue("descending");
+    expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
     expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
     expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
@@ -134,10 +135,10 @@ describe("PracticeTableWithSort component", () => {
     });
 
     userEvent.selectOptions(sortBySelect, "practiceName");
-    userEvent.selectOptions(orderSelect, "ascending");
+    userEvent.selectOptions(orderSelect, SortOrder.ASCENDING);
 
     expect(sortBySelect).toHaveValue("practiceName");
-    expect(orderSelect).toHaveValue("ascending");
+    expect(orderSelect).toHaveValue(SortOrder.ASCENDING);
 
     expect(allRows[1]).toHaveTextContent("Fifth GP Practice");
     expect(allRows[2]).toHaveTextContent("Fourth GP Practice");
@@ -159,7 +160,7 @@ describe("PracticeTableWithSort component", () => {
           filteredPractices={practiceMetricsMock}
           headers={practiceTableContent.headers}
           sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
-          orderSelect={{ defaultValue: "descending", options: [] }}
+          orderSelect={{ defaultValue: SortOrder.DESCENDING, options: [] }}
         />
       );
 
@@ -178,7 +179,7 @@ describe("PracticeTableWithSort component", () => {
           filteredPractices={practiceMetricsMock}
           headers={practiceTableContent.headers}
           sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
-          orderSelect={{ defaultValue: "descending", options: [] }}
+          orderSelect={{ defaultValue: SortOrder.DESCENDING, options: [] }}
         />
       );
 
@@ -206,7 +207,7 @@ describe("PracticeTableWithSort component", () => {
             defaultValue: "beyond8DaysPercentage",
             options: [],
           }}
-          orderSelect={{ defaultValue: "descending", options: [] }}
+          orderSelect={{ defaultValue: SortOrder.DESCENDING, options: [] }}
         />
       );
 

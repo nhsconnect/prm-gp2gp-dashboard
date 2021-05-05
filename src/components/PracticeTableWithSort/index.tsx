@@ -10,6 +10,8 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
+import practiceTableContent from "../../data/content/practiceTable.json";
+
 type TableWithSortProps = {
   filteredPractices: PracticeType[];
   headers: string[];
@@ -20,6 +22,11 @@ type TableWithSortProps = {
 type SelectType = {
   defaultValue: string;
   options: { displayText: string; value: string }[];
+};
+
+export const SortOrder = {
+  DESCENDING: practiceTableContent.orderSelect.options[0].value,
+  ASCENDING: practiceTableContent.orderSelect.options[1].value,
 };
 
 const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
@@ -61,7 +68,7 @@ const _sortPractices = (practices: any[], fieldName: string, order: string) => {
         ? secondEl.name
         : secondEl.metrics[0].requester.integrated[fieldName];
 
-    if (order === "ascending")
+    if (order === SortOrder.ASCENDING)
       return _sortInAscendingOrder(firstField, secondField);
     else return _sortInDescendingOrder(firstField, secondField);
   });
