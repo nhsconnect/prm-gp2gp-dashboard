@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import classNames from "classnames";
 import "./index.scss";
 
 type SelectProps = {
@@ -7,6 +8,7 @@ type SelectProps = {
   id: string;
   defaultValue: string;
   handleValueChange: (value: string) => void;
+  className?: string;
 };
 
 export const Select: FC<SelectProps> = ({
@@ -15,13 +17,14 @@ export const Select: FC<SelectProps> = ({
   id,
   defaultValue,
   handleValueChange,
+  className,
 }) => (
-  <div className="nhsuk-form-group">
+  <div className={classNames("gp2gp-form-group", className)}>
     <label className="nhsuk-label" htmlFor={id}>
       {label}
     </label>
     <select
-      className="nhsuk-select"
+      className="gp2gp-select"
       id={id}
       name={id}
       defaultValue={defaultValue}

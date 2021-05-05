@@ -1,4 +1,14 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
+@import "node_modules/nhsuk-frontend/packages/core/objects/_form-group";
 @import "node_modules/nhsuk-frontend/packages/components/select/_select";
 @import "node_modules/nhsuk-frontend/packages/components/label/_label";
+
+.gp2gp-select {
+  @extend .nhsuk-select;
+  min-width: 250px;
+}
+.gp2gp-form-group {
+  @extend .nhsuk-form-group;
+  display: inline-block;
+}

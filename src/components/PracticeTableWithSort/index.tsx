@@ -115,6 +115,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         id="sortBySelect"
         defaultValue={sortBySelect.defaultValue}
         handleValueChange={handleSortByValueChange}
+        className="nhsuk-u-margin-right-6"
       />
       <Select
         label="Order"
