@@ -38,39 +38,30 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   );
 };
 
-const _sortInAscendingOrder = (firstEl: any, secondEl: any) => {
-  if (firstEl === null) return -1;
-  if (secondEl === null) return 1;
-
-  if (secondEl < firstEl) return 1;
-  if (secondEl > firstEl) return -1;
-  return 0;
-};
-
-const _sortInDescendingOrder = (firstEl: any, secondEl: any) => {
-  if (firstEl === null) return 1;
-  if (secondEl === null) return -1;
-
-  if (secondEl < firstEl) return -1;
-  if (secondEl > firstEl) return 1;
+const _sortData = (firstEl: any, secondEl: any) => {
+  if (firstEl === null || secondEl > firstEl) {
+    return -1;
+  }
+  if (secondEl === null || secondEl < firstEl) {
+    return 1;
+  }
   return 0;
 };
 
 const _sortPractices = (practices: any[], fieldName: string, order: string) => {
-  return practices.sort((firstEl, secondEl) => {
-    const firstField =
-      fieldName === "practiceName"
-        ? firstEl.name
-        : firstEl.metrics[0].requester.integrated[fieldName];
+  const getFieldName = (field: any) => {
+    return fieldName === "practiceName"
+      ? field.name
+      : field.metrics[0].requester.integrated[fieldName];
+  };
 
-    const secondField =
-      fieldName === "practiceName"
-        ? secondEl.name
-        : secondEl.metrics[0].requester.integrated[fieldName];
-
-    if (order === SortOrder.ASCENDING)
-      return _sortInAscendingOrder(firstField, secondField);
-    else return _sortInDescendingOrder(firstField, secondField);
+  return [...practices].sort((firstEl, secondEl) => {
+    const firstField = getFieldName(firstEl);
+    const secondField = getFieldName(secondEl);
+    if (order === SortOrder.ASCENDING) {
+      return _sortData(firstField, secondField);
+    }
+    return _sortData(secondField, firstField);
   });
 };
 

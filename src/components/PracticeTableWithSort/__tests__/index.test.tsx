@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import { PracticeTableWithSort } from "../";
-import { SortOrder } from "../../PracticeTableWithSort";
+import { SortOrder } from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
 import { when } from "jest-when";
@@ -88,6 +88,34 @@ describe("PracticeTableWithSort component", () => {
   describe("Sorting practice table", () => {
     const cases = [
       [
+        "practiceName",
+        SortOrder.DESCENDING,
+        ["Third GP Practice", "Sixth GP Practice", "Second GP Practice"],
+      ],
+      [
+        "practiceName",
+        SortOrder.ASCENDING,
+        ["Fifth GP Practice", "Fourth GP Practice", "GP Practice"],
+      ],
+      [
+        "transferCount",
+        SortOrder.DESCENDING,
+        [
+          "Successful integrations 34",
+          "Successful integrations 21",
+          "Successful integrations 12",
+        ],
+      ],
+      [
+        "transferCount",
+        SortOrder.ASCENDING,
+        [
+          "Successful integrations 0",
+          "Successful integrations 5",
+          "Successful integrations 12",
+        ],
+      ],
+      [
         "within3DaysPercentage",
         SortOrder.DESCENDING,
         ["Within 3 days 60%", "Within 3 days 58.8%", "Within 3 days 23.8%"],
@@ -96,6 +124,26 @@ describe("PracticeTableWithSort component", () => {
         "within3DaysPercentage",
         SortOrder.ASCENDING,
         ["Within 3 days n/a", "Within 3 days 0%", "Within 3 days 16.7%"],
+      ],
+      [
+        "within8DaysPercentage",
+        SortOrder.DESCENDING,
+        ["Within 8 days 100%", "Within 8 days 40%", "Within 8 days 32.4%"],
+      ],
+      [
+        "within8DaysPercentage",
+        SortOrder.ASCENDING,
+        ["Within 8 days n/a", "Within 8 days 28.6%", "Within 8 days 32.4%"],
+      ],
+      [
+        "beyond8DaysPercentage",
+        SortOrder.DESCENDING,
+        ["Beyond 8 days 47.6%", "Beyond 8 days 25%", "Beyond 8 days 8.8%"],
+      ],
+      [
+        "beyond8DaysPercentage",
+        SortOrder.ASCENDING,
+        ["Beyond 8 days n/a", "Beyond 8 days 0%", "Beyond 8 days 0%"],
       ],
     ];
 
