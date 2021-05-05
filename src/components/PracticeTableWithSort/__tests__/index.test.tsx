@@ -85,68 +85,53 @@ describe("PracticeTableWithSort component", () => {
     expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
   });
 
-  it("displays practices ordered by Within 3 days percentage SLA when selected", () => {
-    const { getAllByRole, getByRole } = render(
-      <PracticeTableWithSort
-        filteredPractices={practiceMetricsMock}
-        headers={practiceTableContent.headers}
-        sortBySelect={practiceTableContent.sortBySelect}
-        orderSelect={practiceTableContent.orderSelect}
-      />
+  describe("Sorting practice table", () => {
+    const cases = [
+      [
+        "within3DaysPercentage",
+        SortOrder.DESCENDING,
+        ["Within 3 days 60%", "Within 3 days 58.8%", "Within 3 days 23.8%"],
+      ],
+      [
+        "within3DaysPercentage",
+        SortOrder.ASCENDING,
+        ["Within 3 days n/a", "Within 3 days 0%", "Within 3 days 16.7%"],
+      ],
+    ];
+
+    it.each(cases)(
+      "displays practices ordered by %p field and %p order when selected",
+      (fieldName, order, expectedSortOrder) => {
+        const { getAllByRole, getByRole } = render(
+          <PracticeTableWithSort
+            filteredPractices={practiceMetricsMock}
+            headers={practiceTableContent.headers}
+            sortBySelect={practiceTableContent.sortBySelect}
+            orderSelect={practiceTableContent.orderSelect}
+          />
+        );
+
+        const allRows = getAllByRole("row");
+
+        const sortBySelect = getByRole("combobox", {
+          name: "Sort by",
+        });
+        const orderSelect = getByRole("combobox", {
+          name: "Order",
+        });
+
+        userEvent.selectOptions(sortBySelect, fieldName);
+        userEvent.selectOptions(orderSelect, order);
+
+        expect(sortBySelect).toHaveValue(fieldName);
+        expect(orderSelect).toHaveValue(order);
+
+        expect(allRows[1]).toHaveTextContent(expectedSortOrder[0]);
+        expect(allRows[2]).toHaveTextContent(expectedSortOrder[1]);
+        expect(allRows[3]).toHaveTextContent(expectedSortOrder[2]);
+        expect(allRows.length).toBe(7);
+      }
     );
-
-    const allRows = getAllByRole("row");
-
-    const sortBySelect = getByRole("combobox", {
-      name: "Sort by",
-    });
-
-    userEvent.selectOptions(sortBySelect, "within3DaysPercentage");
-
-    expect(sortBySelect).toHaveValue("within3DaysPercentage");
-
-    expect(allRows[1]).toHaveTextContent("Within 3 days 60%");
-    expect(allRows[2]).toHaveTextContent("Within 3 days 58.8%");
-    expect(allRows[3]).toHaveTextContent("Within 3 days 23.8%");
-    expect(allRows[4]).toHaveTextContent("Within 3 days 16.7%");
-    expect(allRows[5]).toHaveTextContent("Within 3 days 0%");
-    expect(allRows[6]).toHaveTextContent("Within 3 days n/a");
-    expect(allRows.length).toBe(7);
-  });
-
-  it("displays practices ordered by practice name in ascending order when selected", () => {
-    const { getAllByRole, getByRole } = render(
-      <PracticeTableWithSort
-        filteredPractices={practiceMetricsMock}
-        headers={practiceTableContent.headers}
-        sortBySelect={practiceTableContent.sortBySelect}
-        orderSelect={practiceTableContent.orderSelect}
-      />
-    );
-
-    const allRows = getAllByRole("row");
-
-    const sortBySelect = getByRole("combobox", {
-      name: "Sort by",
-    });
-
-    const orderSelect = getByRole("combobox", {
-      name: "Order",
-    });
-
-    userEvent.selectOptions(sortBySelect, "practiceName");
-    userEvent.selectOptions(orderSelect, SortOrder.ASCENDING);
-
-    expect(sortBySelect).toHaveValue("practiceName");
-    expect(orderSelect).toHaveValue(SortOrder.ASCENDING);
-
-    expect(allRows[1]).toHaveTextContent("Fifth GP Practice");
-    expect(allRows[2]).toHaveTextContent("Fourth GP Practice");
-    expect(allRows[3]).toHaveTextContent("GP Practice");
-    expect(allRows[4]).toHaveTextContent("Second GP Practice");
-    expect(allRows[5]).toHaveTextContent("Sixth GP Practice");
-    expect(allRows[6]).toHaveTextContent("Third GP Practice");
-    expect(allRows.length).toBe(7);
   });
 
   describe("practiceTableWithSort toggled off", () => {
