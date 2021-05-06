@@ -88,6 +88,7 @@ describe("PracticeTableWithSort component", () => {
   describe("Sorting practice table", () => {
     const cases = [
       [
+        "Practice name",
         "practiceName",
         SortOrder.DESCENDING,
         [
@@ -97,6 +98,7 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
+        "Practice name",
         "practiceName",
         SortOrder.ASCENDING,
         [
@@ -106,6 +108,7 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
+        "Successful integrations",
         "transferCount",
         SortOrder.DESCENDING,
         [
@@ -115,6 +118,7 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
+        "Successful integrations",
         "transferCount",
         SortOrder.ASCENDING,
         [
@@ -124,31 +128,37 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
+        "Within 3 days",
         "within3DaysPercentage",
         SortOrder.DESCENDING,
         ["Within 3 days 60%", "Within 3 days 58.8%", "Within 3 days 23.8%"],
       ],
       [
+        "Within 3 days",
         "within3DaysPercentage",
         SortOrder.ASCENDING,
         ["Within 3 days n/a", "Within 3 days 0%", "Within 3 days 16.7%"],
       ],
       [
+        "Within 8 days",
         "within8DaysPercentage",
         SortOrder.DESCENDING,
         ["Within 8 days 100%", "Within 8 days 40%", "Within 8 days 32.4%"],
       ],
       [
+        "Within 8 days",
         "within8DaysPercentage",
         SortOrder.ASCENDING,
         ["Within 8 days n/a", "Within 8 days 28.6%", "Within 8 days 32.4%"],
       ],
       [
+        "Beyond 8 days",
         "beyond8DaysPercentage",
         SortOrder.DESCENDING,
         ["Beyond 8 days 47.6%", "Beyond 8 days 25%", "Beyond 8 days 8.8%"],
       ],
       [
+        "Beyond 8 days",
         "beyond8DaysPercentage",
         SortOrder.ASCENDING,
         ["Beyond 8 days n/a", "Beyond 8 days 0%", "Beyond 8 days 0%"],
@@ -157,7 +167,7 @@ describe("PracticeTableWithSort component", () => {
 
     it.each(cases)(
       "displays practices ordered by %p field and %p order when selected",
-      (fieldName, order, expectedSortOrder) => {
+      (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole } = render(
           <PracticeTableWithSort
             filteredPractices={practiceMetricsMock}
@@ -182,13 +192,17 @@ describe("PracticeTableWithSort component", () => {
         expect(sortBySelect).toHaveValue(fieldName);
         expect(orderSelect).toHaveValue(order);
 
-        // @ts-ignore
-        expectedSortOrder.forEach(cell => {
+        (expectedSortOrder as string[]).forEach(cell => {
           const sortedCell = getAllByRole("cell", {
             name: cell,
           });
           expect(sortedCell[0]).toHaveClass("sorted");
         });
+
+        const sortedColumnHeader = getByRole("columnheader", {
+          name: columnHeader as string,
+        });
+        expect(sortedColumnHeader.getAttribute("aria-sort")).toBe(order);
 
         expect(allRows[1]).toHaveTextContent(expectedSortOrder[0]);
         expect(allRows[2]).toHaveTextContent(expectedSortOrder[1]);

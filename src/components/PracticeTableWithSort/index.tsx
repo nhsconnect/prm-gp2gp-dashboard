@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { AriaAttributes, FC, useMemo, useState } from "react";
 import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
@@ -134,7 +134,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         headers={headers}
         rows={practiceTableRows}
         sortedColumnIndex={sortedColumnIndex}
-        sortOrder={selectedOrder}
+        sortOrder={selectedOrder as AriaAttributes["aria-sort"]}
       />
     </div>
   ) : (
