@@ -8,14 +8,18 @@ type TableProps = {
   rows: (string | number | JSX.Element)[][];
   className?: string;
   sortedColumnIndex?: number;
+  sortOrder?: string;
 };
 
+// @ts-ignore
+// @ts-ignore
 export const Table: FC<TableProps> = ({
   headers,
   captionText,
   rows,
   className,
   sortedColumnIndex,
+  sortOrder,
 }) => (
   <table
     className={classNames("gp2gp-table", className)}
@@ -36,6 +40,14 @@ export const Table: FC<TableProps> = ({
             scope="col"
             key={header}
             className={`nhsuk-table__col nhsuk-table__col-${columnIndex}`}
+            // @ts-ignore
+            aria-sort={
+              sortedColumnIndex
+                ? columnIndex === sortedColumnIndex
+                  ? sortOrder
+                  : "none"
+                : null
+            }
           >
             {header}
           </th>

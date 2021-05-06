@@ -134,6 +134,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         headers={headers}
         rows={practiceTableRows}
         sortedColumnIndex={sortedColumnIndex}
+        sortOrder={selectedOrder}
       />
     </div>
   ) : (
