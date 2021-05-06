@@ -90,12 +90,20 @@ describe("PracticeTableWithSort component", () => {
       [
         "practiceName",
         SortOrder.DESCENDING,
-        ["Third GP Practice", "Sixth GP Practice", "Second GP Practice"],
+        [
+          "Practice name Third GP Practice | A12347",
+          "Practice name Sixth GP Practice | A12350",
+          "Practice name Second GP Practice | A12346",
+        ],
       ],
       [
         "practiceName",
         SortOrder.ASCENDING,
-        ["Fifth GP Practice", "Fourth GP Practice", "GP Practice"],
+        [
+          "Practice name Fifth GP Practice | A12349",
+          "Practice name Fourth GP Practice | A12348",
+          "Practice name GP Practice | A12345",
+        ],
       ],
       [
         "transferCount",
@@ -173,6 +181,14 @@ describe("PracticeTableWithSort component", () => {
 
         expect(sortBySelect).toHaveValue(fieldName);
         expect(orderSelect).toHaveValue(order);
+
+        // @ts-ignore
+        expectedSortOrder.forEach(cell => {
+          const sortedCell = getAllByRole("cell", {
+            name: cell,
+          });
+          expect(sortedCell[0]).toHaveClass("sorted");
+        });
 
         expect(allRows[1]).toHaveTextContent(expectedSortOrder[0]);
         expect(allRows[2]).toHaveTextContent(expectedSortOrder[1]);

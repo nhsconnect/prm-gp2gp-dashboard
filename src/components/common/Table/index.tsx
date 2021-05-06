@@ -7,6 +7,7 @@ type TableProps = {
   captionText?: string;
   rows: (string | number | JSX.Element)[][];
   className?: string;
+  sortedColumnIndex?: number;
 };
 
 export const Table: FC<TableProps> = ({
@@ -14,6 +15,7 @@ export const Table: FC<TableProps> = ({
   captionText,
   rows,
   className,
+  sortedColumnIndex,
 }) => (
   <table
     className={classNames("gp2gp-table", className)}
@@ -48,7 +50,11 @@ export const Table: FC<TableProps> = ({
               data-testid={`table__cell--row-${rowIndex}-col-${cellIndex}`}
               key={`cell-${rowIndex}-${cellIndex}`}
               role="cell"
-              className="nhsuk-table__cell"
+              className={
+                cellIndex === sortedColumnIndex
+                  ? "nhsuk-table__cell sorted"
+                  : "nhsuk-table__cell"
+              }
             >
               <span className="nhsuk-table-responsive__heading">
                 {headers[cellIndex]}

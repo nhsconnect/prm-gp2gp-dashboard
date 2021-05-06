@@ -1,8 +1,11 @@
 import React from "react";
+import "./index.scss";
 
 export const AboutThisDataContent = () => (
   <>
-    <h2 id="about-this-data">About this data</h2>
+    <h2 id="about-this-data" className="nhsuk-u-margin-top-6">
+      About this data
+    </h2>
     <p>
       The Data Platform is updated 14 days after the end of the month. This is
       so we can identify whether transfers started at the end of the month were

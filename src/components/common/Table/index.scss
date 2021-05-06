@@ -1,11 +1,33 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 @import "node_modules/nhsuk-frontend/packages/components/tables/tables";
+@import "node_modules/nhsuk-frontend/packages/core/settings/colours";
 
 .gp2gp-table {
   @extend .nhsuk-table-responsive;
   @extend .nhsuk-table;
-  padding-bottom: 3rem;
+
+  td:last-child {
+    padding-right: nhsuk-spacing(3);
+  }
+
+  th:last-child {
+    padding-right: nhsuk-spacing(3);
+  }
+
+  tr:last-child {
+    td {
+      @include mq($from: desktop) {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .nhsuk-table__body .nhsuk-table__row td {
+    @include mq($until: desktop) {
+      padding-right: nhsuk-spacing(2);
+    }
+  }
 }
 
 .hide-caption {
@@ -17,4 +39,8 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.sorted {
+  background-color: $color_nhsuk-grey-5;
 }

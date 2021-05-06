@@ -29,9 +29,7 @@ type PracticeProps = {
   pageContext: PageContext;
 };
 
-const _generate_row_data = (
-  integratedMetrics: IntegratedPracticeMetricsType
-) => {
+const generateRowData = (integratedMetrics: IntegratedPracticeMetricsType) => {
   return [
     [
       integratedMetrics.transferCount.toString(),
@@ -93,7 +91,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         className={"gp2gp-practice-table"}
         headers={slaMetricsContent.tableHeaders}
         captionText={tableCaptionText}
-        rows={_generate_row_data(requester.integrated)}
+        rows={generateRowData(requester.integrated)}
       />
       <AboutThisDataContent />
     </>
