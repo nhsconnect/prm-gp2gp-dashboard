@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 type TableProps = {
   headers: string[];
-  captionText?: string;
+  caption?: { text: string; hidden: boolean };
   rows: (string | number | JSX.Element)[][];
   className?: string;
   sortedColumnIndex?: number;
@@ -13,7 +13,7 @@ type TableProps = {
 
 export const Table: FC<TableProps> = ({
   headers,
-  captionText,
+  caption,
   rows,
   className,
   sortedColumnIndex,
@@ -21,14 +21,18 @@ export const Table: FC<TableProps> = ({
 }) => (
   <table
     className={classNames("gp2gp-table", className)}
-    {...(captionText ? { "aria-describedby": "table-title" } : {})}
+    {...(caption ? { "aria-describedby": "table-title" } : {})}
   >
-    {captionText ? (
+    {caption ? (
       <caption
         id="table-title"
-        className="nhsuk-table__caption nhsuk-u-margin-bottom-4"
+        className={
+          caption.hidden
+            ? "nhsuk-u-visually-hidden"
+            : "nhsuk-table__caption nhsuk-u-margin-bottom-4"
+        }
       >
-        {captionText}
+        {caption.text}
       </caption>
     ) : null}
     <thead className="nhsuk-table__head">

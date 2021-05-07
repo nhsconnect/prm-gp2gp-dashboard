@@ -2,6 +2,7 @@
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 @import "node_modules/nhsuk-frontend/packages/components/tables/tables";
 @import "node_modules/nhsuk-frontend/packages/core/settings/colours";
+@import "node_modules/nhsuk-frontend/packages/core/utilities/_visually-hidden";
 
 .gp2gp-table {
   @extend .nhsuk-table-responsive;
@@ -28,17 +29,6 @@
       padding-right: nhsuk-spacing(2);
     }
   }
-}
-
-.hide-caption {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
 }
 
 .sorted {

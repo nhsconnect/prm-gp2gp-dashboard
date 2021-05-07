@@ -112,10 +112,11 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   return practiceTableWithSort ? (
-    <div className="gp2gp-table-with-sort">
+    <section className="gp2gp-table-with-sort">
       <h3>{tableTitle}</h3>
       <Select
         label="Sort by"
+        hiddenLabel={practiceTableContent.selectHiddenLabel}
         options={sortBySelect.options}
         id="sortBySelect"
         defaultValue={sortBySelect.defaultValue}
@@ -124,6 +125,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       />
       <Select
         label="Order"
+        hiddenLabel={practiceTableContent.selectHiddenLabel}
         options={orderSelect.options}
         id="orderSelect"
         defaultValue={orderSelect.defaultValue}
@@ -131,16 +133,17 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       />
       <Table
         className="gp2gp-ccg-table"
+        caption={{ text: `${tableTitle} data`, hidden: true }}
         headers={headers}
         rows={practiceTableRows}
         sortedColumnIndex={sortedColumnIndex}
         sortOrder={selectedOrder as AriaAttributes["aria-sort"]}
       />
-    </div>
+    </section>
   ) : (
     <Table
       className="gp2gp-ccg-table"
-      captionText={tableTitle}
+      caption={{ text: tableTitle, hidden: false }}
       headers={headers}
       rows={practiceTableRows}
     />

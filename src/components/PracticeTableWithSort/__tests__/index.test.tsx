@@ -51,10 +51,10 @@ describe("PracticeTableWithSort component", () => {
     const allRows = getAllByRole("row");
 
     const sortBySelect = getByRole("combobox", {
-      name: "Sort by",
+      name: `Sort by${practiceTableContent.selectHiddenLabel}`,
     });
     const orderSelect = getByRole("combobox", {
-      name: "Order",
+      name: `Order${practiceTableContent.selectHiddenLabel}`,
     });
     expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
@@ -180,10 +180,10 @@ describe("PracticeTableWithSort component", () => {
         const allRows = getAllByRole("row");
 
         const sortBySelect = getByRole("combobox", {
-          name: "Sort by",
+          name: `Sort by${practiceTableContent.selectHiddenLabel}`,
         });
         const orderSelect = getByRole("combobox", {
-          name: "Order",
+          name: `Order${practiceTableContent.selectHiddenLabel}`,
         });
 
         userEvent.selectOptions(sortBySelect, fieldName);
@@ -275,10 +275,10 @@ describe("PracticeTableWithSort component", () => {
       );
 
       const sortBySelect = queryByRole("combobox", {
-        name: "Sort by",
+        name: `Sort by${practiceTableContent.selectHiddenLabel}`,
       });
       const orderSelect = queryByRole("combobox", {
-        name: "Order",
+        name: `Order${practiceTableContent.selectHiddenLabel}`,
       });
 
       expect(sortBySelect).not.toBeInTheDocument();

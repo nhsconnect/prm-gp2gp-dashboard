@@ -7,6 +7,7 @@
     "Within 8 days ",
     "Beyond 8 days "
   ],
+  "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {
     "defaultValue": "beyond8DaysPercentage",
     "options": [
@@ -32,7 +33,7 @@
       }
     ]
   },
-  "orderSelect" : {
+  "orderSelect": {
     "defaultValue": "descending",
     "options": [
       {

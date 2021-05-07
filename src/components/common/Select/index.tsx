@@ -4,6 +4,7 @@ import "./index.scss";
 
 type SelectProps = {
   label: string;
+  hiddenLabel?: string;
   options: { displayText: string; value: string }[];
   id: string;
   defaultValue: string;
@@ -13,6 +14,7 @@ type SelectProps = {
 
 export const Select: FC<SelectProps> = ({
   label,
+  hiddenLabel,
   options,
   id,
   defaultValue,
@@ -22,6 +24,9 @@ export const Select: FC<SelectProps> = ({
   <div className={classNames("gp2gp-form-group", className)}>
     <label className="nhsuk-label" htmlFor={id}>
       {label}
+      {hiddenLabel && (
+        <span className="nhsuk-u-visually-hidden">{hiddenLabel}</span>
+      )}
     </label>
     <select
       className="gp2gp-select"

@@ -41,7 +41,11 @@ describe("Table component", () => {
 
   it("displays table caption when passed in", () => {
     const { getByText, getByRole } = render(
-      <Table headers={headers} captionText="Fruits Caption" rows={rows} />
+      <Table
+        headers={headers}
+        caption={{ text: "Fruits Caption", hidden: false }}
+        rows={rows}
+      />
     );
 
     const table = getByRole("table");

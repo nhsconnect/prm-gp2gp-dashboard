@@ -90,7 +90,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       <Table
         className={"gp2gp-practice-table"}
         headers={slaMetricsContent.tableHeaders}
-        captionText={tableCaptionText}
+        caption={{ text: tableCaptionText, hidden: false }}
         rows={generateRowData(requester.integrated)}
       />
       <AboutThisDataContent />
