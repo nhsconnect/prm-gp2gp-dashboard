@@ -16,6 +16,7 @@
     "deploy": "gatsby-plugin-s3 deploy",
     "test": "jest",
     "e2e": "./node_modules/.bin/cypress run",
+    "e2e:install": "./node_modules/.bin/cypress install",
     "e2e:open": "./node_modules/.bin/cypress open",
     "test:e2e": "start-server-and-test 'gatsby develop' http://localhost:8000 e2e",
     "test:e2e:open": "start-server-and-test 'gatsby develop' http://localhost:8000 e2e:open",
