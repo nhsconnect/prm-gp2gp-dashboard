@@ -45,6 +45,7 @@
     "aws-sdk": "^2.637.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
+    "fs-extra": "^10.0.0",
     "gatsby": "^2.32.12",
     "gatsby-plugin-layout": "^1.1.23",
     "gatsby-plugin-react-helmet": "^3.3.14",

@@ -78,14 +78,14 @@ case "${task}" in
       ;;
   build)
       setup_env ${deployment_env}
-      npm install
+      npm install --prod
       npm run build:ci
       ;;
   dojo-build)
       dojo "./tasks build ${deployment_env}"
       ;;
   get-stubs)
-      npm install
+      npm install --prod
       npm run getStubs
       ;;
   dojo-get-stubs)
@@ -93,7 +93,7 @@ case "${task}" in
       ;;
   get-metrics)
       setup_env ${deployment_env}
-      npm install
+      npm install --prod
       npm run getPracticeMetrics:ci
       npm run getNationalMetrics:ci
       ;;
@@ -102,14 +102,14 @@ case "${task}" in
       ;;
   get-metadata)
       setup_env ${deployment_env}
-      npm install
+      npm install --prod
       npm run getMetadata:ci
       ;;
   dojo-get-metadata)
       dojo "./tasks get-metadata ${deployment_env}"
       ;;
   deploy)
-      npm install
+      npm install --prod
       npm run deploy
       ;;
   dojo-deploy)
