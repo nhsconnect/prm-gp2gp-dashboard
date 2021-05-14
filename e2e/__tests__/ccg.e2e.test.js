@@ -10,8 +10,10 @@ describe("CCG page", () => {
         cy.injectAxe();
       });
 
+      const odsUrl = "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000"
+
       it("searches and navigates to the CCG page", () => {
-        cy.intercept("GET", "/organisations", organisations);
+        cy.intercept("GET", odsUrl, organisations);
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
@@ -47,7 +49,7 @@ describe("CCG page", () => {
       });
 
       it("sort practice performance table and link to the individual practices", () => {
-        cy.intercept("GET", "/organisations", organisations);
+        cy.intercept("GET", odsUrl, organisations);
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
@@ -114,7 +116,7 @@ describe("CCG page", () => {
       });
 
       it("searches and navigates to the CCG page with no practices associated to that ccg", () => {
-        cy.intercept("GET", "/organisations", {
+        cy.intercept("GET", odsUrl, {
           Organisations: [],
         });
 
@@ -131,7 +133,7 @@ describe("CCG page", () => {
       });
 
       it("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
-        cy.intercept("GET", "/organisations", {
+        cy.intercept("GET", odsUrl, {
           statusCode: 400,
         });
 
