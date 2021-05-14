@@ -11,7 +11,7 @@ describe("Practice page", () => {
       });
 
       it("searches, navigates to an individual practice page and goes back to home page", () => {
-        cy.intercept("/organisations/A12347", practicesWithSomeIntegrations);
+        cy.intercept("/ORD/2-0-0/organisations/A12347", practicesWithSomeIntegrations);
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
