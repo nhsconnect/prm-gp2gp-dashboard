@@ -111,7 +111,9 @@ describe("CCG page", () => {
       });
 
       it("searches and navigates to the CCG page with no practices associated to that ccg", () => {
-        cy.intercept("GET", odsUrl, {
+        const odsUrlNoCCG =
+          "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=11D&RelStatus=active&Limit=1000";
+        cy.intercept("GET", odsUrlNoCCG, {
           Organisations: [],
         });
 
