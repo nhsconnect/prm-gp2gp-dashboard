@@ -32,7 +32,7 @@ describe("PracticeTableWithSort component", () => {
 
     const tableHeading = getByRole("heading", {
       name: "Practice performance for February 2020",
-      level: 3,
+      level: 2,
     });
 
     expect(tableHeading).toBeInTheDocument();

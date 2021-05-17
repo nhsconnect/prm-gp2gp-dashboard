@@ -47,4 +47,43 @@ describe("Select component", () => {
 
     expect(fruitSelect).toHaveValue("blueberry");
   });
+
+  it("calls handleValueChange when value changed", () => {
+    const handleValueChange = jest.fn();
+
+    const { getByRole } = render(
+      <Select
+        label="Select fruit"
+        options={fruitOptions}
+        id="fruitSelect"
+        defaultValue="pomegranate"
+        handleValueChange={handleValueChange}
+      />
+    );
+
+    const fruitSelect = getByRole("combobox", {
+      name: "Select fruit",
+    });
+
+    userEvent.selectOptions(fruitSelect, "blueberry");
+
+    expect(handleValueChange).toHaveBeenCalledWith("blueberry");
+  });
+
+  it("adds hidden label to the document when passed", () => {
+    const { getByText } = render(
+      <Select
+        label="Select fruit"
+        hiddenLabel="This element selects fruit"
+        options={fruitOptions}
+        id="fruitSelect"
+        defaultValue="pomegranate"
+        handleValueChange={() => {}}
+      />
+    );
+
+    const hiddenLabel = getByText("This element selects fruit");
+
+    expect(hiddenLabel).toBeInTheDocument();
+  });
 });

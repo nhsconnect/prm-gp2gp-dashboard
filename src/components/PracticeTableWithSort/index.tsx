@@ -113,7 +113,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   return showPracticeTableWithSort ? (
     <section className="gp2gp-table-with-sort">
-      <h3>{tableTitle}</h3>
+      <h2 className="nhsuk-heading-m">{tableTitle}</h2>
       <Select
         label="Sort by"
         hiddenLabel={practiceTableContent.selectHiddenLabel}
