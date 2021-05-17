@@ -28,13 +28,9 @@
     "getNationalMetrics:stub": "node scripts/get-stub-data.js --datatype nationalMetrics",
     "getMetadata:ci": "node scripts/get-s3-data.js --datatype metadata",
     "getMetadata:stub": "node scripts/get-stub-data.js --datatype metadata",
-    "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub && npm run getMetadata:stub"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm test",
-      "pre-push": "npm run build && npm run test:e2e:built"
-    }
+    "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub && npm run getMetadata:stub",
+    "pre-commit": "lint-staged && npm test",
+    "pre-push": "npm run build && npm run test:e2e:built"
   },
   "lint-staged": {
     "*.{js,jsx,json,scss,md,ts,tsx}": "prettier --write"
