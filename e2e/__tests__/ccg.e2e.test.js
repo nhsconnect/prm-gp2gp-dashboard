@@ -132,7 +132,7 @@ describe("CCG page", () => {
         cy.contains("No GP practices found");
       });
 
-      it.only("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
+      it("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
         const odsUrlForErrorStub = "/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000"
         cy.intercept("GET", odsUrlForErrorStub , {
           statusCode: 400,

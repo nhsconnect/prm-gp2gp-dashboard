@@ -51,7 +51,7 @@ jest.mock("../../../../../featureToggles.json", () => ({
   },
 }));
 
-describe.only("Feature Toggling Functionality", () => {
+describe("Feature Toggling Functionality", () => {
   const ORIGINAL_LOCATION = global.window.location;
 
   beforeEach(() => {
