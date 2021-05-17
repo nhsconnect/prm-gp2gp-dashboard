@@ -20,7 +20,7 @@ export const OrganisationDetails: FC<OrganisationDetailsProps> = ({
   address,
 }) => (
   <div className="gp2gp-organisation-details">
-    <h1 className="nhsuk-heading-l">
+    <h1 className="nhsuk-u-margin-bottom-5">
       <span className="gp2gp-organisation-details__name">{name}</span>
       <span>{odsCode}</span>
     </h1>

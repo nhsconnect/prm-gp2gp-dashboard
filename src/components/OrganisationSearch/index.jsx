@@ -14,7 +14,7 @@ import "./index.scss";
 const practiceSearch = new Search(
   "odsCode",
   ["name", "odsCode"],
-  organisationMetadata.practices.map(item => ({
+  organisationMetadata.practices.map((item) => ({
     ...item,
     path: `/practice/${item.odsCode}`,
   }))
@@ -23,7 +23,7 @@ const practiceSearch = new Search(
 const ccgSearch = new Search(
   "odsCode",
   ["name", "odsCode"],
-  organisationMetadata.ccgs.map(item => ({
+  organisationMetadata.ccgs.map((item) => ({
     ...item,
     path: `/ccg/${item.odsCode}`,
   }))
@@ -34,7 +34,7 @@ export const OrganisationSearch = () => {
   const [inputError, setInputError] = useState(null);
   const [selectedOdsCode, setSelectedOdsCode] = useState("");
 
-  const findSuggestions = value => [
+  const findSuggestions = (value) => [
     {
       title: "Clinical Commissioning Group",
       organisations: ccgSearch.search(value, 50),
@@ -45,11 +45,11 @@ export const OrganisationSearch = () => {
     },
   ];
 
-  const getSuggestionListItemText = suggestion => {
+  const getSuggestionListItemText = (suggestion) => {
     return `${convertToTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
   };
 
-  const getFormattedSelectionText = value => {
+  const getFormattedSelectionText = (value) => {
     setSelectedOdsCode(value.odsCode);
     return `${convertToTitleCase(value.name)} | ${value.odsCode}`;
   };
@@ -61,7 +61,7 @@ export const OrganisationSearch = () => {
     setInputTextValue(newValue);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const result = findSuggestions(selectedOdsCode || inputTextValue);
@@ -84,7 +84,7 @@ export const OrganisationSearch = () => {
 
   return (
     <div className="gp2gp-practice-search">
-      <h2 className="nhsuk-heading-l nhsuk-u-margin-bottom-0">
+      <h2 className="nhsuk-u-margin-bottom-0">
         {organisationSearchContent.heading}
       </h2>
       <Form onSubmit={handleSubmit} hasError={!!inputError}>
@@ -97,8 +97,8 @@ export const OrganisationSearch = () => {
           findSuggestions={findSuggestions}
           onInputChange={onInputChange}
           multiSection={true}
-          renderSectionTitle={section => section.title}
-          getSectionSuggestions={section => section.organisations}
+          renderSectionTitle={(section) => section.title}
+          getSectionSuggestions={(section) => section.organisations}
         />
         <Button
           dataTestId="gp2gp-practice-search__button"

@@ -108,12 +108,12 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   };
 
   const sortedColumnIndex = sortBySelect.options.findIndex(
-    option => option.value === selectedField
+    (option) => option.value === selectedField
   );
 
   return showPracticeTableWithSort ? (
     <section className="gp2gp-table-with-sort">
-      <h2 className="nhsuk-heading-m">{tableTitle}</h2>
+      <h2>{tableTitle}</h2>
       <Select
         label="Sort by"
         hiddenLabel={practiceTableContent.selectHiddenLabel}
