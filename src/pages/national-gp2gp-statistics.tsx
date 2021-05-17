@@ -109,6 +109,7 @@ const NationalStatistics = () => {
         transfers result in the paper fallback process being triggered.
       </p>
       <Table
+        className="nhsuk-u-margin-bottom-5"
         headers={["Within 3 days", "Within 8 days", "Beyond 8 days"]}
         rows={[
           [
