@@ -2,7 +2,7 @@ const { viewPorts } = require("../support/common");
 const { organisations } = require("/local-mocks/mocks.js");
 
 describe("CCG page", () => {
-  viewPorts.map(viewPort => {
+  viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
@@ -10,7 +10,8 @@ describe("CCG page", () => {
         cy.injectAxe();
       });
 
-      const odsUrl = "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000"
+      const odsUrl =
+        "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000";
 
       it("searches and navigates to the CCG page", () => {
         cy.intercept("GET", odsUrl, organisations);
@@ -18,10 +19,7 @@ describe("CCG page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("test ccg");
-        cy.contains("li", "CCG")
-          .parent()
-          .parent()
-          .click();
+        cy.contains("li", "CCG").parent().parent().click();
         cy.contains("button", "Search").click();
 
         // CCG Page
@@ -54,10 +52,7 @@ describe("CCG page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("test ccg");
-        cy.contains("li", "CCG")
-          .parent()
-          .parent()
-          .click();
+        cy.contains("li", "CCG").parent().parent().click();
         cy.contains("button", "Search").click();
 
         cy.contains("h1", "Test CCG With GP Practices10D");
@@ -123,28 +118,21 @@ describe("CCG page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("test ccg without");
-        cy.contains("li", "CCG")
-          .parent()
-          .parent()
-          .click();
+        cy.contains("li", "CCG").parent().parent().click();
         cy.contains("button", "Search").click();
 
         cy.contains("No GP practices found");
       });
 
       it("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
-        const odsUrlForErrorStub = "/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000"
-        cy.intercept("GET", odsUrlForErrorStub , {
+        cy.intercept("GET", odsUrl, {
           statusCode: 400,
         });
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("test");
-        cy.contains("li", "CCG")
-          .parent()
-          .parent()
-          .click();
+        cy.contains("li", "CCG").parent().parent().click();
         cy.contains("button", "Search").click();
 
         cy.contains("Error loading practice list");
