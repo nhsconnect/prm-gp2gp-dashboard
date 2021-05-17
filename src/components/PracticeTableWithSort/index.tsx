@@ -78,7 +78,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     return sortPractices(filteredPractices, selectedField, selectedOrder);
   }, [filteredPractices, selectedField, selectedOrder]);
 
-  const { practiceTableWithSort } = useFeatureToggles();
+  const { showPracticeTableWithSort } = useFeatureToggles();
 
   const { year, month } = filteredPractices[0].metrics[0];
 
@@ -111,7 +111,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     option => option.value === selectedField
   );
 
-  return practiceTableWithSort ? (
+  return showPracticeTableWithSort ? (
     <section className="gp2gp-table-with-sort">
       <h3>{tableTitle}</h3>
       <Select

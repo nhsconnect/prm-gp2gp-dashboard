@@ -17,7 +17,7 @@ describe("PracticeTableWithSort component", () => {
   beforeEach(() => {
     when(mocked(useFeatureToggles))
       .calledWith()
-      .mockReturnValue({ practiceTableWithSort: true });
+      .mockReturnValue({ showPracticeTableWithSort: true });
   });
 
   it("should display table heading with the month and year", () => {
@@ -212,11 +212,11 @@ describe("PracticeTableWithSort component", () => {
     );
   });
 
-  describe("practiceTableWithSort toggled off", () => {
-    it("should display table caption with the month and year when practiceTableWithSort feature toggle is off", () => {
+  describe("showPracticeTableWithSort toggled off", () => {
+    it("should display table caption with the month and year when showPracticeTableWithSort feature toggle is off", () => {
       when(mocked(useFeatureToggles))
         .calledWith()
-        .mockReturnValue({ practiceTableWithSort: false });
+        .mockReturnValue({ showPracticeTableWithSort: false });
 
       const { getByText } = render(
         <PracticeTableWithSort
@@ -232,10 +232,10 @@ describe("PracticeTableWithSort component", () => {
       ).toBeInTheDocument();
     });
 
-    it("displays practices ordered by Beyond 8 day Percentage SLA when practiceTableWithSort feature toggle is off", () => {
+    it("displays practices ordered by Beyond 8 day Percentage SLA when showPracticeTableWithSort feature toggle is off", () => {
       when(mocked(useFeatureToggles))
         .calledWith()
-        .mockReturnValue({ practiceTableWithSort: false });
+        .mockReturnValue({ showPracticeTableWithSort: false });
 
       const { getAllByRole } = render(
         <PracticeTableWithSort
@@ -260,7 +260,7 @@ describe("PracticeTableWithSort component", () => {
     it("does not display sort by and order selects when practiceTableWithSort feature toggle is off", () => {
       when(mocked(useFeatureToggles))
         .calledWith()
-        .mockReturnValue({ practiceTableWithSort: false });
+        .mockReturnValue({ showPracticeTableWithSort: false });
 
       const { queryByRole } = render(
         <PracticeTableWithSort

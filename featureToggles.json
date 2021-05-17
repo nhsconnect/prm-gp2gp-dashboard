@@ -1,8 +1,8 @@
 {
   "dev": {
-    "practiceTableWithSort": true
+    "showPracticeTableWithSort": true
   },
   "prod": {
-    "practiceTableWithSort": false
+    "showPracticeTableWithSort": true
   }
 }
