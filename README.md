@@ -13,6 +13,7 @@
 1. `git clone git@github.com:nhsconnect/prm-gp2gp-dashboard.git`
 2. `cd prm-gp2gp-dashboard`
 3. `npm install`
+4. `npm run prepare`
 
 GP2GP metrics and metadata JSON files are then required to build the dashboard. There are two options - to either retrieve them from the Data Pipeline Github repo, or to download them from S3. Below are instructions for both:
 
