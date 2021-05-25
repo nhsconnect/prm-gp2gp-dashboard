@@ -101,6 +101,7 @@
   "resolutions": {
     "trim": "^0.0.3",
     "netmask": "^2.0.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "dns-packet": "^5.2.2"
   }
 }
