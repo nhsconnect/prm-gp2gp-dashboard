@@ -23,7 +23,7 @@ describe("Cookie page", () => {
         cy.checkAccessibility();
       });
 
-      it("contains the title and description after navigating to cookie policy page", () => {
+      it("contains the title and description metadata after navigating to cookie policy page", () => {
         cy.contains("Do not use analytics cookies").click();
         cy.contains("a", "cookies page").click();
         cy.title().should(

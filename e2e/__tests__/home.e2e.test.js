@@ -32,7 +32,7 @@ describe("Home page", () => {
         cy.checkAccessibility();
       });
 
-      it("contains the title and description", () => {
+      it("contains the title and description metadata", () => {
         cy.title().should("eq", "GP Registrations Data Platform");
         cy.get('meta[name="description"]').should(
           "have.attr",

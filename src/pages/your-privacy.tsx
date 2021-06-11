@@ -5,7 +5,13 @@ import { Helmet } from "react-helmet";
 const YourPrivacy: FC = () => {
   return (
     <>
-      <Helmet title="Your Privacy - GP Registrations Data Platform" />
+      <Helmet>
+        <title>Your Privacy - GP Registrations Data Platform</title>
+        <meta
+          name="description"
+          content="Privacy Policy for the GP Registrations Data Platform"
+        />
+      </Helmet>
       <div className="nhsuk-u-reading-width">
         <h1>Your privacy</h1>
         <p className="nhsuk-lede-text">

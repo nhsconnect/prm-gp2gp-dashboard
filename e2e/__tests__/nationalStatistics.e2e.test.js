@@ -60,7 +60,7 @@ describe("National statistics page", () => {
         cy.checkAccessibility();
       });
 
-      it("contains the title and description", () => {
+      it("contains the title and description metadata", () => {
         cy.title().should(
           "eq",
           "National Statistics - GP Registrations Data Platform"

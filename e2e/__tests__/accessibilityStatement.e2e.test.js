@@ -13,6 +13,11 @@ describe("Accessibility statement page", () => {
         cy.contains("a", "Accessibility statement").click();
         cy.contains("h1", "Accessibility statement");
         cy.contains("How accessible this website is");
+        cy.checkAccessibility();
+      });
+
+      it("contains title and description metadata", () => {
+        cy.contains("a", "Accessibility statement").click();
         cy.title().should(
           "eq",
           "Accessibility statement - GP Registrations Data Platform"
@@ -22,7 +27,6 @@ describe("Accessibility statement page", () => {
           "content",
           "Accessibility Statement for the GP Registrations Data Platform"
         );
-        cy.checkAccessibility();
       });
     });
   });
