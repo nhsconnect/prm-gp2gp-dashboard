@@ -18,8 +18,13 @@ describe("EmphasisBox component", () => {
   });
 
   it("displays title when passed", () => {
-    const { getByText } = render(<EmphasisBox title="This is title" />);
+    const { getByRole } = render(<EmphasisBox title="This is title" />);
 
-    expect(getByText("This is title")).toBeInTheDocument();
+    expect(
+      getByRole("heading", {
+        level: 3,
+        name: "This is title",
+      })
+    ).toBeInTheDocument();
   });
 });

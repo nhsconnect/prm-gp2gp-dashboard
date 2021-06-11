@@ -21,7 +21,7 @@ describe("Home page", () => {
       });
 
       it("displays the feedback form", () => {
-        cy.contains("Tell us what you think");
+        cy.contains("h3", "Tell us what you think");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });
