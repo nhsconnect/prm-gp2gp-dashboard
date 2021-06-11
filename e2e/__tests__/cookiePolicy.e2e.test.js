@@ -37,6 +37,21 @@ describe("Cookie page", () => {
         );
         cy.checkAccessibility();
       });
+
+      it("contains the title and description metadata for the cookie confirmation page", () => {
+        cy.contains("Do not use analytics cookies").click();
+        cy.contains("a", "cookies page").click();
+        cy.contains("Save my cookie settings").click();
+        cy.title().should(
+          "eq",
+          "Your cookie settings have been saved - GP Registrations Data Platform"
+        );
+        cy.get('meta[name="description"]').should(
+          "have.attr",
+          "content",
+          "Cookie settings confirmation page for the GP Registrations Data Platform"
+        );
+      });
     });
   });
 });

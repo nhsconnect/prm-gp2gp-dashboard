@@ -5,7 +5,16 @@ import { Link } from "gatsby";
 const CookieConfirmation: FC = () => {
   return (
     <>
-      <Helmet title="Your cookie settings have been saved - GP Registrations Data Platform" />
+      <Helmet>
+        <title>
+          Your cookie settings have been saved - GP Registrations Data Platform
+        </title>
+        <meta
+          name="description"
+          content="Cookie settings confirmation page for the GP Registrations Data Platform"
+        />
+      </Helmet>
+
       <div className="nhsuk-u-reading-width">
         <h1>Your cookie settings have been saved</h1>
         <p>We'll save your settings for three months.</p>
