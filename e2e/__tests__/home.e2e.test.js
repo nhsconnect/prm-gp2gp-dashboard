@@ -1,7 +1,7 @@
 const { viewPorts } = require("../support/common");
 
 describe("Home page", () => {
-  viewPorts.map(viewPort => {
+  viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
@@ -30,6 +30,15 @@ describe("Home page", () => {
         cy.contains("button", "Search").click();
         cy.contains("Please enter a valid ODS code, practice name or CCG name");
         cy.checkAccessibility();
+      });
+
+      it("contains the title and description", () => {
+        cy.title().should("eq", "GP Registrations Data Platform");
+        cy.get('meta[name="description"]').should(
+          "have.attr",
+          "content",
+          "Search for monthly data about GP2GP transfers for practices in England"
+        );
       });
     });
   });
