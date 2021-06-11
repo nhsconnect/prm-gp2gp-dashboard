@@ -24,6 +24,13 @@ describe("CCG page", () => {
 
         // CCG Page
         cy.contains("h1", "Test CCG With GP Practices10D");
+        cy.title().should("eq", "Test CCG With GP Practices | 10D");
+        cy.get('meta[name="description"]').should(
+          "have.attr",
+          "content",
+          "Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+        );
+
         cy.contains("Why integrate within 8 days?").click();
         cy.contains("When records are not integrated within 8 days");
         cy.contains("Practice performance for December 2019");

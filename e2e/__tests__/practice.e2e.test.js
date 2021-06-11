@@ -2,7 +2,7 @@ const { viewPorts } = require("../support/common");
 const { practicesWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
 describe("Practice page", () => {
-  viewPorts.map(viewPort => {
+  viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
@@ -11,7 +11,10 @@ describe("Practice page", () => {
       });
 
       it("searches, navigates to an individual practice page and goes back to home page", () => {
-        cy.intercept("/ORD/2-0-0/organisations/A12347", practicesWithSomeIntegrations);
+        cy.intercept(
+          "/ORD/2-0-0/organisations/A12347",
+          practicesWithSomeIntegrations
+        );
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
@@ -24,6 +27,17 @@ describe("Practice page", () => {
         cy.contains("button", "Search").click();
 
         cy.contains("h1", "Test GP Practice With Some Integrations");
+
+        cy.title().should(
+          "eq",
+          "Test GP Practice With Some Integrations | A12347 - GP Registrations Data Platform"
+        );
+        cy.get('meta[name="description"]').should(
+          "have.attr",
+          "content",
+          "Monthly data about GP2GP transfers for this practice"
+        );
+
         cy.contains("A12347");
         cy.contains("123 Some Address");
         cy.contains("Some Town");

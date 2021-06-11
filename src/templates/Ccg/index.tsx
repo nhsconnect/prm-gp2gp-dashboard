@@ -33,7 +33,13 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
 
   return (
     <>
-      <Helmet title={`${formattedName} | ${odsCode}`} />
+      <Helmet>
+        <title>{`${formattedName} | ${odsCode}`}</title>
+        <meta
+          name="description"
+          content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+        />
+      </Helmet>
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       {isLoading ? (
         <p className="nhsuk-body">{ccgContent.loadingMessage}</p>
