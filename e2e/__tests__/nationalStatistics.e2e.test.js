@@ -1,7 +1,7 @@
 const { viewPorts } = require("../support/common");
 
 describe("National statistics page", () => {
-  viewPorts.map(viewPort => {
+  viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
@@ -58,6 +58,18 @@ describe("National statistics page", () => {
         ).contains("Percent: 33.33%");
 
         cy.checkAccessibility();
+      });
+
+      it("contains the title and description", () => {
+        cy.title().should(
+          "eq",
+          "National Statistics - GP Registrations Data Platform"
+        );
+        cy.get('meta[name="description"]').should(
+          "have.attr",
+          "content",
+          "National monthly data about GP2GP transfers"
+        );
       });
     });
   });

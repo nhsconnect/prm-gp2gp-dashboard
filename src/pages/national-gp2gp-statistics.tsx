@@ -52,7 +52,13 @@ const NationalStatistics = () => {
 
   return (
     <>
-      <Helmet title="National Statistics - GP Registrations Data Platform" />
+      <Helmet>
+        <title>National Statistics - GP Registrations Data Platform</title>
+        <meta
+          name="description"
+          content="National monthly data about GP2GP transfers"
+        />
+      </Helmet>
       <h1>National GP2GP patient record transfers data</h1>
       <p>
         This page provides monthly national data about GP2GP transfers for
