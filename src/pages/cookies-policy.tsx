@@ -18,7 +18,13 @@ const CookiesPolicy: FC = () => {
 
   return (
     <>
-      <Helmet title="Cookies policy - GP Registrations Data Platform" />
+      <Helmet>
+        <title>Cookies policy - GP Registrations Data Platform</title>
+        <meta
+          name="description"
+          content="Cookie Policy for the GP Registrations Data Platform"
+        />
+      </Helmet>
       <div className="nhsuk-u-reading-width">
         <h1>Cookie Policy</h1>
         <h2>What are cookies?</h2>
