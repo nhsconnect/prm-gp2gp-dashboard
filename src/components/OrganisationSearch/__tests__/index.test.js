@@ -8,12 +8,46 @@ jest.mock(
   "../../../data/organisations/organisationMetadata.json",
   () => ({
     practices: [
-      { odsCode: "A12345", name: "Test Practice" },
-      { odsCode: "X99999", name: "Second Practice" },
+      {
+        odsCode: "A12345",
+        name: "Test Practice",
+        metrics: [
+          {
+            year: 2021,
+            month: 5,
+            requester: {
+              integrated: {
+                transferCount: 78,
+                within3DaysPercentage: 92.3,
+                within8DaysPercentage: 7.7,
+                beyond8DaysPercentage: 0.0,
+              },
+            },
+          },
+        ],
+      },
+      {
+        odsCode: "X99999",
+        name: "Second Practice",
+        metrics: [
+          {
+            year: 2021,
+            month: 4,
+            requester: {
+              integrated: {
+                transferCount: 24,
+                within3DaysPercentage: 58.3,
+                within8DaysPercentage: 25.0,
+                beyond8DaysPercentage: 16.7,
+              },
+            },
+          },
+        ],
+      },
     ],
     ccgs: [
-      { odsCode: "12A", name: "Test CCG" },
-      { odsCode: "13B", name: "Second CCG" },
+      { odsCode: "12A", name: "Test CCG", practices: ["A12345", "X99999"] },
+      { odsCode: "13B", name: "Second CCG", practices: [] },
     ],
   }),
   { virtual: true }

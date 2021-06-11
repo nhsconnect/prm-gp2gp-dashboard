@@ -1,14 +1,13 @@
 const path = require("path");
 const organisationMetadata = require("./src/data/organisations/organisationMetadata.json");
-const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
+
+const practices = organisationMetadata.practices;
+const ccgs = organisationMetadata.ccgs;
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
-  const practices = practiceMetrics.practices;
-  const ccgs = organisationMetadata.ccgs;
-
-  practices.forEach(practice => {
+  practices.forEach((practice) => {
     createPage({
       path: `/practice/${practice.odsCode}`,
       component: path.resolve("src/templates/Practice/index.tsx"),
@@ -19,18 +18,31 @@ exports.createPages = async ({ actions }) => {
     });
   });
 
-  ccgs.forEach(ccg => {
+  ccgs.forEach((ccg) => {
     createPage({
       path: `/ccg/${ccg.odsCode}`,
       component: path.resolve("src/templates/Ccg/index.tsx"),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
-        validPractices: practiceMetrics.practices,
+        validPractices: getPracticesForCcg(ccg.practices),
         layout: "general",
       },
     });
   });
+};
+
+const getPracticesForCcg = (practicesODsCodes) => {
+  let ccgPractices = [];
+  practicesODsCodes.map((practiceOds) => {
+    practices.find((ccgPractice) => {
+      if (ccgPractice.odsCode === practiceOds) {
+        ccgPractices.push(ccgPractice);
+      }
+    });
+  });
+
+  return ccgPractices;
 };
 
 exports.onCreatePage = ({ page, actions }) => {
