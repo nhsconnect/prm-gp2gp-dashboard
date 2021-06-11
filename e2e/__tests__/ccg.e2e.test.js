@@ -24,7 +24,10 @@ describe("CCG page", () => {
 
         // CCG Page
         cy.contains("h1", "Test CCG With GP Practices10D");
-        cy.title().should("eq", "Test CCG With GP Practices | 10D");
+        cy.title().should(
+          "eq",
+          "Test CCG With GP Practices | 10D - GP Registrations Data Platform"
+        );
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",

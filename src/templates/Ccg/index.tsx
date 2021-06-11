@@ -34,7 +34,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
   return (
     <>
       <Helmet>
-        <title>{`${formattedName} | ${odsCode}`}</title>
+        <title>{`${formattedName} | ${odsCode} - GP Registrations Data Platform`}</title>
         <meta
           name="description"
           content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
