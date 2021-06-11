@@ -39,7 +39,6 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@types/react-helmet": "^6.1.1",
     "aws-sdk": "^2.906.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.21.3",
@@ -76,6 +75,7 @@
     "@types/jest-when": "^2.7.2",
     "@types/moxios": "^0.4.11",
     "@types/react-dom": "^17.0.5",
+    "@types/react-helmet": "^6.1.1",
     "axe-core": "^4.2.0",
     "axios-mock-adapter": "^1.19.0",
     "babel-jest": "^26.6.3",
