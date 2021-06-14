@@ -79,10 +79,12 @@
   color: $color_nhsuk-white;
 }
 
-.text-match--highlighted {
-  background-color: transparent;
-  font-weight: normal;
-  color: inherit;
+@media (forced-colors: none) {
+  .text-match--highlighted {
+    background-color: transparent;
+    font-weight: normal;
+    color: inherit;
+  }
 }
 
 .react-autosuggest__section-title {
