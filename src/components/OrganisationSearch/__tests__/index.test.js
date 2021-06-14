@@ -36,7 +36,7 @@ describe("OrganisationSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, "A123");
 
-      const suggestion = getByText("Test Practice |");
+      const suggestion = getByText("Test Practice -");
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -54,7 +54,7 @@ describe("OrganisationSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validPracticeName);
 
-      const suggestion = getByText(`| ${validPracticeOdsCode}`);
+      const suggestion = getByText(`- ${validPracticeOdsCode}`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -106,7 +106,7 @@ describe("OrganisationSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validCCGOdsCode);
 
-      const suggestion = getByText(`${validCCGName} |`);
+      const suggestion = getByText(`${validCCGName} -`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -124,7 +124,7 @@ describe("OrganisationSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validCCGName);
 
-      const suggestion = getByText(`| ${validCCGOdsCode}`);
+      const suggestion = getByText(`- ${validCCGOdsCode}`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });

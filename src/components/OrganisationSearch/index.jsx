@@ -46,12 +46,12 @@ export const OrganisationSearch = () => {
   ];
 
   const getSuggestionListItemText = (suggestion) => {
-    return `${convertToTitleCase(suggestion.name)} | ${suggestion.odsCode}`;
+    return `${convertToTitleCase(suggestion.name)} - ${suggestion.odsCode}`;
   };
 
   const getFormattedSelectionText = (value) => {
     setSelectedOdsCode(value.odsCode);
-    return `${convertToTitleCase(value.name)} | ${value.odsCode}`;
+    return `${convertToTitleCase(value.name)} - ${value.odsCode}`;
   };
 
   const onInputChange = (_, { newValue, method }) => {
