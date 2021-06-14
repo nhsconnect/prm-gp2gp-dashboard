@@ -24,7 +24,7 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({
 }) => {
   const practiceSearch = new Search("OrgId", ["OrgId"], ccgPractices);
   const filteredPractices = validPractices.filter(
-    practice => practiceSearch.search(practice.odsCode).length > 0
+    (practice) => practiceSearch.search(practice.odsCode).length > 0
   );
 
   if (filteredPractices.length === 0)

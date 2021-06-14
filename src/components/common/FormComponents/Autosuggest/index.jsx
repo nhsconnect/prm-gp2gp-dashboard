@@ -22,7 +22,7 @@ export const Autosuggest = ({
     let suggestions = findSuggestions(value);
     if (multiSection) {
       suggestions = suggestions.filter(
-        suggestion => getSectionSuggestions(suggestion).length > 0
+        (suggestion) => getSectionSuggestions(suggestion).length > 0
       );
     }
     setSuggestions(suggestions);

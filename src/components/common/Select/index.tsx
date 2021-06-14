@@ -33,7 +33,7 @@ export const Select: FC<SelectProps> = ({
       id={id}
       name={id}
       defaultValue={defaultValue}
-      onChange={e => handleValueChange(e.target.value)}
+      onChange={(e) => handleValueChange(e.target.value)}
     >
       {options.map(({ displayText, value }) => (
         <option key={value} value={value}>

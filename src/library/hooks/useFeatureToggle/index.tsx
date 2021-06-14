@@ -37,7 +37,7 @@ export function useFetchFeatureToggles() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       const featureToggles =
         getEnv() === DEV_ENV
           ? await getDevFeatureToggles()

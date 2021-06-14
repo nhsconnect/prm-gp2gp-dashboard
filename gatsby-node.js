@@ -8,7 +8,7 @@ exports.createPages = async ({ actions }) => {
   const practices = practiceMetrics.practices;
   const ccgs = organisationMetadata.ccgs;
 
-  practices.forEach(practice => {
+  practices.forEach((practice) => {
     createPage({
       path: `/practice/${practice.odsCode}`,
       component: path.resolve("src/templates/Practice/index.tsx"),
@@ -19,7 +19,7 @@ exports.createPages = async ({ actions }) => {
     });
   });
 
-  ccgs.forEach(ccg => {
+  ccgs.forEach((ccg) => {
     createPage({
       path: `/ccg/${ccg.odsCode}`,
       component: path.resolve("src/templates/Ccg/index.tsx"),

@@ -12,8 +12,8 @@ describe("Autosuggest component", () => {
     const { getByLabelText } = render(
       <Autosuggest
         inputLabelText={inputLabelText}
-        getSuggestionListItemText={suggestion => suggestion.name}
-        getFormattedSelectionText={value => value.name}
+        getSuggestionListItemText={(suggestion) => suggestion.name}
+        getFormattedSelectionText={(value) => value.name}
         findSuggestions={() => []}
         onInputChange={mockSetInputValue}
       />
@@ -39,8 +39,8 @@ describe("Autosuggest component", () => {
     const { getByLabelText, getByRole } = render(
       <Autosuggest
         inputLabelText={inputLabelText}
-        getSuggestionListItemText={suggestion => suggestion.name}
-        getFormattedSelectionText={suggestion => suggestion.name}
+        getSuggestionListItemText={(suggestion) => suggestion.name}
+        getFormattedSelectionText={(suggestion) => suggestion.name}
         onInputChange={mockSetInputValue}
         inputTextValue="a"
         findSuggestions={() => [{ name: "apple" }]}
@@ -65,8 +65,8 @@ describe("Autosuggest component", () => {
       const { getByLabelText, getByText, getByRole } = render(
         <Autosuggest
           inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="a"
           findSuggestions={() => [
@@ -76,8 +76,8 @@ describe("Autosuggest component", () => {
             },
           ]}
           multiSection={true}
-          renderSectionTitle={section => section.title}
-          getSectionSuggestions={section => section.fruits}
+          renderSectionTitle={(section) => section.title}
+          getSectionSuggestions={(section) => section.fruits}
         />
       );
 
@@ -95,8 +95,8 @@ describe("Autosuggest component", () => {
       const { getByLabelText, getByText, getByRole } = render(
         <Autosuggest
           inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="e"
           findSuggestions={() => [
@@ -110,8 +110,8 @@ describe("Autosuggest component", () => {
             },
           ]}
           multiSection={true}
-          renderSectionTitle={section => section.title}
-          getSectionSuggestions={section => section.items}
+          renderSectionTitle={(section) => section.title}
+          getSectionSuggestions={(section) => section.items}
         />
       );
 
@@ -130,8 +130,8 @@ describe("Autosuggest component", () => {
       const { getByLabelText, getByText, getByRole, queryByText } = render(
         <Autosuggest
           inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="e"
           findSuggestions={() => [
@@ -145,8 +145,8 @@ describe("Autosuggest component", () => {
             },
           ]}
           multiSection={true}
-          renderSectionTitle={section => section.title}
-          getSectionSuggestions={section => section.items}
+          renderSectionTitle={(section) => section.title}
+          getSectionSuggestions={(section) => section.items}
         />
       );
 
@@ -165,8 +165,8 @@ describe("Autosuggest component", () => {
       const { getByLabelText, getByText } = render(
         <Autosuggest
           inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="app"
           findSuggestions={() => [{ name: "apple" }]}
@@ -187,8 +187,8 @@ describe("Autosuggest component", () => {
       const { getByLabelText, getByText } = render(
         <Autosuggest
           inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="APP"
           findSuggestions={() => [{ name: "apple" }]}
@@ -209,8 +209,8 @@ describe("Autosuggest component", () => {
       const { getByLabelText, getByText } = render(
         <Autosuggest
           inputLabelText={inputLabelText}
-          getSuggestionListItemText={suggestion => suggestion.name}
-          getFormattedSelectionText={suggestion => suggestion.name}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
           onInputChange={mockSetInputValue}
           inputTextValue="ap le"
           findSuggestions={() => [{ name: "apple" }]}

@@ -4,7 +4,7 @@ export class Search {
   constructor(uniqueKey, indexNames, list) {
     this.jsSearch = new JsSearch.Search(uniqueKey);
     this.jsSearch.indexStrategy = new JsSearch.AllSubstringsIndexStrategy();
-    indexNames.forEach(indexName => {
+    indexNames.forEach((indexName) => {
       this.jsSearch.addIndex(indexName);
     });
     this.jsSearch.addDocuments(list);

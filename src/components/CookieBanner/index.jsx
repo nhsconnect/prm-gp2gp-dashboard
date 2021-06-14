@@ -12,7 +12,7 @@ export const CookieBanner = ({ path }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const successBannerRef = useCallback(node => {
+  const successBannerRef = useCallback((node) => {
     if (node !== null) {
       node.focus();
     }
@@ -23,7 +23,7 @@ export const CookieBanner = ({ path }) => {
     setIsLoading(false);
   }, [path]);
 
-  const setCookieConsent = consent => {
+  const setCookieConsent = (consent) => {
     const expiryDate = getCookieExpiryDate();
     setCookie(NHS_COOKIE_NAME, consent, {
       expires: expiryDate,

@@ -5,7 +5,7 @@ module.exports = {
   ...gatsby,
   navigate: jest.fn(),
   Link: jest.fn().mockImplementation(({ to, onClick, ...rest }) => {
-    const onClickWithoutDefault = ev => {
+    const onClickWithoutDefault = (ev) => {
       ev.preventDefault();
       if (onClick) onClick(ev);
     };
