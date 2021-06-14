@@ -1,25 +1,15 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
-import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
-import userEvent from "@testing-library/user-event";
-
 describe("PracticeTableWithSort component", () => {
-  beforeEach(() => {
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showPracticeTableWithSort: true });
-  });
-
   it("should display table heading with the month and year", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
@@ -192,7 +182,7 @@ describe("PracticeTableWithSort component", () => {
         expect(sortBySelect).toHaveValue(fieldName);
         expect(orderSelect).toHaveValue(order);
 
-        (expectedSortOrder as string[]).forEach(cell => {
+        (expectedSortOrder as string[]).forEach((cell) => {
           const sortedCell = getAllByRole("cell", {
             name: cell,
           });
@@ -210,79 +200,5 @@ describe("PracticeTableWithSort component", () => {
         expect(allRows.length).toBe(7);
       }
     );
-  });
-
-  describe("showPracticeTableWithSort toggled off", () => {
-    it("should display table caption with the month and year when showPracticeTableWithSort feature toggle is off", () => {
-      when(mocked(useFeatureToggles))
-        .calledWith()
-        .mockReturnValue({ showPracticeTableWithSort: false });
-
-      const { getByText } = render(
-        <PracticeTableWithSort
-          filteredPractices={practiceMetricsMock}
-          headers={practiceTableContent.headers}
-          sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
-          orderSelect={{ defaultValue: SortOrder.DESCENDING, options: [] }}
-        />
-      );
-
-      expect(
-        getByText("Practice performance for February 2020")
-      ).toBeInTheDocument();
-    });
-
-    it("displays practices ordered by Beyond 8 day Percentage SLA when showPracticeTableWithSort feature toggle is off", () => {
-      when(mocked(useFeatureToggles))
-        .calledWith()
-        .mockReturnValue({ showPracticeTableWithSort: false });
-
-      const { getAllByRole } = render(
-        <PracticeTableWithSort
-          filteredPractices={practiceMetricsMock}
-          headers={practiceTableContent.headers}
-          sortBySelect={{ defaultValue: "beyond8DaysPercentage", options: [] }}
-          orderSelect={{ defaultValue: SortOrder.DESCENDING, options: [] }}
-        />
-      );
-
-      const allRows = getAllByRole("row");
-
-      expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
-      expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
-      expect(allRows[3]).toHaveTextContent("Beyond 8 days 8.8%");
-      expect(allRows[4]).toHaveTextContent("Beyond 8 days 0%");
-      expect(allRows[5]).toHaveTextContent("Beyond 8 days 0%");
-      expect(allRows[6]).toHaveTextContent("Beyond 8 days n/a");
-      expect(allRows.length).toBe(7);
-    });
-
-    it("does not display sort by and order selects when practiceTableWithSort feature toggle is off", () => {
-      when(mocked(useFeatureToggles))
-        .calledWith()
-        .mockReturnValue({ showPracticeTableWithSort: false });
-
-      const { queryByRole } = render(
-        <PracticeTableWithSort
-          filteredPractices={practiceMetricsMock}
-          headers={practiceTableContent.headers}
-          sortBySelect={{
-            defaultValue: "beyond8DaysPercentage",
-            options: [],
-          }}
-          orderSelect={{ defaultValue: SortOrder.DESCENDING, options: [] }}
-        />
-      );
-
-      const sortBySelect = queryByRole("combobox", {
-        name: `Sort by${practiceTableContent.selectHiddenLabel}`,
-      });
-      const orderSelect = queryByRole("combobox", {
-        name: `Order${practiceTableContent.selectHiddenLabel}`,
-      });
-
-      expect(sortBySelect).not.toBeInTheDocument();
-      expect(orderSelect).not.toBeInTheDocument();
-    });
   });
 });

@@ -8,7 +8,6 @@ import { PracticeType } from "../../templates/Practice/practice.types";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 import practiceTableContent from "../../data/content/practiceTable.json";
 import "./index.scss";
@@ -78,8 +77,6 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     return sortPractices(filteredPractices, selectedField, selectedOrder);
   }, [filteredPractices, selectedField, selectedOrder]);
 
-  const { showPracticeTableWithSort } = useFeatureToggles();
-
   const { year, month } = filteredPractices[0].metrics[0];
 
   const tableTitle = `Practice performance for ${convertMonthNumberToText(
@@ -111,7 +108,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     (option) => option.value === selectedField
   );
 
-  return showPracticeTableWithSort ? (
+  return (
     <section className="gp2gp-table-with-sort">
       <h2>{tableTitle}</h2>
       <Select
@@ -140,12 +137,5 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         sortOrder={selectedOrder as AriaAttributes["aria-sort"]}
       />
     </section>
-  ) : (
-    <Table
-      className="gp2gp-ccg-table"
-      caption={{ text: tableTitle, hidden: false }}
-      headers={headers}
-      rows={practiceTableRows}
-    />
   );
 };
