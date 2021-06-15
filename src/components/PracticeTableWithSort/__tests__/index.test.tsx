@@ -69,7 +69,7 @@ describe("PracticeTableWithSort component", () => {
     );
 
     const practicePageLink = getByRole("link", {
-      name: "GP Practice | A12345",
+      name: "GP Practice - A12345",
     });
 
     expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
@@ -82,9 +82,9 @@ describe("PracticeTableWithSort component", () => {
         "practiceName",
         SortOrder.DESCENDING,
         [
-          "Practice name Third GP Practice | A12347",
-          "Practice name Sixth GP Practice | A12350",
-          "Practice name Second GP Practice | A12346",
+          "Practice name Third GP Practice - A12347",
+          "Practice name Sixth GP Practice - A12350",
+          "Practice name Second GP Practice - A12346",
         ],
       ],
       [
@@ -92,9 +92,9 @@ describe("PracticeTableWithSort component", () => {
         "practiceName",
         SortOrder.ASCENDING,
         [
-          "Practice name Fifth GP Practice | A12349",
-          "Practice name Fourth GP Practice | A12348",
-          "Practice name GP Practice | A12345",
+          "Practice name Fifth GP Practice - A12349",
+          "Practice name Fourth GP Practice - A12348",
+          "Practice name GP Practice - A12345",
         ],
       ],
       [

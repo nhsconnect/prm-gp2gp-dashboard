@@ -21,8 +21,7 @@ export const OrganisationDetails: FC<OrganisationDetailsProps> = ({
 }) => (
   <div className="gp2gp-organisation-details">
     <h1 className="nhsuk-u-margin-bottom-5">
-      <span className="gp2gp-organisation-details__name">{name}</span>
-      <span>{odsCode}</span>
+      {name ? `${name} - ${odsCode}` : odsCode}
     </h1>
     {!!address && (
       <address data-testid="organisation-details-address">

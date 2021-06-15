@@ -66,19 +66,21 @@ describe("Practice template", () => {
         line2: "Headingley",
       },
     };
-    const expectedPracticeName = "Burton Croft Surgery";
 
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
 
-    const { getByText } = render(
+    const { getByText, getByRole } = render(
       <Practice pageContext={practicePageContext} />
     );
 
     await waitFor(() => {
-      expect(getByText(expectedODSPracticeData.odsCode)).toBeInTheDocument();
-      expect(getByText(expectedPracticeName)).toBeInTheDocument();
+      const expectedPracticeHeading = getByRole("heading", {
+        name: "Burton Croft Surgery - B86030",
+        level: 1,
+      });
+      expect(expectedPracticeHeading).toBeInTheDocument();
       expect(getByText(expectedODSPracticeData.town)).toBeInTheDocument();
       expect(getByText(expectedODSPracticeData.postCode)).toBeInTheDocument();
       expect(
@@ -95,15 +97,16 @@ describe("Practice template", () => {
     const statusCode = 500;
     mockAPIResponse(statusCode);
 
-    const { getByText, queryByTestId } = render(
+    const { getByText, queryByTestId, getByRole } = render(
       <Practice pageContext={practicePageContext} />
     );
 
     await waitFor(() => {
-      expect(
-        getByText(practicePageContext.practice.odsCode)
-      ).toBeInTheDocument();
-      expect(getByText(expectedPracticeName)).toBeInTheDocument();
+      const expectedPracticeHeading = getByRole("heading", {
+        name: "Burton Croft Surgery - B86030",
+        level: 1,
+      });
+      expect(expectedPracticeHeading).toBeInTheDocument();
       expect(
         queryByTestId("organisation-details-address")
       ).not.toBeInTheDocument();

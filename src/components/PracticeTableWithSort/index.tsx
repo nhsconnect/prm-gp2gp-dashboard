@@ -33,7 +33,7 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   const formattedName = convertToTitleCase(name);
   return (
     <Link to={`/practice/${odsCode}`}>
-      {formattedName} | {odsCode}
+      {formattedName} - {odsCode}
     </Link>
   );
 };

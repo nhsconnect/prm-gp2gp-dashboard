@@ -18,7 +18,7 @@ describe("Practice page", () => {
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-        ).type("Test GP Practice With Some Integrations | A12347");
+        ).type("Test GP Practice With Some Integrations A12347");
         cy.contains("li", "Test GP Practice With Some Integrations")
           .parent()
           .parent()
@@ -26,11 +26,11 @@ describe("Practice page", () => {
 
         cy.contains("button", "Search").click();
 
-        cy.contains("h1", "Test GP Practice With Some Integrations");
+        cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
 
         cy.title().should(
           "eq",
-          "Test GP Practice With Some Integrations | A12347 - GP Registrations Data Platform"
+          "Test GP Practice With Some Integrations - A12347 - GP Registrations Data Platform"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",

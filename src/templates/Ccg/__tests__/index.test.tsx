@@ -23,21 +23,19 @@ describe("CCG template", () => {
       name: "BURTON CCG",
       validPractices: practiceMetricsMock,
     };
-    const expectedCCGName = "Burton CCG";
-
     const statusCode = 200;
     const mockedResponse = {
       Organisations: [{ OrgId: "A12345", Name: "GP PRACTICE" }],
     };
-    const expectedPracticeName = "GP Practice | A12345";
+    const expectedPracticeName = "GP Practice - A12345";
+    const expectedCCGHeading = "Burton CCG - 12A";
 
     mockAPIResponse(statusCode, mockedResponse);
 
     const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
 
     await waitFor(() => {
-      expect(getByText(pipelineCCGData.odsCode)).toBeInTheDocument();
-      expect(getByText(expectedCCGName)).toBeInTheDocument();
+      expect(getByText(expectedCCGHeading)).toBeInTheDocument();
       expect(getByText(expectedPracticeName)).toBeInTheDocument();
     });
   });
@@ -48,7 +46,7 @@ describe("CCG template", () => {
       name: "BURTON CCG",
       validPractices: practiceMetricsMock,
     };
-    const expectedCCGName = "Burton CCG";
+    const expectedCCGHeading = "Burton CCG - 12A";
 
     const statusCode = 500;
 
@@ -57,8 +55,7 @@ describe("CCG template", () => {
     const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
 
     await waitFor(() => {
-      expect(getByText(pipelineCCGData.odsCode)).toBeInTheDocument();
-      expect(getByText(expectedCCGName)).toBeInTheDocument();
+      expect(getByText(expectedCCGHeading)).toBeInTheDocument();
       expect(getByText("Error loading practice list")).toBeInTheDocument();
     });
   });

@@ -23,10 +23,10 @@ describe("CCG page", () => {
         cy.contains("button", "Search").click();
 
         // CCG Page
-        cy.contains("h1", "Test CCG With GP Practices10D");
+        cy.contains("h1", "Test CCG With GP Practices - 10D");
         cy.title().should(
           "eq",
-          "Test CCG With GP Practices | 10D - GP Registrations Data Platform"
+          "Test CCG With GP Practices - 10D - GP Registrations Data Platform"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",
@@ -40,7 +40,7 @@ describe("CCG page", () => {
 
         cy.contains("Practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With Integrations | A12345"
+          "Test GP Practice With Integrations - A12345"
         );
 
         cy.contains("Successful integrations");
@@ -65,17 +65,17 @@ describe("CCG page", () => {
         cy.contains("li", "CCG").parent().parent().click();
         cy.contains("button", "Search").click();
 
-        cy.contains("h1", "Test CCG With GP Practices10D");
+        cy.contains("h1", "Test CCG With GP Practices - 10D");
 
         cy.contains("Practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With Integrations | A12345"
+          "Test GP Practice With Integrations - A12345"
         );
         cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
-          "Test GP Practice With Some Integrations | A12347"
+          "Test GP Practice With Some Integrations - A12347"
         );
         cy.get('[data-testid="table__cell--row-2-col-0"]').contains(
-          "Test GP Practice With No Integrations | A12346"
+          "Test GP Practice With No Integrations - A12346"
         );
 
         cy.contains("Sort by");
@@ -104,18 +104,18 @@ describe("CCG page", () => {
 
         cy.contains("Practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With Integrations | A12345"
+          "Test GP Practice With Integrations - A12345"
         );
         cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
-          "Test GP Practice With No Integrations | A12346"
+          "Test GP Practice With No Integrations - A12346"
         );
         cy.get('[data-testid="table__cell--row-2-col-0"]').contains(
-          "Test GP Practice With Some Integrations | A12347"
+          "Test GP Practice With Some Integrations - A12347"
         );
 
         cy.checkAccessibility();
 
-        cy.contains("a", "Test GP Practice With Integrations | A12345")
+        cy.contains("a", "Test GP Practice With Integrations - A12345")
           .should("have.attr", "href")
           .and("contains", "practice/A12345");
       });

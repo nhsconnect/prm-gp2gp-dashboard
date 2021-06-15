@@ -3,24 +3,33 @@ import { render } from "@testing-library/react";
 import { OrganisationDetails } from "../";
 
 describe("OrganisationDetails component", () => {
-  it("displays organisation name and ODS code", () => {
+  it("displays organisation name and ODS code heading", () => {
     const name = "Hall Green Health";
     const odsCode = "Y00159";
-    const { getByText } = render(
+    const { getByRole } = render(
       <OrganisationDetails name={name} odsCode={odsCode} />
     );
 
-    expect(getByText(name)).toBeInTheDocument();
-    expect(getByText(odsCode)).toBeInTheDocument();
+    const organisationHeading = getByRole("heading", {
+      name: "Hall Green Health - Y00159",
+      level: 1,
+    });
+
+    expect(organisationHeading).toBeInTheDocument();
   });
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const { getByText } = render(
+    const { getByRole } = render(
       <OrganisationDetails name="" odsCode={odsCode} />
     );
 
-    expect(getByText(odsCode)).toBeInTheDocument();
+    const odsCodeHeading = getByRole("heading", {
+      name: "Y00159",
+      level: 1,
+    });
+
+    expect(odsCodeHeading).toBeInTheDocument();
   });
 
   it("displays organisation address in the correct order", () => {

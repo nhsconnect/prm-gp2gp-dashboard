@@ -60,7 +60,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
     <>
       <Helmet>
         <title>
-          {`${formattedName} | ${odsCode} - GP Registrations Data Platform`}
+          {`${formattedName} - ${odsCode} - GP Registrations Data Platform`}
         </title>
         <meta
           name="description"

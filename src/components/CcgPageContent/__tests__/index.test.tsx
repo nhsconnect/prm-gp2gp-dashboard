@@ -45,8 +45,8 @@ describe("CcgPageContent component", () => {
 
     const allRows = getAllByRole("row");
 
-    expect(getByText("GP Practice | A12345")).toBeInTheDocument();
-    expect(getByText("GP Practice 2 | B12345")).toBeInTheDocument();
+    expect(getByText("GP Practice - A12345")).toBeInTheDocument();
+    expect(getByText("GP Practice 2 - B12345")).toBeInTheDocument();
     expect(allRows[1]).toHaveTextContent("Successful integrations 7");
     expect(allRows[1]).toHaveTextContent("Within 3 days 0%");
     expect(allRows[1]).toHaveTextContent("Within 8 days 28.6%");
@@ -66,8 +66,8 @@ describe("CcgPageContent component", () => {
       />
     );
 
-    expect(getByText("GP Practice | A12345")).toBeInTheDocument();
-    expect(queryByText("GP Practice 2 | B12345")).not.toBeInTheDocument();
+    expect(getByText("GP Practice - A12345")).toBeInTheDocument();
+    expect(queryByText("GP Practice 2 - B12345")).not.toBeInTheDocument();
   });
 
   it("displays a message if there are no valid practices", () => {

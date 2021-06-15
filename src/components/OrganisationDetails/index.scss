@@ -6,18 +6,6 @@
 @import "node_modules/nhsuk-frontend/packages/components/hint/hint";
 
 .gp2gp-organisation-details {
-  &__name {
-    position: relative;
-    padding-right: 12px;
-
-    &:after {
-      content: "";
-      border-right: 4px solid #212b32;
-      height: 100%;
-      padding-left: 12px;
-    }
-  }
-
   &__address-line {
     display: block;
   }
