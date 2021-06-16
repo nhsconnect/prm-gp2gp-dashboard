@@ -102,7 +102,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
   const isOnCookiePage = path === "/cookies-policy/";
 
-  const { toggles, isLoadingToggles } = useFetchFeatureToggles();
+  const { toggles } = useFetchFeatureToggles();
 
   useEffect(() => {
     setupAnalytics({
@@ -110,10 +110,6 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
       trackingId,
     });
   }, [hasCookieConsent]);
-
-  if (isLoadingToggles) {
-    return null;
-  }
 
   return (
     <>
