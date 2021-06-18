@@ -17,10 +17,4 @@
   &__button {
     display: block !important;
   }
-
-  .react-autosuggest__container {
-    @media (max-width: 1024px) {
-      margin-right: 0;
-    }
-  }
 }

@@ -9,6 +9,10 @@
   max-width: 40rem;
   margin-right: 3rem;
   position: relative;
+
+  @media (max-width: 1024px) {
+    margin-right: 0;
+  }
 }
 
 .react-autosuggest__input {
