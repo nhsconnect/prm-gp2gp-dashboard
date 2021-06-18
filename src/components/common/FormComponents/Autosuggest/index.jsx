@@ -38,7 +38,6 @@ export const Autosuggest = ({
     className: inputError
       ? "react-autosuggest__input--error"
       : "react-autosuggest__input",
-    "aria-label": "Search input",
   };
 
   const renderSuggestion = (suggestion, { query }) => {
