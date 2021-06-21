@@ -10,7 +10,7 @@
   margin-right: 3rem;
   position: relative;
 
-  @media (max-width: 1024px) {
+  @include mq($until: desktop) {
     margin-right: 0;
   }
 }
