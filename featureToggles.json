@@ -1,4 +1,8 @@
 {
-  "dev": {},
-  "prod": {}
+  "dev": {
+    "showPublicBetaText": true
+  },
+  "prod": {
+    "showPublicBetaText": false
+  }
 }

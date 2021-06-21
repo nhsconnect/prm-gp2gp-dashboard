@@ -4,8 +4,11 @@ import Logo from "../../assets/logo.svg";
 import { PhaseBanner } from "../common/PhaseBanner/";
 import "./index.scss";
 import content from "../../data/content/header.json";
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 export const Header = () => {
+  const { showPublicBetaText } = useFeatureToggles();
+
   return (
     <header className="nhsuk-header" role="banner">
       <div className="nhsuk-width-container nhsuk-header__container">
@@ -23,7 +26,9 @@ export const Header = () => {
         </div>
       </div>
       <div className="nhsuk-width-container nhsuk-u-padding-bottom-3">
-        <PhaseBanner tag={content.phaseBanner.tag}>
+        <PhaseBanner
+          tag={!showPublicBetaText ? "Private Beta" : content.phaseBanner.tag}
+        >
           {content.phaseBanner.text}
         </PhaseBanner>
       </div>
