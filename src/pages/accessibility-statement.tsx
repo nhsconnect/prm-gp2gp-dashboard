@@ -42,7 +42,7 @@ const AccessibilityStatement: FC = () => (
       <h2>How accessible this website is</h2>
       <p>
         The majority of this website is fully accessible, however we have not
-        tested the website across all screen readers.{" "}
+        tested the website across all screen readers.
       </p>
       <p>We have tested:</p>
       <ul>
@@ -59,7 +59,12 @@ const AccessibilityStatement: FC = () => (
       </ul>
       <p>
         The ability to search for a practice or a CCG does not work without
+        JavaScript. Sorting functionality on the CCG page will not work without
         JavaScript.
+      </p>
+      <p>
+        When you click on a link and are navigated to a new page, the focus may
+        remain on that link.
       </p>
       <h2>Reporting accessibility problems</h2>
       <p>We're always looking to improve the accessibility of the website.</p>
@@ -78,6 +83,42 @@ const AccessibilityStatement: FC = () => (
           contact the Equality Advisory and Support Service (EASS)
         </a>
         .
+      </p>
+      <h2>Technical information about this website's accessibility</h2>
+      <p>
+        The Health and Social Care Information Centre is committed to making its
+        website accessible, in accordance with the
+        <a href="https://www.legislation.gov.uk/uksi/2018/852/contents/made">
+          Public Sector Bodies (Websites and Mobile Applications) (No. 2)
+          Accessibility Regulations 2018
+        </a>
+        .
+      </p>
+      <p>
+        This website is partially compliant with the{" "}
+        <a href="https://www.w3.org/TR/WCAG21/">
+          Web Content Accessibility Guidelines version 2.1
+        </a>{" "}
+        AA standard, due to the non-compliances listed below.
+      </p>
+      <h3>Non-accessible content</h3>
+      <p>
+        We are mostly compliant with the WCAG 2.1 AA standard, however have one
+        known issue. When you click on a link and are navigated to a new page,
+        the focus may remain on that link.
+      </p>
+      <h3>Non-compliance with the accessibility regulations</h3>
+      <p>
+        We are currently not compliant with success Criteria 2.4.3 - “focus
+        order” of the WCAG 2.1 AA success criteria the problem fails on. We are
+        aiming to have this issue fixed by September 2021
+      </p>
+      <h2>Preparation of this accessibility statement</h2>
+      <p>
+        This statement was prepared on 23rd March 2021. It was last reviewed on
+        17th June 2021. This website was last tested in May 2021. The test was
+        carried out by the internal team. We tested all pages on the site using
+        the NHS accessibility audit checklist.
       </p>
     </div>
   </>
