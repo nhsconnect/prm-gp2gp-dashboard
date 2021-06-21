@@ -6,7 +6,7 @@ import homepageContent from "../data/content/homepage.json";
 const Index: FC = () => (
   <>
     <Helmet>
-      <title>GP Registrations Data Platform</title>
+      <title>GP Registrations Data</title>
       <meta
         name="description"
         content="Search for monthly data about GP2GP transfers for practices in England"

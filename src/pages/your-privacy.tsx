@@ -6,10 +6,10 @@ const YourPrivacy: FC = () => {
   return (
     <>
       <Helmet>
-        <title>Your Privacy - GP Registrations Data Platform</title>
+        <title>Your Privacy - GP Registrations Data</title>
         <meta
           name="description"
-          content="Privacy Policy for the GP Registrations Data Platform"
+          content="Privacy Policy for GP Registrations Data"
         />
       </Helmet>
       <div className="nhsuk-u-reading-width">

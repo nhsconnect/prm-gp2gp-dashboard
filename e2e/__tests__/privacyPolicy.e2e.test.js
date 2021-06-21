@@ -18,14 +18,11 @@ describe("Privacy policy page", () => {
 
       it("contains title and description metadata", () => {
         cy.contains("a", "Your privacy").click();
-        cy.title().should(
-          "eq",
-          "Your Privacy - GP Registrations Data Platform"
-        );
+        cy.title().should("eq", "Your Privacy - GP Registrations Data");
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Privacy Policy for the GP Registrations Data Platform"
+          "Privacy Policy for GP Registrations Data"
         );
       });
     });

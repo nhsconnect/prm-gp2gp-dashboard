@@ -7,11 +7,11 @@ const CookieConfirmation: FC = () => {
     <>
       <Helmet>
         <title>
-          Your cookie settings have been saved - GP Registrations Data Platform
+          Your cookie settings have been saved - GP Registrations Data
         </title>
         <meta
           name="description"
-          content="Cookie settings confirmation page for the GP Registrations Data Platform"
+          content="Cookie settings confirmation page for GP Registrations Data"
         />
       </Helmet>
 

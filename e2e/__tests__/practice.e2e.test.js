@@ -30,7 +30,7 @@ describe("Practice page", () => {
 
         cy.title().should(
           "eq",
-          "Test GP Practice With Some Integrations - A12347 - GP Registrations Data Platform"
+          "Test GP Practice With Some Integrations - A12347 - GP Registrations Data"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",

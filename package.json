@@ -1,7 +1,7 @@
 {
   "name": "prm-gp2gp-dashboard",
   "private": true,
-  "description": "GP Registrations Data Platform",
+  "description": "GP Registrations Data",
   "version": "1.0.0",
   "scripts": {
     "mockServer": "node local-mocks/mockServer.js",

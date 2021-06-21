@@ -11,7 +11,7 @@ describe("Not found page", () => {
     cy.get('meta[name="description"]').should(
       "have.attr",
       "content",
-      "The page you are looking for on the GP Registrations Data Platform cannot be found."
+      "The page you are looking for on GP Registrations Data cannot be found."
     );
   });
 });

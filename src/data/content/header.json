@@ -1,6 +1,6 @@
 {
-  "serviceName": "GP Registrations Data Platform",
-  "homepageLinkLabel": "NHS GP Registrations Data Platform homepage",
+  "serviceName": "GP Registrations Data",
+  "homepageLinkLabel": "NHS GP Registrations Data homepage",
   "phaseBanner": {
     "tag": "Private Beta",
     "text": "This is a new site. Content and structure are subject to change."

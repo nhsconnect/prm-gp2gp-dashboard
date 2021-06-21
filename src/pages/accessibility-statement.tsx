@@ -4,10 +4,10 @@ import { Helmet } from "react-helmet";
 const AccessibilityStatement: FC = () => (
   <>
     <Helmet>
-      <title>Accessibility statement - GP Registrations Data Platform</title>
+      <title>Accessibility statement - GP Registrations Data</title>
       <meta
         name="description"
-        content="Accessibility Statement for the GP Registrations Data Platform"
+        content="Accessibility Statement for GP Registrations Data"
       />
     </Helmet>
     <div className="nhsuk-u-reading-width">

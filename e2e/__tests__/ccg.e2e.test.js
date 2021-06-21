@@ -26,7 +26,7 @@ describe("CCG page", () => {
         cy.contains("h1", "Test CCG With GP Practices - 10D");
         cy.title().should(
           "eq",
-          "Test CCG With GP Practices - 10D - GP Registrations Data Platform"
+          "Test CCG With GP Practices - 10D - GP Registrations Data"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",

@@ -20,12 +20,12 @@ describe("Accessibility statement page", () => {
         cy.contains("a", "Accessibility statement").click();
         cy.title().should(
           "eq",
-          "Accessibility statement - GP Registrations Data Platform"
+          "Accessibility statement - GP Registrations Data"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Accessibility Statement for the GP Registrations Data Platform"
+          "Accessibility Statement for GP Registrations Data"
         );
       });
     });

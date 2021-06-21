@@ -8,7 +8,7 @@ const NotFound: FC = () => {
         <title>Page not found.</title>
         <meta
           name="description"
-          content="The page you are looking for on the GP Registrations Data Platform cannot be found."
+          content="The page you are looking for on GP Registrations Data cannot be found."
         />
       </Helmet>
       <div className="nhsuk-u-reading-width">

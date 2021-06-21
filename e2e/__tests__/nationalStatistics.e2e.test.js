@@ -61,10 +61,7 @@ describe("National statistics page", () => {
       });
 
       it("contains the title and description metadata", () => {
-        cy.title().should(
-          "eq",
-          "National Statistics - GP Registrations Data Platform"
-        );
+        cy.title().should("eq", "National Statistics - GP Registrations Data");
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",

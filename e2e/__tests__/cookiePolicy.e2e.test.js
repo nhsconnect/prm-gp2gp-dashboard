@@ -26,14 +26,11 @@ describe("Cookie page", () => {
       it("contains the title and description metadata after navigating to cookie policy page", () => {
         cy.contains("Do not use analytics cookies").click();
         cy.contains("a", "cookies page").click();
-        cy.title().should(
-          "eq",
-          "Cookies policy - GP Registrations Data Platform"
-        );
+        cy.title().should("eq", "Cookies policy - GP Registrations Data");
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Cookie Policy for the GP Registrations Data Platform"
+          "Cookie Policy for GP Registrations Data"
         );
         cy.checkAccessibility();
       });
@@ -44,12 +41,12 @@ describe("Cookie page", () => {
         cy.contains("Save my cookie settings").click();
         cy.title().should(
           "eq",
-          "Your cookie settings have been saved - GP Registrations Data Platform"
+          "Your cookie settings have been saved - GP Registrations Data"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Cookie settings confirmation page for the GP Registrations Data Platform"
+          "Cookie settings confirmation page for GP Registrations Data"
         );
       });
     });
