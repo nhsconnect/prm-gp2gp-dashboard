@@ -43,22 +43,22 @@ describe("Practice page", () => {
         cy.contains("Some Town");
         cy.contains("BL3 5DP");
 
-        cy.contains("Why integrate within 8 days?").click();
+        cy.contains("Why integrate within 8 days").click();
         cy.contains("When records are not integrated within 8 days");
 
-        cy.contains("Practice performance");
+        cy.contains("Integration times for December 2019");
 
         cy.contains("Successful integrations");
 
         cy.get("[data-testid=table__cell--row-0-col-0]").contains(2);
 
-        cy.contains("Within 3 days");
+        cy.contains("Integrated within 3 days");
         cy.get("[data-testid=table__cell--row-0-col-1]").contains("50%");
 
-        cy.contains("Within 8 days");
+        cy.contains("Integrated within 8 days");
         cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
 
-        cy.contains("Beyond 8 days");
+        cy.contains("Integrated beyond 8 days");
         cy.get("[data-testid=table__cell--row-0-col-3]").contains("0%");
 
         cy.checkAccessibility();

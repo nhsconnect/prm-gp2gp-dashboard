@@ -1,5 +1,5 @@
 {
   "loadingMessage": "Loading practice list...",
   "errorMessage": "Error loading practice list",
-  "tableDescription": "The table below shows the time to integrate for records received by the practices within this Clinical Commissioning Group (CCG)."
+  "tableDescription": "The table below shows the number of records successfully integrated and the time it took for these records to be integrated by the practices within this CCG."
 }

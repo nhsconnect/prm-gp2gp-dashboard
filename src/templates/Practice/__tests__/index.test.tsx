@@ -156,9 +156,9 @@ describe("Practice template", () => {
     );
 
     await waitFor(() => {
-      const expanderTitle = getByText("Why integrate within 8 days?");
+      const expanderTitle = getByText("Why integrate within 8 days");
       const expanderContent = getByText(
-        "This increases the burden on both the sending and receiving",
+        "This increases burden on both the sending and receiving",
         { exact: false }
       );
       expect(expanderTitle).toBeInTheDocument();
@@ -177,9 +177,9 @@ describe("Practice template", () => {
     const allColumnHeaders = getAllByRole("columnheader");
 
     expect(allColumnHeaders[0]).toHaveTextContent("Successful integrations");
-    expect(allColumnHeaders[1]).toHaveTextContent("Within 3 days");
-    expect(allColumnHeaders[2]).toHaveTextContent("Within 8 days");
-    expect(allColumnHeaders[3]).toHaveTextContent("Beyond 8 days");
+    expect(allColumnHeaders[1]).toHaveTextContent("Integrated within 3 days");
+    expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 8 days");
+    expect(allColumnHeaders[3]).toHaveTextContent("Integrated beyond 8 days");
 
     expect(allColumnHeaders.length).toBe(4);
   });

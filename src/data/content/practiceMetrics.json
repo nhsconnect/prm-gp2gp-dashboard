@@ -3,8 +3,8 @@
   "subtitle": "Number of records integrated:",
   "tableHeaders": [
     "Successful integrations",
-    "Within 3 days",
-    "Within 8 days",
-    "Beyond 8 days"
+    "Integrated within 3 days",
+    "Integrated within 8 days",
+    "Integrated beyond 8 days"
   ]
 }

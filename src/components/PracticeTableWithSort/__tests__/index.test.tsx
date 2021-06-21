@@ -49,12 +49,12 @@ describe("PracticeTableWithSort component", () => {
     expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
-    expect(allRows[1]).toHaveTextContent("Beyond 8 days 47.6%");
-    expect(allRows[2]).toHaveTextContent("Beyond 8 days 25%");
-    expect(allRows[3]).toHaveTextContent("Beyond 8 days 8.8%");
-    expect(allRows[4]).toHaveTextContent("Beyond 8 days 0%");
-    expect(allRows[5]).toHaveTextContent("Beyond 8 days 0%");
-    expect(allRows[6]).toHaveTextContent("Beyond 8 days n/a");
+    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 47.6%");
+    expect(allRows[2]).toHaveTextContent("Integrated beyond 8 days 25%");
+    expect(allRows[3]).toHaveTextContent("Integrated beyond 8 days 8.8%");
+    expect(allRows[4]).toHaveTextContent("Integrated beyond 8 days 0%");
+    expect(allRows[5]).toHaveTextContent("Integrated beyond 8 days 0%");
+    expect(allRows[6]).toHaveTextContent("Integrated beyond 8 days n/a");
     expect(allRows.length).toBe(7);
   });
 
@@ -118,40 +118,64 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
-        "Within 3 days",
+        "Integrated within 3 days",
         "within3DaysPercentage",
         SortOrder.DESCENDING,
-        ["Within 3 days 60%", "Within 3 days 58.8%", "Within 3 days 23.8%"],
+        [
+          "Integrated within 3 days 60%",
+          "Integrated within 3 days 58.8%",
+          "Integrated within 3 days 23.8%",
+        ],
       ],
       [
-        "Within 3 days",
+        "Integrated within 3 days",
         "within3DaysPercentage",
         SortOrder.ASCENDING,
-        ["Within 3 days n/a", "Within 3 days 0%", "Within 3 days 16.7%"],
+        [
+          "Integrated within 3 days n/a",
+          "Integrated within 3 days 0%",
+          "Integrated within 3 days 16.7%",
+        ],
       ],
       [
-        "Within 8 days",
+        "Integrated within 8 days",
         "within8DaysPercentage",
         SortOrder.DESCENDING,
-        ["Within 8 days 100%", "Within 8 days 40%", "Within 8 days 32.4%"],
+        [
+          "Integrated within 8 days 100%",
+          "Integrated within 8 days 40%",
+          "Integrated within 8 days 32.4%",
+        ],
       ],
       [
-        "Within 8 days",
+        "Integrated within 8 days",
         "within8DaysPercentage",
         SortOrder.ASCENDING,
-        ["Within 8 days n/a", "Within 8 days 28.6%", "Within 8 days 32.4%"],
+        [
+          "Integrated within 8 days n/a",
+          "Integrated within 8 days 28.6%",
+          "Integrated within 8 days 32.4%",
+        ],
       ],
       [
-        "Beyond 8 days",
+        "Integrated beyond 8 days",
         "beyond8DaysPercentage",
         SortOrder.DESCENDING,
-        ["Beyond 8 days 47.6%", "Beyond 8 days 25%", "Beyond 8 days 8.8%"],
+        [
+          "Integrated beyond 8 days 47.6%",
+          "Integrated beyond 8 days 25%",
+          "Integrated beyond 8 days 8.8%",
+        ],
       ],
       [
-        "Beyond 8 days",
+        "Integrated beyond 8 days",
         "beyond8DaysPercentage",
         SortOrder.ASCENDING,
-        ["Beyond 8 days n/a", "Beyond 8 days 0%", "Beyond 8 days 0%"],
+        [
+          "Integrated beyond 8 days n/a",
+          "Integrated beyond 8 days 0%",
+          "Integrated beyond 8 days 0%",
+        ],
       ],
     ];
 

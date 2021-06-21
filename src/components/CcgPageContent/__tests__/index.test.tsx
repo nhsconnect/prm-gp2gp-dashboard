@@ -48,9 +48,9 @@ describe("CcgPageContent component", () => {
     expect(getByText("GP Practice - A12345")).toBeInTheDocument();
     expect(getByText("GP Practice 2 - B12345")).toBeInTheDocument();
     expect(allRows[1]).toHaveTextContent("Successful integrations 7");
-    expect(allRows[1]).toHaveTextContent("Within 3 days 0%");
-    expect(allRows[1]).toHaveTextContent("Within 8 days 28.6%");
-    expect(allRows[1]).toHaveTextContent("Beyond 8 days 71.4%");
+    expect(allRows[1]).toHaveTextContent("Integrated within 3 days 0%");
+    expect(allRows[1]).toHaveTextContent("Integrated within 8 days 28.6%");
+    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 71.4%");
   });
 
   it("filters out invalid practices", () => {
@@ -106,9 +106,9 @@ describe("CcgPageContent component", () => {
       />
     );
 
-    const expanderTitle = getByText("Why integrate within 8 days?");
+    const expanderTitle = getByText("Why integrate within 8 days");
     const expanderContent = getByText(
-      "This increases the burden on both the sending and receiving",
+      "This increases burden on both the sending and receiving",
       { exact: false }
     );
     expect(expanderTitle).toBeInTheDocument();

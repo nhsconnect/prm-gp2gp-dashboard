@@ -34,7 +34,7 @@ describe("CCG page", () => {
           "Monthly data about GP2GP transfers for practices within this clinical commissioning group"
         );
 
-        cy.contains("Why integrate within 8 days?").click();
+        cy.contains("Why integrate within 8 days").click();
         cy.contains("When records are not integrated within 8 days");
         cy.contains("Integration times for December 2019");
 
@@ -46,13 +46,13 @@ describe("CCG page", () => {
         cy.contains("Successful integrations");
         cy.get('[data-testid="table__cell--row-0-col-1"]').contains(3);
 
-        cy.contains("Within 3 days");
+        cy.contains("Integrated within 3 days");
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("33.3%");
 
-        cy.contains("Within 8 days");
+        cy.contains("Integrated within 8 days");
         cy.get('[data-testid="table__cell--row-0-col-3"]').contains("33.3%");
 
-        cy.contains("Beyond 8 days");
+        cy.contains("Integrated beyond 8 days");
         cy.get('[data-testid="table__cell--row-0-col-4"]').contains("33.3%");
       });
 
