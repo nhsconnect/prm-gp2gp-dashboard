@@ -79,7 +79,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const { year, month } = filteredPractices[0].metrics[0];
 
-  const tableTitle = `Practice performance for ${convertMonthNumberToText(
+  const tableTitle = `Integration times for ${convertMonthNumberToText(
     month
   )} ${year}`;
 

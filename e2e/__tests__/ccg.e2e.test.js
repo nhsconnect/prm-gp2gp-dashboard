@@ -36,7 +36,7 @@ describe("CCG page", () => {
 
         cy.contains("Why integrate within 8 days?").click();
         cy.contains("When records are not integrated within 8 days");
-        cy.contains("Practice performance for December 2019");
+        cy.contains("Integration times for December 2019");
 
         cy.contains("Practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(

@@ -52,7 +52,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   } = practice;
   const formattedName = convertToTitleCase(name);
 
-  const tableCaptionText = `Practice performance for ${convertMonthNumberToText(
+  const tableCaptionText = `Integration times for ${convertMonthNumberToText(
     month
   )} ${year}`;
 

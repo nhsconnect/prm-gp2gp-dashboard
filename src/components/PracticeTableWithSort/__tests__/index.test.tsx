@@ -21,7 +21,7 @@ describe("PracticeTableWithSort component", () => {
     );
 
     const tableHeading = getByRole("heading", {
-      name: "Practice performance for February 2020",
+      name: "Integration times for February 2020",
       level: 2,
     });
 
