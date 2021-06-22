@@ -2,28 +2,23 @@ const { viewPorts } = require("../support/common");
 const { organisations } = require("/local-mocks/mocks.js");
 
 describe("CCG page", () => {
+  const odsUrl =
+    "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000";
+
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
-        cy.injectAxe();
+        cy.visit("/ccg/10D");
+        cy.intercept("GET", odsUrl, organisations);
       });
 
-      const odsUrl =
-        "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=10D&RelStatus=active&Limit=1000";
+      it("checks for accessibility", () => {
+        cy.injectAxe();
+        cy.checkAccessibility();
+      });
 
-      it("searches and navigates to the CCG page", () => {
-        cy.intercept("GET", odsUrl, organisations);
-
-        cy.findByLabelText(
-          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-        ).type("test ccg");
-        cy.contains("li", "CCG").parent().parent().click();
-        cy.contains("button", "Search").click();
-
-        // CCG Page
-        cy.contains("h1", "Test CCG With GP Practices - 10D");
+      it("contains the title and description metadata relevant to the page", () => {
         cy.title().should(
           "eq",
           "Test CCG With GP Practices - 10D - GP Registrations Data"
@@ -33,6 +28,10 @@ describe("CCG page", () => {
           "content",
           "Monthly data about GP2GP transfers for practices within this clinical commissioning group"
         );
+      });
+
+      it("displays the practice metrics of the associated practice", () => {
+        cy.contains("h1", "Test CCG With GP Practices - 10D");
 
         cy.contains("Why integrate within 8 days").click();
         cy.contains("When records are not integrated within 8 days");
@@ -57,14 +56,6 @@ describe("CCG page", () => {
       });
 
       it("sort practice performance table and link to the individual practices", () => {
-        cy.intercept("GET", odsUrl, organisations);
-
-        cy.findByLabelText(
-          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-        ).type("test ccg");
-        cy.contains("li", "CCG").parent().parent().click();
-        cy.contains("button", "Search").click();
-
         cy.contains("h1", "Test CCG With GP Practices - 10D");
 
         cy.contains("Practice name");
@@ -113,19 +104,38 @@ describe("CCG page", () => {
           "Test GP Practice With Some Integrations - A12347"
         );
 
-        cy.checkAccessibility();
-
         cy.contains("a", "Test GP Practice With Integrations - A12345")
           .should("have.attr", "href")
           .and("contains", "practice/A12345");
       });
 
-      it("searches and navigates to the CCG page with no practices associated to that ccg", () => {
+      it("displays the feedback section that links to feedback survey", () => {
+        cy.contains("h3", "Get in touch");
+        cy.contains("Take our survey").click();
+        cy.contains("Feedback form for GP registrations data platform");
+      });
+
+      it("searches on homepage then navigates to the CCG page", () => {
+        cy.visit("/");
+        cy.intercept("GET", odsUrl, organisations);
+
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        ).type("test ccg");
+        cy.contains("li", "CCG").parent().parent().click();
+        cy.contains("button", "Search").click();
+
+        cy.contains("h1", "Test CCG With GP Practices - 10D");
+      });
+
+      it("searches on homepage and navigates to the CCG page with no practices associated to that ccg", () => {
         const odsUrlNoCCG =
           "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=11D&RelStatus=active&Limit=1000";
         cy.intercept("GET", odsUrlNoCCG, {
           Organisations: [],
         });
+
+        cy.visit("/");
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
@@ -136,7 +146,8 @@ describe("CCG page", () => {
         cy.contains("No GP practices found");
       });
 
-      it("searches and navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
+      it("searches on homepage, navigates to the CCG page and displays an error when it can't fetch the CCG data", () => {
+        cy.visit("/");
         cy.intercept("GET", odsUrl, {
           statusCode: 400,
         });
@@ -148,13 +159,6 @@ describe("CCG page", () => {
         cy.contains("button", "Search").click();
 
         cy.contains("Error loading practice list");
-      });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/ccg/10D");
-        cy.contains("h3", "Get in touch");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
       });
     });
   });
