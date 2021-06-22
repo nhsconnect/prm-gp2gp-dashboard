@@ -87,7 +87,7 @@ const AccessibilityStatement: FC = () => (
       <h2>Technical information about this website's accessibility</h2>
       <p>
         The Health and Social Care Information Centre is committed to making its
-        website accessible, in accordance with the
+        website accessible, in accordance with the{" "}
         <a href="https://www.legislation.gov.uk/uksi/2018/852/contents/made">
           Public Sector Bodies (Websites and Mobile Applications) (No. 2)
           Accessibility Regulations 2018
@@ -109,9 +109,9 @@ const AccessibilityStatement: FC = () => (
       </p>
       <h3>Non-compliance with the accessibility regulations</h3>
       <p>
-        We are currently not compliant with success Criteria 2.4.3 - “focus
-        order” of the WCAG 2.1 AA success criteria the problem fails on. We are
-        aiming to have this issue fixed by September 2021
+        We are currently not compliant with Success Criteria 2.4.3 - “focus
+        order” of the WCAG 2.1 AA success criteria. We are aiming to have this
+        issue fixed by September 2021.
       </p>
       <h2>Preparation of this accessibility statement</h2>
       <p>
