@@ -4,12 +4,12 @@ import { render, waitFor } from "@testing-library/react";
 import { FeedbackBanner } from "../";
 
 describe("FeedbackBanner component", () => {
-  it("displays feedback banner heading", async () => {
+  it("displays feedback heading", async () => {
     const { getByRole } = render(<FeedbackBanner />);
 
     await waitFor(() => {
       const feedbackBannerHeading = getByRole("heading", {
-        name: "Tell us what you think",
+        name: "Get in touch",
         level: 3,
       });
       expect(feedbackBannerHeading).toBeInTheDocument();
@@ -34,5 +34,14 @@ describe("FeedbackBanner component", () => {
     expect(surveyLink.getAttribute("href")).toBe(
       "https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_ac1GS7jmHNtMTlA"
     );
+  });
+
+  it("contains link to GP2GP email", () => {
+    const { getByRole } = render(<FeedbackBanner />);
+    const surveyLink = getByRole("link", {
+      name: "gp2gp@nhs.net",
+    });
+
+    expect(surveyLink.getAttribute("href")).toBe("mailto:gp2gp@nhs.net");
   });
 });

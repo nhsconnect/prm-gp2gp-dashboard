@@ -72,7 +72,7 @@ describe("Practice page", () => {
 
       it("displays the feedback section that links to feedback survey", () => {
         cy.visit("/practice/A12345");
-        cy.contains("h3", "Tell us what you think");
+        cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });
