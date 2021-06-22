@@ -149,6 +149,13 @@ describe("CCG page", () => {
 
         cy.contains("Error loading practice list");
       });
+
+      it("displays the feedback section that links to feedback survey", () => {
+        cy.visit("/ccg/10D");
+        cy.contains("h3", "Tell us what you think");
+        cy.contains("Take our survey").click();
+        cy.contains("Feedback form for GP registrations data platform");
+      });
     });
   });
 });

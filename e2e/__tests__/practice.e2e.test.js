@@ -69,6 +69,13 @@ describe("Practice page", () => {
         ).click();
         cy.contains("h1", "GP2GP patient record transfers data");
       });
+
+      it("displays the feedback section that links to feedback survey", () => {
+        cy.visit("/practice/A12345");
+        cy.contains("h3", "Tell us what you think");
+        cy.contains("Take our survey").click();
+        cy.contains("Feedback form for GP registrations data platform");
+      });
     });
   });
 });

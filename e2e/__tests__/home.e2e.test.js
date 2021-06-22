@@ -20,12 +20,6 @@ describe("Home page", () => {
         cy.checkAccessibility();
       });
 
-      it("displays the feedback form", () => {
-        cy.contains("h3", "Tell us what you think");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
-
       it("displays the validation error when there is no input", () => {
         cy.contains("button", "Search").click();
         cy.contains("Please enter a valid ODS code, practice name or CCG name");

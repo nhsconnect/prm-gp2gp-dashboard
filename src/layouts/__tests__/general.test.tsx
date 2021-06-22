@@ -65,7 +65,7 @@ describe("General layout", () => {
     });
   });
 
-  it("displays feedback banner", async () => {
+  it("displays feedback heading", async () => {
     const { getByRole } = render(
       <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
         <p>This is a paragraph.</p>
@@ -73,10 +73,11 @@ describe("General layout", () => {
     );
 
     await waitFor(() => {
-      const feedbackBannerHeading = getByRole("heading", {
+      const feedbackHeading = getByRole("heading", {
         name: "Tell us what you think",
+        level: 3,
       });
-      expect(feedbackBannerHeading).toBeInTheDocument();
+      expect(feedbackHeading).toBeInTheDocument();
     });
   });
 

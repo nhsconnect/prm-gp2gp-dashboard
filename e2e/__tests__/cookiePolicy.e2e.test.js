@@ -49,6 +49,13 @@ describe("Cookie page", () => {
           "Cookie settings confirmation page for GP Registrations Data"
         );
       });
+
+      it("displays the feedback section that links to feedback survey", () => {
+        cy.visit("/cookies-policy");
+        cy.contains("h3", "Tell us what you think");
+        cy.contains("Take our survey").click();
+        cy.contains("Feedback form for GP registrations data platform");
+      });
     });
   });
 });

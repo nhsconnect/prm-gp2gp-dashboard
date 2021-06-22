@@ -50,22 +50,6 @@ describe("Homepage layout", () => {
     });
   });
 
-  it("displays feedback banner", async () => {
-    const { getByRole } = render(
-      <Layout path="/" pageContext={{ layout: "homepage" }}>
-        <p>This is a paragraph.</p>
-      </Layout>
-    );
-
-    await waitFor(() => {
-      const feedbackBannerHeading = getByRole("heading", {
-        name: "Tell us what you think",
-      });
-
-      expect(feedbackBannerHeading).toBeInTheDocument();
-    });
-  });
-
   it("displays hero banner", async () => {
     const { getByRole } = render(
       <Layout path="/" pageContext={{ layout: "homepage" }}>

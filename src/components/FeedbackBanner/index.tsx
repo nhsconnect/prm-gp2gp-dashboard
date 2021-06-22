@@ -1,15 +1,15 @@
 import React, { FC } from "react";
-import { EmphasisBox } from "../common/EmphasisBox";
-import feedbackBannerContent from "../../data/content/feedbackBanner.json";
+import "./index.scss";
 
 export const FeedbackBanner: FC = () => (
-  <EmphasisBox title={feedbackBannerContent.title}>
+  <aside className="nhsuk-inset-text">
+    <h3>Tell us what you think</h3>
     <p>
-      {feedbackBannerContent.text1}
-      <a href={feedbackBannerContent.linkUrl}>
-        {feedbackBannerContent.linkText}
-      </a>
-      {feedbackBannerContent.text2}
+      We are always looking to improve our site.{" "}
+      <a href="https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_ac1GS7jmHNtMTlA">
+        Take our survey
+      </a>{" "}
+      to let us know what you think. If you need help with GP
     </p>
-  </EmphasisBox>
+  </aside>
 );
