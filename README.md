@@ -15,12 +15,12 @@
 3. `npm install`
 4. `npm run prepare`
 
-GP2GP metrics and metadata JSON files are then required to build the dashboard. There are two options - to either retrieve them from the Data Pipeline Github repo, or to download them from S3. Below are instructions for both:
+GP2GP metrics JSON files are then required to build the dashboard. There are two options - to either retrieve them from the Data Pipeline Github repo, or to download them from S3. Below are instructions for both:
 
 #### Retrieving required JSON files from Data Pipeline Github Repo (stubbed data)
 
 1. Run `./tasks get-stubs`
-2. Look inside `src/data/organisations` and there should be the following JSON files - nationalMetrics.json, organisationMetrics.json and practiceMetrics.json
+2. Look inside `src/data/organisations` and there should be the following JSON files - nationalMetrics.json and practiceMetrics.json
 3. Run `npm run develop`
    - This will run a local mock server that will mock API calls made dynamically on page load.
    - It will then build, with hot-reloading enabled and with test CCG and GP practices.
@@ -30,7 +30,7 @@ GP2GP metrics and metadata JSON files are then required to build the dashboard. 
 
 To retrieve these files from S3 you will need to be authenticated with AWS. It will overwrite the JSON files that you already have.
 
-1. `./tasks get-metrics <environment> && ./tasks get-metadata <environment>`
+1. `./tasks get-metrics <environment>`
    - Only available environments are dev or prod.
 2. `npm run develop:ci`
 

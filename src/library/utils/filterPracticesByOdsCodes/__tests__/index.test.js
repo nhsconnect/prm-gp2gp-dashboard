@@ -1,4 +1,4 @@
-import { filterPracticesByOdsCodes } from "../index";
+import filterPracticesByOdsCodes from "../index";
 
 describe("filterPracticesByOdsCodes", () => {
   it("returns one matching practice given one practice in practice list", () => {

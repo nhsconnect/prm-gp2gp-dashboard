@@ -67,11 +67,6 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-get-metadata dev
-                - exec:
-                    command: /bin/bash
-                    arguments:
-                      - -c
                       - ./tasks dojo-build dev
       - deploy_dev:
           clean_workspace: true
@@ -113,11 +108,6 @@ pipelines:
                     arguments:
                       - -c
                       - ./tasks dojo-get-metrics prod
-                - exec:
-                    command: /bin/bash
-                    arguments:
-                      - -c
-                      - ./tasks dojo-get-metadata prod
                 - exec:
                     command: /bin/bash
                     arguments:

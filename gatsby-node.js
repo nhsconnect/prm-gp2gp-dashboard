@@ -1,12 +1,12 @@
 const path = require("path");
-const organisationMetadata = require("./src/data/organisations/organisationMetadata.json");
 const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
+const filterPracticesByOdsCodes = require("./src/library/utils/filterPracticesByOdsCodes/index.js");
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
 
   const practices = practiceMetrics.practices;
-  const ccgs = organisationMetadata.ccgs;
+  const ccgs = practiceMetrics.ccgs;
 
   practices.forEach((practice) => {
     createPage({
@@ -26,7 +26,7 @@ exports.createPages = async ({ actions }) => {
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
-        validPractices: practiceMetrics.practices,
+        ccgPractices: filterPracticesByOdsCodes(ccg.practices, practices),
         layout: "general",
       },
     });

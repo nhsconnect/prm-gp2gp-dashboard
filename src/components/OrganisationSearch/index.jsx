@@ -8,13 +8,14 @@ import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
 import organisationSearchContent from "../../data/content/organisationSearch.json";
-import organisationMetadata from "../../data/organisations/organisationMetadata.json";
+import practiceMetrics from "../../data/organisations/practiceMetrics.json";
+
 import "./index.scss";
 
 const practiceSearch = new Search(
   "odsCode",
   ["name", "odsCode"],
-  organisationMetadata.practices.map((item) => ({
+  practiceMetrics.practices.map((item) => ({
     ...item,
     path: `/practice/${item.odsCode}`,
   }))
@@ -23,7 +24,7 @@ const practiceSearch = new Search(
 const ccgSearch = new Search(
   "odsCode",
   ["name", "odsCode"],
-  organisationMetadata.ccgs.map((item) => ({
+  practiceMetrics.ccgs.map((item) => ({
     ...item,
     path: `/ccg/${item.odsCode}`,
   }))

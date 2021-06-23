@@ -13,7 +13,7 @@ describe("PracticeTableWithSort component", () => {
   it("should display table heading with the month and year", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
-        filteredPractices={practiceMetricsMock}
+        ccgPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
@@ -31,7 +31,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices ordered by Beyond 8 day Percentage SLA by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        filteredPractices={practiceMetricsMock}
+        ccgPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
@@ -61,7 +61,7 @@ describe("PracticeTableWithSort component", () => {
   it("navigates to a practice page when a link is clicked", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
-        filteredPractices={practiceMetricsMock}
+        ccgPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
@@ -184,7 +184,7 @@ describe("PracticeTableWithSort component", () => {
       (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole } = render(
           <PracticeTableWithSort
-            filteredPractices={practiceMetricsMock}
+            ccgPractices={practiceMetricsMock}
             headers={practiceTableContent.headers}
             sortBySelect={practiceTableContent.sortBySelect}
             orderSelect={practiceTableContent.orderSelect}

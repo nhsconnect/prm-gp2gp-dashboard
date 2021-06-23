@@ -5,15 +5,15 @@ import userEvent from "@testing-library/user-event";
 import { OrganisationSearch } from "../";
 
 jest.mock(
-  "../../../data/organisations/organisationMetadata.json",
+  "../../../data/organisations/practiceMetrics.json",
   () => ({
     practices: [
-      { odsCode: "A12345", name: "Test Practice" },
-      { odsCode: "X99999", name: "Second Practice" },
+      { odsCode: "A12345", name: "Test Practice", metrics: [] },
+      { odsCode: "X99999", name: "Second Practice", metrics: [] },
     ],
     ccgs: [
-      { odsCode: "12A", name: "Test CCG" },
-      { odsCode: "13B", name: "Second CCG" },
+      { odsCode: "12A", name: "Test CCG", practices: ["A12345"] },
+      { odsCode: "13B", name: "Second CCG", practices: ["X99999"] },
     ],
   }),
   { virtual: true }

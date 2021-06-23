@@ -100,14 +100,6 @@ case "${task}" in
   dojo-get-metrics)
       dojo "./tasks get-metrics ${deployment_env}"
       ;;
-  get-metadata)
-      setup_env ${deployment_env}
-      npm install --prod
-      npm run getMetadata:ci
-      ;;
-  dojo-get-metadata)
-      dojo "./tasks get-metadata ${deployment_env}"
-      ;;
   deploy)
       npm install --prod
       npm run deploy

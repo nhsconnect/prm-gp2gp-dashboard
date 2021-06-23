@@ -1,8 +1,8 @@
 const jsonServer = require("json-server");
 const {
-  organisations,
   practiceWithIntegrations,
-  practicesWithSomeIntegrations,
+  practiceWithSomeIntegrations,
+  practiceWithNoIntegrations,
 } = require("./mocks");
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
@@ -16,17 +16,11 @@ server.get("/ORD/2-0-0/organisations/A12345", (request, response) => {
 });
 
 server.get("/ORD/2-0-0/organisations/A12347", (request, response) => {
-  return response.send(practicesWithSomeIntegrations);
+  return response.send(practiceWithSomeIntegrations);
 });
 
-server.get("/ORD/2-0-0/organisations", (request, response) => {
-  if (request.query.TargetOrgId) {
-    if (request.query.TargetOrgId === "10D") {
-      return response.send(organisations);
-    } else {
-      return response.send({ Organisations: [] });
-    }
-  }
+server.get("/ORD/2-0-0/organisations/A12346", (request, response) => {
+  return response.send(practiceWithNoIntegrations);
 });
 
 server.listen(port, () => {

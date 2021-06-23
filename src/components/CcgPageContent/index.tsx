@@ -9,27 +9,13 @@ import practiceTableContent from "../../data/content/practiceTable.json";
 import ccgContent from "../../data/content/ccg.json";
 import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 
-import { Search } from "../../library/utils/search";
-
 import "./index.scss";
 
 type CcgPageContentProps = {
-  ccgPractices: { OrgId: string; Name: string }[];
-  validPractices: PracticeType[];
+  ccgPractices: PracticeType[];
 };
 
-export const CcgPageContent: FC<CcgPageContentProps> = ({
-  ccgPractices,
-  validPractices,
-}) => {
-  const practiceSearch = new Search("OrgId", ["OrgId"], ccgPractices);
-  const filteredPractices = validPractices.filter(
-    (practice) => practiceSearch.search(practice.odsCode).length > 0
-  );
-
-  if (filteredPractices.length === 0)
-    return <p>{practiceTableContent.noResultsMessage}</p>;
-
+export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
   return (
     <>
       <p className="nhsuk-body">
@@ -48,7 +34,7 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({
       />
 
       <PracticeTableWithSort
-        filteredPractices={filteredPractices}
+        ccgPractices={ccgPractices}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}

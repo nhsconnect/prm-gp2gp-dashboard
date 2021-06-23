@@ -13,7 +13,7 @@ import practiceTableContent from "../../data/content/practiceTable.json";
 import "./index.scss";
 
 type TableWithSortProps = {
-  filteredPractices: PracticeType[];
+  ccgPractices: PracticeType[];
   headers: string[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
@@ -66,7 +66,7 @@ const sortPractices = (practices: any[], fieldName: string, order: string) => {
 };
 
 export const PracticeTableWithSort: FC<TableWithSortProps> = ({
-  filteredPractices,
+  ccgPractices,
   headers,
   sortBySelect,
   orderSelect,
@@ -74,10 +74,10 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
   const sortedPractices = useMemo(() => {
-    return sortPractices(filteredPractices, selectedField, selectedOrder);
-  }, [filteredPractices, selectedField, selectedOrder]);
+    return sortPractices(ccgPractices, selectedField, selectedOrder);
+  }, [ccgPractices, selectedField, selectedOrder]);
 
-  const { year, month } = filteredPractices[0].metrics[0];
+  const { year, month } = ccgPractices[0].metrics[0];
 
   const tableTitle = `Integration times for ${convertMonthNumberToText(
     month
