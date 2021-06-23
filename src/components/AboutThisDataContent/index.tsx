@@ -16,7 +16,7 @@ export const AboutThisDataContent = () => (
       are not included, even if they are integrated at a later date.
     </p>
     <p>
-      For example, a practice receives a record via PG2GP within the month of
+      For example, a practice receives a record via GP2GP within the month of
       May. They integrated this record on the 28th June, which is more than 14
       days after the end of the month. This integration will not be included in
       this data.
@@ -49,8 +49,8 @@ export const AboutThisDataContent = () => (
     </p>
     <h3>Within 8 days</h3>
     <p>
-      The percentage of the successful integrations that were integrated (filed
-      or suppressed) within 8 days of the practice receiving the record.
+      The percentage of the total integrations that were integrated (filed or
+      suppressed) within 8 days of the practice receiving the record.
     </p>
     <h3>Beyond 8 days</h3>
     <p>
