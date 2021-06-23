@@ -9,16 +9,20 @@ describe("CCG page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/ccg/10D");
-        cy.intercept("GET", odsUrl, organisations);
       });
 
       it("checks for accessibility", () => {
+        cy.visit("/ccg/10D");
+        cy.intercept("GET", odsUrl, organisations);
+
         cy.injectAxe();
         cy.checkAccessibility();
       });
 
       it("contains the title and description metadata relevant to the page", () => {
+        cy.visit("/ccg/10D");
+        cy.intercept("GET", odsUrl, organisations);
+
         cy.title().should(
           "eq",
           "Test CCG With GP Practices - 10D - GP Registrations Data"
@@ -31,6 +35,9 @@ describe("CCG page", () => {
       });
 
       it("displays the practice metrics of the associated practice", () => {
+        cy.visit("/ccg/10D");
+        cy.intercept("GET", odsUrl, organisations);
+
         cy.contains("h1", "Test CCG With GP Practices - 10D");
 
         cy.contains("Why integrate within 8 days").click();
@@ -56,6 +63,9 @@ describe("CCG page", () => {
       });
 
       it("sort practice performance table and link to the individual practices", () => {
+        cy.visit("/ccg/10D");
+        cy.intercept("GET", odsUrl, organisations);
+
         cy.contains("h1", "Test CCG With GP Practices - 10D");
 
         cy.contains("Practice name");
@@ -110,6 +120,9 @@ describe("CCG page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
+        cy.visit("/ccg/10D");
+        cy.intercept("GET", odsUrl, organisations);
+
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
@@ -131,11 +144,11 @@ describe("CCG page", () => {
       it("searches on homepage and navigates to the CCG page with no practices associated to that ccg", () => {
         const odsUrlNoCCG =
           "/ORD/2-0-0/organisations?RelTypeId=RE4&TargetOrgId=11D&RelStatus=active&Limit=1000";
+
+        cy.visit("/");
         cy.intercept("GET", odsUrlNoCCG, {
           Organisations: [],
         });
-
-        cy.visit("/");
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
