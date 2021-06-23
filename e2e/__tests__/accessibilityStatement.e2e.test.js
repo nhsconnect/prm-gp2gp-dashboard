@@ -5,11 +5,14 @@ describe("Accessibility statement page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/accessibility-statement");
+        cy.visit("/");
+        cy.injectAxe();
       });
 
-      it("checks for accessibility on accessibility statement page", () => {
-        cy.injectAxe();
+      it("displays accessibility statement page", () => {
+        cy.contains("a", "Accessibility statement").click();
+        cy.contains("h1", "Accessibility statement");
+        cy.contains("How accessible this website is");
         cy.checkAccessibility();
       });
 
@@ -27,22 +30,10 @@ describe("Accessibility statement page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
+        cy.visit("/accessibility-statement");
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
-      });
-
-      it("displays accessibility statement page upon navigation to page", () => {
-        cy.visit("/");
-        cy.contains("a", "Accessibility statement").click();
-        cy.contains("h1", "Accessibility statement");
-        cy.contains("How accessible this website is");
-      });
-
-      it("clicking on Accessibility statement link from homepage will navigate to accessibility page", () => {
-        cy.visit("/");
-        cy.contains("a", "Accessibility statement").click();
-        cy.contains("h1", "Accessibility statement");
       });
     });
   });

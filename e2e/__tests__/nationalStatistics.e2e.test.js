@@ -6,20 +6,7 @@ describe("National statistics page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/national-gp2gp-statistics");
-      });
-
-      it("contains the title and description metadata", () => {
-        cy.title().should("eq", "National Statistics - GP Registrations Data");
-        cy.get('meta[name="description"]').should(
-          "have.attr",
-          "content",
-          "National monthly data about GP2GP transfers"
-        );
-      });
-
-      it("checks for accessibility on national metrics page", () => {
         cy.injectAxe();
-        cy.checkAccessibility();
       });
 
       it("displays national metrics contents", () => {
@@ -69,6 +56,17 @@ describe("National statistics page", () => {
         cy.get(
           '[data-testid="national-statistics__paper-fallback-percent"]'
         ).contains("Percent: 33.33%");
+
+        cy.checkAccessibility();
+      });
+
+      it("contains the title and description metadata", () => {
+        cy.title().should("eq", "National Statistics - GP Registrations Data");
+        cy.get('meta[name="description"]').should(
+          "have.attr",
+          "content",
+          "National monthly data about GP2GP transfers"
+        );
       });
 
       it("displays the feedback section that links to feedback survey", () => {
