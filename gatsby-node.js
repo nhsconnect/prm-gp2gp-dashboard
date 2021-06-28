@@ -2,11 +2,11 @@ const path = require("path");
 const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
 const filterPracticesByOdsCodes = require("./src/library/utils/filterPracticesByOdsCodes/index.js");
 
+const practices = practiceMetrics.practices;
+const ccgs = practiceMetrics.ccgs;
+
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
-
-  const practices = practiceMetrics.practices;
-  const ccgs = practiceMetrics.ccgs;
 
   practices.forEach((practice) => {
     createPage({
@@ -38,11 +38,20 @@ exports.onCreatePage = ({ page, actions }) => {
 
   const layout = page.path === "/" ? "homepage" : "general";
 
+  const context =
+    page.path === "/ccgs/"
+      ? {
+          ...page.context,
+          layout,
+          ccgs,
+        }
+      : {
+          ...page.context,
+          layout,
+        };
+
   createPage({
     ...page,
-    context: {
-      ...page.context,
-      layout,
-    },
+    context,
   });
 };

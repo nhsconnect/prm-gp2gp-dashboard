@@ -1,7 +1,13 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
+import { CcgType } from "../templates/Ccg/ccg.types";
+import { CcgDirectory } from "../components/CcgDirectory";
 
-const Ccgs: FC = () => {
+type CcgsProps = {
+  pageContext: { ccgs: CcgType[] };
+};
+
+const Ccgs: FC<CcgsProps> = ({ pageContext: { ccgs } }) => {
   return (
     <>
       <Helmet>
@@ -10,6 +16,7 @@ const Ccgs: FC = () => {
       </Helmet>
       <div className="nhsuk-u-reading-width">
         <h1>CCG A to Z</h1>
+        <CcgDirectory ccgs={ccgs} />
       </div>
     </>
   );
