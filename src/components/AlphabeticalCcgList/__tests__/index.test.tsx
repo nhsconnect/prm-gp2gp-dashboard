@@ -4,9 +4,15 @@ import { render } from "@testing-library/react";
 import { AlphabeticalCcgList } from "../";
 
 describe("AlphabeticalCcgList component", () => {
-  const alphabetisedCcgs = { N: [{ odsCode: "14A", name: "NORTH CCG" }] };
+  const alphabetisedCcgs = {
+    N: [
+      { odsCode: "14A", name: "NINE CCG" },
+      { odsCode: "17A", name: "NO CCG" },
+      { odsCode: "6A", name: "NORTH CCG" },
+    ],
+  };
 
-  it("displays a single ccg under correct letter", () => {
+  it("displays ccgs under correct letter", () => {
     const { getByRole } = render(
       <AlphabeticalCcgList sortedCcgs={alphabetisedCcgs} />
     );
@@ -17,21 +23,23 @@ describe("AlphabeticalCcgList component", () => {
     });
 
     const ccgListBeginningWithN = alphabetLetterHeading.nextSibling;
-    const firstCcgInList = ccgListBeginningWithN?.firstChild;
+    const ccgsInList = ccgListBeginningWithN!.childNodes;
 
-    expect(firstCcgInList).toHaveTextContent("North CCG - 14A");
+    expect(ccgsInList![0]).toHaveTextContent("Nine CCG - 14A");
+    expect(ccgsInList![1]).toHaveTextContent("No CCG - 17A");
+    expect(ccgsInList![2]).toHaveTextContent("North CCG - 6A");
   });
 
-  it("navigates to a ccg page when a link is clicked", () => {
+  it("has a link to a CCG page", () => {
     const { getByRole } = render(
       <AlphabeticalCcgList sortedCcgs={alphabetisedCcgs} />
     );
 
     const ccgPageLink = getByRole("link", {
-      name: "North CCG - 14A",
+      name: "North CCG - 6A",
     });
 
-    expect(ccgPageLink.getAttribute("href")).toBe("/ccg/14A");
+    expect(ccgPageLink.getAttribute("href")).toBe("/ccg/6A");
   });
 
   it("has a back to top link for each letter", () => {

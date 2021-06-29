@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Link } from "gatsby";
 
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
+import ccgDirectoryContent from "../../data/content/ccgDirectory.json";
 
 type AlphabeticalCcgProps = {
   sortedCcgs: { [key: string]: { name: string; odsCode: string }[] };
@@ -25,7 +26,7 @@ export const AlphabeticalCcgList: FC<AlphabeticalCcgProps> = ({
                 </li>
               ))}
             </ul>
-            <Link to="#nhsuk-nav-a-z">Back to top</Link>
+            <Link to="#nhsuk-nav-a-z">{ccgDirectoryContent.linkText}</Link>
           </li>
         )
       )}
