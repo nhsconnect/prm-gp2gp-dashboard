@@ -5,7 +5,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import ccgDirectoryContent from "../../data/content/ccgDirectory.json";
 
 type AlphabeticalCcgProps = {
-  sortedCcgs: { [key: string]: { name: string; odsCode: string }[] };
+  sortedCcgs: Map<string, { name: string; odsCode: string }[]>;
 };
 
 export const AlphabeticalCcgList: FC<AlphabeticalCcgProps> = ({
@@ -13,7 +13,7 @@ export const AlphabeticalCcgList: FC<AlphabeticalCcgProps> = ({
 }) => {
   return (
     <ol>
-      {Object.entries(sortedCcgs).map(
+      {[...sortedCcgs.entries()].map(
         ([alphabetLetter, ccgsBeginningWithLetter]) => (
           <li key={alphabetLetter}>
             <h2 id={alphabetLetter}>{alphabetLetter}</h2>

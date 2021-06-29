@@ -4,7 +4,8 @@ import { render } from "@testing-library/react";
 import { AlphabeticalNav } from "../";
 
 describe("AlphabeticalNav component", () => {
-  const alphabetisedItems = { N: [{ odsCode: "14A", name: "NORTH CCG" }] };
+  const alphabetisedItems = new Map();
+  alphabetisedItems.set("N", [{ odsCode: "14A", name: "NORTH CCG" }]);
 
   it("displays all letters in the alphabet", () => {
     const { getAllByRole } = render(

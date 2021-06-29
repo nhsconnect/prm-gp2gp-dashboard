@@ -4,13 +4,12 @@ import { render } from "@testing-library/react";
 import { AlphabeticalCcgList } from "../";
 
 describe("AlphabeticalCcgList component", () => {
-  const alphabetisedCcgs = {
-    N: [
-      { odsCode: "14A", name: "NINE CCG" },
-      { odsCode: "17A", name: "NO CCG" },
-      { odsCode: "6A", name: "NORTH CCG" },
-    ],
-  };
+  const alphabetisedCcgs = new Map();
+  alphabetisedCcgs.set("N", [
+    { odsCode: "14A", name: "NINE CCG" },
+    { odsCode: "17A", name: "NO CCG" },
+    { odsCode: "6A", name: "NORTH CCG" },
+  ]);
 
   it("displays ccgs under correct letter", () => {
     const { getByRole } = render(
@@ -43,11 +42,10 @@ describe("AlphabeticalCcgList component", () => {
   });
 
   it("has a back to top link for each letter", () => {
-    const alphabetisedCcgs2 = {
-      E: [{ odsCode: "13A", name: "EAST CCG" }],
-      N: [{ odsCode: "14A", name: "NORTH CCG" }],
-      W: [{ odsCode: "8A", name: "WEST CCG" }],
-    };
+    const alphabetisedCcgs2 = new Map();
+    alphabetisedCcgs2.set("E", [{ odsCode: "13A", name: "EAST CCG" }]);
+    alphabetisedCcgs2.set("N", [{ odsCode: "14A", name: "NORTH CCG" }]);
+    alphabetisedCcgs2.set("W", [{ odsCode: "8A", name: "WEST CCG" }]);
 
     const { getAllByRole } = render(
       <AlphabeticalCcgList sortedCcgs={alphabetisedCcgs2} />

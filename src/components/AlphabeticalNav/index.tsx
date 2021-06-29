@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Link } from "gatsby";
 
 type AlphabeticalNavProps = {
-  sortedItems: { [key: string]: any[] };
+  sortedItems: Map<string, any[]>;
 };
 
 const generateListOfAlphabetLetters = (): string[] => {
@@ -18,7 +18,7 @@ export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
       <ol>
         {listOfAlphabetLetters.map((letter) => (
           <li key={letter}>
-            {sortedItems[letter] ? (
+            {sortedItems.get(letter) ? (
               <Link to={`#${letter}`}>{letter}</Link>
             ) : (
               letter

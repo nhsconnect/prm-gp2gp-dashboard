@@ -13,25 +13,27 @@ const getSortLetter = (organisationName: string): string => {
 
 export const sortOrganisationsAlphabetically = (
   organisationList: OrganisationType[]
-): { [key: string]: OrganisationType[] } => {
-  organisationList.sort((a, b) => a.name.localeCompare(b.name));
-
-  const alphabetisedOrganisations: { [key: string]: OrganisationType[] } = {};
+): Map<string, OrganisationType[]> => {
+  const alphabetisedOrganisations: Map<string, OrganisationType[]> = new Map();
 
   organisationList.forEach((organisation) => {
     const sortLetter = getSortLetter(organisation.name);
 
     const formattedOrganisation = {
-      name: organisation.name,
       odsCode: organisation.odsCode,
+      name: organisation.name,
     };
 
-    if (alphabetisedOrganisations[sortLetter]) {
-      alphabetisedOrganisations[sortLetter].push(formattedOrganisation);
-    } else {
-      alphabetisedOrganisations[sortLetter] = [formattedOrganisation];
-    }
+    const orgsBeginningWithLetter =
+      alphabetisedOrganisations.get(sortLetter) || [];
+
+    const updatedOrgsBeginningWithLetter = [
+      ...orgsBeginningWithLetter,
+      formattedOrganisation,
+    ].sort((a, b) => a.name.localeCompare(b.name));
+
+    alphabetisedOrganisations.set(sortLetter, updatedOrgsBeginningWithLetter);
   });
 
-  return alphabetisedOrganisations;
+  return new Map([...alphabetisedOrganisations].sort());
 };

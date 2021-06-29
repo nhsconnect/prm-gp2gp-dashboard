@@ -5,7 +5,9 @@ describe("sortOrganisationsAlphabetically", () => {
     const orgList = [{ odsCode: "12A", name: "NEW CCG", practices: ["A123"] }];
 
     const actual = sortOrganisationsAlphabetically(orgList);
-    const expected = { N: [{ odsCode: "12A", name: "NEW CCG" }] };
+
+    const expected = new Map();
+    expected.set("N", [{ odsCode: "12A", name: "NEW CCG" }]);
 
     expect(actual).toEqual(expected);
   });
@@ -17,12 +19,12 @@ describe("sortOrganisationsAlphabetically", () => {
     ];
 
     const actual = sortOrganisationsAlphabetically(orgList);
-    const expected = {
-      N: [
-        { odsCode: "12A", name: "NEW CCG" },
-        { odsCode: "14A", name: "NORTH CCG" },
-      ],
-    };
+
+    const expected = new Map();
+    expected.set("N", [
+      { odsCode: "12A", name: "NEW CCG" },
+      { odsCode: "14A", name: "NORTH CCG" },
+    ]);
 
     expect(actual).toEqual(expected);
   });
@@ -34,10 +36,10 @@ describe("sortOrganisationsAlphabetically", () => {
     ];
 
     const actual = sortOrganisationsAlphabetically(orgList);
-    const expected = {
-      E: [{ odsCode: "12A", name: "EAST CCG" }],
-      N: [{ odsCode: "14A", name: "NORTH CCG" }],
-    };
+
+    const expected = new Map();
+    expected.set("E", [{ odsCode: "12A", name: "EAST CCG" }]);
+    expected.set("N", [{ odsCode: "14A", name: "NORTH CCG" }]);
 
     expect(actual).toEqual(expected);
   });
@@ -48,7 +50,9 @@ describe("sortOrganisationsAlphabetically", () => {
     ];
 
     const actual = sortOrganisationsAlphabetically(orgList);
-    const expected = { E: [{ odsCode: "12A", name: "NHS EAST CCG" }] };
+
+    const expected = new Map();
+    expected.set("E", [{ odsCode: "12A", name: "NHS EAST CCG" }]);
 
     expect(actual).toEqual(expected);
   });
@@ -63,16 +67,17 @@ describe("sortOrganisationsAlphabetically", () => {
     ];
 
     const actual = sortOrganisationsAlphabetically(orgList);
-    const expected = {
-      E: [{ odsCode: "12A", name: "NHS EAST CCG" }],
-      N: [{ odsCode: "18A", name: "NORTH CCG" }],
-      S: [{ odsCode: "15A", name: "SOUTH CCG" }],
-      W: [
-        { odsCode: "3A", name: "NHS WEST CCG" },
-        { odsCode: "1A", name: "WING CCG" },
-      ],
-    };
+
+    const expected = new Map();
+    expected.set("E", [{ odsCode: "12A", name: "NHS EAST CCG" }]);
+    expected.set("N", [{ odsCode: "18A", name: "NORTH CCG" }]);
+    expected.set("S", [{ odsCode: "15A", name: "SOUTH CCG" }]);
+    expected.set("W", [
+      { odsCode: "3A", name: "NHS WEST CCG" },
+      { odsCode: "1A", name: "WING CCG" },
+    ]);
 
     expect(actual).toEqual(expected);
+    expect([...actual.keys()]).toEqual(["E", "N", "S", "W"]);
   });
 });
