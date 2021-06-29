@@ -15,7 +15,7 @@ export const AlphabeticalCcgList: FC<AlphabeticalCcgProps> = ({
       {Object.entries(sortedCcgs).map(
         ([alphabetLetter, ccgsBeginningWithLetter]) => (
           <li key={alphabetLetter}>
-            <h2>{alphabetLetter}</h2>
+            <h2 id={alphabetLetter}>{alphabetLetter}</h2>
             <ul>
               {ccgsBeginningWithLetter.map((ccg) => (
                 <li key={ccg.odsCode}>
@@ -25,6 +25,7 @@ export const AlphabeticalCcgList: FC<AlphabeticalCcgProps> = ({
                 </li>
               ))}
             </ul>
+            <Link to="#nhsuk-nav-a-z">Back to top</Link>
           </li>
         )
       )}

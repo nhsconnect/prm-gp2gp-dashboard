@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { CcgType } from "../../templates/Ccg/ccg.types";
 import { sortOrganisationsAlphabetically } from "../../library/utils/sortOrganisationsAlphabetically";
 import { AlphabeticalCcgList } from "../AlphabeticalCcgList";
+import { AlphabeticalNav } from "../AlphabeticalNav";
 
 type CcgDirectoryProps = {
   ccgs: CcgType[];
@@ -10,5 +11,11 @@ type CcgDirectoryProps = {
 
 export const CcgDirectory: FC<CcgDirectoryProps> = ({ ccgs }) => {
   const sortedCcgs = sortOrganisationsAlphabetically(ccgs);
-  return <AlphabeticalCcgList sortedCcgs={sortedCcgs} />;
+
+  return (
+    <>
+      <AlphabeticalNav sortedItems={sortedCcgs} />
+      <AlphabeticalCcgList sortedCcgs={sortedCcgs} />
+    </>
+  );
 };
