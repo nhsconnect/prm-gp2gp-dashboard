@@ -29,7 +29,7 @@ describe("CcgDirectory component", () => {
     expect(navigation).toBeInTheDocument();
   });
 
-  it("displays the alphabetical CCG list", () => {
+  it("displays the nav letters and alphabetical CCG list in the correct order", () => {
     const { getAllByRole } = render(<CcgDirectory ccgs={ccgList} />);
     const allLinks = getAllByRole("link");
     expect(allLinks[0]).toHaveTextContent("S");
