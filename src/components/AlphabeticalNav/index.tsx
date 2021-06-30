@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
+import "./index.scss";
+
 type AlphabeticalNavProps = {
   sortedItems: Map<string, any[]>;
 };
@@ -14,17 +16,24 @@ const listOfAlphabetLetters = generateListOfAlphabetLetters();
 
 export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
   return (
-    <nav id="nhsuk-nav-a-z">
-      <ol>
-        {listOfAlphabetLetters.map((letter) => (
-          <li key={letter}>
-            {sortedItems.get(letter) ? (
-              <Link to={`#${letter}`}>{letter}</Link>
-            ) : (
-              letter
-            )}
-          </li>
-        ))}
+    <nav id="nhsuk-nav-a-z" className="nhsuk-nav-a-z">
+      <ol className="nhsuk-nav-a-z__list">
+        {listOfAlphabetLetters.map((letter) =>
+          sortedItems.get(letter) ? (
+            <li className="nhsuk-nav-a-z__item" key={letter}>
+              <Link to={`#${letter}`} className="nhsuk-nav-a-z__link">
+                {letter}
+              </Link>{" "}
+            </li>
+          ) : (
+            <li
+              className="nhsuk-nav-a-z__item nhsuk-nav-a-z__no-link"
+              key={letter}
+            >
+              {letter}
+            </li>
+          )
+        )}
       </ol>
     </nav>
   );

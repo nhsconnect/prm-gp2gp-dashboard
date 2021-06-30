@@ -1,0 +1,17 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+@import "node_modules/nhsuk-frontend/packages/components/nav-a-z/nav-a-z";
+
+.nhsuk-nav-a-z__no-link {
+  @include nhsuk-typography-responsive(22);
+
+  display: block;
+  min-width: 34px;
+  padding-bottom: nhsuk-spacing(2);
+  padding-top: nhsuk-spacing(2);
+  text-align: center;
+
+  @include mq($until: tablet) {
+    min-width: 36px;
+  }
+}

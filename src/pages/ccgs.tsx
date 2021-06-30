@@ -14,9 +14,7 @@ const Ccgs: FC<CcgsProps> = ({ pageContext: { ccgs } }) => {
         <title>CCG A to Z</title>
         <meta name="description" content="" />
       </Helmet>
-      <div className="nhsuk-u-reading-width">
-        <CcgDirectory ccgs={ccgs} />
-      </div>
+      <CcgDirectory ccgs={ccgs} />
     </>
   );
 };
