@@ -17,8 +17,8 @@ jest.mock(
 );
 
 describe("CcgDirectory component", () => {
-  it("displays the relevant heading for the page", () => {
-    const { getByRole } = render(<CcgDirectory />);
+  it("displays the relevant heading with correct priority for the page", () => {
+    const { getByRole } = render(<CcgDirectory headingPriority={1} />);
 
     const heading = getByRole("heading", {
       name: "CCG A to Z",
@@ -29,7 +29,7 @@ describe("CcgDirectory component", () => {
   });
 
   it("displays the navigation component for the page", () => {
-    const { getByRole } = render(<CcgDirectory />);
+    const { getByRole } = render(<CcgDirectory headingPriority={1} />);
 
     const navigation = getByRole("navigation");
 
@@ -37,7 +37,7 @@ describe("CcgDirectory component", () => {
   });
 
   it("displays the nav letters and alphabetical CCG list in the correct order", () => {
-    const { getAllByRole } = render(<CcgDirectory />);
+    const { getAllByRole } = render(<CcgDirectory headingPriority={1} />);
     const allLinks = getAllByRole("link");
     expect(allLinks[0]).toHaveTextContent("S");
     expect(allLinks[1]).toHaveTextContent("W");

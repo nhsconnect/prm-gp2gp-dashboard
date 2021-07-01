@@ -12,7 +12,7 @@ const Ccgs: FC = () => {
           content="Alphabetical list of all CCGs in England"
         />
       </Helmet>
-      <CcgDirectory />
+      <CcgDirectory headingPriority={1} />
     </>
   );
 };
