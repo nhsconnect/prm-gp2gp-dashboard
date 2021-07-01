@@ -1,13 +1,8 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { CcgType } from "../templates/Ccg/ccg.types";
 import { CcgDirectory } from "../components/CcgDirectory";
 
-type CcgsProps = {
-  pageContext: { ccgs: CcgType[] };
-};
-
-const Ccgs: FC<CcgsProps> = ({ pageContext: { ccgs } }) => {
+const Ccgs: FC = () => {
   return (
     <>
       <Helmet>
@@ -17,7 +12,7 @@ const Ccgs: FC<CcgsProps> = ({ pageContext: { ccgs } }) => {
           content="Alphabetical list of all CCGs in England"
         />
       </Helmet>
-      <CcgDirectory ccgs={ccgs} />
+      <CcgDirectory />
     </>
   );
 };

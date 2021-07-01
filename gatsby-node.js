@@ -38,20 +38,11 @@ exports.onCreatePage = ({ page, actions }) => {
 
   const layout = page.path === "/" ? "homepage" : "general";
 
-  const context =
-    page.path === "/ccgs/"
-      ? {
-          ...page.context,
-          layout,
-          ccgs,
-        }
-      : {
-          ...page.context,
-          layout,
-        };
-
   createPage({
     ...page,
-    context,
+    context: {
+      ...page.context,
+      layout,
+    },
   });
 };
