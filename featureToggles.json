@@ -1,8 +1,10 @@
 {
   "dev": {
-    "showPublicBetaText": true
+    "showPublicBetaText": true,
+    "showCcgAtoZLink": true
   },
   "prod": {
-    "showPublicBetaText": false
+    "showPublicBetaText": false,
+    "showCcgAtoZLink": false
   }
 }
