@@ -16,7 +16,11 @@ const listOfAlphabetLetters = generateListOfAlphabetLetters();
 
 export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
   return (
-    <nav id="nhsuk-nav-a-z" className="nhsuk-nav-a-z">
+    <nav
+      id="nhsuk-nav-a-z"
+      className="nhsuk-nav-a-z"
+      aria-label="A to Z Navigation"
+    >
       <ol className="nhsuk-nav-a-z__list">
         {listOfAlphabetLetters.map((letter) =>
           sortedItems.get(letter) ? (
