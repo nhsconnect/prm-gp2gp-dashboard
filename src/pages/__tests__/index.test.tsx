@@ -28,6 +28,7 @@ describe("Homepage", () => {
     when(mocked(useJavascriptEnabled))
       .calledWith()
       .mockReturnValue({ hasJavascriptEnabled: true });
+
     const { getByRole, queryByRole } = render(<Index />);
 
     const organisationSearchHeading = getByRole("heading", {
@@ -41,5 +42,26 @@ describe("Homepage", () => {
     });
     expect(organisationSearchHeading).toBeInTheDocument();
     expect(ccgListHeading).not.toBeInTheDocument();
+  });
+
+  it("displays CCG A to Z list when javascript is disabled", () => {
+    when(mocked(useJavascriptEnabled))
+      .calledWith()
+      .mockReturnValue({ hasJavascriptEnabled: false });
+
+    const { getByRole, queryByRole } = render(<Index />);
+
+    const ccgListHeading = getByRole("heading", {
+      name: "CCG A to Z",
+      level: 2,
+    });
+
+    const organisationSearchHeading = queryByRole("heading", {
+      name: "Search",
+      level: 2,
+    });
+
+    expect(ccgListHeading).toBeInTheDocument();
+    expect(organisationSearchHeading).not.toBeInTheDocument();
   });
 });

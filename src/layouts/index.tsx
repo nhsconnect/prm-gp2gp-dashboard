@@ -20,6 +20,7 @@ import {
 import homepageContent from "../data/content/homepage.json";
 import "./index.scss";
 import { SkipLink } from "../components/SkipLink";
+import { useJavascriptEnabled } from "../library/hooks/useJavascriptEnabled";
 
 const trackingId =
   getEnv() === "dev" ? analytics.trackingId.dev : analytics.trackingId.prod;
@@ -78,9 +79,15 @@ const BackToLink = ({ text, link }: { text: string; link: string }) => (
 );
 
 const GeneralContent: FC<ContentProps> = ({ children }) => {
+  const { hasJavascriptEnabled } = useJavascriptEnabled();
+
   return (
     <div className="nhsuk-width-container">
-      <BackToLink link="/" text="Back to search" />
+      {hasJavascriptEnabled ? (
+        <BackToLink link="/" text="Back to search" />
+      ) : (
+        <BackToLink link="/" text="Back to home" />
+      )}
       <main
         className="nhsuk-main-wrapper nhsuk-u-padding-top-2"
         id="maincontent"
