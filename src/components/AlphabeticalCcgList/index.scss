@@ -1,3 +1,12 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 @import "node_modules/nhsuk-frontend/packages/components/list-panel/list-panel";
+
+.gp2gp-list-panel__link {
+  @extend .nhsuk-list-panel__link;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
