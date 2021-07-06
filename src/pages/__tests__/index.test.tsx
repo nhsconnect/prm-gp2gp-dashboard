@@ -1,12 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { mocked } from "ts-jest/utils";
-import { when } from "jest-when";
-
-import { useJavascriptEnabled } from "../../library/hooks/useJavascriptEnabled";
 import Index from "../index";
-
-jest.mock("../../library/hooks/useJavascriptEnabled");
 
 jest.mock(
   "../../data/organisations/practiceMetrics.json",
@@ -24,44 +18,14 @@ jest.mock(
 );
 
 describe("Homepage", () => {
-  it("displays organisational search when javascript is enabled", () => {
-    when(mocked(useJavascriptEnabled))
-      .calledWith()
-      .mockReturnValue({ hasJavascriptEnabled: true });
-
-    const { getByRole, queryByRole } = render(<Index />);
+  it("displays organisational search", () => {
+    const { getByRole } = render(<Index />);
 
     const organisationSearchHeading = getByRole("heading", {
       name: "Search",
       level: 2,
     });
 
-    const ccgListHeading = queryByRole("heading", {
-      name: "CCG A to Z",
-      level: 2,
-    });
     expect(organisationSearchHeading).toBeInTheDocument();
-    expect(ccgListHeading).not.toBeInTheDocument();
-  });
-
-  it("displays CCG A to Z list when javascript is disabled", () => {
-    when(mocked(useJavascriptEnabled))
-      .calledWith()
-      .mockReturnValue({ hasJavascriptEnabled: false });
-
-    const { getByRole, queryByRole } = render(<Index />);
-
-    const ccgListHeading = getByRole("heading", {
-      name: "CCG A to Z",
-      level: 2,
-    });
-
-    const organisationSearchHeading = queryByRole("heading", {
-      name: "Search",
-      level: 2,
-    });
-
-    expect(ccgListHeading).toBeInTheDocument();
-    expect(organisationSearchHeading).not.toBeInTheDocument();
   });
 });

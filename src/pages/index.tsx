@@ -2,12 +2,9 @@ import React, { FC } from "react";
 import { OrganisationSearch } from "../components/OrganisationSearch";
 import { Helmet } from "react-helmet";
 import homepageContent from "../data/content/homepage.json";
-import { useJavascriptEnabled } from "../library/hooks/useJavascriptEnabled";
 import { CcgDirectory } from "../components/CcgDirectory";
 
 const Index: FC = () => {
-  const { hasJavascriptEnabled } = useJavascriptEnabled();
-
   return (
     <>
       <Helmet>
@@ -19,11 +16,10 @@ const Index: FC = () => {
       </Helmet>
       <h2>{homepageContent.descriptionTitle}</h2>
       <p>{homepageContent.description}</p>
-      {hasJavascriptEnabled ? (
-        <OrganisationSearch />
-      ) : (
+      <noscript>
         <CcgDirectory headingPriority={2} />
-      )}
+      </noscript>
+      <OrganisationSearch />
     </>
   );
 };

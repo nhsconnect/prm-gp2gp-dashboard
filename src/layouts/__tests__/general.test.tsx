@@ -1,19 +1,8 @@
 import React from "react";
 import { render, waitFor } from "@testing-library/react";
-import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 import Layout from "../";
-import { useJavascriptEnabled } from "../../library/hooks/useJavascriptEnabled";
-
-jest.mock("../../library/hooks/useJavascriptEnabled");
 
 describe("General layout", () => {
-  beforeEach(() => {
-    when(mocked(useJavascriptEnabled))
-      .calledWith()
-      .mockReturnValue({ hasJavascriptEnabled: true });
-  });
-
   it("displays header and footer", async () => {
     const { getByRole } = render(
       <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
@@ -107,7 +96,7 @@ describe("General layout", () => {
     });
   });
 
-  it("displays back to search link when Javascript is enabled", async () => {
+  it("displays back to search link", async () => {
     const { getAllByRole } = render(
       <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
         <p>This is a paragraph.</p>
@@ -117,27 +106,6 @@ describe("General layout", () => {
     await waitFor(() => {
       const backToSearchLink = getAllByRole("link", {
         name: "Back to search",
-      })[0];
-
-      expect(backToSearchLink).toBeInTheDocument();
-      expect(backToSearchLink.getAttribute("href")).toBe("/");
-    });
-  });
-
-  it("displays back to home link when Javascript is disabled", async () => {
-    when(mocked(useJavascriptEnabled))
-      .calledWith()
-      .mockReturnValue({ hasJavascriptEnabled: false });
-
-    const { getAllByRole } = render(
-      <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
-        <p>This is a paragraph.</p>
-      </Layout>
-    );
-
-    await waitFor(() => {
-      const backToSearchLink = getAllByRole("link", {
-        name: "Back to home",
       })[0];
 
       expect(backToSearchLink).toBeInTheDocument();
