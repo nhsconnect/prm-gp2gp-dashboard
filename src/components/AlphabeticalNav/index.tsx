@@ -25,7 +25,11 @@ export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
         {listOfAlphabetLetters.map((letter) =>
           sortedItems.get(letter) ? (
             <li className="nhsuk-nav-a-z__item" key={letter}>
-              <Link to={`#${letter}`} className="nhsuk-nav-a-z__link">
+              <Link
+                to={`#${letter}`}
+                className="nhsuk-nav-a-z__link"
+                onClick={(e) => e.currentTarget.blur()}
+              >
                 {letter}
               </Link>{" "}
             </li>
