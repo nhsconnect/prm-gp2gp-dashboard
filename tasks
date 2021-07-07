@@ -58,6 +58,12 @@ function setup_env {
     export GATSBY_ENV="$1"
     export DEPLOYMENT_ENV="$1"
     export DEPLOYMENT_BUCKET=$(get_bucket)
+
+    if [ "${deployment_env}" == "dev" ]; then
+      export DATA_BUCKET_ENV="dev"
+    elif [ "${deployment_env}" == "prod" ]; then
+      export DATA_BUCKET_ENV="preprod"
+    fi
 }
 
 case "${task}" in
@@ -98,6 +104,7 @@ case "${task}" in
       npm run getNationalMetrics:ci
       ;;
   dojo-get-metrics)
+      assume_role
       dojo "./tasks get-metrics ${deployment_env}"
       ;;
   deploy)

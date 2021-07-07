@@ -1,5 +1,5 @@
 module.exports = {
-  bucket: `prm-gp2gp-dashboard-data-${process.env.DEPLOYMENT_ENV}`,
+  bucket: `prm-gp2gp-metrics-${process.env.DATA_BUCKET_ENV}`,
   outputPath: "src/data/organisations/",
   practiceMetrics: {
     key: "v3/2021/5/practiceMetrics.json",
