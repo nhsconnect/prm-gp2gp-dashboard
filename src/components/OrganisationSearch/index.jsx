@@ -85,12 +85,6 @@ export const OrganisationSearch = () => {
 
   return (
     <div className="gp2gp-practice-search">
-      <noscript>
-        <p className="gp2gp-no-js">
-          Search functionality does not work when JavaScript is disabled. Please
-          use A-Z list of CCGs above.
-        </p>
-      </noscript>
       <h2 className="nhsuk-u-margin-bottom-0">
         {organisationSearchContent.heading}
       </h2>

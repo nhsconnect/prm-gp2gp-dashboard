@@ -13,6 +13,9 @@ const Index: FC = () => {
           name="description"
           content="Search for monthly data about GP2GP transfers for practices in England"
         />
+        <noscript>
+          {`<style>.gp2gp-practice-search {display: none}</style>`}
+        </noscript>
       </Helmet>
       <h2>{homepageContent.descriptionTitle}</h2>
       <p>{homepageContent.description}</p>
