@@ -1,9 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { useFeatureToggles } from "../library/hooks/useFeatureToggle";
 
 const AccessibilityStatement: FC = () => {
-  const { showCcgAtoZLink } = useFeatureToggles();
   return (
     <>
       <Helmet>
@@ -66,10 +64,8 @@ const AccessibilityStatement: FC = () => {
         </ul>
         <p>
           The ability to search for a practice or a CCG does not work without
-          JavaScript
-          {showCcgAtoZLink &&
-            ", however an A-Z list of CCGs is available to browse"}
-          . Sorting functionality on the CCG page will not work without
+          JavaScript, however an A-Z list of CCGs is available to browse.
+          Sorting functionality on the CCG page will not work without
           JavaScript.
         </p>
         <p>
