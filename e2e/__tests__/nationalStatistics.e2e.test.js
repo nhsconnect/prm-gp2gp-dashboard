@@ -14,7 +14,7 @@ describe("National statistics page", () => {
 
         cy.contains("h3", "Transfers started");
         cy.get('[data-testid="national-statistics__initiated-count"]').contains(
-          "Count: 6"
+          "Count: 7"
         );
 
         cy.contains("h3", "Successful integrations");
@@ -23,7 +23,7 @@ describe("National statistics page", () => {
         ).contains("Count: 5");
         cy.get(
           '[data-testid="national-statistics__integrated-percent"]'
-        ).contains("Percent: 83.33%");
+        ).contains("Percent: 71.43%");
 
         cy.contains("h3", "Integration times");
         cy.contains("Within 3 days");
@@ -38,24 +38,24 @@ describe("National statistics page", () => {
           "Count: 1"
         );
         cy.get('[data-testid="national-statistics__failed-percent"]').contains(
-          "Percent: 16.67%"
+          "Percent: 14.29%"
         );
 
         cy.contains("h3", "Pending transfers");
         cy.get('[data-testid="national-statistics__pending-count"]').contains(
-          "Count: 0"
+          "Count: 1"
         );
         cy.get('[data-testid="national-statistics__pending-percent"]').contains(
-          "Percent: 0%"
+          "Percent: 14.29%"
         );
 
         cy.contains("h3", "Paper fallback transfers");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-count"]'
-        ).contains("Count: 2");
+        ).contains("Count: 3");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-percent"]'
-        ).contains("Percent: 33.33%");
+        ).contains("Percent: 42.86%");
 
         cy.checkAccessibility();
       });
