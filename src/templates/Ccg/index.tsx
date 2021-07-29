@@ -29,6 +29,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
           name="description"
           content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
         />
+        <noscript>{`<style>.gp2gp-sort {display: none}</style>`}</noscript>
       </Helmet>
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       <CcgPageContent ccgPractices={ccgPractices} />

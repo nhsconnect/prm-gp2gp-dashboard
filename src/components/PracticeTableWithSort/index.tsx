@@ -111,23 +111,25 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   return (
     <section className="gp2gp-table-with-sort">
       <h2>{tableTitle}</h2>
-      <Select
-        label="Sort by"
-        hiddenLabel={practiceTableContent.selectHiddenLabel}
-        options={sortBySelect.options}
-        id="sortBySelect"
-        defaultValue={sortBySelect.defaultValue}
-        handleValueChange={handleSortByValueChange}
-        className="nhsuk-u-margin-right-6"
-      />
-      <Select
-        label="Order"
-        hiddenLabel={practiceTableContent.selectHiddenLabel}
-        options={orderSelect.options}
-        id="orderSelect"
-        defaultValue={orderSelect.defaultValue}
-        handleValueChange={handleOrderValueChange}
-      />
+      <div className="gp2gp-sort">
+        <Select
+          label="Sort by"
+          hiddenLabel={practiceTableContent.selectHiddenLabel}
+          options={sortBySelect.options}
+          id="sortBySelect"
+          defaultValue={sortBySelect.defaultValue}
+          handleValueChange={handleSortByValueChange}
+          className="nhsuk-u-margin-right-6"
+        />
+        <Select
+          label="Order"
+          hiddenLabel={practiceTableContent.selectHiddenLabel}
+          options={orderSelect.options}
+          id="orderSelect"
+          defaultValue={orderSelect.defaultValue}
+          handleValueChange={handleOrderValueChange}
+        />
+      </div>
       <Table
         className="gp2gp-ccg-table"
         caption={{ text: `${tableTitle} data`, hidden: true }}
