@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "./index.scss";
 
 export const FeedbackBanner: FC = () => (
-  <aside className="nhsuk-inset-text">
+  <aside className="gp2gp-inset-text">
     <h3>Get in touch</h3>
     <p>
       We are always looking to improve our site.{" "}

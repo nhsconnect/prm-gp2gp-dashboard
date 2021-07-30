@@ -11,10 +11,8 @@ const NotFound: FC = () => {
           content="The page you are looking for on GP Registrations Data cannot be found."
         />
       </Helmet>
-      <div className="nhsuk-u-reading-width">
-        <h1>Page not found.</h1>
-        <p>If you entered a web address please check it was correct.</p>
-      </div>
+      <h1>Page not found.</h1>
+      <p>If you entered a web address please check it was correct.</p>
     </>
   );
 };
