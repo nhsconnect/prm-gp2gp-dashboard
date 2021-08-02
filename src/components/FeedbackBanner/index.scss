@@ -1,8 +1,3 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 @import "node_modules/nhsuk-frontend/packages/components/inset-text/inset-text";
-
-.gp2gp-inset-text {
-  @extend .nhsuk-inset-text;
-  max-width: none;
-}

@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { FC } from "react";
+import "./index.scss";
 
 type ExpanderProps = {
   title: string;
@@ -12,7 +13,7 @@ export const Expander: FC<ExpanderProps> = ({ title, content }) => {
       <summary className="nhsuk-details__summary">
         <span className="nhsuk-details__summary-text">{title}</span>
       </summary>
-      <div className="nhsuk-details__text">{content}</div>
+      <div className="gp2gp-details__text">{content}</div>
     </details>
   );
 };

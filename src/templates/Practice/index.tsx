@@ -76,12 +76,13 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       )}
       <hr />
 
-      <p className="nhsuk-body">
-        The table below shows the time to integrate for records received by the
-        practice. More information{" "}
-        <a href={"#about-this-data"}>about this data</a>.
-      </p>
-
+      <div className="nhsuk-u-reading-width">
+        <p className="nhsuk-body">
+          The table below shows the time to integrate for records received by
+          the practice. More information{" "}
+          <a href={"#about-this-data"}>about this data</a>.
+        </p>
+      </div>
       <Expander
         title={eightDayExpanderContent.title}
         content={

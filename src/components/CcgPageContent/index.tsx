@@ -18,10 +18,12 @@ type CcgPageContentProps = {
 export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
   return (
     <>
-      <p className="nhsuk-body">
-        {ccgContent.tableDescription} More information{" "}
-        <a href="#about-this-data">about this data</a>.
-      </p>
+      <div className="nhsuk-u-reading-width">
+        <p className="nhsuk-body">
+          {ccgContent.tableDescription} More information{" "}
+          <a href="#about-this-data">about this data</a>.
+        </p>
+      </div>
 
       <Expander
         title={eightDayExpanderContent.title}

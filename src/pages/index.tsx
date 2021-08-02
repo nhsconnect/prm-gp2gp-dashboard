@@ -17,8 +17,10 @@ const Index: FC = () => {
           {`<style>.gp2gp-practice-search {display: none}</style>`}
         </noscript>
       </Helmet>
-      <h2>{homepageContent.descriptionTitle}</h2>
-      <p>{homepageContent.description}</p>
+      <div className="nhsuk-u-reading-width">
+        <h2>{homepageContent.descriptionTitle}</h2>
+        <p>{homepageContent.description}</p>
+      </div>
       <noscript>
         <CcgDirectory headingPriority={2} />
       </noscript>

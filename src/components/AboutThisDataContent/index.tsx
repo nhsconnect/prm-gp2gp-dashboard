@@ -2,7 +2,7 @@ import React from "react";
 import "./index.scss";
 
 export const AboutThisDataContent = () => (
-  <>
+  <div className="nhsuk-u-reading-width">
     <h2 id="about-this-data" className="nhsuk-u-margin-top-6">
       About this data
     </h2>
@@ -61,5 +61,5 @@ export const AboutThisDataContent = () => (
       When records are not integrated within 8 days, GP2GP requests that a full
       paper copy is printed and sent to the practice.
     </p>
-  </>
+  </div>
 );
