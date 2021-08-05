@@ -182,7 +182,7 @@ describe("PracticeTableWithSort component", () => {
     it.each(cases)(
       "displays practices ordered by %p field and %p order when selected",
       (columnHeader, fieldName, order, expectedSortOrder) => {
-        const { getAllByRole, getByRole } = render(
+        const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
             ccgPractices={practiceMetricsMock}
             headers={practiceTableContent.headers}
@@ -206,11 +206,16 @@ describe("PracticeTableWithSort component", () => {
         expect(sortBySelect).toHaveValue(fieldName);
         expect(orderSelect).toHaveValue(order);
 
-        (expectedSortOrder as string[]).forEach((cell) => {
-          const sortedCell = getAllByRole("cell", {
+        (expectedSortOrder as string[]).forEach((cell, index) => {
+          const sortedCell = queryAllByRole("cell", {
             name: cell,
           });
-          expect(sortedCell[0]).toHaveClass("sorted");
+
+          const sortedRowheader = queryAllByRole("rowheader");
+
+          const expectedSortedCell = sortedCell[0] || sortedRowheader[index];
+
+          expect(expectedSortedCell).toHaveClass("sorted");
         });
 
         const sortedColumnHeader = getByRole("columnheader", {

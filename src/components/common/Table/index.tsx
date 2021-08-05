@@ -40,6 +40,7 @@ export const Table: FC<TableProps> = ({
         {headers?.map((header, columnIndex) => (
           <th
             scope="col"
+            role="columnheader"
             key={header}
             className={`nhsuk-table__col nhsuk-table__col-${columnIndex}`}
             aria-sort={
@@ -58,23 +59,35 @@ export const Table: FC<TableProps> = ({
     <tbody className="nhsuk-table__body">
       {rows?.map((row, rowIndex) => (
         <tr role="row" className="nhsuk-table__row" key={`row-${rowIndex}`}>
-          {row?.map((cell, cellIndex) => (
-            <td
-              data-testid={`table__cell--row-${rowIndex}-col-${cellIndex}`}
-              key={`cell-${rowIndex}-${cellIndex}`}
-              role="cell"
-              className={
+          {row?.map((cell, cellIndex) => {
+            const cellData = (
+              <>
+                {" "}
+                <span className="nhsuk-table-responsive__heading">
+                  {headers[cellIndex]}
+                </span>
+                {cell}
+              </>
+            );
+            const cellProps = {
+              "data-testid": `table__cell--row-${rowIndex}-col-${cellIndex}`,
+              key: `cell-${rowIndex}-${cellIndex}`,
+              className:
                 cellIndex === sortedColumnIndex
                   ? "nhsuk-table__cell sorted"
-                  : "nhsuk-table__cell"
-              }
-            >
-              <span className="nhsuk-table-responsive__heading">
-                {headers[cellIndex]}
-              </span>
-              {cell}
-            </td>
-          ))}
+                  : "nhsuk-table__cell",
+            };
+            // For accessibility the first cell in a row is a header for the screen reader
+            return cellIndex === 0 ? (
+              <th {...cellProps} scope="row" role="rowheader">
+                {cellData}
+              </th>
+            ) : (
+              <td {...cellProps} role="cell">
+                {cellData}
+              </td>
+            );
+          })}
         </tr>
       ))}
     </tbody>

@@ -22,6 +22,27 @@ describe("Table component", () => {
     expect(allHeaders.length).toBe(3);
   });
 
+  it("displays table body rows correctly", () => {
+    const { getAllByRole } = render(<Table headers={headers} rows={rows} />);
+
+    const allRowHeaders = getAllByRole("rowheader");
+    const allNonHeaderCells = getAllByRole("cell");
+
+    expect(allRowHeaders[0]).toHaveTextContent("banana");
+    expect(allRowHeaders[1]).toHaveTextContent("mango");
+    expect(allRowHeaders[2]).toHaveTextContent("melon");
+    expect(allRowHeaders.length).toBe(3);
+
+    expect(allNonHeaderCells[0]).toHaveTextContent("yellow");
+    expect(allNonHeaderCells[1]).toHaveTextContent("2");
+    expect(allNonHeaderCells[2]).toHaveTextContent("orange");
+    expect(allNonHeaderCells[3]).toHaveTextContent("3");
+    expect(allNonHeaderCells[4]).toHaveTextContent("yellow");
+    expect(allNonHeaderCells[5]).toHaveTextContent("1");
+
+    expect(allNonHeaderCells.length).toBe(6);
+  });
+
   it("displays rows in correct order", () => {
     const { getAllByRole } = render(<Table headers={headers} rows={rows} />);
 
