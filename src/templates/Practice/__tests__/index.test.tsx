@@ -9,7 +9,6 @@ import { when } from "jest-when";
 import Practice from "..";
 import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
-import slaMetricsContent from "../../../data/content/practiceMetrics.json";
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
@@ -156,18 +155,19 @@ describe("Practice template", () => {
       <Practice pageContext={practicePageContext} />
     );
 
-    practiceMetrics.forEach((metric) => {
+    const monthStrings = ["November 2019", "October 2019", "September 2019"];
+
+    practiceMetrics.forEach((metric, i) => {
       const integratedMetrics = metric.requester.integrated;
 
+      expect(getByText(monthStrings[i])).toBeInTheDocument();
       expect(getByText(integratedMetrics.transferCount)).toBeInTheDocument();
       expect(
         getByText(`${integratedMetrics.within3DaysPercentage}%`)
       ).toBeInTheDocument();
-
       expect(
         getByText(`${integratedMetrics.within8DaysPercentage}%`)
       ).toBeInTheDocument();
-
       expect(
         getByText(`${integratedMetrics.beyond8DaysPercentage}%`)
       ).toBeInTheDocument();

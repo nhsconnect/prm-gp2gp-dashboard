@@ -1,8 +1,19 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import { mocked } from "ts-jest/utils";
+import { when } from "jest-when";
 import { Table } from "../";
+import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
+
+jest.mock("../../../../library/hooks/useFeatureToggle");
 
 describe("Table component", () => {
+  beforeEach(() => {
+    when(mocked(useFeatureToggles))
+      .calledWith()
+      .mockReturnValue({ showHistoricalData: true });
+  });
+
   const headers = ["fruit ", "colour ", "quantity "];
 
   const rows = [
