@@ -5,7 +5,11 @@ import { Table } from "../../components/common/Table";
 import { AboutThisDataContent } from "../../components/AboutThisDataContent";
 import { Expander } from "../../components/common/Expander";
 
-import { IntegratedPracticeMetricsType, PracticeType } from "./practice.types";
+import {
+  IntegratedPracticeMetricsType,
+  PracticeMetricsType,
+  PracticeType,
+} from "./practice.types";
 
 import {
   ODS_PORTAL_URL,
@@ -30,6 +34,7 @@ type PracticeProps = {
   pageContext: PageContext;
 };
 
+//Delete below function when cleaning up showHistoricalData toggle
 const generateRowData = (integratedMetrics: IntegratedPracticeMetricsType) => {
   return [
     [
@@ -41,22 +46,33 @@ const generateRowData = (integratedMetrics: IntegratedPracticeMetricsType) => {
   ];
 };
 
+const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
+  return metrics.map((metric) => {
+    const integratedMetrics = metric.requester.integrated;
+    return [
+      `${convertMonthNumberToText(metric.month)} ${metric.year}`,
+      integratedMetrics.transferCount.toString(),
+      addPercentageSign(integratedMetrics.within3DaysPercentage),
+      addPercentageSign(integratedMetrics.within8DaysPercentage),
+      addPercentageSign(integratedMetrics.beyond8DaysPercentage),
+    ];
+  });
+};
+
 const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${practice.odsCode}`
   );
   const { showHistoricalData } = useFeatureToggles();
 
-  const {
-    name,
-    odsCode,
-    metrics: [{ month, year, requester }],
-  } = practice;
+  const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
   const tableCaptionText = showHistoricalData
     ? "Integration times"
-    : `Integration times for ${convertMonthNumberToText(month)} ${year}`;
+    : `Integration times for ${convertMonthNumberToText(metrics[0].month)} ${
+        metrics[0].year
+      }`;
 
   return (
     <>
@@ -96,9 +112,17 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       />
       <Table
         className={"gp2gp-practice-table"}
-        headers={slaMetricsContent.tableHeaders}
+        headers={
+          showHistoricalData
+            ? slaMetricsContent.tableHeaders
+            : slaMetricsContent.tableHeaders.slice(1)
+        }
         caption={{ text: tableCaptionText, hidden: false }}
-        rows={generateRowData(requester.integrated)}
+        rows={
+          showHistoricalData
+            ? generateMonthlyRowData(metrics)
+            : generateRowData(metrics[0].requester.integrated)
+        }
       />
       <AboutThisDataContent />
     </>

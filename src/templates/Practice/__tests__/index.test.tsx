@@ -51,9 +51,30 @@ describe("Practice template", () => {
               within3DaysPercentage: 25,
               within8DaysPercentage: 60,
               beyond8DaysPercentage: 15,
-              within3Days: 5,
-              within8Days: 12,
-              beyond8Days: 3,
+            },
+          },
+        },
+        {
+          year: 2019,
+          month: 10,
+          requester: {
+            integrated: {
+              transferCount: 10,
+              within3DaysPercentage: 50,
+              within8DaysPercentage: 24,
+              beyond8DaysPercentage: 26,
+            },
+          },
+        },
+        {
+          year: 2019,
+          month: 9,
+          requester: {
+            integrated: {
+              transferCount: 30,
+              within3DaysPercentage: 42,
+              within8DaysPercentage: 19,
+              beyond8DaysPercentage: 39,
             },
           },
         },
@@ -62,8 +83,7 @@ describe("Practice template", () => {
     layout: "general",
   };
 
-  const practiceIntegratedData =
-    practicePageContext.practice.metrics[0].requester.integrated;
+  const practiceMetrics = practicePageContext.practice.metrics;
 
   it("renders practice details correctly", async () => {
     const expectedODSPracticeData = {
@@ -131,35 +151,25 @@ describe("Practice template", () => {
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("renders metrics correctly", async () => {
-    const { getByText, getAllByText } = render(
+  it("renders metrics for multiple months correctly", () => {
+    const { getByText } = render(
       <Practice pageContext={practicePageContext} />
     );
 
-    await waitFor(() => {
+    practiceMetrics.forEach((metric) => {
+      const integratedMetrics = metric.requester.integrated;
+
+      expect(getByText(integratedMetrics.transferCount)).toBeInTheDocument();
       expect(
-        getAllByText(slaMetricsContent.tableHeaders[0])[0]
+        getByText(`${integratedMetrics.within3DaysPercentage}%`)
       ).toBeInTheDocument();
+
       expect(
-        getByText(practiceIntegratedData.transferCount)
+        getByText(`${integratedMetrics.within8DaysPercentage}%`)
       ).toBeInTheDocument();
+
       expect(
-        getAllByText(slaMetricsContent.tableHeaders[1])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${practiceIntegratedData.within3DaysPercentage}%`)
-      ).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeaders[2])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${practiceIntegratedData.within8DaysPercentage}%`)
-      ).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeaders[3])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${practiceIntegratedData.beyond8DaysPercentage}%`)
+        getByText(`${integratedMetrics.beyond8DaysPercentage}%`)
       ).toBeInTheDocument();
     });
   });
@@ -194,12 +204,13 @@ describe("Practice template", () => {
 
     const allColumnHeaders = getAllByRole("columnheader");
 
-    expect(allColumnHeaders[0]).toHaveTextContent("Successful integrations");
-    expect(allColumnHeaders[1]).toHaveTextContent("Integrated within 3 days");
-    expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 8 days");
-    expect(allColumnHeaders[3]).toHaveTextContent("Integrated beyond 8 days");
+    expect(allColumnHeaders[0]).toHaveTextContent("Month");
+    expect(allColumnHeaders[1]).toHaveTextContent("Successful integrations");
+    expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 3 days");
+    expect(allColumnHeaders[3]).toHaveTextContent("Integrated within 8 days");
+    expect(allColumnHeaders[4]).toHaveTextContent("Integrated beyond 8 days");
 
-    expect(allColumnHeaders.length).toBe(4);
+    expect(allColumnHeaders.length).toBe(5);
   });
 
   it("renders placeholders when there is no transfers", async () => {
@@ -277,9 +288,6 @@ describe("showHistoricalData toggled off", () => {
               within3DaysPercentage: 25,
               within8DaysPercentage: 60,
               beyond8DaysPercentage: 15,
-              within3Days: 5,
-              within8Days: 12,
-              beyond8Days: 3,
             },
           },
         },
@@ -357,37 +365,24 @@ describe("showHistoricalData toggled off", () => {
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("renders metrics correctly", async () => {
-    const { getByText, getAllByText } = render(
+  it("renders metrics correctly", () => {
+    const { getByText } = render(
       <Practice pageContext={practicePageContext} />
     );
 
-    await waitFor(() => {
-      expect(
-        getAllByText(slaMetricsContent.tableHeaders[0])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(practiceIntegratedData.transferCount)
-      ).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeaders[1])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${practiceIntegratedData.within3DaysPercentage}%`)
-      ).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeaders[2])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${practiceIntegratedData.within8DaysPercentage}%`)
-      ).toBeInTheDocument();
-      expect(
-        getAllByText(slaMetricsContent.tableHeaders[3])[0]
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${practiceIntegratedData.beyond8DaysPercentage}%`)
-      ).toBeInTheDocument();
-    });
+    expect(getByText(practiceIntegratedData.transferCount)).toBeInTheDocument();
+
+    expect(
+      getByText(`${practiceIntegratedData.within3DaysPercentage}%`)
+    ).toBeInTheDocument();
+
+    expect(
+      getByText(`${practiceIntegratedData.within8DaysPercentage}%`)
+    ).toBeInTheDocument();
+
+    expect(
+      getByText(`${practiceIntegratedData.beyond8DaysPercentage}%`)
+    ).toBeInTheDocument();
   });
 
   it("should display expander with the correct content", async () => {

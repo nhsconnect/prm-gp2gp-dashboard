@@ -2,6 +2,7 @@
   "title": "Your practice integrating records",
   "subtitle": "Number of records integrated:",
   "tableHeaders": [
+    "Month",
     "Successful integrations",
     "Integrated within 3 days",
     "Integrated within 8 days",

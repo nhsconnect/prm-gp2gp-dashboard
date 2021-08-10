@@ -5,7 +5,7 @@ export type IntegratedPracticeMetricsType = {
   beyond8DaysPercentage: number | null;
 };
 
-type PracticeMetricsType = {
+export type PracticeMetricsType = {
   year: number;
   month: number;
   requester: {
