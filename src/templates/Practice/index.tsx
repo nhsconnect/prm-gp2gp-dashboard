@@ -15,6 +15,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useApi } from "../../library/hooks/useApi";
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
@@ -44,6 +45,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${practice.odsCode}`
   );
+  const { showHistoricalData } = useFeatureToggles();
 
   const {
     name,
@@ -52,9 +54,9 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   } = practice;
   const formattedName = convertToTitleCase(name);
 
-  const tableCaptionText = `Integration times for ${convertMonthNumberToText(
-    month
-  )} ${year}`;
+  const tableCaptionText = showHistoricalData
+    ? "Integration times"
+    : `Integration times for ${convertMonthNumberToText(month)} ${year}`;
 
   return (
     <>
