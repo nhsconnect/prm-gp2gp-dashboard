@@ -111,7 +111,9 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         }
       />
       <Table
-        className={"gp2gp-practice-table"}
+        className={
+          showHistoricalData ? "gp2gp-metrics-table" : "gp2gp-practice-table"
+        }
         headers={
           showHistoricalData
             ? slaMetricsContent.tableHeaders
