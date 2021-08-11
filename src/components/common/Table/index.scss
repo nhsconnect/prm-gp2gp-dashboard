@@ -17,16 +17,18 @@
 }
 
 .nhsuk-table__body {
-  .nhsuk-table__row td {
-    @include mq($until: desktop) {
-      padding-right: nhsuk-spacing(2);
+  .nhsuk-table__row {
+    td.nhsuk-table__cell {
+      @include mq($until: desktop) {
+        padding-right: nhsuk-spacing(2);
+      }
     }
-  }
 
-  th.nhsuk-table__cell {
-    display: flex;
-    justify-content: space-between;
-    font-weight: $nhsuk-font-normal;
+    th.nhsuk-table__cell {
+      display: flex;
+      justify-content: space-between;
+      font-weight: $nhsuk-font-normal;
+    }
   }
 }
 

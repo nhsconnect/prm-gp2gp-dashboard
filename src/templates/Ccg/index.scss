@@ -1,4 +1,5 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/colours";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
 
 .gp2gp-ccg-table {
   .nhsuk-table__col,
@@ -11,6 +12,10 @@
   .nhsuk-table__col-0,
   .nhsuk-table__row .nhsuk-table__cell:first-child {
     text-align: left;
+
+    @include mq($until: tablet) {
+      text-align: right;
+    }
   }
 
   .nhsuk-table__col-1 {
