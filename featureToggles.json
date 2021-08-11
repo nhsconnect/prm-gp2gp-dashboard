@@ -1,7 +1,7 @@
 {
   "dev": {
     "showPublicBetaText": true,
-    "showHistoricalData": false
+    "showHistoricalData": true
   },
   "prod": {
     "showPublicBetaText": false,

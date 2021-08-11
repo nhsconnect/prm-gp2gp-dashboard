@@ -46,20 +46,32 @@ describe("Practice page", () => {
         cy.contains("Why integrate within 8 days").click();
         cy.contains("When records are not integrated within 8 days");
 
-        cy.contains("Integration times for December 2019");
+        cy.contains("Integration times");
+
+        cy.contains("Month");
+        cy.get("[data-testid=table__cell--row-0-col-0]").contains(
+          "December 2019"
+        );
 
         cy.contains("Successful integrations");
-
-        cy.get("[data-testid=table__cell--row-0-col-0]").contains(2);
+        cy.get("[data-testid=table__cell--row-0-col-1]").contains(2);
 
         cy.contains("Integrated within 3 days");
-        cy.get("[data-testid=table__cell--row-0-col-1]").contains("50%");
-
-        cy.contains("Integrated within 8 days");
         cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
 
+        cy.contains("Integrated within 8 days");
+        cy.get("[data-testid=table__cell--row-0-col-3]").contains("50%");
+
         cy.contains("Integrated beyond 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-3]").contains("0%");
+        cy.get("[data-testid=table__cell--row-0-col-4]").contains("0%");
+
+        cy.get("[data-testid=table__cell--row-1-col-0]").contains(
+          "November 2019"
+        );
+        cy.get("[data-testid=table__cell--row-1-col-1]").contains(0);
+        cy.get("[data-testid=table__cell--row-1-col-2]").contains("n/a");
+        cy.get("[data-testid=table__cell--row-1-col-3]").contains("n/a");
+        cy.get("[data-testid=table__cell--row-1-col-4]").contains("n/a");
 
         cy.checkAccessibility();
 
