@@ -59,6 +59,27 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   });
 };
 
+const IntegrationsOverview: FC = () => (
+  <>
+    <div className="nhsuk-u-reading-width">
+      <p className="nhsuk-body">
+        The table below shows the time to integrate for records received by the
+        practice. More information{" "}
+        <a href={"#about-this-data"}>about this data</a>.
+      </p>
+    </div>
+    <Expander
+      title={eightDayExpanderContent.title}
+      content={
+        <>
+          <p>{eightDayExpanderContent.firstParagraph}</p>
+          <p>{eightDayExpanderContent.secondParagraph}</p>
+        </>
+      }
+    />
+  </>
+);
+
 const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${practice.odsCode}`
@@ -68,11 +89,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
-  const tableCaptionText = showHistoricalData
-    ? "Integration times"
-    : `Integration times for ${convertMonthNumberToText(metrics[0].month)} ${
-        metrics[0].year
-      }`;
+  // Delete below when cleaning up showHistoricalData toggle
+  const tableCaptionText = `Integration times for ${convertMonthNumberToText(
+    metrics[0].month
+  )} ${metrics[0].year}`;
 
   return (
     <>
@@ -94,38 +114,31 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       )}
       <hr />
 
-      <div className="nhsuk-u-reading-width">
-        <p className="nhsuk-body">
-          The table below shows the time to integrate for records received by
-          the practice. More information{" "}
-          <a href={"#about-this-data"}>about this data</a>.
-        </p>
-      </div>
-      <Expander
-        title={eightDayExpanderContent.title}
-        content={
-          <>
-            <p>{eightDayExpanderContent.firstParagraph}</p>
-            <p>{eightDayExpanderContent.secondParagraph}</p>
-          </>
-        }
-      />
-      <Table
-        className={
-          showHistoricalData ? "gp2gp-metrics-table" : "gp2gp-practice-table"
-        }
-        headers={
-          showHistoricalData
-            ? slaMetricsContent.tableHeaders
-            : slaMetricsContent.tableHeaders.slice(1)
-        }
-        caption={{ text: tableCaptionText, hidden: false }}
-        rows={
-          showHistoricalData
-            ? generateMonthlyRowData(metrics)
-            : generateRowData(metrics[0].requester.integrated)
-        }
-      />
+      {showHistoricalData ? (
+        <section className="gp2gp-table-section">
+          <h2>Integration times</h2>
+          <IntegrationsOverview />
+          <Table
+            className="gp2gp-metrics-table"
+            headers={slaMetricsContent.tableHeaders}
+            caption={{
+              text: "Integration times for the recent months",
+              hidden: true,
+            }}
+            rows={generateMonthlyRowData(metrics)}
+          />
+        </section>
+      ) : (
+        <>
+          <IntegrationsOverview />
+          <Table
+            className="gp2gp-practice-table"
+            headers={slaMetricsContent.tableHeaders.slice(1)}
+            caption={{ text: tableCaptionText, hidden: false }}
+            rows={generateRowData(metrics[0].requester.integrated)}
+          />
+        </>
+      )}
       <AboutThisDataContent />
     </>
   );
