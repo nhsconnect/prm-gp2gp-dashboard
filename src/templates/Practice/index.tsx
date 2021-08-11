@@ -112,7 +112,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
           address={transformPracticeAddress(data.Organisation.GeoLoc.Location)}
         />
       )}
-      <hr />
+      <hr aria-hidden={true} />
 
       {showHistoricalData ? (
         <section className="gp2gp-table-section">
