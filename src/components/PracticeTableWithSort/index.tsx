@@ -10,7 +10,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 
 import practiceTableContent from "../../data/content/practiceTable.json";
-import "./index.scss";
+import "../../styles/index.scss";
 
 type TableWithSortProps = {
   ccgPractices: PracticeType[];
@@ -109,7 +109,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   return (
-    <section className="gp2gp-table-with-sort">
+    <section className="gp2gp-table-section">
       <h2>{tableTitle}</h2>
       <div className="gp2gp-sort">
         <Select
@@ -131,7 +131,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         />
       </div>
       <Table
-        className="gp2gp-ccg-table"
+        className="gp2gp-metrics-table"
         caption={{ text: `${tableTitle} data`, hidden: true }}
         headers={headers}
         rows={practiceTableRows}

@@ -1,5 +1,6 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/colours";
 
+// delete this file when cleaning up showHistoricalData toggle
 .gp2gp-practice-table {
   .nhsuk-table__col-0 {
     border-right: 2px solid $color_nhsuk-grey-4;
@@ -11,30 +12,5 @@
   .nhsuk-table__cell {
     vertical-align: bottom;
     text-align: right;
-  }
-}
-
-.gp2gp-table-section {
-  background-color: $color_nhsuk-white;
-  padding: 1rem 1rem 2rem;
-}
-
-.gp2gp-metrics-table {
-  .nhsuk-table__col,
-  .nhsuk-table__cell {
-    white-space: initial;
-    vertical-align: bottom;
-    text-align: right;
-  }
-
-  .nhsuk-table__col-0,
-  .nhsuk-table__row .nhsuk-table__cell:first-child {
-    text-align: left;
-    min-width: 200px;
-  }
-
-  .nhsuk-table__col-1 {
-    border-right: 2px solid $color_nhsuk-grey-4;
-    white-space: initial;
   }
 }
