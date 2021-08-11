@@ -13,6 +13,62 @@ import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
+const ODSPracticeData = {
+  odsCode: "B86030",
+  town: "LEEDS",
+  postCode: "LS6 2AF",
+  lines: {
+    AddrLn1: "1 SHIRE OAK STREET",
+    AddrLn2: "HEADINGLEY",
+  },
+};
+
+const practicePageContext = {
+  practice: {
+    odsCode: "B86030",
+    name: "BURTON CROFT SURGERY",
+    metrics: [
+      {
+        year: 2019,
+        month: 11,
+        requester: {
+          integrated: {
+            transferCount: 20,
+            within3DaysPercentage: 25,
+            within8DaysPercentage: 60,
+            beyond8DaysPercentage: 15,
+          },
+        },
+      },
+      {
+        year: 2019,
+        month: 10,
+        requester: {
+          integrated: {
+            transferCount: 10,
+            within3DaysPercentage: 50,
+            within8DaysPercentage: 24,
+            beyond8DaysPercentage: 26,
+          },
+        },
+      },
+      {
+        year: 2019,
+        month: 9,
+        requester: {
+          integrated: {
+            transferCount: 30,
+            within3DaysPercentage: 42,
+            within8DaysPercentage: 19,
+            beyond8DaysPercentage: 39,
+          },
+        },
+      },
+    ],
+  },
+  layout: "general",
+};
+
 describe("Practice template", () => {
   beforeEach(() => {
     moxios.install();
@@ -20,67 +76,15 @@ describe("Practice template", () => {
     when(mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showHistoricalData: true });
+
+    const statusCode = 200;
+    const mockedResponse = practiceDataBuilder(ODSPracticeData);
+    mockAPIResponse(statusCode, mockedResponse);
   });
 
   afterAll(() => {
     moxios.uninstall();
   });
-
-  const ODSPracticeData = {
-    odsCode: "B86030",
-    town: "LEEDS",
-    postCode: "LS6 2AF",
-    lines: {
-      AddrLn1: "1 SHIRE OAK STREET",
-      AddrLn2: "HEADINGLEY",
-    },
-  };
-
-  const practicePageContext = {
-    practice: {
-      odsCode: "B86030",
-      name: "BURTON CROFT SURGERY",
-      metrics: [
-        {
-          year: 2019,
-          month: 11,
-          requester: {
-            integrated: {
-              transferCount: 20,
-              within3DaysPercentage: 25,
-              within8DaysPercentage: 60,
-              beyond8DaysPercentage: 15,
-            },
-          },
-        },
-        {
-          year: 2019,
-          month: 10,
-          requester: {
-            integrated: {
-              transferCount: 10,
-              within3DaysPercentage: 50,
-              within8DaysPercentage: 24,
-              beyond8DaysPercentage: 26,
-            },
-          },
-        },
-        {
-          year: 2019,
-          month: 9,
-          requester: {
-            integrated: {
-              transferCount: 30,
-              within3DaysPercentage: 42,
-              within8DaysPercentage: 19,
-              beyond8DaysPercentage: 39,
-            },
-          },
-        },
-      ],
-    },
-    layout: "general",
-  };
 
   const practiceMetrics = practicePageContext.practice.metrics;
 
@@ -94,10 +98,6 @@ describe("Practice template", () => {
         line2: "Headingley",
       },
     };
-
-    const statusCode = 200;
-    const mockedResponse = practiceDataBuilder(ODSPracticeData);
-    mockAPIResponse(statusCode, mockedResponse);
 
     const { getByText, getByRole } = render(
       <Practice pageContext={practicePageContext} />
@@ -174,27 +174,21 @@ describe("Practice template", () => {
     });
   });
 
-  it("should display expander with the correct content", async () => {
-    const statusCode = 200;
-    const mockedResponse = practiceDataBuilder(ODSPracticeData);
-    mockAPIResponse(statusCode, mockedResponse);
-
+  it("should display expander with the correct content", () => {
     const { getByText } = render(
       <Practice pageContext={practicePageContext} />
     );
 
-    await waitFor(() => {
-      const expanderTitle = getByText("Why integrate within 8 days");
-      const expanderContent = getByText(
-        "This increases burden on both the sending and receiving",
-        { exact: false }
-      );
-      expect(expanderTitle).toBeInTheDocument();
-      expect(expanderContent).not.toBeVisible();
+    const expanderTitle = getByText("Why integrate within 8 days");
+    const expanderContent = getByText(
+      "This increases burden on both the sending and receiving",
+      { exact: false }
+    );
+    expect(expanderTitle).toBeInTheDocument();
+    expect(expanderContent).not.toBeVisible();
 
-      userEvent.click(expanderTitle);
-      expect(expanderContent).toBeVisible();
-    });
+    userEvent.click(expanderTitle);
+    expect(expanderContent).toBeVisible();
   });
 
   it("display table headers correctly", () => {
@@ -213,7 +207,7 @@ describe("Practice template", () => {
     expect(allColumnHeaders.length).toBe(5);
   });
 
-  it("renders placeholders when there is no transfers", async () => {
+  it("renders placeholders when there is no transfers", () => {
     const practicePageContextNoTransferData = {
       practice: {
         odsCode: "B86030",
@@ -243,11 +237,9 @@ describe("Practice template", () => {
       <Practice pageContext={practicePageContextNoTransferData} />
     );
 
-    await waitFor(() => {
-      const dashElements = getAllByText("n/a");
-      expect(dashElements[0]).toBeInTheDocument();
-      expect(dashElements.length).toBe(3);
-    });
+    const dashElements = getAllByText("n/a");
+    expect(dashElements[0]).toBeInTheDocument();
+    expect(dashElements.length).toBe(3);
   });
 });
 
@@ -258,23 +250,17 @@ describe("showHistoricalData toggled off", () => {
     when(mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showHistoricalData: false });
+
+    const statusCode = 200;
+    const mockedResponse = practiceDataBuilder(ODSPracticeData);
+    mockAPIResponse(statusCode, mockedResponse);
   });
 
   afterAll(() => {
     moxios.uninstall();
   });
 
-  const ODSPracticeData = {
-    odsCode: "B86030",
-    town: "LEEDS",
-    postCode: "LS6 2AF",
-    lines: {
-      AddrLn1: "1 SHIRE OAK STREET",
-      AddrLn2: "HEADINGLEY",
-    },
-  };
-
-  const practicePageContext = {
+  const pageContextWithOneMonthMetric = {
     practice: {
       odsCode: "B86030",
       name: "BURTON CROFT SURGERY",
@@ -297,67 +283,11 @@ describe("showHistoricalData toggled off", () => {
   };
 
   const practiceIntegratedData =
-    practicePageContext.practice.metrics[0].requester.integrated;
-
-  it("renders practice details correctly", async () => {
-    const expectedODSPracticeData = {
-      odsCode: "B86030",
-      town: "Leeds",
-      postCode: "LS6 2AF",
-      lines: {
-        line1: "1 Shire Oak Street",
-        line2: "Headingley",
-      },
-    };
-
-    const statusCode = 200;
-    const mockedResponse = practiceDataBuilder(ODSPracticeData);
-    mockAPIResponse(statusCode, mockedResponse);
-
-    const { getByText, getByRole } = render(
-      <Practice pageContext={practicePageContext} />
-    );
-
-    await waitFor(() => {
-      const expectedPracticeHeading = getByRole("heading", {
-        name: "Burton Croft Surgery - B86030",
-        level: 1,
-      });
-      expect(expectedPracticeHeading).toBeInTheDocument();
-      expect(getByText(expectedODSPracticeData.town)).toBeInTheDocument();
-      expect(getByText(expectedODSPracticeData.postCode)).toBeInTheDocument();
-      expect(
-        getByText(expectedODSPracticeData.lines.line1)
-      ).toBeInTheDocument();
-      expect(
-        getByText(expectedODSPracticeData.lines.line2)
-      ).toBeInTheDocument();
-    });
-  });
-
-  it("does not render practice address when API responds with an error", async () => {
-    const statusCode = 500;
-    mockAPIResponse(statusCode);
-
-    const { queryByTestId, getByRole } = render(
-      <Practice pageContext={practicePageContext} />
-    );
-
-    await waitFor(() => {
-      const expectedPracticeHeading = getByRole("heading", {
-        name: "Burton Croft Surgery - B86030",
-        level: 1,
-      });
-      expect(expectedPracticeHeading).toBeInTheDocument();
-      expect(
-        queryByTestId("organisation-details-address")
-      ).not.toBeInTheDocument();
-    });
-  });
+    pageContextWithOneMonthMetric.practice.metrics[0].requester.integrated;
 
   it("display table caption correctly", () => {
     const { getByText } = render(
-      <Practice pageContext={practicePageContext} />
+      <Practice pageContext={pageContextWithOneMonthMetric} />
     );
 
     const tableCaption = getByText("Integration times for November 2019");
@@ -367,7 +297,7 @@ describe("showHistoricalData toggled off", () => {
 
   it("renders metrics correctly", () => {
     const { getByText } = render(
-      <Practice pageContext={practicePageContext} />
+      <Practice pageContext={pageContextWithOneMonthMetric} />
     );
 
     expect(getByText(practiceIntegratedData.transferCount)).toBeInTheDocument();
@@ -385,32 +315,26 @@ describe("showHistoricalData toggled off", () => {
     ).toBeInTheDocument();
   });
 
-  it("should display expander with the correct content", async () => {
-    const statusCode = 200;
-    const mockedResponse = practiceDataBuilder(ODSPracticeData);
-    mockAPIResponse(statusCode, mockedResponse);
-
+  it("should display expander with the correct content", () => {
     const { getByText } = render(
-      <Practice pageContext={practicePageContext} />
+      <Practice pageContext={pageContextWithOneMonthMetric} />
     );
 
-    await waitFor(() => {
-      const expanderTitle = getByText("Why integrate within 8 days");
-      const expanderContent = getByText(
-        "This increases burden on both the sending and receiving",
-        { exact: false }
-      );
-      expect(expanderTitle).toBeInTheDocument();
-      expect(expanderContent).not.toBeVisible();
+    const expanderTitle = getByText("Why integrate within 8 days");
+    const expanderContent = getByText(
+      "This increases burden on both the sending and receiving",
+      { exact: false }
+    );
+    expect(expanderTitle).toBeInTheDocument();
+    expect(expanderContent).not.toBeVisible();
 
-      userEvent.click(expanderTitle);
-      expect(expanderContent).toBeVisible();
-    });
+    userEvent.click(expanderTitle);
+    expect(expanderContent).toBeVisible();
   });
 
   it("display table headers correctly", () => {
     const { getAllByRole } = render(
-      <Practice pageContext={practicePageContext} />
+      <Practice pageContext={pageContextWithOneMonthMetric} />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -421,42 +345,5 @@ describe("showHistoricalData toggled off", () => {
     expect(allColumnHeaders[3]).toHaveTextContent("Integrated beyond 8 days");
 
     expect(allColumnHeaders.length).toBe(4);
-  });
-
-  it("renders placeholders when there is no transfers", async () => {
-    const practicePageContextNoTransferData = {
-      practice: {
-        odsCode: "B86030",
-        name: "BURTON CROFT SURGERY",
-        metrics: [
-          {
-            year: 2019,
-            month: 11,
-            requester: {
-              integrated: {
-                transferCount: 0,
-                within3DaysPercentage: null,
-                within8DaysPercentage: null,
-                beyond8DaysPercentage: null,
-                within3Days: 0,
-                within8Days: 0,
-                beyond8Days: 0,
-              },
-            },
-          },
-        ],
-      },
-      layout: "general",
-    };
-
-    const { getAllByText } = render(
-      <Practice pageContext={practicePageContextNoTransferData} />
-    );
-
-    await waitFor(() => {
-      const dashElements = getAllByText("n/a");
-      expect(dashElements[0]).toBeInTheDocument();
-      expect(dashElements.length).toBe(3);
-    });
   });
 });

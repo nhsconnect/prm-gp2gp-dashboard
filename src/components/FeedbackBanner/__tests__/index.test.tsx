@@ -1,19 +1,17 @@
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { FeedbackBanner } from "../";
 
 describe("FeedbackBanner component", () => {
-  it("displays feedback heading", async () => {
+  it("displays feedback heading", () => {
     const { getByRole } = render(<FeedbackBanner />);
 
-    await waitFor(() => {
-      const feedbackBannerHeading = getByRole("heading", {
-        name: "Get in touch",
-        level: 3,
-      });
-      expect(feedbackBannerHeading).toBeInTheDocument();
+    const feedbackBannerHeading = getByRole("heading", {
+      name: "Get in touch",
+      level: 3,
     });
+    expect(feedbackBannerHeading).toBeInTheDocument();
   });
 
   it("displays paragraph text", () => {

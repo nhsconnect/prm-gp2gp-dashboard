@@ -1,13 +1,12 @@
 import React from "react";
 
 import { render } from "@testing-library/react";
-import { waitFor } from "@testing-library/dom";
 
 import Ccg from "..";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 describe("CCG template", () => {
-  it("renders CCG details correctly", async () => {
+  it("renders CCG details correctly", () => {
     const pipelineCCGData = {
       odsCode: "12A",
       name: "BURTON CCG",
@@ -18,9 +17,7 @@ describe("CCG template", () => {
 
     const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
 
-    await waitFor(() => {
-      expect(getByText(expectedCCGHeading)).toBeInTheDocument();
-      expect(getByText(expectedPracticeName)).toBeInTheDocument();
-    });
+    expect(getByText(expectedCCGHeading)).toBeInTheDocument();
+    expect(getByText(expectedPracticeName)).toBeInTheDocument();
   });
 });
