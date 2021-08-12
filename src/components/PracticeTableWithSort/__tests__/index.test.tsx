@@ -1,23 +1,13 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { mocked } from "ts-jest/utils";
-import { when } from "jest-when";
 
 import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
-
-jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("PracticeTableWithSort component", () => {
-  beforeEach(() => {
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showHistoricalData: true });
-  });
   it("should display table heading with the month and year", () => {
     const { getByRole } = render(
       <PracticeTableWithSort

@@ -10,7 +10,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 
 import practiceTableContent from "../../data/content/practiceTable.json";
-import "../../styles/index.scss";
+import "../common/Table/index.scss";
 
 type TableWithSortProps = {
   ccgPractices: PracticeType[];

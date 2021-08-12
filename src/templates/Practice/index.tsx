@@ -23,7 +23,7 @@ import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
-import "../../styles/index.scss";
+import "../../components/common/Table/index.scss";
 import "./index.scss";
 
 type PageContext = {
