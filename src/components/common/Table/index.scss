@@ -47,6 +47,10 @@
   .nhsuk-table__body .nhsuk-table__row .nhsuk-table__cell:first-child {
     text-align: left;
     min-width: 170px;
+
+    @include mq($until: tablet) {
+      text-align: right;
+    }
   }
 
   .nhsuk-table__col-1 {
