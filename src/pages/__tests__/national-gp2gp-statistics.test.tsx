@@ -8,19 +8,20 @@ jest.mock(
   () => ({
     metrics: [
       {
-        transferCount: 223033,
-        integrated: {
-          transferCount: 205233,
-          transferPercentage: 92.02,
-          within3Days: 164341,
-          within8Days: 29507,
-          beyond8Days: 11385,
-        },
-        failed: { transferCount: 9241, transferPercentage: 4.14 },
-        pending: { transferCount: 11230, transferPercentage: 5.04 },
-        paperFallback: { transferCount: 31856, transferPercentage: 14.28 },
         year: 2021,
-        month: 1,
+        month: 7,
+        total: 7,
+        transferOutcomes: {
+          integratedOnTime: { total: 4, percent: 57.14 },
+          processFailure: {
+            total: 2,
+            percent: 28.57,
+            integratedLate: { percent: 14.29, total: 1 },
+            transferredNotIntegrated: { total: 1, percent: 14.29 },
+          },
+          technicalFailure: { total: 1, percent: 14.29 },
+          unclassifiedFailure: { total: 0, percent: 0 },
+        },
       },
     ],
   }),
@@ -35,44 +36,29 @@ describe("National GP2GP Statistics template", () => {
       getByText("National GP2GP patient record transfers data")
     ).toBeInTheDocument();
     expect(
-      getByText("GP2GP National Performance for January 2021")
+      getByText("GP2GP National Performance for July 2021")
     ).toBeInTheDocument();
-    expect(getByText("Count: 223033")).toBeInTheDocument();
+    expect(getByText("Count: 7")).toBeInTheDocument();
   });
 
   it("renders integrated transfers correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 205233")).toBeInTheDocument();
-    expect(getByText("Percent: 92.02%")).toBeInTheDocument();
-  });
-
-  it("renders SLA metrics correctly", () => {
-    const { getByText } = render(<NationalStatistics />);
-
-    expect(getByText("164341")).toBeInTheDocument();
-    expect(getByText("29507")).toBeInTheDocument();
-    expect(getByText("11385")).toBeInTheDocument();
+    expect(getByText("Count: 4")).toBeInTheDocument();
+    expect(getByText("Percent: 57.14%")).toBeInTheDocument();
   });
 
   it("renders paper fallback correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 31856")).toBeInTheDocument();
-    expect(getByText("Percent: 14.28%")).toBeInTheDocument();
+    expect(getByText("Count: 3")).toBeInTheDocument();
+    expect(getByText("Percent: 42.86%")).toBeInTheDocument();
   });
 
   it("renders failed transfers correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 9241")).toBeInTheDocument();
-    expect(getByText("Percent: 4.14%")).toBeInTheDocument();
-  });
-
-  it("renders pending transfers correctly", () => {
-    const { getByText } = render(<NationalStatistics />);
-
-    expect(getByText("Count: 11230")).toBeInTheDocument();
-    expect(getByText("Percent: 5.04%")).toBeInTheDocument();
+    expect(getByText("Count: 1")).toBeInTheDocument();
+    expect(getByText("Percent: 14.29%")).toBeInTheDocument();
   });
 });

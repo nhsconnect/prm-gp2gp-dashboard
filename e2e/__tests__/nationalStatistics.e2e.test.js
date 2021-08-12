@@ -12,42 +12,20 @@ describe("National statistics page", () => {
       it("displays national metrics contents", () => {
         cy.contains("h1", "National GP2GP patient record transfers data");
 
+        cy.contains("h2", "GP2GP National Performance for December 2019");
+
         cy.contains("h3", "Transfers started");
         cy.get('[data-testid="national-statistics__initiated-count"]').contains(
           "Count: 7"
         );
 
-        cy.contains("h3", "Successful integrations");
+        cy.contains("h3", "Successful integrations within 8 day SLA");
         cy.get(
           '[data-testid="national-statistics__integrated-count"]'
-        ).contains("Count: 5");
+        ).contains("Count: 4");
         cy.get(
           '[data-testid="national-statistics__integrated-percent"]'
-        ).contains("Percent: 71.43%");
-
-        cy.contains("h3", "Integration times");
-        cy.contains("Within 3 days");
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains("2");
-        cy.contains("Within 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains("2");
-        cy.contains("Beyond 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("1");
-
-        cy.contains("h3", "Technical failures");
-        cy.get('[data-testid="national-statistics__failed-count"]').contains(
-          "Count: 1"
-        );
-        cy.get('[data-testid="national-statistics__failed-percent"]').contains(
-          "Percent: 14.29%"
-        );
-
-        cy.contains("h3", "Pending transfers");
-        cy.get('[data-testid="national-statistics__pending-count"]').contains(
-          "Count: 1"
-        );
-        cy.get('[data-testid="national-statistics__pending-percent"]').contains(
-          "Percent: 14.29%"
-        );
+        ).contains("Percent: 57.14%");
 
         cy.contains("h3", "Paper fallback transfers");
         cy.get(
@@ -56,6 +34,26 @@ describe("National statistics page", () => {
         cy.get(
           '[data-testid="national-statistics__paper-fallback-percent"]'
         ).contains("Percent: 42.86%");
+
+        cy.contains("h4", "Process failure");
+        cy.contains("h5", "Transferred, not integrated");
+        cy.contains("h5", "Integrated late (beyond 8 days)");
+        cy.contains("Transferred, not integrated");
+        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
+          "14.29% (1)"
+        );
+        cy.contains("Integrated late (beyond 8 days)");
+        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(
+          "14.29% (1)"
+        );
+
+        cy.contains("h4", "Technical failures");
+        cy.get('[data-testid="national-statistics__failed-count"]').contains(
+          "Count: 1"
+        );
+        cy.get('[data-testid="national-statistics__failed-percent"]').contains(
+          "Percent: 14.29%"
+        );
 
         cy.checkAccessibility();
       });

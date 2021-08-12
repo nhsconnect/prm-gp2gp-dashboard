@@ -8,46 +8,32 @@ import nationalMetrics from "../data/organisations/nationalMetrics.json";
 type NationalStatisticsMetric = {
   year: number;
   month: number;
-  transferCount: number;
-  integrated: IntegratedStats;
-  failed: FailedStats;
-  pending: PendingStats;
-  paperFallback: PaperStats;
+  total: number;
+  transferOutcomes: TransferOutcomes;
 };
 
-type IntegratedStats = {
-  transferCount: number;
-  transferPercentage: number;
-  within3Days: number;
-  within8Days: number;
-  beyond8Days: number;
+type TransferOutcomes = {
+  integratedOnTime: TransferMetrics;
+  technicalFailure: TransferMetrics;
+  processFailure: ProcessFailureMetrics;
+  unclassifiedFailure: TransferMetrics;
 };
 
-type FailedStats = {
-  transferCount: number;
-  transferPercentage: number;
+type TransferMetrics = {
+  total: number;
+  percent: number;
 };
 
-type PendingStats = {
-  transferCount: number;
-  transferPercentage: number;
-};
-
-type PaperStats = {
-  transferCount: number;
-  transferPercentage: number;
+type ProcessFailureMetrics = {
+  total: number;
+  percent: number;
+  integratedLate: TransferMetrics;
+  transferredNotIntegrated: TransferMetrics;
 };
 
 const NationalStatistics = () => {
-  const {
-    month,
-    year,
-    transferCount,
-    integrated,
-    paperFallback,
-    failed,
-    pending,
-  }: NationalStatisticsMetric = nationalMetrics.metrics[0];
+  const { month, year, total, transferOutcomes }: NationalStatisticsMetric =
+    nationalMetrics.metrics[0];
   const monthName = convertMonthNumberToText(month);
 
   return (
@@ -86,79 +72,16 @@ const NationalStatistics = () => {
         successful or failed.
       </p>
       <ul>
-        <li data-testid="national-statistics__initiated-count">{`Count: ${transferCount}`}</li>
+        <li data-testid="national-statistics__initiated-count">{`Count: ${total}`}</li>
       </ul>
-      <h3>Successful integrations</h3>
+      <h3>Successful integrations within 8 day SLA</h3>
       <p>
         Transfers that were integrated (filed or suppressed) by the receiving
-        practice before the Data Platform was updated.
+        practice before the Data Platform was updated within 8 days.
       </p>
       <ul>
-        <li data-testid="national-statistics__integrated-count">{`Count: ${integrated.transferCount}`}</li>
-        <li data-testid="national-statistics__integrated-percent">{`Percent: ${integrated.transferPercentage}%`}</li>
-      </ul>
-      <h3>Integration times</h3>
-      <h4>Within 3 days</h4>
-      <p>
-        The number of successful integrations that were integrated (filed or
-        suppressed) within 3 days of the practice receiving the record.
-      </p>
-      <h4>Within 8 days</h4>
-      <p>
-        The number of successful integrations that were integrated (filed or
-        suppressed) within 8 days of the practice receiving the record.
-      </p>
-      <h4>Beyond 8 days</h4>
-      <p>
-        The number of successful integrations that were integrated (filed or
-        suppressed) beyond 8 days of the practice receiving the record. These
-        transfers result in the paper fallback process being triggered.
-      </p>
-      <Table
-        className="nhsuk-u-margin-bottom-5"
-        headers={["Within 3 days", "Within 8 days", "Beyond 8 days"]}
-        rows={[
-          [
-            integrated.within3Days.toString(),
-            integrated.within8Days.toString(),
-            integrated.beyond8Days.toString(),
-          ],
-        ]}
-      />
-      <h3>Technical failures</h3>
-      <p>
-        Records that fail to transfer due to technical error. These transfers
-        result in the paper fallback process being triggered.
-      </p>
-      <ul>
-        <li data-testid="national-statistics__failed-count">
-          {`Count: ${failed.transferCount}`}
-        </li>
-        <li data-testid="national-statistics__failed-percent">
-          {`Percent: ${failed.transferPercentage}%`}
-        </li>
-      </ul>
-      <h3>Pending transfers</h3>
-      <p>Transfers that either:</p>
-      <ul>
-        <li>
-          have not been integrated by the time the Data Platform is updated, or
-        </li>
-        <li>have an unreported technical error</li>
-      </ul>
-      <p>
-        These transfers result in the paper fallback process being triggered.
-        Because the Data Platform is updated 14 days after the end of the month,
-        all transfers that have not been integrated will be beyond the 8 day SLA
-        and will have triggered the paper fallback process.
-      </p>
-      <ul>
-        <li data-testid="national-statistics__pending-count">
-          {`Count: ${pending.transferCount}`}
-        </li>
-        <li data-testid="national-statistics__pending-percent">
-          {`Percent: ${pending.transferPercentage}%`}
-        </li>
+        <li data-testid="national-statistics__integrated-count">{`Count: ${transferOutcomes.integratedOnTime.total}`}</li>
+        <li data-testid="national-statistics__integrated-percent">{`Percent: ${transferOutcomes.integratedOnTime.percent}%`}</li>
       </ul>
       <h3>Paper fallback transfers</h3>
       <p>
@@ -168,18 +91,72 @@ const NationalStatistics = () => {
       </p>
       <p>This includes:</p>
       <ul>
-        <li>records successfully integrated beyond 8 days</li>
-        <li>technical failures</li>
-        <li>pending transfers</li>
+        <li>Process Failures</li>
+        <li>Technical Failures</li>
+        <li>Unclassified Failures</li>
+      </ul>
+      <ul>
+        <li data-testid="national-statistics__paper-fallback-count">{`Count: ${
+          total - transferOutcomes.integratedOnTime.total
+        }`}</li>
+        <li data-testid="national-statistics__paper-fallback-percent">{`Percent: ${
+          100 - transferOutcomes.integratedOnTime.percent
+        }%`}</li>
+      </ul>
+      <h4>Process failures</h4>
+      <p>Transfers that either:</p>
+      <ul>
+        <li>
+          have not been integrated by the time the Data Platform is updated, or
+        </li>
+        <li>have been successfully integrated but beyond 8 days</li>
       </ul>
       <p>
-        The Data Platform is updated 14 days after the end of the month. This is
-        so we can identify whether transfers started at the end of the month
-        were integrated within the 8 day SLA.
+        These transfers result in the paper fallback process being triggered.
+        Because the Data Platform is updated 14 days after the end of the month,
+        all transfers that have not been integrated will be beyond the 8 day SLA
+        and will have triggered the paper fallback process.
+      </p>
+      <h5>Transferred, not integrated</h5>
+      <p>
+        There are transfers that have been sent but have not been integrated for
+        at least 14 days
+      </p>
+      <h5>Integrated late (beyond 8 days)</h5>
+      <p>
+        The number of successful integrations that were integrated (filed or
+        suppressed) beyond 8 days of the practice receiving the record. These
+        transfers result in the paper fallback process being triggered.
+      </p>
+      <Table
+        className="nhsuk-u-margin-bottom-5"
+        headers={[
+          "Transferred, not integrated",
+          "Integrated late (beyond 8 days)",
+        ]}
+        rows={[
+          [
+            `${transferOutcomes.processFailure.transferredNotIntegrated.percent}% (${transferOutcomes.processFailure.transferredNotIntegrated.total})`,
+            `${transferOutcomes.processFailure.integratedLate.percent}% (${transferOutcomes.processFailure.integratedLate.total})`,
+          ],
+        ]}
+      />
+
+      <h4>Technical failures</h4>
+      <p>
+        Records that fail to transfer either due to a technical error, or due to
+        the transfer getting stuck in transit with an unreported technical
+        issue. These transfers result in the paper fallback process being
+        triggered, and a break in the continuity of the record as the EHR is not
+        received.
       </p>
       <ul>
-        <li data-testid="national-statistics__paper-fallback-count">{`Count: ${paperFallback.transferCount}`}</li>
-        <li data-testid="national-statistics__paper-fallback-percent">{`Percent: ${paperFallback.transferPercentage}%`}</li>
+        <li data-testid="national-statistics__failed-count">
+          {`Count: ${transferOutcomes.technicalFailure.total}`}
+        </li>
+        <li data-testid="national-statistics__failed-percent">
+          {`Percent: ${transferOutcomes.technicalFailure.percent}%`}
+        </li>
       </ul>
     </>
   );
