@@ -84,8 +84,8 @@ const NationalStatistics = () => {
         </ul>
         <h3>Successful integrations within 8 day SLA</h3>
         <p>
-          Transfers that were integrated (filed or suppressed) by the receiving
-          practice before the Data Platform was updated within 8 days.
+          Transfers that were integrated (filed or suppressed) within 8 days by
+          the receiving practice before the Data Platform was updated.
         </p>
         <ul>
           <li data-testid="national-statistics__integrated-count">{`Count: ${convertToReadableNum(
