@@ -79,7 +79,12 @@ export const Table: FC<TableProps> = ({
             };
             // For accessibility the first cell in a row is a header for the screen reader
             return cellIndex === 0 ? (
-              <th {...cellProps} scope="row" role="rowheader">
+              <th
+                {...cellProps}
+                className={`${cellProps.className} nhs-table__header_cell`}
+                scope="row"
+                role="rowheader"
+              >
                 {cellData}
               </th>
             ) : (

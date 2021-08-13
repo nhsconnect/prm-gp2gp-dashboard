@@ -14,23 +14,12 @@
     padding-right: nhsuk-spacing(3);
     white-space: initial;
     vertical-align: bottom;
-    text-align: right;
   }
+}
 
-  .nhsuk-table__body {
-    .nhsuk-table__row {
-      td.nhsuk-table__cell {
-        @include mq($until: desktop) {
-          padding-right: nhsuk-spacing(2);
-        }
-      }
-
-      th.nhsuk-table__cell {
-        @extend td;
-        font-weight: $nhsuk-font-normal;
-      }
-    }
-  }
+.nhs-table__header_cell {
+  @extend td;
+  font-weight: $nhsuk-font-normal;
 }
 
 .sorted {
@@ -43,14 +32,14 @@
 }
 
 .gp2gp-metrics-table {
-  .nhsuk-table__col-0,
-  .nhsuk-table__body .nhsuk-table__row .nhsuk-table__cell:first-child {
-    text-align: left;
-    min-width: 170px;
+  .nhsuk-table__col,
+  .nhsuk-table__cell {
+    text-align: right;
+  }
 
-    @include mq($until: tablet) {
-      text-align: right;
-    }
+  .nhsuk-table__col-0 {
+    min-width: 11rem;
+    text-align: left;
   }
 
   .nhsuk-table__col-1 {
