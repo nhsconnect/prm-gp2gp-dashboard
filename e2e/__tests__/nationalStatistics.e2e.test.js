@@ -55,6 +55,14 @@ describe("National statistics page", () => {
           "Percent: 22.22%"
         );
 
+        cy.contains("h4", "Unclassified failures");
+        cy.get(
+          '[data-testid="national-statistics__unclassified-count"]'
+        ).contains("Count: 1");
+        cy.get(
+          '[data-testid="national-statistics__unclassified-percent"]'
+        ).contains("Percent: 11.11%");
+
         cy.checkAccessibility();
       });
 

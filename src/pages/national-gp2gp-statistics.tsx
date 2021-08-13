@@ -164,7 +164,6 @@ const NationalStatistics = () => {
             ],
           ]}
         />
-
         <h4>Technical failures</h4>
         <p>
           Records that fail to transfer either due to a technical error, or due
@@ -182,6 +181,23 @@ const NationalStatistics = () => {
           <li data-testid="national-statistics__failed-percent">
             {`Percent: ${addPercentageSign(
               paperFallback.technicalFailure.transferPercentage
+            )}`}
+          </li>
+        </ul>
+        <h4>Unclassified failures</h4>
+        <p>
+          Transfers that we are currently unable to confidently classify as
+          technical or process error
+        </p>
+        <ul>
+          <li data-testid="national-statistics__unclassified-count">
+            {`Count: ${convertToReadableNum(
+              paperFallback.unclassifiedFailure.transferCount
+            )}`}
+          </li>
+          <li data-testid="national-statistics__unclassified-percent">
+            {`Percent: ${addPercentageSign(
+              paperFallback.unclassifiedFailure.transferPercentage
             )}`}
           </li>
         </ul>

@@ -10,26 +10,26 @@ jest.mock(
       {
         year: 2021,
         month: 7,
-        transferCount: 700000,
-        integratedOnTime: { transferCount: 400000, transferPercentage: 57.14 },
+        transferCount: 248942,
+        integratedOnTime: { transferCount: 219808, transferPercentage: 88.3 },
         paperFallback: {
-          transferCount: 300000,
-          transferPercentage: 42.86,
+          transferCount: 29134,
+          transferPercentage: 11.7,
           processFailure: {
             integratedLate: {
-              transferCount: 100000,
-              transferPercentage: 14.29,
+              transferCount: 12988,
+              transferPercentage: 5.22,
             },
             transferredNotIntegrated: {
-              transferCount: 100000,
-              transferPercentage: 14.29,
+              transferCount: 6860,
+              transferPercentage: 2.76,
             },
           },
           technicalFailure: {
-            transferCount: 100000,
-            transferPercentage: 14.29,
+            transferCount: 8943,
+            transferPercentage: 3.59,
           },
-          unclassifiedFailure: { transferCount: 0, transferPercentage: 0 },
+          unclassifiedFailure: { transferCount: 343, transferPercentage: 0.14 },
         },
       },
     ],
@@ -47,41 +47,46 @@ describe("National GP2GP Statistics template", () => {
     expect(
       getByText("GP2GP National Performance for July 2021")
     ).toBeInTheDocument();
-    expect(getByText("Count: 700,000")).toBeInTheDocument();
+    expect(getByText("Count: 248,942")).toBeInTheDocument();
   });
 
   it("renders integrated transfers correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 400,000")).toBeInTheDocument();
-    expect(getByText("Percent: 57.14%")).toBeInTheDocument();
+    expect(getByText("Count: 219,808")).toBeInTheDocument();
+    expect(getByText("Percent: 88.3%")).toBeInTheDocument();
   });
 
   it("renders paper fallback correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 300,000")).toBeInTheDocument();
-    expect(getByText("Percent: 42.86%")).toBeInTheDocument();
+    expect(getByText("Count: 29,134")).toBeInTheDocument();
+    expect(getByText("Percent: 11.7%")).toBeInTheDocument();
   });
 
   it("renders process failure integrated late metrics correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 100,000")).toBeInTheDocument();
-    expect(getByText("Percent: 14.29%")).toBeInTheDocument();
+    expect(getByText("5.22% (12,988)")).toBeInTheDocument();
   });
 
   it("renders process failure transferred not integrated metrics correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 100,000")).toBeInTheDocument();
-    expect(getByText("Percent: 14.29%")).toBeInTheDocument();
+    expect(getByText("2.76% (6,860)")).toBeInTheDocument();
   });
 
   it("renders failed transfers correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("Count: 100,000")).toBeInTheDocument();
-    expect(getByText("Percent: 14.29%")).toBeInTheDocument();
+    expect(getByText("Count: 8,943")).toBeInTheDocument();
+    expect(getByText("Percent: 3.59%")).toBeInTheDocument();
+  });
+
+  it("renders unclassified transfers correctly", () => {
+    const { getByText } = render(<NationalStatistics />);
+
+    expect(getByText("Count: 343")).toBeInTheDocument();
+    expect(getByText("Percent: 0.14%")).toBeInTheDocument();
   });
 });
