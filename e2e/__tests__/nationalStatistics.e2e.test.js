@@ -16,7 +16,7 @@ describe("National statistics page", () => {
 
         cy.contains("h3", "Transfers started");
         cy.get('[data-testid="national-statistics__initiated-count"]').contains(
-          "Count: 7"
+          "Count: 9"
         );
 
         cy.contains("h3", "Successful integrations within 8 day SLA");
@@ -25,34 +25,34 @@ describe("National statistics page", () => {
         ).contains("Count: 4");
         cy.get(
           '[data-testid="national-statistics__integrated-percent"]'
-        ).contains("Percent: 57.14%");
+        ).contains("Percent: 44.44%");
 
         cy.contains("h3", "Paper fallback transfers");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-count"]'
-        ).contains("Count: 3");
+        ).contains("Count: 5");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-percent"]'
-        ).contains("Percent: 42.86%");
+        ).contains("Percent: 55.56%");
 
         cy.contains("h4", "Process failure");
         cy.contains("h5", "Transferred, not integrated");
         cy.contains("h5", "Integrated late (beyond 8 days)");
         cy.contains("Transferred, not integrated");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "14.29% (1)"
+          "11.11% (1)"
         );
         cy.contains("Integrated late (beyond 8 days)");
         cy.get('[data-testid="table__cell--row-0-col-1"]').contains(
-          "14.29% (1)"
+          "11.11% (1)"
         );
 
         cy.contains("h4", "Technical failures");
         cy.get('[data-testid="national-statistics__failed-count"]').contains(
-          "Count: 1"
+          "Count: 2"
         );
         cy.get('[data-testid="national-statistics__failed-percent"]').contains(
-          "Percent: 14.29%"
+          "Percent: 22.22%"
         );
 
         cy.checkAccessibility();
