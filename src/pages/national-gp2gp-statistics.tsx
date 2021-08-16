@@ -57,14 +57,28 @@ const NationalStatistics = () => {
           practices in England.
         </p>
         <p>
-          The Data Platform is updated 14 days after the end of the month. This
-          is so we can identify whether transfers started at the end of the
-          month were integrated within the 8 day SLA.
+          This site is updated 14 days after the end of each month. This is to
+          identify whether transfers started at the end of the month were
+          integrated within 8 days. When records are not integrated within 8
+          days, GP2GP requests that a full paper copy is printed and sent to the
+          practice.
         </p>
         <p>
           Values presented as percentages are rounded to the nearest two decimal
           places.
         </p>
+        <h4>Why might there be fewer successful integrations than I expect?</h4>
+        <p>
+          Every transfer shown on the site is categorised 14 days after it
+          started. Currently, transfers that are not integrated within 14 days
+          are not included.
+        </p>
+        <p>
+          For example, a transfer started on the 2nd February and not integrated
+          by the 15th February would not be included in the successful
+          integration number.
+        </p>
+
         <h2>
           GP2GP National Performance for {monthName} {year}
         </h2>
@@ -84,8 +98,8 @@ const NationalStatistics = () => {
         </ul>
         <h3>Successful integrations within 8 day SLA</h3>
         <p>
-          Transfers that were integrated (filed or suppressed) within 8 days by
-          the receiving practice before the Data Platform was updated.
+          Transfers that were integrated (filed or suppressed) by the receiving
+          practice within 8 days.
         </p>
         <ul>
           <li data-testid="national-statistics__integrated-count">{`Count: ${convertToReadableNum(
@@ -97,9 +111,8 @@ const NationalStatistics = () => {
         </ul>
         <h3>Paper fallback transfers</h3>
         <p>
-          Transfers that triggered the paper fallback process. The paper
-          fallback process is triggered when a record is not received
-          electronically, or is received but not integrated within 8 days.
+          This includes any successful or failed GP2GP requests that triggered
+          the paper fallback process and created extra burden for practices.
         </p>
         <p>This includes:</p>
         <ul>
@@ -118,28 +131,22 @@ const NationalStatistics = () => {
         <h4>Process failures</h4>
         <p>Transfers that either:</p>
         <ul>
-          <li>
-            have not been integrated by the time the Data Platform is updated,
-            or
-          </li>
+          <li>have not been integrated within 14 days, or</li>
           <li>have been successfully integrated but beyond 8 days</li>
         </ul>
         <p>
           These transfers result in the paper fallback process being triggered.
-          Because the Data Platform is updated 14 days after the end of the
-          month, all transfers that have not been integrated will be beyond the
-          8 day SLA and will have triggered the paper fallback process.
         </p>
         <h5>Transferred, not integrated</h5>
         <p>
           There are transfers that have been sent but have not been integrated
-          for at least 14 days
+          for at least 14 days.
         </p>
         <h5>Integrated late (beyond 8 days)</h5>
         <p>
           The number of successful integrations that were integrated (filed or
-          suppressed) beyond 8 days of the practice receiving the record. These
-          transfers result in the paper fallback process being triggered.
+          suppressed) beyond 8 days of the record being sent. These transfers
+          result in the paper fallback process being triggered.
         </p>
         <Table
           className="nhsuk-u-margin-bottom-5"
@@ -187,7 +194,7 @@ const NationalStatistics = () => {
         <h4>Unclassified failures</h4>
         <p>
           Transfers that we are currently unable to confidently classify as
-          technical or process error
+          technical or process error.
         </p>
         <ul>
           <li data-testid="national-statistics__unclassified-count">
