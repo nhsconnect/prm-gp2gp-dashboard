@@ -19,7 +19,7 @@ describe("National statistics page", () => {
           "Count: 9"
         );
 
-        cy.contains("h3", "Successful integrations within 8 day SLA");
+        cy.contains("h3", "Successful integrations within 8 days");
         cy.get(
           '[data-testid="national-statistics__integrated-count"]'
         ).contains("Count: 4");
@@ -39,13 +39,21 @@ describe("National statistics page", () => {
         cy.contains("h5", "Transferred, not integrated");
         cy.contains("h5", "Integrated late (beyond 8 days)");
         cy.contains("Transferred, not integrated");
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "11.11% (1)"
-        );
+        cy.get(
+          '[data-testid="national-statistics__transferred-not-int-count"]'
+        ).contains("Count: 1");
+        cy.get(
+          '[data-testid="national-statistics__transferred-not-int-percent"]'
+        ).contains("Percent: 11.11%");
+
         cy.contains("Integrated late (beyond 8 days)");
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(
-          "11.11% (1)"
+
+        cy.get('[data-testid="national-statistics__int-late-count"]').contains(
+          "Count: 1"
         );
+        cy.get(
+          '[data-testid="national-statistics__int-late-percent"]'
+        ).contains("Percent: 11.11%");
 
         cy.contains("h4", "Technical failures");
         cy.get('[data-testid="national-statistics__failed-count"]').contains(

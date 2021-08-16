@@ -64,21 +64,18 @@ const NationalStatistics = () => {
           practice.
         </p>
         <p>
-          Values presented as percentages are rounded to the nearest two decimal
-          places.
-        </p>
-        <h4>Why might there be fewer successful integrations than I expect?</h4>
-        <p>
           Every transfer shown on the site is categorised 14 days after it
-          started. Currently, transfers that are not integrated within 14 days
-          are not included.
+          started.
         </p>
         <p>
           For example, a transfer started on the 2nd February and not integrated
-          by the 15th February would not be included in the successful
-          integration number.
+          by the 15th February would be categorised as 'transferred, not
+          integrated'.
         </p>
-
+        <p>
+          Values presented as percentages are rounded to the nearest two decimal
+          places.
+        </p>
         <h2>
           GP2GP National Performance for {monthName} {year}
         </h2>
@@ -96,7 +93,7 @@ const NationalStatistics = () => {
             transferCount
           )}`}</li>
         </ul>
-        <h3>Successful integrations within 8 day SLA</h3>
+        <h3>Successful integrations within 8 days</h3>
         <p>
           Transfers that were integrated (filed or suppressed) by the receiving
           practice within 8 days.
@@ -139,38 +136,32 @@ const NationalStatistics = () => {
         </p>
         <h5>Transferred, not integrated</h5>
         <p>
-          There are transfers that have been sent but have not been integrated
-          for at least 14 days.
+          Transfers that have been sent but have not been integrated for at
+          least 14 days.
         </p>
+        <ul>
+          <li data-testid="national-statistics__transferred-not-int-count">{`Count: ${convertToReadableNum(
+            paperFallback.processFailure.transferredNotIntegrated.transferCount
+          )}`}</li>
+          <li data-testid="national-statistics__transferred-not-int-percent">{`Percent: ${addPercentageSign(
+            paperFallback.processFailure.transferredNotIntegrated
+              .transferPercentage
+          )}`}</li>
+        </ul>
         <h5>Integrated late (beyond 8 days)</h5>
         <p>
           The number of successful integrations that were integrated (filed or
           suppressed) beyond 8 days of the record being sent. These transfers
           result in the paper fallback process being triggered.
         </p>
-        <Table
-          className="nhsuk-u-margin-bottom-5"
-          headers={[
-            "Transferred, not integrated",
-            "Integrated late (beyond 8 days)",
-          ]}
-          rows={[
-            [
-              `${addPercentageSign(
-                paperFallback.processFailure.transferredNotIntegrated
-                  .transferPercentage
-              )} (${convertToReadableNum(
-                paperFallback.processFailure.transferredNotIntegrated
-                  .transferCount
-              )})`,
-              `${addPercentageSign(
-                paperFallback.processFailure.integratedLate.transferPercentage
-              )} (${convertToReadableNum(
-                paperFallback.processFailure.integratedLate.transferCount
-              )})`,
-            ],
-          ]}
-        />
+        <ul>
+          <li data-testid="national-statistics__int-late-count">{`Count: ${convertToReadableNum(
+            paperFallback.processFailure.integratedLate.transferCount
+          )}`}</li>
+          <li data-testid="national-statistics__int-late-percent">{`Percent: ${addPercentageSign(
+            paperFallback.processFailure.integratedLate.transferPercentage
+          )}`}</li>
+        </ul>
         <h4>Technical failures</h4>
         <p>
           Records that fail to transfer either due to a technical error, or due

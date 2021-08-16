@@ -67,13 +67,15 @@ describe("National GP2GP Statistics template", () => {
   it("renders process failure integrated late metrics correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("5.22% (12,988)")).toBeInTheDocument();
+    expect(getByText("Count: 12,988")).toBeInTheDocument();
+    expect(getByText("Percent: 5.22%")).toBeInTheDocument();
   });
 
   it("renders process failure transferred not integrated metrics correctly", () => {
     const { getByText } = render(<NationalStatistics />);
 
-    expect(getByText("2.76% (6,860)")).toBeInTheDocument();
+    expect(getByText("Count: 6,860")).toBeInTheDocument();
+    expect(getByText("Percent: 2.76%")).toBeInTheDocument();
   });
 
   it("renders failed transfers correctly", () => {

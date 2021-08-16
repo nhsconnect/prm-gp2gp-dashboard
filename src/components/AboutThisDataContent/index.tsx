@@ -12,17 +12,18 @@ export const AboutThisDataContent = () => (
       integrated within 8 days. When records are not integrated within 8 days,
       GP2GP requests that a full paper copy is printed and sent to the practice.
     </p>
+    <h4>Why might there be fewer successful integrations than I expect?</h4>
     <p>
-      Every transfer shown on the platform is categorised 14 days after it
-      started. For example, for a transfer initiated on the 2nd February, we
-      would categorise that transfer based on its state on the 15th February.
+      Every transfer shown on the site is categorised 14 days after it started.
+      Currently, transfers that are not integrated within 14 days are not
+      included.
     </p>
     <p>
-      If a transfer is integrated more than 14 days after it started, it will
-      not be shown in these integration metrics. This is because it was still
-      awaiting integration when it was categorised.
+      For example, a transfer started on the 2nd February and not integrated by
+      the 15th February would not be included in the successful integration
+      number.
     </p>
-    <h3>Total integrations</h3>
+    <h3>Successful integrations</h3>
     <p>All GP2GP transfers that were:</p>
     <ul>
       <li>
