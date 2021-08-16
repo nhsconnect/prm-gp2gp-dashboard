@@ -5,6 +5,6 @@
   },
   "prod": {
     "showPublicBetaText": false,
-    "showHistoricalData": false
+    "showHistoricalData": true
   }
 }
