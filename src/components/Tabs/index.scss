@@ -1,0 +1,36 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/settings/colours";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+@import "node_modules/nhsuk-frontend/packages/core/utilities/typography";
+
+.gp2gp-tabs {
+  &--tab-titles {
+    border-bottom: 1px solid $color_nhsuk-grey-4;
+    margin-bottom: 16px;
+  }
+
+  &--tab-title {
+    color: $color_nhsuk-blue;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    background: none;
+    padding: nhsuk-spacing(1) 0;
+    margin-right: 24px;
+    @extend .nhsuk-u-font-size-19;
+
+    &:focus {
+      background-color: $color_nhsuk-yellow;
+      border-bottom: 4px solid $color_nhsuk-blue;
+    }
+
+    &:hover {
+      color: $color_shade_nhsuk-blue-50;
+    }
+
+    &__active {
+      font-weight: bold;
+      border-bottom: 4px solid $color_nhsuk-blue;
+    }
+  }
+}
