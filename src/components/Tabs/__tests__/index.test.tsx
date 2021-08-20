@@ -48,4 +48,21 @@ describe("Tabs component", () => {
       expect(secondTabContent).toBeInTheDocument();
     });
   });
+
+  it("has gp2gp-active-tab class name when tab is selected", async () => {
+    const { getByRole } = render(<Tabs tabs={tabs} />);
+
+    const firstTabTitle = getByRole("button", { name: "First tab" });
+    expect(firstTabTitle).toHaveClass("gp2gp-active-tab");
+
+    const secondTabTitle = getByRole("button", { name: "Second tab" });
+    expect(secondTabTitle).not.toHaveClass("gp2gp-active-tab");
+
+    userEvent.click(secondTabTitle);
+
+    await waitFor(() => {
+      expect(secondTabTitle).toHaveClass("gp2gp-active-tab");
+      expect(firstTabTitle).not.toHaveClass("gp2gp-active-tab");
+    });
+  });
 });

@@ -1,4 +1,5 @@
 import React, { FC, ReactNode, useState } from "react";
+import classNames from "classnames";
 
 type Tab = { title: string; content: ReactNode };
 
@@ -11,13 +12,16 @@ export const Tabs: FC<TabsProps> = ({ tabs }) => {
 
   return (
     <>
-      {tabs.map((tab, i) => (
+      {tabs.map((tab, index) => (
         <button
           onClick={() => {
-            setSelectedTabIndex(i);
+            setSelectedTabIndex(index);
           }}
           key={tab.title}
-          className={`tab-index-${i}`}
+          className={classNames(
+            "gp2gp-tab",
+            selectedTabIndex === index && "gp2gp-active-tab"
+          )}
         >
           {tab.title}
         </button>
