@@ -29,12 +29,13 @@ describe("Tabs component", () => {
   });
 
   it("displays second tab content when second title clicked", async () => {
-    const { container, queryByText, getByRole, getByText } = render(
-      <Tabs tabs={tabs} />
-    );
+    const { queryByText, getByRole, getByText } = render(<Tabs tabs={tabs} />);
 
     const firstTabContent = getByText("This is a paragraph");
     expect(firstTabContent).toBeInTheDocument();
+
+    const secondTabContent = queryByText("A div");
+    expect(secondTabContent).not.toBeInTheDocument();
 
     const secondTabTitle = getByRole("button", { name: "Second tab" });
     userEvent.click(secondTabTitle);
