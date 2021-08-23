@@ -12,6 +12,7 @@ import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
 import { Tabs } from "../Tabs";
+import { DefinitionsContent } from "../Definitions/DefinitionsContent";
 
 type CcgPageContentProps = {
   ccgPractices: PracticeType[];
@@ -43,6 +44,7 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
         orderSelect={practiceTableContent.orderSelect}
       />
       <AboutThisDataContent />
+      <DefinitionsContent />
     </>
   );
   return (
@@ -61,8 +63,8 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
                 />
               ),
             },
-            { title: "About", content: "" },
-            { title: "Definitions", content: "" },
+            { title: "About", content: <AboutThisDataContent /> },
+            { title: "Definitions", content: <DefinitionsContent /> },
           ]}
         />
       ) : (

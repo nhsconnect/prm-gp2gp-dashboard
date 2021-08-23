@@ -11,6 +11,9 @@ import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("CcgPageContent component", () => {
+  const definitionsText =
+    "The percentage of successful integrations that were integrated (filed or suppressed) within 3 days of the record being sent.";
+
   describe("With Tabs", () => {
     beforeEach(() => {
       when(mocked(useFeatureToggles))
@@ -75,10 +78,54 @@ describe("CcgPageContent component", () => {
       ).not.toBeInTheDocument();
 
       expect(
-        queryByText("When records are not integrated within 8 days", {
+        queryByText(definitionsText, {
           exact: false,
         })
       ).not.toBeInTheDocument();
+    });
+
+    it("displays about this data when tab is clicked", async () => {
+      const { getByRole, getByText, queryByText } = render(
+        <CcgPageContent ccgPractices={ccgPractices} />
+      );
+
+      const aboutTabContent = queryByText(
+        "The Data Platform is updated 14 days after the end of the month.",
+        { exact: false }
+      );
+      expect(aboutTabContent).not.toBeInTheDocument();
+
+      const aboutTabTitle = getByRole("button", { name: "About" });
+      userEvent.click(aboutTabTitle);
+
+      await waitFor(() => {
+        const aboutTabContent = getByText(
+          "The Data Platform is updated 14 days after the end of the month.",
+          { exact: false }
+        );
+        expect(aboutTabContent).toBeInTheDocument();
+      });
+    });
+
+    it("displays definitions when tab is clicked", async () => {
+      const { getByRole, getByText, queryByText } = render(
+        <CcgPageContent ccgPractices={ccgPractices} />
+      );
+
+      const definitionsTabContent = queryByText(definitionsText, {
+        exact: false,
+      });
+      expect(definitionsTabContent).not.toBeInTheDocument();
+
+      const definitionsTabTitle = getByRole("button", { name: "Definitions" });
+      userEvent.click(definitionsTabTitle);
+
+      await waitFor(() => {
+        const definitionsTabContent = getByText(definitionsText, {
+          exact: false,
+        });
+        expect(definitionsTabContent).toBeInTheDocument();
+      });
     });
   });
 
