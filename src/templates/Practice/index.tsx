@@ -25,6 +25,7 @@ import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import "../../components/common/Table/index.scss";
 import "./index.scss";
+import { DefinitionsContent } from "../../components/Definitions";
 
 type PageContext = {
   practice: PracticeType;
@@ -144,6 +145,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         About this data
       </h2>
       <AboutThisDataContent />
+      <DefinitionsContent />
     </>
   );
 };
