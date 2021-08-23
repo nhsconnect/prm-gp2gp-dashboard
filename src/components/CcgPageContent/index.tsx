@@ -8,15 +8,18 @@ import { PracticeType } from "../../templates/Practice/practice.types";
 import practiceTableContent from "../../data/content/practiceTable.json";
 import ccgContent from "../../data/content/ccg.json";
 import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
+import { Tabs } from "../Tabs";
 
 type CcgPageContentProps = {
   ccgPractices: PracticeType[];
 };
 
 export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
-  return (
+  const { showTabsView } = useFeatureToggles();
+  const NoTabsContent = () => (
     <>
       <div className="nhsuk-u-reading-width">
         <p className="nhsuk-body">
@@ -24,7 +27,6 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
           <a href="#about-this-data">about this data</a>.
         </p>
       </div>
-
       <Expander
         title={eightDayExpanderContent.title}
         content={
@@ -34,7 +36,6 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
           </>
         }
       />
-
       <PracticeTableWithSort
         ccgPractices={ccgPractices}
         headers={practiceTableContent.headers}
@@ -42,6 +43,31 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
         orderSelect={practiceTableContent.orderSelect}
       />
       <AboutThisDataContent />
+    </>
+  );
+  return (
+    <>
+      {showTabsView ? (
+        <Tabs
+          tabs={[
+            {
+              title: "Data table",
+              content: (
+                <PracticeTableWithSort
+                  ccgPractices={ccgPractices}
+                  headers={practiceTableContent.headers}
+                  sortBySelect={practiceTableContent.sortBySelect}
+                  orderSelect={practiceTableContent.orderSelect}
+                />
+              ),
+            },
+            { title: "About", content: "" },
+            { title: "Definitions", content: "" },
+          ]}
+        />
+      ) : (
+        <NoTabsContent />
+      )}
     </>
   );
 };

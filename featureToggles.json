@@ -1,10 +1,12 @@
 {
   "dev": {
     "showPublicBetaText": true,
-    "showHistoricalData": true
+    "showHistoricalData": true,
+    "showTabsView": true
   },
   "prod": {
     "showPublicBetaText": false,
-    "showHistoricalData": true
+    "showHistoricalData": true,
+    "showTabsView": false
   }
 }
