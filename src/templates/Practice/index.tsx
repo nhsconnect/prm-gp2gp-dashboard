@@ -140,6 +140,9 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
           />
         </>
       )}
+      <h2 id="about-this-data" className="nhsuk-u-margin-top-6">
+        About this data
+      </h2>
       <AboutThisDataContent />
     </>
   );
