@@ -127,6 +127,23 @@ describe("CcgPageContent component", () => {
         expect(definitionsTabContent).toBeInTheDocument();
       });
     });
+
+    it("should display expander with the correct content", () => {
+      const { getByText } = render(
+        <CcgPageContent ccgPractices={practiceMetricsMock} />
+      );
+
+      const expanderTitle = getByText("Why integrate within 8 days");
+      const expanderContent = getByText(
+        "This increases burden on both the sending and receiving",
+        { exact: false }
+      );
+      expect(expanderTitle).toBeInTheDocument();
+      expect(expanderContent).not.toBeVisible();
+
+      userEvent.click(expanderTitle);
+      expect(expanderContent).toBeVisible();
+    });
   });
 
   describe("Without Tabs - showTabsView toggled off", () => {

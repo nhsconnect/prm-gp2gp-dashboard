@@ -12,22 +12,41 @@ import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 import "./index.scss";
 import { Tabs } from "../Tabs";
-import { DefinitionsContent } from "../Definitions/DefinitionsContent";
+import { DefinitionsContent } from "../Definitions";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 
 type CcgPageContentProps = {
   ccgPractices: PracticeType[];
 };
 
 export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
+  const { year, month } = ccgPractices[0].metrics[0];
+  const tableTitle = `Integration times for ${convertMonthNumberToText(
+    month
+  )} ${year}`;
+
   const { showTabsView } = useFeatureToggles();
   const NoTabsContent = () => (
     <>
+      <PracticeTableWithSort
+        ccgPractices={ccgPractices}
+        headers={practiceTableContent.headers}
+        sortBySelect={practiceTableContent.sortBySelect}
+        orderSelect={practiceTableContent.orderSelect}
+        tableCaption={tableTitle}
+      />
+      <AboutThisDataContent />
+      <DefinitionsContent />
+    </>
+  );
+
+  return (
+    <section className="gp2gp-table-section">
+      <h2>{tableTitle}</h2>
       <div className="nhsuk-u-reading-width">
-        <p className="nhsuk-body">
-          {ccgContent.tableDescription} More information{" "}
-          <a href="#about-this-data">about this data</a>.
-        </p>
+        <p className="nhsuk-body">{ccgContent.tableDescription}</p>
       </div>
+
       <Expander
         title={eightDayExpanderContent.title}
         content={
@@ -37,18 +56,7 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
           </>
         }
       />
-      <PracticeTableWithSort
-        ccgPractices={ccgPractices}
-        headers={practiceTableContent.headers}
-        sortBySelect={practiceTableContent.sortBySelect}
-        orderSelect={practiceTableContent.orderSelect}
-      />
-      <AboutThisDataContent />
-      <DefinitionsContent />
-    </>
-  );
-  return (
-    <>
+
       {showTabsView ? (
         <Tabs
           tabs={[
@@ -60,6 +68,7 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
                   headers={practiceTableContent.headers}
                   sortBySelect={practiceTableContent.sortBySelect}
                   orderSelect={practiceTableContent.orderSelect}
+                  tableCaption={tableTitle}
                 />
               ),
             },
@@ -70,6 +79,6 @@ export const CcgPageContent: FC<CcgPageContentProps> = ({ ccgPractices }) => {
       ) : (
         <NoTabsContent />
       )}
-    </>
+    </section>
   );
 };

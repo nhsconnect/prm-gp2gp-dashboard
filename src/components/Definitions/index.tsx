@@ -1,7 +1,7 @@
 import React from "react";
 
 export const DefinitionsContent = () => (
-  <>
+  <div className="nhsuk-u-reading-width">
     <h3>Successful integrations</h3>
     <p>All GP2GP transfers that were:</p>
     <ul>
@@ -42,5 +42,5 @@ export const DefinitionsContent = () => (
       When records are not integrated within 8 days, GP2GP requests that a full
       paper copy is printed and sent to the practice.
     </p>
-  </>
+  </div>
 );

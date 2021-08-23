@@ -8,22 +8,22 @@ import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json"
 import practiceTableContent from "../../../data/content/practiceTable.json";
 
 describe("PracticeTableWithSort component", () => {
-  it("should display table heading with the month and year", () => {
-    const { getByRole } = render(
+  it("should display table heading caption with the month and year", () => {
+    const tableCaptionText = "Integration times for February 2020";
+
+    const { getByText } = render(
       <PracticeTableWithSort
         ccgPractices={practiceMetricsMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
+        tableCaption={tableCaptionText}
       />
     );
 
-    const tableHeading = getByRole("heading", {
-      name: "Integration times for February 2020",
-      level: 2,
-    });
+    const tableCaption = getByText(`${tableCaptionText} data`);
 
-    expect(tableHeading).toBeInTheDocument();
+    expect(tableCaption).toBeInTheDocument();
   });
 
   it("displays practices ordered by Beyond 8 day Percentage SLA by default in descending order", () => {
@@ -33,6 +33,7 @@ describe("PracticeTableWithSort component", () => {
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
+        tableCaption={"Some table title"}
       />
     );
 
@@ -63,6 +64,7 @@ describe("PracticeTableWithSort component", () => {
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
+        tableCaption={"Some table title"}
       />
     );
 
@@ -186,6 +188,7 @@ describe("PracticeTableWithSort component", () => {
             headers={practiceTableContent.headers}
             sortBySelect={practiceTableContent.sortBySelect}
             orderSelect={practiceTableContent.orderSelect}
+            tableCaption={"Some table title"}
           />
         );
 

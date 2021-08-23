@@ -17,6 +17,7 @@ type TableWithSortProps = {
   headers: string[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
+  tableCaption: string;
 };
 
 type SelectType = {
@@ -70,18 +71,13 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   headers,
   sortBySelect,
   orderSelect,
+  tableCaption,
 }) => {
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
   const sortedPractices = useMemo(() => {
     return sortPractices(ccgPractices, selectedField, selectedOrder);
   }, [ccgPractices, selectedField, selectedOrder]);
-
-  const { year, month } = ccgPractices[0].metrics[0];
-
-  const tableTitle = `Integration times for ${convertMonthNumberToText(
-    month
-  )} ${year}`;
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: PracticeType) => {
@@ -109,8 +105,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   return (
-    <section className="gp2gp-table-section">
-      <h2>{tableTitle}</h2>
+    <>
       <div className="gp2gp-sort">
         <Select
           label="Sort by"
@@ -132,12 +127,12 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       </div>
       <Table
         className="gp2gp-metrics-table"
-        caption={{ text: `${tableTitle} data`, hidden: true }}
+        caption={{ text: `${tableCaption} data`, hidden: true }}
         headers={headers}
         rows={practiceTableRows}
         sortedColumnIndex={sortedColumnIndex}
         sortOrder={selectedOrder as AriaAttributes["aria-sort"]}
       />
-    </section>
+    </>
   );
 };
