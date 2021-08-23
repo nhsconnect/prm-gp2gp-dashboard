@@ -85,7 +85,7 @@ describe("CcgPageContent component", () => {
     });
 
     it("displays about this data when tab is clicked", async () => {
-      const { getByRole, getByText, queryByText } = render(
+      const { getByRole, getByText, queryByText, queryByRole } = render(
         <CcgPageContent ccgPractices={ccgPractices} />
       );
 
@@ -104,6 +104,12 @@ describe("CcgPageContent component", () => {
           { exact: false }
         );
         expect(aboutTabContent).toBeInTheDocument();
+
+        const aboutHeading = queryByRole("heading", {
+          name: "About this data",
+          level: 2,
+        });
+        expect(aboutHeading).not.toBeInTheDocument();
       });
     });
 

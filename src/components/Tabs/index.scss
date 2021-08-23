@@ -4,9 +4,11 @@
 @import "node_modules/nhsuk-frontend/packages/core/utilities/typography";
 
 .gp2gp-tabs {
+  margin-top: 32px;
+
   &--tab-titles {
     border-bottom: 1px solid $color_nhsuk-grey-4;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   &--tab-title {
