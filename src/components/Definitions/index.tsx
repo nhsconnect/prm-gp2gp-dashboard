@@ -2,6 +2,7 @@ import React from "react";
 
 export const DefinitionsContent = () => (
   <div className="nhsuk-u-reading-width">
+    <h2 className="nhsuk-u-margin-top-6">Definitions</h2>
     <h3>Successful integrations</h3>
     <p>All GP2GP transfers that were:</p>
     <ul>

@@ -105,7 +105,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   return (
-    <>
+    <div className="nhsuk-u-margin-top-6">
       <div className="gp2gp-sort">
         <Select
           label="Sort by"
@@ -133,6 +133,6 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         sortedColumnIndex={sortedColumnIndex}
         sortOrder={selectedOrder as AriaAttributes["aria-sort"]}
       />
-    </>
+    </div>
   );
 };

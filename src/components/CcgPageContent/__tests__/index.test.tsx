@@ -85,7 +85,7 @@ describe("CcgPageContent component", () => {
     });
 
     it("displays about this data when tab is clicked", async () => {
-      const { getByRole, getByText, queryByText, queryByRole } = render(
+      const { getByRole, getByText, queryByText } = render(
         <CcgPageContent ccgPractices={ccgPractices} />
       );
 
@@ -105,11 +105,11 @@ describe("CcgPageContent component", () => {
         );
         expect(aboutTabContent).toBeInTheDocument();
 
-        const aboutHeading = queryByRole("heading", {
+        const aboutHeading = getByRole("heading", {
           name: "About this data",
           level: 2,
         });
-        expect(aboutHeading).not.toBeInTheDocument();
+        expect(aboutHeading).toBeInTheDocument();
       });
     });
 
@@ -131,6 +131,12 @@ describe("CcgPageContent component", () => {
           exact: false,
         });
         expect(definitionsTabContent).toBeInTheDocument();
+
+        const definitionsHeading = getByRole("heading", {
+          name: "Definitions",
+          level: 2,
+        });
+        expect(definitionsHeading).toBeInTheDocument();
       });
     });
 
@@ -170,6 +176,19 @@ describe("CcgPageContent component", () => {
       });
 
       expect(aboutThisDataHeading).toBeInTheDocument();
+    });
+
+    it("displays CCG 'Definitions' header correctly - when showTabsView toggled off", () => {
+      const { getByRole } = render(
+        <CcgPageContent ccgPractices={practiceMetricsMock} />
+      );
+
+      const definitionsHeading = getByRole("heading", {
+        name: "Definitions",
+        level: 2,
+      });
+
+      expect(definitionsHeading).toBeInTheDocument();
     });
 
     it("displays multiple CCG practices - when showTabsView toggled off", () => {
