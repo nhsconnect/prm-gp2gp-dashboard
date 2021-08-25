@@ -25,6 +25,9 @@ export const Tabs: FC<TabsProps> = ({ tabs }) => {
               selectedTabIndex === index && "gp2gp-tabs--tab-title__active"
             )}
           >
+            <span className="nhsuk-u-visually-hidden">
+              Click to display content
+            </span>
             {tab.title}
           </button>
         ))}

@@ -65,9 +65,15 @@ describe("PageContent component", () => {
         <PageContent title="" tableDescription="" tableContent="" />
       );
 
-      expect(getByRole("button", { name: "Data table" })).toBeInTheDocument();
-      expect(getByRole("button", { name: "About" })).toBeInTheDocument();
-      expect(getByRole("button", { name: "Definitions" })).toBeInTheDocument();
+      expect(
+        getByRole("button", { name: "Click to display content Data table" })
+      ).toBeInTheDocument();
+      expect(
+        getByRole("button", { name: "Click to display content About" })
+      ).toBeInTheDocument();
+      expect(
+        getByRole("button", { name: "Click to display content Definitions" })
+      ).toBeInTheDocument();
     });
 
     it("displays data table content when passed", () => {
@@ -91,7 +97,9 @@ describe("PageContent component", () => {
       );
       expect(aboutTabContent).not.toBeInTheDocument();
 
-      const aboutTabTitle = getByRole("button", { name: "About" });
+      const aboutTabTitle = getByRole("button", {
+        name: "Click to display content About",
+      });
       userEvent.click(aboutTabTitle);
 
       await waitFor(() => {
@@ -119,7 +127,9 @@ describe("PageContent component", () => {
       });
       expect(definitionsTabContent).not.toBeInTheDocument();
 
-      const definitionsTabTitle = getByRole("button", { name: "Definitions" });
+      const definitionsTabTitle = getByRole("button", {
+        name: "Click to display content Definitions",
+      });
       userEvent.click(definitionsTabTitle);
 
       await waitFor(() => {

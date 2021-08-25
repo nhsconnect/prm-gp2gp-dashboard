@@ -37,7 +37,9 @@ describe("Tabs component", () => {
     const secondTabContent = queryByText("A div");
     expect(secondTabContent).not.toBeInTheDocument();
 
-    const secondTabTitle = getByRole("button", { name: "Second tab" });
+    const secondTabTitle = getByRole("button", {
+      name: "Click to display content Second tab",
+    });
     userEvent.click(secondTabTitle);
 
     await waitFor(() => {
@@ -52,10 +54,14 @@ describe("Tabs component", () => {
   it("has gp2gp-active-tab class name when tab is selected", async () => {
     const { getByRole } = render(<Tabs tabs={tabs} />);
 
-    const firstTabTitle = getByRole("button", { name: "First tab" });
+    const firstTabTitle = getByRole("button", {
+      name: "Click to display content First tab",
+    });
     expect(firstTabTitle).toHaveClass("gp2gp-tabs--tab-title__active");
 
-    const secondTabTitle = getByRole("button", { name: "Second tab" });
+    const secondTabTitle = getByRole("button", {
+      name: "Click to display content Second tab",
+    });
     expect(secondTabTitle).not.toHaveClass("gp2gp-tabs--tab-title__active");
 
     userEvent.click(secondTabTitle);
