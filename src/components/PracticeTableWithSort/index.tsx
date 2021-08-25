@@ -126,7 +126,6 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         />
       </div>
       <Table
-        className="gp2gp-metrics-table"
         caption={{ text: `${tableCaption} data`, hidden: true }}
         headers={headers}
         rows={practiceTableRows}

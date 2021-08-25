@@ -14,21 +14,6 @@
     padding-right: nhsuk-spacing(3);
     white-space: initial;
     vertical-align: bottom;
-  }
-}
-
-.nhs-table__header_cell {
-  @extend td;
-  font-weight: $nhsuk-font-normal;
-}
-
-.sorted {
-  background-color: $color_nhsuk-grey-5;
-}
-
-.gp2gp-metrics-table {
-  .nhsuk-table__col,
-  .nhsuk-table__cell {
     text-align: right;
   }
 
@@ -40,4 +25,13 @@
   .nhsuk-table__col-1 {
     border-right: 2px solid $color_nhsuk-grey-4;
   }
+}
+
+.nhs-table__header_cell {
+  @extend td;
+  font-weight: $nhsuk-font-normal;
+}
+
+.sorted {
+  background-color: $color_nhsuk-grey-5;
 }

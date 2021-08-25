@@ -3,15 +3,10 @@ import moxios from "moxios";
 import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { mocked } from "ts-jest/utils";
-import { when } from "jest-when";
 
 import Practice from "..";
 import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
-
-jest.mock("../../../library/hooks/useFeatureToggle");
 
 const ODSPracticeData = {
   odsCode: "B86030",
@@ -72,11 +67,6 @@ const practicePageContext = {
 describe("Practice template", () => {
   beforeEach(() => {
     moxios.install();
-
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showHistoricalData: true });
-
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
@@ -243,110 +233,5 @@ describe("Practice template", () => {
     const dashElements = getAllByText("n/a");
     expect(dashElements[0]).toBeInTheDocument();
     expect(dashElements.length).toBe(3);
-  });
-});
-
-describe("showHistoricalData toggled off", () => {
-  beforeEach(() => {
-    moxios.install();
-
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showHistoricalData: false });
-
-    const statusCode = 200;
-    const mockedResponse = practiceDataBuilder(ODSPracticeData);
-    mockAPIResponse(statusCode, mockedResponse);
-  });
-
-  afterAll(() => {
-    moxios.uninstall();
-  });
-
-  const pageContextWithOneMonthMetric = {
-    practice: {
-      odsCode: "B86030",
-      name: "BURTON CROFT SURGERY",
-      metrics: [
-        {
-          year: 2019,
-          month: 11,
-          requester: {
-            integrated: {
-              transferCount: 20,
-              within3DaysPercentage: 25,
-              within8DaysPercentage: 60,
-              beyond8DaysPercentage: 15,
-            },
-          },
-        },
-      ],
-    },
-    layout: "general",
-  };
-
-  const practiceIntegratedData =
-    pageContextWithOneMonthMetric.practice.metrics[0].requester.integrated;
-
-  it("displays table caption correctly", () => {
-    const { getByText } = render(
-      <Practice pageContext={pageContextWithOneMonthMetric} />
-    );
-
-    const tableCaption = getByText("Integration times for November 2019");
-
-    expect(tableCaption).toBeInTheDocument();
-  });
-
-  it("renders metrics correctly", () => {
-    const { getByText } = render(
-      <Practice pageContext={pageContextWithOneMonthMetric} />
-    );
-
-    expect(getByText(practiceIntegratedData.transferCount)).toBeInTheDocument();
-
-    expect(
-      getByText(`${practiceIntegratedData.within3DaysPercentage}%`)
-    ).toBeInTheDocument();
-
-    expect(
-      getByText(`${practiceIntegratedData.within8DaysPercentage}%`)
-    ).toBeInTheDocument();
-
-    expect(
-      getByText(`${practiceIntegratedData.beyond8DaysPercentage}%`)
-    ).toBeInTheDocument();
-  });
-
-  it("displays expander with the correct content", () => {
-    const { getByText } = render(
-      <Practice pageContext={pageContextWithOneMonthMetric} />
-    );
-
-    const expanderTitle = getByText("Why integrate within 8 days");
-    const expanderContent = getByText(
-      "This increases burden on both the sending and receiving",
-      { exact: false }
-    );
-    expect(expanderTitle).toBeInTheDocument();
-    expect(expanderContent).not.toBeVisible();
-
-    userEvent.click(expanderTitle);
-    expect(expanderContent).toBeVisible();
-  });
-
-  it("displays table headers correctly", () => {
-    const { getAllByRole } = render(
-      <Practice pageContext={pageContextWithOneMonthMetric} />
-    );
-
-    const allColumnHeaders = getAllByRole("columnheader");
-
-    expect(allColumnHeaders[0]).toHaveTextContent("Successful integrations");
-    expect(allColumnHeaders[1]).toHaveTextContent("Integrated within 3 days");
-    expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 8 days");
-    expect(allColumnHeaders[3]).toHaveTextContent("Integrated beyond 8 days");
-
-    expect(allColumnHeaders.length).toBe(4);
   });
 });
