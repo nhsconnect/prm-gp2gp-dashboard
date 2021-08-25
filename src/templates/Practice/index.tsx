@@ -2,8 +2,6 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { OrganisationDetails } from "../../components/OrganisationDetails";
 import { Table } from "../../components/common/Table";
-import { AboutThisDataContent } from "../../components/AboutThisDataContent";
-import { Expander } from "../../components/common/Expander";
 
 import {
   IntegratedPracticeMetricsType,
@@ -21,11 +19,10 @@ import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useApi } from "../../library/hooks/useApi";
 import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
-import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import "../../components/common/Table/index.scss";
 import "./index.scss";
-import { DefinitionsContent } from "../../components/Definitions";
+import { PageContent } from "../../components/PageContent";
 
 type PageContext = {
   practice: PracticeType;
@@ -61,27 +58,6 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   });
 };
 
-const IntegrationsOverview: FC = () => (
-  <>
-    <div className="nhsuk-u-reading-width">
-      <p className="nhsuk-body">
-        The table below shows the time to integrate for records received by the
-        practice. More information{" "}
-        <a href={"#about-this-data"}>about this data</a>.
-      </p>
-    </div>
-    <Expander
-      title={eightDayExpanderContent.title}
-      content={
-        <>
-          <p>{eightDayExpanderContent.firstParagraph}</p>
-          <p>{eightDayExpanderContent.secondParagraph}</p>
-        </>
-      }
-    />
-  </>
-);
-
 const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { isLoading, data, error } = useApi(
     `${ODS_PORTAL_URL}/${practice.odsCode}`
@@ -116,36 +92,31 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       )}
       <hr aria-hidden={true} />
 
-      {showHistoricalData ? (
-        <section className="gp2gp-table-section">
-          <h2>Integration times</h2>
-          <IntegrationsOverview />
-          <Table
-            className="gp2gp-metrics-table"
-            headers={slaMetricsContent.tableHeaders}
-            caption={{
-              text: "Integration times for the recent months",
-              hidden: true,
-            }}
-            rows={generateMonthlyRowData(metrics)}
-          />
-        </section>
-      ) : (
-        <>
-          <IntegrationsOverview />
-          <Table
-            className="gp2gp-practice-table"
-            headers={slaMetricsContent.tableHeaders.slice(1)}
-            caption={{ text: tableCaptionText, hidden: false }}
-            rows={generateRowData(metrics[0].requester.integrated)}
-          />
-        </>
-      )}
-      <h2 id="about-this-data" className="nhsuk-u-margin-top-6">
-        About this data
-      </h2>
-      <AboutThisDataContent />
-      <DefinitionsContent />
+      <PageContent
+        title="Integration times"
+        tableDescription="The table below shows the time to integrate for records received by the
+        practice."
+        tableContent={
+          showHistoricalData ? (
+            <Table
+              className="gp2gp-metrics-table"
+              headers={slaMetricsContent.tableHeaders}
+              caption={{
+                text: "Integration times for the recent months",
+                hidden: true,
+              }}
+              rows={generateMonthlyRowData(metrics)}
+            />
+          ) : (
+            <Table
+              className="gp2gp-practice-table"
+              headers={slaMetricsContent.tableHeaders.slice(1)}
+              caption={{ text: tableCaptionText, hidden: false }}
+              rows={generateRowData(metrics[0].requester.integrated)}
+            />
+          )
+        }
+      />
     </>
   );
 };

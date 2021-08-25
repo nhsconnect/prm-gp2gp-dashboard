@@ -140,14 +140,17 @@ describe("Practice template", () => {
     });
   });
 
-  it("display table caption correctly", () => {
-    const { getByText } = render(
+  it("displays table title correctly", () => {
+    const { getByRole } = render(
       <Practice pageContext={practicePageContext} />
     );
 
-    const tableCaption = getByText("Integration times");
+    const tableTitle = getByRole("heading", {
+      name: "Integration times",
+      level: 2,
+    });
 
-    expect(tableCaption).toBeInTheDocument();
+    expect(tableTitle).toBeInTheDocument();
   });
 
   it("renders metrics for multiple months correctly", () => {
@@ -174,7 +177,7 @@ describe("Practice template", () => {
     });
   });
 
-  it("should display expander with the correct content", () => {
+  it("displays expander with the correct content", () => {
     const { getByText } = render(
       <Practice pageContext={practicePageContext} />
     );
@@ -191,7 +194,7 @@ describe("Practice template", () => {
     expect(expanderContent).toBeVisible();
   });
 
-  it("display table headers correctly", () => {
+  it("displays table headers correctly", () => {
     const { getAllByRole } = render(
       <Practice pageContext={practicePageContext} />
     );
@@ -285,7 +288,7 @@ describe("showHistoricalData toggled off", () => {
   const practiceIntegratedData =
     pageContextWithOneMonthMetric.practice.metrics[0].requester.integrated;
 
-  it("display table caption correctly", () => {
+  it("displays table caption correctly", () => {
     const { getByText } = render(
       <Practice pageContext={pageContextWithOneMonthMetric} />
     );
@@ -315,7 +318,7 @@ describe("showHistoricalData toggled off", () => {
     ).toBeInTheDocument();
   });
 
-  it("should display expander with the correct content", () => {
+  it("displays expander with the correct content", () => {
     const { getByText } = render(
       <Practice pageContext={pageContextWithOneMonthMetric} />
     );
@@ -332,7 +335,7 @@ describe("showHistoricalData toggled off", () => {
     expect(expanderContent).toBeVisible();
   });
 
-  it("display table headers correctly", () => {
+  it("displays table headers correctly", () => {
     const { getAllByRole } = render(
       <Practice pageContext={pageContextWithOneMonthMetric} />
     );
