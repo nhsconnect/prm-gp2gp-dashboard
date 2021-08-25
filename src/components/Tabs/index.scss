@@ -18,8 +18,12 @@
     border: none;
     background: none;
     padding: nhsuk-spacing(1) 0;
-    margin-right: 24px;
+    margin-right: 80px;
     @extend .nhsuk-u-font-size-19;
+
+    @include mq($until: tablet) {
+      margin-right: 24px;
+    }
 
     &:focus {
       background-color: $color_nhsuk-yellow;

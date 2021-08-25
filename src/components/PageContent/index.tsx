@@ -48,12 +48,17 @@ export const PageContent: FC<PageContentProps> = ({
           ]}
         />
       ) : (
-        <>
+        <div className="gp2gp-no-tabs">
           {tableContent}
           <AboutThisDataContent />
           <DefinitionsContent />
-        </>
+        </div>
       )}
+      <noscript>
+        {tableContent}
+        <AboutThisDataContent />
+        <DefinitionsContent />
+      </noscript>
     </section>
   );
 };
