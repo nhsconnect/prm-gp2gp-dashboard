@@ -73,6 +73,22 @@ describe("Practice page", () => {
         cy.get("[data-testid=table__cell--row-1-col-3]").contains("n/a");
         cy.get("[data-testid=table__cell--row-1-col-4]").contains("n/a");
 
+        cy.contains("h2", "About this data").should("not.exist");
+        cy.contains("h2", "Definitions").should("not.exist");
+
+        cy.contains("button", "About").click();
+        cy.contains("h2", "About this data");
+        cy.contains("December 2019").should("not.exist");
+        cy.contains("h2", "Definitions").should("not.exist");
+
+        cy.contains("button", "Definitions").click();
+        cy.contains("h2", "Definitions");
+        cy.contains("December 2019").should("not.exist");
+        cy.contains("h2", "About this data").should("not.exist");
+
+        cy.contains("button", "Data table").click();
+        cy.contains("December 2019");
+
         cy.checkAccessibility();
 
         cy.contains(

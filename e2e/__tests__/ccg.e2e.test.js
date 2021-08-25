@@ -45,6 +45,26 @@ describe("CCG page", () => {
 
         cy.contains("Integrated beyond 8 days");
         cy.get('[data-testid="table__cell--row-0-col-4"]').contains("33.3%");
+
+        cy.contains("h2", "About this data").should("not.exist");
+        cy.contains("h2", "Definitions").should("not.exist");
+
+        cy.contains("button", "About").click();
+        cy.contains("h2", "About this data");
+        cy.contains("Test GP Practice With Integrations - A12345").should(
+          "not.exist"
+        );
+        cy.contains("h2", "Definitions").should("not.exist");
+
+        cy.contains("button", "Definitions").click();
+        cy.contains("h2", "Definitions");
+        cy.contains("Test GP Practice With Integrations - A12345").should(
+          "not.exist"
+        );
+        cy.contains("h2", "About this data").should("not.exist");
+
+        cy.contains("button", "Data table").click();
+        cy.contains("Test GP Practice With Integrations - A12345");
       });
 
       it("sort practice performance table and link to the individual practices", () => {
