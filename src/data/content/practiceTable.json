@@ -2,7 +2,7 @@
   "noResultsMessage": "No GP practices found",
   "headers": [
     "Practice name ",
-    "Successful integrations ",
+    "Transfers received ",
     "Integrated within 3 days ",
     "Integrated within 8 days ",
     "Integrated beyond 8 days "
@@ -16,7 +16,7 @@
         "value": "practiceName"
       },
       {
-        "displayText": "Successful integrations",
+        "displayText": "Transfers received",
         "value": "transferCount"
       },
       {

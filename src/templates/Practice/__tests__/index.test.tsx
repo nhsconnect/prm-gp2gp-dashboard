@@ -33,6 +33,18 @@ const practicePageContext = {
             within8DaysPercentage: 60,
             beyond8DaysPercentage: 15,
           },
+          transfersReceived: {
+            transferCount: 20,
+            awaitingIntegration: {
+              percentage: 0,
+            },
+            integrated: {
+              transferCount: 20,
+              within3DaysPercentage: 25,
+              within8DaysPercentage: 60,
+              beyond8DaysPercentage: 15,
+            },
+          },
         },
       },
       {
@@ -45,6 +57,18 @@ const practicePageContext = {
             within8DaysPercentage: 24,
             beyond8DaysPercentage: 26,
           },
+          transfersReceived: {
+            transferCount: 10,
+            awaitingIntegration: {
+              percentage: 0,
+            },
+            integrated: {
+              transferCount: 10,
+              within3DaysPercentage: 50,
+              within8DaysPercentage: 24,
+              beyond8DaysPercentage: 26,
+            },
+          },
         },
       },
       {
@@ -56,6 +80,18 @@ const practicePageContext = {
             within3DaysPercentage: 42,
             within8DaysPercentage: 19,
             beyond8DaysPercentage: 39,
+          },
+          transfersReceived: {
+            transferCount: 30,
+            awaitingIntegration: {
+              percentage: 0,
+            },
+            integrated: {
+              transferCount: 30,
+              within3DaysPercentage: 42,
+              within8DaysPercentage: 19,
+              beyond8DaysPercentage: 39,
+            },
           },
         },
       },
@@ -151,18 +187,18 @@ describe("Practice template", () => {
     const monthStrings = ["November 2019", "October 2019", "September 2019"];
 
     practiceMetrics.forEach((metric, i) => {
-      const integratedMetrics = metric.requester.integrated;
+      const transfersReceived = metric.requester.transfersReceived;
 
       expect(getByText(monthStrings[i])).toBeInTheDocument();
-      expect(getByText(integratedMetrics.transferCount)).toBeInTheDocument();
+      expect(getByText(transfersReceived.transferCount)).toBeInTheDocument();
       expect(
-        getByText(`${integratedMetrics.within3DaysPercentage}%`)
+        getByText(`${transfersReceived.integrated.within3DaysPercentage}%`)
       ).toBeInTheDocument();
       expect(
-        getByText(`${integratedMetrics.within8DaysPercentage}%`)
+        getByText(`${transfersReceived.integrated.within8DaysPercentage}%`)
       ).toBeInTheDocument();
       expect(
-        getByText(`${integratedMetrics.beyond8DaysPercentage}%`)
+        getByText(`${transfersReceived.integrated.beyond8DaysPercentage}%`)
       ).toBeInTheDocument();
     });
   });
@@ -192,7 +228,7 @@ describe("Practice template", () => {
     const allColumnHeaders = getAllByRole("columnheader");
 
     expect(allColumnHeaders[0]).toHaveTextContent("Month");
-    expect(allColumnHeaders[1]).toHaveTextContent("Successful integrations");
+    expect(allColumnHeaders[1]).toHaveTextContent("Transfers received");
     expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 3 days");
     expect(allColumnHeaders[3]).toHaveTextContent("Integrated within 8 days");
     expect(allColumnHeaders[4]).toHaveTextContent("Integrated beyond 8 days");
@@ -215,9 +251,18 @@ describe("Practice template", () => {
                 within3DaysPercentage: null,
                 within8DaysPercentage: null,
                 beyond8DaysPercentage: null,
-                within3Days: 0,
-                within8Days: 0,
-                beyond8Days: 0,
+              },
+              transfersReceived: {
+                transferCount: 0,
+                awaitingIntegration: {
+                  percentage: null,
+                },
+                integrated: {
+                  transferCount: 0,
+                  within3DaysPercentage: null,
+                  within8DaysPercentage: null,
+                  beyond8DaysPercentage: null,
+                },
               },
             },
           },

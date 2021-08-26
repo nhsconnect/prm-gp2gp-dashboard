@@ -3,7 +3,7 @@
   "subtitle": "Number of records integrated:",
   "tableHeaders": [
     "Month",
-    "Successful integrations",
+    "Transfers received",
     "Integrated within 3 days",
     "Integrated within 8 days",
     "Integrated beyond 8 days"

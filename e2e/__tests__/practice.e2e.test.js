@@ -53,7 +53,7 @@ describe("Practice page", () => {
           "December 2019"
         );
 
-        cy.contains("Successful integrations");
+        cy.contains("Transfers received");
         cy.get("[data-testid=table__cell--row-0-col-1]").contains(2);
 
         cy.contains("Integrated within 3 days");

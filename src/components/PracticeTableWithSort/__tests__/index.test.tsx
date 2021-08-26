@@ -98,23 +98,23 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
-        "Successful integrations",
+        "Transfers received",
         "transferCount",
         SortOrder.DESCENDING,
         [
-          "Successful integrations 34",
-          "Successful integrations 21",
-          "Successful integrations 12",
+          "Transfers received 34",
+          "Transfers received 21",
+          "Transfers received 12",
         ],
       ],
       [
-        "Successful integrations",
+        "Transfers received",
         "transferCount",
         SortOrder.ASCENDING,
         [
-          "Successful integrations 0",
-          "Successful integrations 5",
-          "Successful integrations 12",
+          "Transfers received 0",
+          "Transfers received 5",
+          "Transfers received 12",
         ],
       ],
       [

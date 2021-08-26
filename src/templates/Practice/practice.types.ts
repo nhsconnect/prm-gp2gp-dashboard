@@ -10,6 +10,13 @@ export type PracticeMetricsType = {
   month: number;
   requester: {
     integrated: IntegratedPracticeMetricsType;
+    transfersReceived: {
+      transferCount: number;
+      awaitingIntegration: {
+        percentage: number | null;
+      };
+      integrated: IntegratedPracticeMetricsType;
+    };
   };
 };
 

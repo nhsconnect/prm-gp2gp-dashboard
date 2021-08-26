@@ -66,7 +66,7 @@ describe("CCG template", () => {
 
     expect(getByText("GP Practice - A12345")).toBeInTheDocument();
     expect(getByText("Second GP Practice - A12346")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent("Successful integrations 21");
+    expect(allRows[1]).toHaveTextContent("Transfers received 21");
     expect(allRows[1]).toHaveTextContent("Integrated within 3 days 23.8%");
     expect(allRows[1]).toHaveTextContent("Integrated within 8 days 28.6%");
     expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 47.6%");

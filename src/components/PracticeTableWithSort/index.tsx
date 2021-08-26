@@ -81,13 +81,14 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: PracticeType) => {
-      const slaMetrics = metrics[0].requester.integrated;
+      const transfersReceived = metrics[0].requester.transfersReceived;
+
       return [
         <PracticeLink odsCode={odsCode} name={name} />,
-        slaMetrics.transferCount,
-        addPercentageSign(slaMetrics.within3DaysPercentage),
-        addPercentageSign(slaMetrics.within8DaysPercentage),
-        addPercentageSign(slaMetrics.beyond8DaysPercentage),
+        transfersReceived.transferCount,
+        addPercentageSign(transfersReceived.integrated.within3DaysPercentage),
+        addPercentageSign(transfersReceived.integrated.within8DaysPercentage),
+        addPercentageSign(transfersReceived.integrated.beyond8DaysPercentage),
       ];
     }
   );

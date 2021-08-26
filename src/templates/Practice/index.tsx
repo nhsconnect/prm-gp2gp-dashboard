@@ -28,13 +28,14 @@ type PracticeProps = {
 
 const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   return metrics.map((metric) => {
-    const integratedMetrics = metric.requester.integrated;
+    const transfersReceived = metric.requester.transfersReceived;
+
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,
-      integratedMetrics.transferCount.toString(),
-      addPercentageSign(integratedMetrics.within3DaysPercentage),
-      addPercentageSign(integratedMetrics.within8DaysPercentage),
-      addPercentageSign(integratedMetrics.beyond8DaysPercentage),
+      transfersReceived.transferCount.toString(),
+      addPercentageSign(transfersReceived.integrated.within3DaysPercentage),
+      addPercentageSign(transfersReceived.integrated.within8DaysPercentage),
+      addPercentageSign(transfersReceived.integrated.beyond8DaysPercentage),
     ];
   });
 };
