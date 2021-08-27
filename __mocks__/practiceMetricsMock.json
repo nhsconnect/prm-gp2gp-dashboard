@@ -79,7 +79,7 @@
           "transfersReceived": {
             "transferCount": 0,
             "awaitingIntegration": {
-              "percentage": 0
+              "percentage": null
             },
             "integrated": {
               "within3DaysPercentage": null,

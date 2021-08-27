@@ -31,6 +31,10 @@
       {
         "displayText": "Beyond 8 days",
         "value": "beyond8DaysPercentage"
+      },
+      {
+        "displayText": "Awaiting integration",
+        "value": "awaitingIntegration"
       }
     ]
   },

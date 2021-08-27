@@ -47,6 +47,9 @@ const sortPractices = (
     if (fieldName === "practiceName") return field.name;
     if (fieldName === "transferCount")
       return field.metrics[0].requester.transfersReceived.transferCount;
+    if (fieldName === "awaitingIntegration")
+      return field.metrics[0].requester.transfersReceived.awaitingIntegration
+        .percentage;
     return field.metrics[0].requester.transfersReceived.integrated[fieldName];
   };
 

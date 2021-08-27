@@ -177,6 +177,26 @@ describe("PracticeTableWithSort component", () => {
           "Integrated beyond 8 days 0%",
         ],
       ],
+      [
+        "Awaiting integration",
+        "awaitingIntegration",
+        SortOrder.DESCENDING,
+        [
+          "Awaiting integration 7.7%",
+          "Awaiting integration 4.5%",
+          "Awaiting integration 0%",
+        ],
+      ],
+      [
+        "Awaiting integration",
+        "awaitingIntegration",
+        SortOrder.ASCENDING,
+        [
+          "Awaiting integration n/a",
+          "Awaiting integration 0%",
+          "Awaiting integration 0%",
+        ],
+      ],
     ];
 
     it.each(cases)(
