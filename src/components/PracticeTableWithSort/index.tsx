@@ -7,7 +7,6 @@ import { PracticeType } from "../../templates/Practice/practice.types";
 
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 
 import practiceTableContent from "../../data/content/practiceTable.json";
 import "../common/Table/index.scss";
@@ -39,11 +38,16 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   );
 };
 
-const sortPractices = (practices: any[], fieldName: string, order: string) => {
+const sortPractices = (
+  practices: PracticeType[],
+  fieldName: string,
+  order: string
+) => {
   const getFieldName = (field: any) => {
-    return fieldName === "practiceName"
-      ? field.name
-      : field.metrics[0].requester.integrated[fieldName];
+    if (fieldName === "practiceName") return field.name;
+    if (fieldName === "transferCount")
+      return field.metrics[0].requester.transfersReceived.transferCount;
+    return field.metrics[0].requester.transfersReceived.integrated[fieldName];
   };
 
   const sortData = (firstEl: any, secondEl: any) => {

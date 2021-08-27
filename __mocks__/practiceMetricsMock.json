@@ -10,8 +10,8 @@
           "integrated": {
             "transferCount": 5,
             "within3DaysPercentage": 60,
-            "within8DaysPercentage": 40,
-            "beyond8DaysPercentage": 0
+            "within8DaysPercentage": 0,
+            "beyond8DaysPercentage": 40
           },
           "transfersReceived": {
             "transferCount": 5,
