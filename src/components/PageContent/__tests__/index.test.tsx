@@ -11,7 +11,7 @@ jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("PageContent component", () => {
   const definitionsText =
-    "The percentage of successful integrations that were integrated (filed or suppressed) within 3 days of the record being sent.";
+    "The percentage of transfers received that were integrated (filed or suppressed) within 3 days of the record being sent.";
 
   describe("with tabs", () => {
     beforeEach(() => {
@@ -92,7 +92,7 @@ describe("PageContent component", () => {
       );
 
       const aboutTabContent = queryByText(
-        "The Data Platform is updated 14 days after the end of the month.",
+        "This site is updated 14 days after the end of each month.",
         { exact: false }
       );
       expect(aboutTabContent).not.toBeInTheDocument();
@@ -104,7 +104,7 @@ describe("PageContent component", () => {
 
       await waitFor(() => {
         const aboutTabContent = getByText(
-          "The Data Platform is updated 14 days after the end of the month.",
+          "This site is updated 14 days after the end of each month.",
           { exact: false }
         );
         expect(aboutTabContent).toBeInTheDocument();
@@ -223,7 +223,7 @@ describe("PageContent component", () => {
       );
 
       const aboutTabContent = getByText(
-        "The Data Platform is updated 14 days after the end of the month.",
+        "This site is updated 14 days after the end of each month.",
         { exact: false }
       );
       expect(aboutTabContent).toBeInTheDocument();
