@@ -65,6 +65,9 @@ describe("Practice page", () => {
         cy.contains("Integrated beyond 8 days");
         cy.get("[data-testid=table__cell--row-0-col-4]").contains("0%");
 
+        cy.contains("Awaiting integration");
+        cy.get("[data-testid=table__cell--row-0-col-5]").contains("0%");
+
         cy.get("[data-testid=table__cell--row-1-col-0]").contains(
           "November 2019"
         );

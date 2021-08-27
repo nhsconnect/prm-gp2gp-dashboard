@@ -211,8 +211,9 @@ describe("Practice template", () => {
     expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 3 days");
     expect(allColumnHeaders[3]).toHaveTextContent("Integrated within 8 days");
     expect(allColumnHeaders[4]).toHaveTextContent("Integrated beyond 8 days");
+    expect(allColumnHeaders[5]).toHaveTextContent("Awaiting integration");
 
-    expect(allColumnHeaders.length).toBe(5);
+    expect(allColumnHeaders.length).toBe(6);
   });
 
   it("renders placeholders when there is no transfers", () => {
@@ -249,6 +250,6 @@ describe("Practice template", () => {
 
     const dashElements = getAllByText("n/a");
     expect(dashElements[0]).toBeInTheDocument();
-    expect(dashElements.length).toBe(3);
+    expect(dashElements.length).toBe(4);
   });
 });
