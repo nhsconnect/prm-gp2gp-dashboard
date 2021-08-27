@@ -35,16 +35,16 @@ describe("CCG page", () => {
         );
 
         cy.contains("Transfers received");
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(4);
+        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(6);
 
         cy.contains("Integrated within 3 days");
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("25%");
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("16.7%");
 
         cy.contains("Integrated within 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-3"]').contains("25%");
+        cy.get('[data-testid="table__cell--row-0-col-3"]').contains("16.7%");
 
         cy.contains("Integrated beyond 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-4"]').contains("25%");
+        cy.get('[data-testid="table__cell--row-0-col-4"]').contains("16.7%");
 
         cy.contains("h2", "About this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");

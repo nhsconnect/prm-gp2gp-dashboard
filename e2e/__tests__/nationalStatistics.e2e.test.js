@@ -16,7 +16,7 @@ describe("National statistics page", () => {
 
         cy.contains("h3", "Transfers started");
         cy.get('[data-testid="national-statistics__initiated-count"]').contains(
-          "Count: 9"
+          "Count: 11"
         );
 
         cy.contains("h3", "Successful integrations within 8 days");
@@ -25,15 +25,15 @@ describe("National statistics page", () => {
         ).contains("Count: 4");
         cy.get(
           '[data-testid="national-statistics__integrated-percent"]'
-        ).contains("Percent: 44.44%");
+        ).contains("Percent: 36.36%");
 
         cy.contains("h3", "Paper fallback transfers");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-count"]'
-        ).contains("Count: 5");
+        ).contains("Count: 7");
         cy.get(
           '[data-testid="national-statistics__paper-fallback-percent"]'
-        ).contains("Percent: 55.56%");
+        ).contains("Percent: 63.64%");
 
         cy.contains("h4", "Process failure");
         cy.contains("h5", "Transferred, not integrated");
@@ -41,10 +41,10 @@ describe("National statistics page", () => {
         cy.contains("Transferred, not integrated");
         cy.get(
           '[data-testid="national-statistics__transferred-not-int-count"]'
-        ).contains("Count: 1");
+        ).contains("Count: 3");
         cy.get(
           '[data-testid="national-statistics__transferred-not-int-percent"]'
-        ).contains("Percent: 11.11%");
+        ).contains("Percent: 27.27%");
 
         cy.contains("Integrated late (beyond 8 days)");
 
@@ -53,14 +53,14 @@ describe("National statistics page", () => {
         );
         cy.get(
           '[data-testid="national-statistics__int-late-percent"]'
-        ).contains("Percent: 11.11%");
+        ).contains("Percent: 9.09%");
 
         cy.contains("h4", "Technical failures");
         cy.get('[data-testid="national-statistics__failed-count"]').contains(
           "Count: 2"
         );
         cy.get('[data-testid="national-statistics__failed-percent"]').contains(
-          "Percent: 22.22%"
+          "Percent: 18.18%"
         );
 
         cy.contains("h4", "Unclassified failures");
@@ -69,7 +69,7 @@ describe("National statistics page", () => {
         ).contains("Count: 1");
         cy.get(
           '[data-testid="national-statistics__unclassified-percent"]'
-        ).contains("Percent: 11.11%");
+        ).contains("Percent: 9.09%");
 
         cy.checkAccessibility();
       });

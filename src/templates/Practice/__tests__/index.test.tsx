@@ -27,19 +27,12 @@ const practicePageContext = {
         year: 2019,
         month: 11,
         requester: {
-          integrated: {
-            transferCount: 20,
-            within3DaysPercentage: 25,
-            within8DaysPercentage: 60,
-            beyond8DaysPercentage: 15,
-          },
           transfersReceived: {
             transferCount: 20,
             awaitingIntegration: {
               percentage: 0,
             },
             integrated: {
-              transferCount: 20,
               within3DaysPercentage: 25,
               within8DaysPercentage: 60,
               beyond8DaysPercentage: 15,
@@ -51,19 +44,12 @@ const practicePageContext = {
         year: 2019,
         month: 10,
         requester: {
-          integrated: {
-            transferCount: 10,
-            within3DaysPercentage: 50,
-            within8DaysPercentage: 24,
-            beyond8DaysPercentage: 26,
-          },
           transfersReceived: {
             transferCount: 10,
             awaitingIntegration: {
               percentage: 0,
             },
             integrated: {
-              transferCount: 10,
               within3DaysPercentage: 50,
               within8DaysPercentage: 24,
               beyond8DaysPercentage: 26,
@@ -75,19 +61,12 @@ const practicePageContext = {
         year: 2019,
         month: 9,
         requester: {
-          integrated: {
-            transferCount: 30,
-            within3DaysPercentage: 42,
-            within8DaysPercentage: 19,
-            beyond8DaysPercentage: 39,
-          },
           transfersReceived: {
             transferCount: 30,
             awaitingIntegration: {
               percentage: 0,
             },
             integrated: {
-              transferCount: 30,
               within3DaysPercentage: 42,
               within8DaysPercentage: 19,
               beyond8DaysPercentage: 39,
@@ -246,19 +225,12 @@ describe("Practice template", () => {
             year: 2019,
             month: 11,
             requester: {
-              integrated: {
-                transferCount: 0,
-                within3DaysPercentage: null,
-                within8DaysPercentage: null,
-                beyond8DaysPercentage: null,
-              },
               transfersReceived: {
                 transferCount: 0,
                 awaitingIntegration: {
                   percentage: null,
                 },
                 integrated: {
-                  transferCount: 0,
                   within3DaysPercentage: null,
                   within8DaysPercentage: null,
                   beyond8DaysPercentage: null,

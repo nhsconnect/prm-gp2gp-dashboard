@@ -7,19 +7,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
-          "integrated": {
-            "transferCount": 5,
-            "within3DaysPercentage": 60,
-            "within8DaysPercentage": 0,
-            "beyond8DaysPercentage": 40
-          },
           "transfersReceived": {
             "transferCount": 5,
             "awaitingIntegration": {
               "percentage": 0
             },
             "integrated": {
-              "transferCount": 5,
               "within3DaysPercentage": 60,
               "within8DaysPercentage": 40,
               "beyond8DaysPercentage": 0
@@ -37,19 +30,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
-          "integrated": {
-            "transferCount": 21,
-            "within3DaysPercentage": 23.8,
-            "within8DaysPercentage": 28.6,
-            "beyond8DaysPercentage": 47.6
-          },
           "transfersReceived": {
             "transferCount": 21,
             "awaitingIntegration": {
               "percentage": 0
             },
             "integrated": {
-              "transferCount": 21,
               "within3DaysPercentage": 23.8,
               "within8DaysPercentage": 28.6,
               "beyond8DaysPercentage": 47.6
@@ -67,19 +53,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
-          "integrated": {
-            "transferCount": 34,
-            "within3DaysPercentage": 58.8,
-            "within8DaysPercentage": 32.4,
-            "beyond8DaysPercentage": 8.8
-          },
           "transfersReceived": {
             "transferCount": 34,
             "awaitingIntegration": {
               "percentage": 0
             },
             "integrated": {
-              "transferCount": 34,
               "within3DaysPercentage": 58.8,
               "within8DaysPercentage": 32.4,
               "beyond8DaysPercentage": 8.8
@@ -97,19 +76,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
-          "integrated": {
-            "transferCount": 0,
-            "within3DaysPercentage": null,
-            "within8DaysPercentage": null,
-            "beyond8DaysPercentage": null
-          },
           "transfersReceived": {
             "transferCount": 0,
             "awaitingIntegration": {
               "percentage": 0
             },
             "integrated": {
-              "transferCount": 0,
               "within3DaysPercentage": null,
               "within8DaysPercentage": null,
               "beyond8DaysPercentage": null
@@ -127,19 +99,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
-          "integrated": {
-            "transferCount": 12,
-            "within3DaysPercentage": 0,
-            "within8DaysPercentage": 100,
-            "beyond8DaysPercentage": 0
-          },
           "transfersReceived": {
             "transferCount": 12,
             "awaitingIntegration": {
               "percentage": 0
             },
             "integrated": {
-              "transferCount": 12,
               "within3DaysPercentage": 0,
               "within8DaysPercentage": 100,
               "beyond8DaysPercentage": 0
@@ -157,19 +122,12 @@
         "year": 2020,
         "month": 2,
         "requester": {
-          "integrated": {
-            "transferCount": 12,
-            "within3DaysPercentage": 16.7,
-            "within8DaysPercentage": 32.4,
-            "beyond8DaysPercentage": 25
-          },
           "transfersReceived": {
             "transferCount": 12,
             "awaitingIntegration": {
               "percentage": 0
             },
             "integrated": {
-              "transferCount": 12,
               "within3DaysPercentage": 16.7,
               "within8DaysPercentage": 32.4,
               "beyond8DaysPercentage": 25
