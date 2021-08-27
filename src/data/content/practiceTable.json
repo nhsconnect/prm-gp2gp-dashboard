@@ -18,7 +18,7 @@
       },
       {
         "displayText": "Transfers received",
-        "value": "transferCount"
+        "value": "transfersReceivedCount"
       },
       {
         "displayText": "Within 3 days",
@@ -34,7 +34,7 @@
       },
       {
         "displayText": "Awaiting integration",
-        "value": "awaitingIntegration"
+        "value": "awaitingIntegrationPercentage"
       }
     ]
   },

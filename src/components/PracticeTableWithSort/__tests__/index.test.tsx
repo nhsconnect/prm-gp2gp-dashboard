@@ -99,7 +99,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Transfers received",
-        "transferCount",
+        "transfersReceivedCount",
         SortOrder.DESCENDING,
         [
           "Transfers received 34",
@@ -109,7 +109,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Transfers received",
-        "transferCount",
+        "transfersReceivedCount",
         SortOrder.ASCENDING,
         [
           "Transfers received 0",
@@ -179,7 +179,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Awaiting integration",
-        "awaitingIntegration",
+        "awaitingIntegrationPercentage",
         SortOrder.DESCENDING,
         [
           "Awaiting integration 7.7%",
@@ -189,7 +189,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Awaiting integration",
-        "awaitingIntegration",
+        "awaitingIntegrationPercentage",
         SortOrder.ASCENDING,
         [
           "Awaiting integration n/a",

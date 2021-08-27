@@ -43,17 +43,22 @@ const sortPractices = (
   fieldName: string,
   order: string
 ) => {
-  const getFieldName = (field: any) => {
-    if (fieldName === "practiceName") return field.name;
-    if (fieldName === "transferCount")
-      return field.metrics[0].requester.transfersReceived.transferCount;
-    if (fieldName === "awaitingIntegration")
-      return field.metrics[0].requester.transfersReceived.awaitingIntegration
-        .percentage;
-    return field.metrics[0].requester.transfersReceived.integrated[fieldName];
+  const getFieldValue = (field: any) => {
+    const transfers_received_metrics =
+      field.metrics[0].requester.transfersReceived;
+    switch (fieldName) {
+      case "practiceName":
+        return field.name;
+      case "transfersReceivedCount":
+        return transfers_received_metrics.transferCount;
+      case "awaitingIntegrationPercentage":
+        return transfers_received_metrics.awaitingIntegration.percentage;
+      default:
+        return transfers_received_metrics.integrated[fieldName];
+    }
   };
 
-  const sortData = (firstEl: any, secondEl: any) => {
+  const sortData = (firstEl: string | number, secondEl: string | number) => {
     if (firstEl === null || secondEl > firstEl) {
       return -1;
     }
@@ -64,8 +69,8 @@ const sortPractices = (
   };
 
   return [...practices].sort((firstEl, secondEl) => {
-    const firstField = getFieldName(firstEl);
-    const secondField = getFieldName(secondEl);
+    const firstField = getFieldValue(firstEl);
+    const secondField = getFieldValue(secondEl);
     if (order === SortOrder.ASCENDING) {
       return sortData(firstField, secondField);
     }
