@@ -93,6 +93,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         addPercentageSign(transfersReceived.integrated.within3DaysPercentage),
         addPercentageSign(transfersReceived.integrated.within8DaysPercentage),
         addPercentageSign(transfersReceived.integrated.beyond8DaysPercentage),
+        addPercentageSign(transfersReceived.awaitingIntegration.percentage),
       ];
     }
   );

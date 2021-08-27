@@ -5,7 +5,8 @@
     "Transfers received ",
     "Integrated within 3 days ",
     "Integrated within 8 days ",
-    "Integrated beyond 8 days "
+    "Integrated beyond 8 days ",
+    "Awaiting integration "
   ],
   "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {

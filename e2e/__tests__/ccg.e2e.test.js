@@ -46,6 +46,9 @@ describe("CCG page", () => {
         cy.contains("Integrated beyond 8 days");
         cy.get('[data-testid="table__cell--row-0-col-4"]').contains("16.7%");
 
+        cy.contains("Awaiting integration");
+        cy.get('[data-testid="table__cell--row-0-col-5"]').contains("50%");
+
         cy.contains("h2", "About this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");
 
