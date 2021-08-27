@@ -56,7 +56,7 @@ describe("CCG template", () => {
 
   it("displays CCG practices and hides about and definitions content", () => {
     const definitionsText =
-      "The percentage of successful integrations that were integrated (filed or suppressed) within 3 days of the record being sent.";
+      "The percentage of transfers received that were integrated (filed or suppressed) within 3 days of the record being sent.";
 
     const { getByText, queryByText, getAllByRole } = render(
       <Ccg pageContext={pipelineCCGData} />
@@ -66,16 +66,15 @@ describe("CCG template", () => {
 
     expect(getByText("GP Practice - A12345")).toBeInTheDocument();
     expect(getByText("Second GP Practice - A12346")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent("Transfers received 21");
-    expect(allRows[1]).toHaveTextContent("Integrated within 3 days 23.8%");
-    expect(allRows[1]).toHaveTextContent("Integrated within 8 days 28.6%");
-    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 47.6%");
+    expect(allRows[1]).toHaveTextContent("Transfers received 22");
+    expect(allRows[1]).toHaveTextContent("Integrated within 3 days 22.7%");
+    expect(allRows[1]).toHaveTextContent("Integrated within 8 days 27.3%");
+    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 45.5%");
 
     expect(
-      queryByText(
-        "The Data Platform is updated 14 days after the end of the month.",
-        { exact: false }
-      )
+      queryByText("This site is updated 14 days after the end of each month.", {
+        exact: false,
+      })
     ).not.toBeInTheDocument();
 
     expect(

@@ -31,14 +31,14 @@
         "month": 2,
         "requester": {
           "transfersReceived": {
-            "transferCount": 21,
+            "transferCount": 22,
             "awaitingIntegration": {
-              "percentage": 0
+              "percentage": 4.5
             },
             "integrated": {
-              "within3DaysPercentage": 23.8,
-              "within8DaysPercentage": 28.6,
-              "beyond8DaysPercentage": 47.6
+              "within3DaysPercentage": 22.7,
+              "within8DaysPercentage": 27.3,
+              "beyond8DaysPercentage": 45.5
             }
           }
         }
@@ -100,13 +100,13 @@
         "month": 2,
         "requester": {
           "transfersReceived": {
-            "transferCount": 12,
+            "transferCount": 13,
             "awaitingIntegration": {
-              "percentage": 0
+              "percentage": 7.7
             },
             "integrated": {
               "within3DaysPercentage": 0,
-              "within8DaysPercentage": 100,
+              "within8DaysPercentage": 92.3,
               "beyond8DaysPercentage": 0
             }
           }

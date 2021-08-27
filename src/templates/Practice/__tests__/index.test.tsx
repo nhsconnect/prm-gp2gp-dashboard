@@ -28,14 +28,14 @@ const practicePageContext = {
         month: 11,
         requester: {
           transfersReceived: {
-            transferCount: 20,
+            transferCount: 22,
             awaitingIntegration: {
-              percentage: 0,
+              percentage: 90.9,
             },
             integrated: {
-              within3DaysPercentage: 25,
-              within8DaysPercentage: 60,
-              beyond8DaysPercentage: 15,
+              within3DaysPercentage: 22.7,
+              within8DaysPercentage: 54.5,
+              beyond8DaysPercentage: 13.6,
             },
           },
         },

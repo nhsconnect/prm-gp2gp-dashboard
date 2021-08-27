@@ -48,7 +48,7 @@ describe("PracticeTableWithSort component", () => {
     expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
-    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 47.6%");
+    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 45.5%");
     expect(allRows[2]).toHaveTextContent("Integrated beyond 8 days 25%");
     expect(allRows[3]).toHaveTextContent("Integrated beyond 8 days 8.8%");
     expect(allRows[4]).toHaveTextContent("Integrated beyond 8 days 0%");
@@ -103,8 +103,8 @@ describe("PracticeTableWithSort component", () => {
         SortOrder.DESCENDING,
         [
           "Transfers received 34",
-          "Transfers received 21",
-          "Transfers received 12",
+          "Transfers received 22",
+          "Transfers received 13",
         ],
       ],
       [
@@ -124,7 +124,7 @@ describe("PracticeTableWithSort component", () => {
         [
           "Integrated within 3 days 60%",
           "Integrated within 3 days 58.8%",
-          "Integrated within 3 days 23.8%",
+          "Integrated within 3 days 22.7%",
         ],
       ],
       [
@@ -142,7 +142,7 @@ describe("PracticeTableWithSort component", () => {
         "within8DaysPercentage",
         SortOrder.DESCENDING,
         [
-          "Integrated within 8 days 100%",
+          "Integrated within 8 days 92.3%",
           "Integrated within 8 days 40%",
           "Integrated within 8 days 32.4%",
         ],
@@ -153,7 +153,7 @@ describe("PracticeTableWithSort component", () => {
         SortOrder.ASCENDING,
         [
           "Integrated within 8 days n/a",
-          "Integrated within 8 days 28.6%",
+          "Integrated within 8 days 27.3%",
           "Integrated within 8 days 32.4%",
         ],
       ],
@@ -162,7 +162,7 @@ describe("PracticeTableWithSort component", () => {
         "beyond8DaysPercentage",
         SortOrder.DESCENDING,
         [
-          "Integrated beyond 8 days 47.6%",
+          "Integrated beyond 8 days 45.5%",
           "Integrated beyond 8 days 25%",
           "Integrated beyond 8 days 8.8%",
         ],
