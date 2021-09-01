@@ -44,17 +44,17 @@ const sortPractices = (
   order: string
 ) => {
   const getFieldValue = (field: any) => {
-    const transfers_received_metrics =
+    const transfersReceivedMetrics =
       field.metrics[0].requester.transfersReceived;
     switch (fieldName) {
       case "practiceName":
         return field.name;
       case "transfersReceivedCount":
-        return transfers_received_metrics.transferCount;
+        return transfersReceivedMetrics.transferCount;
       case "awaitingIntegrationPercentage":
-        return transfers_received_metrics.awaitingIntegration.percentage;
+        return transfersReceivedMetrics.awaitingIntegration.percentage;
       default:
-        return transfers_received_metrics.integrated[fieldName];
+        return transfersReceivedMetrics.integrated[fieldName];
     }
   };
 

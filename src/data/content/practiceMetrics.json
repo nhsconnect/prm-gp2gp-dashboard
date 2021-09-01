@@ -1,12 +1,10 @@
 {
-  "title": "Your practice integrating records",
-  "subtitle": "Number of records integrated:",
   "tableHeaders": [
-    "Month",
-    "Transfers received",
-    "Integrated within 3 days",
-    "Integrated within 8 days",
-    "Integrated beyond 8 days",
-    "Awaiting integration"
+    "Month ",
+    "Transfers received ",
+    "Integrated within 3 days ",
+    "Integrated within 8 days ",
+    "Integrated beyond 8 days ",
+    "Awaiting integration "
   ]
 }
