@@ -15,7 +15,7 @@ export const useApi = (
         const response = await axios.get(url, { params });
         setData(response.data);
         setIsLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         setError(error.response.status);
         setIsLoading(false);
       }
