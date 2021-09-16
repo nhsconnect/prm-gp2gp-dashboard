@@ -2,20 +2,17 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
 import { OrganisationDetails } from "../../components/OrganisationDetails";
-import {
-  MetricsTableType,
-  PracticeMetricsPercentageType,
-  PracticePercentageType,
-  PracticeType,
-  RequestedTransfersType,
-} from "../Practice/practice.types";
+import { PracticeType } from "../Practice/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
 import practiceTableContent from "../../data/content/practiceTable.json";
 import ccgContent from "../../data/content/ccg.json";
-import { calculatePercentage } from "../../library/utils/calculatePercentage";
+import {
+  generateMetricsTableData,
+  PracticePercentageType,
+} from "../../library/utils/generateMetricsTableData";
 
 type PageContext = {
   odsCode: string;
@@ -25,39 +22,6 @@ type PageContext = {
 
 type CcgProps = {
   pageContext: PageContext;
-};
-
-const generateMetricsTableData = ({
-  receivedCount,
-  integratedWithin3DaysCount,
-  integratedWithin8DaysCount,
-  integratedBeyond8DaysCount,
-  awaitingIntegrationCount,
-}: RequestedTransfersType): MetricsTableType => {
-  const integratedWithin3DaysPercentage = calculatePercentage(
-    integratedWithin3DaysCount,
-    receivedCount
-  );
-  const integratedWithin8DaysPercentage = calculatePercentage(
-    integratedWithin8DaysCount,
-    receivedCount
-  );
-
-  const integratedBeyond8DaysPercentage = calculatePercentage(
-    integratedBeyond8DaysCount,
-    receivedCount
-  );
-  const awaitingIntegrationPercentage = calculatePercentage(
-    awaitingIntegrationCount,
-    receivedCount
-  );
-  return {
-    receivedCount,
-    integratedWithin3DaysPercentage,
-    integratedWithin8DaysPercentage,
-    integratedBeyond8DaysPercentage,
-    awaitingIntegrationPercentage,
-  };
 };
 
 const Ccg: FC<CcgProps> = ({ pageContext }) => {

@@ -10,26 +10,6 @@ export type RequestedTransfersType = {
   unclassifiedFailureCount: number;
 };
 
-export type MetricsTableType = {
-  receivedCount: number;
-  integratedWithin3DaysPercentage: number | null;
-  integratedWithin8DaysPercentage: number | null;
-  integratedBeyond8DaysPercentage: number | null;
-  awaitingIntegrationPercentage: number | null;
-};
-
-export type PracticeMetricsPercentageType = {
-  year: number;
-  month: number;
-  requestedTransfers: MetricsTableType;
-};
-
-export type PracticePercentageType = {
-  odsCode: string;
-  name: string;
-  metrics: PracticeMetricsPercentageType[];
-};
-
 export type PracticeMetricsType = {
   year: number;
   month: number;
