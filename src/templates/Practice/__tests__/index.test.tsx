@@ -58,12 +58,12 @@ const practicePageContext = {
         month: 9,
         requestedTransfers: {
           requestedCount: 30,
-          receivedCount: 15,
+          receivedCount: 16,
           integratedCount: 15,
           integratedWithin3DaysCount: 10,
           integratedWithin8DaysCount: 2,
           integratedBeyond8DaysCount: 3,
-          awaitingIntegrationCount: 0,
+          awaitingIntegrationCount: 1,
           technicalFailuresCount: 0,
           unclassifiedFailureCount: 0,
         },
@@ -160,10 +160,10 @@ describe("Practice template", () => {
     const monthStrings = ["November 2019", "October 2019", "September 2019"];
 
     practiceMetrics.forEach((metric, i) => {
-      const transfersReceived = metric.requestedTransfers;
+      const transfersRequested = metric.requestedTransfers;
 
       expect(getByText(monthStrings[i])).toBeInTheDocument();
-      expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
+      expect(getByText(transfersRequested.receivedCount)).toBeInTheDocument();
     });
   });
 

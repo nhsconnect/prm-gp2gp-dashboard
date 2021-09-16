@@ -16,7 +16,7 @@ import { useApi } from "../../library/hooks/useApi";
 
 import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { PageContent } from "../../components/PageContent";
-import { calculatePercentage } from "../../library/utils/calculatePercentage";
+import { generateMetricsTableData } from "../../library/utils/generateMetricsTableData";
 
 type PageContext = {
   practice: PracticeType;
@@ -29,26 +29,17 @@ type PracticeProps = {
 
 const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   return metrics.map((metric) => {
-    const integratedWithin3DaysPercentage = calculatePercentage(
-      metric.requestedTransfers.integratedWithin3DaysCount,
-      metric.requestedTransfers.requestedCount
-    );
-    const integratedWithin8DaysPercentage = calculatePercentage(
-      metric.requestedTransfers.integratedWithin8DaysCount,
-      metric.requestedTransfers.requestedCount
-    );
+    const {
+      receivedCount,
+      integratedWithin3DaysPercentage,
+      integratedWithin8DaysPercentage,
+      integratedBeyond8DaysPercentage,
+      awaitingIntegrationPercentage,
+    } = generateMetricsTableData(metric.requestedTransfers);
 
-    const integratedBeyond8DaysPercentage = calculatePercentage(
-      metric.requestedTransfers.integratedBeyond8DaysCount,
-      metric.requestedTransfers.requestedCount
-    );
-    const awaitingIntegrationPercentage = calculatePercentage(
-      metric.requestedTransfers.awaitingIntegrationCount,
-      metric.requestedTransfers.requestedCount
-    );
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,
-      metric.requestedTransfers.requestedCount.toString(),
+      receivedCount,
       addPercentageSign(integratedWithin3DaysPercentage),
       addPercentageSign(integratedWithin8DaysPercentage),
       addPercentageSign(integratedBeyond8DaysPercentage),
