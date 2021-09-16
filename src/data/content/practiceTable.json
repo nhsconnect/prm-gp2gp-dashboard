@@ -10,7 +10,7 @@
   ],
   "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {
-    "defaultValue": "beyond8DaysPercentage",
+    "defaultValue": "integratedBeyond8DaysPercentage",
     "options": [
       {
         "displayText": "Practice name",
@@ -18,19 +18,19 @@
       },
       {
         "displayText": "Transfers received",
-        "value": "transfersReceivedCount"
+        "value": "receivedCount"
       },
       {
         "displayText": "Within 3 days",
-        "value": "within3DaysPercentage"
+        "value": "integratedWithin3DaysPercentage"
       },
       {
         "displayText": "Within 8 days",
-        "value": "within8DaysPercentage"
+        "value": "integratedWithin8DaysPercentage"
       },
       {
         "displayText": "Beyond 8 days",
-        "value": "beyond8DaysPercentage"
+        "value": "integratedBeyond8DaysPercentage"
       },
       {
         "displayText": "Awaiting integration",

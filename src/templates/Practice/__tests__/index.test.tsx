@@ -26,52 +26,46 @@ const practicePageContext = {
       {
         year: 2019,
         month: 11,
-        requester: {
-          transfersReceived: {
-            transferCount: 22,
-            awaitingIntegration: {
-              percentage: 90.9,
-            },
-            integrated: {
-              within3DaysPercentage: 22.7,
-              within8DaysPercentage: 54.5,
-              beyond8DaysPercentage: 13.6,
-            },
-          },
+        requestedTransfers: {
+          requestedCount: 22,
+          receivedCount: 22,
+          integratedCount: 0,
+          integratedWithin3DaysCount: 5,
+          integratedWithin8DaysCount: 12,
+          integratedBeyond8DaysCount: 2,
+          awaitingIntegrationCount: 1,
+          technicalFailuresCount: 0,
+          unclassifiedFailureCount: 0,
         },
       },
       {
         year: 2019,
         month: 10,
-        requester: {
-          transfersReceived: {
-            transferCount: 10,
-            awaitingIntegration: {
-              percentage: 0,
-            },
-            integrated: {
-              within3DaysPercentage: 50,
-              within8DaysPercentage: 24,
-              beyond8DaysPercentage: 26,
-            },
-          },
+        requestedTransfers: {
+          requestedCount: 15,
+          receivedCount: 15,
+          integratedCount: 15,
+          integratedWithin3DaysCount: 10,
+          integratedWithin8DaysCount: 2,
+          integratedBeyond8DaysCount: 3,
+          awaitingIntegrationCount: 0,
+          technicalFailuresCount: 0,
+          unclassifiedFailureCount: 0,
         },
       },
       {
         year: 2019,
         month: 9,
-        requester: {
-          transfersReceived: {
-            transferCount: 30,
-            awaitingIntegration: {
-              percentage: 0,
-            },
-            integrated: {
-              within3DaysPercentage: 42,
-              within8DaysPercentage: 19,
-              beyond8DaysPercentage: 39,
-            },
-          },
+        requestedTransfers: {
+          requestedCount: 30,
+          receivedCount: 15,
+          integratedCount: 15,
+          integratedWithin3DaysCount: 10,
+          integratedWithin8DaysCount: 2,
+          integratedBeyond8DaysCount: 3,
+          awaitingIntegrationCount: 0,
+          technicalFailuresCount: 0,
+          unclassifiedFailureCount: 0,
         },
       },
     ],
@@ -166,20 +160,26 @@ describe("Practice template", () => {
     const monthStrings = ["November 2019", "October 2019", "September 2019"];
 
     practiceMetrics.forEach((metric, i) => {
-      const transfersReceived = metric.requester.transfersReceived;
+      const transfersReceived = metric.requestedTransfers;
 
       expect(getByText(monthStrings[i])).toBeInTheDocument();
-      expect(getByText(transfersReceived.transferCount)).toBeInTheDocument();
-      expect(
-        getByText(`${transfersReceived.integrated.within3DaysPercentage}%`)
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${transfersReceived.integrated.within8DaysPercentage}%`)
-      ).toBeInTheDocument();
-      expect(
-        getByText(`${transfersReceived.integrated.beyond8DaysPercentage}%`)
-      ).toBeInTheDocument();
+      expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
     });
+  });
+
+  it("renders one month of metrics correctly", () => {
+    const { getByText } = render(
+      <Practice pageContext={practicePageContext} />
+    );
+
+    const transfersReceived =
+      practicePageContext.practice.metrics[0].requestedTransfers;
+
+    expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
+    expect(getByText("22.7%")).toBeInTheDocument();
+    expect(getByText("54.5%")).toBeInTheDocument();
+    expect(getByText("9.1%")).toBeInTheDocument();
+    expect(getByText("4.5%")).toBeInTheDocument();
   });
 
   it("displays expander with the correct content", () => {
@@ -225,18 +225,16 @@ describe("Practice template", () => {
           {
             year: 2019,
             month: 11,
-            requester: {
-              transfersReceived: {
-                transferCount: 0,
-                awaitingIntegration: {
-                  percentage: null,
-                },
-                integrated: {
-                  within3DaysPercentage: null,
-                  within8DaysPercentage: null,
-                  beyond8DaysPercentage: null,
-                },
-              },
+            requestedTransfers: {
+              requestedCount: 0,
+              receivedCount: 0,
+              integratedCount: 0,
+              integratedWithin3DaysCount: 0,
+              integratedWithin8DaysCount: 0,
+              integratedBeyond8DaysCount: 0,
+              awaitingIntegrationCount: 0,
+              technicalFailuresCount: 0,
+              unclassifiedFailureCount: 0,
             },
           },
         ],

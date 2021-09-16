@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 
 import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
-import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
+import practiceMetricsPercentageMock from "../../../../__mocks__/practiceMetricsPercentageMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
 
 describe("PracticeTableWithSort component", () => {
@@ -13,7 +13,7 @@ describe("PracticeTableWithSort component", () => {
 
     const { getByText } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        ccgPractices={practiceMetricsPercentageMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
@@ -29,7 +29,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices ordered by Beyond 8 day Percentage SLA by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        ccgPractices={practiceMetricsPercentageMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
@@ -45,7 +45,7 @@ describe("PracticeTableWithSort component", () => {
     const orderSelect = getByRole("combobox", {
       name: `Order${practiceTableContent.selectHiddenLabel}`,
     });
-    expect(sortBySelect).toHaveValue("beyond8DaysPercentage");
+    expect(sortBySelect).toHaveValue("integratedBeyond8DaysPercentage");
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
     expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 45.5%");
@@ -60,7 +60,7 @@ describe("PracticeTableWithSort component", () => {
   it("navigates to a practice page when a link is clicked", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        ccgPractices={practiceMetricsPercentageMock}
         headers={practiceTableContent.headers}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
@@ -99,7 +99,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Transfers received",
-        "transfersReceivedCount",
+        "receivedCount",
         SortOrder.DESCENDING,
         [
           "Transfers received 34",
@@ -109,7 +109,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Transfers received",
-        "transfersReceivedCount",
+        "receivedCount",
         SortOrder.ASCENDING,
         [
           "Transfers received 0",
@@ -119,37 +119,37 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated within 3 days",
-        "within3DaysPercentage",
+        "integratedWithin3DaysPercentage",
         SortOrder.DESCENDING,
         [
           "Integrated within 3 days 60%",
           "Integrated within 3 days 58.8%",
-          "Integrated within 3 days 22.7%",
+          "Integrated within 3 days 41.7%",
         ],
       ],
       [
         "Integrated within 3 days",
-        "within3DaysPercentage",
+        "integratedWithin3DaysPercentage",
         SortOrder.ASCENDING,
         [
           "Integrated within 3 days n/a",
           "Integrated within 3 days 0%",
-          "Integrated within 3 days 16.7%",
+          "Integrated within 3 days 22.7%",
         ],
       ],
       [
         "Integrated within 8 days",
-        "within8DaysPercentage",
+        "integratedWithin8DaysPercentage",
         SortOrder.DESCENDING,
         [
           "Integrated within 8 days 92.3%",
           "Integrated within 8 days 40%",
-          "Integrated within 8 days 32.4%",
+          "Integrated within 8 days 33.3%",
         ],
       ],
       [
         "Integrated within 8 days",
-        "within8DaysPercentage",
+        "integratedWithin8DaysPercentage",
         SortOrder.ASCENDING,
         [
           "Integrated within 8 days n/a",
@@ -159,7 +159,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated beyond 8 days",
-        "beyond8DaysPercentage",
+        "integratedBeyond8DaysPercentage",
         SortOrder.DESCENDING,
         [
           "Integrated beyond 8 days 45.5%",
@@ -169,7 +169,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated beyond 8 days",
-        "beyond8DaysPercentage",
+        "integratedBeyond8DaysPercentage",
         SortOrder.ASCENDING,
         [
           "Integrated beyond 8 days n/a",
@@ -200,11 +200,11 @@ describe("PracticeTableWithSort component", () => {
     ];
 
     it.each(cases)(
-      "displays practices ordered by %p field and %p order when selected",
+      "displays practices ordered by %p field and %p %p order when selected",
       (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
-            ccgPractices={practiceMetricsMock}
+            ccgPractices={practiceMetricsPercentageMock}
             headers={practiceTableContent.headers}
             sortBySelect={practiceTableContent.sortBySelect}
             orderSelect={practiceTableContent.orderSelect}

@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
 
-import { PracticeType } from "../../templates/Practice/practice.types";
+import { PracticePercentageType } from "../../templates/Practice/practice.types";
 
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
@@ -12,7 +12,7 @@ import practiceTableContent from "../../data/content/practiceTable.json";
 import "../common/Table/index.scss";
 
 type TableWithSortProps = {
-  ccgPractices: PracticeType[];
+  ccgPractices: PracticePercentageType[];
   headers: string[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
@@ -39,23 +39,14 @@ const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
 };
 
 const sortPractices = (
-  practices: PracticeType[],
+  practices: PracticePercentageType[],
   fieldName: string,
   order: string
 ) => {
   const getFieldValue = (field: any) => {
-    const transfersReceivedMetrics =
-      field.metrics[0].requester.transfersReceived;
-    switch (fieldName) {
-      case "practiceName":
-        return field.name;
-      case "transfersReceivedCount":
-        return transfersReceivedMetrics.transferCount;
-      case "awaitingIntegrationPercentage":
-        return transfersReceivedMetrics.awaitingIntegration.percentage;
-      default:
-        return transfersReceivedMetrics.integrated[fieldName];
-    }
+    if (fieldName === "practiceName") return field.name;
+    const transfersReceivedMetrics = field.metrics[0].requestedTransfers;
+    return transfersReceivedMetrics[fieldName];
   };
 
   const sortData = (firstEl: string | number, secondEl: string | number) => {
@@ -92,16 +83,15 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   }, [ccgPractices, selectedField, selectedOrder]);
 
   const practiceTableRows = sortedPractices.map(
-    ({ odsCode, name, metrics }: PracticeType) => {
-      const transfersReceived = metrics[0].requester.transfersReceived;
-
+    ({ odsCode, name, metrics }: PracticePercentageType) => {
+      const requestedMetric = metrics[0].requestedTransfers;
       return [
         <PracticeLink odsCode={odsCode} name={name} />,
-        transfersReceived.transferCount,
-        addPercentageSign(transfersReceived.integrated.within3DaysPercentage),
-        addPercentageSign(transfersReceived.integrated.within8DaysPercentage),
-        addPercentageSign(transfersReceived.integrated.beyond8DaysPercentage),
-        addPercentageSign(transfersReceived.awaitingIntegration.percentage),
+        requestedMetric.receivedCount,
+        addPercentageSign(requestedMetric.integratedWithin3DaysPercentage),
+        addPercentageSign(requestedMetric.integratedWithin8DaysPercentage),
+        addPercentageSign(requestedMetric.integratedBeyond8DaysPercentage),
+        addPercentageSign(requestedMetric.awaitingIntegrationPercentage),
       ];
     }
   );

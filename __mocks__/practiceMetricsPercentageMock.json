@@ -1,0 +1,104 @@
+[
+  {
+    "odsCode": "A12345",
+    "name": "GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "receivedCount": 5,
+          "integratedWithin3DaysPercentage": 60,
+          "integratedWithin8DaysPercentage": 40,
+          "integratedBeyond8DaysPercentage": 0,
+          "awaitingIntegrationPercentage": 0
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12346",
+    "name": "Second GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "receivedCount": 22,
+          "integratedWithin3DaysPercentage": 22.7,
+          "integratedWithin8DaysPercentage": 27.3,
+          "integratedBeyond8DaysPercentage": 45.5,
+          "awaitingIntegrationPercentage": 4.5
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12347",
+    "name": "Third GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "receivedCount": 34,
+          "integratedWithin3DaysPercentage": 58.8,
+          "integratedWithin8DaysPercentage": 32.4,
+          "integratedBeyond8DaysPercentage": 8.8,
+          "awaitingIntegrationPercentage": 0
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12348",
+    "name": "Fourth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "receivedCount": 0,
+          "integratedWithin3DaysPercentage": null,
+          "integratedWithin8DaysPercentage": null,
+          "integratedBeyond8DaysPercentage": null,
+          "awaitingIntegrationPercentage": null
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12349",
+    "name": "Fifth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "receivedCount": 13,
+          "integratedWithin3DaysPercentage": 0,
+          "integratedWithin8DaysPercentage": 92.3,
+          "integratedBeyond8DaysPercentage": 0,
+          "awaitingIntegrationPercentage": 7.7
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12350",
+    "name": "Sixth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "receivedCount": 12,
+          "integratedWithin3DaysPercentage": 41.7,
+          "integratedWithin8DaysPercentage": 33.3,
+          "integratedBeyond8DaysPercentage": 25,
+          "awaitingIntegrationPercentage": 0
+        }
+      }
+    ]
+  }
+]

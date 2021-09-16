@@ -54,13 +54,13 @@ describe("Practice page", () => {
         );
 
         cy.contains("Transfers received");
-        cy.get("[data-testid=table__cell--row-0-col-1]").contains(2);
+        cy.get("[data-testid=table__cell--row-0-col-1]").contains(3);
 
         cy.contains("Integrated within 3 days");
-        cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
+        cy.get("[data-testid=table__cell--row-0-col-2]").contains("33.3%");
 
         cy.contains("Integrated within 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-3]").contains("50%");
+        cy.get("[data-testid=table__cell--row-0-col-3]").contains("33.3%");
 
         cy.contains("Integrated beyond 8 days");
         cy.get("[data-testid=table__cell--row-0-col-4]").contains("0%");
