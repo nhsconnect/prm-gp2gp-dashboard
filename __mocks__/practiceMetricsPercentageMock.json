@@ -10,8 +10,7 @@
           "receivedCount": 5,
           "integratedWithin3DaysPercentage": 60,
           "integratedWithin8DaysPercentage": 40,
-          "integratedBeyond8DaysPercentage": 0,
-          "awaitingIntegrationPercentage": 0
+          "notIntegratedWithin8DaysPercentage": 0
         }
       }
     ]
@@ -27,8 +26,7 @@
           "receivedCount": 22,
           "integratedWithin3DaysPercentage": 22.7,
           "integratedWithin8DaysPercentage": 27.3,
-          "integratedBeyond8DaysPercentage": 45.5,
-          "awaitingIntegrationPercentage": 4.5
+          "notIntegratedWithin8DaysPercentage": 50
         }
       }
     ]
@@ -44,8 +42,7 @@
           "receivedCount": 34,
           "integratedWithin3DaysPercentage": 58.8,
           "integratedWithin8DaysPercentage": 32.4,
-          "integratedBeyond8DaysPercentage": 8.8,
-          "awaitingIntegrationPercentage": 0
+          "notIntegratedWithin8DaysPercentage": 8.8
         }
       }
     ]
@@ -61,8 +58,7 @@
           "receivedCount": 0,
           "integratedWithin3DaysPercentage": null,
           "integratedWithin8DaysPercentage": null,
-          "integratedBeyond8DaysPercentage": null,
-          "awaitingIntegrationPercentage": null
+          "notIntegratedWithin8DaysPercentage": null
         }
       }
     ]
@@ -78,8 +74,7 @@
           "receivedCount": 13,
           "integratedWithin3DaysPercentage": 0,
           "integratedWithin8DaysPercentage": 92.3,
-          "integratedBeyond8DaysPercentage": 0,
-          "awaitingIntegrationPercentage": 7.7
+          "notIntegratedWithin8DaysPercentage": 7.7
         }
       }
     ]
@@ -95,8 +90,7 @@
           "receivedCount": 12,
           "integratedWithin3DaysPercentage": 41.7,
           "integratedWithin8DaysPercentage": 33.3,
-          "integratedBeyond8DaysPercentage": 25,
-          "awaitingIntegrationPercentage": 0
+          "notIntegratedWithin8DaysPercentage": 25
         }
       }
     ]

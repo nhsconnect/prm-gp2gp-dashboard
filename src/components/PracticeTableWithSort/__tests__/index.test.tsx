@@ -26,7 +26,7 @@ describe("PracticeTableWithSort component", () => {
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("displays practices ordered by Beyond 8 day Percentage SLA by default in descending order", () => {
+  it("displays practices ordered by Not integrated within 8 days Percentage SLA by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         ccgPractices={practiceMetricsPercentageMock}
@@ -45,15 +45,15 @@ describe("PracticeTableWithSort component", () => {
     const orderSelect = getByRole("combobox", {
       name: `Order${practiceTableContent.selectHiddenLabel}`,
     });
-    expect(sortBySelect).toHaveValue("integratedBeyond8DaysPercentage");
+    expect(sortBySelect).toHaveValue("notIntegratedWithin8DaysPercentage");
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
-    expect(allRows[1]).toHaveTextContent("Integrated beyond 8 days 45.5%");
-    expect(allRows[2]).toHaveTextContent("Integrated beyond 8 days 25%");
-    expect(allRows[3]).toHaveTextContent("Integrated beyond 8 days 8.8%");
-    expect(allRows[4]).toHaveTextContent("Integrated beyond 8 days 0%");
-    expect(allRows[5]).toHaveTextContent("Integrated beyond 8 days 0%");
-    expect(allRows[6]).toHaveTextContent("Integrated beyond 8 days n/a");
+    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 50%");
+    expect(allRows[2]).toHaveTextContent("Not integrated within 8 days 25%");
+    expect(allRows[3]).toHaveTextContent("Not integrated within 8 days 8.8%");
+    expect(allRows[4]).toHaveTextContent("Not integrated within 8 days 7.7%");
+    expect(allRows[5]).toHaveTextContent("Not integrated within 8 days 0%");
+    expect(allRows[6]).toHaveTextContent("Not integrated within 8 days n/a");
     expect(allRows.length).toBe(7);
   });
 
@@ -158,43 +158,23 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
-        "Integrated beyond 8 days",
-        "integratedBeyond8DaysPercentage",
+        "Not integrated within 8 days",
+        "notIntegratedWithin8DaysPercentage",
         SortOrder.DESCENDING,
         [
-          "Integrated beyond 8 days 45.5%",
-          "Integrated beyond 8 days 25%",
-          "Integrated beyond 8 days 8.8%",
+          "Not integrated within 8 days 50%",
+          "Not integrated within 8 days 25%",
+          "Not integrated within 8 days 8.8%",
         ],
       ],
       [
-        "Integrated beyond 8 days",
-        "integratedBeyond8DaysPercentage",
+        "Not integrated within 8 days",
+        "notIntegratedWithin8DaysPercentage",
         SortOrder.ASCENDING,
         [
-          "Integrated beyond 8 days n/a",
-          "Integrated beyond 8 days 0%",
-          "Integrated beyond 8 days 0%",
-        ],
-      ],
-      [
-        "Awaiting integration",
-        "awaitingIntegrationPercentage",
-        SortOrder.DESCENDING,
-        [
-          "Awaiting integration 7.7%",
-          "Awaiting integration 4.5%",
-          "Awaiting integration 0%",
-        ],
-      ],
-      [
-        "Awaiting integration",
-        "awaitingIntegrationPercentage",
-        SortOrder.ASCENDING,
-        [
-          "Awaiting integration n/a",
-          "Awaiting integration 0%",
-          "Awaiting integration 0%",
+          "Not integrated within 8 days n/a",
+          "Not integrated within 8 days 0%",
+          "Not integrated within 8 days 7.7%",
         ],
       ],
     ];

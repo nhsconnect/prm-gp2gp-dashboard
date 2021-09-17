@@ -5,8 +5,7 @@ type MetricsTableType = {
   receivedCount: number;
   integratedWithin3DaysPercentage: number | null;
   integratedWithin8DaysPercentage: number | null;
-  integratedBeyond8DaysPercentage: number | null;
-  awaitingIntegrationPercentage: number | null;
+  notIntegratedWithin8DaysPercentage: number | null;
 };
 
 type PracticeMetricsPercentageType = {
@@ -37,19 +36,15 @@ export const generateMetricsTableData = ({
     receivedCount
   );
 
-  const integratedBeyond8DaysPercentage = calculatePercentage(
-    integratedBeyond8DaysCount,
+  const notIntegratedWithin8DaysPercentage = calculatePercentage(
+    integratedBeyond8DaysCount + awaitingIntegrationCount,
     receivedCount
   );
-  const awaitingIntegrationPercentage = calculatePercentage(
-    awaitingIntegrationCount,
-    receivedCount
-  );
+
   return {
     receivedCount,
     integratedWithin3DaysPercentage,
     integratedWithin8DaysPercentage,
-    integratedBeyond8DaysPercentage,
-    awaitingIntegrationPercentage,
+    notIntegratedWithin8DaysPercentage,
   };
 };

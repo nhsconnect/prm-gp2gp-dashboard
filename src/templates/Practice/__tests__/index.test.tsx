@@ -178,8 +178,7 @@ describe("Practice template", () => {
     expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
     expect(getByText("22.7%")).toBeInTheDocument();
     expect(getByText("54.5%")).toBeInTheDocument();
-    expect(getByText("9.1%")).toBeInTheDocument();
-    expect(getByText("4.5%")).toBeInTheDocument();
+    expect(getByText("13.6%")).toBeInTheDocument();
   });
 
   it("displays expander with the correct content", () => {
@@ -210,10 +209,11 @@ describe("Practice template", () => {
     expect(allColumnHeaders[1]).toHaveTextContent("Transfers received");
     expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 3 days");
     expect(allColumnHeaders[3]).toHaveTextContent("Integrated within 8 days");
-    expect(allColumnHeaders[4]).toHaveTextContent("Integrated beyond 8 days");
-    expect(allColumnHeaders[5]).toHaveTextContent("Awaiting integration");
+    expect(allColumnHeaders[4]).toHaveTextContent(
+      "Not integrated within 8 days"
+    );
 
-    expect(allColumnHeaders.length).toBe(6);
+    expect(allColumnHeaders.length).toBe(5);
   });
 
   it("renders placeholders when there is no transfers", () => {
@@ -248,6 +248,6 @@ describe("Practice template", () => {
 
     const dashElements = getAllByText("n/a");
     expect(dashElements[0]).toBeInTheDocument();
-    expect(dashElements.length).toBe(4);
+    expect(dashElements.length).toBe(3);
   });
 });

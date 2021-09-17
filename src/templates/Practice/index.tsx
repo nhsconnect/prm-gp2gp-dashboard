@@ -33,8 +33,7 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
       receivedCount,
       integratedWithin3DaysPercentage,
       integratedWithin8DaysPercentage,
-      integratedBeyond8DaysPercentage,
-      awaitingIntegrationPercentage,
+      notIntegratedWithin8DaysPercentage,
     } = generateMetricsTableData(metric.requestedTransfers);
 
     return [
@@ -42,8 +41,7 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
       receivedCount,
       addPercentageSign(integratedWithin3DaysPercentage),
       addPercentageSign(integratedWithin8DaysPercentage),
-      addPercentageSign(integratedBeyond8DaysPercentage),
-      addPercentageSign(awaitingIntegrationPercentage),
+      addPercentageSign(notIntegratedWithin8DaysPercentage),
     ];
   });
 };

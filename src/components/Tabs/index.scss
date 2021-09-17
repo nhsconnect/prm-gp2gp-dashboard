@@ -23,7 +23,7 @@
     @extend .nhsuk-u-font-size-19;
 
     @include mq($until: tablet) {
-      margin-right: 24px;
+      margin-right: 16px;
     }
 
     &:focus {

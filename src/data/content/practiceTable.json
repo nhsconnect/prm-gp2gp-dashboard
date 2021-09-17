@@ -1,16 +1,14 @@
 {
-  "noResultsMessage": "No GP practices found",
   "headers": [
     "Practice name ",
     "Transfers received ",
     "Integrated within 3 days ",
     "Integrated within 8 days ",
-    "Integrated beyond 8 days ",
-    "Awaiting integration "
+    "Not integrated within 8 days "
   ],
   "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {
-    "defaultValue": "integratedBeyond8DaysPercentage",
+    "defaultValue": "notIntegratedWithin8DaysPercentage",
     "options": [
       {
         "displayText": "Practice name",
@@ -21,20 +19,16 @@
         "value": "receivedCount"
       },
       {
-        "displayText": "Within 3 days",
+        "displayText": "Integrated within 3 days",
         "value": "integratedWithin3DaysPercentage"
       },
       {
-        "displayText": "Within 8 days",
+        "displayText": "Integrated within 8 days",
         "value": "integratedWithin8DaysPercentage"
       },
       {
-        "displayText": "Beyond 8 days",
-        "value": "integratedBeyond8DaysPercentage"
-      },
-      {
-        "displayText": "Awaiting integration",
-        "value": "awaitingIntegrationPercentage"
+        "displayText": "Not integrated within 8 days",
+        "value": "notIntegratedWithin8DaysPercentage"
       }
     ]
   },
