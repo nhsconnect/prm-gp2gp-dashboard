@@ -22,9 +22,8 @@ export const AboutThisDataContent = () => (
       </li>
       <li>The time it took for the records to be integrated by the practice</li>
       <li>
-        The proportion of received transfers that were integrated beyond 8 days
-        or were awaiting integration. These trigger a paper copy being printed
-        and sent.{" "}
+        The proportion of received transfers that were not integrated within 8
+        days. These trigger a paper copy being printed and sent.
       </li>
     </ul>
     <h3>What this data can’t tell you</h3>

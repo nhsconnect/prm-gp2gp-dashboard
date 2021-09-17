@@ -11,7 +11,7 @@ export const DefinitionsContent = () => (
     <p>It does not include GP2GP transfers that:</p>
     <ul>
       <li>failed to transfer, or</li>
-      <li>were rejected by the receiving practice</li>
+      <li>were rejected by the receiving practice.</li>
     </ul>
     <h3>Integrated within 3 days</h3>
     <p>
@@ -27,19 +27,22 @@ export const DefinitionsContent = () => (
       The percentage of transfers received that were integrated (filed or
       suppressed) within 8 days of the record being sent.
     </p>
-    <h3>Integrated beyond 8 days</h3>
+    <h3>
+      Not integrated within 8 days{" "}
+      <span className="gp2gp-title-emphasis">(paper copy sent)</span>
+    </h3>
     <p>
-      The percentage of transfers received that were integrated (filed or
-      suppressed) beyond 8 days of the record being sent.
+      The percentage of transfers received that were not integrated within 8
+      days.
     </p>
+    <p>This includes transfers that were:</p>
+    <ul>
+      <li>integrated after 8 days, or</li>
+      <li>not integrated when the transfer was categorised.</li>
+    </ul>
     <p>
-      When records are not integrated within 8 days, GP2GP requests that a full
-      paper copy is printed and sent to the practice.
-    </p>
-    <h3>Awaiting integration</h3>
-    <p>
-      The percentage of transfers received that have not been integrated at the
-      point of being categorised (14 days after it started).
+      For the purpose of this site, each transfer is categorised 14 days after
+      it started.
     </p>
   </div>
 );

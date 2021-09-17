@@ -1,9 +1,9 @@
-import React, { FC, AriaAttributes } from "react";
+import React, { FC, AriaAttributes, ReactNode } from "react";
 import "./index.scss";
 import classNames from "classnames";
 
 type TableProps = {
-  headers: string[];
+  headers: ReactNode[];
   caption?: { text: string; hidden: boolean };
   rows: (string | number | JSX.Element)[][];
   className?: string;
@@ -41,7 +41,7 @@ export const Table: FC<TableProps> = ({
           <th
             scope="col"
             role="columnheader"
-            key={header}
+            key={`column-header-${columnIndex}`}
             className={`nhsuk-table__col nhsuk-table__col-${columnIndex}`}
             aria-sort={
               sortedColumnIndex !== undefined

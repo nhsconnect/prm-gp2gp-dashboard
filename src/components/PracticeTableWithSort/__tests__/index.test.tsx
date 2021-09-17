@@ -7,6 +7,14 @@ import { SortOrder } from "../index";
 import practiceMetricsPercentageMock from "../../../../__mocks__/practiceMetricsPercentageMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
 
+const tableHeaders = [
+  "Practice name ",
+  "Transfers received ",
+  "Integrated within 3 days ",
+  "Integrated within 8 days ",
+  <>Not integrated within 8 days </>,
+];
+
 describe("PracticeTableWithSort component", () => {
   it("should display table heading caption with the month and year", () => {
     const tableCaptionText = "Integration times for February 2020";
@@ -14,7 +22,7 @@ describe("PracticeTableWithSort component", () => {
     const { getByText } = render(
       <PracticeTableWithSort
         ccgPractices={practiceMetricsPercentageMock}
-        headers={practiceTableContent.headers}
+        headers={tableHeaders}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
         tableCaption={tableCaptionText}
@@ -30,7 +38,7 @@ describe("PracticeTableWithSort component", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         ccgPractices={practiceMetricsPercentageMock}
-        headers={practiceTableContent.headers}
+        headers={tableHeaders}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
         tableCaption={"Some table title"}
@@ -61,7 +69,7 @@ describe("PracticeTableWithSort component", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
         ccgPractices={practiceMetricsPercentageMock}
-        headers={practiceTableContent.headers}
+        headers={tableHeaders}
         sortBySelect={practiceTableContent.sortBySelect}
         orderSelect={practiceTableContent.orderSelect}
         tableCaption={"Some table title"}
@@ -185,7 +193,7 @@ describe("PracticeTableWithSort component", () => {
         const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
             ccgPractices={practiceMetricsPercentageMock}
-            headers={practiceTableContent.headers}
+            headers={tableHeaders}
             sortBySelect={practiceTableContent.sortBySelect}
             orderSelect={practiceTableContent.orderSelect}
             tableCaption={"Some table title"}

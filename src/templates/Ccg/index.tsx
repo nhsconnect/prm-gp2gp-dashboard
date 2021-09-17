@@ -66,7 +66,16 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
         tableContent={
           <PracticeTableWithSort
             ccgPractices={ccgPracticeTableData}
-            headers={practiceTableContent.headers}
+            headers={[
+              "Practice name ",
+              "Transfers received ",
+              "Integrated within 3 days ",
+              "Integrated within 8 days ",
+              <>
+                Not integrated within 8 days{" "}
+                <div className="gp2gp-title-emphasis">(paper copy sent) </div>
+              </>,
+            ]}
             sortBySelect={practiceTableContent.sortBySelect}
             orderSelect={practiceTableContent.orderSelect}
             tableCaption={tableTitle}

@@ -69,7 +69,9 @@ describe("CCG template", () => {
     expect(allRows[1]).toHaveTextContent("Transfers received 22");
     expect(allRows[1]).toHaveTextContent("Integrated within 3 days 22.7%");
     expect(allRows[1]).toHaveTextContent("Integrated within 8 days 27.3%");
-    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 50%");
+    expect(allRows[1]).toHaveTextContent(
+      "Not integrated within 8 days (paper copy sent) 50%"
+    );
 
     expect(
       queryByText("This site is updated 14 days after the end of each month.", {

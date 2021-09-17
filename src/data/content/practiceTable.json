@@ -1,11 +1,4 @@
 {
-  "headers": [
-    "Practice name ",
-    "Transfers received ",
-    "Integrated within 3 days ",
-    "Integrated within 8 days ",
-    "Not integrated within 8 days "
-  ],
   "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {
     "defaultValue": "notIntegratedWithin8DaysPercentage",

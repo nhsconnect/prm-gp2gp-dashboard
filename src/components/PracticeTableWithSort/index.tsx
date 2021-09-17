@@ -1,4 +1,4 @@
-import React, { AriaAttributes, FC, useMemo, useState } from "react";
+import React, { AriaAttributes, FC, useMemo, useState, ReactNode } from "react";
 import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
@@ -13,7 +13,7 @@ import "../common/Table/index.scss";
 
 type TableWithSortProps = {
   ccgPractices: PracticePercentageType[];
-  headers: string[];
+  headers: ReactNode[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
   tableCaption: string;

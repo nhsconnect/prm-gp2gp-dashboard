@@ -14,7 +14,6 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { useApi } from "../../library/hooks/useApi";
 
-import slaMetricsContent from "../../data/content/practiceMetrics.json";
 import { PageContent } from "../../components/PageContent";
 import { generateMetricsTableData } from "../../library/utils/generateMetricsTableData";
 
@@ -81,7 +80,16 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         practice."
         tableContent={
           <Table
-            headers={slaMetricsContent.tableHeaders}
+            headers={[
+              "Month ",
+              "Transfers received ",
+              "Integrated within 3 days ",
+              "Integrated within 8 days ",
+              <>
+                Not integrated within 8 days{" "}
+                <div className="gp2gp-title-emphasis">(paper copy sent) </div>
+              </>,
+            ]}
             caption={{
               text: "Integration times for the recent months",
               hidden: true,
