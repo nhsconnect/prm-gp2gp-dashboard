@@ -103,6 +103,7 @@
     "trim-newlines": "^3.0.1",
     "browserslist": "^4.16.5",
     "ws": "^7.4.6",
-    "glob-parent": "^5.1.2"
+    "glob-parent": "^5.1.2",
+    "pac-resolver": "^5.0.0"
   }
 }
