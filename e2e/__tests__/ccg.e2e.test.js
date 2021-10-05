@@ -29,7 +29,7 @@ describe("CCG page", () => {
         cy.contains("When records are not integrated within 8 days");
         cy.contains("Integration times for December 2019");
 
-        cy.contains("Practice name");
+        cy.contains("Requesting practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
           "Test GP Practice With Integrations - A12345"
         );
@@ -76,7 +76,7 @@ describe("CCG page", () => {
 
         cy.contains("h1", "Another Test CCG - 11D");
 
-        cy.contains("Practice name");
+        cy.contains("Requesting practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
           "Test GP Practice With Some Integrations - A12347"
         );
@@ -96,10 +96,10 @@ describe("CCG page", () => {
           "Descending"
         );
 
-        cy.get("select#sortBySelect").select("Practice name");
+        cy.get("select#sortBySelect").select("Requesting practice name");
         cy.get("select#sortBySelect option:selected").should(
           "have.text",
-          "Practice name"
+          "Requesting practice name"
         );
 
         cy.get("select#orderSelect").select("Ascending");
@@ -108,7 +108,7 @@ describe("CCG page", () => {
           "Ascending"
         );
 
-        cy.contains("Practice name");
+        cy.contains("Requesting practice name");
 
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
           "Test GP Practice With No Integrations - A12346"

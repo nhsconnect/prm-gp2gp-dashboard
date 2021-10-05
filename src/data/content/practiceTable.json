@@ -4,8 +4,8 @@
     "defaultValue": "notIntegratedWithin8DaysPercentage",
     "options": [
       {
-        "displayText": "Practice name",
-        "value": "practiceName"
+        "displayText": "Requesting practice name",
+        "value": "requestingPracticeName"
       },
       {
         "displayText": "Transfers received",

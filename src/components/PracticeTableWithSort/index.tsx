@@ -44,7 +44,7 @@ const sortPractices = (
   order: string
 ) => {
   const getFieldValue = (field: any) => {
-    if (fieldName === "practiceName") return field.name;
+    if (fieldName === "requestingPracticeName") return field.name;
     const transfersReceivedMetrics = field.metrics[0].requestedTransfers;
     return transfersReceivedMetrics[fieldName];
   };

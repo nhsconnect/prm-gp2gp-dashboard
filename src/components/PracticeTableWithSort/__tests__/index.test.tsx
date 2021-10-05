@@ -8,7 +8,7 @@ import practiceMetricsPercentageMock from "../../../../__mocks__/practiceMetrics
 import practiceTableContent from "../../../data/content/practiceTable.json";
 
 const tableHeaders = [
-  "Practice name ",
+  "Requesting practice name ",
   "Transfers received ",
   "Integrated within 3 days ",
   "Integrated within 8 days ",
@@ -86,23 +86,23 @@ describe("PracticeTableWithSort component", () => {
   describe("Sorting practice table", () => {
     const cases = [
       [
-        "Practice name",
-        "practiceName",
+        "Requesting practice name",
+        "requestingPracticeName",
         SortOrder.DESCENDING,
         [
-          "Practice name Third GP Practice - A12347",
-          "Practice name Sixth GP Practice - A12350",
-          "Practice name Second GP Practice - A12346",
+          "Requesting practice name Third GP Practice - A12347",
+          "Requesting practice name Sixth GP Practice - A12350",
+          "Requesting practice name Second GP Practice - A12346",
         ],
       ],
       [
-        "Practice name",
-        "practiceName",
+        "Requesting practice name",
+        "requestingPracticeName",
         SortOrder.ASCENDING,
         [
-          "Practice name Fifth GP Practice - A12349",
-          "Practice name Fourth GP Practice - A12348",
-          "Practice name GP Practice - A12345",
+          "Requesting practice name Fifth GP Practice - A12349",
+          "Requesting practice name Fourth GP Practice - A12348",
+          "Requesting practice name GP Practice - A12345",
         ],
       ],
       [

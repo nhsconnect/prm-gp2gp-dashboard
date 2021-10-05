@@ -47,7 +47,7 @@ describe("CCG template", () => {
     const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
 
     const tableDescription = getByText(
-      "The table below shows the number of records",
+      "The table below shows the number of GP2GP transfers",
       { exact: false }
     );
 

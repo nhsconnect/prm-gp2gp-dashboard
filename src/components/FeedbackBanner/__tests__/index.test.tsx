@@ -34,12 +34,14 @@ describe("FeedbackBanner component", () => {
     );
   });
 
-  it("contains link to GP2GP email", () => {
+  it("contains link to GP Registrations Data email", () => {
     const { getByRole } = render(<FeedbackBanner />);
     const surveyLink = getByRole("link", {
-      name: "gp2gp@nhs.net",
+      name: "gpregistrationsdata@nhs.net",
     });
 
-    expect(surveyLink.getAttribute("href")).toBe("mailto:gp2gp@nhs.net");
+    expect(surveyLink.getAttribute("href")).toBe(
+      "mailto:gpregistrationsdata@nhs.net"
+    );
   });
 });

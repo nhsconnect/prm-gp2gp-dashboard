@@ -76,8 +76,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
 
       <PageContent
         title="Integration times"
-        tableDescription="The table below shows the time to integrate for records received by the
-        practice."
+        tableDescription="The table below shows the number of GP2GP transfers received by the practice and the time it took for these records to be integrated."
         tableContent={
           <Table
             headers={[

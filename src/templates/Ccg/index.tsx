@@ -67,7 +67,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
           <PracticeTableWithSort
             ccgPractices={ccgPracticeTableData}
             headers={[
-              "Practice name ",
+              "Requesting practice name ",
               "Transfers received ",
               "Integrated within 3 days ",
               "Integrated within 8 days ",
