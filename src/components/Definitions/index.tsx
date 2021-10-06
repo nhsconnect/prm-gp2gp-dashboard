@@ -1,8 +1,7 @@
 import React from "react";
 
-export const DefinitionsContent = () => (
-  <div className="nhsuk-u-reading-width">
-    <h2 className="nhsuk-u-margin-top-6">Definitions</h2>
+export const TransfersReceivedDefinition = () => (
+  <>
     <h3>Transfers received</h3>
     <p>
       All GP2GP transfers that were requested by the practice between the 1st
@@ -13,6 +12,11 @@ export const DefinitionsContent = () => (
       <li>failed to transfer, or</li>
       <li>were rejected by the receiving practice.</li>
     </ul>
+  </>
+);
+
+export const IntegratedWithin3DaysDefinition = () => (
+  <>
     <h3>Integrated within 3 days</h3>
     <p>
       The percentage of transfers received that were integrated (filed or
@@ -22,11 +26,21 @@ export const DefinitionsContent = () => (
       3 days is considered best practice for integrating or suppressing records
       transferred via GP2GP.
     </p>
+  </>
+);
+
+export const IntegratedWithin8DaysDefinition = () => (
+  <>
     <h3>Integrated within 8 days</h3>
     <p>
       The percentage of transfers received that were integrated (filed or
       suppressed) within 8 days of the record being sent.
     </p>
+  </>
+);
+
+export const NotIntegratedWithin8DaysDefinition = () => (
+  <>
     <h3>
       Not integrated within 8 days{" "}
       <span className="gp2gp-title-emphasis">(paper copy sent)</span>
@@ -45,5 +59,15 @@ export const DefinitionsContent = () => (
       it started. See About section to learn more about how we categorise
       transfers.
     </p>
+  </>
+);
+
+export const DefinitionsContent = () => (
+  <div className="nhsuk-u-reading-width">
+    <h2 className="nhsuk-u-margin-top-6">Definitions</h2>
+    <TransfersReceivedDefinition />
+    <IntegratedWithin3DaysDefinition />
+    <IntegratedWithin8DaysDefinition />
+    <NotIntegratedWithin8DaysDefinition />
   </div>
 );
