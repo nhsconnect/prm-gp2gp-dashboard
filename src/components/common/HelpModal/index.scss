@@ -3,15 +3,11 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/colours";
 
 .gp2gp-modal {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   background-color: $color_nhsuk-white;
   padding: 2rem;
 }
 
 .gp2gp-open-modal {
-  background-color: none;
+  background-color: inherit;
   border: none;
 }
