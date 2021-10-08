@@ -6,10 +6,16 @@ import PlaceholderIcon from "../../../assets/placeholderIcon.svg";
 import "./index.scss";
 
 type HelpModalProps = {
+  ariaLabelledBy: string;
+  iconHiddenDescription: string;
   content: ReactNode;
 };
 
-export const HelpModal: FC<HelpModalProps> = ({ content }) => {
+export const HelpModal: FC<HelpModalProps> = ({
+  ariaLabelledBy,
+  iconHiddenDescription,
+  content,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -32,11 +38,13 @@ export const HelpModal: FC<HelpModalProps> = ({ content }) => {
     <>
       <button onClick={openModal} className="gp2gp-open-modal">
         <PlaceholderIcon />
+        <span className="nhsuk-u-visually-hidden">{iconHiddenDescription}</span>
       </button>
       <Modal
         open={isModalOpen}
         onClose={closeModal}
         classNames={{ modal: "gp2gp-modal" }}
+        ariaLabelledby={ariaLabelledBy}
         showCloseIcon={false}
         animationDuration={0}
         center

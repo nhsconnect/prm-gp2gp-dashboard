@@ -1,8 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 
-export const TransfersReceivedDefinition = () => (
+type DefinitionProps = {
+  ariaLabelId?: string;
+};
+
+export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
+  ariaLabelId,
+}) => (
   <>
-    <h3>Transfers received</h3>
+    <h3 id={ariaLabelId}>Transfers received</h3>
     <p>
       All GP2GP transfers that were requested by the practice between the 1st
       and last day of the month and successfully received.
@@ -15,9 +21,11 @@ export const TransfersReceivedDefinition = () => (
   </>
 );
 
-export const IntegratedWithin3DaysDefinition = () => (
+export const IntegratedWithin3DaysDefinition: FC<DefinitionProps> = ({
+  ariaLabelId,
+}) => (
   <>
-    <h3>Integrated within 3 days</h3>
+    <h3 id={ariaLabelId}>Integrated within 3 days</h3>
     <p>
       The percentage of transfers received that were integrated (filed or
       suppressed) within 3 days of the record being sent.
@@ -29,9 +37,11 @@ export const IntegratedWithin3DaysDefinition = () => (
   </>
 );
 
-export const IntegratedWithin8DaysDefinition = () => (
+export const IntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
+  ariaLabelId,
+}) => (
   <>
-    <h3>Integrated within 8 days</h3>
+    <h3 id={ariaLabelId}>Integrated within 8 days</h3>
     <p>
       The percentage of transfers received that were integrated (filed or
       suppressed) within 8 days of the record being sent.
@@ -39,9 +49,11 @@ export const IntegratedWithin8DaysDefinition = () => (
   </>
 );
 
-export const NotIntegratedWithin8DaysDefinition = () => (
+export const NotIntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
+  ariaLabelId,
+}) => (
   <>
-    <h3>
+    <h3 id={ariaLabelId}>
       Not integrated within 8 days{" "}
       <span className="gp2gp-title-emphasis">(paper copy sent)</span>
     </h3>

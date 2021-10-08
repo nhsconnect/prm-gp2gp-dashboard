@@ -4,13 +4,18 @@ import userEvent from "@testing-library/user-event";
 import noScroll from "no-scroll";
 import { HelpModal } from "../";
 
+jest.mock("no-scroll");
+
 describe("HelpModal component", () => {
   it("displays content and close button when modal is open", async () => {
-    noScroll.on = jest.fn();
-    noScroll.off = jest.fn();
-
     const { queryByText, findByText, getByRole, findByRole, queryByRole } =
-      render(<HelpModal content={<p>This is content</p>} />);
+      render(
+        <HelpModal
+          ariaLabelledBy=""
+          iconHiddenDescription=""
+          content={<p>This is content</p>}
+        />
+      );
 
     expect(queryByText("This is content")).not.toBeInTheDocument();
     expect(queryByRole("button", { name: "Close" })).not.toBeInTheDocument();
