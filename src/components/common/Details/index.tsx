@@ -4,7 +4,7 @@ import "./index.scss";
 
 type DetailsProps = {
   summary: string;
-  headers: { title: ReactNode }[];
+  headers: { title: string; extra?: ReactNode }[];
   rows: string[][];
 };
 

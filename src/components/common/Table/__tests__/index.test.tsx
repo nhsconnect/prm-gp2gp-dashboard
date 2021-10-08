@@ -26,6 +26,17 @@ describe("Table component", () => {
     expect(allHeaders.length).toBe(3);
   });
 
+  it("displays table header with extra React component", () => {
+    const headersWithExtra = [{ title: "fruit ", extra: <p>Content</p> }];
+    const { getAllByRole, getAllByText } = render(
+      <Table headers={headersWithExtra} rows={[["banana"]]} />
+    );
+
+    const allHeaders = getAllByRole("columnheader");
+    expect(allHeaders[0]).toHaveTextContent("fruit Content");
+    expect(getAllByText("Content")[0]).toBeInTheDocument();
+  });
+
   it("displays table body rows correctly", () => {
     const { getAllByRole } = render(<Table headers={headers} rows={rows} />);
 

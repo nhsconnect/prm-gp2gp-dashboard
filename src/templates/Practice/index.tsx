@@ -85,13 +85,9 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
               { title: "Integrated within 3 days " },
               { title: "Integrated within 8 days " },
               {
-                title: (
-                  <>
-                    Not integrated within 8 days{" "}
-                    <div className="gp2gp-title-emphasis">
-                      (paper copy sent){" "}
-                    </div>
-                  </>
+                title: "Not integrated within 8 days ",
+                extra: (
+                  <div className="gp2gp-title-emphasis">(paper copy sent) </div>
                 ),
               },
             ]}

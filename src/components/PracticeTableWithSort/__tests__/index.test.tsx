@@ -12,7 +12,7 @@ const tableHeaders = [
   { title: "Transfers received " },
   { title: "Integrated within 3 days " },
   { title: "Integrated within 8 days " },
-  { title: <>Not integrated within 8 days </> },
+  { title: "Not integrated within 8 days " },
 ];
 
 describe("PracticeTableWithSort component", () => {
