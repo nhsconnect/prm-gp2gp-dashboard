@@ -3,7 +3,11 @@ import { render } from "@testing-library/react";
 import { Table } from "../";
 
 describe("Table component", () => {
-  const headers = ["fruit ", "colour ", "quantity "];
+  const headers = [
+    { title: "fruit " },
+    { title: "colour " },
+    { title: "quantity " },
+  ];
 
   const rows = [
     ["banana ", "yellow ", "2"],

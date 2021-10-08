@@ -59,7 +59,11 @@ const CookiesPolicy: FC = () => {
         </p>
         <Details
           summary="Cookies needed for this website to work"
-          headers={["Cookie Name", "Purpose", "Expiry"]}
+          headers={[
+            { title: "Cookie Name" },
+            { title: "Purpose" },
+            { title: "Expiry" },
+          ]}
           rows={[
             [
               NHS_COOKIE_NAME,
@@ -76,7 +80,11 @@ const CookiesPolicy: FC = () => {
         </p>
         <Details
           summary="List of cookies that measure website use"
-          headers={["Cookie Name", "Purpose", "Expiry"]}
+          headers={[
+            { title: "Cookie Name" },
+            { title: "Purpose" },
+            { title: "Expiry" },
+          ]}
           rows={[
             [
               "_ga",

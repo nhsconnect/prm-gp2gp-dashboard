@@ -3,7 +3,7 @@ import "./index.scss";
 import classNames from "classnames";
 
 type TableProps = {
-  headers: ReactNode[];
+  headers: { title: ReactNode }[];
   caption?: { text: string; hidden: boolean };
   rows: (string | number | JSX.Element)[][];
   className?: string;
@@ -51,7 +51,7 @@ export const Table: FC<TableProps> = ({
                 : undefined
             }
           >
-            {header}
+            {header.title}
           </th>
         ))}
       </tr>
@@ -64,7 +64,7 @@ export const Table: FC<TableProps> = ({
               <>
                 {" "}
                 <span className="nhsuk-table-responsive__heading">
-                  {headers[cellIndex]}
+                  {headers[cellIndex].title}
                 </span>
                 {cell}
               </>

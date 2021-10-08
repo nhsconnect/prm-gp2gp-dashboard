@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { Table } from "../Table";
 import "./index.scss";
 
 type DetailsProps = {
   summary: string;
-  headers: string[];
+  headers: { title: ReactNode }[];
   rows: string[][];
 };
 

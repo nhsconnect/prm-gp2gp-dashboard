@@ -8,11 +8,11 @@ import practiceMetricsPercentageMock from "../../../../__mocks__/practiceMetrics
 import practiceTableContent from "../../../data/content/practiceTable.json";
 
 const tableHeaders = [
-  "Requesting practice name ",
-  "Transfers received ",
-  "Integrated within 3 days ",
-  "Integrated within 8 days ",
-  <>Not integrated within 8 days </>,
+  { title: "Requesting practice name " },
+  { title: "Transfers received " },
+  { title: "Integrated within 3 days " },
+  { title: "Integrated within 8 days " },
+  { title: <>Not integrated within 8 days </> },
 ];
 
 describe("PracticeTableWithSort component", () => {

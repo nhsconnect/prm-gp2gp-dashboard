@@ -80,14 +80,20 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         tableContent={
           <Table
             headers={[
-              "Month ",
-              "Transfers received ",
-              "Integrated within 3 days ",
-              "Integrated within 8 days ",
-              <>
-                Not integrated within 8 days{" "}
-                <div className="gp2gp-title-emphasis">(paper copy sent) </div>
-              </>,
+              { title: "Month " },
+              { title: "Transfers received " },
+              { title: "Integrated within 3 days " },
+              { title: "Integrated within 8 days " },
+              {
+                title: (
+                  <>
+                    Not integrated within 8 days{" "}
+                    <div className="gp2gp-title-emphasis">
+                      (paper copy sent){" "}
+                    </div>
+                  </>
+                ),
+              },
             ]}
             caption={{
               text: "Integration times for the recent months",
