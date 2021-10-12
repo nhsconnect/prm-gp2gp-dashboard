@@ -1,8 +1,10 @@
 {
   "dev": {
-    "showPublicBetaText": true
+    "showPublicBetaText": true,
+    "showDefinitionsModals": true
   },
   "prod": {
-    "showPublicBetaText": false
+    "showPublicBetaText": false,
+    "showDefinitionsModals": false
   }
 }

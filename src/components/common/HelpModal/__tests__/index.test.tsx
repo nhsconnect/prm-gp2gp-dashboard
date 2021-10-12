@@ -1,7 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import noScroll from "no-scroll";
 import { HelpModal } from "../";
 
 jest.mock("no-scroll");
