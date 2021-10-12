@@ -14,6 +14,15 @@ import {
   PracticePercentageType,
 } from "../../library/utils/generateMetricsTableData";
 
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
+import { HelpModal } from "../../components/common/HelpModal";
+import {
+  IntegratedWithin3DaysDefinition,
+  IntegratedWithin8DaysDefinition,
+  NotIntegratedWithin8DaysDefinition,
+  TransfersReceivedDefinition,
+} from "../../components/Definitions";
+
 type PageContext = {
   odsCode: string;
   name: string;
@@ -27,6 +36,8 @@ type CcgProps = {
 const Ccg: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode, ccgPractices } = pageContext;
   const formattedName: string = convertToTitleCase(name);
+
+  const { showDefinitionsModals } = useFeatureToggles();
 
   const { year, month } = ccgPractices[0].metrics[0];
   const tableTitle = `Integration times for ${convertMonthNumberToText(
@@ -66,18 +77,79 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
         tableContent={
           <PracticeTableWithSort
             ccgPractices={ccgPracticeTableData}
-            headers={[
-              { title: "Requesting practice name " },
-              { title: "Transfers received " },
-              { title: "Integrated within 3 days " },
-              { title: "Integrated within 8 days " },
-              {
-                title: "Not integrated within 8 days ",
-                extra: (
-                  <div className="gp2gp-title-emphasis">(paper copy sent) </div>
-                ),
-              },
-            ]}
+            headers={
+              showDefinitionsModals
+                ? [
+                    { title: "Requesting practice name " },
+                    {
+                      title: "Transfers received ",
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy=""
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <TransfersReceivedDefinition ariaLabelId="" />
+                          }
+                        />
+                      ),
+                    },
+                    {
+                      title: "Integrated within 3 days ",
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy=""
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <IntegratedWithin3DaysDefinition ariaLabelId="" />
+                          }
+                        />
+                      ),
+                    },
+                    {
+                      title: "Integrated within 8 days ",
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy=""
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <IntegratedWithin8DaysDefinition ariaLabelId="" />
+                          }
+                        />
+                      ),
+                    },
+                    {
+                      title: "Not integrated within 8 days ",
+                      extra: (
+                        <>
+                          <div className="gp2gp-title-emphasis">
+                            (paper copy sent){" "}
+                          </div>
+                          <HelpModal
+                            ariaLabelledBy=""
+                            iconHiddenDescription="Open modal with definition"
+                            content={
+                              <NotIntegratedWithin8DaysDefinition ariaLabelId="" />
+                            }
+                          />
+                        </>
+                      ),
+                    },
+                  ]
+                : [
+                    { title: "Requesting practice name " },
+                    { title: "Transfers received " },
+                    { title: "Integrated within 3 days " },
+                    { title: "Integrated within 8 days " },
+                    {
+                      title: "Not integrated within 8 days ",
+                      extra: (
+                        <div className="gp2gp-title-emphasis">
+                          (paper copy sent){" "}
+                        </div>
+                      ),
+                    },
+                  ]
+            }
             sortBySelect={practiceTableContent.sortBySelect}
             orderSelect={practiceTableContent.orderSelect}
             tableCaption={tableTitle}
