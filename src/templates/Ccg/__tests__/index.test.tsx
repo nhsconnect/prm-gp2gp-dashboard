@@ -4,18 +4,8 @@ import { render } from "@testing-library/react";
 
 import Ccg from "..";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
-import { mocked } from "ts-jest/utils";
-import { when } from "jest-when";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
-
-jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("CCG template", () => {
-  beforeEach(() => {
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showTabsView: true });
-  });
   const pipelineCCGData = {
     odsCode: "12A",
     name: "BURTON CCG",

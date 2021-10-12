@@ -4,7 +4,6 @@ import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import { Tabs } from "../Tabs";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import { DefinitionsContent } from "../Definitions";
-import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 import "./index.scss";
 
 type PageContentProps = {
@@ -18,8 +17,6 @@ export const PageContent: FC<PageContentProps> = ({
   tableDescription,
   tableContent,
 }) => {
-  const { showTabsView } = useFeatureToggles();
-
   return (
     <section className="gp2gp-page-content-section">
       <h2>{title}</h2>
@@ -36,24 +33,16 @@ export const PageContent: FC<PageContentProps> = ({
           </>
         }
       />
-      {showTabsView ? (
-        <Tabs
-          tabs={[
-            {
-              title: "Data table",
-              content: tableContent,
-            },
-            { title: "About", content: <AboutThisDataContent /> },
-            { title: "Definitions", content: <DefinitionsContent /> },
-          ]}
-        />
-      ) : (
-        <div className="gp2gp-no-tabs">
-          {tableContent}
-          <AboutThisDataContent />
-          <DefinitionsContent />
-        </div>
-      )}
+      <Tabs
+        tabs={[
+          {
+            title: "Data table",
+            content: tableContent,
+          },
+          { title: "About", content: <AboutThisDataContent /> },
+          { title: "Definitions", content: <DefinitionsContent /> },
+        ]}
+      />
       <noscript>
         {tableContent}
         <AboutThisDataContent />
