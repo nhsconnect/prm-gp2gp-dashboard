@@ -89,97 +89,92 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         title="Integration times"
         tableDescription="The table below shows the number of GP2GP transfers received by the practice and the time it took for these records to be integrated."
         tableContent={
-          showDefinitionsModals ? (
-            <Table
-              headers={[
-                { title: "Month " },
-                {
-                  title: "Transfers received ",
-                  extra: (
-                    <HelpModal
-                      ariaLabelledBy=""
-                      iconHiddenDescription="Open modal with definition"
-                      content={<TransfersReceivedDefinition ariaLabelId="" />}
-                    />
-                  ),
-                },
-                {
-                  title: "Integrated within 3 days ",
-                  extra: (
-                    <HelpModal
-                      ariaLabelledBy=""
-                      iconHiddenDescription="Open modal with definition"
-                      content={
-                        <IntegratedWithin3DaysDefinition ariaLabelId="" />
-                      }
-                    />
-                  ),
-                },
-                {
-                  title: "Integrated within 8 days ",
-                  extra: (
-                    <HelpModal
-                      ariaLabelledBy=""
-                      iconHiddenDescription="Open modal with definition"
-                      content={
-                        <IntegratedWithin8DaysDefinition ariaLabelId="" />
-                      }
-                    />
-                  ),
-                },
-                {
-                  title: "Not integrated within 8 days ",
-                  extra: (
-                    <>
-                      <div className="gp2gp-title-emphasis">
-                        (paper copy sent){" "}
-                      </div>
-                      <HelpModal
-                        ariaLabelledBy=""
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <NotIntegratedWithin8DaysDefinition ariaLabelId="" />
-                        }
-                      />
-                    </>
-                  ),
-                },
-              ]}
-              caption={{
-                text: "Integration times for the recent months",
-                hidden: true,
-              }}
-              rows={generateMonthlyRowData(metrics)}
-            />
-          ) : (
-            <Table
-              headers={[
-                { title: "Month " },
-                {
-                  title: "Transfers received ",
-                },
-                {
-                  title: "Integrated within 3 days ",
-                },
-                {
-                  title: "Integrated within 8 days ",
-                },
-                {
-                  title: "Not integrated within 8 days ",
-                  extra: (
-                    <div className="gp2gp-title-emphasis">
-                      (paper copy sent){" "}
-                    </div>
-                  ),
-                },
-              ]}
-              caption={{
-                text: "Integration times for the recent months",
-                hidden: true,
-              }}
-              rows={generateMonthlyRowData(metrics)}
-            />
-          )
+          <Table
+            headers={
+              showDefinitionsModals
+                ? [
+                    { title: "Month " },
+                    {
+                      title: "Transfers received ",
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy=""
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <TransfersReceivedDefinition ariaLabelId="" />
+                          }
+                        />
+                      ),
+                    },
+                    {
+                      title: "Integrated within 3 days ",
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy=""
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <IntegratedWithin3DaysDefinition ariaLabelId="" />
+                          }
+                        />
+                      ),
+                    },
+                    {
+                      title: "Integrated within 8 days ",
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy=""
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <IntegratedWithin8DaysDefinition ariaLabelId="" />
+                          }
+                        />
+                      ),
+                    },
+                    {
+                      title: "Not integrated within 8 days ",
+                      extra: (
+                        <>
+                          <div className="gp2gp-title-emphasis">
+                            (paper copy sent){" "}
+                          </div>
+                          <HelpModal
+                            ariaLabelledBy=""
+                            iconHiddenDescription="Open modal with definition"
+                            content={
+                              <NotIntegratedWithin8DaysDefinition ariaLabelId="" />
+                            }
+                          />
+                        </>
+                      ),
+                    },
+                  ]
+                : [
+                    { title: "Month " },
+                    {
+                      title: "Transfers received ",
+                    },
+                    {
+                      title: "Integrated within 3 days ",
+                    },
+                    {
+                      title: "Integrated within 8 days ",
+                    },
+                    {
+                      title: "Not integrated within 8 days ",
+                      extra: (
+                        <div className="gp2gp-title-emphasis">
+                          (paper copy sent){" "}
+                        </div>
+                      ),
+                    },
+                  ]
+            }
+            caption={{
+              text: "Integration times for the recent months",
+              hidden: true,
+            }}
+            rows={generateMonthlyRowData(metrics)}
+          />
         }
       />
     </>
