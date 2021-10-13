@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useState, useEffect } from "react";
 import "react-responsive-modal/styles.css";
 import Modal from "react-responsive-modal";
 import noScroll from "no-scroll";
-import PlaceholderIcon from "../../../assets/placeholderIcon.svg";
+import QuestionMark from "../../../assets/questionMark.svg";
 import "./index.scss";
 
 type HelpModalProps = {
@@ -37,7 +37,7 @@ export const HelpModal: FC<HelpModalProps> = ({
   return (
     <>
       <button onClick={openModal} className="gp2gp-open-modal">
-        <PlaceholderIcon />
+        <QuestionMark />
         <span className="nhsuk-u-visually-hidden">{iconHiddenDescription}</span>
       </button>
       <Modal
