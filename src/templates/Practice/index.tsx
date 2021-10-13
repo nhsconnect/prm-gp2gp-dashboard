@@ -98,10 +98,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
                       title: "Transfers received ",
                       extra: (
                         <HelpModal
-                          ariaLabelledBy=""
+                          ariaLabelledBy="transfers-received-modal-title"
                           iconHiddenDescription="Open modal with definition"
                           content={
-                            <TransfersReceivedDefinition ariaLabelId="" />
+                            <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
                           }
                         />
                       ),
@@ -110,10 +110,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
                       title: "Integrated within 3 days ",
                       extra: (
                         <HelpModal
-                          ariaLabelledBy=""
+                          ariaLabelledBy="integrated-within-3-days-modal-title"
                           iconHiddenDescription="Open modal with definition"
                           content={
-                            <IntegratedWithin3DaysDefinition ariaLabelId="" />
+                            <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
                           }
                         />
                       ),
@@ -122,10 +122,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
                       title: "Integrated within 8 days ",
                       extra: (
                         <HelpModal
-                          ariaLabelledBy=""
+                          ariaLabelledBy="integrated-within-8-days-modal-title"
                           iconHiddenDescription="Open modal with definition"
                           content={
-                            <IntegratedWithin8DaysDefinition ariaLabelId="" />
+                            <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
                           }
                         />
                       ),
@@ -138,10 +138,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
                             (paper copy sent){" "}
                           </div>
                           <HelpModal
-                            ariaLabelledBy=""
+                            ariaLabelledBy="not-integrated-within-8-days-modal-title"
                             iconHiddenDescription="Open modal with definition"
                             content={
-                              <NotIntegratedWithin8DaysDefinition ariaLabelId="" />
+                              <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
                             }
                           />
                         </>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, within } from "@testing-library/react";
+import { findByLabelText, render, within } from "@testing-library/react";
 
 import Ccg from "..";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
@@ -104,6 +104,25 @@ describe("CCG template", () => {
       expect(
         within(allColumnHeaders[4]).getByRole("button", buttonOptions)
       ).toBeInTheDocument();
+    });
+
+    it("labels modal with content title", async () => {
+      const { getByRole, findByLabelText } = render(
+        <Ccg pageContext={pipelineCCGData} />
+      );
+
+      const within8DaysHeader = getByRole("columnheader", {
+        name: /Integrated within 8 days/,
+      });
+
+      const within8DaysHeaderButton =
+        within(within8DaysHeader).getByRole("button");
+      userEvent.click(within8DaysHeaderButton);
+
+      const within8DaysModal = await findByLabelText(
+        "Integrated within 8 days"
+      );
+      expect(within8DaysModal).toBeInTheDocument();
     });
 
     it("displays CCG practices and hides about and definitions content", () => {

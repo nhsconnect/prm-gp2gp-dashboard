@@ -10,6 +10,7 @@ import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 import { mocked } from "ts-jest/utils";
 import { when } from "jest-when";
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import Ccg from "../../Ccg";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
@@ -277,6 +278,25 @@ describe("Practice template", () => {
       expect(
         within(allColumnHeaders[4]).getByRole("button", buttonOptions)
       ).toBeInTheDocument();
+    });
+
+    it("labels modal with content title", async () => {
+      const { getByRole, findByLabelText } = render(
+        <Practice pageContext={practicePageContext} />
+      );
+
+      const within8DaysHeader = getByRole("columnheader", {
+        name: /Integrated within 8 days/,
+      });
+
+      const within8DaysHeaderButton =
+        within(within8DaysHeader).getByRole("button");
+      userEvent.click(within8DaysHeaderButton);
+
+      const within8DaysModal = await findByLabelText(
+        "Integrated within 8 days"
+      );
+      expect(within8DaysModal).toBeInTheDocument();
     });
 
     it("renders placeholders when there is no transfers", () => {
