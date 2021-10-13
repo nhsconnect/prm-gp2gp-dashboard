@@ -48,30 +48,38 @@ describe("Practice page", () => {
 
         cy.contains("Integration times");
 
-        cy.contains("Month");
-        cy.get("[data-testid=table__cell--row-0-col-0]").contains(
-          "December 2019"
+        cy.get("table").within(() => {
+          cy.contains("Month");
+          cy.get("[data-testid=table__cell--row-0-col-0]").contains(
+            "December 2019"
+          );
+
+          cy.contains("Transfers received");
+          cy.get("[data-testid=table__cell--row-0-col-1]").contains(2);
+
+          cy.contains("Integrated within 3 days");
+          cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
+
+          cy.contains("Integrated within 8 days");
+          cy.get("[data-testid=table__cell--row-0-col-3]").contains("50%");
+
+          cy.contains("Not integrated within 8 days");
+          cy.get("[data-testid=table__cell--row-0-col-4]").contains("0%");
+
+          cy.get("[data-testid=table__cell--row-1-col-0]").contains(
+            "November 2019"
+          );
+          cy.get("[data-testid=table__cell--row-1-col-1]").contains(0);
+          cy.get("[data-testid=table__cell--row-1-col-2]").contains("n/a");
+          cy.get("[data-testid=table__cell--row-1-col-3]").contains("n/a");
+          cy.get("[data-testid=table__cell--row-1-col-4]").contains("n/a");
+        });
+
+        cy.get(".gp2gp-open-modal").filter(":visible").eq(3).click();
+        cy.contains(
+          "The percentage of transfers received that were not integrated within 8 days."
         );
-
-        cy.contains("Transfers received");
-        cy.get("[data-testid=table__cell--row-0-col-1]").contains(2);
-
-        cy.contains("Integrated within 3 days");
-        cy.get("[data-testid=table__cell--row-0-col-2]").contains("50%");
-
-        cy.contains("Integrated within 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-3]").contains("50%");
-
-        cy.contains("Not integrated within 8 days");
-        cy.get("[data-testid=table__cell--row-0-col-4]").contains("0%");
-
-        cy.get("[data-testid=table__cell--row-1-col-0]").contains(
-          "November 2019"
-        );
-        cy.get("[data-testid=table__cell--row-1-col-1]").contains(0);
-        cy.get("[data-testid=table__cell--row-1-col-2]").contains("n/a");
-        cy.get("[data-testid=table__cell--row-1-col-3]").contains("n/a");
-        cy.get("[data-testid=table__cell--row-1-col-4]").contains("n/a");
+        cy.contains("button", "Close").click();
 
         cy.contains("h2", "About this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");

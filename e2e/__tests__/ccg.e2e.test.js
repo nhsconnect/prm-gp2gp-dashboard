@@ -29,28 +29,30 @@ describe("CCG page", () => {
         cy.contains("When records are not integrated within 8 days");
         cy.contains("Integration times for December 2019");
 
-        cy.contains("Requesting practice name");
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With Integrations - A12345"
-        );
+        cy.get("table").within(() => {
+          cy.contains("Requesting practice name");
+          cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
+            "Test GP Practice With Integrations - A12345"
+          );
 
-        cy.contains("Transfers received");
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(6);
+          cy.contains("Transfers received");
+          cy.get('[data-testid="table__cell--row-0-col-1"]').contains(6);
 
-        cy.contains("Integrated within 3 days");
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("16.7%");
+          cy.contains("Integrated within 3 days");
+          cy.get('[data-testid="table__cell--row-0-col-2"]').contains("16.7%");
+
+          cy.contains("Integrated within 8 days");
+          cy.get('[data-testid="table__cell--row-0-col-3"]').contains("16.7%");
+
+          cy.contains("Not integrated within 8 days");
+          cy.get('[data-testid="table__cell--row-0-col-4"]').contains("66.7%");
+        });
 
         cy.get(".gp2gp-open-modal").filter(":visible").eq(1).click();
         cy.contains(
           "The percentage of transfers received that were integrated (filed or suppressed) within 3 days"
         );
         cy.contains("button", "Close").click();
-
-        cy.contains("Integrated within 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-3"]').contains("16.7%");
-
-        cy.contains("Not integrated within 8 days");
-        cy.get('[data-testid="table__cell--row-0-col-4"]').contains("66.7%");
 
         cy.contains("h2", "About this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");
