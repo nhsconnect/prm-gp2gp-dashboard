@@ -40,6 +40,12 @@ describe("CCG page", () => {
         cy.contains("Integrated within 3 days");
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("16.7%");
 
+        cy.get(".gp2gp-open-modal").filter(":visible").eq(1).click();
+        cy.contains(
+          "The percentage of transfers received that were integrated (filed or suppressed) within 3 days"
+        );
+        cy.contains("button", "Close").click();
+
         cy.contains("Integrated within 8 days");
         cy.get('[data-testid="table__cell--row-0-col-3"]').contains("16.7%");
 
