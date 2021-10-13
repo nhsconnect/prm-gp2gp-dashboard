@@ -2,10 +2,28 @@
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
 @import "node_modules/nhsuk-frontend/packages/core/settings/colours";
 @import "node_modules/nhsuk-frontend/packages/core/utilities/_visually-hidden";
+@import "node_modules/nhsuk-frontend/packages/core/utilities/typography";
 
 .gp2gp-modal {
   background-color: $color_nhsuk-white;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem;
+}
+
+.gp2gp-modal__close-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gp2gp-modal__close-btn {
+  @include nhsuk-link-style-default;
+  @extend .nhsuk-u-font-size-19;
+  background-color: inherit;
+  border: none;
+  text-decoration: underline;
+}
+
+.gp2gp-modal__content {
+  padding-top: 1rem;
 }
 
 .gp2gp-open-modal {

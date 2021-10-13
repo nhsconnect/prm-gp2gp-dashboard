@@ -49,10 +49,12 @@ export const HelpModal: FC<HelpModalProps> = ({
         animationDuration={0}
         center
       >
-        <div>
-          <button onClick={closeModal}>Close</button>
-          {content}
+        <div className="gp2gp-modal__close-btn-container">
+          <button onClick={closeModal} className="gp2gp-modal__close-btn">
+            Close
+          </button>
         </div>
+        <div className="gp2gp-modal__content">{content}</div>
       </Modal>
     </>
   );
