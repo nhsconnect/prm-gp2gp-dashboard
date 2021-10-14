@@ -118,20 +118,22 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
                       ),
                     },
                     {
-                      title: "Not integrated within 8 days ",
-                      extra: (
+                      title: (
                         <>
+                          Not integrated within 8 days{" "}
                           <div className="gp2gp-title-emphasis">
                             (paper copy sent){" "}
                           </div>
-                          <HelpModal
-                            ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                            iconHiddenDescription="Open modal with definition"
-                            content={
-                              <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                            }
-                          />
                         </>
+                      ),
+                      extra: (
+                        <HelpModal
+                          ariaLabelledBy="not-integrated-within-8-days-modal-title"
+                          iconHiddenDescription="Open modal with definition"
+                          content={
+                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                          }
+                        />
                       ),
                     },
                   ]
@@ -141,11 +143,13 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
                     { title: "Integrated within 3 days " },
                     { title: "Integrated within 8 days " },
                     {
-                      title: "Not integrated within 8 days ",
-                      extra: (
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy sent){" "}
-                        </div>
+                      title: (
+                        <>
+                          Not integrated within 8 days{" "}
+                          <div className="gp2gp-title-emphasis">
+                            (paper copy sent){" "}
+                          </div>
+                        </>
                       ),
                     },
                   ]

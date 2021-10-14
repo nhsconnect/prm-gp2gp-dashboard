@@ -11,15 +11,24 @@
   td,
   th {
     padding-left: nhsuk-spacing(2);
-    padding-right: nhsuk-spacing(3);
+    padding-right: nhsuk-spacing(2);
     white-space: initial;
     vertical-align: bottom;
     text-align: right;
   }
 
   .nhsuk-table__col-0 {
-    min-width: 11rem;
     text-align: left;
+  }
+}
+
+.gp2gp-table__header-with-extra {
+  display: flex;
+}
+
+.gp2gp-table .gp2gp-table__cell-with-extra {
+  @include mq($from: desktop) {
+    padding-right: 44px;
   }
 }
 

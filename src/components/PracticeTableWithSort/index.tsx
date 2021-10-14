@@ -13,7 +13,7 @@ import "../common/Table/index.scss";
 
 type TableWithSortProps = {
   ccgPractices: PracticePercentageType[];
-  headers: { title: string; extra?: ReactNode }[];
+  headers: { title: ReactNode; extra?: ReactNode }[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
   tableCaption: string;

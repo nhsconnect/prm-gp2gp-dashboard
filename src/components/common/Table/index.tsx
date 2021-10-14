@@ -3,7 +3,7 @@ import "./index.scss";
 import classNames from "classnames";
 
 type TableProps = {
-  headers: { title: string; extra?: ReactNode }[];
+  headers: { title: ReactNode; extra?: ReactNode }[];
   caption?: { text: string; hidden: boolean };
   rows: (string | number | JSX.Element)[][];
   className?: string;
@@ -51,8 +51,14 @@ export const Table: FC<TableProps> = ({
                 : undefined
             }
           >
-            {header.title}
-            {header.extra}
+            {header.extra ? (
+              <div className="gp2gp-table__header-with-extra">
+                <div>{header.title}</div>
+                {header.extra}
+              </div>
+            ) : (
+              header.title
+            )}
           </th>
         ))}
       </tr>
@@ -91,7 +97,15 @@ export const Table: FC<TableProps> = ({
                 {cellData}
               </th>
             ) : (
-              <td {...cellProps} role="cell">
+              <td
+                {...cellProps}
+                className={
+                  header.extra
+                    ? `${cellProps.className} gp2gp-table__cell-with-extra`
+                    : cellProps.className
+                }
+                role="cell"
+              >
                 {cellData}
               </td>
             );
