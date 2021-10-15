@@ -4,6 +4,10 @@ type DefinitionProps = {
   ariaLabelId?: string;
 };
 
+type WhyIntegrateWithin8DaysProps = {
+  title?: string;
+};
+
 export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
 }) => (
@@ -70,6 +74,27 @@ export const NotIntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
       For the purpose of this site, each transfer is categorised 14 days after
       it started. See About section to learn more about how we categorise
       transfers.
+    </p>
+  </>
+);
+
+export const WhyIntegrateWithin8Days: FC<WhyIntegrateWithin8DaysProps> = ({
+  title,
+}) => (
+  <>
+    {title && <h4>{title}</h4>}
+    <p>
+      If transfers are not integrated within 8 days, this increases the quantity
+      of paper records your practice will need to process and store.
+    </p>
+    <p>
+      The previous practice will be automatically notified that the record has
+      not been integrated, and that a paper copy of the electronic record should
+      be printed, to send with the Lloyd George envelope to the new practice.
+    </p>
+    <p>
+      Unnecessary printing causes avoidable work and expense for both your
+      practice and the previous practice.
     </p>
   </>
 );

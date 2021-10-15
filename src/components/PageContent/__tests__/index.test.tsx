@@ -38,7 +38,7 @@ describe("PageContent component", () => {
 
     const expanderTitle = getByText("Why integrate within 8 days");
     const expanderContent = getByText(
-      "This increases burden on both the sending and receiving",
+      "The previous practice will be automatically notified that the record",
       { exact: false }
     );
     expect(expanderTitle).toBeInTheDocument();

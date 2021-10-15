@@ -26,9 +26,12 @@
       margin-right: 16px;
     }
 
-    &:focus {
-      background-color: $color_nhsuk-yellow;
-      border-bottom: 4px solid $color_nhsuk-blue;
+    &:focus,
+    &:focus-visible {
+      background-color: $nhsuk-focus-color;
+      border-bottom: 4px solid $nhsuk-focus-text-color;
+      color: $nhsuk-focus-text-color;
+      outline: none;
     }
 
     &:hover {

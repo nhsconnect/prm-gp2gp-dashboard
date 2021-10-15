@@ -203,7 +203,7 @@ describe("Practice template", () => {
 
       const expanderTitle = getByText("Why integrate within 8 days");
       const expanderContent = getByText(
-        "This increases burden on both the sending and receiving",
+        "Unnecessary printing causes avoidable work and expense",
         { exact: false }
       );
       expect(expanderTitle).toBeInTheDocument();
@@ -232,16 +232,23 @@ describe("Practice template", () => {
     });
 
     it("displays modal with definitions when icon is clicked", async () => {
-      const { findByText, queryByText, getByRole } = render(
-        <Practice pageContext={practicePageContext} />
-      );
+      const {
+        findByText,
+        findAllByText,
+        queryByText,
+        queryAllByText,
+        getByRole,
+      } = render(<Practice pageContext={practicePageContext} />);
 
       expect(
-        queryByText(/All GP2GP transfers that were requested/)
+        queryByText(/transfers received that were not integrated within 8 days/)
       ).not.toBeInTheDocument();
+      expect(
+        queryAllByText(/Unnecessary printing causes avoidable work/)
+      ).toHaveLength(1);
 
       const transfersReceivedHeader = getByRole("columnheader", {
-        name: /Transfers received/,
+        name: /Not integrated within 8 days/,
       });
 
       const transfersReceivedModalButton = within(
@@ -250,8 +257,13 @@ describe("Practice template", () => {
       userEvent.click(transfersReceivedModalButton);
 
       expect(
-        await findByText(/All GP2GP transfers that were requested/)
+        await findByText(
+          /transfers received that were not integrated within 8 days/
+        )
       ).toBeInTheDocument();
+      expect(
+        await findAllByText(/Unnecessary printing causes avoidable work/)
+      ).toHaveLength(2);
     });
 
     it("displays help icons for all relevant headers", () => {
@@ -391,7 +403,7 @@ describe("Practice template", () => {
 
       const expanderTitle = getByText("Why integrate within 8 days");
       const expanderContent = getByText(
-        "This increases burden on both the sending and receiving",
+        "Unnecessary printing causes avoidable work and expense",
         { exact: false }
       );
       expect(expanderTitle).toBeInTheDocument();

@@ -1,9 +1,8 @@
 import React, { FC, ReactNode } from "react";
 import { Expander } from "../common/Expander";
-import eightDayExpanderContent from "../../data/content/eightDayExpander.json";
 import { Tabs } from "../Tabs";
 import { AboutThisDataContent } from "../AboutThisDataContent";
-import { DefinitionsContent } from "../Definitions";
+import { DefinitionsContent, WhyIntegrateWithin8Days } from "../Definitions";
 import "./index.scss";
 
 type PageContentProps = {
@@ -25,13 +24,8 @@ export const PageContent: FC<PageContentProps> = ({
       </div>
 
       <Expander
-        title={eightDayExpanderContent.title}
-        content={
-          <>
-            <p>{eightDayExpanderContent.firstParagraph}</p>
-            <p>{eightDayExpanderContent.secondParagraph}</p>
-          </>
-        }
+        title="Why integrate within 8 days"
+        content={<WhyIntegrateWithin8Days />}
       />
       <Tabs
         tabs={[

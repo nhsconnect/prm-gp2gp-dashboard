@@ -26,7 +26,7 @@ describe("CCG page", () => {
         );
 
         cy.contains("Why integrate within 8 days").click();
-        cy.contains("When records are not integrated within 8 days");
+        cy.contains("If transfers are not integrated within 8 days");
         cy.contains("Integration times for December 2019");
 
         cy.get("table").within(() => {

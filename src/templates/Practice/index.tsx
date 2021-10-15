@@ -22,6 +22,7 @@ import {
   IntegratedWithin8DaysDefinition,
   NotIntegratedWithin8DaysDefinition,
   TransfersReceivedDefinition,
+  WhyIntegrateWithin8Days,
 } from "../../components/Definitions";
 
 import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
@@ -144,7 +145,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
                           ariaLabelledBy="not-integrated-within-8-days-modal-title"
                           iconHiddenDescription="Open modal with definition"
                           content={
-                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                            <>
+                              <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                              <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                            </>
                           }
                         />
                       ),
