@@ -10,6 +10,10 @@
   &--tab-titles {
     border-bottom: 1px solid $color_nhsuk-grey-4;
     margin-bottom: 24px;
+
+    @include mq($until: tablet) {
+      display: flex;
+    }
   }
 
   &--tab-title {
@@ -23,7 +27,7 @@
     @extend .nhsuk-u-font-size-19;
 
     @include mq($until: tablet) {
-      margin-right: 16px;
+      margin-right: nhsuk-spacing(3);
     }
 
     &:focus,

@@ -33,7 +33,7 @@ export const PageContent: FC<PageContentProps> = ({
             title: "Data table",
             content: tableContent,
           },
-          { title: "About", content: <AboutThisDataContent /> },
+          { title: "Notes about this data", content: <AboutThisDataContent /> },
           { title: "Definitions", content: <DefinitionsContent /> },
         ]}
       />

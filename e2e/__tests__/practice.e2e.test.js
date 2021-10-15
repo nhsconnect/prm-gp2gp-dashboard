@@ -82,7 +82,7 @@ describe("Practice page", () => {
         cy.contains("h2", "About this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");
 
-        cy.contains("button", "About").click();
+        cy.contains("button", "Notes about this data").click();
         cy.contains("h2", "About this data");
         cy.contains("December 2019").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");

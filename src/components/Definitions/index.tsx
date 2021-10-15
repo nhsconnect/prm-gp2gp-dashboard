@@ -72,8 +72,8 @@ export const NotIntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
     </ul>
     <p>
       For the purpose of this site, each transfer is categorised 14 days after
-      it started. See About section to learn more about how we categorise
-      transfers.
+      it started. See Notes about this data to learn more about how we
+      categorise transfers.
     </p>
   </>
 );

@@ -57,7 +57,9 @@ describe("PageContent component", () => {
       getByRole("button", { name: "Click to display content Data table" })
     ).toBeInTheDocument();
     expect(
-      getByRole("button", { name: "Click to display content About" })
+      getByRole("button", {
+        name: "Click to display content Notes about this data",
+      })
     ).toBeInTheDocument();
     expect(
       getByRole("button", { name: "Click to display content Definitions" })
@@ -86,7 +88,7 @@ describe("PageContent component", () => {
     expect(aboutTabContent).not.toBeInTheDocument();
 
     const aboutTabTitle = getByRole("button", {
-      name: "Click to display content About",
+      name: "Click to display content Notes about this data",
     });
     userEvent.click(aboutTabTitle);
 
