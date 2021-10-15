@@ -48,7 +48,7 @@ describe("CCG page", () => {
           cy.get('[data-testid="table__cell--row-0-col-4"]').contains("66.7%");
         });
 
-        cy.get(".gp2gp-open-modal").filter(":visible").eq(1).click();
+        cy.get(".gp2gp-open-modal-btn").filter(":visible").eq(1).click();
         cy.contains(
           "The percentage of transfers received that were integrated (filed or suppressed) within 3 days"
         );

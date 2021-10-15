@@ -75,7 +75,7 @@ describe("Practice page", () => {
           cy.get("[data-testid=table__cell--row-1-col-4]").contains("n/a");
         });
 
-        cy.get(".gp2gp-open-modal").filter(":visible").eq(3).click();
+        cy.get(".gp2gp-open-modal-btn").filter(":visible").eq(3).click();
         cy.contains(
           "The percentage of transfers received that were not integrated within 8 days."
         );

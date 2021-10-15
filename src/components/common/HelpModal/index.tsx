@@ -36,7 +36,7 @@ export const HelpModal: FC<HelpModalProps> = ({
 
   return (
     <>
-      <button onClick={openModal} className="gp2gp-open-modal">
+      <button onClick={openModal} className="gp2gp-open-modal-btn">
         <QuestionMark />
         <span className="nhsuk-u-visually-hidden">{iconHiddenDescription}</span>
       </button>
@@ -46,7 +46,7 @@ export const HelpModal: FC<HelpModalProps> = ({
         classNames={{ modal: "gp2gp-modal" }}
         ariaLabelledby={ariaLabelledBy}
         showCloseIcon={false}
-        animationDuration={0}
+        animationDuration={1}
         center
       >
         <div className="gp2gp-modal__close-btn-container">

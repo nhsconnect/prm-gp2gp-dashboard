@@ -53,7 +53,9 @@ export const Table: FC<TableProps> = ({
           >
             {header.extra ? (
               <div className="gp2gp-table__header-with-extra">
-                <div>{header.title}</div>
+                <div className="gp2gp-table__header-with-extra-title">
+                  {header.title}
+                </div>
                 {header.extra}
               </div>
             ) : (

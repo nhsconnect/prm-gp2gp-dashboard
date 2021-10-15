@@ -3,6 +3,7 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/colours";
 @import "node_modules/nhsuk-frontend/packages/core/utilities/_visually-hidden";
 @import "node_modules/nhsuk-frontend/packages/core/utilities/typography";
+@import "node_modules/nhsuk-frontend/packages/components/button/button";
 
 .gp2gp-modal {
   background-color: $color_nhsuk-white;
@@ -19,17 +20,25 @@
   @extend .nhsuk-u-font-size-19;
   background-color: inherit;
   border: none;
-  text-decoration: underline;
 }
 
 .gp2gp-modal__content {
   padding-top: 1rem;
 }
 
-.gp2gp-open-modal {
+.gp2gp-open-modal-btn {
   background-color: inherit;
   border: none;
   align-self: center;
   min-width: 44px;
   min-height: 44px;
+
+  &:focus {
+    background-color: $nhsuk-focus-color;
+    box-shadow: 0 $button-shadow-size 0 $nhsuk-focus-text-color;
+  }
+
+  &:focus .gp2gp-question-mark-icon {
+    fill: $nhsuk-focus-text-color;
+  }
 }

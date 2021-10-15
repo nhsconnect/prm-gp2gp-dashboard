@@ -27,6 +27,10 @@
   display: flex;
 }
 
+.gp2gp-table__header-with-extra-title {
+  padding-right: 0.2rem;
+}
+
 .gp2gp-table .gp2gp-table__cell-with-extra {
   @include mq($from: desktop) {
     padding-right: 44px;
