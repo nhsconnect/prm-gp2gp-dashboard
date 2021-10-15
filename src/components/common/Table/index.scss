@@ -11,13 +11,14 @@
   td,
   th {
     padding-left: nhsuk-spacing(2);
-    padding-right: nhsuk-spacing(2);
+    padding-right: nhsuk-spacing(3);
     white-space: initial;
     vertical-align: bottom;
     text-align: right;
   }
 
   .nhsuk-table__col-0 {
+    min-width: 11rem;
     text-align: left;
   }
 }
