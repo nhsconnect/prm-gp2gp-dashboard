@@ -54,11 +54,11 @@ describe("CCG page", () => {
         );
         cy.contains("button", "Close").click();
 
-        cy.contains("h2", "About this data").should("not.exist");
+        cy.contains("h2", "Notes about this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");
 
         cy.contains("button", "Notes about this data").click();
-        cy.contains("h2", "About this data");
+        cy.contains("h2", "Notes about this data");
         cy.contains("Test GP Practice With Integrations - A12345").should(
           "not.exist"
         );
@@ -69,7 +69,7 @@ describe("CCG page", () => {
         cy.contains("Test GP Practice With Integrations - A12345").should(
           "not.exist"
         );
-        cy.contains("h2", "About this data").should("not.exist");
+        cy.contains("h2", "Notes about this data").should("not.exist");
 
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");

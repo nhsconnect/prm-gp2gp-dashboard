@@ -79,18 +79,18 @@ describe("Practice page", () => {
         cy.contains("All GP2GP transfers that were requested by the practice");
         cy.contains("button", "Close").click();
 
-        cy.contains("h2", "About this data").should("not.exist");
+        cy.contains("h2", "Notes about this data").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");
 
         cy.contains("button", "Notes about this data").click();
-        cy.contains("h2", "About this data");
+        cy.contains("h2", "Notes about this data");
         cy.contains("December 2019").should("not.exist");
         cy.contains("h2", "Definitions").should("not.exist");
 
         cy.contains("button", "Definitions").click();
         cy.contains("h2", "Definitions");
         cy.contains("December 2019").should("not.exist");
-        cy.contains("h2", "About this data").should("not.exist");
+        cy.contains("h2", "Notes about this data").should("not.exist");
 
         cy.contains("button", "Data table").click();
         cy.contains("December 2019");
