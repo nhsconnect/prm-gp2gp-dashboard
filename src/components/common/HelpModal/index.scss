@@ -32,9 +32,9 @@
   align-self: center;
   min-width: 44px;
   min-height: 44px;
+  cursor: pointer;
 
-  &:focus,
-  &:focus-visible {
+  &:focus {
     background-color: $nhsuk-focus-color;
     box-shadow: 0 $button-shadow-size 0 $nhsuk-focus-text-color;
     outline: none;
@@ -42,5 +42,9 @@
 
   &:focus .gp2gp-question-mark-icon {
     fill: $nhsuk-focus-text-color;
+  }
+
+  &:hover .gp2gp-question-mark-icon {
+    fill: $color_nhsuk-purple;
   }
 }

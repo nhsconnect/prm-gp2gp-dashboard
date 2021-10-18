@@ -13,7 +13,7 @@ export const Tabs: FC<TabsProps> = ({ tabs }) => {
 
   return (
     <div className="gp2gp-tabs">
-      <div className="gp2gp-tabs--tab-titles">
+      <div className="gp2gp-tabs__tab-titles">
         {tabs.map((tab, index) => (
           <button
             onClick={() => {
@@ -21,8 +21,8 @@ export const Tabs: FC<TabsProps> = ({ tabs }) => {
             }}
             key={tab.title}
             className={classNames(
-              "gp2gp-tabs--tab-title",
-              selectedTabIndex === index && "gp2gp-tabs--tab-title__active"
+              "gp2gp-tabs__tab-title",
+              selectedTabIndex === index && "gp2gp-tabs__tab-title--active"
             )}
           >
             <span className="nhsuk-u-visually-hidden">
@@ -32,9 +32,7 @@ export const Tabs: FC<TabsProps> = ({ tabs }) => {
           </button>
         ))}
       </div>
-      <div className="gp2gp-tabs--tab-content">
-        {tabs[selectedTabIndex].content}
-      </div>
+      <div>{tabs[selectedTabIndex].content}</div>
     </div>
   );
 };

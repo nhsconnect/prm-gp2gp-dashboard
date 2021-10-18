@@ -7,7 +7,7 @@
 .gp2gp-tabs {
   margin-top: 32px;
 
-  &--tab-titles {
+  &__tab-titles {
     border-bottom: 1px solid $color_nhsuk-grey-4;
     margin-bottom: 24px;
 
@@ -16,7 +16,7 @@
     }
   }
 
-  &--tab-title {
+  &__tab-title {
     color: $color_nhsuk-blue;
     cursor: pointer;
     text-decoration: none;
@@ -30,8 +30,7 @@
       margin-right: nhsuk-spacing(3);
     }
 
-    &:focus,
-    &:focus-visible {
+    &:focus {
       background-color: $nhsuk-focus-color;
       border-bottom: 4px solid $nhsuk-focus-text-color;
       color: $nhsuk-focus-text-color;
@@ -42,7 +41,7 @@
       color: $color_shade_nhsuk-blue-50;
     }
 
-    &__active {
+    &--active {
       font-weight: bold;
       border-bottom: 4px solid $color_nhsuk-blue;
     }

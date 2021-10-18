@@ -57,18 +57,18 @@ describe("Tabs component", () => {
     const firstTabTitle = getByRole("button", {
       name: "Click to display content First tab",
     });
-    expect(firstTabTitle).toHaveClass("gp2gp-tabs--tab-title__active");
+    expect(firstTabTitle).toHaveClass("gp2gp-tabs__tab-title--active");
 
     const secondTabTitle = getByRole("button", {
       name: "Click to display content Second tab",
     });
-    expect(secondTabTitle).not.toHaveClass("gp2gp-tabs--tab-title__active");
+    expect(secondTabTitle).not.toHaveClass("gp2gp-tabs__tab-title--active");
 
     userEvent.click(secondTabTitle);
 
     await waitFor(() => {
-      expect(secondTabTitle).toHaveClass("gp2gp-tabs--tab-title__active");
-      expect(firstTabTitle).not.toHaveClass("gp2gp-tabs--tab-title__active");
+      expect(secondTabTitle).toHaveClass("gp2gp-tabs__tab-title--active");
+      expect(firstTabTitle).not.toHaveClass("gp2gp-tabs__tab-title--active");
     });
   });
 });
