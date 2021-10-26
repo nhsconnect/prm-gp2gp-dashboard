@@ -23,6 +23,7 @@ export const Table: FC<TableProps> = ({
 
   return (
     <table
+      data-testid="gp2gp-table"
       className={
         isHeaderWithExtra
           ? classNames("gp2gp-table-with-extra", className)

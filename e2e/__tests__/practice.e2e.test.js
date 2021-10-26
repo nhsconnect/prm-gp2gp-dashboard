@@ -48,7 +48,7 @@ describe("Practice page", () => {
 
         cy.contains("Integration times");
 
-        cy.get("table").within(() => {
+        cy.get("[data-testid=gp2gp-table]").within(() => {
           cy.contains("Month");
           cy.get("[data-testid=table__cell--row-0-col-0]").contains(
             "December 2019"
@@ -75,7 +75,10 @@ describe("Practice page", () => {
           cy.get("[data-testid=table__cell--row-1-col-4]").contains("n/a");
         });
 
-        cy.get(".gp2gp-open-modal-btn").filter(":visible").eq(0).click();
+        cy.get("[data-testid=gp2gp-open-modal-btn]")
+          .filter(":visible")
+          .eq(0)
+          .click();
         cy.contains("All GP2GP transfers that were requested by the practice");
         cy.contains("button", "Close").click();
 

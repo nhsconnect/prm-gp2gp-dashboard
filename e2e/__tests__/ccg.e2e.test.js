@@ -29,7 +29,7 @@ describe("CCG page", () => {
         cy.contains("If transfers are not integrated within 8 days");
         cy.contains("Integration times for December 2019");
 
-        cy.get("table").within(() => {
+        cy.get("[data-testid=gp2gp-table]").within(() => {
           cy.contains("Requesting practice name");
           cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
             "Test GP Practice With Integrations - A12345"
@@ -48,7 +48,10 @@ describe("CCG page", () => {
           cy.get('[data-testid="table__cell--row-0-col-4"]').contains("66.7%");
         });
 
-        cy.get(".gp2gp-open-modal-btn").filter(":visible").eq(1).click();
+        cy.get("[data-testid=gp2gp-open-modal-btn]")
+          .filter(":visible")
+          .eq(1)
+          .click();
         cy.contains(
           "The percentage of transfers received that were integrated (filed or suppressed) within 3 days"
         );

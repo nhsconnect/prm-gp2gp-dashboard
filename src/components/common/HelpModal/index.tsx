@@ -36,7 +36,11 @@ export const HelpModal: FC<HelpModalProps> = ({
 
   return (
     <>
-      <button onClick={openModal} className="gp2gp-open-modal-btn">
+      <button
+        onClick={openModal}
+        className="gp2gp-open-modal-btn"
+        data-testid="gp2gp-open-modal-btn"
+      >
         <QuestionMark />
         <span className="nhsuk-u-visually-hidden">{iconHiddenDescription}</span>
       </button>
