@@ -13,14 +13,10 @@ describe("404 NotFound Page", () => {
       );
     });
   });
-
-  function getMeta(metaName: string) {
-    const metas = document.getElementsByTagName("meta");
-    for (let i = 0; i < metas.length; i += 1) {
-      if (metas[i].getAttribute("name") === metaName) {
-        return metas[i].getAttribute("content");
-      }
-    }
-    return "";
-  }
 });
+
+function getMeta(metaName: string) {
+  //convert HTMLCollection into an array
+  const metas = [...document.getElementsByTagName("meta")];
+  return metas.find((meta) => meta.name === metaName)?.content || "";
+}
