@@ -100,8 +100,8 @@ describe("PageContent component", () => {
       expect(aboutTabContent).toBeInTheDocument();
 
       const aboutHeading = getByRole("heading", {
-        name: "Notes about this data",
-        level: 2,
+        name: "How we calculate the data",
+        level: 3,
       });
       expect(aboutHeading).toBeInTheDocument();
     });
