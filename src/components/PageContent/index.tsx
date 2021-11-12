@@ -7,7 +7,7 @@ import "./index.scss";
 
 type PageContentProps = {
   title: string;
-  tableDescription: string;
+  tableDescription: ReactNode;
   tableContent: ReactNode;
 };
 
@@ -20,7 +20,7 @@ export const PageContent: FC<PageContentProps> = ({
     <section className="gp2gp-page-content-section">
       <h2>{title}</h2>
       <div className="nhsuk-u-reading-width">
-        <p className="nhsuk-body">{tableDescription}</p>
+        <div className="nhsuk-body">{tableDescription}</div>
       </div>
 
       <Expander

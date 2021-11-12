@@ -52,7 +52,7 @@ describe("CCG template", () => {
       const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
 
       const tableDescription = getByText(
-        "The table below shows the number of GP2GP transfers",
+        "Records that take longer than 24 hours to transfer electronically via GP2GP are excluded ",
         { exact: false }
       );
 
@@ -195,7 +195,7 @@ describe("CCG template", () => {
       const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
 
       const tableDescription = getByText(
-        "The table below shows the number of GP2GP transfers",
+        "Records that take longer than 24 hours to transfer electronically via GP2GP are excluded ",
         { exact: false }
       );
 

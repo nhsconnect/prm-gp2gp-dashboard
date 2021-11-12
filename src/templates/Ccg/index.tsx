@@ -8,7 +8,6 @@ import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
 import practiceTableContent from "../../data/content/practiceTable.json";
-import ccgContent from "../../data/content/ccg.json";
 import {
   generateMetricsTableData,
   PracticePercentageType,
@@ -74,7 +73,20 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
       <OrganisationDetails name={formattedName} odsCode={odsCode} />
       <PageContent
         title={tableTitle}
-        tableDescription={ccgContent.tableDescription}
+        tableDescription={
+          <>
+            <p>
+              The table below shows the integration times for records received
+              by the practice.
+            </p>
+            <p>
+              Records that take longer than 24 hours to transfer electronically
+              via GP2GP are excluded from the data, even if they are
+              successfully integrated. For more information about how the data
+              is calculated please see Notes about this data.
+            </p>
+          </>
+        }
         tableContent={
           <PracticeTableWithSort
             ccgPractices={ccgPracticeTableData}
