@@ -12,10 +12,6 @@ export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
 }) => (
   <>
-    <p>
-      For information about how the data is calculated see the Notes about this
-      data section.
-    </p>
     <h3 id={ariaLabelId}>Transfers received</h3>
     <p>
       All records that were requested by the practice between the 1st day and
@@ -29,6 +25,10 @@ export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
       </li>
       <li>were rejected by the receiving practice.</li>
     </ul>
+    <p>
+      For information about how the data is calculated see the 'Notes about this
+      data' section.
+    </p>
   </>
 );
 
@@ -45,6 +45,10 @@ export const IntegratedWithin3DaysDefinition: FC<DefinitionProps> = ({
       3 days is considered best practice for integrating or suppressing records
       transferred via GP2GP.
     </p>
+    <p>
+      For information about how the data is calculated see the 'Notes about this
+      data' section.
+    </p>
   </>
 );
 
@@ -56,6 +60,10 @@ export const IntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
     <p>
       The percentage of transfers received that were integrated (filed or
       suppressed) within 8 days of the record being sent.
+    </p>
+    <p>
+      For information about how the data is calculated see the 'Notes about this
+      data' section.
     </p>
   </>
 );
