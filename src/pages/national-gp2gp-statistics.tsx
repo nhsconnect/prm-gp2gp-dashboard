@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Table } from "../components/common/Table";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../library/utils/addPercentageSign";
 import { convertToReadableNum } from "../library/utils/convertToReadableNum";
@@ -69,7 +68,7 @@ const NationalStatistics = () => {
         </p>
         <p>
           For example, a transfer started on the 2nd February and not integrated
-          by the 15th February would be categorised as 'transferred, not
+          by the 16th February would be categorised as 'transferred, not
           integrated'.
         </p>
         <p>

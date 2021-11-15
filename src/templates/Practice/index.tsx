@@ -69,7 +69,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
           name="description"
           content="Monthly data about GP2GP transfers for this practice"
         />
-        <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal {display: none}</style>`}</noscript>
+        <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
       {isLoading || error ? (
         <OrganisationDetails name={formattedName} odsCode={odsCode} />
