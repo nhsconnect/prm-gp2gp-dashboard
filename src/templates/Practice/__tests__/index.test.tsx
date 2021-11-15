@@ -10,7 +10,6 @@ import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 import { mocked } from "ts-jest/utils";
 import { when } from "jest-when";
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
-import Ccg from "../../Ccg";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 
