@@ -15,7 +15,7 @@ export const AboutThisDataContent = () => (
       <li>
         Every transfer shown on the platform is categorised 14 days after it
         started. For example, a transfer started on the 2nd February would be
-        categorised based on its status on the 15th February.
+        categorised based on its status on the 16th February.
       </li>
       <li>
         The time to integrate is calculated from the time the record starts to
