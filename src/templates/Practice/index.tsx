@@ -25,8 +25,6 @@ import {
   WhyIntegrateWithin8Days,
 } from "../../components/Definitions";
 
-import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
-
 type PageContext = {
   practice: PracticeType;
   layout: string;
@@ -63,8 +61,6 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
-  const { showDefinitionsModals } = useFeatureToggles();
-
   return (
     <>
       <Helmet>
@@ -96,92 +92,67 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         }
         tableContent={
           <Table
-            headers={
-              showDefinitionsModals
-                ? [
-                    { title: "Month " },
-                    {
-                      title: "Transfers received ",
-                      extra: (
-                        <HelpModal
-                          ariaLabelledBy="transfers-received-modal-title"
-                          iconHiddenDescription="Open modal with definition"
-                          content={
-                            <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                          }
-                        />
-                      ),
-                    },
-                    {
-                      title: "Integrated within 3 days ",
-                      extra: (
-                        <HelpModal
-                          ariaLabelledBy="integrated-within-3-days-modal-title"
-                          iconHiddenDescription="Open modal with definition"
-                          content={
-                            <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                          }
-                        />
-                      ),
-                    },
-                    {
-                      title: "Integrated within 8 days ",
-                      extra: (
-                        <HelpModal
-                          ariaLabelledBy="integrated-within-8-days-modal-title"
-                          iconHiddenDescription="Open modal with definition"
-                          content={
-                            <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                          }
-                        />
-                      ),
-                    },
-                    {
-                      title: (
-                        <>
-                          Not integrated within 8 days{" "}
-                          <div className="gp2gp-title-emphasis">
-                            (paper copy sent){" "}
-                          </div>
-                        </>
-                      ),
-                      extra: (
-                        <HelpModal
-                          ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                          iconHiddenDescription="Open modal with definition"
-                          content={
-                            <>
-                              <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                              <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
-                            </>
-                          }
-                        />
-                      ),
-                    },
-                  ]
-                : [
-                    { title: "Month " },
-                    {
-                      title: "Transfers received ",
-                    },
-                    {
-                      title: "Integrated within 3 days ",
-                    },
-                    {
-                      title: "Integrated within 8 days ",
-                    },
-                    {
-                      title: (
-                        <>
-                          Not integrated within 8 days{" "}
-                          <div className="gp2gp-title-emphasis">
-                            (paper copy sent){" "}
-                          </div>
-                        </>
-                      ),
-                    },
-                  ]
-            }
+            headers={[
+              { title: "Month " },
+              {
+                title: "Transfers received ",
+                extra: (
+                  <HelpModal
+                    ariaLabelledBy="transfers-received-modal-title"
+                    iconHiddenDescription="Open modal with definition"
+                    content={
+                      <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
+                    }
+                  />
+                ),
+              },
+              {
+                title: "Integrated within 3 days ",
+                extra: (
+                  <HelpModal
+                    ariaLabelledBy="integrated-within-3-days-modal-title"
+                    iconHiddenDescription="Open modal with definition"
+                    content={
+                      <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
+                    }
+                  />
+                ),
+              },
+              {
+                title: "Integrated within 8 days ",
+                extra: (
+                  <HelpModal
+                    ariaLabelledBy="integrated-within-8-days-modal-title"
+                    iconHiddenDescription="Open modal with definition"
+                    content={
+                      <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
+                    }
+                  />
+                ),
+              },
+              {
+                title: (
+                  <>
+                    Not integrated within 8 days{" "}
+                    <div className="gp2gp-title-emphasis">
+                      (paper copy sent){" "}
+                    </div>
+                  </>
+                ),
+                extra: (
+                  <HelpModal
+                    ariaLabelledBy="not-integrated-within-8-days-modal-title"
+                    iconHiddenDescription="Open modal with definition"
+                    content={
+                      <>
+                        <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                        <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                      </>
+                    }
+                  />
+                ),
+              },
+            ]}
             caption={{
               text: "Integration times for the recent months",
               hidden: true,
