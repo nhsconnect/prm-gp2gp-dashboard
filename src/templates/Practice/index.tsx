@@ -85,10 +85,18 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       <PageContent
         title="Integration times"
         tableDescription={
-          <p>
-            The table below shows the number of GP2GP transfers received by the
-            practice and the time it took for these records to be integrated.
-          </p>
+          <>
+            <p>
+              The table below shows the integration times for records received
+              by the practice.
+            </p>
+            <p>
+              Records that take longer than 24 hours to transfer electronically
+              via GP2GP are excluded from the data, even if they are
+              successfully integrated. For more information about how the data
+              is calculated please see the 'Notes about this data' section.
+            </p>
+          </>
         }
         tableContent={
           <Table
