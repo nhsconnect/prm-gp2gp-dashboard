@@ -79,7 +79,9 @@ describe("Practice page", () => {
           .filter(":visible")
           .eq(0)
           .click();
-        cy.contains("All GP2GP transfers that were requested by the practice");
+        cy.contains(
+          "All records that were requested by the practice between the 1st day and last day of the month"
+        );
         cy.contains("button", "Close").click();
 
         cy.contains("h3", "How we calculate the data").should("not.exist");

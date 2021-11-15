@@ -12,14 +12,21 @@ export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
 }) => (
   <>
+    <p>
+      For information about how the data is calculated see the Notes about this
+      data section.
+    </p>
     <h3 id={ariaLabelId}>Transfers received</h3>
     <p>
-      All GP2GP transfers that were requested by the practice between the 1st
-      and last day of the month and successfully received.
+      All records that were requested by the practice between the 1st day and
+      last day of the month and were successfully transferred via GP2GP.
     </p>
     <p>It does not include GP2GP transfers that:</p>
     <ul>
-      <li>failed to transfer, or</li>
+      <li>
+        took longer than 24 hours to transfer electronically failed to transfer,
+        or
+      </li>
       <li>were rejected by the receiving practice.</li>
     </ul>
   </>
