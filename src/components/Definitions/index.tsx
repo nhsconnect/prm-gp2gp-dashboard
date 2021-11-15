@@ -19,10 +19,8 @@ export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
     </p>
     <p>It does not include GP2GP transfers that:</p>
     <ul>
-      <li>
-        took longer than 24 hours to transfer electronically failed to transfer,
-        or
-      </li>
+      <li>took longer than 24 hours to transfer electronically</li>
+      <li>failed to transfer, or</li>
       <li>were rejected by the receiving practice.</li>
     </ul>
     <p>
