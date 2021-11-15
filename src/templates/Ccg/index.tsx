@@ -83,7 +83,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
               Records that take longer than 24 hours to transfer electronically
               via GP2GP are excluded from the data, even if they are
               successfully integrated. For more information about how the data
-              is calculated please see Notes about this data.
+              is calculated please see the 'Notes about this data' section.
             </p>
           </>
         }
