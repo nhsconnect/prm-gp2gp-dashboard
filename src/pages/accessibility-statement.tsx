@@ -78,7 +78,10 @@ const AccessibilityStatement: FC = () => {
           If you find any problems which aren't listed on this page, or think
           that we're not meeting the requirements of the accessibility
           regulations then please email{" "}
-          <a href="mailto:gp2gp@nhs.net">gp2gp@nhs.net</a> to let us know.
+          <a href="mailto:gp-registrations-data@nhs.net">
+            gp-registrations-data@nhs.net
+          </a>{" "}
+          to let us know.
         </p>
         <h2>Enforcement procedure</h2>
         <p>

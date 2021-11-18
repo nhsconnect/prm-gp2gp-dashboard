@@ -97,7 +97,10 @@ const YourPrivacy: FC = () => {
           <li>
             find out what information we hold about you, ask us to correct it if
             it's wrong, or delete it by emailing
-            <a href={"mailto:gp2gp@nhs.net"}> gp2gp@nhs.net</a>
+            <a href={"mailto:gp-registrations-data@nhs.net"}>
+              {" "}
+              gp-registrations-data@nhs.net
+            </a>
           </li>
           <li>
             contact the{" "}

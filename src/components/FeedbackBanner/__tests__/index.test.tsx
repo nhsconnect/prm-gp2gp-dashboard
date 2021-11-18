@@ -37,11 +37,11 @@ describe("FeedbackBanner component", () => {
   it("contains link to GP Registrations Data email", () => {
     const { getByRole } = render(<FeedbackBanner />);
     const surveyLink = getByRole("link", {
-      name: "gpregistrationsdata@nhs.net",
+      name: "gp-registrations-data@nhs.net",
     });
 
     expect(surveyLink.getAttribute("href")).toBe(
-      "mailto:gpregistrationsdata@nhs.net"
+      "mailto:gp-registrations-data@nhs.net"
     );
   });
 });

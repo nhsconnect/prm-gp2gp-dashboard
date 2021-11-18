@@ -34,8 +34,8 @@ export const AboutThisDataContent = () => (
     <p>
       If you have any concerns about the data for a specific practice please
       contact us at{" "}
-      <a href="mailto:gpregistrationsdata@nhs.net">
-        gpregistrationsdata@nhs.net
+      <a href="mailto:gp-registrations-data@nhs.net">
+        gp-registrations-data@nhs.net
       </a>
       .
     </p>

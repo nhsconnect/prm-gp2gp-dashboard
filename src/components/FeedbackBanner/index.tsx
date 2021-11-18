@@ -11,8 +11,8 @@ export const FeedbackBanner: FC = () => (
       </a>{" "}
       to let us know what you think. If you need help with GP Registrations
       Data, or if it isn't working properly, contact the team at{" "}
-      <a href="mailto:gpregistrationsdata@nhs.net">
-        gpregistrationsdata@nhs.net
+      <a href="mailto:gp-registrations-data@nhs.net">
+        gp-registrations-data@nhs.net
       </a>
     </p>
   </aside>
