@@ -90,31 +90,32 @@ export const OrganisationSearch = () => {
       <h2 className="nhsuk-u-margin-bottom-0">
         {organisationSearchContent.heading}
       </h2>
-      {hasMounted ? (
-        <Form onSubmit={handleSubmit} hasError={!!inputError}>
-          <Autosuggest
-            inputError={inputError}
-            inputLabelText={organisationSearchContent.inputLabel}
-            getSuggestionListItemText={getSuggestionListItemText}
-            getFormattedSelectionText={getFormattedSelectionText}
-            inputTextValue={inputTextValue}
-            findSuggestions={findSuggestions}
-            onInputChange={onInputChange}
-            multiSection={true}
-            renderSectionTitle={(section) => section.title}
-            getSectionSuggestions={(section) => section.organisations}
-          />
-          <Button
-            dataTestId="gp2gp-practice-search__button"
-            className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
-            type="submit"
-          >
-            {organisationSearchContent.buttonLabel}
-          </Button>
-        </Form>
-      ) : (
-        <p className="nhsuk-hint gp2gp-text-emphasis">Loading...</p>
-      )}
+      <Form onSubmit={handleSubmit} hasError={!!inputError}>
+        <Autosuggest
+          inputProps={{
+            disabled: !hasMounted,
+            placeholder: hasMounted ? "" : "Loading...",
+          }}
+          inputError={inputError}
+          inputLabelText={organisationSearchContent.inputLabel}
+          getSuggestionListItemText={getSuggestionListItemText}
+          getFormattedSelectionText={getFormattedSelectionText}
+          inputTextValue={inputTextValue}
+          findSuggestions={findSuggestions}
+          onInputChange={onInputChange}
+          multiSection={true}
+          renderSectionTitle={(section) => section.title}
+          getSectionSuggestions={(section) => section.organisations}
+        />
+        <Button
+          disabled={!hasMounted}
+          dataTestId="gp2gp-practice-search__button"
+          className="nhsuk-u-margin-top-3 gp2gp-practice-search__button"
+          type="submit"
+        >
+          {organisationSearchContent.buttonLabel}
+        </Button>
+      </Form>
     </div>
   );
 };

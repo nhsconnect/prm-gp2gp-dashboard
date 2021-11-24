@@ -15,6 +15,7 @@ export const Autosuggest = ({
   multiSection,
   renderSectionTitle,
   getSectionSuggestions,
+  inputProps = {},
 }) => {
   const [suggestions, setSuggestions] = useState([]);
 
@@ -32,12 +33,13 @@ export const Autosuggest = ({
     setSuggestions([]);
   };
 
-  const inputProps = {
+  const autosuggestInputProps = {
     value: inputTextValue,
     onChange: onInputChange,
     className: inputError
       ? "react-autosuggest__input--error"
       : "react-autosuggest__input",
+    ...inputProps,
   };
 
   const renderSuggestion = (suggestion, { query }) => {
@@ -69,7 +71,7 @@ export const Autosuggest = ({
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={getFormattedSelectionText}
         renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
+        inputProps={autosuggestInputProps}
         {...multiSectionProps}
       />
     </label>

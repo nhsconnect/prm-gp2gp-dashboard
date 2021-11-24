@@ -231,5 +231,25 @@ describe("Autosuggest component", () => {
         "text-match--highlighted"
       );
     });
+
+    it("passes down custom input props", () => {
+      const mockSetInputValue = jest.fn();
+      const { getByLabelText, getByPlaceholderText } = render(
+        <Autosuggest
+          inputLabelText={inputLabelText}
+          getSuggestionListItemText={(suggestion) => suggestion.name}
+          getFormattedSelectionText={(suggestion) => suggestion.name}
+          onInputChange={mockSetInputValue}
+          inputTextValue="ap le"
+          findSuggestions={() => [{ name: "apple" }]}
+          inputProps={{ disabled: true, placeholder: "Loading..." }}
+        />
+      );
+
+      const input = getByLabelText(inputLabelText);
+      expect(input).toBeDisabled();
+      const placeholderText = getByPlaceholderText("Loading...");
+      expect(placeholderText).toBeInTheDocument();
+    });
   });
 });

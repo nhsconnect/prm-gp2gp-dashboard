@@ -7,6 +7,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: MouseEventHandler;
   dataTestId?: string;
+  disabled?: boolean;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -15,12 +16,14 @@ export const Button: FC<ButtonProps> = ({
   type,
   onClick,
   dataTestId,
+  disabled,
 }) => (
   <button
     data-testid={dataTestId}
     className={classNames("nhsuk-button", className)}
     type={type}
     onClick={onClick}
+    disabled={disabled}
   >
     {children}
   </button>
