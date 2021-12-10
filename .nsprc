@@ -1,0 +1,7 @@
+{
+  "1005059": {
+    "active": true,
+    "notes": "ansi-html: ignored since it's a non-bundled (webpack) dependency of gatsby",
+    "expiry": 1643714110000
+  }
+}
