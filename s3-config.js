@@ -2,11 +2,11 @@ module.exports = {
   bucket: `prm-gp2gp-metrics-${process.env.DATA_BUCKET_ENV}`,
   outputPath: "src/data/organisations/",
   practiceMetrics: {
-    key: "v7/2021/12/2021-12-practiceMetrics.json",
+    key: "v8/2021/12/2021-12-practiceMetrics.json",
     outputFile: "practiceMetrics.json",
   },
   nationalMetrics: {
-    key: "v7/2021/12/2021-12-nationalMetrics.json",
+    key: "v8/2021/12/2021-12-nationalMetrics.json",
     outputFile: "nationalMetrics.json",
   },
 };
