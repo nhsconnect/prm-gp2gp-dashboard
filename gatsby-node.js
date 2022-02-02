@@ -20,13 +20,26 @@ exports.createPages = async ({ actions }) => {
   });
 
   ccgs.forEach((ccg) => {
+    const ccgPractices = filterPracticesByOdsCodes(ccg.practices, practices);
+
     createPage({
       path: `/ccg/${ccg.odsCode}`,
       component: path.resolve("src/templates/Ccg/index.tsx"),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
-        ccgPractices: filterPracticesByOdsCodes(ccg.practices, practices),
+        ccgPractices,
+        layout: "general",
+      },
+    });
+
+    createPage({
+      path: `/ccg/${ccg.odsCode}/integration-times`,
+      component: path.resolve("src/templates/IntegrationTimesCcg/index.tsx"),
+      context: {
+        odsCode: ccg.odsCode,
+        name: ccg.name,
+        ccgPractices,
         layout: "general",
       },
     });
