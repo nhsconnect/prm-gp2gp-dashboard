@@ -6,6 +6,7 @@ import IntegrationTimesCcg from "..";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 import userEvent from "@testing-library/user-event";
+import { OrganisationDetails } from "../../../components/OrganisationDetails";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 jest.mock("no-scroll");
@@ -17,16 +18,39 @@ describe("CCG template", () => {
     ccgPractices: practiceMetricsMock,
   };
 
-  it("renders CCG details correctly", () => {
-    const expectedPracticeName = "GP Practice - A12345";
-    const expectedCCGHeading = "Burton CCG - 12A";
+  it("displays only organisation ODS code when the name is not provided", () => {
+    const odsCode = "Y00159";
+    const ccgWithoutNameData = {
+      odsCode,
+      name: "",
+      ccgPractices: practiceMetricsMock,
+    };
 
-    const { getByText } = render(
+    const { getByRole } = render(
+      <IntegrationTimesCcg pageContext={ccgWithoutNameData} />
+    );
+
+    const expectedCcgHeading = getByRole("heading", {
+      name: odsCode,
+      level: 1,
+    });
+
+    expect(expectedCcgHeading).toBeInTheDocument();
+  });
+
+  it("renders CCG name and ODS code title correctly", () => {
+    const ccgHeadingText = "Burton CCG - 12A";
+
+    const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
 
-    expect(getByText(expectedCCGHeading)).toBeInTheDocument();
-    expect(getByText(expectedPracticeName)).toBeInTheDocument();
+    const expectedCcgHeading = getByRole("heading", {
+      name: ccgHeadingText,
+      level: 1,
+    });
+
+    expect(expectedCcgHeading).toBeInTheDocument();
   });
 
   it("renders table title correctly", () => {

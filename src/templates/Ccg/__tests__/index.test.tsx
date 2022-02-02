@@ -17,14 +17,35 @@ describe("CCG template", () => {
     ccgPractices: practiceMetricsMock,
   };
 
-  it("renders CCG details correctly", () => {
-    const expectedPracticeName = "GP Practice - A12345";
-    const expectedCCGHeading = "Burton CCG - 12A";
+  it("displays only organisation ODS code when the name is not provided", () => {
+    const odsCode = "Y00159";
+    const ccgWithoutNameData = {
+      odsCode,
+      name: "",
+      ccgPractices: practiceMetricsMock,
+    };
 
-    const { getByText } = render(<Ccg pageContext={pipelineCCGData} />);
+    const { getByRole } = render(<Ccg pageContext={ccgWithoutNameData} />);
 
-    expect(getByText(expectedCCGHeading)).toBeInTheDocument();
-    expect(getByText(expectedPracticeName)).toBeInTheDocument();
+    const expectedCcgHeading = getByRole("heading", {
+      name: odsCode,
+      level: 1,
+    });
+
+    expect(expectedCcgHeading).toBeInTheDocument();
+  });
+
+  it("renders CCG name and ODS code title correctly", () => {
+    const ccgHeadingText = "Burton CCG - 12A";
+
+    const { getByRole } = render(<Ccg pageContext={pipelineCCGData} />);
+
+    const expectedCcgHeading = getByRole("heading", {
+      name: ccgHeadingText,
+      level: 1,
+    });
+
+    expect(expectedCcgHeading).toBeInTheDocument();
   });
 
   it("renders table title correctly", () => {
