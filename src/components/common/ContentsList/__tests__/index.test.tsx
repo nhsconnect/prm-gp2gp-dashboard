@@ -25,29 +25,10 @@ describe("ContentsList component", () => {
     expect(contentsLink.getAttribute("href")).toBe("/link");
   });
 
-  it("only displays links for contents items that has href", () => {
-    const contentsList = [
-      {
-        text: "This will not be linked",
-      },
-      {
-        text: "This is a link",
-        href: "/another-link",
-      },
-    ];
-    const { queryByRole, getByText } = render(
-      <ContentsList items={contentsList} />
-    );
+  it("has a aria label of 'List of links to pages", () => {
+    const { getByLabelText } = render(<ContentsList />);
 
-    const contentsLink = queryByRole("link", {
-      name: "This is a link",
-    });
-    expect(contentsLink).toBeInTheDocument();
-    expect(contentsLink).toHaveAttribute("href");
-    expect(contentsLink?.getAttribute("href")).toBe("/another-link");
-
-    const notLink = getByText("This will not be linked");
-    expect(notLink).toBeInTheDocument();
-    expect(notLink).not.toHaveAttribute("href");
+    const navLabelText = getByLabelText("List of links to pages");
+    expect(navLabelText).toBeInTheDocument();
   });
 });

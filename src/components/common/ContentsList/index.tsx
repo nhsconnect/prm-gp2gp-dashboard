@@ -25,7 +25,7 @@ export const ContentsList: FC<ContentsListProps> = ({ items }) => (
   <nav
     className="nhsuk-contents-list"
     role="navigation"
-    aria-label="Pages in this guide"
+    aria-label="List of links to pages"
   >
     <h2>Contents</h2>
     <ol className="nhsuk-contents-list__list">
