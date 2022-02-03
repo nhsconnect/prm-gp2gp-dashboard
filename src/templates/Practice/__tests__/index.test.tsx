@@ -145,26 +145,6 @@ describe("Practice template", () => {
     expect(expectedPracticeHeading).toBeInTheDocument();
   });
 
-  it("does not render practice address when API responds with an error", async () => {
-    const statusCode = 500;
-    mockAPIResponse(statusCode);
-
-    const { queryByTestId, getByRole } = render(
-      <Practice pageContext={practicePageContext} />
-    );
-
-    await waitFor(() => {
-      const expectedPracticeHeading = getByRole("heading", {
-        name: "Burton Croft Surgery - B86030",
-        level: 1,
-      });
-      expect(expectedPracticeHeading).toBeInTheDocument();
-      expect(
-        queryByTestId("organisation-details-address")
-      ).not.toBeInTheDocument();
-    });
-  });
-
   it("displays table title correctly", () => {
     const { getByRole } = render(
       <Practice pageContext={practicePageContext} />

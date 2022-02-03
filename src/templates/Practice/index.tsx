@@ -5,15 +5,9 @@ import { Table } from "../../components/common/Table";
 
 import { PracticeMetricsType, PracticeType } from "./practice.types";
 
-import {
-  ODS_PORTAL_URL,
-  transformPracticeAddress,
-} from "../../library/api/ODSPortal";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
-import { useApi } from "../../library/hooks/useApi";
-
 import { PageContent } from "../../components/PageContent";
 import { generateMetricsTableData } from "../../library/utils/generateMetricsTableData";
 import { HelpModal } from "../../components/common/HelpModal";
@@ -54,10 +48,6 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
 };
 
 const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
-  const { isLoading, data, error } = useApi(
-    `${ODS_PORTAL_URL}/${practice.odsCode}`
-  );
-
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
@@ -75,13 +65,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         <h1 className="nhsuk-u-margin-bottom-5">
           {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
         </h1>
-        {isLoading || error ? null : (
-          <OrganisationAddress
-            address={transformPracticeAddress(
-              data.Organisation.GeoLoc.Location
-            )}
-          />
-        )}
+        <OrganisationAddress odsCode={odsCode} />
       </div>
       <hr aria-hidden={true} />
 
