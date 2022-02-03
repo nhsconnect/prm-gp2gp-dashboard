@@ -6,7 +6,7 @@ const practiceWithIntegrations = {
     },
     GeoLoc: {
       Location: {
-        AddrLn1: "123 Some Address",
+        AddrLn1: "125 Some Address",
         Town: "Some Town",
         County: "Some County",
         PostCode: "BL3 5DP",
@@ -24,7 +24,6 @@ const practiceWithNoIntegrations = {
     },
     GeoLoc: {
       Location: {
-        AddrLn1: "122 Some Address",
         Town: "Some Other Town",
         County: "Some Other County",
         PostCode: "BL4 5AA",
