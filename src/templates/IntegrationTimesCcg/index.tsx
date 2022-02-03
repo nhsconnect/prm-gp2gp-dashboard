@@ -20,6 +20,8 @@ import {
   TransfersReceivedDefinition,
   WhyIntegrateWithin8Days,
 } from "../../components/Definitions";
+import { ContentsList } from "../../components/common/ContentsList";
+import "./index.scss";
 
 type PageContext = {
   odsCode: string;
@@ -56,6 +58,12 @@ const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
     })
   );
 
+  const contentListItems = [
+    {
+      text: "Integration times",
+    },
+  ];
+
   return (
     <>
       <Helmet>
@@ -66,11 +74,11 @@ const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
         />
         <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      <div className="gp2gp-organisation-details">
-        <h1 className="nhsuk-u-margin-bottom-5">
-          {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-        </h1>
-      </div>
+      <h1 className="nhsuk-u-margin-bottom-5">
+        {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+      </h1>
+      <ContentsList items={contentListItems} />
+
       <PageContent
         title={tableTitle}
         tableDescription={

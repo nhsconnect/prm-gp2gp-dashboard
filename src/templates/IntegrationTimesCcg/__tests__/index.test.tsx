@@ -65,6 +65,18 @@ describe("CCG template", () => {
     expect(tableTitle).toBeInTheDocument();
   });
 
+  it("renders contents list items correctly", () => {
+    const { getByText } = render(
+      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+    );
+
+    const contentsNavTitle = getByText("Contents");
+    const contentsItem = getByText("Integration times");
+
+    expect(contentsNavTitle).toBeInTheDocument();
+    expect(contentsItem).toBeInTheDocument();
+  });
+
   it("renders table description correctly", () => {
     const { getByText } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />

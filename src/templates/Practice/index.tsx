@@ -61,12 +61,10 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         />
         <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      <div className="gp2gp-organisation-details">
-        <h1 className="nhsuk-u-margin-bottom-5">
-          {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-        </h1>
-        <OrganisationAddress odsCode={odsCode} />
-      </div>
+      <h1 className="nhsuk-u-margin-bottom-5">
+        {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+      </h1>
+      <OrganisationAddress odsCode={odsCode} />
       <hr aria-hidden={true} />
 
       <PageContent
