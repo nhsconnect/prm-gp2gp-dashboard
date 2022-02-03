@@ -6,7 +6,6 @@ import IntegrationTimesCcg from "..";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 
 import userEvent from "@testing-library/user-event";
-import { OrganisationDetails } from "../../../components/OrganisationDetails";
 
 jest.mock("../../../library/hooks/useFeatureToggle");
 jest.mock("no-scroll");

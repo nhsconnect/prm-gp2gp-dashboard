@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { OrganisationDetails } from "../../components/OrganisationDetails";
 import { PracticeType } from "../Practice/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { PageContent } from "../../components/PageContent";
@@ -67,7 +66,11 @@ const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
         />
         <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      <OrganisationDetails name={formattedName} odsCode={odsCode} />
+      <div className="gp2gp-organisation-details">
+        <h1 className="nhsuk-u-margin-bottom-5">
+          {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+        </h1>
+      </div>
       <PageContent
         title={tableTitle}
         tableDescription={

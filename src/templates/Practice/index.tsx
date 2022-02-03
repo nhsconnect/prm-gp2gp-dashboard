@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { OrganisationDetails } from "../../components/OrganisationDetails";
+import { OrganisationAddress } from "../../components/OrganisationAddress";
 import { Table } from "../../components/common/Table";
 
 import { PracticeMetricsType, PracticeType } from "./practice.types";
@@ -71,15 +71,18 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
         />
         <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      {isLoading || error ? (
-        <OrganisationDetails name={formattedName} odsCode={odsCode} />
-      ) : (
-        <OrganisationDetails
-          name={formattedName}
-          odsCode={odsCode}
-          address={transformPracticeAddress(data.Organisation.GeoLoc.Location)}
-        />
-      )}
+      <div className="gp2gp-organisation-details">
+        <h1 className="nhsuk-u-margin-bottom-5">
+          {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+        </h1>
+        {isLoading || error ? null : (
+          <OrganisationAddress
+            address={transformPracticeAddress(
+              data.Organisation.GeoLoc.Location
+            )}
+          />
+        )}
+      </div>
       <hr aria-hidden={true} />
 
       <PageContent

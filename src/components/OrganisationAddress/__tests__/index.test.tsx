@@ -1,37 +1,8 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { OrganisationDetails } from "../";
+import { OrganisationAddress } from "../";
 
-describe("OrganisationDetails component", () => {
-  it("displays organisation name and ODS code heading", () => {
-    const name = "Hall Green Health";
-    const odsCode = "Y00159";
-    const { getByRole } = render(
-      <OrganisationDetails name={name} odsCode={odsCode} />
-    );
-
-    const organisationHeading = getByRole("heading", {
-      name: "Hall Green Health - Y00159",
-      level: 1,
-    });
-
-    expect(organisationHeading).toBeInTheDocument();
-  });
-
-  it("displays only organisation ODS code when the name is not provided", () => {
-    const odsCode = "Y00159";
-    const { getByRole } = render(
-      <OrganisationDetails name="" odsCode={odsCode} />
-    );
-
-    const odsCodeHeading = getByRole("heading", {
-      name: "Y00159",
-      level: 1,
-    });
-
-    expect(odsCodeHeading).toBeInTheDocument();
-  });
-
+describe("OrganisationAddress component", () => {
   it("displays organisation address in the correct order", () => {
     const address = {
       lines: ["15", "Austhorpe Road", "Crossgates"],
@@ -39,9 +10,7 @@ describe("OrganisationDetails component", () => {
       town: "Leeds",
     };
     const testId = "organisation-details-address";
-    const { getByTestId } = render(
-      <OrganisationDetails name="" odsCode="" address={address} />
-    );
+    const { getByTestId } = render(<OrganisationAddress address={address} />);
     const addressNode = getByTestId(testId).children;
 
     expect(addressNode[0]).toHaveTextContent(address.lines[0]);
@@ -59,7 +28,7 @@ describe("OrganisationDetails component", () => {
     };
     const testId = "organisation-details-address";
     const { getByText, getByTestId } = render(
-      <OrganisationDetails name="" odsCode="" address={address} />
+      <OrganisationAddress address={address} />
     );
     const addressNode = getByTestId(testId).children;
 
@@ -76,7 +45,7 @@ describe("OrganisationDetails component", () => {
     };
     const testId = "organisation-details-address";
     const { getByText, getByTestId } = render(
-      <OrganisationDetails name="" odsCode="" address={address} />
+      <OrganisationAddress address={address} />
     );
     const addressNode = getByTestId(testId).children;
 
