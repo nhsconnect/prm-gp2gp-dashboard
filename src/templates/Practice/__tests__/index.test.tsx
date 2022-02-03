@@ -123,6 +123,28 @@ describe("Practice template", () => {
     });
   });
 
+  it("displays only organisation ODS code when the name is not provided", () => {
+    const { getByRole } = render(
+      <Practice
+        pageContext={{
+          ...practicePageContext,
+          practice: {
+            ...practicePageContext.practice,
+            odsCode: "B86031",
+            name: "",
+          },
+        }}
+      />
+    );
+
+    const expectedPracticeHeading = getByRole("heading", {
+      name: "B86031",
+      level: 1,
+    });
+
+    expect(expectedPracticeHeading).toBeInTheDocument();
+  });
+
   it("does not render practice address when API responds with an error", async () => {
     const statusCode = 500;
     mockAPIResponse(statusCode);
