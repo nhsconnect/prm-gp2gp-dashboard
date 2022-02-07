@@ -1,2 +1,36 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
+
+.gp2gp-page-content-wrapper {
+  &:after {
+    @include mq($from: desktop) {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+}
+
+.gp2gp-page-heading {
+  @include mq($from: desktop) {
+    float: right;
+    width: 80%;
+  }
+}
+
+.gp2gp-page-aside {
+  padding-right: 1rem;
+  padding-top: 1rem;
+
+  @include mq($from: desktop) {
+    float: left;
+    width: 20%;
+  }
+}
+
+.gp2gp-page-contents {
+  @include mq($from: desktop) {
+    float: right;
+    width: 80%;
+  }
+}

@@ -7,24 +7,9 @@ import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json"
 
 import userEvent from "@testing-library/user-event";
 
-import { mocked } from "ts-jest/utils";
-import { when } from "jest-when";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
-
-jest.mock("../../../library/hooks/useFeatureToggle");
 jest.mock("no-scroll");
 
-describe("CCG template", () => {
-  beforeEach(() => {
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showContentsList: false });
-  });
-
-  afterAll(() => {
-    jest.clearAllMocks();
-  });
-
+describe("CCG Integration Times template", () => {
   const pipelineCCGData = {
     odsCode: "12A",
     name: "BURTON CCG",
@@ -66,11 +51,7 @@ describe("CCG template", () => {
     expect(expectedCcgHeading).toBeInTheDocument();
   });
 
-  it("renders contents list with title correctly when showContentsList toggle is true", () => {
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showContentsList: true });
-
+  it("renders contents list with title correctly", () => {
     const { getByRole, getByText } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
@@ -83,21 +64,6 @@ describe("CCG template", () => {
 
     const expectedContentListItem = getByText("Integration times");
     expect(expectedContentListItem).toBeInTheDocument();
-  });
-
-  it("does not render contents list with title correctly when showContentsList toggle is false", () => {
-    const { queryByRole, queryByText } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
-    );
-
-    const expectedContentsListHeading = queryByRole("heading", {
-      name: "Contents",
-      level: 2,
-    });
-    expect(expectedContentsListHeading).not.toBeInTheDocument();
-
-    const expectedContentListItem = queryByText("Integration times");
-    expect(expectedContentListItem).not.toBeInTheDocument();
   });
 
   it("renders table title correctly", () => {

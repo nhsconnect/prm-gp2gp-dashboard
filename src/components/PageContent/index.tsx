@@ -9,15 +9,17 @@ type PageContentProps = {
   title: string;
   tableDescription: ReactNode;
   tableContent: ReactNode;
+  className?: string;
 };
 
 export const PageContent: FC<PageContentProps> = ({
   title,
   tableDescription,
   tableContent,
+  className = "",
 }) => {
   return (
-    <section className="gp2gp-page-content-section">
+    <section className={`gp2gp-page-content-section ${className}`}>
       <h2>{title}</h2>
       <div className="nhsuk-u-reading-width">
         <div className="nhsuk-body">{tableDescription}</div>
