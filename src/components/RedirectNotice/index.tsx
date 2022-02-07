@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import "./index.scss";
 import { Link } from "gatsby";
 
 type RedirectNoticeProps = {
