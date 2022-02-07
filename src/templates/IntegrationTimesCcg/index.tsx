@@ -22,6 +22,7 @@ import {
 } from "../../components/Definitions";
 import { ContentsList } from "../../components/common/ContentsList";
 import "./index.scss";
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 
 type PageContext = {
   odsCode: string;
@@ -64,6 +65,8 @@ const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
     },
   ];
 
+  const { showContentsList } = useFeatureToggles();
+
   return (
     <>
       <Helmet>
@@ -77,8 +80,7 @@ const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
       <h1 className="nhsuk-u-margin-bottom-5">
         {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
       </h1>
-      <ContentsList items={contentListItems} />
-
+      {showContentsList && <ContentsList items={contentListItems} />}
       <PageContent
         title={tableTitle}
         tableDescription={

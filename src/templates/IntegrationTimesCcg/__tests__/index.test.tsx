@@ -18,7 +18,7 @@ describe("CCG template", () => {
   beforeEach(() => {
     when(mocked(useFeatureToggles))
       .calledWith()
-      .mockReturnValue({ showIntegrationTimesRedirect: false });
+      .mockReturnValue({ showContentsList: false });
   });
 
   afterAll(() => {
@@ -66,10 +66,10 @@ describe("CCG template", () => {
     expect(expectedCcgHeading).toBeInTheDocument();
   });
 
-  it("renders contents list with title correctly when showIntegrationTimesRedirect toggle is true", () => {
+  it("renders contents list with title correctly when showContentsList toggle is true", () => {
     when(mocked(useFeatureToggles))
       .calledWith()
-      .mockReturnValue({ showIntegrationTimesRedirect: true });
+      .mockReturnValue({ showContentsList: true });
 
     const { getByRole, getByText } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
@@ -79,11 +79,25 @@ describe("CCG template", () => {
       name: "Contents",
       level: 2,
     });
+    expect(expectedContentsListHeading).toBeInTheDocument();
 
     const expectedContentListItem = getByText("Integration times");
-
-    expect(expectedContentsListHeading).toBeInTheDocument();
     expect(expectedContentListItem).toBeInTheDocument();
+  });
+
+  it("does not render contents list with title correctly when showContentsList toggle is false", () => {
+    const { queryByRole, queryByText } = render(
+      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+    );
+
+    const expectedContentsListHeading = queryByRole("heading", {
+      name: "Contents",
+      level: 2,
+    });
+    expect(expectedContentsListHeading).not.toBeInTheDocument();
+
+    const expectedContentListItem = queryByText("Integration times");
+    expect(expectedContentListItem).not.toBeInTheDocument();
   });
 
   it("renders table title correctly", () => {
@@ -97,18 +111,6 @@ describe("CCG template", () => {
     });
 
     expect(tableTitle).toBeInTheDocument();
-  });
-
-  it("renders contents list items correctly", () => {
-    const { getByText } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
-    );
-
-    const contentsNavTitle = getByText("Contents");
-    const contentsItem = getByText("Integration times");
-
-    expect(contentsNavTitle).toBeInTheDocument();
-    expect(contentsItem).toBeInTheDocument();
   });
 
   it("renders table description correctly", () => {
