@@ -3,8 +3,6 @@ import { render } from "@testing-library/react";
 
 import { Header } from "../";
 
-jest.mock("../../../library/hooks/useFeatureToggle");
-
 describe("Header component", () => {
   it("displays Public Beta", () => {
     const { getByText } = render(<Header />);

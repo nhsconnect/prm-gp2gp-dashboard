@@ -7,10 +7,24 @@ import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json"
 
 import userEvent from "@testing-library/user-event";
 
+import { mocked } from "ts-jest/utils";
+import { when } from "jest-when";
+import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+
 jest.mock("../../../library/hooks/useFeatureToggle");
 jest.mock("no-scroll");
 
 describe("CCG template", () => {
+  beforeEach(() => {
+    when(mocked(useFeatureToggles))
+      .calledWith()
+      .mockReturnValue({ showIntegrationTimesRedirect: false });
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
   const pipelineCCGData = {
     odsCode: "12A",
     name: "BURTON CCG",
@@ -52,7 +66,11 @@ describe("CCG template", () => {
     expect(expectedCcgHeading).toBeInTheDocument();
   });
 
-  it("renders contents list with title correctly", () => {
+  it("renders contents list with title correctly when showIntegrationTimesRedirect toggle is true", () => {
+    when(mocked(useFeatureToggles))
+      .calledWith()
+      .mockReturnValue({ showIntegrationTimesRedirect: true });
+
     const { getByRole, getByText } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );

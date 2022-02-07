@@ -20,6 +20,8 @@ import {
   TransfersReceivedDefinition,
   WhyIntegrateWithin8Days,
 } from "../../components/Definitions";
+import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
+import { RedirectNotice } from "../../components/RedirectNotice";
 
 type PageContext = {
   odsCode: string;
@@ -56,6 +58,7 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
     })
   );
 
+  const { showIntegrationTimesRedirect } = useFeatureToggles();
   return (
     <>
       <Helmet>
@@ -66,95 +69,102 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
         />
         <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      <h1 className="nhsuk-u-margin-bottom-5">
-        {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-      </h1>
-      <PageContent
-        title={tableTitle}
-        tableDescription={
-          <>
-            <p>
-              The table below shows the integration times for records received
-              by the practice.
-            </p>
-            <p>
-              Records that take longer than 24 hours to transfer electronically
-              via GP2GP are excluded from the data, even if they are
-              successfully integrated. For more information about how the data
-              is calculated please see the 'Notes about this data' section.
-            </p>
-          </>
-        }
-        tableContent={
-          <PracticeTableWithSort
-            ccgPractices={ccgPracticeTableData}
-            headers={[
-              { title: "Requesting practice name " },
-              {
-                title: "Transfers received ",
-                extra: (
-                  <HelpModal
-                    ariaLabelledBy="transfers-received-modal-title"
-                    iconHiddenDescription="Open modal with definition"
-                    content={
-                      <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                    }
-                  />
-                ),
-              },
-              {
-                title: "Integrated within 3 days ",
-                extra: (
-                  <HelpModal
-                    ariaLabelledBy="integrated-within-3-days-modal-title"
-                    iconHiddenDescription="Open modal with definition"
-                    content={
-                      <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                    }
-                  />
-                ),
-              },
-              {
-                title: "Integrated within 8 days ",
-                extra: (
-                  <HelpModal
-                    ariaLabelledBy="integrated-within-8-days-modal-title"
-                    iconHiddenDescription="Open modal with definition"
-                    content={
-                      <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                    }
-                  />
-                ),
-              },
-              {
-                title: (
-                  <>
-                    Not integrated within 8 days{" "}
-                    <div className="gp2gp-title-emphasis">
-                      (paper copy sent){" "}
-                    </div>
-                  </>
-                ),
-                extra: (
-                  <HelpModal
-                    ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                    iconHiddenDescription="Open modal with definition"
-                    content={
+      {showIntegrationTimesRedirect ? (
+        <RedirectNotice redirectLink={`/ccg/${odsCode}/integration-times`} />
+      ) : (
+        <>
+          <h1 className="nhsuk-u-margin-bottom-5">
+            {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+          </h1>
+          <PageContent
+            title={tableTitle}
+            tableDescription={
+              <>
+                <p>
+                  The table below shows the integration times for records
+                  received by the practice.
+                </p>
+                <p>
+                  Records that take longer than 24 hours to transfer
+                  electronically via GP2GP are excluded from the data, even if
+                  they are successfully integrated. For more information about
+                  how the data is calculated please see the 'Notes about this
+                  data' section.
+                </p>
+              </>
+            }
+            tableContent={
+              <PracticeTableWithSort
+                ccgPractices={ccgPracticeTableData}
+                headers={[
+                  { title: "Requesting practice name " },
+                  {
+                    title: "Transfers received ",
+                    extra: (
+                      <HelpModal
+                        ariaLabelledBy="transfers-received-modal-title"
+                        iconHiddenDescription="Open modal with definition"
+                        content={
+                          <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
+                        }
+                      />
+                    ),
+                  },
+                  {
+                    title: "Integrated within 3 days ",
+                    extra: (
+                      <HelpModal
+                        ariaLabelledBy="integrated-within-3-days-modal-title"
+                        iconHiddenDescription="Open modal with definition"
+                        content={
+                          <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
+                        }
+                      />
+                    ),
+                  },
+                  {
+                    title: "Integrated within 8 days ",
+                    extra: (
+                      <HelpModal
+                        ariaLabelledBy="integrated-within-8-days-modal-title"
+                        iconHiddenDescription="Open modal with definition"
+                        content={
+                          <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
+                        }
+                      />
+                    ),
+                  },
+                  {
+                    title: (
                       <>
-                        <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                        <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                        Not integrated within 8 days{" "}
+                        <div className="gp2gp-title-emphasis">
+                          (paper copy sent){" "}
+                        </div>
                       </>
-                    }
-                  />
-                ),
-              },
-            ]}
-            sortBySelect={practiceTableContent.sortBySelect}
-            orderSelect={practiceTableContent.orderSelect}
-            tableCaption={tableTitle}
+                    ),
+                    extra: (
+                      <HelpModal
+                        ariaLabelledBy="not-integrated-within-8-days-modal-title"
+                        iconHiddenDescription="Open modal with definition"
+                        content={
+                          <>
+                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                            <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                          </>
+                        }
+                      />
+                    ),
+                  },
+                ]}
+                sortBySelect={practiceTableContent.sortBySelect}
+                orderSelect={practiceTableContent.orderSelect}
+                tableCaption={tableTitle}
+              />
+            }
           />
-        }
-      />
+        </>
+      )}
     </>
   );
 };

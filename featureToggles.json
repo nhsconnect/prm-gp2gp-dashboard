@@ -1,6 +1,6 @@
 {
   "dev": {
-    "showIntegrationTimesRedirect": true
+    "showIntegrationTimesRedirect": false
   },
   "prod": {
     "showIntegrationTimesRedirect": false

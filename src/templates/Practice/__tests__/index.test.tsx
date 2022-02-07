@@ -8,8 +8,6 @@ import Practice from "..";
 import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
 
-jest.mock("../../../library/hooks/useFeatureToggle");
-
 jest.mock("no-scroll");
 
 const ODSPracticeData = {

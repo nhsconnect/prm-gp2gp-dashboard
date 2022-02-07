@@ -7,8 +7,12 @@ import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json"
 
 import userEvent from "@testing-library/user-event";
 
-jest.mock("../../../library/hooks/useFeatureToggle");
+import { mocked } from "ts-jest/utils";
+import { when } from "jest-when";
+import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+
 jest.mock("no-scroll");
+jest.mock("../../../library/hooks/useFeatureToggle");
 
 describe("CCG template", () => {
   const pipelineCCGData = {
@@ -16,6 +20,39 @@ describe("CCG template", () => {
     name: "BURTON CCG",
     ccgPractices: practiceMetricsMock,
   };
+
+  beforeEach(() => {
+    when(mocked(useFeatureToggles))
+      .calledWith()
+      .mockReturnValue({ showIntegrationTimesRedirect: false });
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
+  it("displays redirect notice if showIntegrationTimesRedirect feature toggle true", () => {
+    when(mocked(useFeatureToggles))
+      .calledWith()
+      .mockReturnValue({ showIntegrationTimesRedirect: true });
+
+    const { getByText, getByRole } = render(
+      <Ccg pageContext={pipelineCCGData} />
+    );
+
+    const expectedRedirectTitle = getByText("This page has been moved.");
+    expect(expectedRedirectTitle).toBeInTheDocument();
+
+    const expectedText = getByText("To access, go to this");
+    expect(expectedText).toBeInTheDocument();
+
+    const expectedRedirectLink = getByRole("link", {
+      name: "link",
+    });
+    expect(expectedRedirectLink.getAttribute("href")).toBe(
+      "/ccg/12A/integration-times"
+    );
+  });
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
