@@ -1,4 +1,8 @@
 {
-  "dev": {},
-  "prod": {}
+  "dev": {
+    "showIntegrationTimesRedirect": true
+  },
+  "prod": {
+    "showIntegrationTimesRedirect": false
+  }
 }
