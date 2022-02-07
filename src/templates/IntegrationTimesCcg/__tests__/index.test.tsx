@@ -52,6 +52,22 @@ describe("CCG template", () => {
     expect(expectedCcgHeading).toBeInTheDocument();
   });
 
+  it("renders contents list with title correctly", () => {
+    const { getByRole, getByText } = render(
+      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+    );
+
+    const expectedContentsListHeading = getByRole("heading", {
+      name: "Contents",
+      level: 2,
+    });
+
+    const expectedContentListItem = getByText("Integration times");
+
+    expect(expectedContentsListHeading).toBeInTheDocument();
+    expect(expectedContentListItem).toBeInTheDocument();
+  });
+
   it("renders table title correctly", () => {
     const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
