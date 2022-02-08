@@ -1,17 +1,19 @@
 import React, { FC } from "react";
 import "./index.scss";
+import { Link } from "gatsby";
 
 type ContentsItemsType = { text: string; href?: string };
+type ContentsLinkType = { text: string; href: string };
 
 type ContentsListProps = {
   items?: ContentsItemsType[];
 };
 
-const ContentsLink = ({ text, href }: ContentsItemsType) => (
+const ContentsLink = ({ text, href }: ContentsLinkType) => (
   <li className="nhsuk-contents-list__item">
-    <a className="nhsuk-contents-list__link" href={href}>
+    <Link className="nhsuk-contents-list__link" to={href}>
       {text}
-    </a>
+    </Link>
   </li>
 );
 
