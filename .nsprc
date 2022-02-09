@@ -2,11 +2,11 @@
   "1005059": {
     "active": true,
     "notes": "ansi-html: ignored since it's a non-bundled (webpack) dependency of gatsby",
-    "expiry": 1643714110000
+    "expiry": 1646143730000
   },
   "1006846": {
     "active": true,
     "notes": "postcss: ignored until upgrading Gatsby to v4 as adding to resolutions block causes issues with build",
-    "expiry": 1643714110000
+    "expiry": 1646143730000
   }
 }
