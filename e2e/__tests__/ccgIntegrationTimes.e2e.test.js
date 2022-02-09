@@ -100,6 +100,10 @@ describe("CCG Integration Times page", () => {
           "Descending"
         );
 
+        // remove with showContentsNavigation feature toggle
+        // at the moment it needs to wait for the feature toggle to load
+        cy.wait(3000);
+
         cy.get("select#sortBySelect").select("Requesting practice name");
         cy.get("select#sortBySelect option:selected").should(
           "have.text",
