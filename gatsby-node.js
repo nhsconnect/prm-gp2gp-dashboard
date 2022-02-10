@@ -35,7 +35,7 @@ exports.createPages = async ({ actions }) => {
 
     createPage({
       path: `/ccg/${ccg.odsCode}/integration-times`,
-      component: path.resolve("src/templates/IntegrationTimesCcg/index.tsx"),
+      component: path.resolve("src/templates/CcgIntegrationTimes/index.tsx"),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,

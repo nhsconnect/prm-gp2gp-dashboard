@@ -397,7 +397,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     ).not.toBeInTheDocument();
   });
 
-  it("does not display contents navigation", async () => {
+  it("does not display contents navigation", () => {
     const { queryByRole, queryByLabelText } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );

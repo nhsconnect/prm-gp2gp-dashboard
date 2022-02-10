@@ -1,17 +1,15 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
+import { OrganisationAddress } from "../../components/OrganisationAddress";
+import { Table } from "../../components/common/Table";
 
-import { PracticeType } from "../Practice/practice.types";
+import { PracticeMetricsType, PracticeType } from "./practice.types";
+
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
-import practiceTableContent from "../../data/content/practiceTable.json";
-import {
-  generateMetricsTableData,
-  PracticePercentageType,
-} from "../../library/utils/generateMetricsTableData";
-
+import { addPercentageSign } from "../../library/utils/addPercentageSign";
+import { PageContent } from "../../components/PageContent";
+import { generateMetricsTableData } from "../../library/utils/generateMetricsTableData";
 import { HelpModal } from "../../components/common/HelpModal";
 import {
   IntegratedWithin3DaysDefinition,
@@ -20,46 +18,45 @@ import {
   TransfersReceivedDefinition,
   WhyIntegrateWithin8Days,
 } from "../../components/Definitions";
-import { ContentsList } from "../../components/common/ContentsList";
 import "../index.scss";
 import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
+import { ContentsList } from "../../components/common/ContentsList";
 
 type PageContext = {
-  odsCode: string;
-  name: string;
-  ccgPractices: PracticeType[];
+  practice: PracticeType;
+  layout: string;
 };
 
-type CcgProps = {
+type PracticeProps = {
   pageContext: PageContext;
 };
 
-const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
-  const { name, odsCode, ccgPractices } = pageContext;
-  const formattedName: string = convertToTitleCase(name);
+const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
+  return metrics.map((metric) => {
+    const {
+      receivedCount,
+      integratedWithin3DaysPercentage,
+      integratedWithin8DaysPercentage,
+      notIntegratedWithin8DaysPercentage,
+    } = generateMetricsTableData(metric.requestedTransfers);
+
+    return [
+      `${convertMonthNumberToText(metric.month)} ${metric.year}`,
+      receivedCount,
+      addPercentageSign(integratedWithin3DaysPercentage),
+      addPercentageSign(integratedWithin8DaysPercentage),
+      addPercentageSign(notIntegratedWithin8DaysPercentage),
+    ];
+  });
+};
+
+const PracticeIntegrationTimes: FC<PracticeProps> = ({
+  pageContext: { practice },
+}) => {
+  const { name, odsCode, metrics } = practice;
+  const formattedName = convertToTitleCase(name);
 
   const { showContentsNavigation } = useFeatureToggles();
-
-  const { year, month } = ccgPractices[0].metrics[0];
-  const tableTitle = `Integration times for ${convertMonthNumberToText(
-    month
-  )} ${year}`;
-
-  const ccgPracticeTableData: PracticePercentageType[] = ccgPractices.map(
-    (practice) => ({
-      odsCode: practice.odsCode,
-      name: practice.name,
-      metrics: [
-        {
-          year: practice.metrics[0].year,
-          month: practice.metrics[0].month,
-          requestedTransfers: generateMetricsTableData(
-            practice.metrics[0].requestedTransfers
-          ),
-        },
-      ],
-    })
-  );
 
   const contentListItems = [
     {
@@ -73,21 +70,23 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
         <title>{`${formattedName} - ${odsCode} - GP Registrations Data`}</title>
         <meta
           name="description"
-          content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+          content="Monthly data about GP2GP transfers for this practice"
         />
-        <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
+        <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
       {showContentsNavigation ? (
         <div className="gp2gp-page-content-wrapper">
           <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
           </h1>
+          <OrganisationAddress odsCode={odsCode} />
+          <hr aria-hidden={true} />
           <aside className="gp2gp-page-aside">
             <ContentsList items={contentListItems} />
           </aside>
           <PageContent
             className="gp2gp-page-contents"
-            title={tableTitle}
+            title="Integration times"
             tableDescription={
               <>
                 <p>
@@ -104,10 +103,9 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
               </>
             }
             tableContent={
-              <PracticeTableWithSort
-                ccgPractices={ccgPracticeTableData}
+              <Table
                 headers={[
-                  { title: "Requesting practice name " },
+                  { title: "Month " },
                   {
                     title: "Transfers received ",
                     extra: (
@@ -167,9 +165,11 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                     ),
                   },
                 ]}
-                sortBySelect={practiceTableContent.sortBySelect}
-                orderSelect={practiceTableContent.orderSelect}
-                tableCaption={tableTitle}
+                caption={{
+                  text: "Integration times for the recent months",
+                  hidden: true,
+                }}
+                rows={generateMonthlyRowData(metrics)}
               />
             }
           />
@@ -179,8 +179,11 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
           </h1>
+          <OrganisationAddress odsCode={odsCode} />
+          <hr aria-hidden={true} />
+
           <PageContent
-            title={tableTitle}
+            title="Integration times"
             tableDescription={
               <>
                 <p>
@@ -197,10 +200,9 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
               </>
             }
             tableContent={
-              <PracticeTableWithSort
-                ccgPractices={ccgPracticeTableData}
+              <Table
                 headers={[
-                  { title: "Requesting practice name " },
+                  { title: "Month " },
                   {
                     title: "Transfers received ",
                     extra: (
@@ -260,9 +262,11 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                     ),
                   },
                 ]}
-                sortBySelect={practiceTableContent.sortBySelect}
-                orderSelect={practiceTableContent.orderSelect}
-                tableCaption={tableTitle}
+                caption={{
+                  text: "Integration times for the recent months",
+                  hidden: true,
+                }}
+                rows={generateMonthlyRowData(metrics)}
               />
             }
           />
@@ -271,4 +275,5 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
     </>
   );
 };
-export default CcgIntegrationTimes;
+
+export default PracticeIntegrationTimes;
