@@ -34,7 +34,7 @@ type CcgProps = {
   pageContext: PageContext;
 };
 
-const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
+const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode, ccgPractices } = pageContext;
   const formattedName: string = convertToTitleCase(name);
 
@@ -271,4 +271,4 @@ const IntegrationTimesCcg: FC<CcgProps> = ({ pageContext }) => {
     </>
   );
 };
-export default IntegrationTimesCcg;
+export default CcgIntegrationTimes;
