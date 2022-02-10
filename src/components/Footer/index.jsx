@@ -6,7 +6,7 @@ export const Footer = () => {
   return (
     <footer role="contentinfo">
       <div className="nhsuk-footer">
-        <div className="nhsuk-width-container">
+        <div className="gp2gp-width-container">
           <h2 className="nhsuk-u-visually-hidden">Support links</h2>
           <ul className="nhsuk-footer__list">
             <li className="nhsuk-footer__list-item">

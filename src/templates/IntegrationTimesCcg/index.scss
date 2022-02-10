@@ -3,7 +3,7 @@
 
 .gp2gp-page-content-wrapper {
   &:after {
-    @include mq($from: desktop) {
+    @include mq($from: large-desktop) {
       content: "";
       display: block;
       clear: both;
@@ -12,7 +12,7 @@
 }
 
 .gp2gp-page-heading {
-  @include mq($from: desktop) {
+  @include mq($from: large-desktop) {
     float: right;
     width: 80%;
   }
@@ -22,14 +22,14 @@
   padding-right: 1rem;
   padding-top: 1rem;
 
-  @include mq($from: desktop) {
+  @include mq($from: large-desktop) {
     float: left;
     width: 20%;
   }
 }
 
 .gp2gp-page-contents {
-  @include mq($from: desktop) {
+  @include mq($from: large-desktop) {
     float: right;
     width: 80%;
   }

@@ -1,7 +1,7 @@
 import React from "react";
 
 const ErrorFullback = () => (
-  <div className="nhsuk-width-container">
+  <div className="gp2gp-width-container">
     <main className="nhsuk-main-wrapper">
       <h1>Oops, something went wrong.</h1>
       <p>Please try again later.</p>

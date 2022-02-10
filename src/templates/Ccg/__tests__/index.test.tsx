@@ -36,18 +36,16 @@ describe("CCG template", () => {
       .calledWith()
       .mockReturnValue({ showIntegrationTimesRedirect: true });
 
-    const { getByText, getByRole } = render(
-      <Ccg pageContext={pipelineCCGData} />
-    );
+    const { getByRole } = render(<Ccg pageContext={pipelineCCGData} />);
 
-    const expectedRedirectTitle = getByText("This page has been moved.");
+    const expectedRedirectTitle = getByRole("heading", {
+      name: "This page has been moved.",
+      level: 1,
+    });
     expect(expectedRedirectTitle).toBeInTheDocument();
 
-    const expectedText = getByText("To access, go to this");
-    expect(expectedText).toBeInTheDocument();
-
     const expectedRedirectLink = getByRole("link", {
-      name: "link",
+      name: "Burton CCG - 12A integration times",
     });
     expect(expectedRedirectLink.getAttribute("href")).toBe(
       "/ccg/12A/integration-times"

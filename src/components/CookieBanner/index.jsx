@@ -47,7 +47,7 @@ export const CookieBanner = ({ path }) => {
           className="gp2gp-success-banner"
           aria-label="Cookie setting success banner"
         >
-          <div className="nhsuk-width-container">
+          <div className="gp2gp-width-container">
             <p ref={successBannerRef} tabIndex={-1}>
               You can change your cookie settings at any time using our{" "}
               <Link to="/cookies-policy">cookies page</Link>.
@@ -67,7 +67,7 @@ export const CookieBanner = ({ path }) => {
 
 const AcceptCookies = ({ handleAgree, handleDisagree }) => (
   <section aria-label="Cookie banner" className="gp2gp-cookie-banner">
-    <div className="nhsuk-width-container">
+    <div className="gp2gp-width-container">
       <h2 className="nhsuk-heading-s">{cookieBannerContent.heading}</h2>
       <p>{cookieBannerContent.text1}</p>
       <p>{cookieBannerContent.text2}</p>

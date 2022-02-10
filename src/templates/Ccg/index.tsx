@@ -70,7 +70,10 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
         <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
       {showIntegrationTimesRedirect ? (
-        <RedirectNotice redirectLink={`/ccg/${odsCode}/integration-times`} />
+        <RedirectNotice
+          redirectLink={`/ccg/${odsCode}/integration-times`}
+          linkText={`${formattedName} - ${odsCode} integration times`}
+        />
       ) : (
         <>
           <h1 className="nhsuk-u-margin-bottom-5">

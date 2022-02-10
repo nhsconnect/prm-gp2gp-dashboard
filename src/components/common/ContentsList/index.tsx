@@ -29,7 +29,7 @@ export const ContentsList: FC<ContentsListProps> = ({ items }) => (
     role="navigation"
     aria-label="List of links to pages"
   >
-    <h2>Contents</h2>
+    <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">Contents</h2>
     <ol className="nhsuk-contents-list__list">
       {items?.map(({ text, href }, i) => {
         return href ? (

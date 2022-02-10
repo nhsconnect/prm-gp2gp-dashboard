@@ -3,14 +3,18 @@ import { Link } from "gatsby";
 
 type RedirectNoticeProps = {
   redirectLink: string;
+  linkText: string;
 };
 
-export const RedirectNotice: FC<RedirectNoticeProps> = ({ redirectLink }) => {
+export const RedirectNotice: FC<RedirectNoticeProps> = ({
+  redirectLink,
+  linkText,
+}) => {
   return (
     <>
       <h1 className="nhsuk-u-margin-bottom-5">This page has been moved.</h1>
       <p>
-        To access, go to this <Link to={redirectLink}>link</Link>
+        Please go to <Link to={redirectLink}>{linkText}</Link> to view the page.
       </p>
     </>
   );

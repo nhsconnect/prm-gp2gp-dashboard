@@ -1,6 +1,27 @@
 @import "node_modules/nhsuk-frontend/packages/core/all";
 @import "node_modules/nhsuk-frontend/packages/components/breadcrumb/breadcrumb";
 
+$gp2gp-page-width: 1100px;
+
+@mixin gp2gp-width-container {
+  margin: 0 $nhsuk-gutter-half;
+  max-width: $gp2gp-page-width;
+
+  @include govuk-media-query($from: desktop) {
+    margin: 0 $nhsuk-gutter;
+  }
+
+  @include govuk-media-query(
+    $and: "(min-width: #{($gp2gp-page-width + $nhsuk-gutter * 2)})"
+  ) {
+    margin: 0 auto;
+  }
+}
+
+.gp2gp-width-container {
+  @include gp2gp-width-container;
+}
+
 .gp2gp-nhsuk-breadcrumb {
   background-color: transparent;
   padding-top: 20px;

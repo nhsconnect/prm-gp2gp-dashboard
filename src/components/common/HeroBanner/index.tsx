@@ -8,7 +8,7 @@ type HeroBannerProps = {
 
 export const HeroBanner: FC<HeroBannerProps> = ({ title, subtitle }) => (
   <section className="nhsuk-section nhsuk-hero">
-    <div className="nhsuk-width-container nhsuk-hero--border">
+    <div className="gp2gp-width-container nhsuk-hero--border">
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-two-thirds">
           <div className="nhsuk-hero__wrapper">
