@@ -67,7 +67,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     );
 
     const tableTitle = getByRole("heading", {
-      name: "Integration times for February 2020",
+      name: "Integration times for registering practices - February 2020",
       level: 2,
     });
 
@@ -80,7 +80,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     );
 
     const tableDescription = getByText(
-      "Records that take longer than 24 hours to transfer electronically via GP2GP are excluded ",
+      "The table below shows the integration times for GP2GP transfers received.",
       { exact: false }
     );
 
@@ -177,11 +177,11 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
 
     expect(getByText("GP Practice - A12345")).toBeInTheDocument();
     expect(getByText("Second GP Practice - A12346")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent(/Transfers received(.*)22/);
+    expect(allRows[1]).toHaveTextContent(/GP2GP transfers received(.*)22/);
     expect(allRows[1]).toHaveTextContent(/Integrated within 3 days(.*)22.7%/);
     expect(allRows[1]).toHaveTextContent(/Integrated within 8 days(.*)27.3%/);
     expect(allRows[1]).toHaveTextContent(
-      /Not integrated within 8 days \(paper copy sent\)(.*)50%/
+      /Not integrated within 8 days \(paper copy requested\)(.*)50%/
     );
 
     expect(
@@ -267,7 +267,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     );
 
     const tableTitle = getByRole("heading", {
-      name: "Integration times for February 2020",
+      name: "Integration times for registering practices - February 2020",
       level: 2,
     });
 
@@ -280,7 +280,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     );
 
     const tableDescription = getByText(
-      "Records that take longer than 24 hours to transfer electronically via GP2GP are excluded ",
+      "The table below shows the integration times for GP2GP transfers received.",
       { exact: false }
     );
 
@@ -377,11 +377,11 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
 
     expect(getByText("GP Practice - A12345")).toBeInTheDocument();
     expect(getByText("Second GP Practice - A12346")).toBeInTheDocument();
-    expect(allRows[1]).toHaveTextContent(/Transfers received(.*)22/);
+    expect(allRows[1]).toHaveTextContent(/GP2GP transfers received(.*)22/);
     expect(allRows[1]).toHaveTextContent(/Integrated within 3 days(.*)22.7%/);
     expect(allRows[1]).toHaveTextContent(/Integrated within 8 days(.*)27.3%/);
     expect(allRows[1]).toHaveTextContent(
-      /Not integrated within 8 days \(paper copy sent\)(.*)50%/
+      /Not integrated within 8 days \(paper copy requested\)(.*)50%/
     );
 
     expect(

@@ -89,7 +89,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
           </aside>
           <PageContent
             className="gp2gp-page-contents"
-            title="Integration times"
+            title="Integration times for registering practice"
             tableDescription={
               <>
                 <p>
@@ -110,7 +110,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                 headers={[
                   { title: "Month " },
                   {
-                    title: "Transfers received ",
+                    title: "GP2GP transfers received ",
                     extra: (
                       <HelpModal
                         ariaLabelledBy="transfers-received-modal-title"
@@ -150,7 +150,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                       <>
                         Not integrated within 8 days{" "}
                         <div className="gp2gp-title-emphasis">
-                          (paper copy sent){" "}
+                          (paper copy requested){" "}
                         </div>
                       </>
                     ),
@@ -186,7 +186,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
           <hr aria-hidden={true} />
 
           <PageContent
-            title="Integration times"
+            title="Integration times for registering practice"
             tableDescription={
               <>
                 <p>
@@ -207,7 +207,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                 headers={[
                   { title: "Month " },
                   {
-                    title: "Transfers received ",
+                    title: "GP2GP transfers received ",
                     extra: (
                       <HelpModal
                         ariaLabelledBy="transfers-received-modal-title"
@@ -247,7 +247,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                       <>
                         Not integrated within 8 days{" "}
                         <div className="gp2gp-title-emphasis">
-                          (paper copy sent){" "}
+                          (paper copy requested){" "}
                         </div>
                       </>
                     ),

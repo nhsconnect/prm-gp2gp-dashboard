@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../Practice/practice.types";
+import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
@@ -41,7 +41,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
   const { showContentsNavigation } = useFeatureToggles();
 
   const { year, month } = ccgPractices[0].metrics[0];
-  const tableTitle = `Integration times for ${convertMonthNumberToText(
+  const tableTitle = `Integration times for registering practices - ${convertMonthNumberToText(
     month
   )} ${year}`;
 
@@ -89,27 +89,18 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
             className="gp2gp-page-contents"
             title={tableTitle}
             tableDescription={
-              <>
-                <p>
-                  The table below shows the integration times for records
-                  received by the practice.
-                </p>
-                <p>
-                  Records that take longer than 24 hours to transfer
-                  electronically via GP2GP are excluded from the data, even if
-                  they are successfully integrated. For more information about
-                  how the data is calculated please see the 'Notes about this
-                  data' section.
-                </p>
-              </>
+              <p>
+                The table below shows the integration times for GP2GP transfers
+                received.
+              </p>
             }
             tableContent={
               <PracticeTableWithSort
                 ccgPractices={ccgPracticeTableData}
                 headers={[
-                  { title: "Requesting practice name " },
+                  { title: "Registering practice name " },
                   {
-                    title: "Transfers received ",
+                    title: "GP2GP transfers received ",
                     extra: (
                       <HelpModal
                         ariaLabelledBy="transfers-received-modal-title"
@@ -149,7 +140,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                       <>
                         Not integrated within 8 days{" "}
                         <div className="gp2gp-title-emphasis">
-                          (paper copy sent){" "}
+                          (paper copy requested){" "}
                         </div>
                       </>
                     ),
@@ -182,27 +173,18 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
           <PageContent
             title={tableTitle}
             tableDescription={
-              <>
-                <p>
-                  The table below shows the integration times for records
-                  received by the practice.
-                </p>
-                <p>
-                  Records that take longer than 24 hours to transfer
-                  electronically via GP2GP are excluded from the data, even if
-                  they are successfully integrated. For more information about
-                  how the data is calculated please see the 'Notes about this
-                  data' section.
-                </p>
-              </>
+              <p>
+                The table below shows the integration times for GP2GP transfers
+                received.
+              </p>
             }
             tableContent={
               <PracticeTableWithSort
                 ccgPractices={ccgPracticeTableData}
                 headers={[
-                  { title: "Requesting practice name " },
+                  { title: "Registering practice name " },
                   {
-                    title: "Transfers received ",
+                    title: "GP2GP transfers received ",
                     extra: (
                       <HelpModal
                         ariaLabelledBy="transfers-received-modal-title"
@@ -242,7 +224,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                       <>
                         Not integrated within 8 days{" "}
                         <div className="gp2gp-title-emphasis">
-                          (paper copy sent){" "}
+                          (paper copy requested){" "}
                         </div>
                       </>
                     ),

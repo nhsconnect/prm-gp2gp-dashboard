@@ -157,7 +157,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     );
 
     const tableTitle = getByRole("heading", {
-      name: "Integration times",
+      name: "Integration times for registering practice",
       level: 2,
     });
 
@@ -218,7 +218,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     const allColumnHeaders = getAllByRole("columnheader");
 
     expect(allColumnHeaders[0]).toHaveTextContent("Month");
-    expect(allColumnHeaders[1]).toHaveTextContent("Transfers received");
+    expect(allColumnHeaders[1]).toHaveTextContent("GP2GP transfers received");
     expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 3 days");
     expect(allColumnHeaders[3]).toHaveTextContent("Integrated within 8 days");
     expect(allColumnHeaders[4]).toHaveTextContent(
@@ -437,7 +437,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     );
 
     const tableTitle = getByRole("heading", {
-      name: "Integration times",
+      name: "Integration times for registering practice",
       level: 2,
     });
 
@@ -498,7 +498,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     const allColumnHeaders = getAllByRole("columnheader");
 
     expect(allColumnHeaders[0]).toHaveTextContent("Month");
-    expect(allColumnHeaders[1]).toHaveTextContent("Transfers received");
+    expect(allColumnHeaders[1]).toHaveTextContent("GP2GP transfers received");
     expect(allColumnHeaders[2]).toHaveTextContent("Integrated within 3 days");
     expect(allColumnHeaders[3]).toHaveTextContent("Integrated within 8 days");
     expect(allColumnHeaders[4]).toHaveTextContent(

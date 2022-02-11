@@ -1,4 +1,4 @@
-import { RequestedTransfersType } from "../../../templates/Practice/practice.types";
+import { RequestedTransfersType } from "../../../templates/PracticeIntegrationTimes/practice.types";
 import { calculatePercentage } from "../calculatePercentage";
 
 type MetricsTableType = {

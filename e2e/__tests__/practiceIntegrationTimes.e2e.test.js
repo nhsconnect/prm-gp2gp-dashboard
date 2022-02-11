@@ -57,7 +57,7 @@ describe("Practice Integration Times page", () => {
             "December 2019"
           );
 
-          cy.contains("Transfers received");
+          cy.contains("GP2GP transfers received");
           cy.get("[data-testid=table__cell--row-0-col-1]").contains(2);
 
           cy.contains("Integrated within 3 days");

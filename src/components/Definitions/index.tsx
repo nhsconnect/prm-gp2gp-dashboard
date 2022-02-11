@@ -12,7 +12,7 @@ export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
 }) => (
   <>
-    <h3 id={ariaLabelId}>GP2GP Transfers received</h3>
+    <h3 id={ariaLabelId}>GP2GP transfers received</h3>
     <p>
       Total number of GP2GP transfers between the 1st and last day of the month
       that were successfully received by the registering practice.
