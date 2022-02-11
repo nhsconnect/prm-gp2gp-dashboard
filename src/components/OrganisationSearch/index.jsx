@@ -18,7 +18,7 @@ const practiceSearch = new Search(
   ["name", "odsCode"],
   practiceMetrics.practices.map((item) => ({
     ...item,
-    path: `/practice/${item.odsCode}`,
+    path: `/practice/${item.odsCode}/integration-times`,
   }))
 );
 

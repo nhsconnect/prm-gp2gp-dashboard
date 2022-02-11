@@ -18,8 +18,8 @@ describe("CCG Integration Times page", () => {
           "Monthly data about GP2GP transfers for practices within this clinical commissioning group"
         );
 
-        cy.contains("Contents");
-        cy.contains("Integration times");
+        cy.contains("h2", "Contents");
+        cy.contains("li", "Integration times");
 
         cy.checkAccessibility();
 

@@ -17,6 +17,17 @@ exports.createPages = async ({ actions }) => {
         layout: "general",
       },
     });
+
+    createPage({
+      path: `/practice/${practice.odsCode}/integration-times`,
+      component: path.resolve(
+        "src/templates/PracticeIntegrationTimes/index.tsx"
+      ),
+      context: {
+        practice,
+        layout: "general",
+      },
+    });
   });
 
   ccgs.forEach((ccg) => {

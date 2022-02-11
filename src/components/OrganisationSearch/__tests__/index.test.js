@@ -43,7 +43,9 @@ describe("OrganisationSearch component", () => {
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/practice/${"A12345"}`);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(
+        `/practice/${validPracticeOdsCode}/integration-times`
+      );
     });
 
     it("on existing practice name input", async () => {
@@ -62,7 +64,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}`
+        `/practice/${validPracticeOdsCode}/integration-times`
       );
     });
 
@@ -77,7 +79,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}`
+        `/practice/${validPracticeOdsCode}/integration-times`
       );
     });
 
@@ -92,7 +94,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}`
+        `/practice/${validPracticeOdsCode}/integration-times`
       );
     });
   });

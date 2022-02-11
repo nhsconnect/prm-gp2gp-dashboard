@@ -1,22 +1,35 @@
 const { viewPorts } = require("../support/common");
 const { practiceWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
-describe("Practice page", () => {
+describe("Practice Integration Times page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/practice/A12347");
+        cy.visit("/");
         cy.injectAxe();
       });
 
-      it("displays Practice page content and goes back to home page", () => {
+      it("searches, navigates to an individual practice page and goes back to home page", () => {
         cy.intercept(
           "/ORD/2-0-0/organisations/A12347",
           practiceWithSomeIntegrations
         );
 
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        ).type("Test GP Practice With Some Integrations A12347");
+        cy.contains("li", "Test GP Practice With Some Integrations")
+          .parent()
+          .parent()
+          .click();
+
+        cy.contains("button", "Search").click();
+
         cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
+
+        cy.contains("h2", "Contents");
+        cy.contains("li", "Integration times");
 
         cy.title().should(
           "eq",
@@ -36,7 +49,7 @@ describe("Practice page", () => {
         cy.contains("Why integrate within 8 days").click();
         cy.contains("If transfers are not integrated within 8 days");
 
-        cy.contains("Integration times");
+        cy.contains("h2", "Integration times");
 
         cy.get("[data-testid=gp2gp-table]").within(() => {
           cy.contains("Month");

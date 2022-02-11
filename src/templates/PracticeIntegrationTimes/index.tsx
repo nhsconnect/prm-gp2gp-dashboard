@@ -76,11 +76,14 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
       </Helmet>
       {showContentsNavigation ? (
         <div className="gp2gp-page-content-wrapper">
-          <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-            {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-          </h1>
-          <OrganisationAddress odsCode={odsCode} />
-          <hr aria-hidden={true} />
+          <div className="gp2gp-page-heading">
+            <h1 className="nhsuk-u-margin-bottom-5">
+              {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+            </h1>
+            <OrganisationAddress odsCode={odsCode} />
+            <hr aria-hidden={true} />
+          </div>
+
           <aside className="gp2gp-page-aside">
             <ContentsList items={contentListItems} />
           </aside>
