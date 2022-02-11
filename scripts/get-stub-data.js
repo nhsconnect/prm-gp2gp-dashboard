@@ -35,7 +35,8 @@ async function getStubData(outputFileDirectory, stubbedDataUrl) {
 const dataType = argv.datatype;
 const outputFileName = config[dataType].outputFile;
 const outputFileDirectory = config.outputPath + outputFileName;
-const stubbedDataUrl = `https://raw.githubusercontent.com/nhsconnect/prm-gp2gp-metrics-calculator/master/tests/e2e/test_metrics_calculator/expected_outputs/${outputFileName}`;
+const commitHash = "a449e6ad31e189599b6d3d4c4607da27a1d4215c";
+const stubbedDataUrl = `https://raw.githubusercontent.com/nhsconnect/prm-gp2gp-metrics-calculator/${commitHash}/tests/e2e/test_metrics_calculator/expected_outputs/${outputFileName}`;
 
 createOrSyncDir(config.outputPath);
 getStubData(outputFileDirectory, stubbedDataUrl);
