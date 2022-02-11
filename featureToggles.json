@@ -1,10 +1,8 @@
 {
   "dev": {
-    "showIntegrationTimesRedirect": false,
     "showContentsNavigation": true
   },
   "prod": {
-    "showIntegrationTimesRedirect": false,
     "showContentsNavigation": false
   }
 }

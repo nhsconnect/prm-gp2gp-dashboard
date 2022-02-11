@@ -38,7 +38,7 @@ describe("AlphabeticalCcgList component", () => {
       name: "North CCG - 6A",
     });
 
-    expect(ccgPageLink.getAttribute("href")).toBe("/ccg/6A");
+    expect(ccgPageLink.getAttribute("href")).toBe("/ccg/6A/integration-times");
   });
 
   it("has a back to top link for each letter", () => {

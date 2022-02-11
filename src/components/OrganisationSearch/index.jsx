@@ -27,7 +27,7 @@ const ccgSearch = new Search(
   ["name", "odsCode"],
   practiceMetrics.ccgs.map((item) => ({
     ...item,
-    path: `/ccg/${item.odsCode}`,
+    path: `/ccg/${item.odsCode}/integration-times`,
   }))
 );
 

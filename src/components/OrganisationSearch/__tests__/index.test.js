@@ -115,7 +115,9 @@ describe("OrganisationSearch component", () => {
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/ccg/${validCCGOdsCode}`);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(
+        `/ccg/${validCCGOdsCode}/integration-times`
+      );
     });
 
     it("on existing CCG name input", async () => {
@@ -133,7 +135,9 @@ describe("OrganisationSearch component", () => {
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/ccg/${validCCGOdsCode}`);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(
+        `/ccg/${validCCGOdsCode}/integration-times`
+      );
     });
 
     it("when typing valid ods code and not selecting", async () => {
@@ -146,7 +150,9 @@ describe("OrganisationSearch component", () => {
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(`/ccg/${validCCGOdsCode}`);
+      expect(Gatsby.navigate).toHaveBeenCalledWith(
+        `/ccg/${validCCGOdsCode}/integration-times`
+      );
     });
 
     it("entering partial search with one result", async () => {
@@ -159,7 +165,9 @@ describe("OrganisationSearch component", () => {
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith("/ccg/13B");
+      expect(Gatsby.navigate).toHaveBeenCalledWith(
+        "/ccg/13B/integration-times"
+      );
     });
   });
 

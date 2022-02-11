@@ -26,7 +26,7 @@ export const AlphabeticalCcgList: FC<AlphabeticalCcgProps> = ({
                 {ccgsBeginningWithLetter.map((ccg) => (
                   <li className="nhsuk-list-panel__item" key={ccg.odsCode}>
                     <Link
-                      to={`/ccg/${ccg.odsCode}`}
+                      to={`/ccg/${ccg.odsCode}/integration-times`}
                       className="gp2gp-list-panel__link"
                     >{`${convertToTitleCase(ccg.name)} - ${ccg.odsCode}`}</Link>
                   </li>

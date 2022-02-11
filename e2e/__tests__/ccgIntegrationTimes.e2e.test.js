@@ -5,11 +5,18 @@ describe("CCG Integration Times page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/ccg/10D/integration-times");
+        cy.visit("/");
         cy.injectAxe();
       });
 
-      it("contains CCG integration times contents", () => {
+      it("searches, navigates to an individual CCG integration times page and goes back to home page", () => {
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        ).type("Test CCG 10D");
+        cy.contains("li", "Test CCG").parent().parent().click();
+
+        cy.contains("button", "Search").click();
+
         cy.contains("h1", "Test CCG - 10D");
         cy.title().should("eq", "Test CCG - 10D - GP Registrations Data");
         cy.get('meta[name="description"]').should(
@@ -20,8 +27,6 @@ describe("CCG Integration Times page", () => {
 
         cy.contains("h2", "Contents");
         cy.contains("li", "Integration times");
-
-        cy.checkAccessibility();
 
         cy.contains("Why integrate within 8 days").click();
         cy.contains("If transfers are not integrated within 8 days");
@@ -76,6 +81,14 @@ describe("CCG Integration Times page", () => {
 
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");
+
+        cy.checkAccessibility();
+
+        cy.contains(
+          `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,
+          "Back to search"
+        ).click();
+        cy.contains("h1", "GP2GP patient record transfers data");
       });
 
       it("sort practice performance table and link to the individual practices", () => {
@@ -133,12 +146,11 @@ describe("CCG Integration Times page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
+        cy.visit("/ccg/11D/integration-times");
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });
-
-      it("check accessibility", () => {});
     });
   });
 });

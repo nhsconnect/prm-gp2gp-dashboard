@@ -3,24 +3,6 @@ import { Helmet } from "react-helmet";
 
 import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { PageContent } from "../../components/PageContent";
-import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
-import practiceTableContent from "../../data/content/practiceTable.json";
-import {
-  generateMetricsTableData,
-  PracticePercentageType,
-} from "../../library/utils/generateMetricsTableData";
-
-import { HelpModal } from "../../components/common/HelpModal";
-import {
-  IntegratedWithin3DaysDefinition,
-  IntegratedWithin8DaysDefinition,
-  NotIntegratedWithin8DaysDefinition,
-  TransfersReceivedDefinition,
-  WhyIntegrateWithin8Days,
-} from "../../components/Definitions";
-import { useFeatureToggles } from "../../library/hooks/useFeatureToggle";
 import { RedirectNotice } from "../../components/RedirectNotice";
 
 type PageContext = {
@@ -34,31 +16,9 @@ type CcgProps = {
 };
 
 const Ccg: FC<CcgProps> = ({ pageContext }) => {
-  const { name, odsCode, ccgPractices } = pageContext;
+  const { name, odsCode } = pageContext;
   const formattedName: string = convertToTitleCase(name);
 
-  const { year, month } = ccgPractices[0].metrics[0];
-  const tableTitle = `Integration times for registering practices - ${convertMonthNumberToText(
-    month
-  )} ${year}`;
-
-  const ccgPracticeTableData: PracticePercentageType[] = ccgPractices.map(
-    (practice) => ({
-      odsCode: practice.odsCode,
-      name: practice.name,
-      metrics: [
-        {
-          year: practice.metrics[0].year,
-          month: practice.metrics[0].month,
-          requestedTransfers: generateMetricsTableData(
-            practice.metrics[0].requestedTransfers
-          ),
-        },
-      ],
-    })
-  );
-
-  const { showIntegrationTimesRedirect } = useFeatureToggles();
   return (
     <>
       <Helmet>
@@ -67,100 +27,11 @@ const Ccg: FC<CcgProps> = ({ pageContext }) => {
           name="description"
           content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
         />
-        <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      {showIntegrationTimesRedirect ? (
-        <RedirectNotice
-          redirectLink={`/ccg/${odsCode}/integration-times`}
-          linkText={`${formattedName} - ${odsCode} integration times`}
-        />
-      ) : (
-        <>
-          <h1 className="nhsuk-u-margin-bottom-5">
-            {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-          </h1>
-          <PageContent
-            title={tableTitle}
-            tableDescription={
-              <>
-                <p>
-                  The table below shows the integration times for GP2GP
-                  transfers received.
-                </p>
-              </>
-            }
-            tableContent={
-              <PracticeTableWithSort
-                ccgPractices={ccgPracticeTableData}
-                headers={[
-                  { title: "Registering practice name " },
-                  {
-                    title: "GP2GP Transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 3 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-3-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 8 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        Not integrated within 8 days{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <>
-                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                            <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
-                          </>
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                sortBySelect={practiceTableContent.sortBySelect}
-                orderSelect={practiceTableContent.orderSelect}
-                tableCaption={tableTitle}
-              />
-            }
-          />
-        </>
-      )}
+      <RedirectNotice
+        redirectLink={`/ccg/${odsCode}/integration-times`}
+        linkText={`${formattedName} - ${odsCode} integration times`}
+      />
     </>
   );
 };

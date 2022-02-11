@@ -80,7 +80,9 @@ describe("PracticeTableWithSort component", () => {
       name: "GP Practice - A12345",
     });
 
-    expect(practicePageLink.getAttribute("href")).toBe("/practice/A12345");
+    expect(practicePageLink.getAttribute("href")).toBe(
+      "/practice/A12345/integration-times"
+    );
   });
 
   describe("Sorting practice table", () => {

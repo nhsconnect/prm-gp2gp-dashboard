@@ -32,7 +32,7 @@ export const SortOrder = {
 const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
   const formattedName = convertToTitleCase(name);
   return (
-    <Link to={`/practice/${odsCode}`}>
+    <Link to={`/practice/${odsCode}/integration-times`}>
       {formattedName} - {odsCode}
     </Link>
   );

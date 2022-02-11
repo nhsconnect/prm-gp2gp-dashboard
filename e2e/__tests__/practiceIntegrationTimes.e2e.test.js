@@ -10,7 +10,7 @@ describe("Practice Integration Times page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual practice page and goes back to home page", () => {
+      it("searches, navigates to an individual practice integration times page and goes back to home page", () => {
         cy.intercept(
           "/ORD/2-0-0/organisations/A12347",
           practiceWithSomeIntegrations
@@ -113,7 +113,7 @@ describe("Practice Integration Times page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/practice/A12345");
+        cy.visit("/practice/A12345/integration-times");
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
