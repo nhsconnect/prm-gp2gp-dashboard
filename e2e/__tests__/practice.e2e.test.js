@@ -80,7 +80,7 @@ describe("Practice page", () => {
           .eq(0)
           .click();
         cy.contains(
-          "All records that were requested by the practice between the 1st day and last day of the month"
+          "Total number of GP2GP transfers between the 1st and last day of the month"
         );
         cy.contains("button", "Close").click();
 

@@ -68,18 +68,12 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
       <hr aria-hidden={true} />
 
       <PageContent
-        title="Integration times"
+        title="Integration times for registering practice"
         tableDescription={
           <>
             <p>
-              The table below shows the integration times for records received
-              by the practice.
-            </p>
-            <p>
-              Records that take longer than 24 hours to transfer electronically
-              via GP2GP are excluded from the data, even if they are
-              successfully integrated. For more information about how the data
-              is calculated please see the 'Notes about this data' section.
+              The table below shows the integration times for GP2GP transfers
+              received.
             </p>
           </>
         }
@@ -88,7 +82,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
             headers={[
               { title: "Month " },
               {
-                title: "Transfers received ",
+                title: "GP2GP Transfers received ",
                 extra: (
                   <HelpModal
                     ariaLabelledBy="transfers-received-modal-title"
@@ -128,7 +122,7 @@ const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
                   <>
                     Not integrated within 8 days{" "}
                     <div className="gp2gp-title-emphasis">
-                      (paper copy sent){" "}
+                      (paper copy requested){" "}
                     </div>
                   </>
                 ),

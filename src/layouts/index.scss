@@ -54,3 +54,13 @@ $gp2gp-page-width: 1100px;
 .gp2gp-text-emphasis {
   font-style: italic;
 }
+
+li li {
+  list-style-type: circle;
+  margin-left: 1em;
+  padding-top: 0.2em;
+}
+
+ul ul {
+  padding-top: 8px;
+}

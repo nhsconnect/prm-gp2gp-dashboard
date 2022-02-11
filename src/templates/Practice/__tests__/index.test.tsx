@@ -149,7 +149,7 @@ describe("Practice template", () => {
     );
 
     const tableTitle = getByRole("heading", {
-      name: "Integration times",
+      name: "Integration times for registering practice",
       level: 2,
     });
 

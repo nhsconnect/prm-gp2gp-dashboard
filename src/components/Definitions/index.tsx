@@ -12,16 +12,20 @@ export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
 }) => (
   <>
-    <h3 id={ariaLabelId}>Transfers received</h3>
+    <h3 id={ariaLabelId}>GP2GP Transfers received</h3>
     <p>
-      All records that were requested by the practice between the 1st day and
-      last day of the month and were successfully transferred via GP2GP.
+      Total number of GP2GP transfers between the 1st and last day of the month
+      that were successfully received by the registering practice.
     </p>
-    <p>It does not include GP2GP transfers that:</p>
+    <p>
+      This <strong>includes</strong> transfers that have not been integrated.
+    </p>
+    <p>
+      This <strong>does not include</strong> GP2GP transfers that
+    </p>
     <ul>
-      <li>took longer than 24 hours to transfer electronically</li>
       <li>failed to transfer, or</li>
-      <li>were rejected by the receiving practice.</li>
+      <li>were rejected by the receiving practice</li>
     </ul>
     <p>
       For information about how the data is calculated see the 'Notes about this
@@ -43,6 +47,7 @@ export const IntegratedWithin3DaysDefinition: FC<DefinitionProps> = ({
       3 days is considered best practice for integrating or suppressing records
       transferred via GP2GP.
     </p>
+    <TimeToIntegrate />
     <p>
       For information about how the data is calculated see the 'Notes about this
       data' section.
@@ -60,6 +65,11 @@ export const IntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
       suppressed) within 8 days of the record being sent.
     </p>
     <p>
+      Integrating within 8 days means that a paper copy of the record is not
+      unnecessarily requested.
+    </p>
+    <TimeToIntegrate />
+    <p>
       For information about how the data is calculated see the 'Notes about this
       data' section.
     </p>
@@ -72,7 +82,7 @@ export const NotIntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
   <>
     <h3 id={ariaLabelId}>
       Not integrated within 8 days{" "}
-      <span className="gp2gp-title-emphasis">(paper copy sent)</span>
+      <span className="gp2gp-title-emphasis">(paper copy requested)</span>
     </h3>
     <p>
       The percentage of transfers received that were not integrated within 8
@@ -83,10 +93,31 @@ export const NotIntegratedWithin8DaysDefinition: FC<DefinitionProps> = ({
       <li>integrated after 8 days, or</li>
       <li>not integrated when the transfer was categorised.</li>
     </ul>
-    <p className="gp2gp-text-emphasis">
-      For the purpose of this site, each transfer is categorised 14 days after
-      it started. See the 'Notes about this data' section to learn more about
-      how we categorise transfers.
+    <p>
+      Not integrating transfers within 8 days increases the amount of paper
+      records that your practice will need to process and store.
+    </p>
+    <TimeToIntegrate />
+    <p>
+      For information about how the data is calculated see the 'Notes about this
+      data' section.
+    </p>
+  </>
+);
+
+export const TimeToIntegrate: FC = () => (
+  <>
+    <p>
+      <strong>Time to integrate</strong>
+    </p>
+    <p>
+      The time to integrate is calculated from the time the GP2GP transfer
+      starts to the time the record is integrated by the registering practice.
+    </p>
+    <p>
+      For example, the GP2GP transfer for a record takes 10 minutes. The
+      practice integrates the record 2 hours after receiving it. The time to
+      integrate would be 2 hours 10 minutes (within 3 days).
     </p>
   </>
 );
