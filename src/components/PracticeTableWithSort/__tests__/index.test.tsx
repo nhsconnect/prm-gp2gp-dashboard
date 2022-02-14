@@ -17,7 +17,8 @@ const tableHeaders = [
 
 describe("PracticeTableWithSort component", () => {
   it("should display table heading caption with the month and year", () => {
-    const tableCaptionText = "Integration times for February 2020";
+    const tableCaptionText =
+      "Integration times for registering practices - February 2020";
 
     const { getByText } = render(
       <PracticeTableWithSort
@@ -29,7 +30,7 @@ describe("PracticeTableWithSort component", () => {
       />
     );
 
-    const tableCaption = getByText(`${tableCaptionText} data`);
+    const tableCaption = getByText(`${tableCaptionText}`);
 
     expect(tableCaption).toBeInTheDocument();
   });

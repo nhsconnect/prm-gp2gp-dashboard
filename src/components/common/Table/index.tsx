@@ -35,9 +35,7 @@ export const Table: FC<TableProps> = ({
         <caption
           id="table-title"
           className={
-            caption.hidden
-              ? "nhsuk-u-visually-hidden"
-              : "nhsuk-table__caption nhsuk-u-margin-bottom-4"
+            caption.hidden ? "nhsuk-u-visually-hidden" : "nhsuk-table__caption"
           }
         >
           {caption.text}

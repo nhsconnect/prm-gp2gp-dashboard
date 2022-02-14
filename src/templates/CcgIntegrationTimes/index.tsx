@@ -46,6 +46,8 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
     month
   )} ${year}`;
 
+  const pageTitle = `Integration times for registering practices`;
+
   const ccgPracticeTableData: PracticePercentageType[] = ccgPractices.map(
     (practice) => ({
       odsCode: practice.odsCode,
@@ -88,7 +90,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
           </div>
           <PageContent
             className="gp2gp-page-contents"
-            title={tableTitle}
+            title={pageTitle}
             tableDescription={
               <p>
                 The table below shows the integration times for GP2GP transfers
@@ -172,7 +174,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
           </h1>
           <PageContent
-            title={tableTitle}
+            title={pageTitle}
             tableDescription={
               <p>
                 The table below shows the integration times for GP2GP transfers

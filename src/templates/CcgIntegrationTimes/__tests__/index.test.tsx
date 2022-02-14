@@ -63,17 +63,29 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     expect(expectedCcgHeading).toBeInTheDocument();
   });
 
-  it("renders table title correctly", () => {
+  it("renders page title correctly", () => {
     const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
 
-    const tableTitle = getByRole("heading", {
-      name: "Integration times for registering practices - February 2020",
+    const pageTitle = getByRole("heading", {
+      name: "Integration times for registering practices",
       level: 2,
     });
 
-    expect(tableTitle).toBeInTheDocument();
+    expect(pageTitle).toBeInTheDocument();
+  });
+
+  it("renders table caption correctly", () => {
+    const { getByText } = render(
+      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+    );
+
+    const tableCaption = getByText(
+      "Integration times for registering practices - February 2020"
+    );
+
+    expect(tableCaption).toBeInTheDocument();
   });
 
   it("renders table description correctly", () => {
@@ -265,17 +277,29 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     expect(expectedCcgHeading).toBeInTheDocument();
   });
 
-  it("renders table title correctly", () => {
+  it("renders page title correctly", () => {
     const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
 
-    const tableTitle = getByRole("heading", {
-      name: "Integration times for registering practices - February 2020",
+    const pageTitle = getByRole("heading", {
+      name: "Integration times for registering practices",
       level: 2,
     });
 
-    expect(tableTitle).toBeInTheDocument();
+    expect(pageTitle).toBeInTheDocument();
+  });
+
+  it("renders table caption correctly", () => {
+    const { getByText } = render(
+      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+    );
+
+    const tableCaption = getByText(
+      "Integration times for registering practices - February 2020"
+    );
+
+    expect(tableCaption).toBeInTheDocument();
   });
 
   it("renders table description correctly", () => {

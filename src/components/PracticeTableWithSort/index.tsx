@@ -129,7 +129,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         />
       </div>
       <Table
-        caption={{ text: `${tableCaption} data`, hidden: true }}
+        caption={{ text: `${tableCaption}`, hidden: false }}
         headers={headers}
         rows={practiceTableRows}
         sortedColumnIndex={sortedColumnIndex}
