@@ -83,9 +83,9 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
           <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
           </h1>
-          <aside className="gp2gp-page-aside">
+          <div className="gp2gp-side-nav">
             <ContentsList items={contentListItems} />
-          </aside>
+          </div>
           <PageContent
             className="gp2gp-page-contents"
             title={tableTitle}

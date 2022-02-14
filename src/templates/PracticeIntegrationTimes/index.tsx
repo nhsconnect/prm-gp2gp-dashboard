@@ -84,9 +84,9 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
             <hr aria-hidden={true} />
           </div>
 
-          <aside className="gp2gp-page-aside">
+          <div className="gp2gp-side-nav">
             <ContentsList items={contentListItems} />
-          </aside>
+          </div>
           <PageContent
             className="gp2gp-page-contents"
             title="Integration times for registering practice"
