@@ -91,19 +91,10 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
             className="gp2gp-page-contents"
             title="Integration times for registering practice"
             tableDescription={
-              <>
-                <p>
-                  The table below shows the integration times for records
-                  received by the practice.
-                </p>
-                <p>
-                  Records that take longer than 24 hours to transfer
-                  electronically via GP2GP are excluded from the data, even if
-                  they are successfully integrated. For more information about
-                  how the data is calculated please see the 'Notes about this
-                  data' section.
-                </p>
-              </>
+              <p>
+                The table below shows the integration times for GP2GP transfers
+                received.
+              </p>
             }
             tableContent={
               <Table
@@ -188,19 +179,10 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
           <PageContent
             title="Integration times for registering practice"
             tableDescription={
-              <>
-                <p>
-                  The table below shows the integration times for records
-                  received by the practice.
-                </p>
-                <p>
-                  Records that take longer than 24 hours to transfer
-                  electronically via GP2GP are excluded from the data, even if
-                  they are successfully integrated. For more information about
-                  how the data is calculated please see the 'Notes about this
-                  data' section.
-                </p>
-              </>
+              <p>
+                The table below shows the integration times for GP2GP transfers
+                received.
+              </p>
             }
             tableContent={
               <Table
