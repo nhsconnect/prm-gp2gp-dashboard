@@ -13,7 +13,8 @@ exports.createPages = async ({ actions }) => {
       path: `/practice/${practice.odsCode}`,
       component: path.resolve("src/templates/Practice/index.tsx"),
       context: {
-        practice,
+        odsCode: practice.odsCode,
+        name: practice.name,
         layout: "general",
       },
     });
@@ -39,7 +40,6 @@ exports.createPages = async ({ actions }) => {
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
-        ccgPractices,
         layout: "general",
       },
     });

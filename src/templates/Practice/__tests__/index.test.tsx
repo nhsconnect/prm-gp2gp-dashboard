@@ -5,11 +5,8 @@ import Practice from "..";
 jest.mock("no-scroll");
 
 const practicePageContext = {
-  practice: {
-    odsCode: "B86030",
-    name: "BURTON CROFT SURGERY",
-    metrics: [],
-  },
+  odsCode: "B86030",
+  name: "BURTON CROFT SURGERY",
   layout: "general",
 };
 

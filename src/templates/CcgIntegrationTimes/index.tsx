@@ -28,6 +28,7 @@ type PageContext = {
   odsCode: string;
   name: string;
   ccgPractices: PracticeType[];
+  layout: string;
 };
 
 type CcgProps = {

@@ -18,6 +18,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     odsCode: "12A",
     name: "BURTON CCG",
     ccgPractices: practiceMetricsMock,
+    layout: "general",
   };
 
   beforeEach(() => {
@@ -32,6 +33,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
       odsCode,
       name: "",
       ccgPractices: practiceMetricsMock,
+      layout: "general",
     };
 
     const { getByRole } = render(
@@ -218,6 +220,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     odsCode: "12A",
     name: "BURTON CCG",
     ccgPractices: practiceMetricsMock,
+    layout: "general",
   };
 
   beforeEach(() => {
@@ -232,6 +235,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
       odsCode,
       name: "",
       ccgPractices: practiceMetricsMock,
+      layout: "general",
     };
 
     const { getByRole } = render(

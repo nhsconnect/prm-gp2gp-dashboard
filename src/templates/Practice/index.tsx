@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { RedirectNotice } from "../../components/RedirectNotice";
 
 type PageContext = {
-  practice: PracticeType;
+  odsCode: string;
+  name: string;
   layout: string;
 };
 
@@ -13,8 +13,7 @@ type PracticeProps = {
   pageContext: PageContext;
 };
 
-const Practice: FC<PracticeProps> = ({ pageContext: { practice } }) => {
-  const { name, odsCode } = practice;
+const Practice: FC<PracticeProps> = ({ pageContext: { odsCode, name } }) => {
   const formattedName = convertToTitleCase(name);
 
   return (

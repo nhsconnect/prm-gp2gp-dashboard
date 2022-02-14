@@ -8,7 +8,7 @@ describe("CCG template", () => {
   const pipelineCCGData = {
     odsCode: "12A",
     name: "BURTON CCG",
-    ccgPractices: [],
+    layout: "general",
   };
 
   it("displays redirect notice", () => {

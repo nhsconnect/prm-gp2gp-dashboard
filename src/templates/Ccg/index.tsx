@@ -1,14 +1,13 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { RedirectNotice } from "../../components/RedirectNotice";
 
 type PageContext = {
   odsCode: string;
   name: string;
-  ccgPractices: PracticeType[];
+  layout: string;
 };
 
 type CcgProps = {
