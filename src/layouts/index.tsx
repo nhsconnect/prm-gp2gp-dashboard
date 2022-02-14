@@ -2,6 +2,7 @@ import React, { useEffect, FC, ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
+import classNames from "classnames";
 
 import { CookieBanner } from "../components/CookieBanner";
 import { Header } from "../components/Header";
@@ -15,6 +16,7 @@ import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
 import {
   FeatureTogglesContext,
+  useFeatureToggles,
   useFetchFeatureToggles,
 } from "../library/hooks/useFeatureToggle/";
 import homepageContent from "../data/content/homepage.json";
@@ -87,6 +89,27 @@ const GeneralContent: FC<ContentProps> = ({ children }) => (
   </div>
 );
 
+const IntegrationTimesContent: FC<ContentProps> = ({ children }) => {
+  const { showContentsNavigation } = useFeatureToggles();
+
+  return (
+    <div className="gp2gp-width-container">
+      <BackToLink link="/" text="Back to search" />
+      <main
+        className="nhsuk-main-wrapper nhsuk-u-padding-top-2"
+        id="maincontent"
+      >
+        {children}
+        <FeedbackBanner
+          className={classNames({
+            "gp2gp-page-contents-feedback": showContentsNavigation,
+          })}
+        />
+      </main>
+    </div>
+  );
+};
+
 const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
   const hasCookieConsent = cookies[NHS_COOKIE_NAME] === "true";
@@ -117,6 +140,8 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
           <Header />
           {pageContext.layout === "homepage" ? (
             <HomepageContent>{children}</HomepageContent>
+          ) : "integration-times" ? (
+            <IntegrationTimesContent>{children}</IntegrationTimesContent>
           ) : (
             <GeneralContent>{children}</GeneralContent>
           )}

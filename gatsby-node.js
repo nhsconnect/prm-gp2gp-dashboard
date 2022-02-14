@@ -26,7 +26,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practice,
-        layout: "general",
+        layout: "integration-times",
       },
     });
   });
@@ -51,7 +51,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         ccgPractices,
-        layout: "general",
+        layout: "integration-times",
       },
     });
   });

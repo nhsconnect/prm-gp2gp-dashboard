@@ -1,8 +1,13 @@
 import React, { FC } from "react";
+import classNames from "classnames";
 import "./index.scss";
 
-export const FeedbackBanner: FC = () => (
-  <aside className="nhsuk-inset-text">
+type FeedbackBannerProps = {
+  className?: string;
+};
+
+export const FeedbackBanner: FC<FeedbackBannerProps> = ({ className }) => (
+  <aside className={classNames("nhsuk-inset-text", className)}>
     <h3>Get in touch</h3>
     <p>
       We are always looking to improve our site.{" "}
