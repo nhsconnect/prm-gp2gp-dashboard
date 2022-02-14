@@ -160,8 +160,8 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                   },
                 ]}
                 caption={{
-                  text: "Integration times for the recent months",
-                  hidden: true,
+                  text: "Integration times for registering practice",
+                  hidden: false,
                 }}
                 rows={generateMonthlyRowData(metrics)}
               />
@@ -248,8 +248,8 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                   },
                 ]}
                 caption={{
-                  text: "Integration times for the recent months",
-                  hidden: true,
+                  text: "Integration times for registering practice",
+                  hidden: false,
                 }}
                 rows={generateMonthlyRowData(metrics)}
               />
