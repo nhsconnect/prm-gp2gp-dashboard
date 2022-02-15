@@ -97,6 +97,8 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                 received.
               </p>
             }
+            expanderTitle="Why integrate within 8 days"
+            expanderContent={<WhyIntegrateWithin8Days />}
             tableContent={
               <PracticeTableWithSort
                 ccgPractices={ccgPracticeTableData}
@@ -181,6 +183,8 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                 received.
               </p>
             }
+            expanderTitle="Why integrate within 8 days"
+            expanderContent={<WhyIntegrateWithin8Days />}
             tableContent={
               <PracticeTableWithSort
                 ccgPractices={ccgPracticeTableData}

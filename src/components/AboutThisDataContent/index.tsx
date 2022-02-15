@@ -4,7 +4,7 @@ import "./index.scss";
 export const AboutThisDataContent = () => (
   <div className="nhsuk-u-reading-width">
     <h3 className="nhsuk-u-margin-top-6">How we calculate the data</h3>
-    <ul className={"gp2gp-list-with-hidden-sublist-items"}>
+    <ul className="gp2gp-list-with-hidden-sublist-items">
       <li>
         This site is updated 14 days after the end of each month. This is to
         identify whether transfers started at the end of the month were

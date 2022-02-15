@@ -96,6 +96,8 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                 received.
               </p>
             }
+            expanderTitle="Why integrate within 8 days"
+            expanderContent={<WhyIntegrateWithin8Days />}
             tableContent={
               <Table
                 headers={[
@@ -184,6 +186,8 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
                 received.
               </p>
             }
+            expanderTitle="Why integrate within 8 days"
+            expanderContent={<WhyIntegrateWithin8Days />}
             tableContent={
               <Table
                 headers={[

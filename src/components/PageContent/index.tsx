@@ -10,6 +10,8 @@ type PageContentProps = {
   tableDescription: ReactNode;
   tableContent: ReactNode;
   className?: string;
+  expanderTitle: string;
+  expanderContent: ReactNode;
 };
 
 export const PageContent: FC<PageContentProps> = ({
@@ -17,6 +19,8 @@ export const PageContent: FC<PageContentProps> = ({
   tableDescription,
   tableContent,
   className = "",
+  expanderTitle,
+  expanderContent,
 }) => {
   return (
     <section className={`gp2gp-page-content-section ${className}`}>
@@ -25,10 +29,7 @@ export const PageContent: FC<PageContentProps> = ({
         <div className="nhsuk-body">{tableDescription}</div>
       </div>
 
-      <Expander
-        title="Why integrate within 8 days"
-        content={<WhyIntegrateWithin8Days />}
-      />
+      <Expander title={expanderTitle} content={expanderContent} />
       <Tabs
         tabs={[
           {

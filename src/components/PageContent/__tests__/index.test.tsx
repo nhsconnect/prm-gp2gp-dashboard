@@ -3,6 +3,7 @@ import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { PageContent } from "../";
+import { WhyIntegrateWithin8Days } from "../../Definitions";
 
 describe("PageContent component", () => {
   const definitionsText =
@@ -12,7 +13,13 @@ describe("PageContent component", () => {
     const titleText = "A title";
 
     const { getByRole } = render(
-      <PageContent title={titleText} tableDescription="" tableContent="" />
+      <PageContent
+        title={titleText}
+        tableDescription=""
+        tableContent=""
+        expanderTitle=""
+        expanderContent=""
+      />
     );
 
     const title = getByRole("heading", { name: titleText, level: 2 });
@@ -23,7 +30,13 @@ describe("PageContent component", () => {
   it("displays table description", () => {
     const description = "table description";
     const { getByText } = render(
-      <PageContent title="" tableDescription={description} tableContent="" />
+      <PageContent
+        title=""
+        tableDescription={description}
+        tableContent=""
+        expanderTitle=""
+        expanderContent=""
+      />
     );
 
     const tableDescription = getByText(description);
@@ -33,7 +46,13 @@ describe("PageContent component", () => {
 
   it("displays expander with the correct content", () => {
     const { getByText } = render(
-      <PageContent title="" tableDescription="" tableContent="" />
+      <PageContent
+        title=""
+        tableDescription=""
+        tableContent=""
+        expanderTitle="Why integrate within 8 days"
+        expanderContent={<WhyIntegrateWithin8Days />}
+      />
     );
 
     const expanderTitle = getByText("Why integrate within 8 days");
@@ -50,7 +69,13 @@ describe("PageContent component", () => {
 
   it("displays tab titles correctly", () => {
     const { getByRole } = render(
-      <PageContent title="" tableDescription="" tableContent="" />
+      <PageContent
+        title=""
+        tableDescription=""
+        tableContent=""
+        expanderTitle=""
+        expanderContent=""
+      />
     );
 
     expect(
@@ -70,7 +95,13 @@ describe("PageContent component", () => {
     const content = "A data table content";
 
     const { getByText } = render(
-      <PageContent title="" tableDescription="" tableContent={content} />
+      <PageContent
+        title=""
+        tableDescription=""
+        tableContent={content}
+        expanderTitle=""
+        expanderContent=""
+      />
     );
 
     expect(getByText(content)).toBeInTheDocument();
@@ -78,7 +109,13 @@ describe("PageContent component", () => {
 
   it("displays about this data when tab is clicked", async () => {
     const { getByRole, getByText, queryByText } = render(
-      <PageContent title="" tableDescription="" tableContent="" />
+      <PageContent
+        title=""
+        tableDescription=""
+        tableContent=""
+        expanderTitle=""
+        expanderContent=""
+      />
     );
 
     const aboutTabContent = queryByText(
@@ -109,7 +146,13 @@ describe("PageContent component", () => {
 
   it("displays definitions when tab is clicked", async () => {
     const { getByRole, getByText, queryByText } = render(
-      <PageContent title="" tableDescription="" tableContent="" />
+      <PageContent
+        title=""
+        tableDescription=""
+        tableContent=""
+        expanderTitle=""
+        expanderContent=""
+      />
     );
 
     const definitionsTabContent = queryByText(definitionsText, {
