@@ -1,0 +1,92 @@
+[
+  {
+    "odsCode": "A12345",
+    "name": "GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "requestedCount": 7,
+          "receivedPercentage": 71.4,
+          "technicalFailuresPercentage": 28.6
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12346",
+    "name": "Second GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "requestedCount": 22,
+          "receivedPercentage": 100,
+          "technicalFailuresPercentage": 0
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12347",
+    "name": "Third GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "requestedCount": 40,
+          "receivedPercentage": 85,
+          "technicalFailuresPercentage": 15
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12348",
+    "name": "Fourth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "requestedCount": 0,
+          "receivedPercentage": null,
+          "technicalFailuresPercentage": null
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12349",
+    "name": "Fifth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "requestedCount": 14,
+          "receivedPercentage": 92.9,
+          "technicalFailuresPercentage": 7.1
+        }
+      }
+    ]
+  },
+  {
+    "odsCode": "A12350",
+    "name": "Sixth GP Practice",
+    "metrics": [
+      {
+        "year": 2020,
+        "month": 2,
+        "requestedTransfers": {
+          "requestedCount": 13,
+          "receivedPercentage": 92.3,
+          "technicalFailuresPercentage": 7.7
+        }
+      }
+    ]
+  }
+]

@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 
 import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
-import practiceMetricsPercentageMock from "../../../../__mocks__/practiceMetricsPercentageMock.json";
+import practiceMetricsPercentageMock from "../../../../__mocks__/practiceIntegrationMetricsPercentageMock.json";
 import practiceTableContent from "../../../data/content/practiceTable.json";
 
 const tableHeaders = [

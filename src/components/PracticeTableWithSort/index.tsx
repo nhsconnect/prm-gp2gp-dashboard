@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
 
-import { PracticePercentageType } from "../../library/utils/generateMetricsTableData";
+import { PracticePercentageType } from "../../library/utils/generateIntegrationMetricsTableData";
 
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
