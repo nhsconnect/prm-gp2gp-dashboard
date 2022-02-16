@@ -1,7 +1,7 @@
 import { RequestedTransfersType } from "../../../templates/PracticeIntegrationTimes/practice.types";
 import { calculatePercentage } from "../calculatePercentage";
 
-type MetricsTableType = {
+type IntegratedMetricsTableType = {
   receivedCount: number;
   integratedWithin3DaysPercentage: number | null;
   integratedWithin8DaysPercentage: number | null;
@@ -11,7 +11,7 @@ type MetricsTableType = {
 type PracticeMetricsPercentageType = {
   year: number;
   month: number;
-  requestedTransfers: MetricsTableType;
+  requestedTransfers: IntegratedMetricsTableType;
 };
 
 export type PracticePercentageType = {
@@ -20,13 +20,13 @@ export type PracticePercentageType = {
   metrics: PracticeMetricsPercentageType[];
 };
 
-export const generateMetricsTableData = ({
+export const generateIntegratedMetricsTableData = ({
   receivedCount,
   integratedWithin3DaysCount,
   integratedWithin8DaysCount,
   integratedBeyond8DaysCount,
   awaitingIntegrationCount,
-}: RequestedTransfersType): MetricsTableType => {
+}: RequestedTransfersType): IntegratedMetricsTableType => {
   const integratedWithin3DaysPercentage = calculatePercentage(
     integratedWithin3DaysCount,
     receivedCount

@@ -8,9 +8,9 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
 import practiceTableContent from "../../data/content/practiceTable.json";
 import {
-  generateMetricsTableData,
+  generateIntegratedMetricsTableData,
   PracticePercentageType,
-} from "../../library/utils/generateMetricsTableData";
+} from "../../library/utils/generateIntegrationMetricsTableData";
 
 import { HelpModal } from "../../components/common/HelpModal";
 import {
@@ -57,7 +57,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
         {
           year: practice.metrics[0].year,
           month: practice.metrics[0].month,
-          requestedTransfers: generateMetricsTableData(
+          requestedTransfers: generateIntegratedMetricsTableData(
             practice.metrics[0].requestedTransfers
           ),
         },

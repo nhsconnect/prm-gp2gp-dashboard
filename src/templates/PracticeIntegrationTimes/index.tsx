@@ -9,7 +9,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { PageContent } from "../../components/PageContent";
-import { generateMetricsTableData } from "../../library/utils/generateMetricsTableData";
+import { generateIntegratedMetricsTableData } from "../../library/utils/generateIntegrationMetricsTableData";
 import { HelpModal } from "../../components/common/HelpModal";
 import {
   IntegratedWithin3DaysDefinition,
@@ -39,7 +39,7 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
       integratedWithin3DaysPercentage,
       integratedWithin8DaysPercentage,
       notIntegratedWithin8DaysPercentage,
-    } = generateMetricsTableData(metric.requestedTransfers);
+    } = generateIntegratedMetricsTableData(metric.requestedTransfers);
 
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,
