@@ -3,12 +3,12 @@ import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { PageContent } from "../";
-import { WhyIntegrateWithin8Days } from "../../Definitions";
+import {
+  IntegrationsDefinitionsContent,
+  WhyIntegrateWithin8Days,
+} from "../../Definitions";
 
 describe("PageContent component", () => {
-  const definitionsText =
-    "The percentage of transfers received that were integrated (filed or suppressed) within 3 days of the record being sent.";
-
   it("displays title when passed", () => {
     const titleText = "A title";
 
@@ -19,6 +19,7 @@ describe("PageContent component", () => {
         tableContent=""
         expanderTitle=""
         expanderContent=""
+        definitionsContent=""
       />
     );
 
@@ -36,6 +37,7 @@ describe("PageContent component", () => {
         tableContent=""
         expanderTitle=""
         expanderContent=""
+        definitionsContent=""
       />
     );
 
@@ -52,6 +54,7 @@ describe("PageContent component", () => {
         tableContent=""
         expanderTitle="Why integrate within 8 days"
         expanderContent={<WhyIntegrateWithin8Days />}
+        definitionsContent=""
       />
     );
 
@@ -75,6 +78,7 @@ describe("PageContent component", () => {
         tableContent=""
         expanderTitle=""
         expanderContent=""
+        definitionsContent=""
       />
     );
 
@@ -101,6 +105,7 @@ describe("PageContent component", () => {
         tableContent={content}
         expanderTitle=""
         expanderContent=""
+        definitionsContent=""
       />
     );
 
@@ -115,6 +120,7 @@ describe("PageContent component", () => {
         tableContent=""
         expanderTitle=""
         expanderContent=""
+        definitionsContent=""
       />
     );
 
@@ -152,8 +158,12 @@ describe("PageContent component", () => {
         tableContent=""
         expanderTitle=""
         expanderContent=""
+        definitionsContent={<IntegrationsDefinitionsContent />}
       />
     );
+
+    const definitionsText =
+      "The percentage of transfers received that were integrated (filed or suppressed) within 3 days of the record being sent.";
 
     const definitionsTabContent = queryByText(definitionsText, {
       exact: false,

@@ -16,6 +16,7 @@ import { HelpModal } from "../../components/common/HelpModal";
 import {
   IntegratedWithin3DaysDefinition,
   IntegratedWithin8DaysDefinition,
+  IntegrationsDefinitionsContent,
   NotIntegratedWithin8DaysDefinition,
   TransfersReceivedDefinition,
   WhyIntegrateWithin8Days,
@@ -99,6 +100,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
             }
             expanderTitle="Why integrate within 8 days"
             expanderContent={<WhyIntegrateWithin8Days />}
+            definitionsContent={<IntegrationsDefinitionsContent />}
             tableContent={
               <PracticeTableWithSort
                 ccgPractices={ccgPracticeTableData}
@@ -185,6 +187,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
             }
             expanderTitle="Why integrate within 8 days"
             expanderContent={<WhyIntegrateWithin8Days />}
+            definitionsContent={<IntegrationsDefinitionsContent />}
             tableContent={
               <PracticeTableWithSort
                 ccgPractices={ccgPracticeTableData}

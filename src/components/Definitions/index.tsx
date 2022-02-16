@@ -143,7 +143,7 @@ export const WhyIntegrateWithin8Days: FC<WhyIntegrateWithin8DaysProps> = ({
   </>
 );
 
-export const DefinitionsContent = () => (
+export const IntegrationsDefinitionsContent = () => (
   <div className="nhsuk-u-reading-width">
     <h2 className="nhsuk-u-margin-top-6">Definitions</h2>
     <TransfersReceivedDefinition />

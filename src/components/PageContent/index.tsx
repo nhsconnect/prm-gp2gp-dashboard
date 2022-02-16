@@ -2,7 +2,6 @@ import React, { FC, ReactNode } from "react";
 import { Expander } from "../common/Expander";
 import { Tabs } from "../Tabs";
 import { AboutThisDataContent } from "../AboutThisDataContent";
-import { DefinitionsContent, WhyIntegrateWithin8Days } from "../Definitions";
 import "./index.scss";
 
 type PageContentProps = {
@@ -12,6 +11,7 @@ type PageContentProps = {
   className?: string;
   expanderTitle: string;
   expanderContent: ReactNode;
+  definitionsContent: ReactNode;
 };
 
 export const PageContent: FC<PageContentProps> = ({
@@ -21,6 +21,7 @@ export const PageContent: FC<PageContentProps> = ({
   className = "",
   expanderTitle,
   expanderContent,
+  definitionsContent,
 }) => {
   return (
     <section className={`gp2gp-page-content-section ${className}`}>
@@ -37,13 +38,13 @@ export const PageContent: FC<PageContentProps> = ({
             content: tableContent,
           },
           { title: "Notes about this data", content: <AboutThisDataContent /> },
-          { title: "Definitions", content: <DefinitionsContent /> },
+          { title: "Definitions", content: definitionsContent },
         ]}
       />
       <noscript>
         {tableContent}
         <AboutThisDataContent />
-        <DefinitionsContent />
+        {definitionsContent}
       </noscript>
     </section>
   );

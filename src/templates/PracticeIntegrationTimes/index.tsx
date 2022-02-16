@@ -14,6 +14,7 @@ import { HelpModal } from "../../components/common/HelpModal";
 import {
   IntegratedWithin3DaysDefinition,
   IntegratedWithin8DaysDefinition,
+  IntegrationsDefinitionsContent,
   NotIntegratedWithin8DaysDefinition,
   TransfersReceivedDefinition,
   WhyIntegrateWithin8Days,
@@ -98,6 +99,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
             }
             expanderTitle="Why integrate within 8 days"
             expanderContent={<WhyIntegrateWithin8Days />}
+            definitionsContent={<IntegrationsDefinitionsContent />}
             tableContent={
               <Table
                 headers={[
@@ -188,6 +190,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
             }
             expanderTitle="Why integrate within 8 days"
             expanderContent={<WhyIntegrateWithin8Days />}
+            definitionsContent={<IntegrationsDefinitionsContent />}
             tableContent={
               <Table
                 headers={[
