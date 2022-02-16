@@ -6,12 +6,9 @@ import { waitFor } from "@testing-library/dom";
 import PracticeTransfersRequested from "..";
 import { mockAPIResponse } from "../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
-import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");
-jest.mock("../../../library/hooks/useFeatureToggle");
 
 const ODSPracticeData = {
   odsCode: "B86030",
@@ -84,17 +81,11 @@ describe("PracticeTransfersRequested template", () => {
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
-
-    when(mocked(useFeatureToggles))
-      .calledWith()
-      .mockReturnValue({ showContentsNavigation: true });
   });
 
   afterAll(() => {
     moxios.uninstall();
   });
-
-  const practiceMetrics = practicePageContext.practice.metrics;
 
   it("renders practice details correctly", async () => {
     const expectedODSPracticeData = {
@@ -163,5 +154,61 @@ describe("PracticeTransfersRequested template", () => {
 
     expect(contentsHeader).toBeInTheDocument();
     expect(labelText).toBeInTheDocument();
+  });
+
+  it("displays transfers received definitions correctly", async () => {
+    const { getByRole, getByText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+    const definitionsText =
+      "Percentage of GP2GP transfers requested between the 1st and last day of the month that failed for a technical reason.";
+
+    const definitionsTabTitle = getByRole("button", {
+      name: "Click to display content Definitions",
+    });
+    userEvent.click(definitionsTabTitle);
+
+    await waitFor(() => {
+      const definitionsTabContent = getByText(definitionsText, {
+        exact: false,
+      });
+      expect(definitionsTabContent).toBeInTheDocument();
+    });
+  });
+
+  it("displays table title and description correctly", () => {
+    const { getByRole, getByText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const tableTitle = getByRole("heading", {
+      name: "GP2GP transfers requested",
+      level: 2,
+    });
+    const tableDescription = getByText(
+      "number of registrations that triggered a GP2GP transfer",
+      { exact: false }
+    );
+    expect(tableTitle).toBeInTheDocument();
+    expect(tableDescription).toBeInTheDocument();
+  });
+
+  it("displays expander with the correct content", () => {
+    const { getByText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const expanderTitle = getByText(
+      "What happens when a GP2GP transfer fails?"
+    );
+    const expanderContent = getByText(
+      "A task will automatically be created for the sending practice",
+      { exact: false }
+    );
+    expect(expanderTitle).toBeInTheDocument();
+    expect(expanderContent).not.toBeVisible();
+
+    userEvent.click(expanderTitle);
+    expect(expanderContent).toBeVisible();
   });
 });

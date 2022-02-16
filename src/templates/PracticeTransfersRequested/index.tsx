@@ -5,6 +5,8 @@ import { PracticeType } from "./practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../components/common/ContentsList";
 import "../index.scss";
+import { TransfersRequestedDefinitionsContent } from "../../components/Definitions";
+import { PageContent } from "../../components/PageContent";
 
 type PageContext = {
   practice: PracticeType;
@@ -50,6 +52,40 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
         <div className="gp2gp-side-nav">
           <ContentsList items={contentListItems} />
         </div>
+        <PageContent
+          className="gp2gp-page-contents"
+          title="GP2GP transfers requested"
+          tableDescription={
+            <>
+              <p>The table below shows the</p>
+              <ul>
+                <li>number of registrations that triggered a GP2GP transfer</li>
+                <li>
+                  percentage of GP2GP transfers that were successfully received
+                </li>
+                <li>
+                  percentage of GP2GP transfers that failed for a technical
+                  reason
+                </li>
+              </ul>
+            </>
+          }
+          definitionsContent={<TransfersRequestedDefinitionsContent />}
+          expanderTitle="What happens when a GP2GP transfer fails?"
+          expanderContent={
+            <>
+              <p>
+                A task will automatically be created for the sending practice to
+                send a paper copy of the record to the requesting practice.
+              </p>
+              <p>
+                Technical failures are system related and should be reported to
+                the system supplier.
+              </p>
+            </>
+          }
+          tableContent=""
+        />
       </div>
     </>
   );
