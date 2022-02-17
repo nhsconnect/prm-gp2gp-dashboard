@@ -76,7 +76,7 @@ const practicePageContext = {
       },
     ],
   },
-  layout: "general",
+  layout: "navigation-contents",
 };
 
 describe("PracticeIntegrationTimes template when showContentsNavigation toggle is off", () => {
@@ -186,8 +186,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
 
     const transfersReceived =
       practicePageContext.practice.metrics[0].requestedTransfers;
-
-    expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
+    expect(getByText(transfersReceived.receivedCount)).toBeInTheDocument();
     expect(getByText("22.7%")).toBeInTheDocument();
     expect(getByText("54.5%")).toBeInTheDocument();
     expect(getByText("13.6%")).toBeInTheDocument();
@@ -517,30 +516,24 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
       getByRole,
     } = render(<PracticeIntegrationTimes pageContext={practicePageContext} />);
 
-    expect(
-      queryByText(/transfers received that were not integrated within 8 days/)
-    ).not.toBeInTheDocument();
-    expect(
-      queryAllByText(/Unnecessary printing causes avoidable work/)
-    ).toHaveLength(1);
+    const notInt8daysContent =
+      /transfers received that were not integrated within 8 days/;
+    const pageAndModalContent = /Unnecessary printing causes avoidable work/;
 
-    const transfersReceivedHeader = getByRole("columnheader", {
+    expect(queryByText(notInt8daysContent)).not.toBeInTheDocument();
+
+    expect(queryAllByText(pageAndModalContent)).toHaveLength(1);
+
+    const notInt8daysHeader = getByRole("columnheader", {
       name: /Not integrated within 8 days/,
     });
 
-    const transfersReceivedModalButton = within(
-      transfersReceivedHeader
-    ).getByRole("button");
-    userEvent.click(transfersReceivedModalButton);
+    const notInt8daysModalButton =
+      within(notInt8daysHeader).getByRole("button");
+    userEvent.click(notInt8daysModalButton);
 
-    expect(
-      await findByText(
-        /transfers received that were not integrated within 8 days/
-      )
-    ).toBeInTheDocument();
-    expect(
-      await findAllByText(/Unnecessary printing causes avoidable work/)
-    ).toHaveLength(2);
+    expect(await findByText(notInt8daysContent)).toBeInTheDocument();
+    expect(await findAllByText(pageAndModalContent)).toHaveLength(2);
   });
 
   it("displays help icons for all relevant headers", () => {
@@ -549,7 +542,6 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
-
     const buttonOptions = { name: "Open modal with definition" };
 
     expect(
@@ -586,7 +578,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     expect(within8DaysModal).toBeInTheDocument();
   });
 
-  it("renders placeholders when there is no transfers", () => {
+  it("renders placeholders when there are no transfers", () => {
     const practicePageContextNoTransferData = {
       practice: {
         odsCode: "B86030",

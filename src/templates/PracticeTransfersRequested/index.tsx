@@ -1,12 +1,22 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { OrganisationAddress } from "../../components/OrganisationAddress";
-import { PracticeType } from "./practice.types";
+import { PracticeMetricsType, PracticeType } from "./practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../components/common/ContentsList";
 import "../index.scss";
-import { TransfersRequestedDefinitionsContent } from "../../components/Definitions";
+import {
+  GP2GPTechnicalFailuresDefinition,
+  RegistrationsTriggeredByGP2GPDefinition,
+  TransfersReceivedPercentageDefinition,
+  TransfersRequestedDefinitionsContent,
+} from "../../components/Definitions";
 import { PageContent } from "../../components/PageContent";
+import { generateTransfersRequestedMetricsTableData } from "../../library/utils/generateTransfersRequestedMetricsTableData";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import { addPercentageSign } from "../../library/utils/addPercentageSign";
+import { HelpModal } from "../../components/common/HelpModal";
+import { Table } from "../../components/common/Table";
 
 type PageContext = {
   practice: PracticeType;
@@ -17,10 +27,24 @@ type PracticeProps = {
   pageContext: PageContext;
 };
 
+const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
+  return metrics.map((metric) => {
+    const { requestedCount, receivedPercentage, technicalFailuresPercentage } =
+      generateTransfersRequestedMetricsTableData(metric.requestedTransfers);
+
+    return [
+      `${convertMonthNumberToText(metric.month)} ${metric.year}`,
+      requestedCount,
+      addPercentageSign(receivedPercentage),
+      addPercentageSign(technicalFailuresPercentage),
+    ];
+  });
+};
+
 const PracticeTransfersRequested: FC<PracticeProps> = ({
   pageContext: { practice },
 }) => {
-  const { name, odsCode } = practice;
+  const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
   const contentListItems = [
@@ -84,7 +108,61 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
               </p>
             </>
           }
-          tableContent=""
+          tableContent={
+            <Table
+              headers={[
+                { title: "Month " },
+                {
+                  title: "Registrations that triggered GP2GP transfer ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="triggered-transfers-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <RegistrationsTriggeredByGP2GPDefinition ariaLabelId="triggered-transfers-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "GP2GP transfers received ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="transfers-received-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <TransfersReceivedPercentageDefinition ariaLabelId="transfers-received-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: (
+                    <>
+                      GP2GP technical failures{" "}
+                      <div className="gp2gp-title-emphasis">
+                        (paper copy requested){" "}
+                      </div>
+                    </>
+                  ),
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="technical-failures-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <GP2GPTechnicalFailuresDefinition ariaLabelId="technical-failures-modal-title" />
+                      }
+                    />
+                  ),
+                },
+              ]}
+              caption={{
+                text: "GP2GP transfers requested",
+                hidden: false,
+              }}
+              rows={generateMonthlyRowData(metrics)}
+            />
+          }
         />
       </div>
     </>

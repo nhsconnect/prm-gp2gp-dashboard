@@ -1,6 +1,6 @@
 import React from "react";
 import moxios from "moxios";
-import { render } from "@testing-library/react";
+import { render, within } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 
 import PracticeTransfersRequested from "..";
@@ -30,14 +30,14 @@ const practicePageContext = {
         month: 11,
         requestedTransfers: {
           requestedCount: 22,
-          receivedCount: 22,
+          receivedCount: 20,
           integratedCount: 0,
           integratedWithin3DaysCount: 5,
           integratedWithin8DaysCount: 12,
           integratedBeyond8DaysCount: 2,
           awaitingIntegrationCount: 1,
-          technicalFailuresCount: 0,
-          unclassifiedFailureCount: 0,
+          technicalFailuresCount: 1,
+          unclassifiedFailureCount: 1,
         },
       },
       {
@@ -86,6 +86,8 @@ describe("PracticeTransfersRequested template", () => {
   afterAll(() => {
     moxios.uninstall();
   });
+
+  const practiceMetrics = practicePageContext.practice.metrics;
 
   it("renders practice details correctly", async () => {
     const expectedODSPracticeData = {
@@ -156,6 +158,23 @@ describe("PracticeTransfersRequested template", () => {
     expect(labelText).toBeInTheDocument();
   });
 
+  it("displays table title and description correctly", () => {
+    const { getByRole, getByText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const tableTitle = getByRole("heading", {
+      name: "GP2GP transfers requested",
+      level: 2,
+    });
+    const tableDescription = getByText(
+      "number of registrations that triggered a GP2GP transfer",
+      { exact: false }
+    );
+    expect(tableTitle).toBeInTheDocument();
+    expect(tableDescription).toBeInTheDocument();
+  });
+
   it("displays transfers received definitions correctly", async () => {
     const { getByRole, getByText } = render(
       <PracticeTransfersRequested pageContext={practicePageContext} />
@@ -176,23 +195,6 @@ describe("PracticeTransfersRequested template", () => {
     });
   });
 
-  it("displays table title and description correctly", () => {
-    const { getByRole, getByText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
-    );
-
-    const tableTitle = getByRole("heading", {
-      name: "GP2GP transfers requested",
-      level: 2,
-    });
-    const tableDescription = getByText(
-      "number of registrations that triggered a GP2GP transfer",
-      { exact: false }
-    );
-    expect(tableTitle).toBeInTheDocument();
-    expect(tableDescription).toBeInTheDocument();
-  });
-
   it("displays expander with the correct content", () => {
     const { getByText } = render(
       <PracticeTransfersRequested pageContext={practicePageContext} />
@@ -210,5 +212,160 @@ describe("PracticeTransfersRequested template", () => {
 
     userEvent.click(expanderTitle);
     expect(expanderContent).toBeVisible();
+  });
+
+  it("displays table headers correctly", () => {
+    const { getAllByRole } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const allColumnHeaders = getAllByRole("columnheader");
+
+    expect(allColumnHeaders[0]).toHaveTextContent("Month");
+    expect(allColumnHeaders[1]).toHaveTextContent(
+      "Registrations that triggered GP2GP transfer"
+    );
+    expect(allColumnHeaders[2]).toHaveTextContent("GP2GP transfers received");
+    expect(allColumnHeaders[3]).toHaveTextContent("GP2GP technical failures");
+    expect(allColumnHeaders.length).toBe(4);
+  });
+
+  it("displays modal with definitions when icon is clicked", async () => {
+    const {
+      findByText,
+      queryByText,
+      queryAllByText,
+      findAllByText,
+      getByRole,
+    } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const technicalFailureModalContent =
+      /Technical failures can happen from the point the GP2GP transfer is triggered/;
+    const pageAndModalContent = /percentage of GP2GP transfers/i;
+
+    expect(queryByText(technicalFailureModalContent)).not.toBeInTheDocument();
+
+    expect(queryAllByText(pageAndModalContent)).toHaveLength(2);
+
+    const technicalFailuresHeader = getByRole("columnheader", {
+      name: /GP2GP technical failures/,
+    });
+
+    const technicalFailuresModalButton = within(
+      technicalFailuresHeader
+    ).getByRole("button");
+    userEvent.click(technicalFailuresModalButton);
+
+    expect(await findByText(technicalFailureModalContent)).toBeInTheDocument();
+    expect(await findAllByText(pageAndModalContent)).toHaveLength(3);
+  });
+
+  it("displays help icons for all relevant headers", () => {
+    const { getAllByRole } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const allColumnHeaders = getAllByRole("columnheader");
+    const buttonOptions = { name: "Open modal with definition" };
+
+    expect(
+      within(allColumnHeaders[0]).queryByRole("button", buttonOptions)
+    ).not.toBeInTheDocument();
+    expect(
+      within(allColumnHeaders[1]).getByRole("button", buttonOptions)
+    ).toBeInTheDocument();
+    expect(
+      within(allColumnHeaders[2]).getByRole("button", buttonOptions)
+    ).toBeInTheDocument();
+    expect(
+      within(allColumnHeaders[3]).getByRole("button", buttonOptions)
+    ).toBeInTheDocument();
+  });
+
+  it("labels modal with content title", async () => {
+    const { getByRole, findByLabelText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const transfersReceivedHeader = getByRole("columnheader", {
+      name: /GP2GP transfers received/,
+    });
+
+    const transfersReceivedModalButton = within(
+      transfersReceivedHeader
+    ).getByRole("button");
+    userEvent.click(transfersReceivedModalButton);
+
+    const transfersReceivedModal = await findByLabelText(
+      "GP2GP transfers received"
+    );
+    expect(transfersReceivedModal).toBeInTheDocument();
+  });
+
+  it("renders one month of metrics correctly", () => {
+    const { getByText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const transfersReceived =
+      practicePageContext.practice.metrics[0].requestedTransfers;
+
+    expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
+    expect(getByText("90.9%")).toBeInTheDocument();
+    expect(getByText("9.1%")).toBeInTheDocument();
+  });
+
+  it("renders metrics for multiple months correctly", () => {
+    const { getByText } = render(
+      <PracticeTransfersRequested pageContext={practicePageContext} />
+    );
+
+    const monthStrings = ["November 2019", "October 2019", "September 2019"];
+
+    practiceMetrics.forEach((metric, i) => {
+      const transfersRequested = metric.requestedTransfers;
+
+      expect(getByText(monthStrings[i])).toBeInTheDocument();
+      expect(getByText(transfersRequested.requestedCount)).toBeInTheDocument();
+    });
+  });
+
+  it("renders placeholders when there are no transfers", () => {
+    const practicePageContextNoTransferData = {
+      practice: {
+        odsCode: "B86030",
+        name: "BURTON CROFT SURGERY",
+        metrics: [
+          {
+            year: 2019,
+            month: 11,
+            requestedTransfers: {
+              requestedCount: 0,
+              receivedCount: 0,
+              integratedCount: 0,
+              integratedWithin3DaysCount: 0,
+              integratedWithin8DaysCount: 0,
+              integratedBeyond8DaysCount: 0,
+              awaitingIntegrationCount: 0,
+              technicalFailuresCount: 0,
+              unclassifiedFailureCount: 0,
+            },
+          },
+        ],
+      },
+      layout: "general",
+    };
+
+    const { getAllByText } = render(
+      <PracticeTransfersRequested
+        pageContext={practicePageContextNoTransferData}
+      />
+    );
+
+    const dashElements = getAllByText("n/a");
+    expect(dashElements[0]).toBeInTheDocument();
+    expect(dashElements.length).toBe(2);
   });
 });
