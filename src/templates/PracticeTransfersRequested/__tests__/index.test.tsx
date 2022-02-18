@@ -158,7 +158,7 @@ describe("PracticeTransfersRequested template", () => {
     expect(labelText).toBeInTheDocument();
   });
 
-  it("displays table title and description correctly", () => {
+  it("displays page title and description correctly", () => {
     const { getByRole, getByText } = render(
       <PracticeTransfersRequested pageContext={practicePageContext} />
     );

@@ -151,7 +151,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     expect(expectedPracticeHeading).toBeInTheDocument();
   });
 
-  it("displays table title correctly", () => {
+  it("displays page title correctly", () => {
     const { getByRole } = render(
       <PracticeIntegrationTimes pageContext={practicePageContext} />
     );

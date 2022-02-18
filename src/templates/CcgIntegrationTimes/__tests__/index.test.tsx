@@ -302,7 +302,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("renders table description correctly", () => {
+  it("renders page description correctly", () => {
     const { getByText } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
