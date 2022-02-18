@@ -89,7 +89,7 @@ const GeneralContent: FC<ContentProps> = ({ children }) => (
   </div>
 );
 
-const IntegrationTimesContent: FC<ContentProps> = ({ children }) => {
+const NavigationContents: FC<ContentProps> = ({ children }) => {
   const { showContentsNavigation } = useFeatureToggles();
 
   return (
@@ -140,8 +140,8 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
           <Header />
           {pageContext.layout === "homepage" ? (
             <HomepageContent>{children}</HomepageContent>
-          ) : "integration-times" ? (
-            <IntegrationTimesContent>{children}</IntegrationTimesContent>
+          ) : "navigation-contents" ? (
+            <NavigationContents>{children}</NavigationContents>
           ) : (
             <GeneralContent>{children}</GeneralContent>
           )}

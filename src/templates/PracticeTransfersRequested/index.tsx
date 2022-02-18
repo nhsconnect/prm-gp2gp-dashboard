@@ -49,7 +49,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
 
   const contentListItems = [
     {
-      text: "Transfers Requested",
+      text: "GP2GP transfers requested",
     },
   ];
 

@@ -26,7 +26,18 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practice,
-        layout: "integration-times",
+        layout: "navigation-contents",
+      },
+    });
+
+    createPage({
+      path: `/practice/${practice.odsCode}/transfers-requested`,
+      component: path.resolve(
+        "src/templates/PracticeTransfersRequested/index.tsx"
+      ),
+      context: {
+        practice,
+        layout: "navigation-contents",
       },
     });
   });
@@ -51,7 +62,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         ccgPractices,
-        layout: "integration-times",
+        layout: "navigation-contents",
       },
     });
   });
