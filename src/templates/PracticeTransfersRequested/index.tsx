@@ -49,6 +49,10 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
 
   const contentListItems = [
     {
+      text: "Integration times",
+      href: `/practice/${odsCode}/integration-times`,
+    },
+    {
       text: "GP2GP transfers requested",
     },
   ];

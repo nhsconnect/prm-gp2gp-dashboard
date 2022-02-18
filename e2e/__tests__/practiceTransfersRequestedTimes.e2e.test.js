@@ -6,20 +6,37 @@ describe("Practice transfers requested page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/practice/A12347/transfers-requested");
+        cy.visit("/");
         cy.injectAxe();
       });
 
-      it("displays practice transfer requested page and goes back to home page", () => {
+      it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents and goes back to home page and goes back to home page", () => {
         cy.intercept(
           "/ORD/2-0-0/organisations/A12347",
           practiceWithSomeIntegrations
         );
 
+        cy.findByLabelText(
+          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+        ).type("Test GP Practice With Some Integrations A12347");
+        cy.contains("li", "Test GP Practice With Some Integrations")
+          .parent()
+          .parent()
+          .click();
+
+        cy.contains("button", "Search").click();
+
         cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
 
         cy.contains("h2", "Contents");
-        cy.contains("li", "GP2GP transfers requested");
+        cy.contains("li", "Integration times");
+        cy.contains("li", "GP2GP transfers requested").click();
+        cy.contains("h2", "GP2GP transfers requested");
+
+        cy.contains("li", "Integration times").click();
+        cy.contains("Integration times for registering practice");
+        cy.contains("li", "GP2GP transfers requested").click();
+        cy.contains("h2", "GP2GP transfers requested");
 
         cy.title().should(
           "eq",

@@ -63,6 +63,10 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
     {
       text: "Integration times",
     },
+    {
+      text: "GP2GP transfers requested",
+      href: `/practice/${odsCode}/transfers-requested`,
+    },
   ];
 
   return (
