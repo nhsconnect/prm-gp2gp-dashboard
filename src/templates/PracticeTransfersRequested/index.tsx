@@ -10,6 +10,7 @@ import {
   RegistrationsTriggeredByGP2GPDefinition,
   TransfersReceivedPercentageDefinition,
   TransfersRequestedDefinitionsContent,
+  WhatHappensWhenAGP2GPTransferFails,
 } from "../../components/Definitions";
 import { PageContent } from "../../components/PageContent";
 import { generateTransfersRequestedMetricsTableData } from "../../library/utils/generateTransfersRequestedMetricsTableData";
@@ -100,18 +101,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
           }
           definitionsContent={<TransfersRequestedDefinitionsContent />}
           expanderTitle="What happens when a GP2GP transfer fails?"
-          expanderContent={
-            <>
-              <p>
-                A task will automatically be created for the sending practice to
-                send a paper copy of the record to the requesting practice.
-              </p>
-              <p>
-                Technical failures are system related and should be reported to
-                the system supplier.
-              </p>
-            </>
-          }
+          expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
           tableContent={
             <Table
               headers={[

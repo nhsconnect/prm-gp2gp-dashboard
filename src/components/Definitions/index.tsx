@@ -8,6 +8,10 @@ type WhyIntegrateWithin8DaysProps = {
   title?: string;
 };
 
+type WhatHappensWhenAGP2GPTransferFailsProps = {
+  title?: string;
+};
+
 export const TransfersReceivedDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
 }) => (
@@ -142,6 +146,21 @@ export const WhyIntegrateWithin8Days: FC<WhyIntegrateWithin8DaysProps> = ({
     </p>
   </>
 );
+
+export const WhatHappensWhenAGP2GPTransferFails: FC<WhatHappensWhenAGP2GPTransferFailsProps> =
+  ({ title }) => (
+    <>
+      {title && <h4>{title}</h4>}
+      <p>
+        A task will automatically be created for the sending practice to send a
+        paper copy of the record to the requesting practice.
+      </p>
+      <p>
+        Technical failures are system related and should be reported to the
+        system supplier.
+      </p>
+    </>
+  );
 
 export const RegistrationsTriggeredByGP2GPDefinition: FC<DefinitionProps> = ({
   ariaLabelId,
