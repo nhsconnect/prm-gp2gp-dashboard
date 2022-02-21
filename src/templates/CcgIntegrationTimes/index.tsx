@@ -7,10 +7,7 @@ import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
 import practiceTableContent from "../../data/content/practiceTable.json";
-import {
-  generateIntegratedMetricsTableData,
-  PracticePercentageType,
-} from "../../library/utils/generateIntegrationMetricsTableData";
+import { PracticePercentageType } from "../../library/utils/generateIntegrationMetricsTableData";
 
 import { HelpModal } from "../../components/common/HelpModal";
 import {
@@ -57,9 +54,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
         {
           year: practice.metrics[0].year,
           month: practice.metrics[0].month,
-          requestedTransfers: generateIntegratedMetricsTableData(
-            practice.metrics[0].requestedTransfers
-          ),
+          requestedTransfers: practice.metrics[0].requestedTransfers,
         },
       ],
     })

@@ -1,7 +1,7 @@
 {
   "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {
-    "defaultValue": "notIntegratedWithin8DaysPercentage",
+    "defaultValue": "notIntegratedWithin8DaysPercentOfReceived",
     "options": [
       {
         "displayText": "Requesting practice name",
@@ -13,15 +13,15 @@
       },
       {
         "displayText": "Integrated within 3 days",
-        "value": "integratedWithin3DaysPercentage"
+        "value": "integratedWithin3DaysPercentOfReceived"
       },
       {
         "displayText": "Integrated within 8 days",
-        "value": "integratedWithin8DaysPercentage"
+        "value": "integratedWithin8DaysPercentOfReceived"
       },
       {
         "displayText": "Not integrated within 8 days",
-        "value": "notIntegratedWithin8DaysPercentage"
+        "value": "notIntegratedWithin8DaysPercentOfReceived"
       }
     ]
   },

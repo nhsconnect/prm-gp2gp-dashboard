@@ -8,9 +8,9 @@
         "month": 2,
         "requestedTransfers": {
           "receivedCount": 5,
-          "integratedWithin3DaysPercentage": 60,
-          "integratedWithin8DaysPercentage": 40,
-          "notIntegratedWithin8DaysPercentage": 0
+          "integratedWithin3DaysPercentOfReceived": 60,
+          "integratedWithin8DaysPercentOfReceived": 40,
+          "notIntegratedWithin8DaysPercentOfReceived": 0
         }
       }
     ]
@@ -24,9 +24,9 @@
         "month": 2,
         "requestedTransfers": {
           "receivedCount": 22,
-          "integratedWithin3DaysPercentage": 22.7,
-          "integratedWithin8DaysPercentage": 27.3,
-          "notIntegratedWithin8DaysPercentage": 50
+          "integratedWithin3DaysPercentOfReceived": 22.7,
+          "integratedWithin8DaysPercentOfReceived": 27.3,
+          "notIntegratedWithin8DaysPercentOfReceived": 50
         }
       }
     ]
@@ -40,9 +40,9 @@
         "month": 2,
         "requestedTransfers": {
           "receivedCount": 34,
-          "integratedWithin3DaysPercentage": 58.8,
-          "integratedWithin8DaysPercentage": 32.4,
-          "notIntegratedWithin8DaysPercentage": 8.8
+          "integratedWithin3DaysPercentOfReceived": 58.8,
+          "integratedWithin8DaysPercentOfReceived": 32.4,
+          "notIntegratedWithin8DaysPercentOfReceived": 8.8
         }
       }
     ]
@@ -56,9 +56,9 @@
         "month": 2,
         "requestedTransfers": {
           "receivedCount": 0,
-          "integratedWithin3DaysPercentage": null,
-          "integratedWithin8DaysPercentage": null,
-          "notIntegratedWithin8DaysPercentage": null
+          "integratedWithin3DaysPercentOfReceived": null,
+          "integratedWithin8DaysPercentOfReceived": null,
+          "notIntegratedWithin8DaysPercentOfReceived": null
         }
       }
     ]
@@ -72,9 +72,9 @@
         "month": 2,
         "requestedTransfers": {
           "receivedCount": 13,
-          "integratedWithin3DaysPercentage": 0,
-          "integratedWithin8DaysPercentage": 92.3,
-          "notIntegratedWithin8DaysPercentage": 7.7
+          "integratedWithin3DaysPercentOfReceived": 0,
+          "integratedWithin8DaysPercentOfReceived": 92.3,
+          "notIntegratedWithin8DaysPercentOfReceived": 7.7
         }
       }
     ]
@@ -88,9 +88,9 @@
         "month": 2,
         "requestedTransfers": {
           "receivedCount": 12,
-          "integratedWithin3DaysPercentage": 41.7,
-          "integratedWithin8DaysPercentage": 33.3,
-          "notIntegratedWithin8DaysPercentage": 25
+          "integratedWithin3DaysPercentOfReceived": 41.7,
+          "integratedWithin8DaysPercentOfReceived": 33.3,
+          "notIntegratedWithin8DaysPercentOfReceived": 25
         }
       }
     ]

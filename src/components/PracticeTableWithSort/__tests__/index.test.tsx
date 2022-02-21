@@ -54,7 +54,9 @@ describe("PracticeTableWithSort component", () => {
     const orderSelect = getByRole("combobox", {
       name: `Order${practiceTableContent.selectHiddenLabel}`,
     });
-    expect(sortBySelect).toHaveValue("notIntegratedWithin8DaysPercentage");
+    expect(sortBySelect).toHaveValue(
+      "notIntegratedWithin8DaysPercentOfReceived"
+    );
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
     expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 50%");
@@ -130,7 +132,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated within 3 days",
-        "integratedWithin3DaysPercentage",
+        "integratedWithin3DaysPercentOfReceived",
         SortOrder.DESCENDING,
         [
           "Integrated within 3 days 60%",
@@ -140,7 +142,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated within 3 days",
-        "integratedWithin3DaysPercentage",
+        "integratedWithin3DaysPercentOfReceived",
         SortOrder.ASCENDING,
         [
           "Integrated within 3 days n/a",
@@ -150,7 +152,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated within 8 days",
-        "integratedWithin8DaysPercentage",
+        "integratedWithin8DaysPercentOfReceived",
         SortOrder.DESCENDING,
         [
           "Integrated within 8 days 92.3%",
@@ -160,7 +162,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Integrated within 8 days",
-        "integratedWithin8DaysPercentage",
+        "integratedWithin8DaysPercentOfReceived",
         SortOrder.ASCENDING,
         [
           "Integrated within 8 days n/a",
@@ -170,7 +172,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Not integrated within 8 days",
-        "notIntegratedWithin8DaysPercentage",
+        "notIntegratedWithin8DaysPercentOfReceived",
         SortOrder.DESCENDING,
         [
           "Not integrated within 8 days 50%",
@@ -180,7 +182,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "Not integrated within 8 days",
-        "notIntegratedWithin8DaysPercentage",
+        "notIntegratedWithin8DaysPercentOfReceived",
         SortOrder.ASCENDING,
         [
           "Not integrated within 8 days n/a",

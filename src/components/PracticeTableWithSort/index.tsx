@@ -88,9 +88,15 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       return [
         <PracticeLink odsCode={odsCode} name={name} />,
         requestedMetric.receivedCount,
-        addPercentageSign(requestedMetric.integratedWithin3DaysPercentage),
-        addPercentageSign(requestedMetric.integratedWithin8DaysPercentage),
-        addPercentageSign(requestedMetric.notIntegratedWithin8DaysPercentage),
+        addPercentageSign(
+          requestedMetric.integratedWithin3DaysPercentOfReceived
+        ),
+        addPercentageSign(
+          requestedMetric.integratedWithin8DaysPercentOfReceived
+        ),
+        addPercentageSign(
+          requestedMetric.notIntegratedWithin8DaysPercentOfReceived
+        ),
       ];
     }
   );
