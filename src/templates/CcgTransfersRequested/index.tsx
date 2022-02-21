@@ -1,16 +1,13 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../PracticeTransfersRequested/practice.types";
+import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { PracticeTransfersRequestedTableWithSort } from "../../components/PracticeTransfersRequestedTableWithSort";
 import practiceTableContent from "../../data/content/practiceTransfersRequestedTable.json";
-import {
-  generateTransfersRequestedMetricsTableData,
-  PracticePercentageType,
-} from "../../library/utils/generateTransfersRequestedMetricsTableData";
+import { PracticePercentageType } from "../../library/utils/generateTransfersRequestedMetricsTableData";
 
 import { HelpModal } from "../../components/common/HelpModal";
 import {
@@ -53,7 +50,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
         {
           year: practice.metrics[0].year,
           month: practice.metrics[0].month,
-
+          requestedTransfers: practice.metrics[0].requestedTransfers,
         },
       ],
     })

@@ -184,7 +184,7 @@ describe("CCG Transfers Requested template", () => {
     expect(allRows[1]).toHaveTextContent(
       /Registrations that triggered GP2GP transfer(.*)7/
     );
-    expect(allRows[1]).toHaveTextContent(/GP2GP transfers received(.*)71.4%/);
+    expect(allRows[1]).toHaveTextContent(/GP2GP transfers received(.*)71.42%/);
     expect(allRows[1]).toHaveTextContent(/GP2GP technical failures(.*)28.6%/);
 
     expect(
