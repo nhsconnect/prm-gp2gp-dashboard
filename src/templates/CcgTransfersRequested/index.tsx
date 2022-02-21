@@ -1,23 +1,24 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
+import { PracticeType } from "../PracticeTransfersRequested/practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
-import practiceTableContent from "../../data/content/practiceTable.json";
-import { PracticePercentageType } from "../../library/utils/generateIntegrationMetricsTableData";
+import { PracticeTransfersRequestedTableWithSort } from "../../components/PracticeTransfersRequestedTableWithSort";
+import practiceTableContent from "../../data/content/practiceTransfersRequestedTable.json";
+import {
+  generateTransfersRequestedMetricsTableData,
+  PracticePercentageType,
+} from "../../library/utils/generateTransfersRequestedMetricsTableData";
 
 import { HelpModal } from "../../components/common/HelpModal";
 import {
-  IntegratedWithin3DaysDefinition,
-  IntegratedWithin8DaysDefinition,
-  IntegrationsDefinitionsContent,
-  NotIntegratedWithin8DaysDefinition,
-  TransfersReceivedDefinition,
+  GP2GPTechnicalFailuresDefinition,
+  RegistrationsTriggeredByGP2GPDefinition,
+  TransfersReceivedPercentageDefinition,
+  TransfersRequestedDefinitionsContent,
   WhatHappensWhenAGP2GPTransferFails,
-  WhyIntegrateWithin8Days,
 } from "../../components/Definitions";
 import { ContentsList } from "../../components/common/ContentsList";
 import "../index.scss";
@@ -52,7 +53,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
         {
           year: practice.metrics[0].year,
           month: practice.metrics[0].month,
-          requestedTransfers: practice.metrics[0].requestedTransfers,
+
         },
       ],
     })
@@ -101,8 +102,61 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
           }
           expanderTitle="What happens when a GP2GP transfer fails?"
           expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
-          definitionsContent={<IntegrationsDefinitionsContent />}
-          tableContent=""
+          definitionsContent={<TransfersRequestedDefinitionsContent />}
+          tableContent={
+            <PracticeTransfersRequestedTableWithSort
+              ccgPractices={ccgPracticeTableData}
+              headers={[
+                { title: "Registering practice name " },
+                {
+                  title: "Registrations that triggered GP2GP transfer ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="triggered-transfers-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <RegistrationsTriggeredByGP2GPDefinition ariaLabelId="triggered-transfers-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "GP2GP transfers received ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="transfers-received-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <TransfersReceivedPercentageDefinition ariaLabelId="transfers-received-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: (
+                    <>
+                      GP2GP technical failures{" "}
+                      <div className="gp2gp-title-emphasis">
+                        (paper copy requested){" "}
+                      </div>
+                    </>
+                  ),
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="technical-failures-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <GP2GPTechnicalFailuresDefinition ariaLabelId="technical-failures-modal-title" />
+                      }
+                    />
+                  ),
+                },
+              ]}
+              sortBySelect={practiceTableContent.sortBySelect}
+              orderSelect={practiceTableContent.orderSelect}
+              tableCaption={tableTitle}
+            />
+          }
         />
       </div>
     </>
