@@ -8,8 +8,8 @@
         "month": 2,
         "requestedTransfers": {
           "requestedCount": 7,
-          "receivedPercentage": 71.4,
-          "technicalFailuresPercentage": 28.6
+          "receivedPercentOfRequested": 71.4,
+          "failuresTotalPercentOfRequested": 28.6
         }
       }
     ]
@@ -23,8 +23,8 @@
         "month": 2,
         "requestedTransfers": {
           "requestedCount": 22,
-          "receivedPercentage": 100,
-          "technicalFailuresPercentage": 0
+          "receivedPercentOfRequested": 100,
+          "failuresTotalPercentOfRequested": 0
         }
       }
     ]
@@ -38,8 +38,8 @@
         "month": 2,
         "requestedTransfers": {
           "requestedCount": 40,
-          "receivedPercentage": 85,
-          "technicalFailuresPercentage": 15
+          "receivedPercentOfRequested": 85,
+          "failuresTotalPercentOfRequested": 15
         }
       }
     ]
@@ -53,8 +53,8 @@
         "month": 2,
         "requestedTransfers": {
           "requestedCount": 0,
-          "receivedPercentage": null,
-          "technicalFailuresPercentage": null
+          "receivedPercentOfRequested": null,
+          "failuresTotalPercentOfRequested": null
         }
       }
     ]
@@ -68,8 +68,8 @@
         "month": 2,
         "requestedTransfers": {
           "requestedCount": 14,
-          "receivedPercentage": 92.9,
-          "technicalFailuresPercentage": 7.1
+          "receivedPercentOfRequested": 92.9,
+          "failuresTotalPercentOfRequested": 7.1
         }
       }
     ]
@@ -83,8 +83,8 @@
         "month": 2,
         "requestedTransfers": {
           "requestedCount": 13,
-          "receivedPercentage": 92.3,
-          "technicalFailuresPercentage": 7.7
+          "receivedPercentOfRequested": 92.3,
+          "failuresTotalPercentOfRequested": 7.7
         }
       }
     ]

@@ -1,7 +1,7 @@
 {
   "selectHiddenLabel": " this element sorts the practice performance table",
   "sortBySelect": {
-    "defaultValue": "technicalFailuresPercentage",
+    "defaultValue": "failuresTotalPercentOfRequested",
     "options": [
       {
         "displayText": "Requesting practice name",
@@ -13,11 +13,11 @@
       },
       {
         "displayText": "GP2GP transfers received",
-        "value": "receivedPercentage"
+        "value": "receivedPercentOfRequested"
       },
       {
         "displayText": "GP2GP technical failures",
-        "value": "technicalFailuresPercentage"
+        "value": "failuresTotalPercentOfRequested"
       }
     ]
   },

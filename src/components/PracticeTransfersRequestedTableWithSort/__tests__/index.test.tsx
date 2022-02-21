@@ -53,7 +53,7 @@ describe("PracticeTableWithSort component", () => {
     const orderSelect = getByRole("combobox", {
       name: `Order${practiceTableContent.selectHiddenLabel}`,
     });
-    expect(sortBySelect).toHaveValue("technicalFailuresPercentage");
+    expect(sortBySelect).toHaveValue("failuresTotalPercentOfRequested");
     expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
 
     expect(allRows[1]).toHaveTextContent("GP2GP technical failures 28.6%");
@@ -129,7 +129,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "GP2GP transfers received",
-        "receivedPercentage",
+        "receivedPercentOfRequested",
         SortOrder.DESCENDING,
         [
           "GP2GP transfers received 100%",
@@ -139,7 +139,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "GP2GP transfers received",
-        "receivedPercentage",
+        "receivedPercentOfRequested",
         SortOrder.ASCENDING,
         [
           "GP2GP transfers received n/a",
@@ -149,7 +149,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "GP2GP technical failures",
-        "technicalFailuresPercentage",
+        "failuresTotalPercentOfRequested",
         SortOrder.DESCENDING,
         [
           "GP2GP technical failures 28.6%",
@@ -159,7 +159,7 @@ describe("PracticeTableWithSort component", () => {
       ],
       [
         "GP2GP technical failures",
-        "technicalFailuresPercentage",
+        "failuresTotalPercentOfRequested",
         SortOrder.ASCENDING,
         [
           "GP2GP technical failures n/a",

@@ -87,8 +87,8 @@ export const PracticeTransfersRequestedTableWithSort: FC<TableWithSortProps> =
         return [
           <PracticeLink odsCode={odsCode} name={name} />,
           requestedMetric.requestedCount,
-          addPercentageSign(requestedMetric.receivedPercentage),
-          addPercentageSign(requestedMetric.technicalFailuresPercentage),
+          addPercentageSign(requestedMetric.receivedPercentOfRequested),
+          addPercentageSign(requestedMetric.failuresTotalPercentOfRequested),
         ];
       }
     );
