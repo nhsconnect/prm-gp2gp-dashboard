@@ -28,4 +28,49 @@ describe("Homepage", () => {
 
     expect(organisationSearchHeading).toBeInTheDocument();
   });
+
+  it("displays About section", () => {
+    const { getByRole, getByText } = render(<Index />);
+
+    const sectionHeading = getByRole("heading", {
+      name: "About",
+      level: 2,
+    });
+    const sectionText = getByText(
+      /This site provides monthly data about GP2GP transfers/
+    );
+
+    expect(sectionHeading).toBeInTheDocument();
+    expect(sectionText).toBeInTheDocument();
+  });
+
+  it("displays What you can find out section", () => {
+    const { getByRole, getByText } = render(<Index />);
+
+    const sectionHeading = getByRole("heading", {
+      name: "What you can find out",
+      level: 2,
+    });
+    const sectionText = getByText(
+      /percentage of transfers that failed for technical reasons/
+    );
+
+    expect(sectionHeading).toBeInTheDocument();
+    expect(sectionText).toBeInTheDocument();
+  });
+
+  it("displays What this data can’t tell you section", () => {
+    const { getByRole, getByText } = render(<Index />);
+
+    const sectionHeading = getByRole("heading", {
+      name: "What this data can’t tell you",
+      level: 2,
+    });
+    const sectionText = getByText(
+      /registrations to and from the armed forces or justice system/
+    );
+
+    expect(sectionHeading).toBeInTheDocument();
+    expect(sectionText).toBeInTheDocument();
+  });
 });

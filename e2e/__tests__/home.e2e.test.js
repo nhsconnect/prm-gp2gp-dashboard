@@ -17,6 +17,8 @@ describe("Home page", () => {
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         );
         cy.contains("button", "Search");
+        cy.contains("h2", "What you can find out");
+        cy.contains("h2", "What this data can’t tell you");
         cy.checkAccessibility();
       });
 
