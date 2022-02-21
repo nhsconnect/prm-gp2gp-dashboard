@@ -30,7 +30,7 @@ type LayoutProps = {
   path: string;
   children: ReactNode;
   pageContext: {
-    layout: "general" | "homepage";
+    layout: "general" | "homepage" | "navigation-contents";
   };
 };
 
@@ -140,7 +140,7 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
           <Header />
           {pageContext.layout === "homepage" ? (
             <HomepageContent>{children}</HomepageContent>
-          ) : "navigation-contents" ? (
+          ) : pageContext.layout === "navigation-contents" ? (
             <NavigationContents>{children}</NavigationContents>
           ) : (
             <GeneralContent>{children}</GeneralContent>
