@@ -1,0 +1,37 @@
+{
+  "selectHiddenLabel": " this element sorts the practice performance table",
+  "sortBySelect": {
+    "defaultValue": "technicalFailuresPercentage",
+    "options": [
+      {
+        "displayText": "Requesting practice name",
+        "value": "requestingPracticeName"
+      },
+      {
+        "displayText": "Transfers requested",
+        "value": "requestedCount"
+      },
+      {
+        "displayText": "GP2GP transfers received",
+        "value": "receivedPercentage"
+      },
+      {
+        "displayText": "GP2GP technical failures",
+        "value": "technicalFailuresPercentage"
+      }
+    ]
+  },
+  "orderSelect": {
+    "defaultValue": "descending",
+    "options": [
+      {
+        "displayText": "Descending",
+        "value": "descending"
+      },
+      {
+        "displayText": "Ascending",
+        "value": "ascending"
+      }
+    ]
+  }
+}
