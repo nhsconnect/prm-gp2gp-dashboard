@@ -15,7 +15,14 @@
           "integratedBeyond8DaysCount": 0,
           "awaitingIntegrationCount": 0,
           "technicalFailuresCount": 2,
-          "unclassifiedFailureCount": 0
+          "unclassifiedFailureCount": 0,
+          "receivedPercentOfRequested": 71.42,
+          "integratedWithin3DaysPercentOfReceived": 60.0,
+          "integratedWithin8DaysPercentOfReceived": 40.0,
+          "notIntegratedWithin8DaysTotal": 0,
+          "notIntegratedWithin8DaysPercentOfReceived": null,
+          "failuresTotalCount": 2,
+          "failuresTotalPercentOfRequested": 28.6
         }
       }
     ]
@@ -36,7 +43,14 @@
           "integratedBeyond8DaysCount": 10,
           "awaitingIntegrationCount": 1,
           "technicalFailuresCount": 0,
-          "unclassifiedFailureCount": 0
+          "unclassifiedFailureCount": 0,
+          "receivedPercentOfRequested": 100.0,
+          "integratedWithin3DaysPercentOfReceived": 22.7,
+          "integratedWithin8DaysPercentOfReceived": 27.3,
+          "notIntegratedWithin8DaysTotal": 11,
+          "notIntegratedWithin8DaysPercentOfReceived": 50,
+          "failuresTotalCount": 0,
+          "failuresTotalPercentOfRequested": null
         }
       }
     ]
@@ -57,7 +71,14 @@
           "integratedBeyond8DaysCount": 3,
           "awaitingIntegrationCount": 0,
           "technicalFailuresCount": 5,
-          "unclassifiedFailureCount": 1
+          "unclassifiedFailureCount": 1,
+          "receivedPercentOfRequested": 85.0,
+          "integratedWithin3DaysPercentOfReceived": 58.8,
+          "integratedWithin8DaysPercentOfReceived": 32.4,
+          "notIntegratedWithin8DaysTotal": 3,
+          "notIntegratedWithin8DaysPercentOfReceived": 8.8,
+          "failuresTotalCount": 6,
+          "failuresTotalPercentOfRequested": 15.0
         }
       }
     ]
@@ -78,7 +99,14 @@
           "integratedBeyond8DaysCount": 0,
           "awaitingIntegrationCount": 0,
           "technicalFailuresCount": 0,
-          "unclassifiedFailureCount": 0
+          "unclassifiedFailureCount": 0,
+          "receivedPercentOfRequested": null,
+          "integratedWithin3DaysPercentOfReceived": null,
+          "integratedWithin8DaysPercentOfReceived": null,
+          "notIntegratedWithin8DaysTotal": 0,
+          "notIntegratedWithin8DaysPercentOfReceived": null,
+          "failuresTotalCount": 0,
+          "failuresTotalPercentOfRequested": null
         }
       }
     ]
@@ -99,7 +127,14 @@
           "integratedBeyond8DaysCount": 0,
           "awaitingIntegrationCount": 1,
           "technicalFailuresCount": 1,
-          "unclassifiedFailureCount": 0
+          "unclassifiedFailureCount": 0,
+          "receivedPercentOfRequested": 92.9,
+          "integratedWithin3DaysPercentOfReceived": 0,
+          "integratedWithin8DaysPercentOfReceived": 92.3,
+          "notIntegratedWithin8DaysTotal": 1,
+          "notIntegratedWithin8DaysPercentOfReceived": 7.7,
+          "failuresTotalCount": 1,
+          "failuresTotalPercentOfRequested": 7.1
         }
       }
     ]
@@ -120,7 +155,14 @@
           "integratedBeyond8DaysCount": 3,
           "awaitingIntegrationCount": 0,
           "technicalFailuresCount": 0,
-          "unclassifiedFailureCount": 1
+          "unclassifiedFailureCount": 1,
+          "receivedPercentOfRequested": 92.3,
+          "integratedWithin3DaysPercentOfReceived": 41.7,
+          "integratedWithin8DaysPercentOfReceived": 33.3,
+          "notIntegratedWithin8DaysTotal": 3,
+          "notIntegratedWithin8DaysPercentOfReceived": 25.0,
+          "failuresTotalCount": 1,
+          "failuresTotalPercentOfRequested": 7.7
         }
       }
     ]

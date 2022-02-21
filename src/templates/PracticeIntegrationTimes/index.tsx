@@ -9,7 +9,6 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { PageContent } from "../../components/PageContent";
-import { generateIntegratedMetricsTableData } from "../../library/utils/generateIntegrationMetricsTableData";
 import { HelpModal } from "../../components/common/HelpModal";
 import {
   IntegratedWithin3DaysDefinition,
@@ -36,17 +35,17 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   return metrics.map((metric) => {
     const {
       receivedCount,
-      integratedWithin3DaysPercentage,
-      integratedWithin8DaysPercentage,
-      notIntegratedWithin8DaysPercentage,
-    } = generateIntegratedMetricsTableData(metric.requestedTransfers);
+      integratedWithin3DaysPercentOfReceived,
+      integratedWithin8DaysPercentOfReceived,
+      notIntegratedWithin8DaysPercentOfReceived,
+    } = metric.requestedTransfers;
 
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,
       receivedCount,
-      addPercentageSign(integratedWithin3DaysPercentage),
-      addPercentageSign(integratedWithin8DaysPercentage),
-      addPercentageSign(notIntegratedWithin8DaysPercentage),
+      addPercentageSign(integratedWithin3DaysPercentOfReceived),
+      addPercentageSign(integratedWithin8DaysPercentOfReceived),
+      addPercentageSign(notIntegratedWithin8DaysPercentOfReceived),
     ];
   });
 };

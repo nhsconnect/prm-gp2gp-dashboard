@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { OrganisationAddress } from "../../components/OrganisationAddress";
-import { PracticeMetricsType, PracticeType } from "./practice.types";
+
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../components/common/ContentsList";
 import "../index.scss";
@@ -18,6 +18,10 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { HelpModal } from "../../components/common/HelpModal";
 import { Table } from "../../components/common/Table";
+import {
+  PracticeMetricsType,
+  PracticeType,
+} from "../PracticeIntegrationTimes/practice.types";
 
 type PageContext = {
   practice: PracticeType;

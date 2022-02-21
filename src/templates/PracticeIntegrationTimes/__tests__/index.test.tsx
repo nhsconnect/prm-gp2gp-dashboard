@@ -35,9 +35,16 @@ const practicePageContext = {
         requestedTransfers: {
           requestedCount: 22,
           receivedCount: 22,
-          integratedCount: 0,
+          receivedPercentOfRequested: 100,
           integratedWithin3DaysCount: 5,
+          integratedWithin3DaysPercentOfReceived: 22.7,
           integratedWithin8DaysCount: 12,
+          integratedWithin8DaysPercentOfReceived: 54.6,
+          notIntegratedWithin8DaysTotal: 3,
+          notIntegratedWithin8DaysPercentOfReceived: 13.6,
+          failuresTotalCount: 0,
+          failuresTotalPercentOfRequested: null,
+          integratedCount: 0,
           integratedBeyond8DaysCount: 2,
           awaitingIntegrationCount: 1,
           technicalFailuresCount: 0,
@@ -50,9 +57,16 @@ const practicePageContext = {
         requestedTransfers: {
           requestedCount: 15,
           receivedCount: 15,
-          integratedCount: 15,
+          receivedPercentOfRequested: 100,
           integratedWithin3DaysCount: 10,
+          integratedWithin3DaysPercentOfReceived: 66.7,
           integratedWithin8DaysCount: 2,
+          integratedWithin8DaysPercentOfReceived: 13.3,
+          notIntegratedWithin8DaysTotal: 3,
+          notIntegratedWithin8DaysPercentOfReceived: 0.2,
+          failuresTotalCount: 0,
+          failuresTotalPercentOfRequested: null,
+          integratedCount: 15,
           integratedBeyond8DaysCount: 3,
           awaitingIntegrationCount: 0,
           technicalFailuresCount: 0,
@@ -65,9 +79,16 @@ const practicePageContext = {
         requestedTransfers: {
           requestedCount: 30,
           receivedCount: 16,
-          integratedCount: 15,
+          receivedPercentOfRequested: 15.3,
           integratedWithin3DaysCount: 10,
+          integratedWithin3DaysPercentOfReceived: 62.5,
           integratedWithin8DaysCount: 2,
+          integratedWithin8DaysPercentOfReceived: 12.5,
+          notIntegratedWithin8DaysTotal: 4,
+          notIntegratedWithin8DaysPercentOfReceived: 25.0,
+          failuresTotalCount: 0,
+          failuresTotalPercentOfRequested: null,
+          integratedCount: 15,
           integratedBeyond8DaysCount: 3,
           awaitingIntegrationCount: 1,
           technicalFailuresCount: 0,
@@ -188,7 +209,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
       practicePageContext.practice.metrics[0].requestedTransfers;
     expect(getByText(transfersReceived.receivedCount)).toBeInTheDocument();
     expect(getByText("22.7%")).toBeInTheDocument();
-    expect(getByText("54.5%")).toBeInTheDocument();
+    expect(getByText("54.6%")).toBeInTheDocument();
     expect(getByText("13.6%")).toBeInTheDocument();
   });
 
@@ -324,6 +345,13 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
               awaitingIntegrationCount: 0,
               technicalFailuresCount: 0,
               unclassifiedFailureCount: 0,
+              receivedPercentOfRequested: null,
+              integratedWithin3DaysPercentOfReceived: null,
+              integratedWithin8DaysPercentOfReceived: null,
+              notIntegratedWithin8DaysTotal: 0,
+              notIntegratedWithin8DaysPercentOfReceived: null,
+              failuresTotalCount: 0,
+              failuresTotalPercentOfRequested: null,
             },
           },
         ],
@@ -468,7 +496,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
 
     expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
     expect(getByText("22.7%")).toBeInTheDocument();
-    expect(getByText("54.5%")).toBeInTheDocument();
+    expect(getByText("54.6%")).toBeInTheDocument();
     expect(getByText("13.6%")).toBeInTheDocument();
   });
 
@@ -597,6 +625,13 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
               awaitingIntegrationCount: 0,
               technicalFailuresCount: 0,
               unclassifiedFailureCount: 0,
+              receivedPercentOfRequested: null,
+              integratedWithin3DaysPercentOfReceived: null,
+              integratedWithin8DaysPercentOfReceived: null,
+              notIntegratedWithin8DaysTotal: 0,
+              notIntegratedWithin8DaysPercentOfReceived: null,
+              failuresTotalCount: 0,
+              failuresTotalPercentOfRequested: null,
             },
           },
         ],
