@@ -1,8 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "gatsby";
 
-import "./index.scss";
-
 type AlphabeticalNavProps = {
   sortedItems: Map<string, any[]>;
 };
@@ -17,28 +15,28 @@ const listOfAlphabetLetters = generateListOfAlphabetLetters();
 export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
   return (
     <nav
+      className="nhsuk-u-margin-bottom-4 nhsuk-u-margin-top-4"
       id="nhsuk-nav-a-z"
-      className="nhsuk-nav-a-z"
+      role="navigation"
       aria-label="A to Z Navigation"
     >
-      <ol className="nhsuk-nav-a-z__list">
+      <ol className="nhsuk-list nhsuk-u-clear nhsuk-u-margin-0" role="list">
         {listOfAlphabetLetters.map((letter) =>
           sortedItems.get(letter) ? (
-            <li className="nhsuk-nav-a-z__item" key={letter}>
+            <li className="nhsuk-u-margin-bottom-0 nhsuk-u-float-left nhsuk-u-margin-right-1">
               <Link
-                to={`#${letter}`}
-                className="nhsuk-nav-a-z__link"
+                className="nhsuk-u-font-size-22 nhsuk-u-padding-2 nhsuk-u-display-block"
                 onClick={(e) => e.currentTarget.blur()}
+                to={`#${letter}`}
               >
                 {letter}
-              </Link>{" "}
+              </Link>
             </li>
           ) : (
-            <li
-              className="nhsuk-nav-a-z__item nhsuk-nav-a-z__no-link"
-              key={letter}
-            >
-              {letter}
+            <li className="nhsuk-u-margin-bottom-0 nhsuk-u-float-left nhsuk-u-margin-right-1 nhsuk-nav-a-z__no-link">
+              <span className="nhsuk-u-font-size-22 nhsuk-u-padding-2 nhsuk-u-display-block">
+                {letter}
+              </span>
             </li>
           )
         )}

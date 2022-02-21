@@ -1,7 +1,145 @@
 @import "node_modules/nhsuk-frontend/packages/core/settings/all";
 @import "node_modules/nhsuk-frontend/packages/core/tools/all";
-@import "node_modules/nhsuk-frontend/packages/components/list-panel/list-panel";
 
+/**
+ * Code ported over from PR: https://github.com/nhsuk/nhsuk-frontend/pull/740/files
+ * Since list panel component now been deprecated from NHSUK Frontend package
+ */
+
+$nhsuk-border-list-panel: 2px !default;
+$nhsuk-border-list-panel-item: 1px !default;
+
+.nhsuk-list-panel {
+  @include nhsuk-responsive-margin(7, "top");
+  @include nhsuk-responsive-margin(7, "bottom");
+
+  @include mq($until: tablet) {
+    @include remove-margin-mobile();
+  }
+}
+
+.nhsuk-list-panel__label {
+  @include nhsuk-typography-responsive(32);
+
+  background-color: $color_nhsuk-blue;
+  color: $color_nhsuk-white;
+  display: inline-block;
+  margin-bottom: 0;
+  padding: nhsuk-spacing(2) nhsuk-spacing(3);
+
+  @include mq($media-type: print) {
+    color: $color_nhsuk-black;
+    margin-top: 0;
+  }
+}
+
+.nhsuk-list-panel__list,
+.nhsuk-list-panel__box {
+  background-color: $color_nhsuk-white;
+  margin: 0;
+  padding: 0;
+
+  @include mq($media-type: print) {
+    border-top: 0;
+  }
+}
+
+.nhsuk-list-panel__list--with-label,
+.nhsuk-list-panel__box--with-label {
+  border-top: $nhsuk-border-list-panel solid $color_nhsuk-blue;
+  margin: -28px 0 0;
+  padding: 27px 0 0;
+
+  @include mq($until: tablet) {
+    margin: -24px 0 0;
+    padding: 23px 0 0;
+  }
+}
+
+.nhsuk-list-panel__item {
+  background-color: $color_nhsuk-white;
+  list-style: none; /* [4] */
+  margin-bottom: 0;
+}
+
+.nhsuk-list-panel__link {
+  border-bottom: $nhsuk-border-list-panel-item solid $color_nhsuk-grey-4;
+  display: block;
+  padding: 12px nhsuk-spacing(3);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline; /* [7] */
+  }
+
+  &:focus {
+    background-color: $nhsuk-focus-color;
+    border-bottom: 1px solid $nhsuk-focus-text-color;
+    box-shadow: inset 0 -4px 0 0 $nhsuk-focus-text-color;
+  }
+
+  @include mq($until: tablet) {
+    padding: nhsuk-spacing(2) nhsuk-spacing(3);
+  }
+}
+
+.nhsuk-list-panel--results-items__no-results {
+  border-bottom: $nhsuk-border-list-panel-item solid $color_nhsuk-grey-4;
+  color: $nhsuk-secondary-text-color;
+  margin: 0;
+  padding: nhsuk-spacing(3);
+}
+
+.nhsuk-back-to-top__link {
+  @include nhsuk-typography-responsive(19);
+
+  display: inline-block;
+  margin-top: nhsuk-spacing(3);
+  padding-left: 12px;
+  position: relative;
+
+  @include mq($until: tablet) {
+    margin-left: nhsuk-spacing(3);
+  }
+
+  .nhsuk-icon {
+    fill: $color_nhsuk-blue;
+    height: 19px;
+    left: -8px;
+    position: absolute;
+    top: 4px;
+    -ms-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+    width: 19px;
+
+    @include mq($until: tablet) {
+      top: 2px;
+    }
+  }
+
+  &:visited {
+    color: $color_nhsuk-blue;
+  }
+
+  &:hover {
+    color: $nhsuk-link-hover-color;
+
+    .nhsuk-icon {
+      fill: $nhsuk-link-hover-color;
+    }
+  }
+
+  &:focus {
+    @include nhsuk-focused-text();
+
+    .nhsuk-icon {
+      fill: $nhsuk-focus-text-color;
+    }
+  }
+
+  @include print-hide();
+}
 .gp2gp-list-panel__link {
   @extend .nhsuk-list-panel__link;
   text-decoration: underline;
