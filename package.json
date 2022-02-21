@@ -30,7 +30,7 @@
     "pre-push": "npm run build && npm run test:e2e:built",
     "prepare": "husky install",
     "preinstall": "npx npm-force-resolutions",
-    "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub"
+    "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub && npm run clean"
   },
   "lint-staged": {
     "*.{js,jsx,json,scss,md,ts,tsx}": "prettier --write"
