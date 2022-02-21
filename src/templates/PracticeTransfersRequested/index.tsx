@@ -13,7 +13,6 @@ import {
   WhatHappensWhenAGP2GPTransferFails,
 } from "../../components/Definitions";
 import { PageContent } from "../../components/PageContent";
-import { generateTransfersRequestedMetricsTableData } from "../../library/utils/generateTransfersRequestedMetricsTableData";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { HelpModal } from "../../components/common/HelpModal";
@@ -34,14 +33,17 @@ type PracticeProps = {
 
 const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   return metrics.map((metric) => {
-    const { requestedCount, receivedPercentage, technicalFailuresPercentage } =
-      generateTransfersRequestedMetricsTableData(metric.requestedTransfers);
+    const {
+      requestedCount,
+      receivedPercentOfRequested,
+      failuresTotalPercentOfRequested,
+    } = metric.requestedTransfers;
 
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,
       requestedCount,
-      addPercentageSign(receivedPercentage),
-      addPercentageSign(technicalFailuresPercentage),
+      addPercentageSign(receivedPercentOfRequested),
+      addPercentageSign(failuresTotalPercentOfRequested),
     ];
   });
 };
