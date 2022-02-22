@@ -8,7 +8,7 @@
         "value": "requestingPracticeName"
       },
       {
-        "displayText": "Transfers received",
+        "displayText": "GP2GP transfers received",
         "value": "receivedCount"
       },
       {

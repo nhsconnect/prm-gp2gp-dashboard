@@ -8,7 +8,7 @@
         "value": "requestingPracticeName"
       },
       {
-        "displayText": "Transfers requested",
+        "displayText": "Registrations that triggered GP2GP transfer",
         "value": "requestedCount"
       },
       {

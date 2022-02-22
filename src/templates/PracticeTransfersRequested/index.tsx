@@ -89,7 +89,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
         </div>
         <PageContent
           className="gp2gp-page-contents"
-          title="GP2GP transfers requested"
+          title="GP2GP transfers requested as registering practice"
           tableDescription={
             <>
               <p>The table below shows the</p>
@@ -157,7 +157,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
                 },
               ]}
               caption={{
-                text: "GP2GP transfers requested",
+                text: "GP2GP transfers requested as registering practice",
                 hidden: false,
               }}
               rows={generateMonthlyRowData(metrics)}

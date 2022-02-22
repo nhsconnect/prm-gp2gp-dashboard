@@ -184,16 +184,16 @@ describe("PracticeTransfersRequested template", () => {
       <PracticeTransfersRequested pageContext={practicePageContext} />
     );
 
-    const tableTitle = getByRole("heading", {
-      name: "GP2GP transfers requested",
+    const pageTitle = getByRole("heading", {
+      name: "GP2GP transfers requested as registering practice",
       level: 2,
     });
-    const tableDescription = getByText(
+    const pageDescription = getByText(
       "number of registrations that triggered a GP2GP transfer",
       { exact: false }
     );
-    expect(tableTitle).toBeInTheDocument();
-    expect(tableDescription).toBeInTheDocument();
+    expect(pageTitle).toBeInTheDocument();
+    expect(pageDescription).toBeInTheDocument();
   });
 
   it("displays transfers received definitions correctly", async () => {

@@ -9,7 +9,7 @@ import practiceTableContent from "../../../data/content/practiceTransfersRequest
 
 const tableHeaders = [
   { title: "Requesting practice name " },
-  { title: "Transfers received " },
+  { title: "Registrations that triggered GP2GP transfer " },
   { title: "GP2GP transfers received " },
   { title: "GP2GP technical failures " },
 ];
@@ -108,23 +108,23 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
-        "Transfers received",
+        "Registrations that triggered GP2GP transfer",
         "requestedCount",
         SortOrder.DESCENDING,
         [
-          "Transfers received 40",
-          "Transfers received 22",
-          "Transfers received 14",
+          "Registrations that triggered GP2GP transfer 40",
+          "Registrations that triggered GP2GP transfer 22",
+          "Registrations that triggered GP2GP transfer 14",
         ],
       ],
       [
-        "Transfers received",
+        "Registrations that triggered GP2GP transfer",
         "requestedCount",
         SortOrder.ASCENDING,
         [
-          "Transfers received 0",
-          "Transfers received 7",
-          "Transfers received 13",
+          "Registrations that triggered GP2GP transfer 0",
+          "Registrations that triggered GP2GP transfer 7",
+          "Registrations that triggered GP2GP transfer 13",
         ],
       ],
       [

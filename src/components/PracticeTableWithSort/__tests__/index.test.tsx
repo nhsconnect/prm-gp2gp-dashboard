@@ -9,7 +9,7 @@ import practiceTableContent from "../../../data/content/practiceTable.json";
 
 const tableHeaders = [
   { title: "Requesting practice name " },
-  { title: "Transfers received " },
+  { title: "GP2GP transfers received " },
   { title: "Integrated within 3 days " },
   { title: "Integrated within 8 days " },
   { title: "Not integrated within 8 days " },
@@ -111,23 +111,23 @@ describe("PracticeTableWithSort component", () => {
         ],
       ],
       [
-        "Transfers received",
+        "GP2GP transfers received",
         "receivedCount",
         SortOrder.DESCENDING,
         [
-          "Transfers received 34",
-          "Transfers received 22",
-          "Transfers received 13",
+          "GP2GP transfers received 34",
+          "GP2GP transfers received 22",
+          "GP2GP transfers received 13",
         ],
       ],
       [
-        "Transfers received",
+        "GP2GP transfers received",
         "receivedCount",
         SortOrder.ASCENDING,
         [
-          "Transfers received 0",
-          "Transfers received 5",
-          "Transfers received 12",
+          "GP2GP transfers received 0",
+          "GP2GP transfers received 5",
+          "GP2GP transfers received 12",
         ],
       ],
       [
