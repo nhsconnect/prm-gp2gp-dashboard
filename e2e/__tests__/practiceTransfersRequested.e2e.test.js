@@ -10,7 +10,7 @@ describe("Practice transfers requested page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents and goes back to home page and goes back to home page", () => {
+      it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents menu and goes back to home page and goes back to home page", () => {
         cy.intercept(
           "/ORD/2-0-0/organisations/A12347",
           practiceWithSomeIntegrations
@@ -53,7 +53,6 @@ describe("Practice transfers requested page", () => {
         cy.contains("Some Town");
         cy.contains("BL3 5DP");
 
-        cy.contains("h2", "GP2GP transfers requested");
         cy.contains("What happens when a GP2GP transfer fails?").click();
         cy.contains(
           "A task will automatically be created for the sending practice"

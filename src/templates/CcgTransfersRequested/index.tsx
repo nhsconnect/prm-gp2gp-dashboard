@@ -59,6 +59,10 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
   const contentListItems = [
     {
       text: "Integration times",
+      href: `/ccg/${odsCode}/integration-times`,
+    },
+    {
+      text: "GP2GP transfers requested",
     },
   ];
 

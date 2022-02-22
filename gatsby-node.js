@@ -65,6 +65,17 @@ exports.createPages = async ({ actions }) => {
         layout: "navigation-contents",
       },
     });
+
+    createPage({
+      path: `/ccg/${ccg.odsCode}/transfers-requested`,
+      component: path.resolve("src/templates/CcgTransfersRequested/index.tsx"),
+      context: {
+        odsCode: ccg.odsCode,
+        name: ccg.name,
+        ccgPractices,
+        layout: "navigation-contents",
+      },
+    });
   });
 };
 
