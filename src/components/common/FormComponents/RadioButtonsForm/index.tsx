@@ -58,6 +58,45 @@ export const RadioButtonsForm: FC<RadioButtonsFormProps> = ({
             </label>
           </div>
         </div>
+        <legend className="gp2gp-fieldset__legend nhsuk-u-margin-bottom-4 nhsuk-u-padding-top-2">
+          <h3 className="nhsuk-fieldset__heading ">
+            Which dataset you would like to download?
+          </h3>
+        </legend>
+        <div className="nhsuk-radios">
+          <div className="nhsuk-radios__item" key={"latest-month"}>
+            <input
+              className="nhsuk-radios__input"
+              id="latest-month"
+              type="radio"
+              name="radio-input-2"
+              value="Latest month"
+              defaultChecked={true}
+            />
+            <label
+              className="nhsuk-label nhsuk-radios__label"
+              htmlFor={"latest-month"}
+            >
+              {"Latest month"}
+            </label>
+          </div>
+          <div className="nhsuk-radios__item" key={"last-six-months"}>
+            <input
+              className="nhsuk-radios__input"
+              id="last-six-months"
+              type="radio"
+              name="radio-input-2"
+              value="Last 6 months"
+              defaultChecked={false}
+            />
+            <label
+              className="nhsuk-label nhsuk-radios__label"
+              htmlFor={"last-six-months"}
+            >
+              {"Last 6 months"}
+            </label>
+          </div>
+        </div>
         <button type="submit">{submitText}</button>
       </form>
     </div>

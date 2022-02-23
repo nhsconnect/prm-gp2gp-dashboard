@@ -18,7 +18,7 @@ describe("RadioButtonsForm", () => {
     expect(onSubmitMock).toBeCalledTimes(1);
   });
 
-  it("submits form with default value of a radio button", () => {
+  it("submits form with default values of radio buttons", () => {
     const onSubmitMock = jest.fn();
     const submitText = "submitText";
 
@@ -31,10 +31,11 @@ describe("RadioButtonsForm", () => {
     expect(onSubmitMock).toBeCalledTimes(1);
     expect(onSubmitMock).toBeCalledWith({
       "radio-input-1": "Transfers requested",
+      "radio-input-2": "Latest month",
     });
   });
 
-  it("submits form with selected value of a radio button", () => {
+  it("submits form with selected values of a radio button", () => {
     const onSubmitMock = jest.fn();
     const submitText = "submitText";
 
@@ -42,13 +43,16 @@ describe("RadioButtonsForm", () => {
       <RadioButtonsForm submitText={submitText} onSubmit={onSubmitMock} />
     );
 
-    const selectOption = getByDisplayValue("Integration times");
-    selectOption.click();
+    const selectedData = getByDisplayValue("Integration times");
+    const selectedTimeframe = getByDisplayValue("Last 6 months");
+    selectedData.click();
+    selectedTimeframe.click();
     fireEvent.submit(getByTestId("nhsuk-radio-buttons-form"));
 
     expect(onSubmitMock).toBeCalledTimes(1);
     expect(onSubmitMock).toBeCalledWith({
       "radio-input-1": "Integration times",
+      "radio-input-2": "Last 6 months",
     });
   });
 });
