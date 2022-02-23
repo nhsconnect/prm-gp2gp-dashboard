@@ -1,14 +1,14 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Radios } from "../";
+import { RadioButtonsWithRedirect } from "../";
 
 describe("Radios component", () => {
   it("displays the title", () => {
     const title = "This is a radio section";
 
     const { getByText } = render(
-      <Radios
+      <RadioButtonsWithRedirect
         title={title}
         options={[]}
         linkLabel=""
@@ -24,7 +24,7 @@ describe("Radios component", () => {
     const options = [{ displayValue: "First option", value: "" }];
 
     const { getByRole } = render(
-      <Radios
+      <RadioButtonsWithRedirect
         title=""
         options={options}
         linkLabel=""
@@ -46,7 +46,7 @@ describe("Radios component", () => {
     ];
 
     const { getAllByRole } = render(
-      <Radios
+      <RadioButtonsWithRedirect
         title=""
         options={options}
         linkLabel=""
@@ -68,7 +68,7 @@ describe("Radios component", () => {
     const callback = jest.fn();
 
     const { getByRole } = render(
-      <Radios
+      <RadioButtonsWithRedirect
         title=""
         options={options}
         linkLabel="Submit setting"
@@ -93,7 +93,7 @@ describe("Radios component", () => {
     const callback = jest.fn();
 
     const { getByRole } = render(
-      <Radios
+      <RadioButtonsWithRedirect
         title=""
         options={options}
         linkLabel="Submit setting"
@@ -117,7 +117,7 @@ describe("Radios component", () => {
     const title = "This is a radio section";
 
     const { getByRole } = render(
-      <Radios
+      <RadioButtonsWithRedirect
         title={title}
         options={[]}
         linkLabel="Submit setting"
