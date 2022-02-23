@@ -3,12 +3,16 @@ import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
 
-import { PracticePercentageType } from "../../library/utils/generateIntegrationMetricsTableData";
+import {
+  PracticePercentageType,
+  IntegratedMetricsTableType,
+  TransfersRequestedMetricsTableType,
+} from "../../library/utils/practiceMetricsTableTypes";
 
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 
-import practiceTableContent from "../../data/content/practiceTable.json";
+import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
 import "../common/Table/index.scss";
 
 type TableWithSortProps = {
@@ -17,6 +21,7 @@ type TableWithSortProps = {
   sortBySelect: SelectType;
   orderSelect: SelectType;
   tableCaption: string;
+  pageTemplatePath: string;
 };
 
 type SelectType = {
@@ -29,10 +34,18 @@ export const SortOrder = {
   ASCENDING: practiceTableContent.orderSelect.options[1].value,
 };
 
-const PracticeLink = ({ odsCode, name }: { odsCode: string; name: string }) => {
+const PracticeLink = ({
+  odsCode,
+  name,
+  pageTemplatePath,
+}: {
+  odsCode: string;
+  name: string;
+  pageTemplatePath: string;
+}) => {
   const formattedName = convertToTitleCase(name);
   return (
-    <Link to={`/practice/${odsCode}/integration-times`}>
+    <Link to={`/practice/${odsCode}/${pageTemplatePath}`}>
       {formattedName} - {odsCode}
     </Link>
   );
@@ -75,6 +88,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   sortBySelect,
   orderSelect,
   tableCaption,
+  pageTemplatePath,
 }) => {
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
@@ -84,20 +98,44 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: PracticePercentageType) => {
-      const requestedMetric = metrics[0].requestedTransfers;
-      return [
-        <PracticeLink odsCode={odsCode} name={name} />,
-        requestedMetric.receivedCount,
-        addPercentageSign(
-          requestedMetric.integratedWithin3DaysPercentOfReceived
-        ),
-        addPercentageSign(
-          requestedMetric.integratedWithin8DaysPercentOfReceived
-        ),
-        addPercentageSign(
-          requestedMetric.notIntegratedWithin8DaysPercentOfReceived
-        ),
-      ];
+      if (pageTemplatePath == "integration-times") {
+        const requestedMetric = metrics[0]
+          .requestedTransfers as IntegratedMetricsTableType;
+        return [
+          <PracticeLink
+            odsCode={odsCode}
+            name={name}
+            pageTemplatePath={pageTemplatePath}
+          />,
+          requestedMetric.receivedCount,
+          addPercentageSign(
+            requestedMetric.integratedWithin3DaysPercentOfReceived
+          ),
+          addPercentageSign(
+            requestedMetric.integratedWithin8DaysPercentOfReceived
+          ),
+          addPercentageSign(
+            requestedMetric.notIntegratedWithin8DaysPercentOfReceived
+          ),
+        ];
+      }
+
+      if (pageTemplatePath == "transfers-requested") {
+        const requestedMetric = metrics[0]
+          .requestedTransfers as TransfersRequestedMetricsTableType;
+        return [
+          <PracticeLink
+            odsCode={odsCode}
+            name={name}
+            pageTemplatePath={pageTemplatePath}
+          />,
+          requestedMetric.requestedCount,
+          addPercentageSign(requestedMetric.receivedPercentOfRequested),
+          addPercentageSign(requestedMetric.failuresTotalPercentOfRequested),
+        ];
+      }
+
+      return [];
     }
   );
 

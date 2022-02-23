@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { OrganisationAddress } from "../../components/OrganisationAddress";
 import { Table } from "../../components/common/Table";
 
-import { PracticeMetricsType, PracticeType } from "./practice.types";
+import { PracticeMetricsType, PracticeType } from "../practice.types";
 
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";

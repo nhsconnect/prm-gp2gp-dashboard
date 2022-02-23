@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
+import { PracticeType } from "../practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
-import practiceTableContent from "../../data/content/practiceTable.json";
-import { PracticePercentageType } from "../../library/utils/generateIntegrationMetricsTableData";
+import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
+import { PracticePercentageType } from "../../library/utils/practiceMetricsTableTypes";
 
 import { HelpModal } from "../../components/common/HelpModal";
 import {
@@ -97,7 +97,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                 received.
               </p>
             }
-            expanderTitle="Why integrate within 8 days"
+            expanderTitle="Why integrate within 8 days?"
             expanderContent={<WhyIntegrateWithin8Days />}
             definitionsContent={<IntegrationsDefinitionsContent />}
             tableContent={
@@ -164,6 +164,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                     ),
                   },
                 ]}
+                pageTemplatePath="integration-times"
                 sortBySelect={practiceTableContent.sortBySelect}
                 orderSelect={practiceTableContent.orderSelect}
                 tableCaption={tableTitle}
@@ -251,6 +252,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                     ),
                   },
                 ]}
+                pageTemplatePath="integration-times"
                 sortBySelect={practiceTableContent.sortBySelect}
                 orderSelect={practiceTableContent.orderSelect}
                 tableCaption={tableTitle}

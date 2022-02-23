@@ -1,15 +1,14 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../PracticeIntegrationTimes/practice.types";
+import { PracticeType } from "../practice.types";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { PageContent } from "../../components/PageContent";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { PracticeTransfersRequestedTableWithSort } from "../../components/PracticeTransfersRequestedTableWithSort";
-import practiceTableContent from "../../data/content/practiceTransfersRequestedTable.json";
-import { PracticePercentageType } from "../../library/utils/generateTransfersRequestedMetricsTableData";
-
+import { PracticePercentageType } from "../../library/utils/practiceMetricsTableTypes";
+import { PageContent } from "../../components/PageContent";
+import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
 import { HelpModal } from "../../components/common/HelpModal";
+import { ContentsList } from "../../components/common/ContentsList";
 import {
   GP2GPTechnicalFailuresDefinition,
   RegistrationsTriggeredByGP2GPDefinition,
@@ -17,7 +16,7 @@ import {
   TransfersRequestedDefinitionsContent,
   WhatHappensWhenAGP2GPTransferFails,
 } from "../../components/Definitions";
-import { ContentsList } from "../../components/common/ContentsList";
+import practiceTableContent from "../../data/content/practiceTransfersRequestedSortOptions.json";
 import "../index.scss";
 
 type PageContext = {
@@ -105,7 +104,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
           expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
           definitionsContent={<TransfersRequestedDefinitionsContent />}
           tableContent={
-            <PracticeTransfersRequestedTableWithSort
+            <PracticeTableWithSort
               ccgPractices={ccgPracticeTableData}
               headers={[
                 { title: "Registering practice name " },
@@ -153,6 +152,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
                   ),
                 },
               ]}
+              pageTemplatePath="transfers-requested"
               sortBySelect={practiceTableContent.sortBySelect}
               orderSelect={practiceTableContent.orderSelect}
               tableCaption={tableTitle}

@@ -17,10 +17,7 @@ import { convertMonthNumberToText } from "../../library/utils/convertMonthNumber
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { HelpModal } from "../../components/common/HelpModal";
 import { Table } from "../../components/common/Table";
-import {
-  PracticeMetricsType,
-  PracticeType,
-} from "../PracticeIntegrationTimes/practice.types";
+import { PracticeMetricsType, PracticeType } from "../practice.types";
 
 type PageContext = {
   practice: PracticeType;

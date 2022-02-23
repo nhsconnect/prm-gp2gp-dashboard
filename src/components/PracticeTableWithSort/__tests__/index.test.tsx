@@ -4,15 +4,24 @@ import userEvent from "@testing-library/user-event";
 
 import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
-import practiceMetricsPercentageMock from "../../../../__mocks__/practiceIntegrationMetricsPercentageMock.json";
-import practiceTableContent from "../../../data/content/practiceTable.json";
+import practiceIntegrationMetricsPercentageMock from "../../../../__mocks__/practiceIntegrationMetricsPercentageMock.json";
+import practiceTransfersRequestedMetricsPercentageMock from "../../../../__mocks__/practiceTransfersRequestedMetricsPercentageMock.json";
+import practiceIntegrationSortOptions from "../../../data/content/practiceIntegrationsSortOptions.json";
+import practiceTransfersRequestedSortOptions from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 
-const tableHeaders = [
+const integrationTableHeaders = [
   { title: "Requesting practice name " },
   { title: "GP2GP transfers received " },
   { title: "Integrated within 3 days " },
   { title: "Integrated within 8 days " },
   { title: "Not integrated within 8 days " },
+];
+
+const transfersRequestedTableHeaders = [
+  { title: "Requesting practice name " },
+  { title: "Registrations that triggered GP2GP transfer " },
+  { title: "GP2GP transfers received " },
+  { title: "GP2GP technical failures " },
 ];
 
 describe("PracticeTableWithSort component", () => {
@@ -22,11 +31,12 @@ describe("PracticeTableWithSort component", () => {
 
     const { getByText } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsPercentageMock}
-        headers={tableHeaders}
-        sortBySelect={practiceTableContent.sortBySelect}
-        orderSelect={practiceTableContent.orderSelect}
+        ccgPractices={practiceIntegrationMetricsPercentageMock}
+        headers={integrationTableHeaders}
+        sortBySelect={practiceIntegrationSortOptions.sortBySelect}
+        orderSelect={practiceIntegrationSortOptions.orderSelect}
         tableCaption={tableCaptionText}
+        pageTemplatePath="integration-times"
       />
     );
 
@@ -35,24 +45,77 @@ describe("PracticeTableWithSort component", () => {
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("displays practices ordered by Not integrated within 8 days Percentage SLA by default in descending order", () => {
+  it("should display correct table caption for transfers requested page path", () => {
+    const tableCaptionText =
+      "GP2GP transfers requested for registering practices - February 2020";
+
+    const { getByText } = render(
+      <PracticeTableWithSort
+        ccgPractices={practiceTransfersRequestedMetricsPercentageMock}
+        headers={transfersRequestedTableHeaders}
+        sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
+        orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
+        tableCaption={tableCaptionText}
+        pageTemplatePath="transfers-requested"
+      />
+    );
+
+    const tableCaption = getByText(`${tableCaptionText}`);
+
+    expect(tableCaption).toBeInTheDocument();
+  });
+
+  it("displays practices ordered by GP2GP technical failures by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsPercentageMock}
-        headers={tableHeaders}
-        sortBySelect={practiceTableContent.sortBySelect}
-        orderSelect={practiceTableContent.orderSelect}
-        tableCaption={"Some table title"}
+        ccgPractices={practiceTransfersRequestedMetricsPercentageMock}
+        headers={transfersRequestedTableHeaders}
+        sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
+        orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
+        tableCaption={"Some title"}
+        pageTemplatePath="transfers-requested"
       />
     );
 
     const allRows = getAllByRole("row");
 
     const sortBySelect = getByRole("combobox", {
-      name: `Sort by${practiceTableContent.selectHiddenLabel}`,
+      name: `Sort by${practiceTransfersRequestedSortOptions.selectHiddenLabel}`,
     });
     const orderSelect = getByRole("combobox", {
-      name: `Order${practiceTableContent.selectHiddenLabel}`,
+      name: `Order${practiceTransfersRequestedSortOptions.selectHiddenLabel}`,
+    });
+    expect(sortBySelect).toHaveValue("failuresTotalPercentOfRequested");
+    expect(orderSelect).toHaveValue(SortOrder.DESCENDING);
+
+    expect(allRows[1]).toHaveTextContent("GP2GP technical failures 28.6%");
+    expect(allRows[2]).toHaveTextContent("GP2GP technical failures 15%");
+    expect(allRows[3]).toHaveTextContent("GP2GP technical failures 7.7%");
+    expect(allRows[4]).toHaveTextContent("GP2GP technical failures 7.1%");
+    expect(allRows[5]).toHaveTextContent("GP2GP technical failures 0%");
+    expect(allRows[6]).toHaveTextContent("GP2GP technical failures n/a");
+    expect(allRows.length).toBe(7);
+  });
+
+  it("displays practices ordered by Not integrated within 8 days Percentage SLA by default in descending order", () => {
+    const { getAllByRole, getByRole } = render(
+      <PracticeTableWithSort
+        ccgPractices={practiceIntegrationMetricsPercentageMock}
+        headers={integrationTableHeaders}
+        sortBySelect={practiceIntegrationSortOptions.sortBySelect}
+        orderSelect={practiceIntegrationSortOptions.orderSelect}
+        tableCaption={"Some table title"}
+        pageTemplatePath="integration-times"
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    const sortBySelect = getByRole("combobox", {
+      name: `Sort by${practiceIntegrationSortOptions.selectHiddenLabel}`,
+    });
+    const orderSelect = getByRole("combobox", {
+      name: `Order${practiceIntegrationSortOptions.selectHiddenLabel}`,
     });
     expect(sortBySelect).toHaveValue(
       "notIntegratedWithin8DaysPercentOfReceived"
@@ -71,11 +134,12 @@ describe("PracticeTableWithSort component", () => {
   it("navigates to a practice page when a link is clicked", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsPercentageMock}
-        headers={tableHeaders}
-        sortBySelect={practiceTableContent.sortBySelect}
-        orderSelect={practiceTableContent.orderSelect}
+        ccgPractices={practiceIntegrationMetricsPercentageMock}
+        headers={integrationTableHeaders}
+        sortBySelect={practiceIntegrationSortOptions.sortBySelect}
+        orderSelect={practiceIntegrationSortOptions.orderSelect}
         tableCaption={"Some table title"}
+        pageTemplatePath="integration-times"
       />
     );
 
@@ -197,21 +261,22 @@ describe("PracticeTableWithSort component", () => {
       (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
-            ccgPractices={practiceMetricsPercentageMock}
-            headers={tableHeaders}
-            sortBySelect={practiceTableContent.sortBySelect}
-            orderSelect={practiceTableContent.orderSelect}
+            ccgPractices={practiceIntegrationMetricsPercentageMock}
+            headers={integrationTableHeaders}
+            sortBySelect={practiceIntegrationSortOptions.sortBySelect}
+            orderSelect={practiceIntegrationSortOptions.orderSelect}
             tableCaption={"Some table title"}
+            pageTemplatePath="integration-times"
           />
         );
 
         const allRows = getAllByRole("row");
 
         const sortBySelect = getByRole("combobox", {
-          name: `Sort by${practiceTableContent.selectHiddenLabel}`,
+          name: `Sort by${practiceIntegrationSortOptions.selectHiddenLabel}`,
         });
         const orderSelect = getByRole("combobox", {
-          name: `Order${practiceTableContent.selectHiddenLabel}`,
+          name: `Order${practiceIntegrationSortOptions.selectHiddenLabel}`,
         });
 
         userEvent.selectOptions(sortBySelect, fieldName);
