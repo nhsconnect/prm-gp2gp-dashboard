@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { useCookies } from "react-cookie";
-import { Radios } from "../components/common/FormComponents/Radios";
+import { RadioButtonsWithRedirect } from "../components/common/FormComponents/RadioButtonsWithRedirect";
 import { Details } from "../components/common/Details";
 import { getCookieExpiryDate } from "../library/utils/getCookieExpiryDate";
 import { NHS_COOKIE_NAME } from "../library/constants";
@@ -107,7 +107,7 @@ const CookiesPolicy: FC = () => {
           We'll only use these cookies if you say it's OK. We'll use a cookie to
           save your settings.
         </p>
-        <Radios
+        <RadioButtonsWithRedirect
           title="Tell us if we can use analytics cookies"
           options={[
             {

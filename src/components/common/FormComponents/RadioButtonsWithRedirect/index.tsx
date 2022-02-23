@@ -7,7 +7,7 @@ type RadioOption = {
   value: string;
 };
 
-type RadiosProps = {
+type RadioButtonsWithRedirectProps = {
   title: string;
   options: RadioOption[];
   linkLabel: string;
@@ -16,7 +16,7 @@ type RadiosProps = {
   defaultValue?: string;
 };
 
-export const Radios: FC<RadiosProps> = ({
+export const RadioButtonsWithRedirect: FC<RadioButtonsWithRedirectProps> = ({
   title,
   options,
   linkLabel,
