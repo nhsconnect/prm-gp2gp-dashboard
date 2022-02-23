@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 
 import { PracticeType } from "../../practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
+import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
 import { PracticePercentageType } from "../../../library/utils/practiceMetricsTableTypes";
 import { PageContent } from "../../../components/PageContent";
@@ -152,7 +153,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
                   ),
                 },
               ]}
-              pageTemplatePath="transfers-requested"
+              pageTemplatePath={PageTemplatePath.TransferRequested}
               sortBySelect={practiceTableContent.sortBySelect}
               orderSelect={practiceTableContent.orderSelect}
               tableCaption={tableTitle}

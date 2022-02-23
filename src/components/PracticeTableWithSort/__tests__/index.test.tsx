@@ -8,6 +8,7 @@ import practiceIntegrationMetricsPercentageMock from "../../../../__mocks__/prac
 import practiceTransfersRequestedMetricsPercentageMock from "../../../../__mocks__/practiceTransfersRequestedMetricsPercentageMock.json";
 import practiceIntegrationSortOptions from "../../../data/content/practiceIntegrationsSortOptions.json";
 import practiceTransfersRequestedSortOptions from "../../../data/content/practiceTransfersRequestedSortOptions.json";
+import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 
 const integrationTableHeaders = [
   { title: "Requesting practice name " },
@@ -36,7 +37,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
         tableCaption={tableCaptionText}
-        pageTemplatePath="integration-times"
+        pageTemplatePath={PageTemplatePath.IntegrationTimes}
       />
     );
 
@@ -56,7 +57,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
         tableCaption={tableCaptionText}
-        pageTemplatePath="transfers-requested"
+        pageTemplatePath={PageTemplatePath.TransferRequested}
       />
     );
 
@@ -73,7 +74,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
         tableCaption={"Some title"}
-        pageTemplatePath="transfers-requested"
+        pageTemplatePath={PageTemplatePath.TransferRequested}
       />
     );
 
@@ -105,7 +106,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
         tableCaption={"Some table title"}
-        pageTemplatePath="integration-times"
+        pageTemplatePath={PageTemplatePath.IntegrationTimes}
       />
     );
 
@@ -139,7 +140,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
         tableCaption={"Some table title"}
-        pageTemplatePath="integration-times"
+        pageTemplatePath={PageTemplatePath.IntegrationTimes}
       />
     );
 
@@ -266,7 +267,7 @@ describe("PracticeTableWithSort component", () => {
             sortBySelect={practiceIntegrationSortOptions.sortBySelect}
             orderSelect={practiceIntegrationSortOptions.orderSelect}
             tableCaption={"Some table title"}
-            pageTemplatePath="integration-times"
+            pageTemplatePath={PageTemplatePath.IntegrationTimes}
           />
         );
 

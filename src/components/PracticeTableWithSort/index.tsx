@@ -14,6 +14,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
 import "../common/Table/index.scss";
+import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
 
 type TableWithSortProps = {
   ccgPractices: PracticePercentageType[];
@@ -21,7 +22,7 @@ type TableWithSortProps = {
   sortBySelect: SelectType;
   orderSelect: SelectType;
   tableCaption: string;
-  pageTemplatePath: string;
+  pageTemplatePath: PageTemplatePath;
 };
 
 type SelectType = {
@@ -41,7 +42,7 @@ const PracticeLink = ({
 }: {
   odsCode: string;
   name: string;
-  pageTemplatePath: string;
+  pageTemplatePath: PageTemplatePath;
 }) => {
   const formattedName = convertToTitleCase(name);
   return (
@@ -98,7 +99,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: PracticePercentageType) => {
-      if (pageTemplatePath == "integration-times") {
+      if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
         const requestedMetric = metrics[0]
           .requestedTransfers as IntegratedMetricsTableType;
         return [
@@ -120,7 +121,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         ];
       }
 
-      if (pageTemplatePath == "transfers-requested") {
+      if (pageTemplatePath == PageTemplatePath.TransferRequested) {
         const requestedMetric = metrics[0]
           .requestedTransfers as TransfersRequestedMetricsTableType;
         return [

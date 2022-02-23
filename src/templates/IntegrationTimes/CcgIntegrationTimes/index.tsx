@@ -21,6 +21,7 @@ import {
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 
 type PageContext = {
   odsCode: string;
@@ -164,7 +165,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                     ),
                   },
                 ]}
-                pageTemplatePath="integration-times"
+                pageTemplatePath={PageTemplatePath.IntegrationTimes}
                 sortBySelect={practiceTableContent.sortBySelect}
                 orderSelect={practiceTableContent.orderSelect}
                 tableCaption={tableTitle}
@@ -252,7 +253,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
                     ),
                   },
                 ]}
-                pageTemplatePath="integration-times"
+                pageTemplatePath={PageTemplatePath.IntegrationTimes}
                 sortBySelect={practiceTableContent.sortBySelect}
                 orderSelect={practiceTableContent.orderSelect}
                 tableCaption={tableTitle}
