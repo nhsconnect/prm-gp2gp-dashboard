@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Practice from "..";
+import Practice from "../index";
 
 jest.mock("no-scroll");
 

@@ -3,9 +3,9 @@ import moxios from "moxios";
 import { render, within } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 
-import PracticeTransfersRequested from "..";
-import { mockAPIResponse } from "../../../../__mocks__/api";
-import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
+import PracticeTransfersRequested from "../index";
+import { mockAPIResponse } from "../../../../../__mocks__/api";
+import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");

@@ -2,8 +2,8 @@ import React from "react";
 
 import { findByLabelText, render, within } from "@testing-library/react";
 
-import CcgTransfersRequested from "..";
-import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
+import CcgTransfersRequested from "../index";
+import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
 import userEvent from "@testing-library/user-event";
 

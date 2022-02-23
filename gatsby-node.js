@@ -11,7 +11,9 @@ exports.createPages = async ({ actions }) => {
   practices.forEach((practice) => {
     createPage({
       path: `/practice/${practice.odsCode}`,
-      component: path.resolve("src/templates/Practice/index.tsx"),
+      component: path.resolve(
+        "src/templates/RedirectNotice/Practice/index.tsx"
+      ),
       context: {
         odsCode: practice.odsCode,
         name: practice.name,
@@ -22,7 +24,7 @@ exports.createPages = async ({ actions }) => {
     createPage({
       path: `/practice/${practice.odsCode}/integration-times`,
       component: path.resolve(
-        "src/templates/PracticeIntegrationTimes/index.tsx"
+        "src/templates/IntegrationTimes/PracticeIntegrationTimes/index.tsx"
       ),
       context: {
         practice,
@@ -33,7 +35,7 @@ exports.createPages = async ({ actions }) => {
     createPage({
       path: `/practice/${practice.odsCode}/transfers-requested`,
       component: path.resolve(
-        "src/templates/PracticeTransfersRequested/index.tsx"
+        "src/templates/TransfersRequested/PracticeTransfersRequested/index.tsx"
       ),
       context: {
         practice,
@@ -47,7 +49,7 @@ exports.createPages = async ({ actions }) => {
 
     createPage({
       path: `/ccg/${ccg.odsCode}`,
-      component: path.resolve("src/templates/Ccg/index.tsx"),
+      component: path.resolve("src/templates/RedirectNotice/Ccg/index.tsx"),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
@@ -57,7 +59,9 @@ exports.createPages = async ({ actions }) => {
 
     createPage({
       path: `/ccg/${ccg.odsCode}/integration-times`,
-      component: path.resolve("src/templates/CcgIntegrationTimes/index.tsx"),
+      component: path.resolve(
+        "src/templates/IntegrationTimes/CcgIntegrationTimes/index.tsx"
+      ),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,
@@ -68,7 +72,9 @@ exports.createPages = async ({ actions }) => {
 
     createPage({
       path: `/ccg/${ccg.odsCode}/transfers-requested`,
-      component: path.resolve("src/templates/CcgTransfersRequested/index.tsx"),
+      component: path.resolve(
+        "src/templates/TransfersRequested/CcgTransfersRequested/index.tsx"
+      ),
       context: {
         odsCode: ccg.odsCode,
         name: ccg.name,

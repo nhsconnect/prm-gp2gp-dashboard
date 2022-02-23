@@ -1,23 +1,23 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { OrganisationAddress } from "../../components/OrganisationAddress";
+import { OrganisationAddress } from "../../../components/OrganisationAddress";
 
-import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { ContentsList } from "../../components/common/ContentsList";
-import "../index.scss";
+import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
+import { ContentsList } from "../../../components/common/ContentsList";
+import "../../index.scss";
 import {
   GP2GPTechnicalFailuresDefinition,
   RegistrationsTriggeredByGP2GPDefinition,
   TransfersReceivedPercentageDefinition,
   TransfersRequestedDefinitionsContent,
   WhatHappensWhenAGP2GPTransferFails,
-} from "../../components/Definitions";
-import { PageContent } from "../../components/PageContent";
-import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { addPercentageSign } from "../../library/utils/addPercentageSign";
-import { HelpModal } from "../../components/common/HelpModal";
-import { Table } from "../../components/common/Table";
-import { PracticeMetricsType, PracticeType } from "../practice.types";
+} from "../../../components/Definitions";
+import { PageContent } from "../../../components/PageContent";
+import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
+import { addPercentageSign } from "../../../library/utils/addPercentageSign";
+import { HelpModal } from "../../../components/common/HelpModal";
+import { Table } from "../../../components/common/Table";
+import { PracticeMetricsType, PracticeType } from "../../practice.types";
 
 type PageContext = {
   practice: PracticeType;

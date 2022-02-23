@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Ccg from "..";
+import Ccg from "../index";
 
 jest.mock("no-scroll");
 

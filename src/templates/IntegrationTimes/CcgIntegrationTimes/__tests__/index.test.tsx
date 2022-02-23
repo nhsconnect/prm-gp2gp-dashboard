@@ -2,16 +2,16 @@ import React from "react";
 
 import { findByLabelText, render, within } from "@testing-library/react";
 
-import IntegrationTimesCcg from "..";
-import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
+import IntegrationTimesCcg from "../index";
+import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
 import userEvent from "@testing-library/user-event";
 import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
 
 jest.mock("no-scroll");
-jest.mock("../../../library/hooks/useFeatureToggle");
+jest.mock("../../../../library/hooks/useFeatureToggle");
 
 describe("CCG Integration Times template - showContentsNavigation feature toggle is on", () => {
   const pipelineCCGData = {

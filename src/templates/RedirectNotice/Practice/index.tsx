@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { RedirectNotice } from "../../components/RedirectNotice";
+import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
+import { RedirectNotice } from "../../../components/RedirectNotice";
 
 type PageContext = {
   odsCode: string;

@@ -4,15 +4,15 @@ import { render, within } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 
-import PracticeIntegrationTimes from "..";
-import { mockAPIResponse } from "../../../../__mocks__/api";
-import { practiceDataBuilder } from "../../../../__mocks__/ODSPortalBuilder";
+import PracticeIntegrationTimes from "../index";
+import { mockAPIResponse } from "../../../../../__mocks__/api";
+import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { when } from "jest-when";
 import { mocked } from "ts-jest/utils";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
 
 jest.mock("no-scroll");
-jest.mock("../../../library/hooks/useFeatureToggle");
+jest.mock("../../../../library/hooks/useFeatureToggle");
 
 const ODSPracticeData = {
   odsCode: "B86030",

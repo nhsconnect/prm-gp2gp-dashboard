@@ -1,23 +1,23 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../practice.types";
-import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
-import { PracticePercentageType } from "../../library/utils/practiceMetricsTableTypes";
-import { PageContent } from "../../components/PageContent";
-import { PracticeTableWithSort } from "../../components/PracticeTableWithSort";
-import { HelpModal } from "../../components/common/HelpModal";
-import { ContentsList } from "../../components/common/ContentsList";
+import { PracticeType } from "../../practice.types";
+import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
+import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
+import { PracticePercentageType } from "../../../library/utils/practiceMetricsTableTypes";
+import { PageContent } from "../../../components/PageContent";
+import { PracticeTableWithSort } from "../../../components/PracticeTableWithSort";
+import { HelpModal } from "../../../components/common/HelpModal";
+import { ContentsList } from "../../../components/common/ContentsList";
 import {
   GP2GPTechnicalFailuresDefinition,
   RegistrationsTriggeredByGP2GPDefinition,
   TransfersReceivedPercentageDefinition,
   TransfersRequestedDefinitionsContent,
   WhatHappensWhenAGP2GPTransferFails,
-} from "../../components/Definitions";
-import practiceTableContent from "../../data/content/practiceTransfersRequestedSortOptions.json";
-import "../index.scss";
+} from "../../../components/Definitions";
+import practiceTableContent from "../../../data/content/practiceTransfersRequestedSortOptions.json";
+import "../../index.scss";
 
 type PageContext = {
   odsCode: string;
