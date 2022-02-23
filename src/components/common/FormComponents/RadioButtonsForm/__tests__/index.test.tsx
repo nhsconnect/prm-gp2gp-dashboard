@@ -33,4 +33,22 @@ describe("RadioButtonsForm", () => {
       "radio-input-1": "Transfers requested",
     });
   });
+
+  it("submits form with selected value of a radio button", () => {
+    const onSubmitMock = jest.fn();
+    const submitText = "submitText";
+
+    const { getByTestId, getByDisplayValue } = render(
+      <RadioButtonsForm submitText={submitText} onSubmit={onSubmitMock} />
+    );
+
+    const selectOption = getByDisplayValue("Integration times");
+    selectOption.click();
+    fireEvent.submit(getByTestId("nhsuk-radio-buttons-form"));
+
+    expect(onSubmitMock).toBeCalledTimes(1);
+    expect(onSubmitMock).toBeCalledWith({
+      "radio-input-1": "Integration times",
+    });
+  });
 });
