@@ -1,9 +1,9 @@
-import React, { FC, MouseEventHandler } from "react";
+import React, { FC, MouseEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 
 type ButtonProps = {
   className: string;
-  children: FC;
+  children: ReactNode;
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: MouseEventHandler;
   dataTestId?: string;
