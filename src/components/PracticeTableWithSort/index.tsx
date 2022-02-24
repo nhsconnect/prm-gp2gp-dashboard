@@ -3,21 +3,16 @@ import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
 
-import {
-  PracticePercentageType,
-  IntegratedMetricsTableType,
-  TransfersRequestedMetricsTableType,
-} from "../../library/utils/practiceMetricsTableTypes";
-
 import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
+import { PracticeType } from "../../library/types/practice.types";
 
 type TableWithSortProps = {
-  ccgPractices: PracticePercentageType[];
+  ccgPractices: PracticeType[];
   headers: { title: ReactNode; extra?: ReactNode }[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
@@ -53,7 +48,7 @@ const PracticeLink = ({
 };
 
 const sortPractices = (
-  practices: PracticePercentageType[],
+  practices: PracticeType[],
   fieldName: string,
   order: string
 ) => {
@@ -98,10 +93,9 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   }, [ccgPractices, selectedField, selectedOrder]);
 
   const practiceTableRows = sortedPractices.map(
-    ({ odsCode, name, metrics }: PracticePercentageType) => {
+    ({ odsCode, name, metrics }: PracticeType) => {
+      const requestedMetric = metrics[0].requestedTransfers;
       if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
-        const requestedMetric = metrics[0]
-          .requestedTransfers as IntegratedMetricsTableType;
         return [
           <PracticeLink
             odsCode={odsCode}
@@ -122,8 +116,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       }
 
       if (pageTemplatePath == PageTemplatePath.TransferRequested) {
-        const requestedMetric = metrics[0]
-          .requestedTransfers as TransfersRequestedMetricsTableType;
+        const requestedMetric = metrics[0].requestedTransfers;
         return [
           <PracticeLink
             odsCode={odsCode}

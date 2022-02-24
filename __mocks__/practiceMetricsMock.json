@@ -104,9 +104,9 @@
           "integratedWithin3DaysPercentOfReceived": null,
           "integratedWithin8DaysPercentOfReceived": null,
           "notIntegratedWithin8DaysTotal": 0,
-          "notIntegratedWithin8DaysPercentOfReceived": null,
+          "notIntegratedWithin8DaysPercentOfReceived": 0,
           "failuresTotalCount": 0,
-          "failuresTotalPercentOfRequested": null
+          "failuresTotalPercentOfRequested": 0
         }
       }
     ]

@@ -4,8 +4,7 @@ import userEvent from "@testing-library/user-event";
 
 import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
-import practiceIntegrationMetricsPercentageMock from "../../../../__mocks__/practiceIntegrationMetricsPercentageMock.json";
-import practiceTransfersRequestedMetricsPercentageMock from "../../../../__mocks__/practiceTransfersRequestedMetricsPercentageMock.json";
+import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import practiceIntegrationSortOptions from "../../../data/content/practiceIntegrationsSortOptions.json";
 import practiceTransfersRequestedSortOptions from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
@@ -32,7 +31,7 @@ describe("PracticeTableWithSort component", () => {
 
     const { getByText } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceIntegrationMetricsPercentageMock}
+        ccgPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
@@ -52,7 +51,7 @@ describe("PracticeTableWithSort component", () => {
 
     const { getByText } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceTransfersRequestedMetricsPercentageMock}
+        ccgPractices={practiceMetricsMock}
         headers={transfersRequestedTableHeaders}
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
@@ -69,7 +68,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices ordered by GP2GP technical failures by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceTransfersRequestedMetricsPercentageMock}
+        ccgPractices={practiceMetricsMock}
         headers={transfersRequestedTableHeaders}
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
@@ -101,7 +100,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices ordered by Not integrated within 8 days Percentage SLA by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceIntegrationMetricsPercentageMock}
+        ccgPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
@@ -135,7 +134,7 @@ describe("PracticeTableWithSort component", () => {
   it("navigates to a practice page when a link is clicked", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceIntegrationMetricsPercentageMock}
+        ccgPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
@@ -262,7 +261,7 @@ describe("PracticeTableWithSort component", () => {
       (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
-            ccgPractices={practiceIntegrationMetricsPercentageMock}
+            ccgPractices={practiceMetricsMock}
             headers={integrationTableHeaders}
             sortBySelect={practiceIntegrationSortOptions.sortBySelect}
             orderSelect={practiceIntegrationSortOptions.orderSelect}
