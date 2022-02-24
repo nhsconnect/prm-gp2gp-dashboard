@@ -1,4 +1,4 @@
 export enum PageTemplatePath {
   IntegrationTimes = "integration-times",
-  TransferRequested = "transfers-requested",
+  GP2GPTransfersRequested = "GP2GP-transfers-requested",
 }

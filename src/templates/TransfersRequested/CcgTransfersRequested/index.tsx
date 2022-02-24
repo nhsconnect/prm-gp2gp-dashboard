@@ -150,7 +150,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
                   ),
                 },
               ]}
-              pageTemplatePath={PageTemplatePath.TransferRequested}
+              pageTemplatePath={PageTemplatePath.GP2GPTransfersRequested}
               sortBySelect={practiceTableContent.sortBySelect}
               orderSelect={practiceTableContent.orderSelect}
               tableCaption={tableTitle}

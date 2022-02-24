@@ -33,7 +33,7 @@ exports.createPages = async ({ actions }) => {
     });
 
     createPage({
-      path: `/practice/${practice.odsCode}/transfers-requested`,
+      path: `/practice/${practice.odsCode}/GP2GP-transfers-requested`,
       component: path.resolve(
         "src/templates/TransfersRequested/PracticeTransfersRequested/index.tsx"
       ),
@@ -71,7 +71,7 @@ exports.createPages = async ({ actions }) => {
     });
 
     createPage({
-      path: `/ccg/${ccg.odsCode}/transfers-requested`,
+      path: `/ccg/${ccg.odsCode}/GP2GP-transfers-requested`,
       component: path.resolve(
         "src/templates/TransfersRequested/CcgTransfersRequested/index.tsx"
       ),

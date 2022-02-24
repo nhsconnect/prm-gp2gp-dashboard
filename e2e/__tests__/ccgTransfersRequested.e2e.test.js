@@ -106,7 +106,7 @@ describe("CCG Transfers Requested page", () => {
       });
 
       it("sort practice performance table and link to the individual practices", () => {
-        cy.visit("/ccg/11D/transfers-requested");
+        cy.visit("/ccg/11D/GP2GP-transfers-requested");
         cy.contains("h1", "Another Test CCG - 11D");
 
         cy.contains("Requesting practice name");
@@ -162,7 +162,7 @@ describe("CCG Transfers Requested page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/ccg/11D/transfers-requested");
+        cy.visit("/ccg/11D/GP2GP-transfers-requested");
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

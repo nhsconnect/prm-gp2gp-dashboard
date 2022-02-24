@@ -56,7 +56,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
         tableCaption={tableCaptionText}
-        pageTemplatePath={PageTemplatePath.TransferRequested}
+        pageTemplatePath={PageTemplatePath.GP2GPTransfersRequested}
       />
     );
 
@@ -73,7 +73,7 @@ describe("PracticeTableWithSort component", () => {
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         orderSelect={practiceTransfersRequestedSortOptions.orderSelect}
         tableCaption={"Some title"}
-        pageTemplatePath={PageTemplatePath.TransferRequested}
+        pageTemplatePath={PageTemplatePath.GP2GPTransfersRequested}
       />
     );
 

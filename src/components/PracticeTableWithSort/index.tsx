@@ -115,7 +115,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         ];
       }
 
-      if (pageTemplatePath == PageTemplatePath.TransferRequested) {
+      if (pageTemplatePath == PageTemplatePath.GP2GPTransfersRequested) {
         const requestedMetric = metrics[0].requestedTransfers;
         return [
           <PracticeLink
