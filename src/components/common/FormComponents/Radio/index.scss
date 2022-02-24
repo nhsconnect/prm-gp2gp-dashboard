@@ -1,0 +1,20 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+
+@import "node_modules/nhsuk-frontend/packages/components/radios/radios";
+@import "node_modules/nhsuk-frontend/packages/components/fieldset/fieldset";
+
+.gp2gp-fieldset {
+  @extend .nhsuk-fieldset;
+
+  border: none;
+  margin-left: 0;
+  padding-left: 0;
+
+  &__legend {
+    @extend .nhsuk-fieldset__legend;
+    @extend .nhsuk-fieldset__legend--m;
+
+    margin: 0;
+  }
+}
