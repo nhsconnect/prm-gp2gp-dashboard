@@ -31,7 +31,7 @@ describe("CCG Transfers Requested template", () => {
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: odsCode,
+      name: /Y00159/,
       level: 1,
     });
 
@@ -39,7 +39,7 @@ describe("CCG Transfers Requested template", () => {
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = "Burton CCG - 12A";
+    const ccgHeadingText = /Burton CCG - 12A/;
 
     const { getByRole } = render(
       <CcgTransfersRequested pageContext={pipelineCCGData} />

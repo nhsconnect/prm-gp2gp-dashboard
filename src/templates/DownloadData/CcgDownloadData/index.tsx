@@ -46,6 +46,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
           {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
         </h1>
+        <span className="nhsuk-u-visually-hidden">download data</span>
         <div className="gp2gp-side-nav">
           <ContentsList items={contentListItems} />
         </div>

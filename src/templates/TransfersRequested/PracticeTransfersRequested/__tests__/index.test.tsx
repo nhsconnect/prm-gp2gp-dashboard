@@ -127,7 +127,7 @@ describe("PracticeTransfersRequested template", () => {
 
     await waitFor(() => {
       const expectedPracticeHeading = getByRole("heading", {
-        name: "Burton Croft Surgery - B86030",
+        name: /Burton Croft Surgery - B86030/,
         level: 1,
       });
       expect(expectedPracticeHeading).toBeInTheDocument();
@@ -157,7 +157,7 @@ describe("PracticeTransfersRequested template", () => {
     );
 
     const expectedPracticeHeading = getByRole("heading", {
-      name: "B86031",
+      name: /B86031/,
       level: 1,
     });
 

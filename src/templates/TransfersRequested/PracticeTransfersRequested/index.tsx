@@ -79,6 +79,10 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
         <div className="gp2gp-page-heading">
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+            <span className="nhsuk-u-visually-hidden">
+              {" "}
+              GP2GP transfers requested
+            </span>
           </h1>
           <OrganisationAddress odsCode={odsCode} />
           <hr aria-hidden={true} />
