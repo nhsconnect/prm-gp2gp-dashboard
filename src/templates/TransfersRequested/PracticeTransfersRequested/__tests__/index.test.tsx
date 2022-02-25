@@ -165,7 +165,7 @@ describe("PracticeTransfersRequested template", () => {
   });
 
   it("displays contents navigation", () => {
-    const { getByRole, getByLabelText } = render(
+    const { getByRole } = render(
       <PracticeTransfersRequested pageContext={practicePageContext} />
     );
 
@@ -173,10 +173,13 @@ describe("PracticeTransfersRequested template", () => {
       name: "Contents",
       level: 2,
     });
-    const labelText = getByLabelText("List of links to pages");
+
+    const contentsLink = getByRole("link", {
+      name: "Integration times",
+    });
 
     expect(contentsHeader).toBeInTheDocument();
-    expect(labelText).toBeInTheDocument();
+    expect(contentsLink).toBeInTheDocument();
   });
 
   it("displays page title and description correctly", () => {

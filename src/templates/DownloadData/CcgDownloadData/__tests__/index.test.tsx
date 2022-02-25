@@ -78,7 +78,7 @@ describe("CCG Download Data template", () => {
   });
 
   it("displays contents navigation", async () => {
-    const { getByRole, getByLabelText } = render(
+    const { getByRole } = render(
       <CcgDownloadData pageContext={pipelineCCGData} />
     );
 
@@ -86,9 +86,12 @@ describe("CCG Download Data template", () => {
       name: "Contents",
       level: 2,
     });
-    const labelText = getByLabelText("List of links to pages");
+
+    const contentsLink = getByRole("link", {
+      name: "GP2GP transfers requested",
+    });
 
     expect(contentsHeader).toBeInTheDocument();
-    expect(labelText).toBeInTheDocument();
+    expect(contentsLink).toBeInTheDocument();
   });
 });

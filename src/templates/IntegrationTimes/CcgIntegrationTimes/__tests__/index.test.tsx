@@ -212,7 +212,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
   });
 
   it("displays contents navigation", async () => {
-    const { getByRole, getByLabelText } = render(
+    const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
 
@@ -220,10 +220,13 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
       name: "Contents",
       level: 2,
     });
-    const labelText = getByLabelText("List of links to pages");
+
+    const contentsLink = getByRole("link", {
+      name: "GP2GP transfers requested",
+    });
 
     expect(contentsHeader).toBeInTheDocument();
-    expect(labelText).toBeInTheDocument();
+    expect(contentsLink).toBeInTheDocument();
   });
 });
 
@@ -426,7 +429,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
   });
 
   it("does not display contents navigation", () => {
-    const { queryByRole, queryByLabelText } = render(
+    const { queryByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
     );
 
@@ -434,9 +437,11 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
       name: "Contents",
       level: 2,
     });
-    const labelText = queryByLabelText("List of links to pages");
+    const contentsLink = queryByRole("link", {
+      name: "GP2GP transfers requested",
+    });
 
     expect(contentsHeader).not.toBeInTheDocument();
-    expect(labelText).not.toBeInTheDocument();
+    expect(contentsLink).not.toBeInTheDocument();
   });
 });

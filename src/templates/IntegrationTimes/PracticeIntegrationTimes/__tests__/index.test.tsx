@@ -371,7 +371,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
   });
 
   it("does not display contents navigation", () => {
-    const { queryByRole, queryByLabelText } = render(
+    const { queryByRole } = render(
       <PracticeIntegrationTimes pageContext={practicePageContext} />
     );
 
@@ -379,10 +379,12 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
       name: "Contents",
       level: 2,
     });
-    const labelText = queryByLabelText("List of links to pages");
+    const contentsLink = queryByRole("link", {
+      name: "GP2GP transfers requested",
+    });
 
     expect(contentsHeader).not.toBeInTheDocument();
-    expect(labelText).not.toBeInTheDocument();
+    expect(contentsLink).not.toBeInTheDocument();
   });
 });
 
@@ -651,7 +653,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
   });
 
   it("displays contents navigation", () => {
-    const { getByRole, getByLabelText } = render(
+    const { getByRole } = render(
       <PracticeIntegrationTimes pageContext={practicePageContext} />
     );
 
@@ -659,7 +661,9 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
       name: "Contents",
       level: 2,
     });
-    const labelText = getByLabelText("List of links to pages");
+    const labelText = getByRole("link", {
+      name: "GP2GP transfers requested",
+    });
 
     expect(contentsHeader).toBeInTheDocument();
     expect(labelText).toBeInTheDocument();

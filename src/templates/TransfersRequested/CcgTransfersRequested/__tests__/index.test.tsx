@@ -201,7 +201,7 @@ describe("CCG Transfers Requested template", () => {
   });
 
   it("displays contents navigation", async () => {
-    const { getByRole, getByLabelText } = render(
+    const { getByRole } = render(
       <CcgTransfersRequested pageContext={pipelineCCGData} />
     );
 
@@ -209,9 +209,12 @@ describe("CCG Transfers Requested template", () => {
       name: "Contents",
       level: 2,
     });
-    const labelText = getByLabelText("List of links to pages");
+
+    const contentsLink = getByRole("link", {
+      name: "Integration times",
+    });
 
     expect(contentsHeader).toBeInTheDocument();
-    expect(labelText).toBeInTheDocument();
+    expect(contentsLink).toBeInTheDocument();
   });
 });

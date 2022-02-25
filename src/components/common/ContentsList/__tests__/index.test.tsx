@@ -24,11 +24,4 @@ describe("ContentsList component", () => {
     expect(contentsLink).toBeInTheDocument();
     expect(contentsLink.getAttribute("href")).toBe("/link");
   });
-
-  it("has a aria label of 'List of links to pages", () => {
-    const { getByLabelText } = render(<ContentsList />);
-
-    const navLabelText = getByLabelText("List of links to pages");
-    expect(navLabelText).toBeInTheDocument();
-  });
 });
