@@ -23,14 +23,17 @@ export const DownloadData: FC<DownloadDataProps> = ({
   );
 
   return (
-    <>
+    <section className={`gp2gp-page-content-section gp2gp-page-contents`}>
       <h2>Download data</h2>
       <div className="nhsuk-u-reading-width">
-        <div className="nhsuk-body">{pageDescription}</div>
+        <div className="nhsuk-body">
+          <p>{pageDescription}</p>
+        </div>
       </div>
       <fieldset className="gp2gp-fieldset">
         <Radio
           title="Which dataset would you like to download?"
+          className="nhsuk-u-margin-bottom-4"
           radioId="dataset-type"
           options={[
             {
@@ -51,6 +54,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
         />
         <Radio
           title="What timeframe would you like data for?"
+          className="nhsuk-u-margin-bottom-4"
           radioId="timeframe"
           options={[
             {
@@ -66,9 +70,15 @@ export const DownloadData: FC<DownloadDataProps> = ({
           setSelectedValue={setSelectedTimeframe}
         />
       </fieldset>
-      <Button className="nhsuk-u-margin-right-4" onClick={callback}>
+      <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-2">
+        Data will be downloaded in CSV format
+      </p>
+      <Button
+        className="nhsuk-u-padding-left-6 nhsuk-u-padding-right-6 nhsuk-u-margin-right-4"
+        onClick={callback}
+      >
         Download
       </Button>
-    </>
+    </section>
   );
 };

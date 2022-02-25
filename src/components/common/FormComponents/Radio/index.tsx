@@ -8,6 +8,7 @@ type RadioOption = {
 
 type RadioProps = {
   title: string;
+  className?: string;
   radioId: string;
   options: RadioOption[];
   selectedValue: string;
@@ -16,6 +17,7 @@ type RadioProps = {
 
 export const Radio: FC<RadioProps> = ({
   title,
+  className = "",
   radioId,
   options,
   selectedValue,
@@ -26,7 +28,7 @@ export const Radio: FC<RadioProps> = ({
       <legend className="gp2gp-fieldset__legend nhsuk-u-margin-bottom-4 nhsuk-u-padding-top-2">
         <h3 className="nhsuk-fieldset__heading ">{title}</h3>
       </legend>
-      <div className="nhsuk-radios">
+      <div className={`nhsuk-radios ${className}`}>
         {options.map((option, index) => {
           const optionId = `${radioId}-option-${index}`;
           return (
