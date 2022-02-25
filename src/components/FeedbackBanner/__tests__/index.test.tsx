@@ -40,8 +40,11 @@ describe("FeedbackBanner component", () => {
       name: "gp-registrations-data@nhs.net",
     });
 
-    expect(surveyLink.getAttribute("href")).toBe(
-      "mailto:gp-registrations-data@nhs.net"
+    const surveyHref = surveyLink.getAttribute("href");
+
+    expect(surveyHref).toContain(
+      "body=Please note we are unable to assist with individual patient or practice queries."
     );
+    expect(surveyHref).toContain("mailto:gp-registrations-data@nhs.net");
   });
 });
