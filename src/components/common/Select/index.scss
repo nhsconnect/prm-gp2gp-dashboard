@@ -8,6 +8,7 @@
 .gp2gp-select {
   @extend .nhsuk-select;
   min-width: 250px;
+  width: 100%;
 }
 .gp2gp-form-group {
   @extend .nhsuk-form-group;
