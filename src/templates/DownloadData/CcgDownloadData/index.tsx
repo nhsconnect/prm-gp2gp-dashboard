@@ -29,7 +29,8 @@ function getFormatData(
     const integrationTimesCsv = getIntegrationTimesCsv(
       ccgPractices,
       ccgName,
-      ccgOdsCode
+      ccgOdsCode,
+      timeframe
     );
     return [
       Object.values(IntegrationRowHeadings).join(),
