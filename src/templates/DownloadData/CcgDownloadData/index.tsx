@@ -20,6 +20,24 @@ type CcgProps = {
   pageContext: PageContext;
 };
 
+function getFormatData(
+  ccgPractices: PracticeType[],
+  ccgName: string,
+  ccgOdsCode: string
+) {
+  return (timeframe: string, datatype: string) => {
+    const integrationTimesCsv = getIntegrationTimesCsv(
+      ccgPractices,
+      ccgName,
+      ccgOdsCode
+    );
+    return [
+      Object.values(IntegrationRowHeadings).join(),
+      ...integrationTimesCsv,
+    ].join("\n");
+  };
+}
+
 const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
   const { name: ccgName, odsCode: ccgOdsCode, ccgPractices } = pageContext;
   const formattedName: string = convertToTitleCase(ccgName);
@@ -37,17 +55,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
     },
   ];
 
-  const formatData = (timeframe: string, datatype: string) => {
-    const integrationTimesCsv = getIntegrationTimesCsv(
-      ccgPractices,
-      ccgName,
-      ccgOdsCode
-    );
-    return [
-      Object.values(IntegrationRowHeadings).join(),
-      ...integrationTimesCsv,
-    ].join("\n");
-  };
+  const formatData = getFormatData(ccgPractices, ccgName, ccgOdsCode);
 
   return (
     <>

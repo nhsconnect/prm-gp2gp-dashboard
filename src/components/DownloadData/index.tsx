@@ -13,8 +13,8 @@ export const DownloadData: FC<DownloadDataProps> = ({
   pageDescription,
   formatData,
 }) => {
-  let initialDatasetTypeState = "All";
-  let initialTimeframeState = "Last 6 months";
+  let initialDatasetTypeState = "all";
+  let initialTimeframeState = "last6Months";
 
   const [selectedDatasetType, setSelectedDatasetType] = useState(
     initialDatasetTypeState
