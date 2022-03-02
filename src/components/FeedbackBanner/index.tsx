@@ -16,8 +16,11 @@ export const FeedbackBanner: FC<FeedbackBannerProps> = ({ className }) => (
       <a href="https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_ac1GS7jmHNtMTlA">
         Take our survey
       </a>{" "}
-      to let us know what you think. If you need help with this site, or if it
-      isn't working properly, contact the team at{" "}
+      to let us know what you think.
+    </p>
+    <p>
+      If you need help with this site, or if it isn't working properly, contact
+      the team at{" "}
       <a href={`mailto:gp-registrations-data@nhs.net?body=${personalInfoNote}`}>
         gp-registrations-data@nhs.net
       </a>
