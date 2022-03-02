@@ -86,7 +86,7 @@ describe("Download data component", () => {
 
     expect(formatData).toHaveBeenCalledTimes(1);
     // @ts-ignore
-    expect(link.download).toBe("integrations.csv");
+    expect(link.download).toBe("all-last6Months.csv");
     // @ts-ignore
     expect(link.href).toBe("https://csv.test");
     expect(link.dispatchEvent).toHaveBeenCalledTimes(1);

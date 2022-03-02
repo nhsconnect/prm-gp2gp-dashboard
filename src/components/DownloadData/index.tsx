@@ -25,7 +25,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
 
   const exportToCsv = () => {
     const dataToDownload = formatData(selectedTimeframe, selectedDatasetType);
-    downloadFile(dataToDownload, "integrations.csv", "text/csv");
+    downloadFile(
+      dataToDownload,
+      `${selectedDatasetType}-${selectedTimeframe}.csv`,
+      "text/csv"
+    );
   };
 
   return (
