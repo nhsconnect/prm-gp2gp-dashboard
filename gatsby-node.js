@@ -82,6 +82,19 @@ exports.createPages = async ({ actions }) => {
         layout: "navigation-contents",
       },
     });
+
+    createPage({
+      path: `/ccg/${ccg.odsCode}/download-data`,
+      component: path.resolve(
+        "src/templates/DownloadData/CcgDownloadData/index.tsx"
+      ),
+      context: {
+        odsCode: ccg.odsCode,
+        name: ccg.name,
+        ccgPractices,
+        layout: "navigation-contents",
+      },
+    });
   });
 };
 

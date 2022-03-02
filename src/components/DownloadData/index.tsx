@@ -2,15 +2,16 @@ import React, { FC, useState } from "react";
 import "./index.scss";
 import { Button } from "../common/Button";
 import { Radio } from "../common/FormComponents/Radio";
+import { downloadFile } from "../../library/utils/downloadFile";
 
 type DownloadDataProps = {
   pageDescription: string;
-  callback: () => void;
+  formatData: (timeframe: string, datatype: string) => string;
 };
 
 export const DownloadData: FC<DownloadDataProps> = ({
   pageDescription,
-  callback,
+  formatData,
 }) => {
   let initialDatasetTypeState = "All";
   let initialTimeframeState = "Last 6 months";
@@ -21,6 +22,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
   const [selectedTimeframe, setSelectedTimeframe] = useState(
     initialTimeframeState
   );
+
+  const exportToCsv = () => {
+    const dataToDownload = formatData(selectedTimeframe, selectedDatasetType);
+    downloadFile(dataToDownload, "integrations.csv", "text/csv");
+  };
 
   return (
     <section className={`gp2gp-page-content-section gp2gp-page-contents`}>
@@ -75,7 +81,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
       </p>
       <Button
         className="nhsuk-u-padding-left-6 nhsuk-u-padding-right-6 nhsuk-u-margin-right-4"
-        onClick={callback}
+        onClick={exportToCsv}
       >
         Download
       </Button>

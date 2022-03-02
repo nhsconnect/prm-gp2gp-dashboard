@@ -6,6 +6,8 @@ import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
+import { getIntegrationTimesCsv } from "../../../library/utils/getIntegrationTimesCsv";
+import { IntegrationRowHeadings } from "../../../library/enums/csvRowHeadings";
 
 type PageContext = {
   odsCode: string;
@@ -19,23 +21,38 @@ type CcgProps = {
 };
 
 const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
-  const { name, odsCode } = pageContext;
-  const formattedName: string = convertToTitleCase(name);
-
+  const { name: ccgName, odsCode: ccgOdsCode, ccgPractices } = pageContext;
+  const formattedName: string = convertToTitleCase(ccgName);
   const contentListItems = [
     {
       text: "Integration times",
+      href: `/ccg/${ccgOdsCode}/integration-times`,
     },
     {
       text: "GP2GP transfers requested",
-      href: `/ccg/${odsCode}/GP2GP-transfers-requested`,
+      href: `/ccg/${ccgOdsCode}/GP2GP-transfers-requested`,
+    },
+    {
+      text: "Download data",
     },
   ];
+
+  const formatData = (timeframe: string, datatype: string) => {
+    const integrationTimesCsv = getIntegrationTimesCsv(
+      ccgPractices,
+      ccgName,
+      ccgOdsCode
+    );
+    return [
+      Object.values(IntegrationRowHeadings).join(),
+      ...integrationTimesCsv,
+    ].join("\n");
+  };
 
   return (
     <>
       <Helmet>
-        <title>{`${formattedName} - ${odsCode} - GP Registrations Data`}</title>
+        <title>{`${formattedName} - ${ccgOdsCode} - GP Registrations Data`}</title>
         <meta
           name="description"
           content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
@@ -44,14 +61,14 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-          {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+          {formattedName ? `${formattedName} - ${ccgOdsCode}` : ccgOdsCode}
         </h1>
         <span className="nhsuk-u-visually-hidden">download data</span>
         <div className="gp2gp-side-nav">
           <ContentsList items={contentListItems} />
         </div>
         <DownloadData
-          callback={() => {}}
+          formatData={formatData}
           pageDescription={
             "To download data for this CCG in CSV format select from the options below and click 'Download'."
           }

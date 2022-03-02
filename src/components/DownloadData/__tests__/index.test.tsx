@@ -6,7 +6,7 @@ describe("Download data component", () => {
   it("displays the title and description", () => {
     let pageDescription = "This is a description";
     const { getByText, getByRole } = render(
-      <DownloadData callback={() => {}} pageDescription={pageDescription} />
+      <DownloadData formatData={() => ""} pageDescription={pageDescription} />
     );
 
     expect(getByRole("heading", { level: 2 })).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe("Download data component", () => {
 
   it("displays two radio components", () => {
     const { getByRole } = render(
-      <DownloadData callback={() => {}} pageDescription={""} />
+      <DownloadData formatData={() => ""} pageDescription={""} />
     );
     let datasetType = getByRole("heading", {
       level: 3,
@@ -31,7 +31,7 @@ describe("Download data component", () => {
 
   it("displays two radio components with correct options", () => {
     const { getByText } = render(
-      <DownloadData callback={() => {}} pageDescription={""} />
+      <DownloadData formatData={() => ""} pageDescription={""} />
     );
 
     expect(getByText("Transfers requested")).toBeInTheDocument();
@@ -43,8 +43,15 @@ describe("Download data component", () => {
 
   it("displays a button with callback", () => {
     const callback = jest.fn();
+    jest.mock("../../../library/utils/downloadFile", () => ({
+      downloadFile: jest.fn(),
+    }));
+
+    // @ts-ignore
+    window.URL.createObjectURL = function () {};
+
     const { getByRole } = render(
-      <DownloadData callback={callback} pageDescription={""} />
+      <DownloadData formatData={callback} pageDescription={""} />
     );
 
     let button = getByRole("button");
@@ -52,5 +59,36 @@ describe("Download data component", () => {
 
     button.click();
     expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it("downloads a file", () => {
+    const formatData = jest.fn();
+    const link = {
+      dispatchEvent: jest.fn(),
+      remove: jest.fn(),
+    };
+
+    const { getByRole } = render(
+      <DownloadData formatData={formatData} pageDescription={""} />
+    );
+
+    global.URL.createObjectURL = jest.fn(() => "https://csv.test");
+    global.URL.revokeObjectURL = jest.fn();
+    // @ts-ignore
+    global.Blob = function (content, options) {
+      return { content, options };
+    };
+    // @ts-ignore
+    jest.spyOn(document, "createElement").mockImplementation(() => link);
+
+    let button = getByRole("button");
+    button.click();
+
+    expect(formatData).toHaveBeenCalledTimes(1);
+    // @ts-ignore
+    expect(link.download).toBe("integrations.csv");
+    // @ts-ignore
+    expect(link.href).toBe("https://csv.test");
+    expect(link.dispatchEvent).toHaveBeenCalledTimes(1);
   });
 });
