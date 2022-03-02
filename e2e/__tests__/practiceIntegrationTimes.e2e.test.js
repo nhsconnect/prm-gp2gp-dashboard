@@ -113,7 +113,12 @@ describe("Practice Integration Times page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/practice/A12345/integration-times");
+        cy.intercept(
+          "/ORD/2-0-0/organisations/A12347",
+          practiceWithSomeIntegrations
+        );
+
+        cy.visit("/practice/A12347/integration-times");
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

@@ -23,7 +23,10 @@ export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
       <ol className="nhsuk-list nhsuk-u-clear nhsuk-u-margin-0" role="list">
         {listOfAlphabetLetters.map((letter) =>
           sortedItems.get(letter) ? (
-            <li className="nhsuk-u-margin-bottom-0 nhsuk-u-float-left nhsuk-u-margin-right-1">
+            <li
+              className="nhsuk-u-margin-bottom-0 nhsuk-u-float-left nhsuk-u-margin-right-1"
+              key={letter}
+            >
               <Link
                 className="nhsuk-u-font-size-22 nhsuk-u-padding-2 nhsuk-u-display-block"
                 onClick={(e) => e.currentTarget.blur()}
@@ -33,7 +36,10 @@ export const AlphabeticalNav: FC<AlphabeticalNavProps> = ({ sortedItems }) => {
               </Link>
             </li>
           ) : (
-            <li className="nhsuk-u-margin-bottom-0 nhsuk-u-float-left nhsuk-u-margin-right-1 nhsuk-nav-a-z__no-link">
+            <li
+              className="nhsuk-u-margin-bottom-0 nhsuk-u-float-left nhsuk-u-margin-right-1 nhsuk-nav-a-z__no-link"
+              key={letter}
+            >
               <span className="nhsuk-u-font-size-22 nhsuk-u-padding-2 nhsuk-u-display-block">
                 {letter}
               </span>
