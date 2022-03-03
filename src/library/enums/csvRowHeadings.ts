@@ -7,7 +7,7 @@ const baseHeadings = {
 };
 
 const integrationTimesSpecific = {
-  TRANSFERS_RECEIVED_COUNT: "GP2GP transfers received",
+  TRANSFERS_RECEIVED_COUNT: "GP2GP Transfers received",
   INTEGRATED_WITHIN_3_DAYS_COUNT: "Integrated within 3 days",
   INTEGRATED_WITHIN_3_DAYS_PERCENT: "Integrated within 3 days - %",
   INTEGRATED_WITHIN_8_DAYS_COUNT: "Integrated within 8 days ",
@@ -37,7 +37,7 @@ export const TransfersRequestedRowHeadings = {
   ...transfersRequestedSpecific,
 };
 
-const AllCSVHeadings = {
+export const AllCSVHeadings = {
   ...baseHeadings,
   ...transfersRequestedSpecific,
   ...integrationTimesSpecific,
