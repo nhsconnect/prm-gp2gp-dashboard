@@ -8,7 +8,6 @@ import PracticeIntegrationTimes from "../index";
 import { mockAPIResponse } from "../../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
 
 jest.mock("no-scroll");
@@ -107,7 +106,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
 
-    when(mocked(useFeatureToggles))
+    when(jest.mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: false });
   });
@@ -395,7 +394,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
 
-    when(mocked(useFeatureToggles))
+    when(jest.mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: true });
   });
