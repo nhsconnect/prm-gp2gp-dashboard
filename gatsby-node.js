@@ -46,6 +46,20 @@ exports.createPages = async ({ actions }) => {
 
   ccgs.forEach((ccg) => {
     const ccgPractices = filterPracticesByOdsCodes(ccg.practices, practices);
+    practices.forEach((practice) => {
+      createPage({
+        path: `/practice/${practice.odsCode}/download-data`,
+        component: path.resolve(
+          "src/templates/DownloadData/PracticeDownloadData/index.tsx"
+        ),
+        context: {
+          practice,
+          ccgOdsCode: ccg.odsCode,
+          ccgName: ccg.name,
+          layout: "navigation-contents",
+        },
+      });
+    });
 
     createPage({
       path: `/ccg/${ccg.odsCode}`,

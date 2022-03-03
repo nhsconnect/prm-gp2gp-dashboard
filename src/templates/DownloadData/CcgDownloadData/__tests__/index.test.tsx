@@ -7,7 +7,7 @@ import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.js
 
 jest.mock("no-scroll");
 
-describe("CCG Download Data template", () => {
+describe("CCGDownloadData template", () => {
   const pipelineCCGData = {
     odsCode: "12A",
     name: "BURTON CCG",
@@ -70,8 +70,7 @@ describe("CCG Download Data template", () => {
     );
 
     const pageDescription = getByText(
-      "To download data for this CCG in CSV format",
-      { exact: false }
+      /To download data for this CCG in CSV format/
     );
 
     expect(pageDescription).toBeInTheDocument();
