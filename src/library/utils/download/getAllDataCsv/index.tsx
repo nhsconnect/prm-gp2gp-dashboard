@@ -2,14 +2,14 @@ import {
   PracticeMetricsType,
   PracticeType,
   RequestedTransfersType,
-} from "../../types/practice.types";
+} from "../../../types/practice.types";
 import {
   AllCSVHeadings,
   IntegrationRowHeadings,
   TransfersRequestedRowHeadings,
-} from "../../enums/csvRowHeadings";
-import { convertMonthNumberToText } from "../convertMonthNumberToText";
-import { addPercentageSign } from "../addPercentageSign";
+} from "../../../enums/csvRowHeadings";
+import { convertMonthNumberToText } from "../../convertMonthNumberToText";
+import { addPercentageSign } from "../../addPercentageSign";
 
 function getAllDataRow(
   ccgName: string,

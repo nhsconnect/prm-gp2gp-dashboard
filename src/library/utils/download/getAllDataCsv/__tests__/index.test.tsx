@@ -2,7 +2,7 @@ import { getAllDataCsv } from "../index";
 import {
   practiceWithOneMonthMetrics,
   practiceWithTwoMonths,
-} from "../../../../../__mocks__/practiceMetricsTestData";
+} from "../../../../../../__mocks__/practiceMetricsTestData";
 
 describe("getAllDataCsv", () => {
   it("transforms practice metrics into csv rows for 6 months for integration times and transfers requested", async () => {

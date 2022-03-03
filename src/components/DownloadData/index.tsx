@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import "./index.scss";
 import { Button } from "../common/Button";
 import { Radio } from "../common/FormComponents/Radio";
-import { downloadFile } from "../../library/utils/downloadFile";
+import { downloadFile } from "../../library/utils/download/downloadFile";
 
 type DownloadDataProps = {
   pageDescription: string;

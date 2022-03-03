@@ -43,7 +43,7 @@ describe("Download data component", () => {
 
   it("displays a button with callback", () => {
     const callback = jest.fn();
-    jest.mock("../../../library/utils/downloadFile", () => ({
+    jest.mock("../../../library/utils/download/downloadFile", () => ({
       downloadFile: jest.fn(),
     }));
 

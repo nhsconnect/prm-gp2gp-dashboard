@@ -6,14 +6,7 @@ import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
-import { getIntegrationTimesCsv } from "../../../library/utils/getIntegrationTimesCsv";
-import {
-  AllCSVHeadings,
-  IntegrationRowHeadings,
-  TransfersRequestedRowHeadings,
-} from "../../../library/enums/csvRowHeadings";
-import { getTransfersRequestedCsv } from "../../../library/utils/getTransfersRequestedCsv";
-import { getAllDataCsv } from "../../../library/utils/getAllDataCsv";
+import { getFormatData } from "../../../library/utils/download/getFormatData/getFormatData";
 
 type PageContext = {
   odsCode: string;
@@ -25,35 +18,6 @@ type PageContext = {
 type CcgProps = {
   pageContext: PageContext;
 };
-
-function getFormatData(
-  ccgPractices: PracticeType[],
-  ccgName: string,
-  ccgOdsCode: string
-) {
-  return (timeframe: string, datatype: string) => {
-    if (datatype === "integrationTimes") {
-      return [
-        Object.values(IntegrationRowHeadings).join(),
-        ...getIntegrationTimesCsv(ccgPractices, ccgName, ccgOdsCode, timeframe),
-      ].join("\n");
-    } else if (datatype === "transfersRequested") {
-      return [
-        Object.values(TransfersRequestedRowHeadings).join(),
-        ...getTransfersRequestedCsv(
-          ccgPractices,
-          ccgName,
-          ccgOdsCode,
-          timeframe
-        ),
-      ].join("\n");
-    }
-    return [
-      Object.values(AllCSVHeadings).join(),
-      ...getAllDataCsv(ccgPractices, ccgName, ccgOdsCode, timeframe),
-    ].join("\n");
-  };
-}
 
 const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
   const { name: ccgName, odsCode: ccgOdsCode, ccgPractices } = pageContext;

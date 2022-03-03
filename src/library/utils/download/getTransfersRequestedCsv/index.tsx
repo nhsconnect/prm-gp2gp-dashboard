@@ -2,10 +2,10 @@ import {
   PracticeMetricsType,
   PracticeType,
   RequestedTransfersType,
-} from "../../types/practice.types";
-import { TransfersRequestedRowHeadings } from "../../enums/csvRowHeadings";
-import { convertMonthNumberToText } from "../convertMonthNumberToText";
-import { addPercentageSign } from "../addPercentageSign";
+} from "../../../types/practice.types";
+import { TransfersRequestedRowHeadings } from "../../../enums/csvRowHeadings";
+import { convertMonthNumberToText } from "../../convertMonthNumberToText";
+import { addPercentageSign } from "../../addPercentageSign";
 
 function getTransfersRequestedRow(
   ccgName: string,
