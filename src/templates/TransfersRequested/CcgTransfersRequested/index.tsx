@@ -61,6 +61,10 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
     {
       text: "GP2GP transfers requested",
     },
+    {
+      text: "Download data",
+      href: `/ccg/${odsCode}/download-data`,
+    },
   ];
 
   return (

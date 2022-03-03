@@ -62,6 +62,10 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
     {
       text: "GP2GP transfers requested",
     },
+    {
+      text: "Download data",
+      href: `/practice/${odsCode}/download-data`,
+    },
   ];
 
   return (
