@@ -39,6 +39,6 @@ export const TransfersRequestedRowHeadings = {
 
 const AllCSVHeadings = {
   ...baseHeadings,
-  ...integrationTimesSpecific,
   ...transfersRequestedSpecific,
+  ...integrationTimesSpecific,
 };
