@@ -7,7 +7,11 @@ import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
 import { getIntegrationTimesCsv } from "../../../library/utils/getIntegrationTimesCsv";
-import { IntegrationRowHeadings } from "../../../library/enums/csvRowHeadings";
+import {
+  IntegrationRowHeadings,
+  TransfersRequestedRowHeadings,
+} from "../../../library/enums/csvRowHeadings";
+import { getTransfersRequestedCsv } from "../../../library/utils/getTransfersRequestedCsv";
 
 type PageContext = {
   odsCode: string;
@@ -26,15 +30,15 @@ function getFormatData(
   ccgOdsCode: string
 ) {
   return (timeframe: string, datatype: string) => {
-    const integrationTimesCsv = getIntegrationTimesCsv(
-      ccgPractices,
-      ccgName,
-      ccgOdsCode,
-      timeframe
-    );
+    if (datatype === "integrationTimes") {
+      return [
+        Object.values(IntegrationRowHeadings).join(),
+        ...getIntegrationTimesCsv(ccgPractices, ccgName, ccgOdsCode, timeframe),
+      ].join("\n");
+    }
     return [
-      Object.values(IntegrationRowHeadings).join(),
-      ...integrationTimesCsv,
+      Object.values(TransfersRequestedRowHeadings).join(),
+      ...getTransfersRequestedCsv(ccgPractices, ccgName, ccgOdsCode, timeframe),
     ].join("\n");
   };
 }
