@@ -6,11 +6,13 @@ import { downloadFile } from "../../library/utils/download/downloadFile";
 
 type DownloadDataProps = {
   pageDescription: string;
+  className?: string;
   formatData: (timeframe: string, datatype: string) => string;
 };
 
 export const DownloadData: FC<DownloadDataProps> = ({
   pageDescription,
+  className = "",
   formatData,
 }) => {
   const initialDatasetTypeState = "all";
@@ -33,7 +35,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
   };
 
   return (
-    <section className={`gp2gp-page-content-section gp2gp-page-contents`}>
+    <section className={`gp2gp-page-content-section ${className}`}>
       <h2>Download data</h2>
 
       <div className="gp2gp-download-data" data-testid="gp2gp-download-data">
