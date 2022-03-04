@@ -13,8 +13,8 @@ export const DownloadData: FC<DownloadDataProps> = ({
   pageDescription,
   formatData,
 }) => {
-  let initialDatasetTypeState = "all";
-  let initialTimeframeState = "last6Months";
+  const initialDatasetTypeState = "all";
+  const initialTimeframeState = "last6Months";
 
   const [selectedDatasetType, setSelectedDatasetType] = useState(
     initialDatasetTypeState
@@ -36,7 +36,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
     <section className={`gp2gp-page-content-section gp2gp-page-contents`}>
       <h2>Download data</h2>
 
-      <div className="gp2gp-download-data">
+      <div className="gp2gp-download-data" data-testid="gp2gp-download-data">
         <div className="nhsuk-u-reading-width">
           <div className="nhsuk-body">
             <p>{pageDescription}</p>

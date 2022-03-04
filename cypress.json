@@ -5,6 +5,7 @@
   "pluginsFile": "e2e/plugins",
   "supportFile": "e2e/support",
   "videosFolder": "e2e/videos",
+  "downloadsFolder": "e2e/downloads",
   "screenshotsFolder": "e2e/screenshots",
   "chromeWebSecurity": false,
   "testFiles": "**/*.e2e.test.*",
