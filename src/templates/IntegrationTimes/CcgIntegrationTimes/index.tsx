@@ -64,7 +64,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
     },
     {
       text: "GP2GP transfers requested",
-      href: `/ccg/${odsCode}/GP2GP-transfers-requested`,
+      href: `/ccg/${odsCode}/gp2gp-transfers-requested`,
     },
     {
       text: "Download data",

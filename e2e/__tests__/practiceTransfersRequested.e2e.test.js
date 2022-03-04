@@ -121,7 +121,7 @@ describe("Practice transfers requested page", () => {
           practiceWithSomeIntegrations
         );
 
-        cy.visit("/practice/A12347/GP2GP-transfers-requested");
+        cy.visit("/practice/A12347/gp2gp-transfers-requested");
         cy.contains("h3", "Get in touch");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

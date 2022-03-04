@@ -29,7 +29,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
     },
     {
       text: "GP2GP transfers requested",
-      href: `/ccg/${ccgOdsCode}/GP2GP-transfers-requested`,
+      href: `/ccg/${ccgOdsCode}/gp2gp-transfers-requested`,
     },
     {
       text: "Download data",
