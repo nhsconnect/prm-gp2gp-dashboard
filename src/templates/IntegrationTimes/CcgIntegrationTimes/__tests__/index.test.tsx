@@ -7,6 +7,7 @@ import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.js
 
 import userEvent from "@testing-library/user-event";
 import { when } from "jest-when";
+import { mocked } from "ts-jest/utils";
 import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
 
 jest.mock("no-scroll");
@@ -21,7 +22,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
   };
 
   beforeEach(() => {
-    when(jest.mocked(useFeatureToggles))
+    when(mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: true });
   });
@@ -238,7 +239,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
   };
 
   beforeEach(() => {
-    when(jest.mocked(useFeatureToggles))
+    when(mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: false });
   });
