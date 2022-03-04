@@ -68,14 +68,14 @@ function setup_env {
 
 case "${task}" in
   test)
-      npm install
+      npm ci -y
       npm run test
       ;;
   dojo-test)
       dojo "./tasks test"
       ;;
   test-e2e)
-      npm install
+      npm ci -y
       npm run e2e:install
       npm run test:e2e:built
       ;;
@@ -84,14 +84,14 @@ case "${task}" in
       ;;
   build)
       setup_env ${deployment_env}
-      npm install --prod
+      npm ci --production -y
       npm run build:ci
       ;;
   dojo-build)
       dojo "./tasks build ${deployment_env}"
       ;;
   get-stubs)
-      npm install --prod
+      npm ci --production -y
       npm run getStubs
       ;;
   dojo-get-stubs)
@@ -99,7 +99,7 @@ case "${task}" in
       ;;
   get-metrics)
       setup_env ${deployment_env}
-      npm install --prod
+      npm ci --production -y
       npm run getPracticeMetrics:ci
       npm run getNationalMetrics:ci
       ;;
@@ -108,7 +108,7 @@ case "${task}" in
       dojo "./tasks get-metrics ${deployment_env}"
       ;;
   deploy)
-      npm install --prod
+      npm ci --production -y
       npm run deploy
       ;;
   dojo-deploy)
@@ -116,7 +116,7 @@ case "${task}" in
       dojo "./tasks deploy ${deployment_env}"
       ;;
   dep)
-      npm install
+      npm ci -y
       npm run audit > audit-output.txt
       ;;
   dojo-dep)

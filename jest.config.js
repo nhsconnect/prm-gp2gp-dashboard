@@ -1,10 +1,11 @@
 module.exports = {
   transform: {
     "^.+\\.jsx?$": "<rootDir>/jest-preprocess.js",
-    "^.+\\.svg$": "jest-svg-transformer",
+    "\\.svg$": "<rootDir>/jest-svg-transformer.js",
   },
   moduleNameMapper: {
     ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
+    "^gatsby-page-utils/(.*)$": "gatsby-page-utils/dist/$1",
   },
   testPathIgnorePatterns: ["node_modules", ".cache", "public", "e2e"],
   transformIgnorePatterns: ["node_modules/(?!(gatsby)/)"],
@@ -14,4 +15,5 @@ module.exports = {
   setupFilesAfterEnv: ["<rootDir>/setup-test-env.js"],
   clearMocks: true,
   preset: "ts-jest",
+  testEnvironment: "jsdom",
 };
