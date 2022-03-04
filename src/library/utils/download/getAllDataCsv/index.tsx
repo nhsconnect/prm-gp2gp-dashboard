@@ -1,5 +1,4 @@
 import {
-  PracticeMetricsType,
   PracticeType,
   RequestedTransfersType,
 } from "../../../types/practice.types";
@@ -10,8 +9,9 @@ import {
 } from "../../../enums/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
+import { transformMetricsInCsvString } from "../dataTransformers/transformMetricsInCsvString";
 
-function getAllDataRow(
+function getAllDataRowValues(
   ccgName: string,
   ccgOdsCode: string,
   name: string,
@@ -70,40 +70,11 @@ export function getAllDataCsv(
   ccgOdsCode: string,
   timeframe: string
 ) {
-  function transformMetricsIntoCsvRow(name: string, odsCode: string) {
-    return (metric: PracticeMetricsType) => {
-      const year = metric.year;
-      const month = metric.month;
-      const requestedTransfers = metric.requestedTransfers;
-      const allDataRow = getAllDataRow(
-        ccgName,
-        ccgOdsCode,
-        name,
-        odsCode,
-        month,
-        year,
-        requestedTransfers
-      );
-      return Object.values(allDataRow).join(",");
-    };
-  }
-
-  return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
-    const { odsCode, name, metrics } = practice;
-    let allDataRows;
-
-    if (timeframe == "latestMonth") {
-      const { year: latestYear, month: latestMonth } =
-        ccgPractices[0].metrics[0];
-      allDataRows = metrics
-        .filter((metric) => {
-          return metric.month === latestMonth && metric.year === latestYear;
-        })
-        .map(transformMetricsIntoCsvRow(name, odsCode));
-    } else {
-      allDataRows = metrics.map(transformMetricsIntoCsvRow(name, odsCode));
-    }
-
-    return [...acc, ...allDataRows];
-  }, []);
+  return transformMetricsInCsvString(
+    ccgPractices,
+    timeframe,
+    ccgName,
+    ccgOdsCode,
+    getAllDataRowValues
+  );
 }

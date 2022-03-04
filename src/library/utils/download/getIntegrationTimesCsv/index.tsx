@@ -1,13 +1,13 @@
 import {
-  PracticeMetricsType,
   PracticeType,
   RequestedTransfersType,
 } from "../../../types/practice.types";
 import { IntegrationRowHeadings } from "../../../enums/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
+import { transformMetricsInCsvString } from "../dataTransformers/transformMetricsInCsvString";
 
-function getIntegrationTimesRow(
+function getIntegrationTimesRowValues(
   ccgName: string,
   ccgOdsCode: string,
   name: string,
@@ -52,42 +52,11 @@ export function getIntegrationTimesCsv(
   ccgOdsCode: string,
   timeframe: string
 ) {
-  function transformMetricsIntoCsvRow(name: string, odsCode: string) {
-    return (metric: PracticeMetricsType) => {
-      const year = metric.year;
-      const month = metric.month;
-      const requestedTransfers = metric.requestedTransfers;
-      const integrationTimesRow = getIntegrationTimesRow(
-        ccgName,
-        ccgOdsCode,
-        name,
-        odsCode,
-        month,
-        year,
-        requestedTransfers
-      );
-      return Object.values(integrationTimesRow).join(",");
-    };
-  }
-
-  return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
-    const { odsCode, name, metrics } = practice;
-    let integrationTimesRows;
-
-    if (timeframe == "latestMonth") {
-      const { year: latestYear, month: latestMonth } =
-        ccgPractices[0].metrics[0];
-      integrationTimesRows = metrics
-        .filter((metric) => {
-          return metric.month === latestMonth && metric.year === latestYear;
-        })
-        .map(transformMetricsIntoCsvRow(name, odsCode));
-    } else {
-      integrationTimesRows = metrics.map(
-        transformMetricsIntoCsvRow(name, odsCode)
-      );
-    }
-
-    return [...acc, ...integrationTimesRows];
-  }, []);
+  return transformMetricsInCsvString(
+    ccgPractices,
+    timeframe,
+    ccgName,
+    ccgOdsCode,
+    getIntegrationTimesRowValues
+  );
 }

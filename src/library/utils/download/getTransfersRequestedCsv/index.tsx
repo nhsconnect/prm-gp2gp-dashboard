@@ -1,13 +1,13 @@
 import {
-  PracticeMetricsType,
   PracticeType,
   RequestedTransfersType,
 } from "../../../types/practice.types";
 import { TransfersRequestedRowHeadings } from "../../../enums/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
+import { transformMetricsInCsvString } from "../dataTransformers/transformMetricsInCsvString";
 
-function getTransfersRequestedRow(
+function getTransfersRequestedRowValues(
   ccgName: string,
   ccgOdsCode: string,
   name: string,
@@ -42,42 +42,11 @@ export function getTransfersRequestedCsv(
   ccgOdsCode: string,
   timeframe: string
 ) {
-  function transformMetricsIntoCsvRow(name: string, odsCode: string) {
-    return (metric: PracticeMetricsType) => {
-      const year = metric.year;
-      const month = metric.month;
-      const requestedTransfers = metric.requestedTransfers;
-      const transfersRequestedRow = getTransfersRequestedRow(
-        ccgName,
-        ccgOdsCode,
-        name,
-        odsCode,
-        month,
-        year,
-        requestedTransfers
-      );
-      return Object.values(transfersRequestedRow).join(",");
-    };
-  }
-
-  return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
-    const { odsCode, name, metrics } = practice;
-    let transfersRequestedRows;
-
-    if (timeframe == "latestMonth") {
-      const { year: latestYear, month: latestMonth } =
-        ccgPractices[0].metrics[0];
-      transfersRequestedRows = metrics
-        .filter((metric) => {
-          return metric.month === latestMonth && metric.year === latestYear;
-        })
-        .map(transformMetricsIntoCsvRow(name, odsCode));
-    } else {
-      transfersRequestedRows = metrics.map(
-        transformMetricsIntoCsvRow(name, odsCode)
-      );
-    }
-
-    return [...acc, ...transfersRequestedRows];
-  }, []);
+  return transformMetricsInCsvString(
+    ccgPractices,
+    timeframe,
+    ccgName,
+    ccgOdsCode,
+    getTransfersRequestedRowValues
+  );
 }
