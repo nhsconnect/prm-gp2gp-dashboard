@@ -6,8 +6,8 @@ import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
-import { getFormatData } from "../../../library/utils/download/dataTransformers/getFormatData";
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import { getFormatData } from "../../../library/utils/download/getFormatData";
 
 type PageContext = {
   odsCode: string;

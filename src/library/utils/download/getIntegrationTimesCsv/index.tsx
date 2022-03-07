@@ -5,7 +5,7 @@ import {
 import { IntegrationRowHeadings } from "../../../enums/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
-import { transformMetricsInCsvString } from "../dataTransformers/transformMetricsInCsvString";
+import { transformMetricsInCsvString } from "../transformMetricsInCsvString";
 
 function getIntegrationTimesRowValues(
   ccgName: string,

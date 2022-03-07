@@ -6,8 +6,8 @@ import { PracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
-import { getFormatData } from "../../../library/utils/download/dataTransformers/getFormatData";
 import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
+import { getFormatData } from "../../../library/utils/download/getFormatData";
 
 type PageContext = {
   practice: PracticeType;

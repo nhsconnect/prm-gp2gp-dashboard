@@ -5,7 +5,7 @@ import {
 import { TransfersRequestedRowHeadings } from "../../../enums/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
-import { transformMetricsInCsvString } from "../dataTransformers/transformMetricsInCsvString";
+import { transformMetricsInCsvString } from "../transformMetricsInCsvString";
 
 function getTransfersRequestedRowValues(
   ccgName: string,
