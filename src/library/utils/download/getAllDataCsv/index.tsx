@@ -6,7 +6,7 @@ import {
   AllCSVHeadings,
   IntegrationRowHeadings,
   TransfersRequestedRowHeadings,
-} from "../../../enums/csvRowHeadings";
+} from "../../../constants/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
 import { transformMetricsInCsvString } from "../transformMetricsInCsvString";

@@ -2,7 +2,7 @@ import {
   PracticeType,
   RequestedTransfersType,
 } from "../../../types/practice.types";
-import { IntegrationRowHeadings } from "../../../enums/csvRowHeadings";
+import { IntegrationRowHeadings } from "../../../constants/csvRowHeadings";
 import { convertMonthNumberToText } from "../../convertMonthNumberToText";
 import { addPercentageSign } from "../../addPercentageSign";
 import { transformMetricsInCsvString } from "../transformMetricsInCsvString";

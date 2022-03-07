@@ -3,7 +3,7 @@ import {
   AllCSVHeadings,
   IntegrationRowHeadings,
   TransfersRequestedRowHeadings,
-} from "../../../enums/csvRowHeadings";
+} from "../../../constants/csvRowHeadings";
 import { getIntegrationTimesCsv } from "../getIntegrationTimesCsv";
 import { getTransfersRequestedCsv } from "../getTransfersRequestedCsv";
 import { getAllDataCsv } from "../getAllDataCsv";
