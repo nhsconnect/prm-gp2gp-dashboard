@@ -21,8 +21,8 @@ describe("getFormatData - integration tests ", () => {
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,January 2020,22,5,22.7%,6,27.3%,11,50%";
 
     const actual = formatDataForSelectedOptions(
-      "last6Months",
-      "integrationTimes"
+      "last-6-months",
+      "integration-times"
     );
 
     expect(actual).toEqual(expected);
@@ -43,8 +43,8 @@ describe("getFormatData - integration tests ", () => {
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,22,100%,0,0%";
 
     const actual = formatDataForSelectedOptions(
-      "latestMonth",
-      "transfersRequested"
+      "latest-month",
+      "transfers-requested"
     );
     expect(actual).toEqual(expected);
   });
@@ -64,7 +64,7 @@ describe("getFormatData - integration tests ", () => {
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%\n" +
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,January 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%";
 
-    const actual = formatDataForSelectedOptions("last6Months", "all");
+    const actual = formatDataForSelectedOptions("last-6-months", "all");
 
     expect(actual).toEqual(expected);
   });

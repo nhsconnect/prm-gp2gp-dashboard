@@ -13,7 +13,7 @@ describe("getTransfersRequestedCsv", () => {
       ccgPractices,
       ccgName,
       ccgOdsCode,
-      "last6Months"
+      "last-6-months"
     );
     const expected = [
       "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,7,5,71.42%,2,28.6%",
@@ -32,7 +32,7 @@ describe("getTransfersRequestedCsv", () => {
       ccgPractices,
       ccgName,
       ccgOdsCode,
-      "latestMonth"
+      "latest-month"
     );
     const expected = [
       "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,7,5,71.42%,2,28.6%",

@@ -16,7 +16,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
   formatData,
 }) => {
   const initialDatasetTypeState = "all";
-  const initialTimeframeState = "last6Months";
+  const initialTimeframeState = "last-6-months";
 
   const [selectedDatasetType, setSelectedDatasetType] = useState(
     initialDatasetTypeState
@@ -29,7 +29,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
     const dataToDownload = formatData(selectedTimeframe, selectedDatasetType);
     downloadFile(
       dataToDownload,
-      `${selectedDatasetType}-${selectedTimeframe}.csv`,
+      `GP Registrations Data ${selectedDatasetType}-${selectedTimeframe}.csv`,
       "text/csv"
     );
   };
@@ -52,11 +52,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
             options={[
               {
                 displayValue: "Transfers requested",
-                value: "transfersRequested",
+                value: "transfers-requested",
               },
               {
                 displayValue: "Integration times",
-                value: "integrationTimes",
+                value: "integration-times",
               },
               {
                 displayValue: "All",
@@ -73,11 +73,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
             options={[
               {
                 displayValue: "Latest month",
-                value: "latestMonth",
+                value: "latest-month",
               },
               {
                 displayValue: "Last 6 months",
-                value: "last6Months",
+                value: "last-6-months",
               },
             ]}
             selectedValue={selectedTimeframe}

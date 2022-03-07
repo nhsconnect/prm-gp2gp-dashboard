@@ -38,7 +38,7 @@ export function transformMetricsInCsvString(
     let rows;
     const { odsCode, name, metrics } = practice;
 
-    if (timeframe === "latestMonth") {
+    if (timeframe === "latest-month") {
       const { year: latestYear, month: latestMonth } =
         ccgPractices[0].metrics[0];
       rows = metrics

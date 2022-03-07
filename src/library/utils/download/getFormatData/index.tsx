@@ -14,12 +14,12 @@ export function getFormatData(
   ccgOdsCode: string
 ) {
   return (timeframe: string, datatype: string) => {
-    if (datatype === "integrationTimes") {
+    if (datatype === "integration-times") {
       return [
         Object.values(IntegrationRowHeadings).join(),
         ...getIntegrationTimesCsv(ccgPractices, ccgName, ccgOdsCode, timeframe),
       ].join("\n");
-    } else if (datatype === "transfersRequested") {
+    } else if (datatype === "transfers-requested") {
       return [
         Object.values(TransfersRequestedRowHeadings).join(),
         ...getTransfersRequestedCsv(

@@ -13,7 +13,7 @@ describe("getIntegrationTimesCsv", () => {
       ccgPractices,
       ccgName,
       ccgOdsCode,
-      "last6Months"
+      "last-6-months"
     );
     const expected = [
       "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,5,3,60%,2,40%,0,0%",
@@ -32,7 +32,7 @@ describe("getIntegrationTimesCsv", () => {
       ccgPractices,
       ccgName,
       ccgOdsCode,
-      "latestMonth"
+      "latest-month"
     );
     const expected = [
       "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,5,3,60%,2,40%,0,0%",

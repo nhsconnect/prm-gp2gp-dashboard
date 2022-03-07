@@ -46,7 +46,7 @@ describe("CCG Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const transfersRequestedLatestMonth = cy.readFile(
-          "./e2e/downloads/transfersRequested-latestMonth.csv"
+          "./e2e/downloads/GP Registrations Data transfers-requested-latest-month.csv"
         );
         transfersRequestedLatestMonth.should(
           "contain",
@@ -61,7 +61,7 @@ describe("CCG Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const integrationTimesLast6Months = cy.readFile(
-          "./e2e/downloads/integrationTimes-last6Months.csv"
+          "./e2e/downloads/GP Registrations Data integration-times-last-6-months.csv"
         );
         integrationTimesLast6Months.should(
           "contain",
@@ -76,7 +76,7 @@ describe("CCG Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const allLast6Months = cy.readFile(
-          "./e2e/downloads/all-last6Months.csv"
+          "./e2e/downloads/GP Registrations Data all-last-6-months.csv"
         );
         allLast6Months.should(
           "contain",
