@@ -61,6 +61,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
           </div>
           <DownloadData
             className="gp2gp-page-contents"
+            dataFor={formattedName}
             formatData={formatData}
             pageDescription={
               "To download data for this CCG in CSV format select from the options below and click 'Download'."
@@ -74,6 +75,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
           </h1>
           <span className="nhsuk-u-visually-hidden">download data</span>
           <DownloadData
+            dataFor={formattedName}
             formatData={formatData}
             pageDescription={
               "To download data for this CCG in CSV format select from the options below and click 'Download'."

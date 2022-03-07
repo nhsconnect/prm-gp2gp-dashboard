@@ -68,6 +68,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
           </div>
           <DownloadData
             className="gp2gp-page-contents"
+            dataFor={formattedName}
             formatData={formatData}
             pageDescription={
               "To download data for this practice in CSV format select from the options below and click 'Download'."
@@ -83,6 +84,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
           <OrganisationAddress odsCode={odsCode} />
           <hr aria-hidden={true} />
           <DownloadData
+            dataFor={formattedName}
             formatData={formatData}
             pageDescription={
               "To download data for this practice in CSV format select from the options below and click 'Download'."

@@ -6,7 +6,11 @@ describe("Download data component", () => {
   it("displays the title and description", () => {
     let pageDescription = "This is a description";
     const { getByText, getByRole } = render(
-      <DownloadData formatData={() => ""} pageDescription={pageDescription} />
+      <DownloadData
+        formatData={() => ""}
+        pageDescription={pageDescription}
+        dataFor={"Test GP practice"}
+      />
     );
 
     expect(getByRole("heading", { level: 2 })).toBeInTheDocument();
@@ -15,7 +19,11 @@ describe("Download data component", () => {
 
   it("displays two radio components", () => {
     const { getByRole } = render(
-      <DownloadData formatData={() => ""} pageDescription={""} />
+      <DownloadData
+        formatData={() => ""}
+        pageDescription={""}
+        dataFor={"Test GP CCG"}
+      />
     );
     let datasetType = getByRole("heading", {
       level: 3,
@@ -31,7 +39,11 @@ describe("Download data component", () => {
 
   it("displays two radio components with correct options", () => {
     const { getByText } = render(
-      <DownloadData formatData={() => ""} pageDescription={""} />
+      <DownloadData
+        formatData={() => ""}
+        pageDescription={""}
+        dataFor={"Test GP practice"}
+      />
     );
 
     expect(getByText("Transfers requested")).toBeInTheDocument();
@@ -51,7 +63,11 @@ describe("Download data component", () => {
     window.URL.createObjectURL = function () {};
 
     const { getByRole } = render(
-      <DownloadData formatData={callback} pageDescription={""} />
+      <DownloadData
+        formatData={callback}
+        pageDescription={""}
+        dataFor={"Test GP CCG"}
+      />
     );
 
     let button = getByRole("button");
@@ -69,7 +85,11 @@ describe("Download data component", () => {
     };
 
     const { getByRole } = render(
-      <DownloadData formatData={formatData} pageDescription={""} />
+      <DownloadData
+        formatData={formatData}
+        pageDescription={""}
+        dataFor={"Test GP practice"}
+      />
     );
 
     global.URL.createObjectURL = jest.fn(() => "https://csv.test");
@@ -86,7 +106,9 @@ describe("Download data component", () => {
 
     expect(formatData).toHaveBeenCalledTimes(1);
     // @ts-ignore
-    expect(link.download).toBe("GP Registrations Data all-last-6-months.csv");
+    expect(link.download).toBe(
+      "GP Registrations Data Test GP practice all-last-6-months.csv"
+    );
     // @ts-ignore
     expect(link.href).toBe("https://csv.test");
     expect(link.dispatchEvent).toHaveBeenCalledTimes(1);

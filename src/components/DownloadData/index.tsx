@@ -6,12 +6,14 @@ import { downloadFile } from "../../library/utils/download/downloadFile";
 
 type DownloadDataProps = {
   pageDescription: string;
+  dataFor: string;
   className?: string;
   formatData: (timeframe: string, datatype: string) => string;
 };
 
 export const DownloadData: FC<DownloadDataProps> = ({
   pageDescription,
+  dataFor,
   className = "",
   formatData,
 }) => {
@@ -29,7 +31,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
     const dataToDownload = formatData(selectedTimeframe, selectedDatasetType);
     downloadFile(
       dataToDownload,
-      `GP Registrations Data ${selectedDatasetType}-${selectedTimeframe}.csv`,
+      `GP Registrations Data ${dataFor} ${selectedDatasetType}-${selectedTimeframe}.csv`,
       "text/csv"
     );
   };
