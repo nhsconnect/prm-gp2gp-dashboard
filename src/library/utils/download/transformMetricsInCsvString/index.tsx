@@ -3,6 +3,7 @@ import {
   PracticeType,
   RequestedTransfersType,
 } from "../../../types/practice.types";
+import { TimeframeOptions } from "../../../enums/datasetTypeOptions";
 
 export function transformMetricsInCsvString(
   ccgPractices: PracticeType[],
@@ -38,7 +39,7 @@ export function transformMetricsInCsvString(
     let rows;
     const { odsCode, name, metrics } = practice;
 
-    if (timeframe === "latest-month") {
+    if (timeframe === TimeframeOptions.LatestMonth) {
       const { year: latestYear, month: latestMonth } =
         ccgPractices[0].metrics[0];
       rows = metrics

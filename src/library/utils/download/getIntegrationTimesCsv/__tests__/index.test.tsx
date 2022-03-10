@@ -3,6 +3,7 @@ import {
   practiceWithOneMonthMetrics,
   practiceWithTwoMonths,
 } from "../../../../../../__mocks__/practiceMetricsTestData";
+import { TimeframeOptions } from "../../../../enums/datasetTypeOptions";
 
 describe("getIntegrationTimesCsv", () => {
   it("transforms practice metrics into csv rows for 6 months for integration times", async () => {
@@ -13,7 +14,7 @@ describe("getIntegrationTimesCsv", () => {
       ccgPractices,
       ccgName,
       ccgOdsCode,
-      "last-6-months"
+      TimeframeOptions.Last6Months
     );
     const expected = [
       "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,5,3,60%,2,40%,0,0%",
@@ -32,7 +33,7 @@ describe("getIntegrationTimesCsv", () => {
       ccgPractices,
       ccgName,
       ccgOdsCode,
-      "latest-month"
+      TimeframeOptions.LatestMonth
     );
     const expected = [
       "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,5,3,60%,2,40%,0,0%",

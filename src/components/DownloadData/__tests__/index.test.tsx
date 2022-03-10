@@ -1,6 +1,10 @@
 import React from "react";
 import { getByRole, getByText, render } from "@testing-library/react";
 import { DownloadData } from "../index";
+import {
+  DatasetTypeOptions,
+  TimeframeOptions,
+} from "../../../library/enums/datasetTypeOptions";
 
 describe("Download data component", () => {
   it("displays the title and description", () => {
@@ -107,7 +111,8 @@ describe("Download data component", () => {
     expect(formatData).toHaveBeenCalledTimes(1);
     // @ts-ignore
     expect(link.download).toBe(
-      "GP Registrations Data Test GP practice all-last-6-months.csv"
+      "GP Registrations Data Test GP practice " +
+        `${DatasetTypeOptions.AllMetrics}-${TimeframeOptions.Last6Months}.csv`
     );
     // @ts-ignore
     expect(link.href).toBe("https://csv.test");

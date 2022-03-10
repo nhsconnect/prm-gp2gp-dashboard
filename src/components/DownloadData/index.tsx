@@ -3,6 +3,10 @@ import "./index.scss";
 import { Button } from "../common/Button";
 import { Radio } from "../common/FormComponents/Radio";
 import { downloadFile } from "../../library/utils/download/downloadFile";
+import {
+  DatasetTypeOptions,
+  TimeframeOptions,
+} from "../../library/enums/datasetTypeOptions";
 
 type DownloadDataProps = {
   pageDescription: string;
@@ -17,8 +21,8 @@ export const DownloadData: FC<DownloadDataProps> = ({
   className = "",
   formatData,
 }) => {
-  const initialDatasetTypeState = "all";
-  const initialTimeframeState = "last-6-months";
+  const initialDatasetTypeState = DatasetTypeOptions.AllMetrics.valueOf();
+  const initialTimeframeState = TimeframeOptions.Last6Months.valueOf();
 
   const [selectedDatasetType, setSelectedDatasetType] = useState(
     initialDatasetTypeState
@@ -54,15 +58,15 @@ export const DownloadData: FC<DownloadDataProps> = ({
             options={[
               {
                 displayValue: "Transfers requested",
-                value: "transfers-requested",
+                value: DatasetTypeOptions.TransfersRequested,
               },
               {
                 displayValue: "Integration times",
-                value: "integration-times",
+                value: DatasetTypeOptions.IntegrationTimes,
               },
               {
                 displayValue: "All",
-                value: "all",
+                value: DatasetTypeOptions.AllMetrics,
               },
             ]}
             selectedValue={selectedDatasetType}
@@ -75,11 +79,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
             options={[
               {
                 displayValue: "Latest month",
-                value: "latest-month",
+                value: TimeframeOptions.LatestMonth,
               },
               {
                 displayValue: "Last 6 months",
-                value: "last-6-months",
+                value: TimeframeOptions.Last6Months,
               },
             ]}
             selectedValue={selectedTimeframe}

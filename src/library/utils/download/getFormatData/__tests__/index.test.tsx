@@ -3,6 +3,10 @@ import {
   practiceWithOneMonthMetrics,
   practiceWithTwoMonths,
 } from "../../../../../../__mocks__/practiceMetricsTestData";
+import {
+  DatasetTypeOptions,
+  TimeframeOptions,
+} from "../../../../enums/datasetTypeOptions";
 
 describe("getFormatData - integration tests ", () => {
   it("formats data when choosing last 6 months for integration times", async () => {
@@ -21,8 +25,8 @@ describe("getFormatData - integration tests ", () => {
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,January 2020,22,5,22.7%,6,27.3%,11,50%";
 
     const actual = formatDataForSelectedOptions(
-      "last-6-months",
-      "integration-times"
+      TimeframeOptions.Last6Months,
+      DatasetTypeOptions.IntegrationTimes
     );
 
     expect(actual).toEqual(expected);
@@ -43,8 +47,8 @@ describe("getFormatData - integration tests ", () => {
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,22,100%,0,0%";
 
     const actual = formatDataForSelectedOptions(
-      "latest-month",
-      "transfers-requested"
+      TimeframeOptions.LatestMonth,
+      DatasetTypeOptions.TransfersRequested
     );
     expect(actual).toEqual(expected);
   });
@@ -64,7 +68,10 @@ describe("getFormatData - integration tests ", () => {
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%\n" +
       "Some CCG,CCG_ABC_123,Second GP Practice,A12346,January 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%";
 
-    const actual = formatDataForSelectedOptions("last-6-months", "all");
+    const actual = formatDataForSelectedOptions(
+      TimeframeOptions.Last6Months,
+      DatasetTypeOptions.AllMetrics
+    );
 
     expect(actual).toEqual(expected);
   });
