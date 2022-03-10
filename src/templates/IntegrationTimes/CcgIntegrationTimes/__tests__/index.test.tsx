@@ -40,7 +40,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: /Y00159/,
+      name: "Y00159 integration times",
       level: 1,
     });
 
@@ -48,7 +48,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = /Burton CCG - 12A/;
+    const ccgHeadingText = "Burton CCG - 12A integration times";
 
     const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />
@@ -257,7 +257,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: odsCode,
+      name: `${odsCode} integration times`,
       level: 1,
     });
 
@@ -265,7 +265,7 @@ describe("CCG Integration Times template - showContentsNavigation feature toggle
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = "Burton CCG - 12A";
+    const ccgHeadingText = "Burton CCG - 12A integration times";
 
     const { getByRole } = render(
       <IntegrationTimesCcg pageContext={pipelineCCGData} />

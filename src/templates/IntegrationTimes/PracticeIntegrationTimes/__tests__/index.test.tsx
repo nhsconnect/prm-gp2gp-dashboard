@@ -121,7 +121,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
 
     await waitFor(() => {
       const expectedPracticeHeading = getByRole("heading", {
-        name: "Burton Croft Surgery - B86030",
+        name: "Burton Croft Surgery - B86030 integration times",
         level: 1,
       });
       expect(expectedPracticeHeading).toBeInTheDocument();
@@ -151,7 +151,7 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
     );
 
     const expectedPracticeHeading = getByRole("heading", {
-      name: "B86031",
+      name: "B86031 integration times",
       level: 1,
     });
 

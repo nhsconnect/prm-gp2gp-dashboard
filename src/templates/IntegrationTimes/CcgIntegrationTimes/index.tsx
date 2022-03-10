@@ -184,6 +184,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
         <>
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+            <span className="nhsuk-u-visually-hidden"> integration times</span>
           </h1>
           <PageContent
             title={pageTitle}

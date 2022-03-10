@@ -41,7 +41,7 @@ describe("CCG Transfers Requested template - showContentsNavigation feature togg
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: /Y00159/,
+      name: "Y00159 GP2GP transfers requested",
       level: 1,
     });
 
@@ -49,7 +49,7 @@ describe("CCG Transfers Requested template - showContentsNavigation feature togg
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = /Burton CCG - 12A/;
+    const ccgHeadingText = "Burton CCG - 12A GP2GP transfers requested";
 
     const { getByRole } = render(
       <CcgTransfersRequested pageContext={pipelineCCGData} />
@@ -257,7 +257,7 @@ describe("CCG Transfers Requested template - showContentsNavigation feature togg
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: /Y00159/,
+      name: "Y00159 GP2GP transfers requested",
       level: 1,
     });
 
@@ -265,7 +265,7 @@ describe("CCG Transfers Requested template - showContentsNavigation feature togg
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = /Burton CCG - 12A/;
+    const ccgHeadingText = "Burton CCG - 12A GP2GP transfers requested";
 
     const { getByRole } = render(
       <CcgTransfersRequested pageContext={pipelineCCGData} />

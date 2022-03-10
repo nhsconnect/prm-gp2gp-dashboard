@@ -39,7 +39,7 @@ describe("CCGDownloadData template - showContentsNavigation feature toggle is on
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: /Y00159/,
+      name: "Y00159 download data",
       level: 1,
     });
 
@@ -47,7 +47,7 @@ describe("CCGDownloadData template - showContentsNavigation feature toggle is on
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = /Burton CCG - 12A/;
+    const ccgHeadingText = "Burton CCG - 12A download data";
 
     const { getByRole } = render(
       <CcgDownloadData pageContext={pipelineCCGData} />
@@ -133,7 +133,7 @@ describe("CCGDownloadData template - showContentsNavigation feature toggle is of
     );
 
     const expectedCcgHeading = getByRole("heading", {
-      name: /Y00159/,
+      name: "Y00159 download data",
       level: 1,
     });
 
@@ -141,7 +141,7 @@ describe("CCGDownloadData template - showContentsNavigation feature toggle is of
   });
 
   it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = /Burton CCG - 12A/;
+    const ccgHeadingText = "Burton CCG - 12A download data";
 
     const { getByRole } = render(
       <CcgDownloadData pageContext={pipelineCCGData} />

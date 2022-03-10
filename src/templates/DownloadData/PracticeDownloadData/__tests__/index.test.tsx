@@ -93,7 +93,7 @@ describe("PracticeDownloadData template - showContentsNavigation feature toggle 
     );
 
     const expectedPracticeHeading = getByRole("heading", {
-      name: /B86031/,
+      name: "B86031 download data",
       level: 1,
     });
 
@@ -204,7 +204,7 @@ describe("PracticeDownloadData template - showContentsNavigation feature toggle 
     );
 
     const expectedPracticeHeading = getByRole("heading", {
-      name: /B86031/,
+      name: "B86031 download data",
       level: 1,
     });
 

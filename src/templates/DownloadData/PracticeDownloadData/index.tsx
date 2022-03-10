@@ -55,7 +55,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
           <div className="gp2gp-page-heading">
             <h1 className="nhsuk-u-margin-bottom-5">
               {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-              <span className="nhsuk-u-visually-hidden">download data</span>
+              <span className="nhsuk-u-visually-hidden"> download data</span>
             </h1>
             <OrganisationAddress odsCode={odsCode} />
             <hr aria-hidden={true} />
@@ -77,7 +77,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
         <>
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-            <span className="nhsuk-u-visually-hidden">download data</span>
+            <span className="nhsuk-u-visually-hidden"> download data</span>
           </h1>
           <OrganisationAddress odsCode={odsCode} />
           <hr aria-hidden={true} />
