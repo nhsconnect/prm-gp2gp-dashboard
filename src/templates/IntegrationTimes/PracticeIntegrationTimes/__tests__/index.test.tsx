@@ -27,6 +27,8 @@ const practicePageContext = {
   practice: {
     odsCode: "B86030",
     name: "BURTON CROFT SURGERY",
+    ccgOdsCode: "11D",
+    ccgName: "Test ccg",
     metrics: [
       {
         year: 2019,
@@ -43,11 +45,6 @@ const practicePageContext = {
           notIntegratedWithin8DaysPercentOfReceived: 13.6,
           failuresTotalCount: 0,
           failuresTotalPercentOfRequested: 0.0,
-          integratedCount: 0,
-          integratedBeyond8DaysCount: 2,
-          awaitingIntegrationCount: 1,
-          technicalFailuresCount: 0,
-          unclassifiedFailureCount: 0,
         },
       },
       {
@@ -65,11 +62,6 @@ const practicePageContext = {
           notIntegratedWithin8DaysPercentOfReceived: 0.2,
           failuresTotalCount: 0,
           failuresTotalPercentOfRequested: 0.0,
-          integratedCount: 15,
-          integratedBeyond8DaysCount: 3,
-          awaitingIntegrationCount: 0,
-          technicalFailuresCount: 0,
-          unclassifiedFailureCount: 0,
         },
       },
       {
@@ -87,11 +79,6 @@ const practicePageContext = {
           notIntegratedWithin8DaysPercentOfReceived: 25.0,
           failuresTotalCount: 0,
           failuresTotalPercentOfRequested: 0.0,
-          integratedCount: 15,
-          integratedBeyond8DaysCount: 3,
-          awaitingIntegrationCount: 1,
-          technicalFailuresCount: 0,
-          unclassifiedFailureCount: 0,
         },
       },
     ],
@@ -330,6 +317,8 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
       practice: {
         odsCode: "B86030",
         name: "BURTON CROFT SURGERY",
+        ccgOdsCode: "11D",
+        ccgName: "Test ccg",
         metrics: [
           {
             year: 2019,
@@ -337,13 +326,8 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
             requestedTransfers: {
               requestedCount: 0,
               receivedCount: 0,
-              integratedCount: 0,
               integratedWithin3DaysCount: 0,
               integratedWithin8DaysCount: 0,
-              integratedBeyond8DaysCount: 0,
-              awaitingIntegrationCount: 0,
-              technicalFailuresCount: 0,
-              unclassifiedFailureCount: 0,
               receivedPercentOfRequested: null,
               integratedWithin3DaysPercentOfReceived: null,
               integratedWithin8DaysPercentOfReceived: null,
@@ -612,6 +596,8 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
       practice: {
         odsCode: "B86030",
         name: "BURTON CROFT SURGERY",
+        ccgOdsCode: "11D",
+        ccgName: "Test ccg",
         metrics: [
           {
             year: 2019,
@@ -619,13 +605,8 @@ describe("PracticeIntegrationTimes template when showContentsNavigation toggle i
             requestedTransfers: {
               requestedCount: 0,
               receivedCount: 0,
-              integratedCount: 0,
               integratedWithin3DaysCount: 0,
               integratedWithin8DaysCount: 0,
-              integratedBeyond8DaysCount: 0,
-              awaitingIntegrationCount: 0,
-              technicalFailuresCount: 0,
-              unclassifiedFailureCount: 0,
               receivedPercentOfRequested: null,
               integratedWithin3DaysPercentOfReceived: null,
               integratedWithin8DaysPercentOfReceived: null,

@@ -2,6 +2,8 @@
   {
     "odsCode": "A12345",
     "name": "GP Practice",
+    "ccgOdsCode": "11D",
+    "ccgName": "Test ccg",
     "metrics": [
       {
         "year": 2020,
@@ -9,13 +11,8 @@
         "requestedTransfers": {
           "requestedCount": 7,
           "receivedCount": 5,
-          "integratedCount": 5,
           "integratedWithin3DaysCount": 3,
           "integratedWithin8DaysCount": 2,
-          "integratedBeyond8DaysCount": 0,
-          "awaitingIntegrationCount": 0,
-          "technicalFailuresCount": 2,
-          "unclassifiedFailureCount": 0,
           "receivedPercentOfRequested": 71.42,
           "integratedWithin3DaysPercentOfReceived": 60.0,
           "integratedWithin8DaysPercentOfReceived": 40.0,
@@ -30,6 +27,8 @@
   {
     "odsCode": "A12346",
     "name": "Second GP Practice",
+    "ccgOdsCode": "11D",
+    "ccgName": "Test ccg",
     "metrics": [
       {
         "year": 2020,
@@ -37,13 +36,8 @@
         "requestedTransfers": {
           "requestedCount": 22,
           "receivedCount": 22,
-          "integratedCount": 21,
           "integratedWithin3DaysCount": 5,
           "integratedWithin8DaysCount": 6,
-          "integratedBeyond8DaysCount": 10,
-          "awaitingIntegrationCount": 1,
-          "technicalFailuresCount": 0,
-          "unclassifiedFailureCount": 0,
           "receivedPercentOfRequested": 100.0,
           "integratedWithin3DaysPercentOfReceived": 22.7,
           "integratedWithin8DaysPercentOfReceived": 27.3,
@@ -58,6 +52,8 @@
   {
     "odsCode": "A12347",
     "name": "Third GP Practice",
+    "ccgOdsCode": "11D",
+    "ccgName": "Test ccg",
     "metrics": [
       {
         "year": 2020,
@@ -65,13 +61,8 @@
         "requestedTransfers": {
           "requestedCount": 40,
           "receivedCount": 34,
-          "integratedCount": 34,
           "integratedWithin3DaysCount": 20,
           "integratedWithin8DaysCount": 11,
-          "integratedBeyond8DaysCount": 3,
-          "awaitingIntegrationCount": 0,
-          "technicalFailuresCount": 5,
-          "unclassifiedFailureCount": 1,
           "receivedPercentOfRequested": 85.0,
           "integratedWithin3DaysPercentOfReceived": 58.8,
           "integratedWithin8DaysPercentOfReceived": 32.4,
@@ -86,6 +77,8 @@
   {
     "odsCode": "A12348",
     "name": "Fourth GP Practice",
+    "ccgOdsCode": "11D",
+    "ccgName": "Test ccg",
     "metrics": [
       {
         "year": 2020,
@@ -93,13 +86,8 @@
         "requestedTransfers": {
           "requestedCount": 0,
           "receivedCount": 0,
-          "integratedCount": 0,
           "integratedWithin3DaysCount": 0,
           "integratedWithin8DaysCount": 0,
-          "integratedBeyond8DaysCount": 0,
-          "awaitingIntegrationCount": 0,
-          "technicalFailuresCount": 0,
-          "unclassifiedFailureCount": 0,
           "receivedPercentOfRequested": null,
           "integratedWithin3DaysPercentOfReceived": null,
           "integratedWithin8DaysPercentOfReceived": null,
@@ -114,6 +102,8 @@
   {
     "odsCode": "A12349",
     "name": "Fifth GP Practice",
+    "ccgOdsCode": "11D",
+    "ccgName": "Test ccg",
     "metrics": [
       {
         "year": 2020,
@@ -121,13 +111,8 @@
         "requestedTransfers": {
           "requestedCount": 14,
           "receivedCount": 13,
-          "integratedCount": 12,
           "integratedWithin3DaysCount": 0,
           "integratedWithin8DaysCount": 12,
-          "integratedBeyond8DaysCount": 0,
-          "awaitingIntegrationCount": 1,
-          "technicalFailuresCount": 1,
-          "unclassifiedFailureCount": 0,
           "receivedPercentOfRequested": 92.9,
           "integratedWithin3DaysPercentOfReceived": 0,
           "integratedWithin8DaysPercentOfReceived": 92.3,
@@ -142,6 +127,8 @@
   {
     "odsCode": "A12350",
     "name": "Sixth GP Practice",
+    "ccgOdsCode": "11D",
+    "ccgName": "Test ccg",
     "metrics": [
       {
         "year": 2020,
@@ -149,13 +136,8 @@
         "requestedTransfers": {
           "requestedCount": 13,
           "receivedCount": 12,
-          "integratedCount": 12,
           "integratedWithin3DaysCount": 5,
           "integratedWithin8DaysCount": 4,
-          "integratedBeyond8DaysCount": 3,
-          "awaitingIntegrationCount": 0,
-          "technicalFailuresCount": 0,
-          "unclassifiedFailureCount": 1,
           "receivedPercentOfRequested": 92.3,
           "integratedWithin3DaysPercentOfReceived": 41.7,
           "integratedWithin8DaysPercentOfReceived": 33.3,

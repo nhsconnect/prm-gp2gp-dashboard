@@ -1,6 +1,8 @@
 export const practiceWithOneMonthMetrics = {
   odsCode: "A12345",
   name: "GP Practice",
+  ccgOdsCode: "11D",
+  ccgName: "Test ccg",
   metrics: [
     {
       year: 2020,
@@ -17,11 +19,6 @@ export const practiceWithOneMonthMetrics = {
         notIntegratedWithin8DaysPercentOfReceived: 0,
         failuresTotalCount: 2,
         failuresTotalPercentOfRequested: 28.6,
-        integratedCount: 5,
-        integratedBeyond8DaysCount: 0,
-        awaitingIntegrationCount: 0,
-        technicalFailuresCount: 2,
-        unclassifiedFailureCount: 0,
       },
     },
   ],
@@ -30,6 +27,8 @@ export const practiceWithOneMonthMetrics = {
 export const practiceWithTwoMonths = {
   odsCode: "A12346",
   name: "Second GP Practice",
+  ccgOdsCode: "11D",
+  ccgName: "Test ccg",
   metrics: [
     {
       year: 2020,
@@ -46,11 +45,6 @@ export const practiceWithTwoMonths = {
         notIntegratedWithin8DaysPercentOfReceived: 50,
         failuresTotalCount: 0,
         failuresTotalPercentOfRequested: 0,
-        integratedCount: 21,
-        integratedBeyond8DaysCount: 10,
-        awaitingIntegrationCount: 1,
-        technicalFailuresCount: 0,
-        unclassifiedFailureCount: 0,
       },
     },
     {
@@ -68,11 +62,6 @@ export const practiceWithTwoMonths = {
         notIntegratedWithin8DaysPercentOfReceived: 50,
         failuresTotalCount: 0,
         failuresTotalPercentOfRequested: 0,
-        integratedCount: 21,
-        integratedBeyond8DaysCount: 10,
-        awaitingIntegrationCount: 1,
-        technicalFailuresCount: 0,
-        unclassifiedFailureCount: 0,
       },
     },
   ],
@@ -81,6 +70,8 @@ export const practiceWithTwoMonths = {
 export const practiceWithThreeMonthsMetrics = {
   odsCode: "B86030",
   name: "BURTON CROFT SURGERY",
+  ccgOdsCode: "11D",
+  ccgName: "Test ccg",
   metrics: [
     {
       year: 2019,
@@ -97,11 +88,6 @@ export const practiceWithThreeMonthsMetrics = {
         notIntegratedWithin8DaysPercentOfReceived: 13.6,
         failuresTotalCount: 0,
         failuresTotalPercentOfRequested: 0.0,
-        integratedCount: 0,
-        integratedBeyond8DaysCount: 2,
-        awaitingIntegrationCount: 1,
-        technicalFailuresCount: 0,
-        unclassifiedFailureCount: 0,
       },
     },
     {
@@ -119,11 +105,6 @@ export const practiceWithThreeMonthsMetrics = {
         notIntegratedWithin8DaysPercentOfReceived: 0.2,
         failuresTotalCount: 0,
         failuresTotalPercentOfRequested: 0.0,
-        integratedCount: 15,
-        integratedBeyond8DaysCount: 3,
-        awaitingIntegrationCount: 0,
-        technicalFailuresCount: 0,
-        unclassifiedFailureCount: 0,
       },
     },
     {
@@ -141,11 +122,6 @@ export const practiceWithThreeMonthsMetrics = {
         notIntegratedWithin8DaysPercentOfReceived: 25.0,
         failuresTotalCount: 0,
         failuresTotalPercentOfRequested: 0.0,
-        integratedCount: 15,
-        integratedBeyond8DaysCount: 3,
-        awaitingIntegrationCount: 1,
-        technicalFailuresCount: 0,
-        unclassifiedFailureCount: 0,
       },
     },
   ],

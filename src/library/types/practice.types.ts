@@ -10,12 +10,6 @@ export type RequestedTransfersType = {
   notIntegratedWithin8DaysPercentOfReceived: number | null;
   failuresTotalCount: number;
   failuresTotalPercentOfRequested: number | null;
-  //deprecated fields
-  integratedCount: number;
-  integratedBeyond8DaysCount: number;
-  awaitingIntegrationCount: number;
-  technicalFailuresCount: number;
-  unclassifiedFailureCount: number;
 };
 
 export type PracticeMetricsType = {
@@ -27,5 +21,7 @@ export type PracticeMetricsType = {
 export type PracticeType = {
   odsCode: string;
   name: string;
+  ccgOdsCode: string;
+  ccgName: string;
   metrics: PracticeMetricsType[];
 };

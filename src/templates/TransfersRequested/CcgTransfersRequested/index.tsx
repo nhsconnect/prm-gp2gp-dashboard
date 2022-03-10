@@ -45,6 +45,8 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
   const ccgPracticeTableData: PracticeType[] = ccgPractices.map((practice) => ({
     odsCode: practice.odsCode,
     name: practice.name,
+    ccgOdsCode: practice.ccgOdsCode,
+    ccgName: practice.ccgName,
     metrics: [
       {
         year: practice.metrics[0].year,

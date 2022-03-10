@@ -12,8 +12,6 @@ import { getFormatData } from "../../../library/utils/download/getFormatData";
 type PageContext = {
   practice: PracticeType;
   layout: string;
-  ccgOdsCode: string;
-  ccgName: string;
 };
 
 type PracticeProps = {
@@ -21,9 +19,9 @@ type PracticeProps = {
 };
 
 const PracticeDownloadData: FC<PracticeProps> = ({
-  pageContext: { practice, ccgOdsCode, ccgName },
+  pageContext: { practice },
 }) => {
-  const { name, odsCode } = practice;
+  const { name, odsCode, ccgName, ccgOdsCode } = practice;
   const formattedName = convertToTitleCase(name);
   const { showContentsNavigation } = useFeatureToggles();
   const contentListItems = [
