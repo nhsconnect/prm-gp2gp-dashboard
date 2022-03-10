@@ -5,7 +5,6 @@ import { render } from "@testing-library/react";
 import CcgDownloadData from "../index";
 import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
 
 jest.mock("no-scroll");
@@ -20,7 +19,7 @@ describe("CCGDownloadData template - showContentsNavigation feature toggle is on
   };
 
   beforeEach(() => {
-    when(mocked(useFeatureToggles))
+    when(jest.mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: true });
   });
@@ -114,7 +113,7 @@ describe("CCGDownloadData template - showContentsNavigation feature toggle is of
   };
 
   beforeEach(() => {
-    when(mocked(useFeatureToggles))
+    when(jest.mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: false });
   });

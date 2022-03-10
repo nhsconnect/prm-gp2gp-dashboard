@@ -8,7 +8,6 @@ import { mockAPIResponse } from "../../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { practiceWithThreeMonthsMetrics } from "../../../../../__mocks__/practiceMetricsTestData";
 import { when } from "jest-when";
-import { mocked } from "ts-jest/utils";
 import { useFeatureToggles } from "../../../../library/hooks/useFeatureToggle";
 
 jest.mock("no-scroll");
@@ -37,7 +36,7 @@ describe("PracticeDownloadData template - showContentsNavigation feature toggle 
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
-    when(mocked(useFeatureToggles))
+    when(jest.mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: true });
   });
@@ -148,7 +147,7 @@ describe("PracticeDownloadData template - showContentsNavigation feature toggle 
     const statusCode = 200;
     const mockedResponse = practiceDataBuilder(ODSPracticeData);
     mockAPIResponse(statusCode, mockedResponse);
-    when(mocked(useFeatureToggles))
+    when(jest.mocked(useFeatureToggles))
       .calledWith()
       .mockReturnValue({ showContentsNavigation: false });
   });
