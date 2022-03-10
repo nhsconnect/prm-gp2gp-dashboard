@@ -1,7 +1,10 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { PracticeType } from "../../../library/types/practice.types";
+import {
+  CcgPracticeType,
+  PracticeType,
+} from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
@@ -42,19 +45,19 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
 
   const pageTitle = `GP2GP transfers requested for registering practices`;
 
-  const ccgPracticeTableData: PracticeType[] = ccgPractices.map((practice) => ({
-    odsCode: practice.odsCode,
-    name: practice.name,
-    ccgOdsCode: practice.ccgOdsCode,
-    ccgName: practice.ccgName,
-    metrics: [
-      {
-        year: practice.metrics[0].year,
-        month: practice.metrics[0].month,
-        requestedTransfers: practice.metrics[0].requestedTransfers,
-      },
-    ],
-  }));
+  const ccgPracticeTableData: CcgPracticeType[] = ccgPractices.map(
+    (practice) => ({
+      odsCode: practice.odsCode,
+      name: practice.name,
+      metrics: [
+        {
+          year: practice.metrics[0].year,
+          month: practice.metrics[0].month,
+          requestedTransfers: practice.metrics[0].requestedTransfers,
+        },
+      ],
+    })
+  );
 
   const contentListItems = [
     {

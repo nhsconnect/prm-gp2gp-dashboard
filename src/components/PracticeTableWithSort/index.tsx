@@ -1,4 +1,4 @@
-import React, { AriaAttributes, FC, useMemo, useState, ReactNode } from "react";
+import React, { AriaAttributes, FC, ReactNode, useMemo, useState } from "react";
 import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
@@ -9,10 +9,10 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
-import { PracticeType } from "../../library/types/practice.types";
+import { CcgPracticeType } from "../../library/types/practice.types";
 
 type TableWithSortProps = {
-  ccgPractices: PracticeType[];
+  ccgPractices: CcgPracticeType[];
   headers: { title: ReactNode; extra?: ReactNode }[];
   sortBySelect: SelectType;
   orderSelect: SelectType;
@@ -48,7 +48,7 @@ const PracticeLink = ({
 };
 
 const sortPractices = (
-  practices: PracticeType[],
+  practices: CcgPracticeType[],
   fieldName: string,
   order: string
 ) => {
@@ -93,7 +93,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   }, [ccgPractices, selectedField, selectedOrder]);
 
   const practiceTableRows = sortedPractices.map(
-    ({ odsCode, name, metrics }: PracticeType) => {
+    ({ odsCode, name, metrics }: CcgPracticeType) => {
       const requestedMetric = metrics[0].requestedTransfers;
       if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
         return [
