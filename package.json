@@ -26,9 +26,9 @@
     "getPracticeMetrics:stub": "node scripts/get-stub-data.js --datatype practiceMetrics",
     "getNationalMetrics:ci": "node scripts/get-s3-data.js --datatype nationalMetrics",
     "getNationalMetrics:stub": "node scripts/get-stub-data.js --datatype nationalMetrics",
+    "enableGitHooks": "husky install",
     "pre-commit": "lint-staged && npm test",
     "pre-push": "npm run build && npm run test:e2e:built",
-    "prepare": "husky install",
     "preinstall": "npx npm-force-resolutions",
     "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub && npm run clean"
   },
@@ -85,6 +85,7 @@
     "concurrently": "^6.2.0",
     "cypress": "^7.5.0",
     "cypress-axe": "^0.14.0",
+    "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "jest-when": "^3.4.1",
@@ -97,11 +98,8 @@
     "ts-jest": "^27.1.3",
     "typescript": "^4.3.2"
   },
-  "optionalDependencies": {
-    "husky": "^7.0.4"
-  },
   "resolutions": {
-    "ansi-html" : "^0.0.9",
+    "ansi-html": "^0.0.9",
     "netmask": "^2.0.1",
     "mem": "^8.1.1",
     "browserslist": "^4.16.5",

@@ -13,7 +13,7 @@
 1. `git clone git@github.com:nhsconnect/prm-gp2gp-dashboard.git`
 2. `cd prm-gp2gp-dashboard`
 3. `npm ci`
-4. `npm run prepare`
+4. `npm run enableGitHooks`
 
 GP2GP metrics JSON files are then required to build the dashboard. There are two options - to either retrieve them from the Data Pipeline Github repo, or to download them from S3. Below are instructions for both:
 
@@ -56,7 +56,7 @@ Note: due to the nature of the E2E tests relying on having stubbed data, you wil
 
 ### Development build
 
-1. `npm ci`
+1. `npm install`
 2. `npm run develop`
 3. `npm run e2e:open` (in a separate terminal)
    - This will open the Cypress test runner.
