@@ -21,9 +21,9 @@ function getAllDataRowValues(
   requestedTransfers: RequestedTransfersType
 ) {
   return {
-    [AllCSVHeadings.CCG_NAME]: ccgName,
+    [AllCSVHeadings.CCG_NAME]: `"${ccgName}"`,
     [AllCSVHeadings.CCG_ODS]: ccgOdsCode,
-    [AllCSVHeadings.REQUESTING_PRACTICE_NAME]: name,
+    [AllCSVHeadings.REQUESTING_PRACTICE_NAME]: `"${name}"`,
     [AllCSVHeadings.PRACTICE_ODS]: odsCode,
     [AllCSVHeadings.MONTH_AND_YEAR]:
       convertMonthNumberToText(month) + " " + year,

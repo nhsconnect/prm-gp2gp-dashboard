@@ -17,9 +17,9 @@ function getTransfersRequestedRowValues(
   requestedTransfers: RequestedTransfersType
 ) {
   return {
-    [TransfersRequestedRowHeadings.CCG_NAME]: ccgName,
+    [TransfersRequestedRowHeadings.CCG_NAME]: `"${ccgName}"`,
     [TransfersRequestedRowHeadings.CCG_ODS]: ccgOdsCode,
-    [TransfersRequestedRowHeadings.REQUESTING_PRACTICE_NAME]: name,
+    [TransfersRequestedRowHeadings.REQUESTING_PRACTICE_NAME]: `"${name}"`,
     [TransfersRequestedRowHeadings.PRACTICE_ODS]: odsCode,
     [TransfersRequestedRowHeadings.MONTH_AND_YEAR]:
       convertMonthNumberToText(month) + " " + year,

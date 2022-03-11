@@ -20,9 +20,9 @@ describe("getFormatData - integration tests ", () => {
     );
     const expected =
       "CCG name,CCG ODS,Requesting practice name,Practice ODS,Month,GP2GP Transfers received,Integrated within 3 days,Integrated within 3 days - %,Integrated within 8 days ,Integrated within 8 days - %,Not integrated within 8 days (paper copy requested),Not integrated within 8 days (paper copy requested) - %\n" +
-      "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,5,3,60%,2,40%,0,0%\n" +
-      "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,5,22.7%,6,27.3%,11,50%\n" +
-      "Some CCG,CCG_ABC_123,Second GP Practice,A12346,January 2020,22,5,22.7%,6,27.3%,11,50%";
+      '"Some CCG",CCG_ABC_123,"GP Practice",A12345,February 2020,5,3,60%,2,40%,0,0%\n' +
+      '"Some CCG",CCG_ABC_123,"Second GP Practice",A12346,February 2020,22,5,22.7%,6,27.3%,11,50%\n' +
+      '"Some CCG",CCG_ABC_123,"Second GP Practice",A12346,January 2020,22,5,22.7%,6,27.3%,11,50%';
 
     const actual = formatDataForSelectedOptions(
       TimeframeOptions.Last6Months,
@@ -43,8 +43,8 @@ describe("getFormatData - integration tests ", () => {
     );
     const expected =
       "CCG name,CCG ODS,Requesting practice name,Practice ODS,Month,GP2GP transfers requested,GP2GP transfers received,GP2GP transfers received - %,GP2GP technical failures (paper copy requested),GP2GP technical failures (paper copy requested) - %\n" +
-      "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,7,5,71.42%,2,28.6%\n" +
-      "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,22,100%,0,0%";
+      '"Some CCG",CCG_ABC_123,"GP Practice",A12345,February 2020,7,5,71.42%,2,28.6%\n' +
+      '"Some CCG",CCG_ABC_123,"Second GP Practice",A12346,February 2020,22,22,100%,0,0%';
 
     const actual = formatDataForSelectedOptions(
       TimeframeOptions.LatestMonth,
@@ -64,9 +64,9 @@ describe("getFormatData - integration tests ", () => {
     );
     const expected =
       "CCG name,CCG ODS,Requesting practice name,Practice ODS,Month,GP2GP transfers requested,GP2GP transfers received,GP2GP transfers received - %,GP2GP technical failures (paper copy requested),GP2GP technical failures (paper copy requested) - %,GP2GP Transfers received,Integrated within 3 days,Integrated within 3 days - %,Integrated within 8 days ,Integrated within 8 days - %,Not integrated within 8 days (paper copy requested),Not integrated within 8 days (paper copy requested) - %\n" +
-      "Some CCG,CCG_ABC_123,GP Practice,A12345,February 2020,7,5,71.42%,2,28.6%,5,3,60%,2,40%,0,0%\n" +
-      "Some CCG,CCG_ABC_123,Second GP Practice,A12346,February 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%\n" +
-      "Some CCG,CCG_ABC_123,Second GP Practice,A12346,January 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%";
+      '"Some CCG",CCG_ABC_123,"GP Practice",A12345,February 2020,7,5,71.42%,2,28.6%,5,3,60%,2,40%,0,0%\n' +
+      '"Some CCG",CCG_ABC_123,"Second GP Practice",A12346,February 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%\n' +
+      '"Some CCG",CCG_ABC_123,"Second GP Practice",A12346,January 2020,22,22,100%,0,0%,22,5,22.7%,6,27.3%,11,50%';
 
     const actual = formatDataForSelectedOptions(
       TimeframeOptions.Last6Months,

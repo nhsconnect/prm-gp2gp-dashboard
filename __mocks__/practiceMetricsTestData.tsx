@@ -126,3 +126,29 @@ export const practiceWithThreeMonthsMetrics = {
     },
   ],
 };
+
+export const practiceWithCommasInTheName = {
+  odsCode: "A12345",
+  name: "Dr GP1, Dr GP2, Practice",
+  ccgOdsCode: "11D",
+  ccgName: "Test, and test ccg",
+  metrics: [
+    {
+      year: 2020,
+      month: 2,
+      requestedTransfers: {
+        requestedCount: 7,
+        receivedCount: 5,
+        receivedPercentOfRequested: 71.42,
+        integratedWithin3DaysCount: 3,
+        integratedWithin3DaysPercentOfReceived: 60.0,
+        integratedWithin8DaysCount: 2,
+        integratedWithin8DaysPercentOfReceived: 40.0,
+        notIntegratedWithin8DaysTotal: 0,
+        notIntegratedWithin8DaysPercentOfReceived: 0,
+        failuresTotalCount: 2,
+        failuresTotalPercentOfRequested: 28.6,
+      },
+    },
+  ],
+};

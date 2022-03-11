@@ -17,9 +17,9 @@ function getIntegrationTimesRowValues(
   requestedTransfers: RequestedTransfersType
 ) {
   return {
-    [IntegrationRowHeadings.CCG_NAME]: ccgName,
+    [IntegrationRowHeadings.CCG_NAME]: `"${ccgName}"`,
     [IntegrationRowHeadings.CCG_ODS]: ccgOdsCode,
-    [IntegrationRowHeadings.REQUESTING_PRACTICE_NAME]: name,
+    [IntegrationRowHeadings.REQUESTING_PRACTICE_NAME]: `"${name}"`,
     [IntegrationRowHeadings.PRACTICE_ODS]: odsCode,
     [IntegrationRowHeadings.MONTH_AND_YEAR]:
       convertMonthNumberToText(month) + " " + year,
