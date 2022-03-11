@@ -5,6 +5,12 @@ import {
 } from "../../../types/practice.types";
 import { TimeframeOptions } from "../../../enums/datasetTypeOptions";
 
+const filterMetricsByMonth = (
+  metrics: PracticeMetricsType[],
+  month: number,
+  year: number
+) => metrics.filter((metric) => metric.month === month && metric.year === year);
+
 type GetRowValuesType = (
   ccgName: string,
   ccgOdsCode: string,
@@ -20,43 +26,25 @@ export function transformMetricsInCsvString(
   timeframe: string,
   getRowValues: GetRowValuesType
 ) {
-  function transformMetricsIntoCsvRow(
-    name: string,
-    odsCode: string,
-    ccgName: string,
-    ccgOdsCode: string
-  ) {
-    return (metric: PracticeMetricsType) => {
+  return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
+    const allMetrics = practice.metrics;
+    const { year: latestYear, month: latestMonth } = ccgPractices[0].metrics[0];
+    const metrics =
+      timeframe === TimeframeOptions.LatestMonth
+        ? filterMetricsByMonth(allMetrics, latestMonth, latestYear)
+        : allMetrics;
+    const rows = metrics.map((metric: PracticeMetricsType) => {
       const row = getRowValues(
-        ccgName,
-        ccgOdsCode,
-        name,
-        odsCode,
+        practice.ccgName,
+        practice.ccgOdsCode,
+        practice.name,
+        practice.odsCode,
         metric.month,
         metric.year,
         metric.requestedTransfers
       );
       return Object.values(row).join(",");
-    };
-  }
-
-  return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
-    let rows;
-    const { odsCode, name, metrics, ccgName, ccgOdsCode } = practice;
-
-    if (timeframe === TimeframeOptions.LatestMonth) {
-      const { year: latestYear, month: latestMonth } =
-        ccgPractices[0].metrics[0];
-      rows = metrics
-        .filter((metric) => {
-          return metric.month === latestMonth && metric.year === latestYear;
-        })
-        .map(transformMetricsIntoCsvRow(name, odsCode, ccgName, ccgOdsCode));
-    } else {
-      rows = metrics.map(
-        transformMetricsIntoCsvRow(name, odsCode, ccgName, ccgOdsCode)
-      );
-    }
+    });
 
     return [...acc, ...rows];
   }, []);
