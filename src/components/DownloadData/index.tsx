@@ -7,19 +7,21 @@ import {
   DatasetTypeOptions,
   TimeframeOptions,
 } from "../../library/enums/datasetTypeOptions";
+import { PracticeType } from "../../library/types/practice.types";
+import { getFormatData } from "../../library/utils/download/getFormatData";
 
 type DownloadDataProps = {
   pageDescription: string;
   dataFor: string;
   className?: string;
-  formatData: (timeframe: string, datatype: string) => string;
+  data: PracticeType[];
 };
 
 export const DownloadData: FC<DownloadDataProps> = ({
   pageDescription,
   dataFor,
+  data,
   className = "",
-  formatData,
 }) => {
   const initialDatasetTypeState = DatasetTypeOptions.AllMetrics.valueOf();
   const initialTimeframeState = TimeframeOptions.Last6Months.valueOf();
@@ -32,7 +34,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
   );
 
   const exportToCsv = () => {
-    const dataToDownload = formatData(selectedTimeframe, selectedDatasetType);
+    const dataToDownload = getFormatData(
+      selectedTimeframe,
+      selectedDatasetType,
+      data
+    );
     downloadFile(
       dataToDownload,
       `GP Registrations Data ${dataFor} ${selectedDatasetType}-${selectedTimeframe}.csv`,

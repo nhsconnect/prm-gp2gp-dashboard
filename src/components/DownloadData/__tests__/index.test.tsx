@@ -11,9 +11,9 @@ describe("Download data component", () => {
     const pageDescription = "This is a description";
     const { getByText, getByRole } = render(
       <DownloadData
-        formatData={() => ""}
+        data={[]}
         pageDescription={pageDescription}
-        dataFor={"Test GP practice"}
+        dataFor="Test GP practice"
       />
     );
 
@@ -23,11 +23,7 @@ describe("Download data component", () => {
 
   it("displays two radio components", () => {
     const { getByRole } = render(
-      <DownloadData
-        formatData={() => ""}
-        pageDescription={""}
-        dataFor={"Test GP CCG"}
-      />
+      <DownloadData data={[]} pageDescription={""} dataFor="Test GP CCG" />
     );
     const datasetType = getByRole("heading", {
       level: 3,
@@ -43,11 +39,7 @@ describe("Download data component", () => {
 
   it("displays two radio components with correct labels", () => {
     const { getByLabelText } = render(
-      <DownloadData
-        formatData={() => ""}
-        pageDescription={""}
-        dataFor={"Test GP practice"}
-      />
+      <DownloadData data={[]} pageDescription="" dataFor="Test GP practice" />
     );
 
     expect(getByLabelText("Transfers requested")).toBeInTheDocument();
@@ -57,8 +49,7 @@ describe("Download data component", () => {
     expect(getByLabelText("Last 6 months")).toBeInTheDocument();
   });
 
-  it("displays a button with callback", () => {
-    const callback = jest.fn();
+  it("displays a button that can be clicked", () => {
     jest.mock("../../../library/utils/download/downloadFile", () => ({
       downloadFile: jest.fn(),
     }));
@@ -67,11 +58,7 @@ describe("Download data component", () => {
     window.URL.createObjectURL = function () {};
 
     const { getByRole } = render(
-      <DownloadData
-        formatData={callback}
-        pageDescription={""}
-        dataFor={"Test GP CCG"}
-      />
+      <DownloadData data={[]} pageDescription="" dataFor="Test GP CCG" />
     );
 
     const button = getByRole("button", {
@@ -80,7 +67,6 @@ describe("Download data component", () => {
     expect(button).toBeInTheDocument();
 
     button.click();
-    expect(callback).toHaveBeenCalledTimes(1);
   });
 
   it("downloads a file", () => {
@@ -91,11 +77,7 @@ describe("Download data component", () => {
     };
 
     const { getByRole } = render(
-      <DownloadData
-        formatData={formatData}
-        pageDescription={""}
-        dataFor={"Test GP practice"}
-      />
+      <DownloadData data={[]} pageDescription="" dataFor="Test GP practice" />
     );
 
     global.URL.createObjectURL = jest.fn(() => "https://csv.test");
@@ -112,7 +94,6 @@ describe("Download data component", () => {
     });
     button.click();
 
-    expect(formatData).toHaveBeenCalledTimes(1);
     // @ts-ignore
     expect(link.download).toBe(
       "GP Registrations Data Test GP practice " +

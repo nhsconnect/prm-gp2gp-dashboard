@@ -6,7 +6,6 @@ import { PracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
-import { getFormatData } from "../../../library/utils/download/getFormatData";
 
 type PageContext = {
   practice: PracticeType;
@@ -35,8 +34,6 @@ const PracticeDownloadData: FC<PracticeProps> = ({
       text: "Download data",
     },
   ];
-  const formatData = getFormatData([practice]);
-
   return (
     <>
       <Helmet>
@@ -63,7 +60,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
         <DownloadData
           className="gp2gp-page-contents"
           dataFor={formattedName}
-          formatData={formatData}
+          data={[practice]}
           pageDescription={
             "To download data for this practice in CSV format select from the options below and click 'Download'."
           }

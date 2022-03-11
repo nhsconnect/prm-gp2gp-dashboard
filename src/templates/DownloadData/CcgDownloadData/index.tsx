@@ -6,7 +6,6 @@ import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
-import { getFormatData } from "../../../library/utils/download/getFormatData";
 
 type PageContext = {
   odsCode: string;
@@ -36,8 +35,6 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
     },
   ];
 
-  const formatData = getFormatData(ccgPractices);
-
   return (
     <>
       <Helmet>
@@ -59,7 +56,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
         <DownloadData
           className="gp2gp-page-contents"
           dataFor={formattedName}
-          formatData={formatData}
+          data={ccgPractices}
           pageDescription={
             "To download data for this CCG in CSV format select from the options below and click 'Download'."
           }
