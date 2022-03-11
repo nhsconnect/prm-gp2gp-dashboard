@@ -17,7 +17,6 @@ import { convertMonthNumberToText } from "../../../library/utils/convertMonthNum
 import { addPercentageSign } from "../../../library/utils/addPercentageSign";
 import { HelpModal } from "../../../components/common/HelpModal";
 import { Table } from "../../../components/common/Table";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 
 import {
   PracticeMetricsType,
@@ -55,7 +54,6 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
 }) => {
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
-  const { showContentsNavigation } = useFeatureToggles();
 
   const contentListItems = [
     {
@@ -81,106 +79,8 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
         />
         <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      {showContentsNavigation ? (
-        <div className="gp2gp-page-content-wrapper">
-          <div className="gp2gp-page-heading">
-            <h1 className="nhsuk-u-margin-bottom-5">
-              {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-              <span className="nhsuk-u-visually-hidden">
-                {" "}
-                GP2GP transfers requested
-              </span>
-            </h1>
-            <OrganisationAddress odsCode={odsCode} />
-            <hr aria-hidden={true} />
-          </div>
-
-          <div className="gp2gp-side-nav">
-            <ContentsList items={contentListItems} />
-          </div>
-          <PageContent
-            className="gp2gp-page-contents"
-            title="GP2GP transfers requested as registering practice"
-            tableDescription={
-              <>
-                <p>The table below shows the</p>
-                <ul>
-                  <li>
-                    number of registrations that triggered a GP2GP transfer
-                  </li>
-                  <li>
-                    percentage of GP2GP transfers that were successfully
-                    received
-                  </li>
-                  <li>
-                    percentage of GP2GP transfers that failed for a technical
-                    reason
-                  </li>
-                </ul>
-              </>
-            }
-            definitionsContent={<TransfersRequestedDefinitionsContent />}
-            expanderTitle="What happens when a GP2GP transfer fails?"
-            expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
-            tableContent={
-              <Table
-                headers={[
-                  { title: "Month " },
-                  {
-                    title: "Registrations that triggered GP2GP transfer ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="triggered-transfers-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <RegistrationsTriggeredByGP2GPDefinition ariaLabelId="triggered-transfers-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "GP2GP transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedPercentageDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        GP2GP technical failures{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="technical-failures-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <GP2GPTechnicalFailuresDefinition ariaLabelId="technical-failures-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                caption={{
-                  text: "GP2GP transfers requested as registering practice",
-                  hidden: false,
-                }}
-                rows={generateMonthlyRowData(metrics)}
-              />
-            }
-          />
-        </div>
-      ) : (
-        <>
+      <div className="gp2gp-page-content-wrapper">
+        <div className="gp2gp-page-heading">
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
             <span className="nhsuk-u-visually-hidden">
@@ -190,88 +90,89 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
           </h1>
           <OrganisationAddress odsCode={odsCode} />
           <hr aria-hidden={true} />
+        </div>
 
-          <PageContent
-            title="GP2GP transfers requested as registering practice"
-            tableDescription={
-              <>
-                <p>The table below shows the</p>
-                <ul>
-                  <li>
-                    number of registrations that triggered a GP2GP transfer
-                  </li>
-                  <li>
-                    percentage of GP2GP transfers that were successfully
-                    received
-                  </li>
-                  <li>
-                    percentage of GP2GP transfers that failed for a technical
-                    reason
-                  </li>
-                </ul>
-              </>
-            }
-            definitionsContent={<TransfersRequestedDefinitionsContent />}
-            expanderTitle="What happens when a GP2GP transfer fails?"
-            expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
-            tableContent={
-              <Table
-                headers={[
-                  { title: "Month " },
-                  {
-                    title: "Registrations that triggered GP2GP transfer ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="triggered-transfers-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <RegistrationsTriggeredByGP2GPDefinition ariaLabelId="triggered-transfers-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "GP2GP transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedPercentageDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        GP2GP technical failures{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="technical-failures-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <GP2GPTechnicalFailuresDefinition ariaLabelId="technical-failures-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                caption={{
-                  text: "GP2GP transfers requested as registering practice",
-                  hidden: false,
-                }}
-                rows={generateMonthlyRowData(metrics)}
-              />
-            }
-          />
-        </>
-      )}
+        <div className="gp2gp-side-nav">
+          <ContentsList items={contentListItems} />
+        </div>
+        <PageContent
+          className="gp2gp-page-contents"
+          title="GP2GP transfers requested as registering practice"
+          tableDescription={
+            <>
+              <p>The table below shows the</p>
+              <ul>
+                <li>number of registrations that triggered a GP2GP transfer</li>
+                <li>
+                  percentage of GP2GP transfers that were successfully received
+                </li>
+                <li>
+                  percentage of GP2GP transfers that failed for a technical
+                  reason
+                </li>
+              </ul>
+            </>
+          }
+          definitionsContent={<TransfersRequestedDefinitionsContent />}
+          expanderTitle="What happens when a GP2GP transfer fails?"
+          expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
+          tableContent={
+            <Table
+              headers={[
+                { title: "Month " },
+                {
+                  title: "Registrations that triggered GP2GP transfer ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="triggered-transfers-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <RegistrationsTriggeredByGP2GPDefinition ariaLabelId="triggered-transfers-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "GP2GP transfers received ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="transfers-received-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <TransfersReceivedPercentageDefinition ariaLabelId="transfers-received-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: (
+                    <>
+                      GP2GP technical failures{" "}
+                      <div className="gp2gp-title-emphasis">
+                        (paper copy requested){" "}
+                      </div>
+                    </>
+                  ),
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="technical-failures-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <GP2GPTechnicalFailuresDefinition ariaLabelId="technical-failures-modal-title" />
+                      }
+                    />
+                  ),
+                },
+              ]}
+              caption={{
+                text: "GP2GP transfers requested as registering practice",
+                hidden: false,
+              }}
+              rows={generateMonthlyRowData(metrics)}
+            />
+          }
+        />
+      </div>
     </>
   );
 };

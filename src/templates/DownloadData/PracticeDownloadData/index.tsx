@@ -6,7 +6,6 @@ import { PracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 import { getFormatData } from "../../../library/utils/download/getFormatData";
 
 type PageContext = {
@@ -23,7 +22,6 @@ const PracticeDownloadData: FC<PracticeProps> = ({
 }) => {
   const { name, odsCode } = practice;
   const formattedName = convertToTitleCase(name);
-  const { showContentsNavigation } = useFeatureToggles();
   const contentListItems = [
     {
       text: "Integration times",
@@ -49,47 +47,28 @@ const PracticeDownloadData: FC<PracticeProps> = ({
         />
         <noscript>{`<style>.gp2gp-download-data {display: none}</style>`}</noscript>
       </Helmet>
-
-      {showContentsNavigation ? (
-        <div className="gp2gp-page-content-wrapper">
-          <div className="gp2gp-page-heading">
-            <h1 className="nhsuk-u-margin-bottom-5">
-              {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-              <span className="nhsuk-u-visually-hidden"> download data</span>
-            </h1>
-            <OrganisationAddress odsCode={odsCode} />
-            <hr aria-hidden={true} />
-          </div>
-
-          <div className="gp2gp-side-nav">
-            <ContentsList items={contentListItems} />
-          </div>
-          <DownloadData
-            className="gp2gp-page-contents"
-            dataFor={formattedName}
-            formatData={formatData}
-            pageDescription={
-              "To download data for this practice in CSV format select from the options below and click 'Download'."
-            }
-          />
-        </div>
-      ) : (
-        <>
+      <div className="gp2gp-page-content-wrapper">
+        <div className="gp2gp-page-heading">
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
             <span className="nhsuk-u-visually-hidden"> download data</span>
           </h1>
           <OrganisationAddress odsCode={odsCode} />
           <hr aria-hidden={true} />
-          <DownloadData
-            dataFor={formattedName}
-            formatData={formatData}
-            pageDescription={
-              "To download data for this practice in CSV format select from the options below and click 'Download'."
-            }
-          />
-        </>
-      )}
+        </div>
+
+        <div className="gp2gp-side-nav">
+          <ContentsList items={contentListItems} />
+        </div>
+        <DownloadData
+          className="gp2gp-page-contents"
+          dataFor={formattedName}
+          formatData={formatData}
+          pageDescription={
+            "To download data for this practice in CSV format select from the options below and click 'Download'."
+          }
+        />
+      </div>
     </>
   );
 };
