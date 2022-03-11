@@ -8,7 +8,7 @@ import {
 
 describe("Download data component", () => {
   it("displays the title and description", () => {
-    let pageDescription = "This is a description";
+    const pageDescription = "This is a description";
     const { getByText, getByRole } = render(
       <DownloadData
         formatData={() => ""}
@@ -29,11 +29,11 @@ describe("Download data component", () => {
         dataFor={"Test GP CCG"}
       />
     );
-    let datasetType = getByRole("heading", {
+    const datasetType = getByRole("heading", {
       level: 3,
       name: "Which dataset would you like to download?",
     });
-    let timeframe = getByRole("heading", {
+    const timeframe = getByRole("heading", {
       level: 3,
       name: "What timeframe would you like data for?",
     });
@@ -41,8 +41,8 @@ describe("Download data component", () => {
     expect(timeframe).toBeInTheDocument();
   });
 
-  it("displays two radio components with correct options", () => {
-    const { getByText } = render(
+  it("displays two radio components with correct labels", () => {
+    const { getByLabelText } = render(
       <DownloadData
         formatData={() => ""}
         pageDescription={""}
@@ -50,11 +50,11 @@ describe("Download data component", () => {
       />
     );
 
-    expect(getByText("Transfers requested")).toBeInTheDocument();
-    expect(getByText("Integration times")).toBeInTheDocument();
-    expect(getByText("All")).toBeInTheDocument();
-    expect(getByText("Latest month")).toBeInTheDocument();
-    expect(getByText("Last 6 months")).toBeInTheDocument();
+    expect(getByLabelText("Transfers requested")).toBeInTheDocument();
+    expect(getByLabelText("Integration times")).toBeInTheDocument();
+    expect(getByLabelText("All")).toBeInTheDocument();
+    expect(getByLabelText("Latest month")).toBeInTheDocument();
+    expect(getByLabelText("Last 6 months")).toBeInTheDocument();
   });
 
   it("displays a button with callback", () => {
@@ -74,7 +74,9 @@ describe("Download data component", () => {
       />
     );
 
-    let button = getByRole("button");
+    const button = getByRole("button", {
+      name: "Download",
+    });
     expect(button).toBeInTheDocument();
 
     button.click();
@@ -105,7 +107,9 @@ describe("Download data component", () => {
     // @ts-ignore
     jest.spyOn(document, "createElement").mockImplementation(() => link);
 
-    let button = getByRole("button");
+    const button = getByRole("button", {
+      name: "Download",
+    });
     button.click();
 
     expect(formatData).toHaveBeenCalledTimes(1);

@@ -5,18 +5,20 @@ import {
 } from "../../../types/practice.types";
 import { TimeframeOptions } from "../../../enums/datasetTypeOptions";
 
+type GetRowValuesType = (
+  ccgName: string,
+  ccgOdsCode: string,
+  name: string,
+  odsCode: string,
+  month: number,
+  year: number,
+  requestedTransfers: RequestedTransfersType
+) => {};
+
 export function transformMetricsInCsvString(
   ccgPractices: PracticeType[],
   timeframe: string,
-  getRowValues: (
-    ccgName: string,
-    ccgOdsCode: string,
-    name: string,
-    odsCode: string,
-    month: number,
-    year: number,
-    requestedTransfers: RequestedTransfersType
-  ) => {}
+  getRowValues: GetRowValuesType
 ) {
   function transformMetricsIntoCsvRow(
     name: string,

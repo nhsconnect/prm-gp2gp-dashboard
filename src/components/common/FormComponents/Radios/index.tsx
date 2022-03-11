@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import "./index.scss";
+import { TimeframeOptions } from "../../../../library/enums/datasetTypeOptions";
 
 type RadioOption = {
   displayValue: string;
@@ -15,7 +16,7 @@ type RadioProps = {
   setSelectedValue: (value: string) => void;
 };
 
-export const Radio: FC<RadioProps> = ({
+export const Radios: FC<RadioProps> = ({
   title,
   className = "",
   radioId,

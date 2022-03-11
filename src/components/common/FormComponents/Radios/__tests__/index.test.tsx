@@ -1,13 +1,13 @@
 import React from "react";
 import { getByRole, render } from "@testing-library/react";
-import { Radio } from "../";
+import { Radios } from "../";
 
-describe("Radio component", () => {
+describe("Radios component", () => {
   it("displays the title", () => {
     const title = "This is a radio section";
 
     const { getByText } = render(
-      <Radio
+      <Radios
         title={title}
         options={[]}
         radioId="radio-id-1"
@@ -23,7 +23,7 @@ describe("Radio component", () => {
     const options = [{ displayValue: "First option", value: "option-1" }];
 
     const { getByRole } = render(
-      <Radio
+      <Radios
         title=""
         options={options}
         radioId="radio-id-1"
@@ -47,7 +47,7 @@ describe("Radio component", () => {
     ];
 
     const { getAllByRole } = render(
-      <Radio
+      <Radios
         title=""
         options={options}
         radioId="radio-id-1"
@@ -70,14 +70,13 @@ describe("Radio component", () => {
       { displayValue: "Second option", value: "option-2" },
       { displayValue: "Third option", value: "option-3" },
     ];
-    const callback = jest.fn();
     const { getByRole } = render(
-      <Radio
+      <Radios
         title=""
         options={options}
         radioId="radio-id-1"
         selectedValue={"option-2"}
-        setSelectedValue={callback}
+        setSelectedValue={() => {}}
       />
     );
 
@@ -96,7 +95,7 @@ describe("Radio component", () => {
     const callback = jest.fn();
 
     const { getByText } = render(
-      <Radio
+      <Radios
         title=""
         options={options}
         radioId="radio-id-1"

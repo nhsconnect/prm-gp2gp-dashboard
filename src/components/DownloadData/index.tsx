@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import "./index.scss";
 import { Button } from "../common/Button";
-import { Radio } from "../common/FormComponents/Radio";
+import { Radios } from "../common/FormComponents/Radios";
 import { downloadFile } from "../../library/utils/download/downloadFile";
 import {
   DatasetTypeOptions,
@@ -51,7 +51,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
           </div>
         </div>
         <fieldset className="gp2gp-fieldset">
-          <Radio
+          <Radios
             title="Which dataset would you like to download?"
             className="nhsuk-u-margin-bottom-4"
             radioId="dataset-type"
@@ -72,7 +72,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
             selectedValue={selectedDatasetType}
             setSelectedValue={setSelectedDatasetType}
           />
-          <Radio
+          <Radios
             title="What timeframe would you like data for?"
             className="nhsuk-u-margin-bottom-4"
             radioId="timeframe"
