@@ -9,7 +9,7 @@ describe("CCG Download Data page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual CCG integration times page, navigates to CCG download data page via contents menu and goes back to home page", () => {
+      it("searches, navigates to an individual CCG integration times page, navigates to CCG download data page via contents menu and downloads CSV files", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
         ).type("Test CCG 10D");
@@ -39,8 +39,17 @@ describe("CCG Download Data page", () => {
 
         cy.get("[data-testid=gp2gp-download-data]").within(() => {
           cy.contains("Which dataset would you like to download?");
-          cy.contains("Transfers requested").click();
+          cy.get('[type="radio"]').check(["latest-month", "last-6-months"]);
           cy.contains("What timeframe would you like data for?");
+          cy.get('[type="radio"]').check([
+            "all",
+            "integration-times",
+            "transfers-requested",
+          ]);
+        });
+
+        cy.get("[data-testid=gp2gp-download-data]").within(() => {
+          cy.contains("Transfers requested").click();
           cy.contains("Latest month").click();
         });
         cy.contains("button", "Download").click();
