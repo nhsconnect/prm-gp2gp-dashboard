@@ -56,7 +56,7 @@ Note: due to the nature of the E2E tests relying on having stubbed data, you wil
 
 ### Development build
 
-1. `npm install`
+1. `npm ci`
 2. `npm run develop`
 3. `npm run e2e:open` (in a separate terminal)
    - This will open the Cypress test runner.
