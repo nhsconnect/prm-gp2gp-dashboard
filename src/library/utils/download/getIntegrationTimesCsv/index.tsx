@@ -48,15 +48,11 @@ function getIntegrationTimesRowValues(
 
 export function getIntegrationTimesCsv(
   ccgPractices: PracticeType[],
-  ccgName: string,
-  ccgOdsCode: string,
   timeframe: string
 ) {
   return transformMetricsInCsvString(
     ccgPractices,
     timeframe,
-    ccgName,
-    ccgOdsCode,
     getIntegrationTimesRowValues
   );
 }

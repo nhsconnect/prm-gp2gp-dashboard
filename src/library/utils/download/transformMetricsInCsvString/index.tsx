@@ -8,8 +8,6 @@ import { TimeframeOptions } from "../../../enums/datasetTypeOptions";
 export function transformMetricsInCsvString(
   ccgPractices: PracticeType[],
   timeframe: string,
-  ccgName: string,
-  ccgOdsCode: string,
   getRowValues: (
     ccgName: string,
     ccgOdsCode: string,
@@ -20,7 +18,12 @@ export function transformMetricsInCsvString(
     requestedTransfers: RequestedTransfersType
   ) => {}
 ) {
-  function transformMetricsIntoCsvRow(name: string, odsCode: string) {
+  function transformMetricsIntoCsvRow(
+    name: string,
+    odsCode: string,
+    ccgName: string,
+    ccgOdsCode: string
+  ) {
     return (metric: PracticeMetricsType) => {
       const row = getRowValues(
         ccgName,
@@ -37,7 +40,7 @@ export function transformMetricsInCsvString(
 
   return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
     let rows;
-    const { odsCode, name, metrics } = practice;
+    const { odsCode, name, metrics, ccgName, ccgOdsCode } = practice;
 
     if (timeframe === TimeframeOptions.LatestMonth) {
       const { year: latestYear, month: latestMonth } =
@@ -46,9 +49,11 @@ export function transformMetricsInCsvString(
         .filter((metric) => {
           return metric.month === latestMonth && metric.year === latestYear;
         })
-        .map(transformMetricsIntoCsvRow(name, odsCode));
+        .map(transformMetricsIntoCsvRow(name, odsCode, ccgName, ccgOdsCode));
     } else {
-      rows = metrics.map(transformMetricsIntoCsvRow(name, odsCode));
+      rows = metrics.map(
+        transformMetricsIntoCsvRow(name, odsCode, ccgName, ccgOdsCode)
+      );
     }
 
     return [...acc, ...rows];

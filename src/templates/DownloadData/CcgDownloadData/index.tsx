@@ -38,7 +38,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
     },
   ];
 
-  const formatData = getFormatData(ccgPractices, ccgName, ccgOdsCode);
+  const formatData = getFormatData(ccgPractices);
 
   return (
     <>

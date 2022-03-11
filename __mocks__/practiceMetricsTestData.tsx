@@ -2,7 +2,7 @@ export const practiceWithOneMonthMetrics = {
   odsCode: "A12345",
   name: "GP Practice",
   ccgOdsCode: "11D",
-  ccgName: "Test ccg",
+  ccgName: "Some CCG",
   metrics: [
     {
       year: 2020,
@@ -27,8 +27,8 @@ export const practiceWithOneMonthMetrics = {
 export const practiceWithTwoMonths = {
   odsCode: "A12346",
   name: "Second GP Practice",
-  ccgOdsCode: "11D",
-  ccgName: "Test ccg",
+  ccgOdsCode: "10E",
+  ccgName: "Another CCG",
   metrics: [
     {
       year: 2020,

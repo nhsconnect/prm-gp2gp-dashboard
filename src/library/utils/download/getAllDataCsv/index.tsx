@@ -64,17 +64,10 @@ function getAllDataRowValues(
   };
 }
 
-export function getAllDataCsv(
-  ccgPractices: PracticeType[],
-  ccgName: string,
-  ccgOdsCode: string,
-  timeframe: string
-) {
+export function getAllDataCsv(ccgPractices: PracticeType[], timeframe: string) {
   return transformMetricsInCsvString(
     ccgPractices,
     timeframe,
-    ccgName,
-    ccgOdsCode,
     getAllDataRowValues
   );
 }

@@ -21,7 +21,7 @@ type PracticeProps = {
 const PracticeDownloadData: FC<PracticeProps> = ({
   pageContext: { practice },
 }) => {
-  const { name, odsCode, ccgName, ccgOdsCode } = practice;
+  const { name, odsCode } = practice;
   const formattedName = convertToTitleCase(name);
   const { showContentsNavigation } = useFeatureToggles();
   const contentListItems = [
@@ -37,7 +37,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
       text: "Download data",
     },
   ];
-  const formatData = getFormatData([practice], ccgName, ccgOdsCode);
+  const formatData = getFormatData([practice]);
 
   return (
     <>

@@ -25,8 +25,6 @@ const ODSPracticeData = {
 
 const practicePageContext = {
   practice: practiceWithThreeMonthsMetrics,
-  ccgOdsCode: "1234",
-  ccgName: "ccg name",
   layout: "navigation-contents",
 };
 
