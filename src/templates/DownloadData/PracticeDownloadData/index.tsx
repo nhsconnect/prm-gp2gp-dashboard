@@ -29,7 +29,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
     },
     {
       text: "GP2GP transfers requested",
-      href: `/practice/${odsCode}/GP2GP-transfers-requested`,
+      href: `/practice/${odsCode}/gp2gp-transfers-requested`,
     },
     {
       text: "Download data",
