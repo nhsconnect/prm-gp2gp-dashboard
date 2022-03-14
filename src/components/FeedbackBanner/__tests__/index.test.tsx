@@ -43,7 +43,7 @@ describe("FeedbackBanner component", () => {
     const surveyHref = surveyLink.getAttribute("href");
 
     expect(surveyHref).toContain(
-      "body=Please note we are unable to assist with individual patient or practice queries."
+      "body=Please%20note%20we%20are%20unable%20to%20assist%20with%20individual%20patient%20or%20practice%20queries."
     );
     expect(surveyHref).toContain("mailto:gp-registrations-data@nhs.net");
   });
