@@ -22,7 +22,6 @@ import {
 } from "../../../components/Definitions";
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 
 type PageContext = {
@@ -39,8 +38,6 @@ type CcgProps = {
 const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode, ccgPractices } = pageContext;
   const formattedName: string = convertToTitleCase(name);
-
-  const { showContentsNavigation } = useFeatureToggles();
 
   const { year, month } = ccgPractices[0].metrics[0];
   const tableTitle = `Integration times for registering practices - ${convertMonthNumberToText(
@@ -87,189 +84,98 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
         />
         <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      {showContentsNavigation ? (
-        <div className="gp2gp-page-content-wrapper">
-          <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-            {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-            <span className="nhsuk-u-visually-hidden"> integration times</span>
-          </h1>
-          <div className="gp2gp-side-nav">
-            <ContentsList items={contentListItems} />
-          </div>
-          <PageContent
-            className="gp2gp-page-contents"
-            title={pageTitle}
-            tableDescription={
-              <p>
-                The table below shows the integration times for GP2GP transfers
-                received.
-              </p>
-            }
-            expanderTitle="Why integrate within 8 days?"
-            expanderContent={<WhyIntegrateWithin8Days />}
-            definitionsContent={<IntegrationsDefinitionsContent />}
-            tableContent={
-              <PracticeTableWithSort
-                ccgPractices={ccgPracticeTableData}
-                headers={[
-                  { title: "Registering practice name " },
-                  {
-                    title: "GP2GP transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 3 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-3-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 8 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        Not integrated within 8 days{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <>
-                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                            <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
-                          </>
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                pageTemplatePath={PageTemplatePath.IntegrationTimes}
-                sortBySelect={practiceTableContent.sortBySelect}
-                orderSelect={practiceTableContent.orderSelect}
-                tableCaption={tableTitle}
-              />
-            }
-          />
+      <div className="gp2gp-page-content-wrapper">
+        <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
+          {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
+          <span className="nhsuk-u-visually-hidden"> integration times</span>
+        </h1>
+        <div className="gp2gp-side-nav">
+          <ContentsList items={contentListItems} />
         </div>
-      ) : (
-        <>
-          <h1 className="nhsuk-u-margin-bottom-5">
-            {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-            <span className="nhsuk-u-visually-hidden"> integration times</span>
-          </h1>
-          <PageContent
-            title={pageTitle}
-            tableDescription={
-              <p>
-                The table below shows the integration times for GP2GP transfers
-                received.
-              </p>
-            }
-            expanderTitle="Why integrate within 8 days"
-            expanderContent={<WhyIntegrateWithin8Days />}
-            definitionsContent={<IntegrationsDefinitionsContent />}
-            tableContent={
-              <PracticeTableWithSort
-                ccgPractices={ccgPracticeTableData}
-                headers={[
-                  { title: "Registering practice name " },
-                  {
-                    title: "GP2GP transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 3 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-3-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 8 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        Not integrated within 8 days{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <>
-                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                            <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
-                          </>
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                pageTemplatePath={PageTemplatePath.IntegrationTimes}
-                sortBySelect={practiceTableContent.sortBySelect}
-                orderSelect={practiceTableContent.orderSelect}
-                tableCaption={tableTitle}
-              />
-            }
-          />
-        </>
-      )}
+        <PageContent
+          className="gp2gp-page-contents"
+          title={pageTitle}
+          tableDescription={
+            <p>
+              The table below shows the integration times for GP2GP transfers
+              received.
+            </p>
+          }
+          expanderTitle="Why integrate within 8 days?"
+          expanderContent={<WhyIntegrateWithin8Days />}
+          definitionsContent={<IntegrationsDefinitionsContent />}
+          tableContent={
+            <PracticeTableWithSort
+              ccgPractices={ccgPracticeTableData}
+              headers={[
+                { title: "Registering practice name " },
+                {
+                  title: "GP2GP transfers received ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="transfers-received-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "Integrated within 3 days ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="integrated-within-3-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "Integrated within 8 days ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="integrated-within-8-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: (
+                    <>
+                      Not integrated within 8 days{" "}
+                      <div className="gp2gp-title-emphasis">
+                        (paper copy requested){" "}
+                      </div>
+                    </>
+                  ),
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="not-integrated-within-8-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <>
+                          <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                          <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                        </>
+                      }
+                    />
+                  ),
+                },
+              ]}
+              pageTemplatePath={PageTemplatePath.IntegrationTimes}
+              sortBySelect={practiceTableContent.sortBySelect}
+              orderSelect={practiceTableContent.orderSelect}
+              tableCaption={tableTitle}
+            />
+          }
+        />
+      </div>
     </>
   );
 };

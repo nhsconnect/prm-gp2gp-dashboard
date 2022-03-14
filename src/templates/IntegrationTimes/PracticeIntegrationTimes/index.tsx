@@ -22,7 +22,6 @@ import {
   WhyIntegrateWithin8Days,
 } from "../../../components/Definitions";
 import "../../index.scss";
-import { useFeatureToggles } from "../../../library/hooks/useFeatureToggle";
 import { ContentsList } from "../../../components/common/ContentsList";
 
 type PageContext = {
@@ -59,8 +58,6 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
-  const { showContentsNavigation } = useFeatureToggles();
-
   const contentListItems = [
     {
       text: "Integration times",
@@ -85,200 +82,103 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({
         />
         <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
-      {showContentsNavigation ? (
-        <div className="gp2gp-page-content-wrapper">
-          <div className="gp2gp-page-heading">
-            <h1 className="nhsuk-u-margin-bottom-5">
-              {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
-              <span className="nhsuk-u-visually-hidden">
-                {" "}
-                integration times
-              </span>
-            </h1>
-            <OrganisationAddress odsCode={odsCode} />
-            <hr aria-hidden={true} />
-          </div>
-
-          <div className="gp2gp-side-nav">
-            <ContentsList items={contentListItems} />
-          </div>
-          <PageContent
-            className="gp2gp-page-contents"
-            title="Integration times for registering practice"
-            tableDescription={
-              <p>
-                The table below shows the integration times for GP2GP transfers
-                received.
-              </p>
-            }
-            expanderTitle="Why integrate within 8 days"
-            expanderContent={<WhyIntegrateWithin8Days />}
-            definitionsContent={<IntegrationsDefinitionsContent />}
-            tableContent={
-              <Table
-                headers={[
-                  { title: "Month " },
-                  {
-                    title: "GP2GP transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 3 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-3-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 8 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        Not integrated within 8 days{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <>
-                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                            <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
-                          </>
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                caption={{
-                  text: "Integration times for registering practice",
-                  hidden: false,
-                }}
-                rows={generateMonthlyRowData(metrics)}
-              />
-            }
-          />
-        </div>
-      ) : (
-        <>
+      <div className="gp2gp-page-content-wrapper">
+        <div className="gp2gp-page-heading">
           <h1 className="nhsuk-u-margin-bottom-5">
             {formattedName ? `${formattedName} - ${odsCode}` : odsCode}
             <span className="nhsuk-u-visually-hidden"> integration times</span>
           </h1>
           <OrganisationAddress odsCode={odsCode} />
           <hr aria-hidden={true} />
+        </div>
 
-          <PageContent
-            title="Integration times for registering practice"
-            tableDescription={
-              <p>
-                The table below shows the integration times for GP2GP transfers
-                received.
-              </p>
-            }
-            expanderTitle="Why integrate within 8 days"
-            expanderContent={<WhyIntegrateWithin8Days />}
-            definitionsContent={<IntegrationsDefinitionsContent />}
-            tableContent={
-              <Table
-                headers={[
-                  { title: "Month " },
-                  {
-                    title: "GP2GP transfers received ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="transfers-received-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 3 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-3-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: "Integrated within 8 days ",
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
-                        }
-                      />
-                    ),
-                  },
-                  {
-                    title: (
-                      <>
-                        Not integrated within 8 days{" "}
-                        <div className="gp2gp-title-emphasis">
-                          (paper copy requested){" "}
-                        </div>
-                      </>
-                    ),
-                    extra: (
-                      <HelpModal
-                        ariaLabelledBy="not-integrated-within-8-days-modal-title"
-                        iconHiddenDescription="Open modal with definition"
-                        content={
-                          <>
-                            <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
-                            <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
-                          </>
-                        }
-                      />
-                    ),
-                  },
-                ]}
-                caption={{
-                  text: "Integration times for registering practice",
-                  hidden: false,
-                }}
-                rows={generateMonthlyRowData(metrics)}
-              />
-            }
-          />
-        </>
-      )}
+        <div className="gp2gp-side-nav">
+          <ContentsList items={contentListItems} />
+        </div>
+        <PageContent
+          className="gp2gp-page-contents"
+          title="Integration times for registering practice"
+          tableDescription={
+            <p>
+              The table below shows the integration times for GP2GP transfers
+              received.
+            </p>
+          }
+          expanderTitle="Why integrate within 8 days"
+          expanderContent={<WhyIntegrateWithin8Days />}
+          definitionsContent={<IntegrationsDefinitionsContent />}
+          tableContent={
+            <Table
+              headers={[
+                { title: "Month " },
+                {
+                  title: "GP2GP transfers received ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="transfers-received-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "Integrated within 3 days ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="integrated-within-3-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "Integrated within 8 days ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="integrated-within-8-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: (
+                    <>
+                      Not integrated within 8 days{" "}
+                      <div className="gp2gp-title-emphasis">
+                        (paper copy requested){" "}
+                      </div>
+                    </>
+                  ),
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="not-integrated-within-8-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <>
+                          <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                          <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                        </>
+                      }
+                    />
+                  ),
+                },
+              ]}
+              caption={{
+                text: "Integration times for registering practice",
+                hidden: false,
+              }}
+              rows={generateMonthlyRowData(metrics)}
+            />
+          }
+        />
+      </div>
     </>
   );
 };
