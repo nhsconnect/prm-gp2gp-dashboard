@@ -5,10 +5,8 @@ import "./index.scss";
 type FeedbackBannerProps = {
   className?: string;
 };
-const personalInfoNote = encodeURIComponent(
-  "Please note we are unable to assist with individual patient or practice queries. Please do not send any personal information to this email address."
-);
-
+const personalInfoNote =
+  "Please note we are unable to assist with individual patient or practice queries. Please do not send any personal information to this email address.";
 export const FeedbackBanner: FC<FeedbackBannerProps> = ({ className }) => (
   <aside className={classNames("nhsuk-inset-text", className)}>
     <h3>Get in touch</h3>
@@ -22,7 +20,11 @@ export const FeedbackBanner: FC<FeedbackBannerProps> = ({ className }) => (
     <p>
       If you need help with this site, or if it isn't working properly, contact
       the team at{" "}
-      <a href={`mailto:gp-registrations-data@nhs.net?body=${personalInfoNote}`}>
+      <a
+        href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+          personalInfoNote
+        )}`}
+      >
         gp-registrations-data@nhs.net
       </a>
       . <strong>{personalInfoNote}</strong>
