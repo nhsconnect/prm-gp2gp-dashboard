@@ -3,6 +3,7 @@ import { Expander } from "../common/Expander";
 import { Tabs } from "../Tabs";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import "./index.scss";
+import { convertUtcToReadableBstDate } from "../../library/utils/convertUtcToReadableBstDate";
 
 type PageContentProps = {
   title: string;
@@ -25,6 +26,8 @@ export const PageContent: FC<PageContentProps> = ({
   definitionsContent,
   lastEditDate,
 }) => {
+  const lastEditDateBST = convertUtcToReadableBstDate(lastEditDate);
+
   return (
     <section className={`gp2gp-page-content-section ${className}`}>
       <h2>{title}</h2>
@@ -44,7 +47,7 @@ export const PageContent: FC<PageContentProps> = ({
         ]}
       />
       <div>
-        <p>{lastEditDate}</p>
+        <p>Last edited: {lastEditDateBST}</p>
       </div>
 
       <noscript>

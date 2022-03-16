@@ -23,7 +23,8 @@ describe("Download data component", () => {
   });
 
   it("displays the last edit date", () => {
-    const lastEditDate = "2020-02-24 16:51:21.353977";
+    const lastEditDate = "2020-04-24 16:51:21.353977";
+    const expectedDate = /24 April 2020 5:51 pm/;
     const { getByText } = render(
       <DownloadData
         data={[]}
@@ -32,7 +33,7 @@ describe("Download data component", () => {
         lastEditDate={lastEditDate}
       />
     );
-    expect(getByText(lastEditDate)).toBeInTheDocument();
+    expect(getByText(expectedDate)).toBeInTheDocument();
   });
 
   it("displays two radio components", () => {

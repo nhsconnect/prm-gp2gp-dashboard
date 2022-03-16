@@ -9,6 +9,7 @@ import {
 } from "../../library/enums/datasetTypeOptions";
 import { PracticeType } from "../../library/types/practice.types";
 import { getFormatData } from "../../library/utils/download/getFormatData";
+import { convertUtcToReadableBstDate } from "../../library/utils/convertUtcToReadableBstDate";
 
 type DownloadDataProps = {
   pageDescription: string;
@@ -34,6 +35,8 @@ export const DownloadData: FC<DownloadDataProps> = ({
   const [selectedTimeframe, setSelectedTimeframe] = useState(
     initialTimeframeState
   );
+
+  const lastEditDateBST = convertUtcToReadableBstDate(lastEditDate);
 
   const exportToCsv = () => {
     const dataToDownload = getFormatData(
@@ -107,7 +110,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
         >
           Download
         </Button>
-        <p>{lastEditDate}</p>
+        <p>Last edited: {lastEditDateBST}</p>
       </div>
       <noscript>
         <p>

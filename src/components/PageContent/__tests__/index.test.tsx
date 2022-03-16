@@ -25,12 +25,13 @@ describe("PageContent component", () => {
     );
 
     const title = getByRole("heading", { name: titleText, level: 2 });
-
     expect(title).toBeInTheDocument();
   });
 
   it("displays the last edit date", () => {
-    const lastEditDate = "2020-02-24 16:51:21.353977";
+    const lastEditDate = "2020-04-24 16:51:21.353977";
+    const expectedDate = /24 April 2020 5:51 pm/;
+
     const { getByText } = render(
       <PageContent
         title=""
@@ -42,7 +43,7 @@ describe("PageContent component", () => {
         lastEditDate={lastEditDate}
       />
     );
-    expect(getByText(lastEditDate)).toBeInTheDocument();
+    expect(getByText(expectedDate)).toBeInTheDocument();
   });
 
   it("displays table description", () => {
