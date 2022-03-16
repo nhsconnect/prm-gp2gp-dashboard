@@ -15,6 +15,7 @@ type DownloadDataProps = {
   dataFor: string;
   className?: string;
   data: PracticeType[];
+  lastEditDate: string;
 };
 
 export const DownloadData: FC<DownloadDataProps> = ({
@@ -22,6 +23,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
   dataFor,
   data,
   className = "",
+  lastEditDate,
 }) => {
   const initialDatasetTypeState = DatasetTypeOptions.AllMetrics.valueOf();
   const initialTimeframeState = TimeframeOptions.Last6Months.valueOf();
@@ -105,6 +107,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
         >
           Download
         </Button>
+        <p>{lastEditDate}</p>
       </div>
       <noscript>
         <p>

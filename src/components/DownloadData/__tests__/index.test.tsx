@@ -14,6 +14,7 @@ describe("Download data component", () => {
         data={[]}
         pageDescription={pageDescription}
         dataFor="Test GP practice"
+        lastEditDate=""
       />
     );
 
@@ -21,9 +22,27 @@ describe("Download data component", () => {
     expect(getByText(pageDescription)).toBeInTheDocument();
   });
 
+  it("displays the last edit date", () => {
+    const lastEditDate = "2020-02-24 16:51:21.353977";
+    const { getByText } = render(
+      <DownloadData
+        data={[]}
+        pageDescription=""
+        dataFor="Test GP practice"
+        lastEditDate={lastEditDate}
+      />
+    );
+    expect(getByText(lastEditDate)).toBeInTheDocument();
+  });
+
   it("displays two radio components", () => {
     const { getByRole } = render(
-      <DownloadData data={[]} pageDescription={""} dataFor="Test GP CCG" />
+      <DownloadData
+        data={[]}
+        pageDescription={""}
+        dataFor="Test GP CCG"
+        lastEditDate=""
+      />
     );
     const datasetType = getByRole("heading", {
       level: 3,
@@ -39,7 +58,12 @@ describe("Download data component", () => {
 
   it("displays two radio components with correct labels", () => {
     const { getByLabelText } = render(
-      <DownloadData data={[]} pageDescription="" dataFor="Test GP practice" />
+      <DownloadData
+        data={[]}
+        pageDescription=""
+        dataFor="Test GP practice"
+        lastEditDate=""
+      />
     );
 
     expect(getByLabelText("Transfers requested")).toBeInTheDocument();
@@ -58,7 +82,12 @@ describe("Download data component", () => {
     window.URL.createObjectURL = function () {};
 
     const { getByRole } = render(
-      <DownloadData data={[]} pageDescription="" dataFor="Test GP CCG" />
+      <DownloadData
+        data={[]}
+        pageDescription=""
+        dataFor="Test GP CCG"
+        lastEditDate=""
+      />
     );
 
     const button = getByRole("button", {
@@ -77,7 +106,12 @@ describe("Download data component", () => {
     };
 
     const { getByRole } = render(
-      <DownloadData data={[]} pageDescription="" dataFor="Test GP practice" />
+      <DownloadData
+        data={[]}
+        pageDescription=""
+        dataFor="Test GP practice"
+        lastEditDate=""
+      />
     );
 
     global.URL.createObjectURL = jest.fn(() => "https://csv.test");

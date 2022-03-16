@@ -54,6 +54,7 @@ exports.createPages = async ({ actions }) => {
       context: {
         practice,
         layout: "navigation-contents",
+        lastEditDate,
       },
     });
   });
@@ -109,6 +110,7 @@ exports.createPages = async ({ actions }) => {
         name: ccg.name,
         ccgPractices,
         layout: "navigation-contents",
+        lastEditDate,
       },
     });
   });

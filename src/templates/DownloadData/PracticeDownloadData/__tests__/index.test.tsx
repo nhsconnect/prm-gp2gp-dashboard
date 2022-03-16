@@ -23,6 +23,7 @@ const ODSPracticeData = {
 const practicePageContext = {
   practice: practiceWithThreeMonthsMetrics,
   layout: "navigation-contents",
+  lastEditDate: "2020-02-24 16:51:21.353977",
 };
 
 describe("PracticeDownloadData template", () => {

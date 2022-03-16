@@ -12,6 +12,7 @@ type PageContext = {
   name: string;
   ccgPractices: PracticeType[];
   layout: string;
+  lastEditDate: string;
 };
 
 type CcgProps = {
@@ -19,7 +20,12 @@ type CcgProps = {
 };
 
 const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
-  const { name: ccgName, odsCode: ccgOdsCode, ccgPractices } = pageContext;
+  const {
+    name: ccgName,
+    odsCode: ccgOdsCode,
+    ccgPractices,
+    lastEditDate,
+  } = pageContext;
   const formattedName: string = convertToTitleCase(ccgName);
   const contentListItems = [
     {
@@ -60,6 +66,7 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
           pageDescription={
             "To download data for this CCG in CSV format select from the options below and click 'Download'."
           }
+          lastEditDate={lastEditDate}
         />
       </div>
     </>

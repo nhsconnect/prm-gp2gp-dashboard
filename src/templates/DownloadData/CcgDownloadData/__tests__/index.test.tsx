@@ -13,6 +13,7 @@ describe("CCGDownloadData template", () => {
     name: "BURTON CCG",
     ccgPractices: practiceMetricsMock,
     layout: "general",
+    lastEditDate: "2020-02-24 16:51:21.353977",
   };
 
   it("displays only organisation ODS code when the name is not provided", () => {
@@ -22,6 +23,7 @@ describe("CCGDownloadData template", () => {
       name: "",
       ccgPractices: practiceMetricsMock,
       layout: "general",
+      lastEditDate: "",
     };
 
     const { getByRole } = render(
