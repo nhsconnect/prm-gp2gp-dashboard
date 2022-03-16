@@ -12,6 +12,7 @@ type PageContentProps = {
   expanderTitle: string;
   expanderContent: ReactNode;
   definitionsContent: ReactNode;
+  lastEditDate: string;
 };
 
 export const PageContent: FC<PageContentProps> = ({
@@ -22,6 +23,7 @@ export const PageContent: FC<PageContentProps> = ({
   expanderTitle,
   expanderContent,
   definitionsContent,
+  lastEditDate,
 }) => {
   return (
     <section className={`gp2gp-page-content-section ${className}`}>
@@ -41,6 +43,10 @@ export const PageContent: FC<PageContentProps> = ({
           { title: "Definitions", content: definitionsContent },
         ]}
       />
+      <div>
+        <p>{lastEditDate}</p>
+      </div>
+
       <noscript>
         {tableContent}
         <AboutThisDataContent />

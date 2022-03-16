@@ -20,12 +20,29 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
+        lastEditDate=""
       />
     );
 
     const title = getByRole("heading", { name: titleText, level: 2 });
 
     expect(title).toBeInTheDocument();
+  });
+
+  it("displays the last edit date", () => {
+    const lastEditDate = "2020-02-24 16:51:21.353977";
+    const { getByText } = render(
+      <PageContent
+        title=""
+        tableDescription=""
+        tableContent=""
+        expanderTitle=""
+        expanderContent=""
+        definitionsContent=""
+        lastEditDate={lastEditDate}
+      />
+    );
+    expect(getByText(lastEditDate)).toBeInTheDocument();
   });
 
   it("displays table description", () => {
@@ -38,6 +55,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
+        lastEditDate=""
       />
     );
 
@@ -55,6 +73,7 @@ describe("PageContent component", () => {
         expanderTitle="Why integrate within 8 days"
         expanderContent={<WhyIntegrateWithin8Days />}
         definitionsContent=""
+        lastEditDate=""
       />
     );
 
@@ -79,6 +98,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
+        lastEditDate=""
       />
     );
 
@@ -106,6 +126,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
+        lastEditDate=""
       />
     );
 
@@ -121,6 +142,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
+        lastEditDate=""
       />
     );
 
@@ -159,6 +181,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent={<IntegrationsDefinitionsContent />}
+        lastEditDate=""
       />
     );
 

@@ -4,6 +4,7 @@ const filterPracticesByOdsCodes = require("./src/library/utils/filterPracticesBy
 
 const practices = practiceMetrics.practices;
 const ccgs = practiceMetrics.ccgs;
+const lastEditDate = practiceMetrics.generatedOn;
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
@@ -28,6 +29,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practice,
+        lastEditDate,
         layout: "navigation-contents",
       },
     });
@@ -39,6 +41,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practice,
+        lastEditDate,
         layout: "navigation-contents",
       },
     });
@@ -77,6 +80,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         ccgPractices,
+        lastEditDate,
         layout: "navigation-contents",
       },
     });
@@ -90,6 +94,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         ccgPractices,
+        lastEditDate,
         layout: "navigation-contents",
       },
     });
