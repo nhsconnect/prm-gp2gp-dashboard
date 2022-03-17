@@ -46,15 +46,15 @@ export const PageContent: FC<PageContentProps> = ({
           { title: "Definitions", content: definitionsContent },
         ]}
       />
-      <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-0">
-        Data updated: {formattedDataUpdatedDate} <br />
-        New data is added around 15th of each month{" "}
-      </p>
       <noscript>
         {tableContent}
         <AboutThisDataContent />
         {definitionsContent}
       </noscript>
+      <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-0">
+        Data updated: {formattedDataUpdatedDate} <br />
+        New data is added around 15th of each month{" "}
+      </p>
     </section>
   );
 };
