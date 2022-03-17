@@ -20,7 +20,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -29,7 +29,7 @@ describe("PageContent component", () => {
   });
 
   it("displays the last edit date", () => {
-    const lastEditDate = "2020-04-24 16:51:21.353977";
+    const dataUpdatedDate = "2020-04-24 16:51:21.353977";
     const expectedDate = /Data updated: April 2020/;
 
     const { getByText } = render(
@@ -40,7 +40,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
-        lastEditDate={lastEditDate}
+        dataUpdatedDate={dataUpdatedDate}
       />
     );
     expect(getByText(expectedDate)).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -74,7 +74,7 @@ describe("PageContent component", () => {
         expanderTitle="Why integrate within 8 days"
         expanderContent={<WhyIntegrateWithin8Days />}
         definitionsContent=""
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -99,7 +99,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -127,7 +127,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -143,7 +143,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent=""
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -182,7 +182,7 @@ describe("PageContent component", () => {
         expanderTitle=""
         expanderContent=""
         definitionsContent={<IntegrationsDefinitionsContent />}
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 

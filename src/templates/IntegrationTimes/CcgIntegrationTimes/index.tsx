@@ -29,7 +29,7 @@ type PageContext = {
   name: string;
   ccgPractices: PracticeType[];
   layout: string;
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 type CcgProps = {
@@ -37,7 +37,7 @@ type CcgProps = {
 };
 
 const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
-  const { name, odsCode, ccgPractices, lastEditDate } = pageContext;
+  const { name, odsCode, ccgPractices, dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(name);
 
   const { year, month } = ccgPractices[0].metrics[0];
@@ -105,7 +105,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
           expanderTitle="Why integrate within 8 days?"
           expanderContent={<WhyIntegrateWithin8Days />}
           definitionsContent={<IntegrationsDefinitionsContent />}
-          lastEditDate={lastEditDate}
+          dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <PracticeTableWithSort
               ccgPractices={ccgPracticeTableData}

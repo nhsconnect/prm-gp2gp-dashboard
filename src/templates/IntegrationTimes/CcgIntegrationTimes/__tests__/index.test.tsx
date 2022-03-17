@@ -15,13 +15,13 @@ describe("CCG Integration Times template", () => {
     name: "BURTON CCG",
     ccgPractices: practiceMetricsMock,
     layout: "general",
-    lastEditDate: "2020-02-24 16:51:21.353977",
+    dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
     const ccgWithoutNameData = {
-      lastEditDate: "2020-02-24 16:51:21.353977",
+      dataUpdatedDate: "2020-02-24 16:51:21.353977",
       odsCode,
       name: "",
       ccgPractices: practiceMetricsMock,

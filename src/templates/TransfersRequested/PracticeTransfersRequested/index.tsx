@@ -26,7 +26,7 @@ import {
 type PageContext = {
   practice: PracticeType;
   layout: string;
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 type PracticeProps = {
@@ -51,7 +51,7 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
 };
 
 const PracticeTransfersRequested: FC<PracticeProps> = ({ pageContext }) => {
-  const { practice, lastEditDate } = pageContext;
+  const { practice, dataUpdatedDate } = pageContext;
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
@@ -116,7 +116,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({ pageContext }) => {
           definitionsContent={<TransfersRequestedDefinitionsContent />}
           expanderTitle="What happens when a GP2GP transfer fails?"
           expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
-          lastEditDate={lastEditDate}
+          dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <Table
               headers={[

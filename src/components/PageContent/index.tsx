@@ -3,7 +3,7 @@ import { Expander } from "../common/Expander";
 import { Tabs } from "../Tabs";
 import { AboutThisDataContent } from "../AboutThisDataContent";
 import "./index.scss";
-import { convertUtcToReadableBstDate } from "../../library/utils/convertUtcToReadableBstDate";
+import { convertToReadableDate } from "../../library/utils/convertToReadableDate";
 
 type PageContentProps = {
   title: string;
@@ -13,7 +13,7 @@ type PageContentProps = {
   expanderTitle: string;
   expanderContent: ReactNode;
   definitionsContent: ReactNode;
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 export const PageContent: FC<PageContentProps> = ({
@@ -24,9 +24,9 @@ export const PageContent: FC<PageContentProps> = ({
   expanderTitle,
   expanderContent,
   definitionsContent,
-  lastEditDate,
+  dataUpdatedDate,
 }) => {
-  const lastEditDateBST = convertUtcToReadableBstDate(lastEditDate);
+  const formattedDataUpdatedDate = convertToReadableDate(dataUpdatedDate);
 
   return (
     <section className={`gp2gp-page-content-section ${className}`}>
@@ -47,7 +47,7 @@ export const PageContent: FC<PageContentProps> = ({
         ]}
       />
       <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-0">
-        Data updated: {lastEditDateBST} <br />
+        Data updated: {formattedDataUpdatedDate} <br />
         New data is added around 15th of each month{" "}
       </p>
       <noscript>

@@ -27,7 +27,7 @@ type PageContext = {
   name: string;
   ccgPractices: PracticeType[];
   layout: string;
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 type CcgProps = {
@@ -35,7 +35,7 @@ type CcgProps = {
 };
 
 const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
-  const { name, odsCode, ccgPractices, lastEditDate } = pageContext;
+  const { name, odsCode, ccgPractices, dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(name);
   const { year, month } = ccgPractices[0].metrics[0];
   const tableTitle = `GP2GP transfers requested for registering practices - ${convertMonthNumberToText(
@@ -114,7 +114,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
           expanderTitle="What happens when a GP2GP transfer fails?"
           expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
           definitionsContent={<TransfersRequestedDefinitionsContent />}
-          lastEditDate={lastEditDate}
+          dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <PracticeTableWithSort
               ccgPractices={ccgPracticeTableData}

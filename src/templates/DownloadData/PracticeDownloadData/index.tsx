@@ -10,7 +10,7 @@ import { DownloadData } from "../../../components/DownloadData";
 type PageContext = {
   practice: PracticeType;
   layout: string;
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 type PracticeProps = {
@@ -18,7 +18,7 @@ type PracticeProps = {
 };
 
 const PracticeDownloadData: FC<PracticeProps> = ({
-  pageContext: { practice, lastEditDate },
+  pageContext: { practice, dataUpdatedDate },
 }) => {
   const { name, odsCode } = practice;
   const formattedName = convertToTitleCase(name);
@@ -65,7 +65,7 @@ const PracticeDownloadData: FC<PracticeProps> = ({
           pageDescription={
             "To download data for this practice in CSV format select from the options below and click 'Download'."
           }
-          lastEditDate={lastEditDate}
+          dataUpdatedDate={dataUpdatedDate}
         />
       </div>
     </>

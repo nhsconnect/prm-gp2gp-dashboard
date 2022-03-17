@@ -14,7 +14,7 @@ describe("Download data component", () => {
         data={[]}
         pageDescription={pageDescription}
         dataFor="Test GP practice"
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -23,14 +23,14 @@ describe("Download data component", () => {
   });
 
   it("displays the last edit date", () => {
-    const lastEditDate = "2020-04-24 16:51:21.353977";
+    const dataUpdatedDate = "2020-04-24 16:51:21.353977";
     const expectedDate = /Data updated: April 2020/;
     const { getByText } = render(
       <DownloadData
         data={[]}
         pageDescription=""
         dataFor="Test GP practice"
-        lastEditDate={lastEditDate}
+        dataUpdatedDate={dataUpdatedDate}
       />
     );
     expect(getByText(expectedDate)).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("Download data component", () => {
         data={[]}
         pageDescription={""}
         dataFor="Test GP CCG"
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
     const datasetType = getByRole("heading", {
@@ -63,7 +63,7 @@ describe("Download data component", () => {
         data={[]}
         pageDescription=""
         dataFor="Test GP practice"
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -87,7 +87,7 @@ describe("Download data component", () => {
         data={[]}
         pageDescription=""
         dataFor="Test GP CCG"
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 
@@ -111,7 +111,7 @@ describe("Download data component", () => {
         data={[]}
         pageDescription=""
         dataFor="Test GP practice"
-        lastEditDate=""
+        dataUpdatedDate=""
       />
     );
 

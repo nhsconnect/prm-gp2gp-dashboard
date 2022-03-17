@@ -21,7 +21,7 @@ const ODSPracticeData = {
 };
 
 const practicePageContext = {
-  lastEditDate: "2020-02-24 16:51:21.353977",
+  dataUpdatedDate: "2020-02-24 16:51:21.353977",
   practice: {
     odsCode: "B86030",
     name: "BURTON CROFT SURGERY",
@@ -346,7 +346,7 @@ describe("PracticeTransfersRequested template", () => {
 
   it("renders placeholders when there are no transfers", () => {
     const practicePageContextNoTransferData = {
-      lastEditDate: "2020-02-24 16:51:21.353977",
+      dataUpdatedDate: "2020-02-24 16:51:21.353977",
       practice: {
         odsCode: "B86030",
         name: "BURTON CROFT SURGERY",

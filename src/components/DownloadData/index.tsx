@@ -9,14 +9,14 @@ import {
 } from "../../library/enums/datasetTypeOptions";
 import { PracticeType } from "../../library/types/practice.types";
 import { getFormatData } from "../../library/utils/download/getFormatData";
-import { convertUtcToReadableBstDate } from "../../library/utils/convertUtcToReadableBstDate";
+import { convertToReadableDate } from "../../library/utils/convertToReadableDate";
 
 type DownloadDataProps = {
   pageDescription: string;
   dataFor: string;
   className?: string;
   data: PracticeType[];
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 export const DownloadData: FC<DownloadDataProps> = ({
@@ -24,7 +24,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
   dataFor,
   data,
   className = "",
-  lastEditDate,
+  dataUpdatedDate,
 }) => {
   const initialDatasetTypeState = DatasetTypeOptions.AllMetrics.valueOf();
   const initialTimeframeState = TimeframeOptions.Last6Months.valueOf();
@@ -36,7 +36,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
     initialTimeframeState
   );
 
-  const lastEditDateBST = convertUtcToReadableBstDate(lastEditDate);
+  const formattedDataUpdatedDate = convertToReadableDate(dataUpdatedDate);
 
   const exportToCsv = () => {
     const dataToDownload = getFormatData(
@@ -111,7 +111,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
           Download
         </Button>
         <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">
-          Data updated: {lastEditDateBST} <br />
+          Data updated: {formattedDataUpdatedDate} <br />
           New data is added around 15th of each month{" "}
         </p>
       </div>

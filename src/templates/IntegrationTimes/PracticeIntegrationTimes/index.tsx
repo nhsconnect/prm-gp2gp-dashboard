@@ -27,7 +27,7 @@ import { ContentsList } from "../../../components/common/ContentsList";
 type PageContext = {
   practice: PracticeType;
   layout: string;
-  lastEditDate: string;
+  dataUpdatedDate: string;
 };
 
 type PracticeProps = {
@@ -54,7 +54,7 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
 };
 
 const PracticeIntegrationTimes: FC<PracticeProps> = ({ pageContext }) => {
-  const { lastEditDate, practice } = pageContext;
+  const { dataUpdatedDate, practice } = pageContext;
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
@@ -107,7 +107,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({ pageContext }) => {
           expanderTitle="Why integrate within 8 days"
           expanderContent={<WhyIntegrateWithin8Days />}
           definitionsContent={<IntegrationsDefinitionsContent />}
-          lastEditDate={lastEditDate}
+          dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <Table
               headers={[

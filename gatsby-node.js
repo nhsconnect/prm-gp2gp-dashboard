@@ -4,7 +4,7 @@ const filterPracticesByOdsCodes = require("./src/library/utils/filterPracticesBy
 
 const practices = practiceMetrics.practices;
 const ccgs = practiceMetrics.ccgs;
-const lastEditDate = practiceMetrics.generatedOn;
+const dataUpdatedDate = practiceMetrics.generatedOn;
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions;
@@ -29,7 +29,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practice,
-        lastEditDate,
+        dataUpdatedDate,
         layout: "navigation-contents",
       },
     });
@@ -41,7 +41,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practice,
-        lastEditDate,
+        dataUpdatedDate,
         layout: "navigation-contents",
       },
     });
@@ -54,7 +54,7 @@ exports.createPages = async ({ actions }) => {
       context: {
         practice,
         layout: "navigation-contents",
-        lastEditDate,
+        dataUpdatedDate,
       },
     });
   });
@@ -81,7 +81,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         ccgPractices,
-        lastEditDate,
+        dataUpdatedDate,
         layout: "navigation-contents",
       },
     });
@@ -95,7 +95,7 @@ exports.createPages = async ({ actions }) => {
         odsCode: ccg.odsCode,
         name: ccg.name,
         ccgPractices,
-        lastEditDate,
+        dataUpdatedDate,
         layout: "navigation-contents",
       },
     });
@@ -110,7 +110,7 @@ exports.createPages = async ({ actions }) => {
         name: ccg.name,
         ccgPractices,
         layout: "navigation-contents",
-        lastEditDate,
+        dataUpdatedDate,
       },
     });
   });
