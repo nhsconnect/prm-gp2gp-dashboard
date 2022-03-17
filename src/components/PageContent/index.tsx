@@ -46,10 +46,10 @@ export const PageContent: FC<PageContentProps> = ({
           { title: "Definitions", content: definitionsContent },
         ]}
       />
-      <div>
-        <p>Last edited: {lastEditDateBST}</p>
-      </div>
-
+      <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-0">
+        Data updated: {lastEditDateBST} <br />
+        New data is added around 15th of each month{" "}
+      </p>
       <noscript>
         {tableContent}
         <AboutThisDataContent />

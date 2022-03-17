@@ -6,5 +6,5 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export const convertUtcToReadableBstDate = (date: string): string => {
-  return dayjs.utc(date).tz("Europe/London").format("D MMMM YYYY h:mm a");
+  return dayjs.utc(date).tz("Europe/London").format("MMMM YYYY");
 };

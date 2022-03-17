@@ -24,7 +24,7 @@ describe("Download data component", () => {
 
   it("displays the last edit date", () => {
     const lastEditDate = "2020-04-24 16:51:21.353977";
-    const expectedDate = /24 April 2020 5:51 pm/;
+    const expectedDate = /Data updated: April 2020/;
     const { getByText } = render(
       <DownloadData
         data={[]}

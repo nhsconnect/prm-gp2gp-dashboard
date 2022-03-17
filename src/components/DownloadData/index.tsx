@@ -110,7 +110,10 @@ export const DownloadData: FC<DownloadDataProps> = ({
         >
           Download
         </Button>
-        <p>Last edited: {lastEditDateBST}</p>
+        <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-bottom-0">
+          Data updated: {lastEditDateBST} <br />
+          New data is added around 15th of each month{" "}
+        </p>
       </div>
       <noscript>
         <p>
