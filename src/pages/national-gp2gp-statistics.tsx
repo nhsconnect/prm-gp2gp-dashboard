@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import { convertMonthNumberToText } from "../library/utils/convertMonthNumberToText";
 import { addPercentageSign } from "../library/utils/addPercentageSign";
 import { convertToReadableNum } from "../library/utils/convertToReadableNum";
+import { convertToReadableDate } from "../library/utils/convertToReadableDate";
+
 // @ts-ignore
 import nationalMetrics from "../data/organisations/nationalMetrics.json";
 
@@ -29,6 +31,9 @@ type ProcessFailureMetrics = {
   integratedLate: TransferMetrics;
   transferredNotIntegrated: TransferMetrics;
 };
+const formattedDataUpdatedDate = convertToReadableDate(
+  nationalMetrics.generatedOn
+);
 
 const NationalStatistics = () => {
   const {
@@ -199,6 +204,10 @@ const NationalStatistics = () => {
           </li>
         </ul>
       </div>
+      <p className="nhsuk-body-s nhsuk-u-secondary-text-color nhsuk-u-margin-top-5 nhsuk-u-margin-bottom-0">
+        Data updated: {formattedDataUpdatedDate} <br />
+        New data is added around 15th of each month{" "}
+      </p>
     </>
   );
 };

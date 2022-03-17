@@ -6,6 +6,7 @@ import NationalStatistics from "../national-gp2gp-statistics";
 jest.mock(
   "../../data/organisations/nationalMetrics.json",
   () => ({
+    generatedOn: "2020-02-24 16:51:21.353977",
     metrics: [
       {
         year: 2021,
@@ -90,5 +91,11 @@ describe("National GP2GP Statistics template", () => {
 
     expect(getByText("Count: 343")).toBeInTheDocument();
     expect(getByText("Percent: 0.14%")).toBeInTheDocument();
+  });
+
+  it("renders data updated information correctly", () => {
+    const { getByText } = render(<NationalStatistics />);
+    expect(getByText(/Data updated: February 2020/)).toBeInTheDocument();
+    expect(getByText(/15th of each month/)).toBeInTheDocument();
   });
 });
