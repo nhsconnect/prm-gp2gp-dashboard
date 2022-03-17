@@ -190,7 +190,7 @@ describe("CCG Transfers Requested template", () => {
     expect(allRows[1]).toHaveTextContent(/GP2GP technical failures(.*)28.6%/);
 
     expect(
-      queryByText("This site is updated 14 days after the end of each month.", {
+      queryByText("This site is updated 15 days after the end of each month.", {
         exact: false,
       })
     ).not.toBeInTheDocument();

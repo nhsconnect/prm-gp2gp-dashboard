@@ -148,7 +148,7 @@ describe("PageContent component", () => {
     );
 
     const aboutTabContent = queryByText(
-      "This site is updated 14 days after the end of each month.",
+      "This site is updated 15 days after the end of each month.",
       { exact: false }
     );
     expect(aboutTabContent).not.toBeInTheDocument();
@@ -160,7 +160,7 @@ describe("PageContent component", () => {
 
     await waitFor(() => {
       const aboutTabContent = getByText(
-        "This site is updated 14 days after the end of each month.",
+        "This site is updated 15 days after the end of each month.",
         { exact: false }
       );
       expect(aboutTabContent).toBeInTheDocument();

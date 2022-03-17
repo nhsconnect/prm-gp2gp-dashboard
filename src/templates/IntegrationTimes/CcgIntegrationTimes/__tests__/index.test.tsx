@@ -191,7 +191,7 @@ describe("CCG Integration Times template", () => {
     );
 
     expect(
-      queryByText("This site is updated 14 days after the end of each month.", {
+      queryByText("This site is updated 15 days after the end of each month.", {
         exact: false,
       })
     ).not.toBeInTheDocument();

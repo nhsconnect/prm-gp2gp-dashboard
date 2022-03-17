@@ -62,7 +62,7 @@ const NationalStatistics = () => {
           practices in England.
         </p>
         <p>
-          This site is updated 14 days after the end of each month. This is to
+          This site is updated 15 days after the end of each month. This is to
           identify whether transfers started at the end of the month were
           integrated within 8 days. When records are not integrated within 8
           days, GP2GP requests that a full paper copy is printed and sent to the
