@@ -95,6 +95,8 @@ describe("CCG Download Data page", () => {
         allLast6Months.should("contain", "Integrated within 3 days - %");
         allLast6Months.should("contain", "16.7%");
 
+        cy.contains("Data updated: February 2020");
+
         cy.checkAccessibility();
       });
 

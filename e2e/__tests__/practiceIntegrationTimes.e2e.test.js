@@ -103,6 +103,8 @@ describe("Practice Integration Times page", () => {
         cy.contains("button", "Data table").click();
         cy.contains("December 2019");
 
+        cy.contains("Data updated: February 2020");
+
         cy.checkAccessibility();
 
         cy.contains(

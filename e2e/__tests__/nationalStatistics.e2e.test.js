@@ -71,6 +71,8 @@ describe("National statistics page", () => {
           '[data-testid="national-statistics__unclassified-percent"]'
         ).contains("Percent: 9.09%");
 
+        cy.contains("Data updated: February 2020");
+
         cy.checkAccessibility();
       });
 

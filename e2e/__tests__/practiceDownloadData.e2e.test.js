@@ -123,6 +123,8 @@ describe("Practice Download Data page", () => {
         allLatestMonth.should("contain", "Integrated within 3 days - %");
         allLatestMonth.should("contain", "50%");
 
+        cy.contains("Data updated: February 2020");
+
         cy.checkAccessibility();
       });
 

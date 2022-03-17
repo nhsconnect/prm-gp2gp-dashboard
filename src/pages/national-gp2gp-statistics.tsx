@@ -31,6 +31,7 @@ type ProcessFailureMetrics = {
   integratedLate: TransferMetrics;
   transferredNotIntegrated: TransferMetrics;
 };
+
 const formattedDataUpdatedDate = convertToReadableDate(
   nationalMetrics.generatedOn
 );

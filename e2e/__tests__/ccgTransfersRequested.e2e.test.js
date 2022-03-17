@@ -95,7 +95,7 @@ describe("CCG Transfers Requested page", () => {
 
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");
-
+        cy.contains("Data updated: February 2020");
         cy.checkAccessibility();
 
         cy.contains(

@@ -143,6 +143,8 @@ describe("CCG Integration Times page", () => {
         cy.contains("a", "Test GP Practice With No Integrations - A12346")
           .should("have.attr", "href")
           .and("contains", "practice/A12346");
+
+        cy.contains("Data updated: February 2020");
       });
 
       it("displays the feedback section that links to feedback survey", () => {
