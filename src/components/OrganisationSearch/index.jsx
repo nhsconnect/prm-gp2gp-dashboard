@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { navigate } from "gatsby";
+import { navigate, graphql, useStaticQuery } from "gatsby";
 
 import { Form } from "../common/FormComponents/Form";
 import { Button } from "../common/Button";
@@ -8,34 +8,54 @@ import { Search } from "../../library/utils/search/index";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase/index";
 
 import organisationSearchContent from "../../data/content/organisationSearch.json";
-import practiceMetrics from "../../data/organisations/practiceMetrics.json";
 
 import "./index.scss";
 import { useHasMounted } from "../../library/hooks/useHasMounted";
 
-const practiceSearch = new Search(
-  "odsCode",
-  ["name", "odsCode"],
-  practiceMetrics.practices.map((item) => ({
-    ...item,
-    path: `/practice/${item.odsCode}/integration-times`,
-  }))
-);
-
-const ccgSearch = new Search(
-  "odsCode",
-  ["name", "odsCode"],
-  practiceMetrics.ccgs.map((item) => ({
-    ...item,
-    path: `/ccg/${item.odsCode}/integration-times`,
-  }))
-);
+const initializeSearch = (organisations, orgType) => {
+  return new Search(
+    "odsCode",
+    ["name", "odsCode"],
+    organisations.map((item) => ({
+      ...item,
+      path: `/${orgType}/${item.odsCode}/integration-times`,
+    }))
+  );
+};
 
 export const OrganisationSearch = () => {
   const [inputTextValue, setInputTextValue] = useState("");
   const [inputError, setInputError] = useState(null);
   const [selectedOdsCode, setSelectedOdsCode] = useState("");
   const { hasMounted } = useHasMounted();
+
+  const data = useStaticQuery(
+    graphql`
+      query {
+        allFile(filter: { name: { eq: "practiceMetrics" } }) {
+          edges {
+            node {
+              childOrganisationsJson {
+                practices {
+                  name
+                  odsCode
+                }
+                ccgs {
+                  name
+                  odsCode
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  ).allFile.edges[0].node.childOrganisationsJson;
+
+  const [practiceSearch] = useState(() =>
+    initializeSearch(data.practices, "practice")
+  );
+  const [ccgSearch] = useState(() => initializeSearch(data.ccgs, "ccg"));
 
   const findSuggestions = (value) => [
     {
