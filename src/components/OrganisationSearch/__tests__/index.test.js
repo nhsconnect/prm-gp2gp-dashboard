@@ -4,21 +4,6 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { OrganisationSearch } from "../";
 
-jest.mock(
-  "../../../data/organisations/practiceMetrics.json",
-  () => ({
-    practices: [
-      { odsCode: "A12345", name: "Test Practice", metrics: [] },
-      { odsCode: "X99999", name: "Second Practice", metrics: [] },
-    ],
-    ccgs: [
-      { odsCode: "12A", name: "Test CCG", practices: ["A12345"] },
-      { odsCode: "13B", name: "Second CCG", practices: ["X99999"] },
-    ],
-  }),
-  { virtual: true }
-);
-
 describe("OrganisationSearch component", () => {
   const validPracticeOdsCode = "A12345";
   const validPracticeName = "Test Practice";
@@ -26,6 +11,34 @@ describe("OrganisationSearch component", () => {
     "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name";
   const validCCGOdsCode = "12A";
   const validCCGName = "Test CCG";
+
+  beforeAll(() => {
+    const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
+    useStaticQuery.mockImplementation(() => ({
+      allFile: {
+        edges: [
+          {
+            node: {
+              childOrganisationsJson: {
+                practices: [
+                  { odsCode: "A12345", name: "Test Practice" },
+                  { odsCode: "X99999", name: "Second Practice" },
+                ],
+                ccgs: [
+                  { odsCode: "12A", name: "Test CCG" },
+                  { odsCode: "13B", name: "Second CCG" },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    }));
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
 
   describe("navigation to practice page", () => {
     it("when searching for and selecting an ods code", async () => {
