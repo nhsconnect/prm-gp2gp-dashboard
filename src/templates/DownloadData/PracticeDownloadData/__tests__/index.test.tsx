@@ -6,9 +6,29 @@ import { waitFor } from "@testing-library/dom";
 import PracticeDownloadData from "../index";
 import { mockAPIResponse } from "../../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
-import { practiceWithThreeMonthsMetrics } from "../../../../../__mocks__/practiceMetricsTestData";
+import {
+  practiceWithNoName,
+  practiceWithThreeMonthsMetrics,
+} from "../../../../../__mocks__/practiceMetricsTestData";
+import { PracticeType } from "../../../../library/types/practice.types";
 
 jest.mock("no-scroll");
+
+function queryResult(practices: PracticeType[]) {
+  return {
+    allFile: {
+      edges: [
+        {
+          node: {
+            childOrganisationsJson: {
+              practices: practices,
+            },
+          },
+        },
+      ],
+    },
+  };
+}
 
 const ODSPracticeData = {
   odsCode: "B86030",
@@ -21,7 +41,7 @@ const ODSPracticeData = {
 };
 
 const practicePageContext = {
-  practice: practiceWithThreeMonthsMetrics,
+  odsCode: "B86030",
   layout: "navigation-contents",
   dataUpdatedDate: "2020-02-24 16:51:21.353977",
 };
@@ -50,7 +70,10 @@ describe("PracticeDownloadData template", () => {
     };
 
     const { getByText, getByRole } = render(
-      <PracticeDownloadData pageContext={practicePageContext} />
+      <PracticeDownloadData
+        pageContext={practicePageContext}
+        data={queryResult([practiceWithThreeMonthsMetrics])}
+      />
     );
 
     await waitFor(() => {
@@ -73,19 +96,13 @@ describe("PracticeDownloadData template", () => {
   it("displays only organisation ODS code when the name is not provided", () => {
     const { getByRole } = render(
       <PracticeDownloadData
-        pageContext={{
-          ...practicePageContext,
-          practice: {
-            ...practicePageContext.practice,
-            odsCode: "B86031",
-            name: "",
-          },
-        }}
+        pageContext={practicePageContext}
+        data={queryResult([practiceWithNoName])}
       />
     );
 
     const expectedPracticeHeading = getByRole("heading", {
-      name: "B86031 download data",
+      name: "NONAME123 download data",
       level: 1,
     });
 
@@ -94,7 +111,10 @@ describe("PracticeDownloadData template", () => {
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <PracticeDownloadData pageContext={practicePageContext} />
+      <PracticeDownloadData
+        pageContext={practicePageContext}
+        data={queryResult([practiceWithThreeMonthsMetrics])}
+      />
     );
 
     const pageTitle = getByRole("heading", {
@@ -107,7 +127,10 @@ describe("PracticeDownloadData template", () => {
 
   it("renders page description correctly", () => {
     const { getByText } = render(
-      <PracticeDownloadData pageContext={practicePageContext} />
+      <PracticeDownloadData
+        pageContext={practicePageContext}
+        data={queryResult([practiceWithThreeMonthsMetrics])}
+      />
     );
 
     const pageDescription = getByText(
@@ -118,7 +141,10 @@ describe("PracticeDownloadData template", () => {
 
   it("displays contents navigation", () => {
     const { getByRole } = render(
-      <PracticeDownloadData pageContext={practicePageContext} />
+      <PracticeDownloadData
+        pageContext={practicePageContext}
+        data={queryResult([practiceWithThreeMonthsMetrics])}
+      />
     );
 
     const contentsHeader = getByRole("heading", {

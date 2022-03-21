@@ -2,24 +2,29 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { OrganisationAddress } from "../../../components/OrganisationAddress";
 import { ContentsList } from "../../../components/common/ContentsList";
-import { PracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
+import { PracticeDownloadDataType } from "../../../library/types/queryResultDownloadData.types";
+import { graphql } from "gatsby";
 
 type PageContext = {
-  practice: PracticeType;
+  odsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
 type PracticeProps = {
   pageContext: PageContext;
+  data: PracticeDownloadDataType;
 };
 
 const PracticeDownloadData: FC<PracticeProps> = ({
-  pageContext: { practice, dataUpdatedDate },
+  data,
+  pageContext: { dataUpdatedDate },
 }) => {
+  const practice =
+    data.allFile.edges[0].node.childOrganisationsJson.practices[0];
   const { name, odsCode } = practice;
   const formattedName = convertToTitleCase(name);
   const contentListItems = [
@@ -71,5 +76,41 @@ const PracticeDownloadData: FC<PracticeProps> = ({
     </>
   );
 };
+
+export const query = graphql`
+  query PracticeDownloadDataQuery($odsCode: String) {
+    allFile(filter: { name: { eq: "practiceMetrics" } }) {
+      edges {
+        node {
+          childOrganisationsJson {
+            practices(odsCode: $odsCode) {
+              name
+              odsCode
+              ccgName
+              ccgOdsCode
+              metrics {
+                month
+                year
+                requestedTransfers {
+                  requestedCount
+                  receivedCount
+                  receivedPercentOfRequested
+                  integratedWithin3DaysCount
+                  integratedWithin3DaysPercentOfReceived
+                  integratedWithin8DaysCount
+                  integratedWithin8DaysPercentOfReceived
+                  notIntegratedWithin8DaysTotal
+                  notIntegratedWithin8DaysPercentOfReceived
+                  failuresTotalCount
+                  failuresTotalPercentOfRequested
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default PracticeDownloadData;
