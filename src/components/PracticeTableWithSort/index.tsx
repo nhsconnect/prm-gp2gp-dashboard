@@ -90,7 +90,11 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   pageTemplatePath,
 }) => {
   const metrics = ccgPractices[0].metrics;
-  const monthSelect = getPreviousMonths(metrics[0].month, metrics.length);
+  const monthSelect = getPreviousMonths(
+    metrics[0].month,
+    metrics[0].year,
+    metrics.length
+  );
 
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
