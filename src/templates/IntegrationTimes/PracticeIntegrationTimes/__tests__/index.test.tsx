@@ -20,67 +20,65 @@ const ODSPracticeData = {
   },
 };
 
+function queryResult(
+  odsCode: string = "B86031",
+  name: string = "BURTON CROFT SURGERY"
+) {
+  return {
+    allFile: {
+      edges: [
+        {
+          node: {
+            childOrganisationsJson: {
+              practices: [
+                {
+                  odsCode: odsCode,
+                  name: name,
+                  metrics: [
+                    {
+                      year: 2019,
+                      month: 11,
+                      requestedTransfers: {
+                        receivedCount: 22,
+                        integratedWithin3DaysPercentOfReceived: 22.7,
+                        integratedWithin8DaysPercentOfReceived: 54.6,
+                        notIntegratedWithin8DaysPercentOfReceived: 13.6,
+                      },
+                    },
+                    {
+                      year: 2019,
+                      month: 10,
+                      requestedTransfers: {
+                        receivedCount: 15,
+                        integratedWithin3DaysPercentOfReceived: 66.7,
+                        integratedWithin8DaysPercentOfReceived: 13.3,
+                        notIntegratedWithin8DaysPercentOfReceived: 0.2,
+                      },
+                    },
+                    {
+                      year: 2019,
+                      month: 9,
+                      requestedTransfers: {
+                        receivedCount: 16,
+                        integratedWithin3DaysPercentOfReceived: 62.5,
+                        integratedWithin8DaysPercentOfReceived: 12.5,
+                        notIntegratedWithin8DaysPercentOfReceived: 25.0,
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  };
+}
+
 const practicePageContext = {
   dataUpdatedDate: "2020-02-24 16:51:21.353977",
-  practice: {
-    odsCode: "B86030",
-    name: "BURTON CROFT SURGERY",
-    ccgOdsCode: "11D",
-    ccgName: "Test ccg",
-    metrics: [
-      {
-        year: 2019,
-        month: 11,
-        requestedTransfers: {
-          requestedCount: 22,
-          receivedCount: 22,
-          receivedPercentOfRequested: 100,
-          integratedWithin3DaysCount: 5,
-          integratedWithin3DaysPercentOfReceived: 22.7,
-          integratedWithin8DaysCount: 12,
-          integratedWithin8DaysPercentOfReceived: 54.6,
-          notIntegratedWithin8DaysTotal: 3,
-          notIntegratedWithin8DaysPercentOfReceived: 13.6,
-          failuresTotalCount: 0,
-          failuresTotalPercentOfRequested: 0.0,
-        },
-      },
-      {
-        year: 2019,
-        month: 10,
-        requestedTransfers: {
-          requestedCount: 15,
-          receivedCount: 15,
-          receivedPercentOfRequested: 100,
-          integratedWithin3DaysCount: 10,
-          integratedWithin3DaysPercentOfReceived: 66.7,
-          integratedWithin8DaysCount: 2,
-          integratedWithin8DaysPercentOfReceived: 13.3,
-          notIntegratedWithin8DaysTotal: 3,
-          notIntegratedWithin8DaysPercentOfReceived: 0.2,
-          failuresTotalCount: 0,
-          failuresTotalPercentOfRequested: 0.0,
-        },
-      },
-      {
-        year: 2019,
-        month: 9,
-        requestedTransfers: {
-          requestedCount: 30,
-          receivedCount: 16,
-          receivedPercentOfRequested: 15.3,
-          integratedWithin3DaysCount: 10,
-          integratedWithin3DaysPercentOfReceived: 62.5,
-          integratedWithin8DaysCount: 2,
-          integratedWithin8DaysPercentOfReceived: 12.5,
-          notIntegratedWithin8DaysTotal: 4,
-          notIntegratedWithin8DaysPercentOfReceived: 25.0,
-          failuresTotalCount: 0,
-          failuresTotalPercentOfRequested: 0.0,
-        },
-      },
-    ],
-  },
+  odsCode: "B86030",
   layout: "navigation-contents",
 };
 
@@ -96,11 +94,13 @@ describe("PracticeIntegrationTimes template", () => {
     moxios.uninstall();
   });
 
-  const practiceMetrics = practicePageContext.practice.metrics;
+  const practiceMetrics =
+    queryResult().allFile.edges[0].node.childOrganisationsJson.practices[0]
+      .metrics;
 
   it("renders practice details correctly", async () => {
     const expectedODSPracticeData = {
-      odsCode: "B86030",
+      odsCode: "B86031",
       town: "Leeds",
       postCode: "LS6 2AF",
       lines: {
@@ -110,12 +110,15 @@ describe("PracticeIntegrationTimes template", () => {
     };
 
     const { getByText, getByRole } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     await waitFor(() => {
       const expectedPracticeHeading = getByRole("heading", {
-        name: /Burton Croft Surgery - B86030/,
+        name: /Burton Croft Surgery - B86031/,
         level: 1,
       });
       expect(expectedPracticeHeading).toBeInTheDocument();
@@ -133,17 +136,10 @@ describe("PracticeIntegrationTimes template", () => {
   it("displays only organisation ODS code when the name is not provided", () => {
     const { getByRole } = render(
       <PracticeIntegrationTimes
-        pageContext={{
-          ...practicePageContext,
-          practice: {
-            ...practicePageContext.practice,
-            odsCode: "B86031",
-            name: "",
-          },
-        }}
+        pageContext={practicePageContext}
+        data={queryResult("B86031", "")}
       />
     );
-
     const expectedPracticeHeading = getByRole("heading", {
       name: /B86031/,
       level: 1,
@@ -154,7 +150,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("displays table title correctly", () => {
     const { getByRole } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const tableTitle = getByRole("heading", {
@@ -167,7 +166,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("renders metrics for multiple months correctly", () => {
     const { getByText } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const monthStrings = ["November 2019", "October 2019", "September 2019"];
@@ -182,13 +184,17 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("renders one month of metrics correctly", () => {
     const { getByText } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const transfersReceived =
-      practicePageContext.practice.metrics[0].requestedTransfers;
+      queryResult().allFile.edges[0].node.childOrganisationsJson.practices[0]
+        .metrics[0].requestedTransfers;
 
-    expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
+    expect(getByText(transfersReceived.receivedCount)).toBeInTheDocument();
     expect(getByText("22.7%")).toBeInTheDocument();
     expect(getByText("54.6%")).toBeInTheDocument();
     expect(getByText("13.6%")).toBeInTheDocument();
@@ -196,7 +202,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("displays expander with the correct content", () => {
     const { getByText } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const expanderTitle = getByText("Why integrate within 8 days");
@@ -213,7 +222,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("displays table headers correctly", () => {
     const { getAllByRole } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -236,7 +248,12 @@ describe("PracticeIntegrationTimes template", () => {
       queryByText,
       queryAllByText,
       getByRole,
-    } = render(<PracticeIntegrationTimes pageContext={practicePageContext} />);
+    } = render(
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
+    );
 
     const notInt8daysContent =
       /transfers received that were not integrated within 8 days/;
@@ -260,7 +277,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("displays help icons for all relevant headers", () => {
     const { getAllByRole } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -285,7 +305,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("labels modal with content title", async () => {
     const { getByRole, findByLabelText } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const within8DaysHeader = getByRole("columnheader", {
@@ -301,39 +324,46 @@ describe("PracticeIntegrationTimes template", () => {
   });
 
   it("renders placeholders when there are no transfers", () => {
-    const practicePageContextNoTransferData = {
-      dataUpdatedDate: "2020-02-24 16:51:21.353977",
-      practice: {
-        odsCode: "B86030",
-        name: "BURTON CROFT SURGERY",
-        ccgOdsCode: "11D",
-        ccgName: "Test ccg",
-        metrics: [
+    const queryResult = {
+      allFile: {
+        edges: [
           {
-            year: 2019,
-            month: 11,
-            requestedTransfers: {
-              requestedCount: 0,
-              receivedCount: 0,
-              integratedWithin3DaysCount: 0,
-              integratedWithin8DaysCount: 0,
-              receivedPercentOfRequested: null,
-              integratedWithin3DaysPercentOfReceived: null,
-              integratedWithin8DaysPercentOfReceived: null,
-              notIntegratedWithin8DaysTotal: 0,
-              notIntegratedWithin8DaysPercentOfReceived: null,
-              failuresTotalCount: 0,
-              failuresTotalPercentOfRequested: null,
+            node: {
+              childOrganisationsJson: {
+                practices: [
+                  {
+                    odsCode: "B86030",
+                    name: "BURTON CROFT SURGERY",
+                    metrics: [
+                      {
+                        year: 2019,
+                        month: 11,
+                        requestedTransfers: {
+                          receivedCount: 0,
+                          integratedWithin3DaysPercentOfReceived: null,
+                          integratedWithin8DaysPercentOfReceived: null,
+                          notIntegratedWithin8DaysPercentOfReceived: null,
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
             },
           },
         ],
       },
+    };
+    const practicePageContextNoTransferData = {
+      dataUpdatedDate: "2020-02-24 16:51:21.353977",
+      odsCode: "B86030",
       layout: "general",
     };
 
     const { getAllByText } = render(
       <PracticeIntegrationTimes
         pageContext={practicePageContextNoTransferData}
+        data={queryResult}
       />
     );
 
@@ -344,7 +374,10 @@ describe("PracticeIntegrationTimes template", () => {
 
   it("displays contents navigation", () => {
     const { getByRole } = render(
-      <PracticeIntegrationTimes pageContext={practicePageContext} />
+      <PracticeIntegrationTimes
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const contentsHeader = getByRole("heading", {

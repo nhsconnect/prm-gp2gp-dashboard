@@ -2,11 +2,7 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { OrganisationAddress } from "../../../components/OrganisationAddress";
 import { Table } from "../../../components/common/Table";
-
-import {
-  PracticeMetricsType,
-  PracticeType,
-} from "../../../library/types/practice.types";
+import { graphql } from "gatsby";
 
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
@@ -23,18 +19,23 @@ import {
 } from "../../../components/Definitions";
 import "../../index.scss";
 import { ContentsList } from "../../../components/common/ContentsList";
+import {
+  PracticeIntegrationMetricsType,
+  PracticeIntegrationType,
+} from "../../../library/types/queryResult.types";
 
 type PageContext = {
-  practice: PracticeType;
+  odsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
 type PracticeProps = {
   pageContext: PageContext;
+  data: PracticeIntegrationType;
 };
 
-const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
+const generateMonthlyRowData = (metrics: PracticeIntegrationMetricsType[]) => {
   return metrics.map((metric) => {
     const {
       receivedCount,
@@ -53,8 +54,10 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   });
 };
 
-const PracticeIntegrationTimes: FC<PracticeProps> = ({ pageContext }) => {
-  const { dataUpdatedDate, practice } = pageContext;
+const PracticeIntegrationTimes: FC<PracticeProps> = ({ data, pageContext }) => {
+  const practice =
+    data.allFile.edges[0].node.childOrganisationsJson.practices[0];
+  const { dataUpdatedDate } = pageContext;
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
@@ -183,5 +186,32 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({ pageContext }) => {
     </>
   );
 };
+
+export const query = graphql`
+  query PracticeIntegrationsQuery($odsCode: String) {
+    allFile(filter: { name: { eq: "practiceMetrics" } }) {
+      edges {
+        node {
+          childOrganisationsJson {
+            practices(odsCode: $odsCode) {
+              name
+              odsCode
+              metrics {
+                month
+                year
+                requestedTransfers {
+                  integratedWithin3DaysPercentOfReceived
+                  integratedWithin8DaysPercentOfReceived
+                  notIntegratedWithin8DaysPercentOfReceived
+                  receivedCount
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default PracticeIntegrationTimes;
