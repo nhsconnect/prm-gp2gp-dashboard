@@ -40,7 +40,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/TransfersRequested/PracticeTransfersRequested/index.tsx"
       ),
       context: {
-        practice,
+        odsCode: practice.odsCode,
         dataUpdatedDate,
         layout: "navigation-contents",
       },

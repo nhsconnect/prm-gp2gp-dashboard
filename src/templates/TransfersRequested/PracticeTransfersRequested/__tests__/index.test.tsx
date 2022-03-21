@@ -10,6 +10,59 @@ import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");
 
+function queryResult(
+  odsCode: string = "B86031",
+  name: string = "BURTON CROFT SURGERY"
+) {
+  return {
+    allFile: {
+      edges: [
+        {
+          node: {
+            childOrganisationsJson: {
+              practices: [
+                {
+                  odsCode: odsCode,
+                  name: name,
+                  metrics: [
+                    {
+                      year: 2019,
+                      month: 11,
+                      requestedTransfers: {
+                        requestedCount: 22,
+                        receivedPercentOfRequested: 90.9,
+                        failuresTotalPercentOfRequested: 9.1,
+                      },
+                    },
+                    {
+                      year: 2019,
+                      month: 10,
+                      requestedTransfers: {
+                        requestedCount: 15,
+                        receivedPercentOfRequested: 100,
+                        failuresTotalPercentOfRequested: 0.0,
+                      },
+                    },
+                    {
+                      year: 2019,
+                      month: 9,
+                      requestedTransfers: {
+                        requestedCount: 30,
+                        receivedPercentOfRequested: 53.3,
+                        failuresTotalPercentOfRequested: 0.0,
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  };
+}
+
 const ODSPracticeData = {
   odsCode: "B86030",
   town: "LEEDS",
@@ -22,65 +75,7 @@ const ODSPracticeData = {
 
 const practicePageContext = {
   dataUpdatedDate: "2020-02-24 16:51:21.353977",
-  practice: {
-    odsCode: "B86030",
-    name: "BURTON CROFT SURGERY",
-    ccgOdsCode: "11D",
-    ccgName: "Test ccg",
-    metrics: [
-      {
-        year: 2019,
-        month: 11,
-        requestedTransfers: {
-          requestedCount: 22,
-          receivedCount: 20,
-          integratedWithin3DaysCount: 5,
-          integratedWithin8DaysCount: 12,
-          receivedPercentOfRequested: 90.9,
-          integratedWithin3DaysPercentOfReceived: 25.0,
-          integratedWithin8DaysPercentOfReceived: 60.0,
-          notIntegratedWithin8DaysTotal: 3,
-          notIntegratedWithin8DaysPercentOfReceived: 15.0,
-          failuresTotalCount: 2,
-          failuresTotalPercentOfRequested: 9.1,
-        },
-      },
-      {
-        year: 2019,
-        month: 10,
-        requestedTransfers: {
-          requestedCount: 15,
-          receivedCount: 15,
-          integratedWithin3DaysCount: 10,
-          integratedWithin8DaysCount: 2,
-          receivedPercentOfRequested: 100,
-          integratedWithin3DaysPercentOfReceived: 66.7,
-          integratedWithin8DaysPercentOfReceived: 13.3,
-          notIntegratedWithin8DaysTotal: 3,
-          notIntegratedWithin8DaysPercentOfReceived: 22.0,
-          failuresTotalCount: 0,
-          failuresTotalPercentOfRequested: 0.0,
-        },
-      },
-      {
-        year: 2019,
-        month: 9,
-        requestedTransfers: {
-          requestedCount: 30,
-          receivedCount: 16,
-          integratedWithin3DaysCount: 10,
-          integratedWithin8DaysCount: 2,
-          receivedPercentOfRequested: 53.3,
-          integratedWithin3DaysPercentOfReceived: 62.5,
-          integratedWithin8DaysPercentOfReceived: 12.5,
-          notIntegratedWithin8DaysTotal: 4,
-          notIntegratedWithin8DaysPercentOfReceived: 25,
-          failuresTotalCount: 0,
-          failuresTotalPercentOfRequested: 0.0,
-        },
-      },
-    ],
-  },
+  odsCode: "B86030",
   layout: "general",
 };
 
@@ -96,11 +91,13 @@ describe("PracticeTransfersRequested template", () => {
     moxios.uninstall();
   });
 
-  const practiceMetrics = practicePageContext.practice.metrics;
+  const practiceMetrics =
+    queryResult().allFile.edges[0].node.childOrganisationsJson.practices[0]
+      .metrics;
 
   it("renders practice details correctly", async () => {
     const expectedODSPracticeData = {
-      odsCode: "B86030",
+      odsCode: "B86031",
       town: "Leeds",
       postCode: "LS6 2AF",
       lines: {
@@ -110,12 +107,15 @@ describe("PracticeTransfersRequested template", () => {
     };
 
     const { getByText, getByRole } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     await waitFor(() => {
       const expectedPracticeHeading = getByRole("heading", {
-        name: /Burton Croft Surgery - B86030/,
+        name: /Burton Croft Surgery - B86031/,
         level: 1,
       });
       expect(expectedPracticeHeading).toBeInTheDocument();
@@ -133,14 +133,8 @@ describe("PracticeTransfersRequested template", () => {
   it("displays only organisation ODS code when the name is not provided", () => {
     const { getByRole } = render(
       <PracticeTransfersRequested
-        pageContext={{
-          ...practicePageContext,
-          practice: {
-            ...practicePageContext.practice,
-            odsCode: "B86031",
-            name: "",
-          },
-        }}
+        pageContext={practicePageContext}
+        data={queryResult("B86031", "")}
       />
     );
 
@@ -154,7 +148,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("displays contents navigation", () => {
     const { getByRole } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const contentsHeader = getByRole("heading", {
@@ -172,7 +169,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("displays page title and description correctly", () => {
     const { getByRole, getByText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const pageTitle = getByRole("heading", {
@@ -189,7 +189,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("displays transfers received definitions correctly", async () => {
     const { getByRole, getByText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
     const definitionsText =
       "Percentage of GP2GP transfers requested between the 1st and last day of the month that failed for a technical reason.";
@@ -209,7 +212,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("displays expander with the correct content", () => {
     const { getByText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const expanderTitle = getByText(
@@ -228,7 +234,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("displays table headers correctly", () => {
     const { getAllByRole } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -250,7 +259,10 @@ describe("PracticeTransfersRequested template", () => {
       findAllByText,
       getByRole,
     } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const technicalFailureModalContent =
@@ -276,7 +288,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("displays help icons for all relevant headers", () => {
     const { getAllByRole } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -298,7 +313,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("labels modal with content title", async () => {
     const { getByRole, findByLabelText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const transfersReceivedHeader = getByRole("columnheader", {
@@ -318,11 +336,15 @@ describe("PracticeTransfersRequested template", () => {
 
   it("renders one month of metrics correctly", () => {
     const { getByText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const transfersReceived =
-      practicePageContext.practice.metrics[0].requestedTransfers;
+      queryResult().allFile.edges[0].node.childOrganisationsJson.practices[0]
+        .metrics[0].requestedTransfers;
 
     expect(getByText(transfersReceived.requestedCount)).toBeInTheDocument();
     expect(getByText("90.9%")).toBeInTheDocument();
@@ -331,7 +353,10 @@ describe("PracticeTransfersRequested template", () => {
 
   it("renders metrics for multiple months correctly", () => {
     const { getByText } = render(
-      <PracticeTransfersRequested pageContext={practicePageContext} />
+      <PracticeTransfersRequested
+        pageContext={practicePageContext}
+        data={queryResult()}
+      />
     );
 
     const monthStrings = ["November 2019", "October 2019", "September 2019"];
@@ -345,39 +370,46 @@ describe("PracticeTransfersRequested template", () => {
   });
 
   it("renders placeholders when there are no transfers", () => {
-    const practicePageContextNoTransferData = {
-      dataUpdatedDate: "2020-02-24 16:51:21.353977",
-      practice: {
-        odsCode: "B86030",
-        name: "BURTON CROFT SURGERY",
-        ccgOdsCode: "11D",
-        ccgName: "Test ccg",
-        metrics: [
+    const queryResult = {
+      allFile: {
+        edges: [
           {
-            year: 2019,
-            month: 11,
-            requestedTransfers: {
-              requestedCount: 0,
-              receivedCount: 0,
-              integratedWithin3DaysCount: 0,
-              integratedWithin8DaysCount: 0,
-              receivedPercentOfRequested: null,
-              integratedWithin3DaysPercentOfReceived: null,
-              integratedWithin8DaysPercentOfReceived: null,
-              notIntegratedWithin8DaysTotal: 0,
-              notIntegratedWithin8DaysPercentOfReceived: null,
-              failuresTotalCount: 0,
-              failuresTotalPercentOfRequested: null,
+            node: {
+              childOrganisationsJson: {
+                practices: [
+                  {
+                    odsCode: "B86030",
+                    name: "BURTON CROFT SURGERY",
+                    metrics: [
+                      {
+                        year: 2019,
+                        month: 11,
+                        requestedTransfers: {
+                          requestedCount: 0,
+                          receivedPercentOfRequested: null,
+                          failuresTotalPercentOfRequested: null,
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
             },
           },
         ],
       },
+    };
+
+    const practicePageContextNoTransferData = {
+      dataUpdatedDate: "2020-02-24 16:51:21.353977",
+      odsCode: "B86030",
       layout: "general",
     };
 
     const { getAllByText } = render(
       <PracticeTransfersRequested
         pageContext={practicePageContextNoTransferData}
+        data={queryResult}
       />
     );
 
