@@ -7,7 +7,6 @@ import {
 } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
-import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
 import { PageContent } from "../../../components/PageContent";
 import { PracticeTableWithSort } from "../../../components/PracticeTableWithSort";
 import { HelpModal } from "../../../components/common/HelpModal";
@@ -37,10 +36,6 @@ type CcgProps = {
 const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode, ccgPractices, dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(name);
-  const { year, month } = ccgPractices[0].metrics[0];
-  const tableTitle = `GP2GP transfers requested for registering practices - ${convertMonthNumberToText(
-    month
-  )} ${year}`;
 
   const pageTitle = `GP2GP transfers requested for registering practices`;
 
@@ -48,13 +43,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
     (practice) => ({
       odsCode: practice.odsCode,
       name: practice.name,
-      metrics: [
-        {
-          year: practice.metrics[0].year,
-          month: practice.metrics[0].month,
-          requestedTransfers: practice.metrics[0].requestedTransfers,
-        },
-      ],
+      metrics: practice.metrics,
     })
   );
 
@@ -167,7 +156,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ pageContext }) => {
               pageTemplatePath={PageTemplatePath.GP2GPTransfersRequested}
               sortBySelect={practiceTableContent.sortBySelect}
               orderSelect={practiceTableContent.orderSelect}
-              tableCaption={tableTitle}
+              tableCaption={pageTitle}
             />
           }
         />

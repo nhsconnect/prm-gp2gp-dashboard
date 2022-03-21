@@ -8,6 +8,7 @@ import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json"
 import practiceIntegrationSortOptions from "../../../data/content/practiceIntegrationsSortOptions.json";
 import practiceTransfersRequestedSortOptions from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
+import { practiceWithThreeMonthsMetrics } from "../../../../__mocks__/practiceMetricsTestData";
 
 const integrationTableHeaders = [
   { title: "Requesting practice name " },
@@ -26,8 +27,7 @@ const transfersRequestedTableHeaders = [
 
 describe("PracticeTableWithSort component", () => {
   it("should display table heading caption with the month and year", () => {
-    const tableCaptionText =
-      "Integration times for registering practices - February 2020";
+    const tableCaptionText = "Integration times for registering practices";
 
     const { getByText } = render(
       <PracticeTableWithSort
@@ -40,14 +40,14 @@ describe("PracticeTableWithSort component", () => {
       />
     );
 
-    const tableCaption = getByText(`${tableCaptionText}`);
+    const tableCaption = getByText(`${tableCaptionText} - February 2020`);
 
     expect(tableCaption).toBeInTheDocument();
   });
 
   it("should display correct table caption for transfers requested page path", () => {
     const tableCaptionText =
-      "GP2GP transfers requested for registering practices - February 2020";
+      "GP2GP transfers requested for registering practices";
 
     const { getByText } = render(
       <PracticeTableWithSort
@@ -60,8 +60,7 @@ describe("PracticeTableWithSort component", () => {
       />
     );
 
-    const tableCaption = getByText(`${tableCaptionText}`);
-
+    const tableCaption = getByText(`${tableCaptionText} - February 2020`);
     expect(tableCaption).toBeInTheDocument();
   });
 
@@ -129,6 +128,39 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows[5]).toHaveTextContent("Not integrated within 8 days 0%");
     expect(allRows[6]).toHaveTextContent("Not integrated within 8 days n/a");
     expect(allRows.length).toBe(7);
+  });
+
+  it("displays practices data for default first month, then the next month when selected", () => {
+    const { getAllByRole, getByRole } = render(
+      <PracticeTableWithSort
+        ccgPractices={[practiceWithThreeMonthsMetrics]}
+        headers={integrationTableHeaders}
+        sortBySelect={practiceIntegrationSortOptions.sortBySelect}
+        orderSelect={practiceIntegrationSortOptions.orderSelect}
+        tableCaption={"Some table title"}
+        pageTemplatePath={PageTemplatePath.IntegrationTimes}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    const monthSelect = getByRole("combobox", {
+      name: `Month${practiceIntegrationSortOptions.selectHiddenLabel}`,
+    });
+
+    userEvent.selectOptions(monthSelect, "0");
+
+    expect(monthSelect).toHaveValue("0");
+
+    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 13.6%");
+    expect(allRows.length).toBe(2);
+
+    userEvent.selectOptions(monthSelect, "1");
+
+    expect(monthSelect).toHaveValue("1");
+
+    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 0.2%");
+    expect(allRows.length).toBe(2);
   });
 
   it("navigates to a practice page when a link is clicked", () => {

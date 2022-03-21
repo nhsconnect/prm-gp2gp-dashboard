@@ -10,6 +10,8 @@ import practiceTableContent from "../../data/content/practiceIntegrationsSortOpt
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
 import { CcgPracticeType } from "../../library/types/practice.types";
+import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import { getPreviousMonths } from "../../library/utils/getPreviousMonths";
 
 type TableWithSortProps = {
   ccgPractices: CcgPracticeType[];
@@ -50,11 +52,12 @@ const PracticeLink = ({
 const sortPractices = (
   practices: CcgPracticeType[],
   fieldName: string,
-  order: string
+  order: string,
+  month: number
 ) => {
-  const getFieldValue = (field: any) => {
+  const getFieldValue = (field: any, month: number) => {
     if (fieldName === "requestingPracticeName") return field.name;
-    const transfersReceivedMetrics = field.metrics[0].requestedTransfers;
+    const transfersReceivedMetrics = field.metrics[month].requestedTransfers;
     return transfersReceivedMetrics[fieldName];
   };
 
@@ -69,8 +72,8 @@ const sortPractices = (
   };
 
   return [...practices].sort((firstEl, secondEl) => {
-    const firstField = getFieldValue(firstEl);
-    const secondField = getFieldValue(secondEl);
+    const firstField = getFieldValue(firstEl, month);
+    const secondField = getFieldValue(secondEl, month);
     if (order === SortOrder.ASCENDING) {
       return sortData(firstField, secondField);
     }
@@ -86,15 +89,31 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   tableCaption,
   pageTemplatePath,
 }) => {
+  const metrics = ccgPractices[0].metrics;
+  const monthSelect = getPreviousMonths(metrics[0].month, metrics.length);
+
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
+  const [selectedMonth, setSelectedMonth] = useState(monthSelect.defaultValue);
+
+  const { month, year } = metrics[parseInt(selectedMonth)];
+  const tableCaptionWithMonthYear = `${tableCaption} - ${convertMonthNumberToText(
+    month
+  )} ${year}`;
+
   const sortedPractices = useMemo(() => {
-    return sortPractices(ccgPractices, selectedField, selectedOrder);
+    return sortPractices(
+      ccgPractices,
+      selectedField,
+      selectedOrder,
+      parseInt(selectedMonth)
+    );
   }, [ccgPractices, selectedField, selectedOrder]);
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: CcgPracticeType) => {
-      const requestedMetric = metrics[0].requestedTransfers;
+      const requestedMetric =
+        metrics[parseInt(selectedMonth)].requestedTransfers;
       if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
         return [
           <PracticeLink
@@ -116,7 +135,8 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       }
 
       if (pageTemplatePath == PageTemplatePath.GP2GPTransfersRequested) {
-        const requestedMetric = metrics[0].requestedTransfers;
+        const requestedMetric =
+          metrics[parseInt(selectedMonth)].requestedTransfers;
         return [
           <PracticeLink
             odsCode={odsCode}
@@ -141,6 +161,10 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     setSelectedOrder(value);
   };
 
+  const handleMonthValueChange = (value: string) => {
+    setSelectedMonth(value);
+  };
+
   const sortedColumnIndex = sortBySelect.options.findIndex(
     (option) => option.value === selectedField
   );
@@ -149,13 +173,22 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     <div className="nhsuk-u-margin-top-6">
       <div className="gp2gp-sort">
         <Select
+          label="Month"
+          hiddenLabel={practiceTableContent.selectHiddenLabel}
+          options={monthSelect.options}
+          id="monthSelect"
+          defaultValue={monthSelect.defaultValue}
+          handleValueChange={handleMonthValueChange}
+          className="nhsuk-u-margin-right-4"
+        />
+        <Select
           label="Sort by"
           hiddenLabel={practiceTableContent.selectHiddenLabel}
           options={sortBySelect.options}
           id="sortBySelect"
           defaultValue={sortBySelect.defaultValue}
           handleValueChange={handleSortByValueChange}
-          className="nhsuk-u-margin-right-6"
+          className="nhsuk-u-margin-right-4"
         />
         <Select
           label="Order"
@@ -167,7 +200,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         />
       </div>
       <Table
-        caption={{ text: `${tableCaption}`, hidden: false }}
+        caption={{ text: tableCaptionWithMonthYear, hidden: false }}
         headers={headers}
         rows={practiceTableRows}
         sortedColumnIndex={sortedColumnIndex}

@@ -7,7 +7,6 @@ import {
 } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { PageContent } from "../../../components/PageContent";
-import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
 import { PracticeTableWithSort } from "../../../components/PracticeTableWithSort";
 import practiceTableContent from "../../../data/content/practiceIntegrationsSortOptions.json";
 
@@ -40,24 +39,13 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
   const { name, odsCode, ccgPractices, dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(name);
 
-  const { year, month } = ccgPractices[0].metrics[0];
-  const tableTitle = `Integration times for registering practices - ${convertMonthNumberToText(
-    month
-  )} ${year}`;
-
   const pageTitle = `Integration times for registering practices`;
 
   const ccgPracticeTableData: CcgPracticeType[] = ccgPractices.map(
     (practice) => ({
       odsCode: practice.odsCode,
       name: practice.name,
-      metrics: [
-        {
-          year: practice.metrics[0].year,
-          month: practice.metrics[0].month,
-          requestedTransfers: practice.metrics[0].requestedTransfers,
-        },
-      ],
+      metrics: practice.metrics,
     })
   );
 
@@ -173,7 +161,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ pageContext }) => {
               pageTemplatePath={PageTemplatePath.IntegrationTimes}
               sortBySelect={practiceTableContent.sortBySelect}
               orderSelect={practiceTableContent.orderSelect}
-              tableCaption={tableTitle}
+              tableCaption={pageTitle}
             />
           }
         />
