@@ -145,7 +145,7 @@ describe("PracticeTableWithSort component", () => {
     const allRows = getAllByRole("row");
 
     const monthSelect = getByRole("combobox", {
-      name: `Month${practiceIntegrationSortOptions.selectHiddenLabel}`,
+      name: "Month this element filters the practice performance table",
     });
 
     userEvent.selectOptions(monthSelect, "0");

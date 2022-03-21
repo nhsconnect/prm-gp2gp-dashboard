@@ -178,7 +178,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       <div className="gp2gp-sort">
         <Select
           label="Month"
-          hiddenLabel={practiceTableContent.selectHiddenLabel}
+          hiddenLabel=" this element filters the practice performance table"
           options={monthSelect.options}
           id="monthSelect"
           defaultValue={monthSelect.defaultValue}
