@@ -22,7 +22,7 @@ import { ContentsList } from "../../../components/common/ContentsList";
 import {
   PracticeIntegrationMetricsType,
   PracticeIntegrationType,
-} from "../../../library/types/queryResult.types";
+} from "../../../library/types/queryResultIntegrationTimes.types";
 
 type PageContext = {
   odsCode: string;

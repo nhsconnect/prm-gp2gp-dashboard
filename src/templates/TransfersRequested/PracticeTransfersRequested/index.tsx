@@ -19,21 +19,25 @@ import { HelpModal } from "../../../components/common/HelpModal";
 import { Table } from "../../../components/common/Table";
 
 import {
-  PracticeMetricsType,
-  PracticeType,
-} from "../../../library/types/practice.types";
+  PracticeRequestedTransfersType,
+  PracticeTransferRequestedMetricsType,
+} from "../../../library/types/queryResultTrasnfersRequested.types";
+import { graphql } from "gatsby";
 
 type PageContext = {
-  practice: PracticeType;
+  odsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
 type PracticeProps = {
   pageContext: PageContext;
+  data: PracticeRequestedTransfersType;
 };
 
-const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
+const generateMonthlyRowData = (
+  metrics: PracticeTransferRequestedMetricsType[]
+) => {
   return metrics.map((metric) => {
     const {
       requestedCount,
@@ -50,8 +54,13 @@ const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   });
 };
 
-const PracticeTransfersRequested: FC<PracticeProps> = ({ pageContext }) => {
-  const { practice, dataUpdatedDate } = pageContext;
+const PracticeTransfersRequested: FC<PracticeProps> = ({
+  pageContext,
+  data,
+}) => {
+  const { dataUpdatedDate } = pageContext;
+  const practice =
+    data.allFile.edges[0].node.childOrganisationsJson.practices[0];
   const { name, odsCode, metrics } = practice;
   const formattedName = convertToTitleCase(name);
 
@@ -177,5 +186,31 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({ pageContext }) => {
     </>
   );
 };
+
+export const query = graphql`
+  query PracticeTransfersRequestedQuery($odsCode: String) {
+    allFile(filter: { name: { eq: "practiceMetrics" } }) {
+      edges {
+        node {
+          childOrganisationsJson {
+            practices(odsCode: $odsCode) {
+              name
+              odsCode
+              metrics {
+                month
+                year
+                requestedTransfers {
+                  requestedCount
+                  receivedPercentOfRequested
+                  failuresTotalPercentOfRequested
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default PracticeTransfersRequested;
