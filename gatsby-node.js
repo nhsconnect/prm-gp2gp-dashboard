@@ -28,7 +28,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/IntegrationTimes/PracticeIntegrationTimes/index.tsx"
       ),
       context: {
-        practice,
+        odsCode: practice.odsCode,
         dataUpdatedDate,
         layout: "navigation-contents",
       },
@@ -126,6 +126,24 @@ exports.onCreatePage = ({ page, actions }) => {
     context: {
       ...page.context,
       layout,
+    },
+  });
+};
+
+exports.createResolvers = ({ createResolvers }) => {
+  createResolvers({
+    OrganisationsJson: {
+      practices: {
+        type: ["OrganisationsJsonPractices"],
+        args: { odsCode: "String" },
+        resolve: async (root, args, context, info) => {
+          const practices =
+            (await info.originalResolver(root, args, context, info)) || [];
+          return args.odsCode
+            ? practices.filter((practice) => practice.odsCode === args.odsCode)
+            : practices;
+        },
+      },
     },
   });
 };
