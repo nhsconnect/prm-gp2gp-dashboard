@@ -52,7 +52,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/DownloadData/PracticeDownloadData/index.tsx"
       ),
       context: {
-        practice,
+        odsCode: practice.odsCode,
         layout: "navigation-contents",
         dataUpdatedDate,
       },
