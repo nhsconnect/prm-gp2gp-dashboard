@@ -5,9 +5,9 @@ import "./index.scss";
 type SelectProps = {
   label: string;
   hiddenLabel?: string;
-  options: { displayText: string; value: string }[];
+  options: { displayText: string; value: string | number }[];
   id: string;
-  defaultValue: string;
+  defaultValue: string | number;
   handleValueChange: (value: string) => void;
   className?: string;
 };

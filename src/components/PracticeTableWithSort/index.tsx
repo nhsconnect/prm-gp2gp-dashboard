@@ -53,11 +53,12 @@ const sortPractices = (
   practices: CcgPracticeType[],
   fieldName: string,
   order: string,
-  month: number
+  monthIndex: number
 ) => {
-  const getFieldValue = (field: any, month: number) => {
+  const getFieldValue = (field: any, monthIndex: number) => {
     if (fieldName === "requestingPracticeName") return field.name;
-    const transfersReceivedMetrics = field.metrics[month].requestedTransfers;
+    const transfersReceivedMetrics =
+      field.metrics[monthIndex].requestedTransfers;
     return transfersReceivedMetrics[fieldName];
   };
 
@@ -72,8 +73,8 @@ const sortPractices = (
   };
 
   return [...practices].sort((firstEl, secondEl) => {
-    const firstField = getFieldValue(firstEl, month);
-    const secondField = getFieldValue(secondEl, month);
+    const firstField = getFieldValue(firstEl, monthIndex);
+    const secondField = getFieldValue(secondEl, monthIndex);
     if (order === SortOrder.ASCENDING) {
       return sortData(firstField, secondField);
     }
@@ -100,7 +101,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
   const [selectedMonth, setSelectedMonth] = useState(monthSelect.defaultValue);
 
-  const { month, year } = metrics[parseInt(selectedMonth)];
+  const { month, year } = metrics[selectedMonth];
   const tableCaptionWithMonthYear = `${tableCaption} - ${convertMonthNumberToText(
     month
   )} ${year}`;
@@ -110,14 +111,13 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       ccgPractices,
       selectedField,
       selectedOrder,
-      parseInt(selectedMonth)
+      selectedMonth
     );
   }, [ccgPractices, selectedField, selectedOrder]);
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: CcgPracticeType) => {
-      const requestedMetric =
-        metrics[parseInt(selectedMonth)].requestedTransfers;
+      const requestedMetric = metrics[selectedMonth].requestedTransfers;
       if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
         return [
           <PracticeLink
@@ -139,8 +139,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       }
 
       if (pageTemplatePath == PageTemplatePath.GP2GPTransfersRequested) {
-        const requestedMetric =
-          metrics[parseInt(selectedMonth)].requestedTransfers;
+        const requestedMetric = metrics[selectedMonth].requestedTransfers;
         return [
           <PracticeLink
             odsCode={odsCode}
@@ -166,7 +165,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   };
 
   const handleMonthValueChange = (value: string) => {
-    setSelectedMonth(value);
+    setSelectedMonth(parseInt(value));
   };
 
   const sortedColumnIndex = sortBySelect.options.findIndex(
