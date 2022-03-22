@@ -7,11 +7,31 @@ import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.js
 
 jest.mock("no-scroll");
 
+function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
+  return {
+    allFile: {
+      edges: [
+        {
+          node: {
+            childOrganisationsJson: {
+              practices: practiceMetricsMock,
+              ccgs: [
+                {
+                  name: name,
+                  odsCode: odsCode,
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  };
+}
+
 describe("CCGDownloadData template", () => {
   const pipelineCCGData = {
-    odsCode: "12A",
-    name: "BURTON CCG",
-    ccgPractices: practiceMetricsMock,
+    ccgOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
@@ -19,15 +39,16 @@ describe("CCGDownloadData template", () => {
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
     const ccgWithoutNameData = {
-      odsCode,
-      name: "",
-      ccgPractices: practiceMetricsMock,
+      ccgOdsCode: odsCode,
       layout: "general",
       dataUpdatedDate: "",
     };
 
     const { getByRole } = render(
-      <CcgDownloadData pageContext={ccgWithoutNameData} />
+      <CcgDownloadData
+        pageContext={ccgWithoutNameData}
+        data={queryResult("", odsCode)}
+      />
     );
 
     const expectedCcgHeading = getByRole("heading", {
@@ -42,7 +63,7 @@ describe("CCGDownloadData template", () => {
     const ccgHeadingText = "Burton CCG - 12A download data";
 
     const { getByRole } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} />
+      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const expectedCcgHeading = getByRole("heading", {
@@ -55,7 +76,7 @@ describe("CCGDownloadData template", () => {
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} />
+      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const pageTitle = getByRole("heading", {
@@ -68,7 +89,7 @@ describe("CCGDownloadData template", () => {
 
   it("renders page description correctly", () => {
     const { getByText } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} />
+      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const pageDescription = getByText(
@@ -80,7 +101,7 @@ describe("CCGDownloadData template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} />
+      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const contentsHeader = getByRole("heading", {

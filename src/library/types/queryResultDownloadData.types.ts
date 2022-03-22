@@ -18,3 +18,27 @@ type AllFileType = {
 export type PracticeDownloadDataType = {
   allFile: AllFileType;
 };
+
+type CcgType = {
+  name: string;
+  odsCode: string;
+};
+
+type CcgChildOrganisationsJsonType = ChildOrganisationsJsonType & {
+  ccgs: CcgType[];
+};
+
+type CcgNodeType = {
+  childOrganisationsJson: CcgChildOrganisationsJsonType;
+};
+type CcgEdgesType = {
+  node: CcgNodeType;
+};
+
+type CcgAllFileType = {
+  edges: CcgEdgesType[];
+};
+
+export type CcgDownloadDataType = {
+  allFile: CcgAllFileType;
+};

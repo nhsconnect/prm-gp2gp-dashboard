@@ -106,9 +106,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/DownloadData/CcgDownloadData/index.tsx"
       ),
       context: {
-        odsCode: ccg.odsCode,
-        name: ccg.name,
-        ccgPractices,
+        ccgOdsCode: ccg.odsCode,
         layout: "navigation-contents",
         dataUpdatedDate,
       },

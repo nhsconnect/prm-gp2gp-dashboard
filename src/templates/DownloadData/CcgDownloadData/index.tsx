@@ -1,31 +1,30 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-
-import { PracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
+import { graphql } from "gatsby";
+import { CcgDownloadDataType } from "../../../library/types/queryResultDownloadData.types";
 
 type PageContext = {
-  odsCode: string;
-  name: string;
-  ccgPractices: PracticeType[];
+  ccgOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
 type CcgProps = {
   pageContext: PageContext;
+  data: CcgDownloadDataType;
 };
 
-const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
-  const {
-    name: ccgName,
-    odsCode: ccgOdsCode,
-    ccgPractices,
-    dataUpdatedDate,
-  } = pageContext;
+const CcgDownloadData: FC<CcgProps> = ({ data, pageContext }) => {
+  const ccgPractices =
+    data.allFile.edges[0].node.childOrganisationsJson.practices;
+  const { name: ccgName, odsCode: ccgOdsCode } =
+    data.allFile.edges[0].node.childOrganisationsJson.ccgs[0];
+
+  const { dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(ccgName);
   const contentListItems = [
     {
@@ -72,4 +71,45 @@ const CcgDownloadData: FC<CcgProps> = ({ pageContext }) => {
     </>
   );
 };
+
+export const query = graphql`
+  query CcgDownloadDataQuery($ccgOdsCode: String) {
+    allFile(filter: { name: { eq: "practiceMetrics" } }) {
+      edges {
+        node {
+          childOrganisationsJson {
+            ccgs(ccgOdsCode: $ccgOdsCode) {
+              name
+              odsCode
+            }
+            practices(ccgOdsCode: $ccgOdsCode) {
+              name
+              odsCode
+              ccgName
+              ccgOdsCode
+              metrics {
+                month
+                year
+                requestedTransfers {
+                  requestedCount
+                  receivedCount
+                  receivedPercentOfRequested
+                  integratedWithin3DaysCount
+                  integratedWithin3DaysPercentOfReceived
+                  integratedWithin8DaysCount
+                  integratedWithin8DaysPercentOfReceived
+                  notIntegratedWithin8DaysTotal
+                  notIntegratedWithin8DaysPercentOfReceived
+                  failuresTotalCount
+                  failuresTotalPercentOfRequested
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export default CcgDownloadData;
