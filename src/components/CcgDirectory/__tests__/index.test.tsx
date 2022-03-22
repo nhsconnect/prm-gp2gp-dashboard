@@ -1,22 +1,35 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import * as Gatsby from "gatsby";
 
 import { CcgDirectory } from "../";
 
-jest.mock(
-  "../../../data/organisations/practiceMetrics.json",
-  () => ({
-    practices: [],
-    ccgs: [
-      { odsCode: "1A", name: "WING CCG", practices: ["A1156"] },
-      { odsCode: "3A", name: "NHS WEST CCG", practices: ["A1278"] },
-      { odsCode: "15A", name: "SOUTH CCG", practices: ["A1299"] },
-    ],
-  }),
-  { virtual: true }
-);
-
 describe("CcgDirectory component", () => {
+  beforeAll(() => {
+    const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
+    useStaticQuery.mockImplementation(() => ({
+      allFile: {
+        edges: [
+          {
+            node: {
+              childOrganisationsJson: {
+                ccgs: [
+                  { odsCode: "1A", name: "WING CCG" },
+                  { odsCode: "3A", name: "NHS WEST CCG" },
+                  { odsCode: "15A", name: "SOUTH CCG" },
+                ],
+              },
+            },
+          },
+        ],
+      },
+    }));
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
   it("displays the relevant heading with correct priority for the page", () => {
     const { getByRole } = render(<CcgDirectory headingPriority={1} />);
 
