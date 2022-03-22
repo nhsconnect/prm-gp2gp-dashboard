@@ -113,7 +113,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       selectedOrder,
       selectedMonth
     );
-  }, [ccgPractices, selectedField, selectedOrder]);
+  }, [ccgPractices, selectedField, selectedOrder, selectedMonth]);
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: CcgPracticeType) => {

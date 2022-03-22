@@ -147,60 +147,6 @@ describe("CCG Integration Times page", () => {
         cy.contains("Data updated: February 2020");
       });
 
-      it("filter practice performance table by month and persist selected sorting", () => {
-        cy.visit("/ccg/11D/integration-times");
-        cy.contains("h1", "Another Test CCG - 11D");
-
-        cy.get("select#monthSelect option:selected").should(
-          "have.text",
-          "December 2019"
-        );
-        cy.get("select#sortBySelect option:selected").should(
-          "have.text",
-          "Not integrated within 8 days"
-        );
-        cy.get("select#orderSelect option:selected").should(
-          "have.text",
-          "Descending"
-        );
-
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With Some Integrations - A12347"
-        );
-        cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
-          "Test GP Practice With No Integrations - A12346"
-        );
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains("2");
-        cy.get('[data-testid="table__cell--row-1-col-1"]').contains("0");
-
-        cy.get("select#sortBySelect").select("Requesting practice name");
-        cy.get("select#orderSelect").select("Ascending");
-
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With No Integrations - A12346"
-        );
-        cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
-          "Test GP Practice With Some Integrations - A12347"
-        );
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains("0");
-        cy.get('[data-testid="table__cell--row-1-col-1"]').contains("2");
-
-        cy.get("select#monthSelect").select("November 2019");
-        cy.get("select#monthSelect option:selected").should(
-          "have.text",
-          "November 2019"
-        );
-
-        cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With No Integrations - A12346"
-        );
-        cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
-          "Test GP Practice With Some Integrations - A12347"
-        );
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains("0");
-        cy.get('[data-testid="table__cell--row-1-col-1"]').contains("0");
-      });
-
       it("displays the feedback section that links to feedback survey", () => {
         cy.visit("/ccg/11D/integration-times");
         cy.contains("h3", "Get in touch");

@@ -8,7 +8,10 @@ import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json"
 import practiceIntegrationSortOptions from "../../../data/content/practiceIntegrationsSortOptions.json";
 import practiceTransfersRequestedSortOptions from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
-import { practiceWithThreeMonthsMetrics } from "../../../../__mocks__/practiceMetricsTestData";
+import {
+  anotherPracticeWithThreeMonthsMetrics,
+  practiceWithThreeMonthsMetrics
+} from "../../../../__mocks__/practiceMetricsTestData";
 
 const integrationTableHeaders = [
   { title: "Requesting practice name " },
@@ -130,10 +133,10 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows.length).toBe(7);
   });
 
-  it("displays practices data for default first month, then the next month when selected", () => {
+  it("displays practices data for default first month, then the next month when selected, with sorting maintained", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={[practiceWithThreeMonthsMetrics]}
+        ccgPractices={[practiceWithThreeMonthsMetrics, anotherPracticeWithThreeMonthsMetrics]}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
@@ -153,14 +156,14 @@ describe("PracticeTableWithSort component", () => {
     expect(monthSelect).toHaveValue("0");
 
     expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 13.6%");
-    expect(allRows.length).toBe(2);
+    expect(allRows.length).toBe(3);
 
     userEvent.selectOptions(monthSelect, "1");
 
     expect(monthSelect).toHaveValue("1");
 
-    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 0.2%");
-    expect(allRows.length).toBe(2);
+    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 40%");
+    expect(allRows.length).toBe(3);
   });
 
   it("navigates to a practice page when a link is clicked", () => {
