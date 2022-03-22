@@ -7,6 +7,7 @@ import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
+import unitsContent from "../../data/content/unitsOptions.json";
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
 import { CcgPracticeType } from "../../library/types/practice.types";
@@ -30,6 +31,11 @@ type SelectType = {
 export const SortOrder = {
   DESCENDING: practiceTableContent.orderSelect.options[0].value,
   ASCENDING: practiceTableContent.orderSelect.options[1].value,
+};
+
+export const Units = {
+  PERCENTAGES: unitsContent.unitsSelect.options[0].value,
+  NUMBERS: unitsContent.unitsSelect.options[1].value,
 };
 
 const PracticeLink = ({
@@ -99,6 +105,9 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
   const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
+  const [selectedUnits, setSelectedUnits] = useState(
+    unitsContent.unitsSelect.defaultValue
+  );
   const [selectedMonth, setSelectedMonth] = useState(monthSelect.defaultValue);
 
   const { month, year } = metrics[selectedMonth];
@@ -113,7 +122,13 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       selectedOrder,
       selectedMonth
     );
-  }, [ccgPractices, selectedField, selectedOrder, selectedMonth]);
+  }, [
+    ccgPractices,
+    selectedField,
+    selectedOrder,
+    selectedMonth,
+    selectedUnits,
+  ]);
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: CcgPracticeType) => {
@@ -126,15 +141,21 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
             pageTemplatePath={pageTemplatePath}
           />,
           requestedMetric.receivedCount,
-          addPercentageSign(
-            requestedMetric.integratedWithin3DaysPercentOfReceived
-          ),
-          addPercentageSign(
-            requestedMetric.integratedWithin8DaysPercentOfReceived
-          ),
-          addPercentageSign(
-            requestedMetric.notIntegratedWithin8DaysPercentOfReceived
-          ),
+          selectedUnits == Units.PERCENTAGES
+            ? addPercentageSign(
+                requestedMetric.integratedWithin3DaysPercentOfReceived
+              )
+            : requestedMetric.integratedWithin3DaysCount,
+          selectedUnits == Units.PERCENTAGES
+            ? addPercentageSign(
+                requestedMetric.integratedWithin8DaysPercentOfReceived
+              )
+            : requestedMetric.integratedWithin8DaysCount,
+          selectedUnits == Units.PERCENTAGES
+            ? addPercentageSign(
+                requestedMetric.notIntegratedWithin8DaysPercentOfReceived
+              )
+            : requestedMetric.notIntegratedWithin8DaysTotal,
         ];
       }
 
@@ -147,8 +168,12 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
             pageTemplatePath={pageTemplatePath}
           />,
           requestedMetric.requestedCount,
-          addPercentageSign(requestedMetric.receivedPercentOfRequested),
-          addPercentageSign(requestedMetric.failuresTotalPercentOfRequested),
+          selectedUnits == Units.PERCENTAGES
+            ? addPercentageSign(requestedMetric.receivedPercentOfRequested)
+            : requestedMetric.receivedCount,
+          selectedUnits == Units.PERCENTAGES
+            ? addPercentageSign(requestedMetric.failuresTotalPercentOfRequested)
+            : requestedMetric.failuresTotalCount,
         ];
       }
 
@@ -162,6 +187,10 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const handleOrderValueChange = (value: string) => {
     setSelectedOrder(value);
+  };
+
+  const handleUnitsValueChange = (value: string) => {
+    setSelectedUnits(value);
   };
 
   const handleMonthValueChange = (value: string) => {
@@ -182,6 +211,15 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
           id="monthSelect"
           defaultValue={monthSelect.defaultValue}
           handleValueChange={handleMonthValueChange}
+          className="nhsuk-u-margin-right-4"
+        />
+        <Select
+          label="Units"
+          hiddenLabel={unitsContent.selectHiddenLabel}
+          options={unitsContent.unitsSelect.options}
+          id="unitsSelect"
+          defaultValue={unitsContent.unitsSelect.defaultValue}
+          handleValueChange={handleUnitsValueChange}
           className="nhsuk-u-margin-right-4"
         />
         <Select

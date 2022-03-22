@@ -1,0 +1,16 @@
+{
+  "selectHiddenLabel": " this element changes the units in the practice performance table",
+  "unitsSelect": {
+    "defaultValue": "percentages",
+    "options": [
+      {
+        "displayText": "Percentages",
+        "value": "percentages"
+      },
+      {
+        "displayText": "Numbers",
+        "value": "numbers"
+      }
+    ]
+  }
+}

@@ -6,11 +6,12 @@ import { PracticeTableWithSort } from "../";
 import { SortOrder } from "../index";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import practiceIntegrationSortOptions from "../../../data/content/practiceIntegrationsSortOptions.json";
+import unitsContent from "../../../data/content/unitsOptions.json";
 import practiceTransfersRequestedSortOptions from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import {
   anotherPracticeWithThreeMonthsMetrics,
-  practiceWithThreeMonthsMetrics
+  practiceWithThreeMonthsMetrics,
 } from "../../../../__mocks__/practiceMetricsTestData";
 
 const integrationTableHeaders = [
@@ -136,7 +137,10 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices data for default first month, then the next month when selected, with sorting maintained", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={[practiceWithThreeMonthsMetrics, anotherPracticeWithThreeMonthsMetrics]}
+        ccgPractices={[
+          practiceWithThreeMonthsMetrics,
+          anotherPracticeWithThreeMonthsMetrics,
+        ]}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         orderSelect={practiceIntegrationSortOptions.orderSelect}
@@ -164,6 +168,34 @@ describe("PracticeTableWithSort component", () => {
 
     expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 40%");
     expect(allRows.length).toBe(3);
+  });
+
+  it("displays practices data as percentages by default, then as numbers when selected", () => {
+    const { getAllByRole, getByRole } = render(
+      <PracticeTableWithSort
+        ccgPractices={practiceMetricsMock}
+        headers={integrationTableHeaders}
+        sortBySelect={practiceIntegrationSortOptions.sortBySelect}
+        orderSelect={practiceIntegrationSortOptions.orderSelect}
+        tableCaption={"Some table title"}
+        pageTemplatePath={PageTemplatePath.IntegrationTimes}
+      />
+    );
+
+    const allRows = getAllByRole("row");
+
+    const unitsSelect = getByRole("combobox", {
+      name: `Units${unitsContent.selectHiddenLabel}`,
+    });
+
+    expect(unitsSelect).toHaveValue("percentages");
+
+    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 50%");
+
+    userEvent.selectOptions(unitsSelect, "numbers");
+    expect(unitsSelect).toHaveValue("numbers");
+
+    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 11");
   });
 
   it("navigates to a practice page when a link is clicked", () => {
