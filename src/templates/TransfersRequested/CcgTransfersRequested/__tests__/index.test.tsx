@@ -9,11 +9,31 @@ import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");
 
+function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
+  return {
+    allFile: {
+      edges: [
+        {
+          node: {
+            childOrganisationsJson: {
+              practices: practiceMetricsMock,
+              ccgs: [
+                {
+                  name: name,
+                  odsCode: odsCode,
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  };
+}
+
 describe("CCG Transfers Requested template", () => {
   const pipelineCCGData = {
-    odsCode: "12A",
-    name: "BURTON CCG",
-    ccgPractices: practiceMetricsMock,
+    ccgOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
@@ -21,15 +41,16 @@ describe("CCG Transfers Requested template", () => {
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
     const ccgWithoutNameData = {
-      odsCode,
-      name: "",
-      ccgPractices: practiceMetricsMock,
+      ccgOdsCode: odsCode,
       layout: "general",
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
     };
 
     const { getByRole } = render(
-      <CcgTransfersRequested pageContext={ccgWithoutNameData} />
+      <CcgTransfersRequested
+        pageContext={ccgWithoutNameData}
+        data={queryResult("", odsCode)}
+      />
     );
 
     const expectedCcgHeading = getByRole("heading", {
@@ -44,7 +65,10 @@ describe("CCG Transfers Requested template", () => {
     const ccgHeadingText = "Burton CCG - 12A GP2GP transfers requested";
 
     const { getByRole } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const expectedCcgHeading = getByRole("heading", {
@@ -57,7 +81,10 @@ describe("CCG Transfers Requested template", () => {
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const pageTitle = getByRole("heading", {
@@ -70,7 +97,10 @@ describe("CCG Transfers Requested template", () => {
 
   it("renders table caption correctly", () => {
     const { getByText } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const tableCaption = getByText(
@@ -82,7 +112,10 @@ describe("CCG Transfers Requested template", () => {
 
   it("renders page description correctly", () => {
     const { getByText } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const tableDescription = getByText(
@@ -100,7 +133,12 @@ describe("CCG Transfers Requested template", () => {
       queryByText,
       queryAllByText,
       getByRole,
-    } = render(<CcgTransfersRequested pageContext={pipelineCCGData} />);
+    } = render(
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
+    );
 
     expect(
       queryByText(
@@ -132,7 +170,10 @@ describe("CCG Transfers Requested template", () => {
 
   it("displays help icons for all relevant headers", () => {
     const { getAllByRole } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -155,7 +196,10 @@ describe("CCG Transfers Requested template", () => {
 
   it("labels modal with content title", async () => {
     const { getByRole, findByLabelText } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const transfersReceivedHeader = getByRole("columnheader", {
@@ -176,7 +220,10 @@ describe("CCG Transfers Requested template", () => {
       "Percentage of GP2GP transfers between the 1st and last day of the month that were successfully received by the registering practice.";
 
     const { getByText, queryByText, getAllByRole } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const allRows = getAllByRole("row");
@@ -204,7 +251,10 @@ describe("CCG Transfers Requested template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <CcgTransfersRequested pageContext={pipelineCCGData} />
+      <CcgTransfersRequested
+        pageContext={pipelineCCGData}
+        data={queryResult()}
+      />
     );
 
     const contentsHeader = getByRole("heading", {

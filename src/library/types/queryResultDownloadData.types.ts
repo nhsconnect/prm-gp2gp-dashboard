@@ -1,4 +1,4 @@
-import { PracticeType } from "./practice.types";
+import { CcgType, PracticeType } from "./practice.types";
 
 type ChildOrganisationsJsonType = {
   practices: PracticeType[];
@@ -17,11 +17,6 @@ type AllFileType = {
 
 export type PracticeDownloadDataType = {
   allFile: AllFileType;
-};
-
-type CcgType = {
-  name: string;
-  odsCode: string;
 };
 
 type CcgChildOrganisationsJsonType = ChildOrganisationsJsonType & {

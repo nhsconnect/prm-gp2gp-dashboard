@@ -31,3 +31,8 @@ export type CcgPracticeType = {
   name: string;
   metrics: PracticeMetricsType[];
 };
+
+export type CcgType = {
+  name: string;
+  odsCode: string;
+};

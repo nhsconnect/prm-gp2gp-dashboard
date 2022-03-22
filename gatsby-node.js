@@ -92,9 +92,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/TransfersRequested/CcgTransfersRequested/index.tsx"
       ),
       context: {
-        odsCode: ccg.odsCode,
-        name: ccg.name,
-        ccgPractices,
+        ccgOdsCode: ccg.odsCode,
         dataUpdatedDate,
         layout: "navigation-contents",
       },
