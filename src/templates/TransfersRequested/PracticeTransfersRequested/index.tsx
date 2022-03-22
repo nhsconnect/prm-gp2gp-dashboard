@@ -25,7 +25,7 @@ import {
 import { graphql } from "gatsby";
 
 type PageContext = {
-  odsCode: string;
+  practiceOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
@@ -188,12 +188,12 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
 };
 
 export const query = graphql`
-  query PracticeTransfersRequestedQuery($odsCode: String) {
+  query PracticeTransfersRequestedQuery($practiceOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            practices(odsCode: $odsCode) {
+            practices(practiceOdsCode: $practiceOdsCode) {
               name
               odsCode
               metrics {

@@ -28,7 +28,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/IntegrationTimes/PracticeIntegrationTimes/index.tsx"
       ),
       context: {
-        odsCode: practice.odsCode,
+        practiceOdsCode: practice.odsCode,
         dataUpdatedDate,
         layout: "navigation-contents",
       },
@@ -40,7 +40,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/TransfersRequested/PracticeTransfersRequested/index.tsx"
       ),
       context: {
-        odsCode: practice.odsCode,
+        practiceOdsCode: practice.odsCode,
         dataUpdatedDate,
         layout: "navigation-contents",
       },
@@ -52,7 +52,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/DownloadData/PracticeDownloadData/index.tsx"
       ),
       context: {
-        odsCode: practice.odsCode,
+        practiceOdsCode: practice.odsCode,
         layout: "navigation-contents",
         dataUpdatedDate,
       },
@@ -130,18 +130,40 @@ exports.onCreatePage = ({ page, actions }) => {
   });
 };
 
+function practiceResolver(args, practices) {
+  if (args.practiceOdsCode)
+    return practices.filter(
+      (practice) => practice.odsCode === args.practiceOdsCode
+    );
+  if (args.ccgOdsCode) {
+    return practices.filter(
+      (practice) => practice.ccgOdsCode === args.ccgOdsCode
+    );
+  }
+  return practices;
+}
+
 exports.createResolvers = ({ createResolvers }) => {
   createResolvers({
     OrganisationsJson: {
       practices: {
         type: ["OrganisationsJsonPractices"],
-        args: { odsCode: "String" },
+        args: { practiceOdsCode: "String", ccgOdsCode: "String" },
         resolve: async (root, args, context, info) => {
           const practices =
             (await info.originalResolver(root, args, context, info)) || [];
-          return args.odsCode
-            ? practices.filter((practice) => practice.odsCode === args.odsCode)
-            : practices;
+          return practiceResolver(args, practices);
+        },
+      },
+      ccgs: {
+        type: ["OrganisationsJsonCcgs"],
+        args: { ccgOdsCode: "String" },
+        resolve: async (root, args, context, info) => {
+          const ccgs =
+            (await info.originalResolver(root, args, context, info)) || [];
+          return args.ccgOdsCode
+            ? ccgs.filter((ccg) => ccg.odsCode === args.ccgOdsCode)
+            : ccgs;
         },
       },
     },

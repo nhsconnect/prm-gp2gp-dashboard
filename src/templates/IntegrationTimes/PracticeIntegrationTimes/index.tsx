@@ -25,7 +25,7 @@ import {
 } from "../../../library/types/queryResultIntegrationTimes.types";
 
 type PageContext = {
-  odsCode: string;
+  practiceOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
@@ -188,12 +188,12 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query PracticeIntegrationsQuery($odsCode: String) {
+  query PracticeIntegrationsQuery($practiceOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            practices(odsCode: $odsCode) {
+            practices(practiceOdsCode: $practiceOdsCode) {
               name
               odsCode
               metrics {

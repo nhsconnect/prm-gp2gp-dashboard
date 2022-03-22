@@ -75,7 +75,7 @@ const ODSPracticeData = {
 
 const practicePageContext = {
   dataUpdatedDate: "2020-02-24 16:51:21.353977",
-  odsCode: "B86030",
+  practiceOdsCode: "B86030",
   layout: "general",
 };
 
@@ -402,7 +402,7 @@ describe("PracticeTransfersRequested template", () => {
 
     const practicePageContextNoTransferData = {
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
-      odsCode: "B86030",
+      practiceOdsCode: "B86030",
       layout: "general",
     };
 

@@ -9,7 +9,7 @@ import { PracticeDownloadDataType } from "../../../library/types/queryResultDown
 import { graphql } from "gatsby";
 
 type PageContext = {
-  odsCode: string;
+  practiceOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
@@ -78,12 +78,12 @@ const PracticeDownloadData: FC<PracticeProps> = ({
 };
 
 export const query = graphql`
-  query PracticeDownloadDataQuery($odsCode: String) {
+  query PracticeDownloadDataQuery($practiceOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            practices(odsCode: $odsCode) {
+            practices(practiceOdsCode: $practiceOdsCode) {
               name
               odsCode
               ccgName
