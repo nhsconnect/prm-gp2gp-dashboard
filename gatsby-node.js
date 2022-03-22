@@ -1,6 +1,5 @@
 const path = require("path");
 const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
-const filterPracticesByOdsCodes = require("./src/library/utils/filterPracticesByOdsCodes/index.js");
 
 const practices = practiceMetrics.practices;
 const ccgs = practiceMetrics.ccgs;
@@ -60,8 +59,6 @@ exports.createPages = async ({ actions }) => {
   });
 
   ccgs.forEach((ccg) => {
-    const ccgPractices = filterPracticesByOdsCodes(ccg.practices, practices);
-
     createPage({
       path: `/ccg/${ccg.odsCode}`,
       component: path.resolve("src/templates/RedirectNotice/Ccg/index.tsx"),
@@ -78,9 +75,7 @@ exports.createPages = async ({ actions }) => {
         "src/templates/IntegrationTimes/CcgIntegrationTimes/index.tsx"
       ),
       context: {
-        odsCode: ccg.odsCode,
-        name: ccg.name,
-        ccgPractices,
+        ccgOdsCode: ccg.odsCode,
         dataUpdatedDate,
         layout: "navigation-contents",
       },

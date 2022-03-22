@@ -9,11 +9,30 @@ import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");
 
+function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
+  return {
+    allFile: {
+      edges: [
+        {
+          node: {
+            childOrganisationsJson: {
+              practices: practiceMetricsMock,
+              ccgs: [
+                {
+                  name: name,
+                  odsCode: odsCode,
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  };
+}
 describe("CCG Integration Times template", () => {
   const pipelineCCGData = {
-    odsCode: "12A",
-    name: "BURTON CCG",
-    ccgPractices: practiceMetricsMock,
+    ccgOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
@@ -22,14 +41,15 @@ describe("CCG Integration Times template", () => {
     const odsCode = "Y00159";
     const ccgWithoutNameData = {
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
-      odsCode,
-      name: "",
-      ccgPractices: practiceMetricsMock,
+      ccgOdsCode: odsCode,
       layout: "general",
     };
 
     const { getByRole } = render(
-      <IntegrationTimesCcg pageContext={ccgWithoutNameData} />
+      <IntegrationTimesCcg
+        pageContext={ccgWithoutNameData}
+        data={queryResult("", odsCode)}
+      />
     );
 
     const expectedCcgHeading = getByRole("heading", {
@@ -44,7 +64,7 @@ describe("CCG Integration Times template", () => {
     const ccgHeadingText = "Burton CCG - 12A integration times";
 
     const { getByRole } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const expectedCcgHeading = getByRole("heading", {
@@ -57,7 +77,7 @@ describe("CCG Integration Times template", () => {
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const pageTitle = getByRole("heading", {
@@ -70,7 +90,7 @@ describe("CCG Integration Times template", () => {
 
   it("renders table caption correctly", () => {
     const { getByText } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const tableCaption = getByText(
@@ -82,7 +102,7 @@ describe("CCG Integration Times template", () => {
 
   it("renders table description correctly", () => {
     const { getByText } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const tableDescription = getByText(
@@ -100,7 +120,9 @@ describe("CCG Integration Times template", () => {
       queryByText,
       queryAllByText,
       getByRole,
-    } = render(<IntegrationTimesCcg pageContext={pipelineCCGData} />);
+    } = render(
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
+    );
 
     expect(
       queryByText(/transfers received that were not integrated within 8 days/)
@@ -130,7 +152,7 @@ describe("CCG Integration Times template", () => {
 
   it("displays help icons for all relevant headers", () => {
     const { getAllByRole } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const allColumnHeaders = getAllByRole("columnheader");
@@ -156,7 +178,7 @@ describe("CCG Integration Times template", () => {
 
   it("labels modal with content title", async () => {
     const { getByRole, findByLabelText } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const within8DaysHeader = getByRole("columnheader", {
@@ -176,7 +198,7 @@ describe("CCG Integration Times template", () => {
       "The percentage of transfers received that were integrated (filed or suppressed) within 3 days of the record being sent.";
 
     const { getByText, queryByText, getAllByRole } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const allRows = getAllByRole("row");
@@ -205,7 +227,7 @@ describe("CCG Integration Times template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <IntegrationTimesCcg pageContext={pipelineCCGData} />
+      <IntegrationTimesCcg pageContext={pipelineCCGData} data={queryResult()} />
     );
 
     const contentsHeader = getByRole("heading", {
