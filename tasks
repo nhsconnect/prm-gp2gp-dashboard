@@ -7,9 +7,7 @@ deployment_env="$2"
 aws_region=eu-west-2
 
 function assume_role {
-    if [ ${SHARED_ACCOUNT} == 1 ]; then
-      return 0
-    elif [ "${deployment_env}" == "dev" ]; then
+    if [ "${deployment_env}" == "dev" ]; then
       export AWS_ACCOUNT="dev"
     elif [ "${deployment_env}" == "prod" ]; then
       export AWS_ACCOUNT="preprod"
@@ -46,11 +44,7 @@ function check_env {
 }
 
 function get_bucket {
-    if [ ${SHARED_ACCOUNT} == 1 ]; then
-        echo "prm-gp2gp-dashboard-${deployment_env}"
-    else
-        echo "prm-service-dashboard-${deployment_env}"
-    fi
+    echo "prm-gp2gp-dashboard-${deployment_env}"
 }
 
 function setup_env {
