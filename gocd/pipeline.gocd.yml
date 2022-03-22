@@ -1,13 +1,11 @@
 format_version: 4
 pipelines:
-  "prm-gp2gp-dashboard.cross-account":
+  "prm-gp2gp-dashboard":
     group: gp2gp
     label_template: "${git[:8]}"
     materials:
       git:
         type: configrepo
-    environment_variables:
-      SHARED_ACCOUNT: 0
     stages:
       - test:
           clean_workspace: true
