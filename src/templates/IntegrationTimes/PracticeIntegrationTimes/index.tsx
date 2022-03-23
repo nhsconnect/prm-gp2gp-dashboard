@@ -194,18 +194,7 @@ export const query = graphql`
         node {
           childOrganisationsJson {
             practices(practiceOdsCode: $practiceOdsCode) {
-              name
-              odsCode
-              metrics {
-                month
-                year
-                requestedTransfers {
-                  integratedWithin3DaysPercentOfReceived
-                  integratedWithin8DaysPercentOfReceived
-                  notIntegratedWithin8DaysPercentOfReceived
-                  receivedCount
-                }
-              }
+              ...PracticeIntegrationTimesFragment
             }
           }
         }

@@ -175,8 +175,7 @@ export const query = graphql`
         node {
           childOrganisationsJson {
             ccgs(ccgOdsCode: $ccgOdsCode) {
-              name
-              odsCode
+              ...CcgQueryFragment
             }
             practices(ccgOdsCode: $ccgOdsCode) {
               name

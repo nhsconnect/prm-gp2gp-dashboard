@@ -194,17 +194,7 @@ export const query = graphql`
         node {
           childOrganisationsJson {
             practices(practiceOdsCode: $practiceOdsCode) {
-              name
-              odsCode
-              metrics {
-                month
-                year
-                requestedTransfers {
-                  requestedCount
-                  receivedPercentOfRequested
-                  failuresTotalPercentOfRequested
-                }
-              }
+              ...PracticeTransfersRequestedFragment
             }
           }
         }

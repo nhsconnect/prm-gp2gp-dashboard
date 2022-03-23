@@ -79,31 +79,10 @@ export const query = graphql`
         node {
           childOrganisationsJson {
             ccgs(ccgOdsCode: $ccgOdsCode) {
-              name
-              odsCode
+              ...CcgQueryFragment
             }
             practices(ccgOdsCode: $ccgOdsCode) {
-              name
-              odsCode
-              ccgName
-              ccgOdsCode
-              metrics {
-                month
-                year
-                requestedTransfers {
-                  requestedCount
-                  receivedCount
-                  receivedPercentOfRequested
-                  integratedWithin3DaysCount
-                  integratedWithin3DaysPercentOfReceived
-                  integratedWithin8DaysCount
-                  integratedWithin8DaysPercentOfReceived
-                  notIntegratedWithin8DaysTotal
-                  notIntegratedWithin8DaysPercentOfReceived
-                  failuresTotalCount
-                  failuresTotalPercentOfRequested
-                }
-              }
+              ...PracticeDownloadFragment
             }
           }
         }
