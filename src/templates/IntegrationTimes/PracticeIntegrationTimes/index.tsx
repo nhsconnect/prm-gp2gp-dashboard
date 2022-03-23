@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import { OrganisationAddress } from "../../../components/OrganisationAddress";
-import { Table } from "../../../components/common/Table";
+
 import { graphql } from "gatsby";
 
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
-import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
-import { addPercentageSign } from "../../../library/utils/addPercentageSign";
 import { PageContent } from "../../../components/PageContent";
 import { HelpModal } from "../../../components/common/HelpModal";
+import { PracticeTable } from "../../../components/PracticeTable";
+import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import {
   IntegratedWithin3DaysDefinition,
   IntegratedWithin8DaysDefinition,
@@ -20,10 +20,6 @@ import {
 import "../../index.scss";
 import { ContentsList } from "../../../components/common/ContentsList";
 import { PracticeDataType } from "../../../library/types/queryResults.types";
-import {
-  IntegrationRequestedTransfersType,
-  PracticeMetricsType,
-} from "../../../library/types/practice.types";
 
 type PageContext = {
   practiceOdsCode: string;
@@ -34,25 +30,6 @@ type PageContext = {
 type PracticeProps = {
   pageContext: PageContext;
   data: PracticeDataType;
-};
-
-const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
-  return metrics.map((metric) => {
-    const {
-      receivedCount,
-      integratedWithin3DaysPercentOfReceived,
-      integratedWithin8DaysPercentOfReceived,
-      notIntegratedWithin8DaysPercentOfReceived,
-    } = metric.requestedTransfers as IntegrationRequestedTransfersType;
-
-    return [
-      `${convertMonthNumberToText(metric.month)} ${metric.year}`,
-      receivedCount,
-      addPercentageSign(integratedWithin3DaysPercentOfReceived),
-      addPercentageSign(integratedWithin8DaysPercentOfReceived),
-      addPercentageSign(notIntegratedWithin8DaysPercentOfReceived),
-    ];
-  });
 };
 
 const PracticeIntegrationTimes: FC<PracticeProps> = ({ data, pageContext }) => {
@@ -113,7 +90,7 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({ data, pageContext }) => {
           definitionsContent={<IntegrationsDefinitionsContent />}
           dataUpdatedDate={dataUpdatedDate}
           tableContent={
-            <Table
+            <PracticeTable
               headers={[
                 { title: "Month " },
                 {
@@ -175,11 +152,9 @@ const PracticeIntegrationTimes: FC<PracticeProps> = ({ data, pageContext }) => {
                   ),
                 },
               ]}
-              caption={{
-                text: "Integration times for registering practice",
-                hidden: false,
-              }}
-              rows={generateMonthlyRowData(metrics)}
+              tableCaption={"Integration times for registering practice"}
+              metrics={metrics}
+              pageTemplatePath={PageTemplatePath.IntegrationTimes}
             />
           }
         />

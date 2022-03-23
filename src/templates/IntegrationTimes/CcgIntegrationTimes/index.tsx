@@ -20,7 +20,6 @@ import "../../index.scss";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { graphql } from "gatsby";
 import { CcgDataType } from "../../../library/types/queryResults.types";
-import { CcgPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
   ccgOdsCode: string;
