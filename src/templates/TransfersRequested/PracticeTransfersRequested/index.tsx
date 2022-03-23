@@ -13,17 +13,12 @@ import {
   WhatHappensWhenAGP2GPTransferFails,
 } from "../../../components/Definitions";
 import { PageContent } from "../../../components/PageContent";
-import { convertMonthNumberToText } from "../../../library/utils/convertMonthNumberToText";
-import { addPercentageSign } from "../../../library/utils/addPercentageSign";
 import { HelpModal } from "../../../components/common/HelpModal";
-import { Table } from "../../../components/common/Table";
 
 import { graphql } from "gatsby";
 import { PracticeDataType } from "../../../library/types/queryResults.types";
-import {
-  PracticeMetricsType,
-  TransfersRequestedTransfersType,
-} from "../../../library/types/practice.types";
+import { PracticeTable } from "../../../components/PracticeTable";
+import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 
 type PageContext = {
   practiceOdsCode: string;
@@ -34,23 +29,6 @@ type PageContext = {
 type PracticeProps = {
   pageContext: PageContext;
   data: PracticeDataType;
-};
-
-const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
-  return metrics.map((metric) => {
-    const {
-      requestedCount,
-      receivedPercentOfRequested,
-      failuresTotalPercentOfRequested,
-    } = metric.requestedTransfers as TransfersRequestedTransfersType;
-
-    return [
-      `${convertMonthNumberToText(metric.month)} ${metric.year}`,
-      requestedCount,
-      addPercentageSign(receivedPercentOfRequested),
-      addPercentageSign(failuresTotalPercentOfRequested),
-    ];
-  });
 };
 
 const PracticeTransfersRequested: FC<PracticeProps> = ({
@@ -126,7 +104,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
           expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
           dataUpdatedDate={dataUpdatedDate}
           tableContent={
-            <Table
+            <PracticeTable
               headers={[
                 { title: "Month " },
                 {
@@ -173,11 +151,9 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
                   ),
                 },
               ]}
-              caption={{
-                text: "GP2GP transfers requested as registering practice",
-                hidden: false,
-              }}
-              rows={generateMonthlyRowData(metrics)}
+              tableCaption="GP2GP transfers requested as registering practice"
+              metrics={metrics}
+              pageTemplatePath={PageTemplatePath.GP2GPTransfersRequested}
             />
           }
         />
