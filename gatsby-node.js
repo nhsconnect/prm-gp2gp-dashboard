@@ -1,12 +1,30 @@
 const path = require("path");
-const practiceMetrics = require("./src/data/organisations/practiceMetrics.json");
 
-const practices = practiceMetrics.practices;
-const ccgs = practiceMetrics.ccgs;
-const dataUpdatedDate = practiceMetrics.generatedOn;
-
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
+
+  const pageData = await graphql(`
+    query {
+      allFile(filter: { name: { eq: "practiceMetrics" } }) {
+        edges {
+          node {
+            childOrganisationsJson {
+              ccgs {
+                odsCode
+              }
+              practices {
+                odsCode
+              }
+              generatedOn
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const { practices, ccgs, generatedOn } =
+    pageData.data.allFile.edges[0].node.childOrganisationsJson;
 
   practices.forEach((practice) => {
     createPage({
@@ -28,7 +46,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practiceOdsCode: practice.odsCode,
-        dataUpdatedDate,
+        dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
@@ -40,7 +58,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         practiceOdsCode: practice.odsCode,
-        dataUpdatedDate,
+        dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
@@ -53,7 +71,7 @@ exports.createPages = async ({ actions }) => {
       context: {
         practiceOdsCode: practice.odsCode,
         layout: "navigation-contents",
-        dataUpdatedDate,
+        dataUpdatedDate: generatedOn,
       },
     });
   });
@@ -76,7 +94,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         ccgOdsCode: ccg.odsCode,
-        dataUpdatedDate,
+        dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
@@ -88,7 +106,7 @@ exports.createPages = async ({ actions }) => {
       ),
       context: {
         ccgOdsCode: ccg.odsCode,
-        dataUpdatedDate,
+        dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
@@ -101,7 +119,7 @@ exports.createPages = async ({ actions }) => {
       context: {
         ccgOdsCode: ccg.odsCode,
         layout: "navigation-contents",
-        dataUpdatedDate,
+        dataUpdatedDate: generatedOn,
       },
     });
   });
