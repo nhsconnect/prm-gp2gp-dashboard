@@ -11,9 +11,11 @@ exports.createPages = async ({ graphql, actions }) => {
             childOrganisationsJson {
               ccgs {
                 odsCode
+                name
               }
               practices {
                 odsCode
+                name
               }
               generatedOn
             }
