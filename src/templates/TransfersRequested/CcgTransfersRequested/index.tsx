@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { CcgPracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { PageContent } from "../../../components/PageContent";
@@ -18,7 +17,8 @@ import {
 import practiceTableContent from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import "../../index.scss";
 import { graphql } from "gatsby";
-import { CcgRequestedTransfersType } from "../../../library/types/queryResultTrasnfersRequested.types";
+import { CcgIntegrationTimesType } from "../../../library/types/queryResultIntegrationTimes.types";
+import { CcgPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
   ccgOdsCode: string;
@@ -28,7 +28,7 @@ type PageContext = {
 
 type CcgProps = {
   pageContext: PageContext;
-  data: CcgRequestedTransfersType;
+  data: CcgIntegrationTimesType;
 };
 
 const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
@@ -41,14 +41,6 @@ const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
   const formattedName: string = convertToTitleCase(name);
 
   const pageTitle = `GP2GP transfers requested for registering practices`;
-
-  const ccgPracticeTableData: CcgPracticeType[] = ccgPractices.map(
-    (practice) => ({
-      odsCode: practice.odsCode,
-      name: practice.name,
-      metrics: practice.metrics,
-    })
-  );
 
   const contentListItems = [
     {
@@ -109,7 +101,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
           dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <PracticeTableWithSort
-              ccgPractices={ccgPracticeTableData}
+              ccgPractices={ccgPractices}
               headers={[
                 { title: "Registering practice name " },
                 {
@@ -187,12 +179,6 @@ export const query = graphql`
                   requestedCount
                   receivedCount
                   receivedPercentOfRequested
-                  integratedWithin3DaysCount
-                  integratedWithin3DaysPercentOfReceived
-                  integratedWithin8DaysCount
-                  integratedWithin8DaysPercentOfReceived
-                  notIntegratedWithin8DaysTotal
-                  notIntegratedWithin8DaysPercentOfReceived
                   failuresTotalCount
                   failuresTotalPercentOfRequested
                 }

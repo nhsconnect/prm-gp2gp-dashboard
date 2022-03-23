@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import { CcgPracticeType } from "../../../library/types/practice.types";
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
 import { PageContent } from "../../../components/PageContent";
 import { PracticeTableWithSort } from "../../../components/PracticeTableWithSort";
@@ -21,6 +20,7 @@ import "../../index.scss";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { graphql } from "gatsby";
 import { CcgIntegrationTimesType } from "../../../library/types/queryResultIntegrationTimes.types";
+import { CcgPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
   ccgOdsCode: string;
@@ -43,14 +43,6 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ data, pageContext }) => {
   const formattedName: string = convertToTitleCase(name);
 
   const pageTitle = `Integration times for registering practices`;
-
-  const ccgPracticeTableData: CcgPracticeType[] = ccgPractices.map(
-    (practice) => ({
-      odsCode: practice.odsCode,
-      name: practice.name,
-      metrics: practice.metrics,
-    })
-  );
 
   const contentListItems = [
     {
@@ -99,7 +91,7 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ data, pageContext }) => {
           dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <PracticeTableWithSort
-              ccgPractices={ccgPracticeTableData}
+              ccgPractices={ccgPractices}
               headers={[
                 { title: "Registering practice name " },
                 {
@@ -189,17 +181,13 @@ export const query = graphql`
                 month
                 year
                 requestedTransfers {
-                  requestedCount
                   receivedCount
-                  receivedPercentOfRequested
                   integratedWithin3DaysCount
                   integratedWithin3DaysPercentOfReceived
                   integratedWithin8DaysCount
                   integratedWithin8DaysPercentOfReceived
                   notIntegratedWithin8DaysTotal
                   notIntegratedWithin8DaysPercentOfReceived
-                  failuresTotalCount
-                  failuresTotalPercentOfRequested
                 }
               }
             }

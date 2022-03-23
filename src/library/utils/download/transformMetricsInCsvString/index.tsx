@@ -41,7 +41,7 @@ export function transformMetricsInCsvString(
         practice.odsCode,
         metric.month,
         metric.year,
-        metric.requestedTransfers
+        metric.requestedTransfers as RequestedTransfersType
       );
       return Object.values(row).join(",");
     });

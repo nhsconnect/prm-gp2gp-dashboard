@@ -10,9 +10,13 @@ import practiceTableContent from "../../data/content/practiceIntegrationsSortOpt
 import unitsContent from "../../data/content/unitsOptions.json";
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
-import { CcgPracticeType } from "../../library/types/practice.types";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { getPreviousMonths } from "../../library/utils/getPreviousMonths";
+import {
+  CcgPracticeType,
+  IntegrationRequestedTransfersType,
+  TransfersRequestedTransfersType,
+} from "../../library/types/practice.types";
 
 type TableWithSortProps = {
   ccgPractices: CcgPracticeType[];
@@ -132,8 +136,9 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: CcgPracticeType) => {
-      const requestedMetric = metrics[selectedMonth].requestedTransfers;
       if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
+        const requestedMetric = metrics[selectedMonth]
+          .requestedTransfers as IntegrationRequestedTransfersType;
         return [
           <PracticeLink
             odsCode={odsCode}
@@ -160,7 +165,8 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
       }
 
       if (pageTemplatePath == PageTemplatePath.GP2GPTransfersRequested) {
-        const requestedMetric = metrics[selectedMonth].requestedTransfers;
+        const requestedMetric = metrics[selectedMonth]
+          .requestedTransfers as TransfersRequestedTransfersType;
         return [
           <PracticeLink
             odsCode={odsCode}

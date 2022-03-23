@@ -1,22 +1,13 @@
-import { CcgPracticeType, CcgType } from "./practice.types";
-
-type IntegrationRequestedTransfersType = {
-  receivedCount: number;
-  integratedWithin3DaysPercentOfReceived: number | null;
-  integratedWithin8DaysPercentOfReceived: number | null;
-  notIntegratedWithin8DaysPercentOfReceived: number | null;
-};
-
-export type PracticeIntegrationMetricsType = {
-  year: number;
-  month: number;
-  requestedTransfers: IntegrationRequestedTransfersType;
-};
+import {
+  CcgPracticeType,
+  CcgType,
+  PracticeMetricsType,
+} from "./practice.types";
 
 type PracticeIntegrationsResultType = {
   odsCode: string;
   name: string;
-  metrics: PracticeIntegrationMetricsType[];
+  metrics: PracticeMetricsType[];
 };
 type ChildOrganisationsJsonType = {
   practices: PracticeIntegrationsResultType[];

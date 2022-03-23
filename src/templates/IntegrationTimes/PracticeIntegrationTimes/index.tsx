@@ -19,10 +19,11 @@ import {
 } from "../../../components/Definitions";
 import "../../index.scss";
 import { ContentsList } from "../../../components/common/ContentsList";
+import { PracticeIntegrationType } from "../../../library/types/queryResultIntegrationTimes.types";
 import {
-  PracticeIntegrationMetricsType,
-  PracticeIntegrationType,
-} from "../../../library/types/queryResultIntegrationTimes.types";
+  IntegrationRequestedTransfersType,
+  PracticeMetricsType,
+} from "../../../library/types/practice.types";
 
 type PageContext = {
   practiceOdsCode: string;
@@ -35,14 +36,14 @@ type PracticeProps = {
   data: PracticeIntegrationType;
 };
 
-const generateMonthlyRowData = (metrics: PracticeIntegrationMetricsType[]) => {
+const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   return metrics.map((metric) => {
     const {
       receivedCount,
       integratedWithin3DaysPercentOfReceived,
       integratedWithin8DaysPercentOfReceived,
       notIntegratedWithin8DaysPercentOfReceived,
-    } = metric.requestedTransfers;
+    } = metric.requestedTransfers as IntegrationRequestedTransfersType;
 
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,

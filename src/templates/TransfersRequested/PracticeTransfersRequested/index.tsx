@@ -18,11 +18,12 @@ import { addPercentageSign } from "../../../library/utils/addPercentageSign";
 import { HelpModal } from "../../../components/common/HelpModal";
 import { Table } from "../../../components/common/Table";
 
-import {
-  PracticeRequestedTransfersType,
-  PracticeTransferRequestedMetricsType,
-} from "../../../library/types/queryResultTrasnfersRequested.types";
 import { graphql } from "gatsby";
+import { PracticeIntegrationType } from "../../../library/types/queryResultIntegrationTimes.types";
+import {
+  PracticeMetricsType,
+  TransfersRequestedTransfersType,
+} from "../../../library/types/practice.types";
 
 type PageContext = {
   practiceOdsCode: string;
@@ -32,18 +33,16 @@ type PageContext = {
 
 type PracticeProps = {
   pageContext: PageContext;
-  data: PracticeRequestedTransfersType;
+  data: PracticeIntegrationType;
 };
 
-const generateMonthlyRowData = (
-  metrics: PracticeTransferRequestedMetricsType[]
-) => {
+const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
   return metrics.map((metric) => {
     const {
       requestedCount,
       receivedPercentOfRequested,
       failuresTotalPercentOfRequested,
-    } = metric.requestedTransfers;
+    } = metric.requestedTransfers as TransfersRequestedTransfersType;
 
     return [
       `${convertMonthNumberToText(metric.month)} ${metric.year}`,

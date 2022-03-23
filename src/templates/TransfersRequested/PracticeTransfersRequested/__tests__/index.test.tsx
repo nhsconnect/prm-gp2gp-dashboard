@@ -30,7 +30,9 @@ function queryResult(
                       month: 11,
                       requestedTransfers: {
                         requestedCount: 22,
+                        receivedCount: 20,
                         receivedPercentOfRequested: 90.9,
+                        failuresTotalCount: 2,
                         failuresTotalPercentOfRequested: 9.1,
                       },
                     },
@@ -39,7 +41,9 @@ function queryResult(
                       month: 10,
                       requestedTransfers: {
                         requestedCount: 15,
+                        receivedCount: 15,
                         receivedPercentOfRequested: 100,
+                        failuresTotalCount: 0,
                         failuresTotalPercentOfRequested: 0.0,
                       },
                     },
@@ -48,7 +52,9 @@ function queryResult(
                       month: 9,
                       requestedTransfers: {
                         requestedCount: 30,
+                        receivedCount: 16,
                         receivedPercentOfRequested: 53.3,
+                        failuresTotalCount: 0,
                         failuresTotalPercentOfRequested: 0.0,
                       },
                     },
@@ -386,7 +392,9 @@ describe("PracticeTransfersRequested template", () => {
                         month: 11,
                         requestedTransfers: {
                           requestedCount: 0,
+                          receivedCount: 0,
                           receivedPercentOfRequested: null,
+                          failuresTotalCount: 0,
                           failuresTotalPercentOfRequested: null,
                         },
                       },
