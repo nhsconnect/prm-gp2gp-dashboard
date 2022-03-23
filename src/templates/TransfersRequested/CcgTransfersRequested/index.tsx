@@ -170,19 +170,7 @@ export const query = graphql`
               ...CcgQueryFragment
             }
             practices(ccgOdsCode: $ccgOdsCode) {
-              name
-              odsCode
-              metrics {
-                month
-                year
-                requestedTransfers {
-                  requestedCount
-                  receivedCount
-                  receivedPercentOfRequested
-                  failuresTotalCount
-                  failuresTotalPercentOfRequested
-                }
-              }
+              ...PracticeTransfersRequestedFragment
             }
           }
         }

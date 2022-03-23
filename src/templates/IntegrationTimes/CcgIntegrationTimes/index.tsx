@@ -175,21 +175,7 @@ export const query = graphql`
               ...CcgQueryFragment
             }
             practices(ccgOdsCode: $ccgOdsCode) {
-              name
-              odsCode
-              metrics {
-                month
-                year
-                requestedTransfers {
-                  receivedCount
-                  integratedWithin3DaysCount
-                  integratedWithin3DaysPercentOfReceived
-                  integratedWithin8DaysCount
-                  integratedWithin8DaysPercentOfReceived
-                  notIntegratedWithin8DaysTotal
-                  notIntegratedWithin8DaysPercentOfReceived
-                }
-              }
+              ...PracticeIntegrationTimesFragment
             }
           }
         }

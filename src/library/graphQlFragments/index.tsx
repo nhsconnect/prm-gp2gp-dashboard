@@ -51,10 +51,13 @@ export const practiceIntegrationTimesFragment = graphql`
     metrics {
       ...MetricsMetadataFragment
       requestedTransfers {
-        integratedWithin3DaysPercentOfReceived
-        integratedWithin8DaysPercentOfReceived
-        notIntegratedWithin8DaysPercentOfReceived
         receivedCount
+        integratedWithin3DaysCount
+        integratedWithin3DaysPercentOfReceived
+        integratedWithin8DaysCount
+        integratedWithin8DaysPercentOfReceived
+        notIntegratedWithin8DaysTotal
+        notIntegratedWithin8DaysPercentOfReceived
       }
     }
   }
@@ -67,7 +70,9 @@ export const practiceTransfersRequestedFragment = graphql`
       ...MetricsMetadataFragment
       requestedTransfers {
         requestedCount
+        receivedCount
         receivedPercentOfRequested
+        failuresTotalCount
         failuresTotalPercentOfRequested
       }
     }
