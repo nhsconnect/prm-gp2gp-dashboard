@@ -19,7 +19,7 @@ import { HelpModal } from "../../../components/common/HelpModal";
 import { Table } from "../../../components/common/Table";
 
 import { graphql } from "gatsby";
-import { PracticeIntegrationType } from "../../../library/types/queryResultIntegrationTimes.types";
+import { PracticeDataType } from "../../../library/types/queryResults.types";
 import {
   PracticeMetricsType,
   TransfersRequestedTransfersType,
@@ -33,7 +33,7 @@ type PageContext = {
 
 type PracticeProps = {
   pageContext: PageContext;
-  data: PracticeIntegrationType;
+  data: PracticeDataType;
 };
 
 const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {

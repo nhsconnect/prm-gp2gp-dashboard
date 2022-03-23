@@ -17,7 +17,7 @@ import {
 import practiceTableContent from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import "../../index.scss";
 import { graphql } from "gatsby";
-import { CcgIntegrationTimesType } from "../../../library/types/queryResultIntegrationTimes.types";
+import { CcgDataType } from "../../../library/types/queryResults.types";
 import { CcgPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
@@ -28,7 +28,7 @@ type PageContext = {
 
 type CcgProps = {
   pageContext: PageContext;
-  data: CcgIntegrationTimesType;
+  data: CcgDataType;
 };
 
 const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {

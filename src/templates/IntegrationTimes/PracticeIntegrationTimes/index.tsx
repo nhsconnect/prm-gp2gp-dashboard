@@ -19,7 +19,7 @@ import {
 } from "../../../components/Definitions";
 import "../../index.scss";
 import { ContentsList } from "../../../components/common/ContentsList";
-import { PracticeIntegrationType } from "../../../library/types/queryResultIntegrationTimes.types";
+import { PracticeDataType } from "../../../library/types/queryResults.types";
 import {
   IntegrationRequestedTransfersType,
   PracticeMetricsType,
@@ -33,7 +33,7 @@ type PageContext = {
 
 type PracticeProps = {
   pageContext: PageContext;
-  data: PracticeIntegrationType;
+  data: PracticeDataType;
 };
 
 const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {

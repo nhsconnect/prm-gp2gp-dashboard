@@ -4,18 +4,20 @@ import {
   PracticeMetricsType,
 } from "./practice.types";
 
-type PracticeIntegrationsResultType = {
+type PracticeResultType = {
   odsCode: string;
   name: string;
   metrics: PracticeMetricsType[];
 };
+
 type ChildOrganisationsJsonType = {
-  practices: PracticeIntegrationsResultType[];
+  practices: PracticeResultType[];
 };
 
 type NodeType = {
   childOrganisationsJson: ChildOrganisationsJsonType;
 };
+
 type EdgesType = {
   node: NodeType;
 };
@@ -24,7 +26,7 @@ type AllFileType = {
   edges: EdgesType[];
 };
 
-export type PracticeIntegrationType = {
+export type PracticeDataType = {
   allFile: AllFileType;
 };
 
@@ -44,6 +46,6 @@ type CcgAllFileType = {
   edges: CcgEdgesType[];
 };
 
-export type CcgIntegrationTimesType = {
+export type CcgDataType = {
   allFile: CcgAllFileType;
 };

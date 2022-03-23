@@ -19,7 +19,7 @@ import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { graphql } from "gatsby";
-import { CcgIntegrationTimesType } from "../../../library/types/queryResultIntegrationTimes.types";
+import { CcgDataType } from "../../../library/types/queryResults.types";
 import { CcgPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
@@ -30,7 +30,7 @@ type PageContext = {
 
 type CcgProps = {
   pageContext: PageContext;
-  data: CcgIntegrationTimesType;
+  data: CcgDataType;
 };
 
 const CcgIntegrationTimes: FC<CcgProps> = ({ data, pageContext }) => {
