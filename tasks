@@ -44,7 +44,7 @@ function check_env {
 }
 
 function get_bucket {
-    echo "prm-gp2gp-dashboard-${deployment_env}"
+    echo "prm-service-dashboard-${deployment_env}"
 }
 
 function setup_env {
@@ -116,6 +116,8 @@ case "${task}" in
   dojo-dep)
       dojo "./tasks dep"
       ;;
+  log)
+      export NODE_MESSAGE="HELLO" npm run consoleLog
   *)
       echo "Invalid command: '${task}'"
       exit 1
