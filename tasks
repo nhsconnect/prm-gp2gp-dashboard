@@ -116,8 +116,6 @@ case "${task}" in
   dojo-dep)
       dojo "./tasks dep"
       ;;
-  log)
-      export NODE_MESSAGE="HELLO" npm run consoleLog
   *)
       echo "Invalid command: '${task}'"
       exit 1
