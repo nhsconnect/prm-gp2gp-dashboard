@@ -2,8 +2,6 @@ import React, { AriaAttributes, FC, ReactNode, useMemo, useState } from "react";
 import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
-
-import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
@@ -12,11 +10,9 @@ import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { getPreviousMonths } from "../../library/utils/getPreviousMonths";
-import {
-  CcgPracticeType,
-  IntegrationRequestedTransfersType,
-  TransfersRequestedTransfersType,
-} from "../../library/types/practice.types";
+import { CcgPracticeType } from "../../library/types/practice.types";
+import { getTableRowFromMetrics } from "../../library/utils/getTableRowFromMetrics";
+import { Units } from "../../library/enums/units";
 
 type TableWithSortProps = {
   ccgPractices: CcgPracticeType[];
@@ -35,11 +31,6 @@ type SelectType = {
 export const SortOrder = {
   DESCENDING: practiceTableContent.orderSelect.options[0].value,
   ASCENDING: practiceTableContent.orderSelect.options[1].value,
-};
-
-export const Units = {
-  PERCENTAGES: unitsContent.unitsSelect.options[0].value,
-  NUMBERS: unitsContent.unitsSelect.options[1].value,
 };
 
 const PracticeLink = ({
@@ -136,54 +127,16 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const practiceTableRows = sortedPractices.map(
     ({ odsCode, name, metrics }: CcgPracticeType) => {
-      if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
-        const requestedMetric = metrics[selectedMonth]
-          .requestedTransfers as IntegrationRequestedTransfersType;
-        return [
-          <PracticeLink
-            odsCode={odsCode}
-            name={name}
-            pageTemplatePath={pageTemplatePath}
-          />,
-          requestedMetric.receivedCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(
-                requestedMetric.integratedWithin3DaysPercentOfReceived
-              )
-            : requestedMetric.integratedWithin3DaysCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(
-                requestedMetric.integratedWithin8DaysPercentOfReceived
-              )
-            : requestedMetric.integratedWithin8DaysCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(
-                requestedMetric.notIntegratedWithin8DaysPercentOfReceived
-              )
-            : requestedMetric.notIntegratedWithin8DaysTotal,
-        ];
-      }
-
-      if (pageTemplatePath == PageTemplatePath.GP2GPTransfersRequested) {
-        const requestedMetric = metrics[selectedMonth]
-          .requestedTransfers as TransfersRequestedTransfersType;
-        return [
-          <PracticeLink
-            odsCode={odsCode}
-            name={name}
-            pageTemplatePath={pageTemplatePath}
-          />,
-          requestedMetric.requestedCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(requestedMetric.receivedPercentOfRequested)
-            : requestedMetric.receivedCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(requestedMetric.failuresTotalPercentOfRequested)
-            : requestedMetric.failuresTotalCount,
-        ];
-      }
-
-      return [];
+      return getTableRowFromMetrics(
+        <PracticeLink
+          odsCode={odsCode}
+          name={name}
+          pageTemplatePath={pageTemplatePath}
+        />,
+        metrics[selectedMonth],
+        pageTemplatePath,
+        selectedUnits as Units
+      );
     }
   );
 

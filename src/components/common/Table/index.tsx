@@ -5,7 +5,7 @@ import classNames from "classnames";
 type TableProps = {
   headers: { title: ReactNode; extra?: ReactNode }[];
   caption?: { text: string; hidden: boolean };
-  rows: (string | number | JSX.Element)[][];
+  rows: (string | number | JSX.Element | ReactNode)[][];
   className?: string;
   sortedColumnIndex?: number;
   sortOrder?: AriaAttributes["aria-sort"];

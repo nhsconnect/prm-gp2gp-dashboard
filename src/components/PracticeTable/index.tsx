@@ -1,27 +1,19 @@
 import React, { FC, ReactNode, useState } from "react";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
-import { addPercentageSign } from "../../library/utils/addPercentageSign";
 import unitsContent from "../../data/content/unitsOptions.json";
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
-import {
-  IntegrationRequestedTransfersType,
-  PracticeMetricsType,
-  TransfersRequestedTransfersType,
-} from "../../library/types/practice.types";
+import { PracticeMetricsType } from "../../library/types/practice.types";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
+import { getTableRowFromMetrics } from "../../library/utils/getTableRowFromMetrics";
+import { Units } from "../../library/enums/units";
 
 type TableProps = {
   metrics: PracticeMetricsType[];
   headers: { title: ReactNode; extra?: ReactNode }[];
   tableCaption: string;
   pageTemplatePath: PageTemplatePath;
-};
-
-export const Units = {
-  PERCENTAGES: unitsContent.unitsSelect.options[0].value,
-  NUMBERS: unitsContent.unitsSelect.options[1].value,
 };
 
 export const PracticeTable: FC<TableProps> = ({
@@ -38,54 +30,14 @@ export const PracticeTable: FC<TableProps> = ({
     setSelectedUnits(value);
   };
 
-  const generateMonthlyRowData = (metrics: PracticeMetricsType[]) => {
-    return metrics.map((metric) => {
-      if (pageTemplatePath == PageTemplatePath.IntegrationTimes) {
-        const requestedMetric =
-          metric.requestedTransfers as IntegrationRequestedTransfersType;
-
-        return [
-          `${convertMonthNumberToText(metric.month)} ${metric.year}`,
-          requestedMetric.receivedCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(
-                requestedMetric.integratedWithin3DaysPercentOfReceived
-              )
-            : requestedMetric.integratedWithin3DaysCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(
-                requestedMetric.integratedWithin8DaysPercentOfReceived
-              )
-            : requestedMetric.integratedWithin8DaysCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(
-                requestedMetric.notIntegratedWithin8DaysPercentOfReceived
-              )
-            : requestedMetric.notIntegratedWithin8DaysTotal,
-        ];
-      }
-
-      if (pageTemplatePath == PageTemplatePath.GP2GPTransfersRequested) {
-        const requestedMetric =
-          metric.requestedTransfers as TransfersRequestedTransfersType;
-
-        return [
-          `${convertMonthNumberToText(metric.month)} ${metric.year}`,
-          requestedMetric.requestedCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(requestedMetric.receivedPercentOfRequested)
-            : requestedMetric.receivedCount,
-          selectedUnits == Units.PERCENTAGES
-            ? addPercentageSign(requestedMetric.failuresTotalPercentOfRequested)
-            : requestedMetric.failuresTotalCount,
-        ];
-      }
-
-      return [];
-    });
-  };
-
-  const practiceTableRows = generateMonthlyRowData(metrics);
+  const practiceTableRows = metrics.map((metric) => {
+    return getTableRowFromMetrics(
+      `${convertMonthNumberToText(metric.month)} ${metric.year}`,
+      metric,
+      pageTemplatePath,
+      selectedUnits as Units
+    );
+  });
 
   return (
     <div className="nhsuk-u-margin-top-6">

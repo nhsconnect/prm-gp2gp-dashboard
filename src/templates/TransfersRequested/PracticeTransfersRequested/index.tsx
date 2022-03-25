@@ -63,7 +63,7 @@ const PracticeTransfersRequested: FC<PracticeProps> = ({
           name="description"
           content="Monthly data about GP2GP transfers for this practice"
         />
-        <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn {display: none}</style>`}</noscript>
+        <noscript>{`<style>.gp2gp-tabs,.gp2gp-open-modal-btn,.gp2gp-dropdown {display: none}</style>`}</noscript>
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <div className="gp2gp-page-heading">
