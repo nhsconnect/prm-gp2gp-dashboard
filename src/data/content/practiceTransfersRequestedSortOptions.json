@@ -20,18 +20,5 @@
         "value": "failuresTotalPercentOfRequested"
       }
     ]
-  },
-  "orderSelect": {
-    "defaultValue": "descending",
-    "options": [
-      {
-        "displayText": "Descending",
-        "value": "descending"
-      },
-      {
-        "displayText": "Ascending",
-        "value": "ascending"
-      }
-    ]
   }
 }

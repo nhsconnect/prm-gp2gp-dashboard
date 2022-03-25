@@ -6,6 +6,7 @@ import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
 
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
 import unitsContent from "../../data/content/unitsOptions.json";
+import orderContent from "../../data/content/orderOptions.json";
 import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
@@ -18,7 +19,6 @@ type TableWithSortProps = {
   ccgPractices: CcgPracticeType[];
   headers: { title: ReactNode; extra?: ReactNode }[];
   sortBySelect: SelectType;
-  orderSelect: SelectType;
   tableCaption: string;
   pageTemplatePath: PageTemplatePath;
 };
@@ -29,8 +29,8 @@ type SelectType = {
 };
 
 export const SortOrder = {
-  DESCENDING: practiceTableContent.orderSelect.options[0].value,
-  ASCENDING: practiceTableContent.orderSelect.options[1].value,
+  DESCENDING: orderContent.orderSelect.options[0].value,
+  ASCENDING: orderContent.orderSelect.options[1].value,
 };
 
 const PracticeLink = ({
@@ -87,7 +87,6 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   ccgPractices,
   headers,
   sortBySelect,
-  orderSelect,
   tableCaption,
   pageTemplatePath,
 }) => {
@@ -99,7 +98,9 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   );
 
   const [selectedField, setSelectedField] = useState(sortBySelect.defaultValue);
-  const [selectedOrder, setSelectedOrder] = useState(orderSelect.defaultValue);
+  const [selectedOrder, setSelectedOrder] = useState(
+    orderContent.orderSelect.defaultValue
+  );
   const [selectedUnits, setSelectedUnits] = useState(
     unitsContent.unitsSelect.defaultValue
   );
@@ -192,10 +193,10 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
         />
         <Select
           label="Order"
-          hiddenLabel={practiceTableContent.selectHiddenLabel}
-          options={orderSelect.options}
+          hiddenLabel={orderContent.selectHiddenLabel}
+          options={orderContent.orderSelect.options}
           id="orderSelect"
-          defaultValue={orderSelect.defaultValue}
+          defaultValue={orderContent.orderSelect.defaultValue}
           handleValueChange={handleOrderValueChange}
         />
       </div>

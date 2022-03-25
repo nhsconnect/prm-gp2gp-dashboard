@@ -154,7 +154,6 @@ const CcgIntegrationTimes: FC<CcgProps> = ({ data, pageContext }) => {
               ]}
               pageTemplatePath={PageTemplatePath.IntegrationTimes}
               sortBySelect={practiceTableContent.sortBySelect}
-              orderSelect={practiceTableContent.orderSelect}
               tableCaption={pageTitle}
             />
           }

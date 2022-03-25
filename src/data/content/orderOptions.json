@@ -1,0 +1,16 @@
+{
+  "selectHiddenLabel": " this element sorts the practice performance table",
+  "orderSelect": {
+    "defaultValue": "descending",
+    "options": [
+      {
+        "displayText": "Descending",
+        "value": "descending"
+      },
+      {
+        "displayText": "Ascending",
+        "value": "ascending"
+      }
+    ]
+  }
+}
