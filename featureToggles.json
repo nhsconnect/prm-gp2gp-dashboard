@@ -1,8 +1,4 @@
 {
-  "dev": {
-    "showContentsNavigation": true
-  },
-  "prod": {
-    "showContentsNavigation": true
-  }
+  "dev": {},
+  "prod": {}
 }

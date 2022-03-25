@@ -2,7 +2,6 @@ import React, { useEffect, FC, ReactNode } from "react";
 import { useCookies } from "react-cookie";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
-import classNames from "classnames";
 
 import { CookieBanner } from "../components/CookieBanner";
 import { Header } from "../components/Header";
@@ -16,7 +15,6 @@ import analytics from "../../analytics-config.json";
 import { NHS_COOKIE_NAME } from "../library/constants";
 import {
   FeatureTogglesContext,
-  useFeatureToggles,
   useFetchFeatureToggles,
 } from "../library/hooks/useFeatureToggle/";
 import homepageContent from "../data/content/homepage.json";
@@ -90,8 +88,6 @@ const GeneralContent: FC<ContentProps> = ({ children }) => (
 );
 
 const NavigationContents: FC<ContentProps> = ({ children }) => {
-  const { showContentsNavigation } = useFeatureToggles();
-
   return (
     <div className="gp2gp-width-container">
       <BackToLink link="/" text="Back to search" />
@@ -100,11 +96,7 @@ const NavigationContents: FC<ContentProps> = ({ children }) => {
         id="maincontent"
       >
         {children}
-        <FeedbackBanner
-          className={classNames({
-            "gp2gp-page-contents-feedback": showContentsNavigation,
-          })}
-        />
+        <FeedbackBanner className="gp2gp-page-contents-feedback" />
       </main>
     </div>
   );
