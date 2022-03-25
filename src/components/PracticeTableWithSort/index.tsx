@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import { Table } from "../common/Table";
 import { Select } from "../common/Select";
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
+import "./index.scss";
 
 import practiceTableContent from "../../data/content/practiceIntegrationsSortOptions.json";
 import unitsContent from "../../data/content/unitsOptions.json";
@@ -163,42 +164,45 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   return (
     <div className="nhsuk-u-margin-top-6">
-      <div className="gp2gp-sort">
-        <Select
-          label="Month"
-          hiddenLabel=" this element filters the practice performance table"
-          options={monthSelect.options}
-          id="monthSelect"
-          defaultValue={monthSelect.defaultValue}
-          handleValueChange={handleMonthValueChange}
-          className="nhsuk-u-margin-right-4"
-        />
-        <Select
-          label="Units"
-          hiddenLabel={unitsContent.selectHiddenLabel}
-          options={unitsContent.unitsSelect.options}
-          id="unitsSelect"
-          defaultValue={unitsContent.unitsSelect.defaultValue}
-          handleValueChange={handleUnitsValueChange}
-          className="nhsuk-u-margin-right-4"
-        />
-        <Select
-          label="Sort by"
-          hiddenLabel={practiceTableContent.selectHiddenLabel}
-          options={sortBySelect.options}
-          id="sortBySelect"
-          defaultValue={sortBySelect.defaultValue}
-          handleValueChange={handleSortByValueChange}
-          className="nhsuk-u-margin-right-4"
-        />
-        <Select
-          label="Order"
-          hiddenLabel={orderContent.selectHiddenLabel}
-          options={orderContent.orderSelect.options}
-          id="orderSelect"
-          defaultValue={orderContent.orderSelect.defaultValue}
-          handleValueChange={handleOrderValueChange}
-        />
+      <div className="gp2gp-sort nhsuk-u-margin-bottom-4">
+        <div className="gp2gp-select-combo">
+          <Select
+            label="Month"
+            hiddenLabel=" this element filters the practice performance table"
+            options={monthSelect.options}
+            id="monthSelect"
+            defaultValue={monthSelect.defaultValue}
+            handleValueChange={handleMonthValueChange}
+            className="nhsuk-u-margin-right-3"
+          />
+          <Select
+            label="Units"
+            hiddenLabel={unitsContent.selectHiddenLabel}
+            options={unitsContent.unitsSelect.options}
+            id="unitsSelect"
+            defaultValue={unitsContent.unitsSelect.defaultValue}
+            handleValueChange={handleUnitsValueChange}
+          />
+        </div>
+        <div className="gp2gp-select-combo">
+          <Select
+            label="Sort by"
+            hiddenLabel={practiceTableContent.selectHiddenLabel}
+            options={sortBySelect.options}
+            id="sortBySelect"
+            defaultValue={sortBySelect.defaultValue}
+            handleValueChange={handleSortByValueChange}
+            className="nhsuk-u-margin-right-3"
+          />
+          <Select
+            label="Order"
+            hiddenLabel={orderContent.selectHiddenLabel}
+            options={orderContent.orderSelect.options}
+            id="orderSelect"
+            defaultValue={orderContent.orderSelect.defaultValue}
+            handleValueChange={handleOrderValueChange}
+          />
+        </div>
       </div>
       <Table
         caption={{ text: tableCaptionWithMonthYear, hidden: false }}

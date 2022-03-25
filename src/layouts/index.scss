@@ -1,7 +1,7 @@
 @import "node_modules/nhsuk-frontend/packages/core/all";
 @import "node_modules/nhsuk-frontend/packages/components/breadcrumb/breadcrumb";
 
-$gp2gp-page-width: 1100px;
+$gp2gp-page-width: 1250px;
 
 @mixin gp2gp-width-container {
   margin: 0 $nhsuk-gutter-half;

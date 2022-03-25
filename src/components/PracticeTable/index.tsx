@@ -41,7 +41,7 @@ export const PracticeTable: FC<TableProps> = ({
 
   return (
     <div className="nhsuk-u-margin-top-6">
-      <div className="gp2gp-dropdown">
+      <div className="gp2gp-dropdown nhsuk-u-margin-bottom-4">
         <Select
           label="Units"
           hiddenLabel={unitsContent.selectHiddenLabel}

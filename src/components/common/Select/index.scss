@@ -7,8 +7,15 @@
 
 .gp2gp-select {
   @extend .nhsuk-select;
-  width: 250px;
+  width: 210px;
 }
+
+.gp2gp-select {
+  @include mq($until: large-desktop) {
+    min-width: 300px;
+  }
+}
+
 .gp2gp-form-group {
   @extend .nhsuk-form-group;
   display: inline-block;
