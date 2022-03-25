@@ -161,6 +161,26 @@ describe("CCG Transfers Requested page", () => {
           .and("contains", "practice/A12346");
       });
 
+      it("display percentages on practice performance table, change to numbers when selected", () => {
+        cy.visit("/ccg/11D/gp2gp-transfers-requested");
+        cy.contains("h1", "Another Test CCG - 11D");
+
+        cy.get("select#unitsSelect option:selected").should(
+          "have.text",
+          "Percentages"
+        );
+
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("66.7%");
+
+        cy.get("select#unitsSelect").select("Numbers");
+        cy.get("select#unitsSelect option:selected").should(
+          "have.text",
+          "Numbers"
+        );
+
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("2");
+      });
+
       it("displays the feedback section that links to feedback survey", () => {
         cy.visit("/ccg/11D/gp2gp-transfers-requested");
         cy.contains("h3", "Get in touch");

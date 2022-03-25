@@ -114,6 +114,26 @@ describe("Practice Integration Times page", () => {
         cy.contains("h1", "GP2GP patient record transfers data");
       });
 
+      it("display percentages on practice performance table, change to numbers when selected", () => {
+        cy.visit("/practice/A12347/integration-times");
+        cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
+
+        cy.get("select#unitsSelect option:selected").should(
+          "have.text",
+          "Percentages"
+        );
+
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("50%");
+
+        cy.get("select#unitsSelect").select("Numbers");
+        cy.get("select#unitsSelect option:selected").should(
+          "have.text",
+          "Numbers"
+        );
+
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("1");
+      });
+
       it("displays the feedback section that links to feedback survey", () => {
         cy.intercept(
           "/ORD/2-0-0/organisations/A12347",

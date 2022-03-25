@@ -82,6 +82,8 @@ describe("CCG Integration Times page", () => {
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");
 
+        cy.contains("Data updated: February 2020");
+
         cy.checkAccessibility();
 
         cy.contains(
@@ -143,8 +145,26 @@ describe("CCG Integration Times page", () => {
         cy.contains("a", "Test GP Practice With No Integrations - A12346")
           .should("have.attr", "href")
           .and("contains", "practice/A12346");
+      });
 
-        cy.contains("Data updated: February 2020");
+      it("display percentages on practice performance table, change to numbers when selected", () => {
+        cy.visit("/ccg/11D/integration-times");
+        cy.contains("h1", "Another Test CCG - 11D");
+
+        cy.get("select#unitsSelect option:selected").should(
+          "have.text",
+          "Percentages"
+        );
+
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("50%");
+
+        cy.get("select#unitsSelect").select("Numbers");
+        cy.get("select#unitsSelect option:selected").should(
+          "have.text",
+          "Numbers"
+        );
+
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("1");
       });
 
       it("displays the feedback section that links to feedback survey", () => {
