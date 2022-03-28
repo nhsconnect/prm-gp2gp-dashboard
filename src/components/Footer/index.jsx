@@ -35,6 +35,11 @@ export const Footer = () => {
                 CCG A to Z
               </Link>
             </li>
+            <li className="nhsuk-footer__list-item">
+              <Link className="nhsuk-footer__list-item-link" to="/contact-us">
+                Contact us
+              </Link>
+            </li>
           </ul>
           <p className="nhsuk-footer__copyright">&copy; Crown copyright</p>
         </div>
