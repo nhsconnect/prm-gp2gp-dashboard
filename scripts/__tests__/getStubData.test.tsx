@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getStubData } from "../get-stub-data";
+import { getStubData } from "../getStubData";
 import util from "util";
 import yargs from "yargs";
 

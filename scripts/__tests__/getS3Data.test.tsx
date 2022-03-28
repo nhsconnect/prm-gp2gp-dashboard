@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getS3data } from "../get-s3-data";
+import { getS3data } from "../getS3Data";
 import util from "util";
 
 jest.mock("fs");

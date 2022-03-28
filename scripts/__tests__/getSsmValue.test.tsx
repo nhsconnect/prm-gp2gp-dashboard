@@ -1,4 +1,4 @@
-import { getSsmValue } from "../get-ssm-value";
+import { getSsmValue } from "../getSsmValue";
 
 jest.mock("aws-sdk", () => ({
   SSM: jest.fn(() => ({

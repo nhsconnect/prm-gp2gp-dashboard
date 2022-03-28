@@ -7,7 +7,7 @@ const s3 = new aws.S3();
 const getObject = util.promisify(s3.getObject.bind(s3));
 const writeFile = util.promisify(fs.writeFile);
 
-const getS3data = async (params, outputFile) => {
+const getS3Data = async (params, outputFile) => {
   try {
     const data = await getObject(params);
 
@@ -21,4 +21,4 @@ const getS3data = async (params, outputFile) => {
   }
 };
 
-module.exports = { getS3data };
+module.exports = { getS3data: getS3Data };

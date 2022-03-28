@@ -1,4 +1,4 @@
-import { getSsmValue } from "../get-ssm-value";
+import { getSsmValue } from "../getSsmValue";
 
 // couldn't easily mock promisify success/failure in the same test file
 jest.mock("aws-sdk", () => ({

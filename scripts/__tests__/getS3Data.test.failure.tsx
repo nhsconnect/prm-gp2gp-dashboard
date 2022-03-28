@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getS3data } from "../get-s3-data";
+import { getS3data } from "../getS3Data";
 import util from "util";
 
 jest.mock("fs");
@@ -8,6 +8,9 @@ jest.mock("fs");
 jest.mock("util", () => ({
   promisify: jest.fn(() => jest.fn().mockRejectedValue("failure")),
 }));
+
+// reduce test log noise
+jest.mock("console", () => ({ error: jest.fn() }));
 
 describe("getS3Data failure", () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();

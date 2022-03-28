@@ -1,12 +1,12 @@
-import { getSsmValue } from "../get-ssm-value";
-import { getS3data } from "../get-s3-data";
-import { getMetricsFromS3 } from "../get-metrics-from-s3";
+import { getSsmValue } from "../getSsmValue";
+import { getS3data } from "../getS3Data";
+import { getMetricsFromS3 } from "../getMetricsFromS3";
 
-jest.mock("../get-ssm-value", () => ({
+jest.mock("../getSsmValue", () => ({
   getSsmValue: jest.fn().mockResolvedValue("someValue"),
 }));
 
-jest.mock("../get-s3-data");
+jest.mock("../getS3Data");
 
 jest.mock("yargs", () => ({
   argv: {
