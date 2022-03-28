@@ -14,11 +14,10 @@ const getS3data = async (params, outputFile) => {
     if (!fs.existsSync(config.outputPath)) {
       fs.mkdirSync(config.outputPath);
     }
-
-    await writeFile(`${outputFile}`, data.Body);
-    console.info("Successfully wrote to:", `${outputFile}`);
+    await writeFile(outputFile, data.Body);
+    console.info(`Successfully wrote to: ${outputFile}`);
   } catch (err) {
-    console.error("An error occurred:", err);
+    console.error(`An error occurred: ${err}`);
   }
 };
 
