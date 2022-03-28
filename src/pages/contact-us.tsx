@@ -8,7 +8,7 @@ const ContactUs: FC = () => {
         <title>Contact us - GP Registrations Data</title>
         <meta
           name="description"
-          content="Contact us for GP Registrations Data"
+          content="If you are a patient and you need medical advice, you should call 111. The GP Registrations Data team can help with enquiries about the data displayed on this site, not with individual patient or practice queries."
         />
       </Helmet>
       <div className="nhsuk-u-reading-width">
