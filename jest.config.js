@@ -17,3 +17,7 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
 };
+
+process.env = Object.assign(process.env, {
+  DATA_BUCKET_ENV: "TEST_ENV",
+});

@@ -5,18 +5,24 @@ const { getS3data } = require("./get-s3-data");
 
 const datatype = argv.datatype;
 
-if (!datatype) {
-  throw new Error(
-    "Please specify which datatype with --datatype practiceMetrics|nationalMetrics"
-  );
-} else {
-  getSsmValue(config[datatype].ssmName).then((ssmValue) => {
-    getS3data(
-      {
-        Bucket: config.bucket,
-        Key: ssmValue,
-      },
-      `${config.outputPath}${config[datatype].outputFile}`
+const getMetricsFromS3 = async () => {
+  if (!datatype) {
+    throw new Error(
+      "Please specify which datatype with --datatype practiceMetrics|nationalMetrics"
     );
-  });
-}
+  } else {
+    getSsmValue(config[datatype].ssmName).then((ssmValue) => {
+      getS3data(
+        {
+          Bucket: config.bucket,
+          Key: ssmValue,
+        },
+        `${config.outputPath}${config[datatype].outputFile}`
+      );
+    });
+  }
+};
+getMetricsFromS3();
+
+// export for tests
+module.exports = { getMetricsFromS3 };
