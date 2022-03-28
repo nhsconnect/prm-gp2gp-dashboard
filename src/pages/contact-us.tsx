@@ -13,14 +13,19 @@ const ContactUs: FC = () => {
       </Helmet>
       <div className="nhsuk-u-reading-width">
         <h1>Contact us</h1>
+        <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
+          If you need medical advice, call 111
+        </h2>
         <p>
           If you are a patient and you need medical advice, you should call 111,
           or use the web service at <a href="https://111.nhs.uk/">111.nhs.uk</a>{" "}
           .
         </p>
+        <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
+          If you are a patient, please contact your practice directly
+        </h2>
         <p>
-          If you are a patient, please contact your practice directly. NHS
-          services -{" "}
+          NHS services -{" "}
           <a href="https://www.nhs.uk/service-search">
             Find details of your local doctor, dentist, or other NHS service at
             NHS.UK
@@ -32,11 +37,17 @@ const ContactUs: FC = () => {
           to use NHS services, but it can be useful to have it). We are unable
           to assist with individual patient or practice queries.
         </p>
+        <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
+          If you are a practice
+        </h2>
         <p>
           If you are a practice and have a query about specific transfers for
           your practice, please contact your system supplier.
         </p>
 
+        <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
+          If you need help with this site
+        </h2>
         <p>
           If you need help with this site, or if it isn't working properly,
           contact the team at{" "}
@@ -46,6 +57,9 @@ const ContactUs: FC = () => {
           We are unable to assist with individual patient or practice queries.
           Please do not send any personal information to this email address.
         </p>
+        <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
+          Other queries
+        </h2>
         <p>
           If you have a different type of query please see the{" "}
           <a href="https://digital.nhs.uk/about-nhs-digital/contact-us">
