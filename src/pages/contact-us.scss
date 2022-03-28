@@ -1,0 +1,13 @@
+@import "node_modules/nhsuk-frontend/packages/core/settings/all";
+@import "node_modules/nhsuk-frontend/packages/core/tools/all";
+
+.gp2gp-emphasis-box {
+  background-color: $color_nhsuk-white;
+  border: 1px solid $color_nhsuk-grey-3;
+  border-radius: 0.3rem;
+  padding: 1rem;
+  p {
+    margin-bottom: 0;
+  }
+  margin-bottom: 2rem;
+}

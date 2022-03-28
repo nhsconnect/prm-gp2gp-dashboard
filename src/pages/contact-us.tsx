@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
+import "./contact-us.scss";
 
 const ContactUs: FC = () => {
   return (
@@ -13,14 +14,16 @@ const ContactUs: FC = () => {
       </Helmet>
       <div className="nhsuk-u-reading-width">
         <h1>Contact us</h1>
-        <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
-          If you need medical advice, call 111
-        </h2>
-        <p>
-          If you are a patient and you need medical advice, you should call 111,
-          or use the web service at <a href="https://111.nhs.uk/">111.nhs.uk</a>{" "}
-          .
-        </p>
+        <div className="gp2gp-emphasis-box">
+          <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
+            If you need medical advice, call 111
+          </h2>
+          <p>
+            If you are a patient and you need medical advice, you should call
+            111, or use the web service at{" "}
+            <a href="https://111.nhs.uk/">111.nhs.uk</a>.
+          </p>
+        </div>
         <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
           If you are a patient, please contact your practice directly
         </h2>
