@@ -74,7 +74,7 @@ describe("General layout", () => {
 
     await waitFor(() => {
       const feedbackHeading = getByRole("heading", {
-        name: "Get in touch",
+        name: "Feedback",
         level: 3,
       });
       expect(feedbackHeading).toBeInTheDocument();

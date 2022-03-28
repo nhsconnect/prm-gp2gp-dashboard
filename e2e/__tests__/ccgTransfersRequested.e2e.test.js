@@ -179,7 +179,7 @@ describe("CCG Transfers Requested page", () => {
 
       it("displays the feedback section that links to feedback survey", () => {
         cy.visit("/ccg/11D/gp2gp-transfers-requested");
-        cy.contains("h3", "Get in touch");
+        cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });

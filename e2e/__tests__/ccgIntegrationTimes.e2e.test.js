@@ -165,7 +165,7 @@ describe("CCG Integration Times page", () => {
 
       it("displays the feedback section that links to feedback survey", () => {
         cy.visit("/ccg/11D/integration-times");
-        cy.contains("h3", "Get in touch");
+        cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });

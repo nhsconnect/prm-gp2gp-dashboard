@@ -8,7 +8,7 @@ describe("FeedbackBanner component", () => {
     const { getByRole } = render(<FeedbackBanner />);
 
     const feedbackBannerHeading = getByRole("heading", {
-      name: "Get in touch",
+      name: "Feedback",
       level: 3,
     });
     expect(feedbackBannerHeading).toBeInTheDocument();
@@ -32,19 +32,5 @@ describe("FeedbackBanner component", () => {
     expect(surveyLink.getAttribute("href")).toBe(
       "https://qfreeaccountssjc1.az1.qualtrics.com/jfe/form/SV_ac1GS7jmHNtMTlA"
     );
-  });
-
-  it("contains link to GP Registrations Data email", () => {
-    const { getByRole } = render(<FeedbackBanner />);
-    const surveyLink = getByRole("link", {
-      name: "gp-registrations-data@nhs.net",
-    });
-
-    const surveyHref = surveyLink.getAttribute("href");
-
-    expect(surveyHref).toContain(
-      "body=Please%20note%20we%20are%20unable%20to%20assist%20with%20individual%20patient%20or%20practice%20queries."
-    );
-    expect(surveyHref).toContain("mailto:gp-registrations-data@nhs.net");
   });
 });

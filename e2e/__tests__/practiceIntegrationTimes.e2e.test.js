@@ -141,7 +141,7 @@ describe("Practice Integration Times page", () => {
         );
 
         cy.visit("/practice/A12347/integration-times");
-        cy.contains("h3", "Get in touch");
+        cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });

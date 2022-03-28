@@ -135,7 +135,7 @@ describe("Practice Download Data page", () => {
         );
 
         cy.visit("/practice/A12347/download-data");
-        cy.contains("h3", "Get in touch");
+        cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");
       });
