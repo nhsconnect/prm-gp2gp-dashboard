@@ -19,7 +19,7 @@ describe("getMetricsFromS3", () => {
     await getMetricsFromS3();
 
     expect(getSsmValue).toHaveBeenCalledWith(
-      "/registrations/TEST_ENV/data-pipeline/metrics-calculator/practice-metrics-s3-uri"
+      "/registrations/TEST_ENV/data-pipeline/metrics-calculator/practice-metrics-s3-path"
     );
 
     expect(getS3data).toHaveBeenCalledWith(
