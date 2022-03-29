@@ -45,7 +45,12 @@ const ContactUs: FC = () => {
         </h2>
         <p>
           If you are a practice and have a query about specific transfers for
-          your practice, please contact your system supplier.
+          your practice, please contact your system supplier. More information
+          on how to contact your supplier is available on the{" "}
+          <a href="https://digital.nhs.uk/services/gp2gp">
+            NHS Digital GP2GP page
+          </a>
+          .
         </p>
 
         <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
@@ -56,8 +61,8 @@ const ContactUs: FC = () => {
           contact the team at{" "}
           <a href="mailto:gp-registrations-data@nhs.net">
             gp-registrations-data@nhs.net
-          </a>{" "}
-          We are unable to assist with individual patient or practice queries.
+          </a>
+          . We are unable to assist with individual patient or practice queries.
           Please do not send any personal information to this email address.
         </p>
         <h2 className="nhsuk-heading-s nhsuk-u-margin-bottom-2">
