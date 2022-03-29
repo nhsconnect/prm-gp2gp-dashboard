@@ -9,10 +9,11 @@ const getMetricsFromS3 = async () => {
   try {
     if (datatype) {
       const ssmValue = await getSsmValue(config[datatype].ssmName);
+      const s3KeyWithVersion = `${config.metricsVersion}/${ssmValue}`;
       await getS3data(
         {
           Bucket: config.bucket,
-          Key: ssmValue,
+          Key: s3KeyWithVersion,
         },
         `${config.outputPath}${config[datatype].outputFile}`
       );
