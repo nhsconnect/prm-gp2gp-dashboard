@@ -26,7 +26,11 @@ type TableWithSortProps = {
 
 type SelectType = {
   defaultValue: string;
-  options: { displayText: string; value: string }[];
+  options: {
+    displayText: string;
+    percentageValue: string;
+    numberValue: string;
+  }[];
 };
 
 export const SortOrder = {
@@ -142,6 +146,12 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
     }
   );
 
+  const sortBySelectOptions = sortBySelect.options.map((item) => {
+    if ((selectedUnits as Units) == Units.PERCENTAGES)
+      return { displayText: item.displayText, value: item.percentageValue };
+    else return { displayText: item.displayText, value: item.numberValue };
+  });
+
   const handleSortByValueChange = (value: string) => {
     setSelectedField(value);
   };
@@ -151,6 +161,17 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   };
 
   const handleUnitsValueChange = (value: string) => {
+    const currSortedColumnIndex = sortBySelect.options.findIndex(
+      (option) =>
+        option.percentageValue === selectedField ||
+        option.numberValue === selectedField
+    );
+    if ((selectedUnits as Units) == Units.PERCENTAGES)
+      setSelectedField(sortBySelect.options[currSortedColumnIndex].numberValue);
+    else
+      setSelectedField(
+        sortBySelect.options[currSortedColumnIndex].percentageValue
+      );
     setSelectedUnits(value);
   };
 
@@ -159,7 +180,9 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   };
 
   const sortedColumnIndex = sortBySelect.options.findIndex(
-    (option) => option.value === selectedField
+    (option) =>
+      option.percentageValue === selectedField ||
+      option.numberValue === selectedField
   );
 
   return (
@@ -171,6 +194,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
             hiddenLabel=" this element filters the practice performance table"
             options={monthSelect.options}
             id="monthSelect"
+            value={selectedMonth}
             defaultValue={monthSelect.defaultValue}
             handleValueChange={handleMonthValueChange}
             className="nhsuk-u-margin-right-3"
@@ -180,6 +204,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
             hiddenLabel={unitsContent.selectHiddenLabel}
             options={unitsContent.unitsSelect.options}
             id="unitsSelect"
+            value={selectedUnits}
             defaultValue={unitsContent.unitsSelect.defaultValue}
             handleValueChange={handleUnitsValueChange}
           />
@@ -188,8 +213,9 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
           <Select
             label="Sort by"
             hiddenLabel={practiceTableContent.selectHiddenLabel}
-            options={sortBySelect.options}
+            options={sortBySelectOptions}
             id="sortBySelect"
+            value={selectedField}
             defaultValue={sortBySelect.defaultValue}
             handleValueChange={handleSortByValueChange}
             className="nhsuk-u-margin-right-3"
@@ -199,6 +225,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
             hiddenLabel={orderContent.selectHiddenLabel}
             options={orderContent.orderSelect.options}
             id="orderSelect"
+            value={selectedOrder}
             defaultValue={orderContent.orderSelect.defaultValue}
             handleValueChange={handleOrderValueChange}
           />

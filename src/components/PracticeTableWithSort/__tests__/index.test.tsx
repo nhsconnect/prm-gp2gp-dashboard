@@ -126,7 +126,7 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows[2]).toHaveTextContent("Not integrated within 8 days 25%");
     expect(allRows[3]).toHaveTextContent("Not integrated within 8 days 8.8%");
     expect(allRows[4]).toHaveTextContent("Not integrated within 8 days 7.7%");
-    expect(allRows[5]).toHaveTextContent("Not integrated within 8 days 0%");
+    expect(allRows[5]).toHaveTextContent("Not integrated within 8 days n/a");
     expect(allRows[6]).toHaveTextContent("Not integrated within 8 days n/a");
     expect(allRows.length).toBe(7);
   });
@@ -166,7 +166,7 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows.length).toBe(3);
   });
 
-  it("displays practices data as percentages by default, then as numbers when selected", () => {
+  it("displays practices data as percentages by default, then as numbers when selected and updates sort order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         ccgPractices={practiceMetricsMock}
@@ -186,11 +186,33 @@ describe("PracticeTableWithSort component", () => {
     expect(unitsSelect).toHaveValue("percentages");
 
     expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 50%");
+    expect(allRows[1]).toHaveTextContent("Second GP Practice - A12346");
+    expect(allRows[2]).toHaveTextContent("Not integrated within 8 days 25%");
+    expect(allRows[2]).toHaveTextContent("Sixth GP Practice - A12350");
+    expect(allRows[3]).toHaveTextContent("Not integrated within 8 days 8.8%");
+    expect(allRows[3]).toHaveTextContent("Third GP Practice - A12347");
+    expect(allRows[4]).toHaveTextContent("Not integrated within 8 days 7.7%");
+    expect(allRows[4]).toHaveTextContent("Fifth GP Practice - A12349");
+    expect(allRows[5]).toHaveTextContent("Not integrated within 8 days n/a");
+    expect(allRows[5]).toHaveTextContent("Fourth GP Practice - A12348");
+    expect(allRows[6]).toHaveTextContent("Not integrated within 8 days n/a");
+    expect(allRows[6]).toHaveTextContent("GP Practice - A12345");
 
     userEvent.selectOptions(unitsSelect, "numbers");
     expect(unitsSelect).toHaveValue("numbers");
 
     expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 11");
+    expect(allRows[1]).toHaveTextContent("Second GP Practice - A12346");
+    expect(allRows[2]).toHaveTextContent("Not integrated within 8 days 5");
+    expect(allRows[2]).toHaveTextContent("Fifth GP Practice - A12349");
+    expect(allRows[3]).toHaveTextContent("Not integrated within 8 days 3");
+    expect(allRows[3]).toHaveTextContent("Third GP Practice - A12347");
+    expect(allRows[4]).toHaveTextContent("Not integrated within 8 days 3");
+    expect(allRows[4]).toHaveTextContent("Sixth GP Practice - A12350");
+    expect(allRows[5]).toHaveTextContent("Not integrated within 8 days 0");
+    expect(allRows[5]).toHaveTextContent("GP Practice - A12345");
+    expect(allRows[6]).toHaveTextContent("Not integrated within 8 days 0");
+    expect(allRows[6]).toHaveTextContent("Fourth GP Practice - A12348");
   });
 
   it("navigates to a practice page when a link is clicked", () => {
@@ -311,7 +333,7 @@ describe("PracticeTableWithSort component", () => {
         SortOrder.ASCENDING,
         [
           "Not integrated within 8 days n/a",
-          "Not integrated within 8 days 0%",
+          "Not integrated within 8 days n/a",
           "Not integrated within 8 days 7.7%",
         ],
       ],

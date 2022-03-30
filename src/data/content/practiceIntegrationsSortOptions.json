@@ -5,23 +5,28 @@
     "options": [
       {
         "displayText": "Requesting practice name",
-        "value": "requestingPracticeName"
+        "percentageValue": "requestingPracticeName",
+        "numberValue": "requestingPracticeName"
       },
       {
         "displayText": "GP2GP transfers received",
-        "value": "receivedCount"
+        "percentageValue": "receivedCount",
+        "numberValue": "receivedCount"
       },
       {
         "displayText": "Integrated within 3 days",
-        "value": "integratedWithin3DaysPercentOfReceived"
+        "percentageValue": "integratedWithin3DaysPercentOfReceived",
+        "numberValue": "integratedWithin3DaysCount"
       },
       {
         "displayText": "Integrated within 8 days",
-        "value": "integratedWithin8DaysPercentOfReceived"
+        "percentageValue": "integratedWithin8DaysPercentOfReceived",
+        "numberValue": "integratedWithin8DaysCount"
       },
       {
         "displayText": "Not integrated within 8 days",
-        "value": "notIntegratedWithin8DaysPercentOfReceived"
+        "percentageValue": "notIntegratedWithin8DaysPercentOfReceived",
+        "numberValue": "notIntegratedWithin8DaysTotal"
       }
     ]
   }

@@ -5,19 +5,23 @@
     "options": [
       {
         "displayText": "Requesting practice name",
-        "value": "requestingPracticeName"
+        "percentageValue": "requestingPracticeName",
+        "numberValue": "requestingPracticeName"
       },
       {
         "displayText": "Registrations that triggered GP2GP transfer",
-        "value": "requestedCount"
+        "percentageValue": "requestedCount",
+        "numberValue": "requestedCount"
       },
       {
         "displayText": "GP2GP transfers received",
-        "value": "receivedPercentOfRequested"
+        "percentageValue": "receivedPercentOfRequested",
+        "numberValue": "receivedCount"
       },
       {
         "displayText": "GP2GP technical failures",
-        "value": "failuresTotalPercentOfRequested"
+        "percentageValue": "failuresTotalPercentOfRequested",
+        "numberValue": "failuresTotalCount"
       }
     ]
   }

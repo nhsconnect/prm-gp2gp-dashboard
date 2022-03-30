@@ -92,7 +92,7 @@
           "integratedWithin3DaysPercentOfReceived": null,
           "integratedWithin8DaysPercentOfReceived": null,
           "notIntegratedWithin8DaysTotal": 0,
-          "notIntegratedWithin8DaysPercentOfReceived": 0,
+          "notIntegratedWithin8DaysPercentOfReceived": null,
           "failuresTotalCount": 0,
           "failuresTotalPercentOfRequested": 0
         }
@@ -116,7 +116,7 @@
           "receivedPercentOfRequested": 92.9,
           "integratedWithin3DaysPercentOfReceived": 0,
           "integratedWithin8DaysPercentOfReceived": 92.3,
-          "notIntegratedWithin8DaysTotal": 1,
+          "notIntegratedWithin8DaysTotal": 5,
           "notIntegratedWithin8DaysPercentOfReceived": 7.7,
           "failuresTotalCount": 1,
           "failuresTotalPercentOfRequested": 7.1

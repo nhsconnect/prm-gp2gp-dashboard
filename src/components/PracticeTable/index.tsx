@@ -47,6 +47,7 @@ export const PracticeTable: FC<TableProps> = ({
           hiddenLabel={unitsContent.selectHiddenLabel}
           options={unitsContent.unitsSelect.options}
           id="unitsSelect"
+          value={selectedUnits}
           defaultValue={unitsContent.unitsSelect.defaultValue}
           handleValueChange={handleUnitsValueChange}
           className="nhsuk-u-margin-right-4"

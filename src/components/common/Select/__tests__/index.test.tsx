@@ -43,6 +43,8 @@ describe("Select component", () => {
       name: "Select fruit",
     });
 
+    expect(fruitSelect).toHaveValue("pomegranate");
+
     userEvent.selectOptions(fruitSelect, "blueberry");
 
     expect(fruitSelect).toHaveValue("blueberry");

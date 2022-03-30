@@ -160,7 +160,7 @@ describe("CCG Integration Times page", () => {
           "Numbers"
         );
 
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("1");
+        cy.get('[data-testid="table__cell--row-1-col-2"]').contains("1");
       });
 
       it("displays the feedback section that links to feedback survey", () => {

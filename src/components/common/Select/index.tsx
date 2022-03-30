@@ -9,6 +9,7 @@ type SelectProps = {
   id: string;
   defaultValue: string | number;
   handleValueChange: (value: string) => void;
+  value?: string | number;
   className?: string;
 };
 
@@ -18,7 +19,9 @@ export const Select: FC<SelectProps> = ({
   options,
   id,
   defaultValue,
+
   handleValueChange,
+  value,
   className,
 }) => (
   <div className={classNames("gp2gp-form-group", className)}>
@@ -32,7 +35,8 @@ export const Select: FC<SelectProps> = ({
       className="gp2gp-select"
       id={id}
       name={id}
-      defaultValue={defaultValue}
+      value={value ? value : undefined}
+      defaultValue={value ? undefined : defaultValue}
       onChange={(e) => handleValueChange(e.target.value)}
     >
       {options.map(({ displayText, value }) => (
