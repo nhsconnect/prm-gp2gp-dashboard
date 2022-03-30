@@ -207,6 +207,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
             value={selectedUnits}
             defaultValue={unitsContent.unitsSelect.defaultValue}
             handleValueChange={handleUnitsValueChange}
+            className="nhsuk-u-margin-right-3"
           />
         </div>
         <div className="gp2gp-select-combo">
