@@ -22,6 +22,31 @@ describe("Download data component", () => {
     expect(getByText(pageDescription)).toBeInTheDocument();
   });
 
+  it("contains a link to definition and details about this data", () => {
+    const { getByRole } = render(
+      <DownloadData
+        data={[]}
+        pageDescription=""
+        dataFor="Test GP practice"
+        dataUpdatedDate=""
+      />
+    );
+
+    const definitionsAndDetailsAboutThisDataLink = getByRole("link", {
+      name: "Definitions and notes about this data (opens in new tab)",
+    });
+    expect(definitionsAndDetailsAboutThisDataLink).toBeInTheDocument();
+    expect(definitionsAndDetailsAboutThisDataLink.getAttribute("href")).toBe(
+      "/definitions-and-notes-about-this-data"
+    );
+    expect(definitionsAndDetailsAboutThisDataLink.getAttribute("target")).toBe(
+      "_blank"
+    );
+    expect(definitionsAndDetailsAboutThisDataLink.getAttribute("rel")).toBe(
+      "noopener noreferrer"
+    );
+  });
+
   it("displays the last edit date", () => {
     const dataUpdatedDate = "2020-04-24 16:51:21.353977";
     const expectedDate = /Data updated: April 2020/;
