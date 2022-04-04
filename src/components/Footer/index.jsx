@@ -31,6 +31,14 @@ export const Footer = () => {
               </Link>
             </li>
             <li className="nhsuk-footer__list-item">
+              <Link
+                className="nhsuk-footer__list-item-link"
+                to="/definitions-and-notes-about-this-data"
+              >
+                Definitions and notes about this data
+              </Link>
+            </li>
+            <li className="nhsuk-footer__list-item">
               <Link className="nhsuk-footer__list-item-link" to="/ccgs">
                 CCG A to Z
               </Link>

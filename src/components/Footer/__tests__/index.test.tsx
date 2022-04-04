@@ -14,6 +14,18 @@ describe("Footer component", () => {
     expect(ccgAtoZLink.getAttribute("href")).toBe("/ccgs");
   });
 
+  it("displays Definitions and notes about this data link in footer", () => {
+    const { getByRole } = render(<Footer />);
+
+    const ccgAtoZLink = getByRole("link", {
+      name: "Definitions and notes about this data",
+    });
+    expect(ccgAtoZLink).toBeInTheDocument();
+    expect(ccgAtoZLink.getAttribute("href")).toBe(
+      "/definitions-and-notes-about-this-data"
+    );
+  });
+
   it("displays Contact us link in footer", () => {
     const { getByRole } = render(<Footer />);
 
