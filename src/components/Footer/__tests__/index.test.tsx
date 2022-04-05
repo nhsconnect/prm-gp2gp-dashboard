@@ -17,11 +17,11 @@ describe("Footer component", () => {
   it("displays Definitions and notes about this data link in footer", () => {
     const { getByRole } = render(<Footer />);
 
-    const ccgAtoZLink = getByRole("link", {
+    const definitionAndNotesLink = getByRole("link", {
       name: "Definitions and notes about this data",
     });
-    expect(ccgAtoZLink).toBeInTheDocument();
-    expect(ccgAtoZLink.getAttribute("href")).toBe(
+    expect(definitionAndNotesLink).toBeInTheDocument();
+    expect(definitionAndNotesLink.getAttribute("href")).toBe(
       "/definitions-and-notes-about-this-data"
     );
   });

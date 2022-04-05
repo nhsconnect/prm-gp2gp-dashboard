@@ -32,17 +32,17 @@ describe("Download data component", () => {
       />
     );
 
-    const definitionsAndDetailsAboutThisDataLink = getByRole("link", {
+    const definitionsAndNotesAboutThisDataLink = getByRole("link", {
       name: "Definitions and notes about this data (opens in a new tab)",
     });
-    expect(definitionsAndDetailsAboutThisDataLink).toBeInTheDocument();
-    expect(definitionsAndDetailsAboutThisDataLink.getAttribute("href")).toBe(
+    expect(definitionsAndNotesAboutThisDataLink).toBeInTheDocument();
+    expect(definitionsAndNotesAboutThisDataLink.getAttribute("href")).toBe(
       "/definitions-and-notes-about-this-data"
     );
-    expect(definitionsAndDetailsAboutThisDataLink.getAttribute("target")).toBe(
+    expect(definitionsAndNotesAboutThisDataLink.getAttribute("target")).toBe(
       "_blank"
     );
-    expect(definitionsAndDetailsAboutThisDataLink.getAttribute("rel")).toBe(
+    expect(definitionsAndNotesAboutThisDataLink.getAttribute("rel")).toBe(
       "noopener noreferrer"
     );
   });
