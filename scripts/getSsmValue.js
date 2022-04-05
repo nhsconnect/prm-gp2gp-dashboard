@@ -19,6 +19,7 @@ const getSsmValue = async (ssmName) => {
     console.error(
       `An error occurred when fetching SSM param ${ssmName}: ${err}`
     );
+    process.exit(1);
   }
 };
 

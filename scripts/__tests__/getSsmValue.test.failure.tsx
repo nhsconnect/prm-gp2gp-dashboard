@@ -10,13 +10,16 @@ jest.mock("aws-sdk", () => ({
 
 describe("getSsmValue failure", () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+  const mockExit = jest.spyOn(process, "exit").mockImplementation();
 
   afterEach(() => {
     consoleErrorSpy.mockReset();
+    mockExit.mockReset();
   });
 
   afterAll(() => {
     consoleErrorSpy.mockRestore();
+    mockExit.mockRestore();
   });
 
   it("reads ssm param", async () => {
@@ -25,5 +28,6 @@ describe("getSsmValue failure", () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       "An error occurred when fetching SSM param someName: failure"
     );
+    expect(mockExit).toHaveBeenCalledWith(1);
   });
 });

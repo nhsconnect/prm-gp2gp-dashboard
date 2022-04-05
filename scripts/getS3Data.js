@@ -18,6 +18,7 @@ const getS3Data = async (params, outputFile) => {
     console.info(`Successfully wrote to: ${outputFile}`);
   } catch (err) {
     console.error(`An error occurred: ${err}`);
+    process.exit(1);
   }
 };
 
