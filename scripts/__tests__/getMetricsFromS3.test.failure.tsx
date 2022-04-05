@@ -1,5 +1,8 @@
 import { getMetricsFromS3 } from "../getMetricsFromS3";
 
+// reduce test log noise
+jest.mock("console", () => ({ error: jest.fn() }));
+
 describe("getMetricsFromS3 failure", () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
 

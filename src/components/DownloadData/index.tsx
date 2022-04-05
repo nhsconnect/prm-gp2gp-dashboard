@@ -65,7 +65,7 @@ export const DownloadData: FC<DownloadDataProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Definitions and notes about this data (opens in new tab)
+                Definitions and notes about this data (opens in a new tab)
               </a>
             </p>
           </div>

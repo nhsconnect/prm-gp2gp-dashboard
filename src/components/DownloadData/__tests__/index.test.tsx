@@ -33,7 +33,7 @@ describe("Download data component", () => {
     );
 
     const definitionsAndDetailsAboutThisDataLink = getByRole("link", {
-      name: "Definitions and notes about this data (opens in new tab)",
+      name: "Definitions and notes about this data (opens in a new tab)",
     });
     expect(definitionsAndDetailsAboutThisDataLink).toBeInTheDocument();
     expect(definitionsAndDetailsAboutThisDataLink.getAttribute("href")).toBe(
