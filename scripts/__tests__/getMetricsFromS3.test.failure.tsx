@@ -2,9 +2,8 @@ import { getMetricsFromS3 } from "../getMetricsFromS3";
 
 describe("getMetricsFromS3 failure", () => {
   const consoleErrorSpy = jest
-    .spyOn(global.console, "error")
+    .spyOn(console, "error")
     .mockImplementation(jest.fn());
-
   afterEach(() => {
     consoleErrorSpy.mockReset();
   });

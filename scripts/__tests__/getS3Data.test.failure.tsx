@@ -9,9 +9,6 @@ jest.mock("util", () => ({
   promisify: jest.fn(() => jest.fn().mockRejectedValue("failure")),
 }));
 
-// reduce test log noise
-jest.mock("console", () => ({ error: jest.fn() }));
-
 describe("getS3Data failure", () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
   const mockExit = jest.spyOn(process, "exit").mockImplementation();

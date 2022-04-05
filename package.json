@@ -14,7 +14,7 @@
     "serve:ci": "gatsby serve",
     "clean": "gatsby clean",
     "deploy": "gatsby-plugin-s3 deploy",
-    "test": "jest",
+    "test": "jest --silent",
     "e2e": "./node_modules/.bin/cypress run",
     "e2e:install": "./node_modules/.bin/cypress install",
     "e2e:open": "./node_modules/.bin/cypress open",
