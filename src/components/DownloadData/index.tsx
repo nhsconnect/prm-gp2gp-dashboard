@@ -58,8 +58,8 @@ export const DownloadData: FC<DownloadDataProps> = ({
       <div className="gp2gp-download-data" data-testid="gp2gp-download-data">
         <div className="nhsuk-u-reading-width">
           <div className="nhsuk-body">
+            <p>{pageDescription}</p>
             <p>
-              {pageDescription}{" "}
               <a
                 href="/definitions-and-notes-about-this-data"
                 target="_blank"
