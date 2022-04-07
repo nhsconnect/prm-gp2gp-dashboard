@@ -50,7 +50,6 @@ pipelines:
             npm_build:
               resources:
                 - docker
-                - big
               artifacts:
                 - build:
                     source: public
@@ -96,7 +95,6 @@ pipelines:
             npm_build:
               resources:
                 - docker
-                - big
               artifacts:
                 - build:
                     source: public
