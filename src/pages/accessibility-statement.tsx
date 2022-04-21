@@ -64,9 +64,11 @@ const AccessibilityStatement: FC = () => {
         </ul>
         <p>
           The ability to search for a practice or a CCG does not work without
-          JavaScript, however an A-Z list of CCGs is available to browse.
-          Sorting functionality on the CCG page will not work without
-          JavaScript.
+          JavaScript, however an A-Z list of CCGs is available to browse. The
+          download data functionality does not work without JavaScript. However,
+          you can request a copy of the data by contacting
+          gp-registrations-data@nhs.net. Sorting functionality on the CCG and
+          practice pages will not work without JavaScript.
         </p>
         <p>
           When you click on a link and are navigated to a new page, the focus
@@ -120,13 +122,13 @@ const AccessibilityStatement: FC = () => {
         <p>
           We are currently not compliant with Success Criteria 2.4.3 - “focus
           order” of the WCAG 2.1 AA success criteria. We are aiming to have this
-          issue fixed by September 2021.
+          issue fixed by September 2022.
         </p>
         <h2>Preparation of this accessibility statement</h2>
         <p>
-          This statement was prepared on 23rd March 2021. It was last reviewed
-          on 17th June 2021. This website was last tested in May 2021. The test
-          was carried out by the internal team. We tested all pages on the site
+          This statement was prepared on 23rd March 2021. It was last updated on
+          7th April 2022. This website was last tested in May 2021. The test was
+          carried out by the internal team. We tested all pages on the site
           using the NHS accessibility audit checklist.
         </p>
       </div>
