@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import "./contact-us.scss";
-import content from "../../data/content/emailAnchor.json";
+import content from "../data/content/emailAnchor.json";
 
 const ContactUs: FC = () => {
   return (

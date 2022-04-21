@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
-import content from "../../data/content/emailAnchor.json";
+import content from "../data/content/emailAnchor.json";
 
 const AccessibilityStatement: FC = () => {
   return (

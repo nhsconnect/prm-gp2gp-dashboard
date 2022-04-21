@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
-import content from "../../data/content/emailAnchor.json";
+import content from "../data/content/emailAnchor.json";
 
 const YourPrivacy: FC = () => {
   return (
