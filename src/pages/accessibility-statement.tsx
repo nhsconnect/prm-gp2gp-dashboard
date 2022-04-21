@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
+import content from "../../data/content/emailAnchor.json";
+
 const AccessibilityStatement: FC = () => {
   return (
     <>
@@ -67,8 +69,15 @@ const AccessibilityStatement: FC = () => {
           JavaScript, however an A-Z list of CCGs is available to browse. The
           download data functionality does not work without JavaScript. However,
           you can request a copy of the data by contacting
-          gp-registrations-data@nhs.net. Sorting functionality on the CCG and
-          practice pages will not work without JavaScript.
+          <a
+            href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+              content.emailBody
+            )}`}
+          >
+            gp-registrations-data@nhs.net
+          </a>
+          . Sorting functionality on the CCG and practice pages will not work
+          without JavaScript.
         </p>
         <p>
           When you click on a link and are navigated to a new page, the focus
@@ -80,7 +89,11 @@ const AccessibilityStatement: FC = () => {
           If you find any problems which aren't listed on this page, or think
           that we're not meeting the requirements of the accessibility
           regulations then please email{" "}
-          <a href="mailto:gp-registrations-data@nhs.net">
+          <a
+            href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+              content.emailBody
+            )}`}
+          >
             gp-registrations-data@nhs.net
           </a>{" "}
           to let us know.

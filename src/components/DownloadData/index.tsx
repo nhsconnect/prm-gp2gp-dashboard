@@ -10,6 +10,7 @@ import {
 import { PracticeType } from "../../library/types/practice.types";
 import { getFormatData } from "../../library/utils/download/getFormatData";
 import { convertToReadableDate } from "../../library/utils/convertToReadableDate";
+import content from "../../data/content/emailAnchor.json";
 
 type DownloadDataProps = {
   pageDescription: string;
@@ -129,7 +130,11 @@ export const DownloadData: FC<DownloadDataProps> = ({
           Please enable javascript and refresh the page to be able to download
           this data. <br />
           Alternatively, please email{" "}
-          <a href={"mailto:gp-registrations-data@nhs.net"}>
+          <a
+            href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+              content.emailBody
+            )}`}
+          >
             gp-registrations-data@nhs.net
           </a>{" "}
           to receive the data.

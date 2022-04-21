@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 import "./contact-us.scss";
+import content from "../../data/content/emailAnchor.json";
 
 const ContactUs: FC = () => {
   return (
@@ -59,7 +60,11 @@ const ContactUs: FC = () => {
         <p>
           If you need help with this site, or if it isn't working properly,
           contact the team at{" "}
-          <a href="mailto:gp-registrations-data@nhs.net">
+          <a
+            href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+              content.emailBody
+            )}`}
+          >
             gp-registrations-data@nhs.net
           </a>
           . We are unable to assist with individual patient or practice queries.

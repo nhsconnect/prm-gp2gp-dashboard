@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.scss";
 
+import content from "../../data/content/emailAnchor.json";
+
 export const AboutThisDataContent = () => (
   <div className="nhsuk-u-reading-width">
     <h3 className="nhsuk-u-margin-top-6">How we calculate the data</h3>
@@ -53,7 +55,11 @@ export const AboutThisDataContent = () => (
         There may be other scenarios which mean the data is different from what
         is expected. If you have concerns about the data for a specific
         practice, please contact us at{" "}
-        <a href="mailto:gp-registrations-data@nhs.net">
+        <a
+          href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+            content.emailBody
+          )}`}
+        >
           gp-registrations-data@nhs.net
         </a>
         .

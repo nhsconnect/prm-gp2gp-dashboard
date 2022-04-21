@@ -1,6 +1,7 @@
 import { Link } from "gatsby";
 import React, { FC } from "react";
 import { Helmet } from "react-helmet";
+import content from "../../data/content/emailAnchor.json";
 
 const YourPrivacy: FC = () => {
   return (
@@ -97,8 +98,11 @@ const YourPrivacy: FC = () => {
           <li>
             find out what information we hold about you, ask us to correct it if
             it's wrong, or delete it by emailing{" "}
-            <a href={"mailto:gp-registrations-data@nhs.net"}>
-              {" "}
+            <a
+              href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
+                content.emailBody
+              )}`}
+            >
               gp-registrations-data@nhs.net
             </a>
           </li>
