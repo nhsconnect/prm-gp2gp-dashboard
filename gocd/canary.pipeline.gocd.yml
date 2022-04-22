@@ -1,0 +1,88 @@
+format_version: 4
+pipelines:
+  "prm-gp2gp-dashboard.canary":
+    group: gp2gp-canary
+    label_template: "${git[:8]}"
+    materials:
+      git:
+        type: configrepo
+    timer:
+      spec: 0 0 8 ? * MON,TUE,WED,THU,FRI *
+    stages:
+      - update:
+          clean_workspace: true
+          approval: manual
+          jobs:
+            update_package_json:
+              artifacts:
+                - build:
+                    source: package.json
+              resources:
+                - docker
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks update_package_json
+      - test:
+          clean_workspace: true
+          jobs:
+            test:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: update
+                    job: update_package_json
+                    source: package.json
+                    is_file: yes
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-test
+      - test_e2e:
+          clean_workspace: true
+          jobs:
+            test:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: update
+                    job: update_package_json
+                    source: package.json
+                    is_file: yes
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-get-stubs
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-build dev
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dojo-test-e2e
+      - audit:
+          clean_workspace: true
+          jobs:
+            audit:
+              resources:
+                - docker
+              tasks:
+                - fetch:
+                    stage: update
+                    job: update_package_json
+                    source: package.json
+                    is_file: yes
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks dep

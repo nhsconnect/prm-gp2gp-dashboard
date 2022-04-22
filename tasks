@@ -116,6 +116,9 @@ case "${task}" in
   dojo-dep)
       dojo "./tasks dep"
       ;;
+  update_package_json)
+      dojo "npx npm-check-updates -u"
+      ;;
   *)
       echo "Invalid command: '${task}'"
       exit 1
