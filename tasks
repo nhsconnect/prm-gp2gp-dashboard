@@ -91,6 +91,14 @@ case "${task}" in
   dojo-test-e2e)
       dojo "./tasks test-e2e"
       ;;
+  canary-build)
+      setup_env ${deployment_env}
+      npm i --production -y
+      npm run build:ci
+      ;;
+  canary-dojo-build)
+      dojo "./tasks canary-build ${deployment_env}"
+      ;;
   build)
       setup_env ${deployment_env}
       npm ci --production -y

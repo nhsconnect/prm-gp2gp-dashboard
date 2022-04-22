@@ -41,7 +41,7 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-test
+                      - ./tasks canary-dojo-test
       - test_e2e:
           clean_workspace: true
           jobs:
@@ -63,12 +63,12 @@ pipelines:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-build dev
+                      - ./tasks canary-dojo-build dev
                 - exec:
                     command: /bin/bash
                     arguments:
                       - -c
-                      - ./tasks dojo-test-e2e
+                      - ./tasks canary-dojo-test-e2e
       - audit:
           clean_workspace: true
           jobs:
