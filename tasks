@@ -62,14 +62,14 @@ function setup_env {
 
 case "${task}" in
   canary-test)
-      npm ci -i
+      npm i
       npm run test
       ;;
   canary-dojo-test)
       dojo "./tasks canary-test"
       ;;
   canary-test-e2e)
-      npm ci -i
+      npm i
       npm run e2e:install
       npm run test:e2e:built
       ;;
