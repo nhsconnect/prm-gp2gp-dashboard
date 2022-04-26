@@ -17,6 +17,7 @@ public
 
 # IntelliJ directory
 .idea/
+*.iml
 
 # Organisation data
 src/data/organisations/
