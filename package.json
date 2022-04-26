@@ -107,7 +107,6 @@
     "ws": "^8.5.0",
     "pac-resolver": "^5.0.0",
     "immer": "^9.0.6",
-    "ansi-regex": "^5.0.1",
     "node-fetch": "^2.6.7"
   }
 }
