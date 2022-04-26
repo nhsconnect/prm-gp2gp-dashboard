@@ -11,7 +11,6 @@ pipelines:
     stages:
       - update:
           clean_workspace: true
-          approval: manual
           jobs:
             update_package_json:
               artifacts:

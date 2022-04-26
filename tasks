@@ -140,7 +140,7 @@ case "${task}" in
       dojo "./tasks dep"
       ;;
   update_package_json)
-      dojo "npx npm-check-updates -u"
+      dojo "npx npm-check-updates -u --target minor"
       ;;
   *)
       echo "Invalid command: '${task}'"
