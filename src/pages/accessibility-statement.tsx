@@ -68,7 +68,7 @@ const AccessibilityStatement: FC = () => {
           The ability to search for a practice or a CCG does not work without
           JavaScript, however an A-Z list of CCGs is available to browse. The
           download data functionality does not work without JavaScript. However,
-          you can request a copy of the data by contacting
+          you can request a copy of the data by contacting{" "}
           <a
             href={`mailto:gp-registrations-data@nhs.net?body=${encodeURIComponent(
               content.emailBody
