@@ -102,7 +102,7 @@ describe("CCG Integration Times page", () => {
           "Test GP Practice With Some Integrations - A12347"
         );
         cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
-          "Test GP Practice With No Integrations - A12346"
+          "Test GP Practice With An Integration - Z12347"
         );
 
         cy.contains("Sort by");
@@ -132,15 +132,15 @@ describe("CCG Integration Times page", () => {
         cy.contains("Requesting practice name");
 
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
-          "Test GP Practice With No Integrations - A12346"
+          "Test GP Practice With An Integration - Z12347"
         );
         cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
           "Test GP Practice With Some Integrations - A12347"
         );
 
-        cy.contains("a", "Test GP Practice With No Integrations - A12346")
+        cy.contains("a", "Test GP Practice With An Integration - Z12347")
           .should("have.attr", "href")
-          .and("contains", "practice/A12346");
+          .and("contains", "practice/Z12347");
       });
 
       it("display percentages on practice performance table, change to numbers when selected", () => {

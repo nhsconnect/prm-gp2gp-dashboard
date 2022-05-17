@@ -16,11 +16,11 @@ const practiceWithIntegrations = {
   },
 };
 
-const practiceWithNoIntegrations = {
+const practiceWithAnIntegration = {
   Organisation: {
-    Name: "Test GP Practice With no Integrations",
+    Name: "Test GP Practice With An Integration",
     OrgId: {
-      extension: "A12346",
+      extension: "Z12347",
     },
     GeoLoc: {
       Location: {
@@ -54,5 +54,5 @@ const practiceWithSomeIntegrations = {
 module.exports = {
   practiceWithIntegrations,
   practiceWithSomeIntegrations,
-  practiceWithNoIntegrations,
+  practiceWithAnIntegration,
 };

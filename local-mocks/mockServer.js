@@ -2,7 +2,7 @@ const jsonServer = require("json-server");
 const {
   practiceWithIntegrations,
   practiceWithSomeIntegrations,
-  practiceWithNoIntegrations,
+  practiceWithAnIntegration,
 } = require("./mocks");
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
@@ -19,8 +19,8 @@ server.get("/ORD/2-0-0/organisations/A12347", (request, response) => {
   return response.send(practiceWithSomeIntegrations);
 });
 
-server.get("/ORD/2-0-0/organisations/A12346", (request, response) => {
-  return response.send(practiceWithNoIntegrations);
+server.get("/ORD/2-0-0/organisations/Z12347", (request, response) => {
+  return response.send(practiceWithAnIntegration);
 });
 
 server.listen(port, () => {
