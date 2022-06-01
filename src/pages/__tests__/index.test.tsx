@@ -80,9 +80,7 @@ describe("Homepage", () => {
       name: "What this data can’t tell you",
       level: 2,
     });
-    const sectionText = getByText(
-      /registrations to and from the armed forces or justice system/
-    );
+    const sectionText = getByText(/registrations to and from the armed forces/);
 
     expect(sectionHeading).toBeInTheDocument();
     expect(sectionText).toBeInTheDocument();

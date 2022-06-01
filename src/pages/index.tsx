@@ -54,9 +54,7 @@ const Index: FC = () => {
             registrations that are not eligible for GP2GP. For example:
             <ul>
               <li>the previous practice was in Wales or Scotland</li>
-              <li>
-                registrations to and from the armed forces or justice system
-              </li>
+              <li>registrations to and from the armed forces</li>
               <li>there is no previous practice registered, for any reason</li>
             </ul>
           </li>
