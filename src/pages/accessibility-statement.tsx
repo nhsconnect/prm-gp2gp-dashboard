@@ -18,13 +18,9 @@ const AccessibilityStatement: FC = () => {
         <h2>How you can use this website</h2>
         <p>
           This accessibility statement is for the GP Registrations data website
-          (
-          <a href="https://gp-registrations-data.nhs.uk">
-            gp-registrations-data.nhs.uk
-          </a>
-          ) only. It does not cover any other subsites or any websites linked
-          from this one. Those sites will have their own accessibility
-          statements.
+          (<a href="/">gp-registrations-data.nhs.uk</a>) only. It does not cover
+          any other subsites or any websites linked from this one. Those sites
+          will have their own accessibility statements.
         </p>
         <p>On this website, you should be able to:</p>
         <ul>

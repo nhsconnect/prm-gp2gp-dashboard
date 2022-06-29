@@ -14,7 +14,7 @@ const NotFound: FC = () => {
       <h1>Page not found.</h1>
       <p>
         This page may have been moved. You can find ICBs and practices using the{" "}
-        <a href="https://gp-registrations-data.nhs.uk">Homepage - search</a>.
+        <a href="/">Homepage - search</a>.
       </p>
     </>
   );
