@@ -8,11 +8,14 @@ const NotFound: FC = () => {
         <title>Page not found.</title>
         <meta
           name="description"
-          content="The page you are looking for on GP Registrations Data cannot be found."
+          content="This page may have been moved. You can find ICBs and practices using the Homepage - search."
         />
       </Helmet>
       <h1>Page not found.</h1>
-      <p>If you entered a web address please check it was correct.</p>
+      <p>
+        This page may have been moved. You can find ICBs and practices using the{" "}
+        <a href="https://gp-registrations-data.nhs.uk">Homepage - search</a>.
+      </p>
     </>
   );
 };
