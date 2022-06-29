@@ -30,18 +30,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   practices.forEach((practice) => {
     createPage({
-      path: `/practice/${practice.odsCode}`,
-      component: path.resolve(
-        "src/templates/RedirectNotice/Practice/index.tsx"
-      ),
-      context: {
-        odsCode: practice.odsCode,
-        name: practice.name,
-        layout: "general",
-      },
-    });
-
-    createPage({
       path: `/practice/${practice.odsCode}/integration-times`,
       component: path.resolve(
         "src/templates/IntegrationTimes/PracticeIntegrationTimes/index.tsx"
@@ -79,16 +67,6 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   ccgs.forEach((ccg) => {
-    createPage({
-      path: `/ccg/${ccg.odsCode}`,
-      component: path.resolve("src/templates/RedirectNotice/Ccg/index.tsx"),
-      context: {
-        odsCode: ccg.odsCode,
-        name: ccg.name,
-        layout: "general",
-      },
-    });
-
     createPage({
       path: `/ccg/${ccg.odsCode}/integration-times`,
       component: path.resolve(

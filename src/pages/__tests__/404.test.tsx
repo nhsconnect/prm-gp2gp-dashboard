@@ -9,7 +9,7 @@ describe("404 NotFound Page", () => {
     await waitFor(() => {
       expect(document.title).toEqual("Page not found.");
       expect(getMeta("description")).toEqual(
-        "The page you are looking for on GP Registrations Data cannot be found."
+        "This page may have been moved. You can find ICBs and practices using the Homepage - search."
       );
     });
   });
