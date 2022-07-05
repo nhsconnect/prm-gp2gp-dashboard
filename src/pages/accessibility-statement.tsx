@@ -61,8 +61,8 @@ const AccessibilityStatement: FC = () => {
           <li>Dragon (speech recognition)</li>
         </ul>
         <p>
-          The ability to search for a practice or a CCG does not work without
-          JavaScript, however an A-Z list of CCGs is available to browse. The
+          The ability to search for a practice or a ICB does not work without
+          JavaScript, however an A-Z list of ICBs is available to browse. The
           download data functionality does not work without JavaScript. However,
           you can request a copy of the data by contacting{" "}
           <a
@@ -72,7 +72,7 @@ const AccessibilityStatement: FC = () => {
           >
             gp-registrations-data@nhs.net
           </a>
-          . Sorting functionality on the CCG and practice pages will not work
+          . Sorting functionality on the ICB and practice pages will not work
           without JavaScript.
         </p>
         <p>

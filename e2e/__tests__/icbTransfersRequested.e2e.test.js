@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe("CCG Transfers Requested page", () => {
+describe("ICB Transfers Requested page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
@@ -9,15 +9,15 @@ describe("CCG Transfers Requested page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual CCG integration times page, navigates to CCG transfers requested page via contents menu and goes back to home page", () => {
+      it("searches, navigates to an individual ICB integration times page, navigates to ICB transfers requested page via contents menu and goes back to home page", () => {
         cy.findByLabelText(
-          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-        ).type("Test CCG 10D");
-        cy.contains("li", "Test CCG").parent().parent().click();
+          "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
+        ).type("Test ICB 10D");
+        cy.contains("li", "Test ICB").parent().parent().click();
 
         cy.contains("button", "Search").click();
 
-        cy.contains("h1", "Test CCG - 10D");
+        cy.contains("h1", "Test ICB - 10D");
 
         cy.contains("h2", "Contents");
         cy.contains("li", "Integration times");
@@ -35,11 +35,11 @@ describe("CCG Transfers Requested page", () => {
           "GP2GP transfers requested for registering practices"
         );
 
-        cy.title().should("eq", "Test CCG - 10D - GP Registrations Data");
+        cy.title().should("eq", "Test ICB - 10D - GP Registrations Data");
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+          "Monthly data about GP2GP transfers for practices within this integrated care board"
         );
 
         cy.contains("What happens when a GP2GP transfer fails?").click();
@@ -106,8 +106,8 @@ describe("CCG Transfers Requested page", () => {
       });
 
       it("sort practice performance table and link to the individual practices", () => {
-        cy.visit("/ccg/11D/gp2gp-transfers-requested");
-        cy.contains("h1", "Another Test CCG - 11D");
+        cy.visit("/icb/11D/gp2gp-transfers-requested");
+        cy.contains("h1", "Another Test ICB - 11D");
 
         cy.contains("Requesting practice name");
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
@@ -158,8 +158,8 @@ describe("CCG Transfers Requested page", () => {
       });
 
       it("display percentages on practice performance table, change to numbers when selected", () => {
-        cy.visit("/ccg/11D/gp2gp-transfers-requested");
-        cy.contains("h1", "Another Test CCG - 11D");
+        cy.visit("/icb/11D/gp2gp-transfers-requested");
+        cy.contains("h1", "Another Test ICB - 11D");
 
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
@@ -178,7 +178,7 @@ describe("CCG Transfers Requested page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/ccg/11D/gp2gp-transfers-requested");
+        cy.visit("/icb/11D/gp2gp-transfers-requested");
         cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

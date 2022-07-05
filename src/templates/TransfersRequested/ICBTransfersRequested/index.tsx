@@ -17,25 +17,25 @@ import {
 import practiceTableContent from "../../../data/content/practiceTransfersRequestedSortOptions.json";
 import "../../index.scss";
 import { graphql } from "gatsby";
-import { CcgDataType } from "../../../library/types/queryResults.types";
-import { CcgPracticeType } from "../../../library/types/practice.types";
+import { ICBDataType } from "../../../library/types/queryResults.types";
+import { ICBPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
-  ccgOdsCode: string;
+  icbOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
-type CcgProps = {
+type ICBProps = {
   pageContext: PageContext;
-  data: CcgDataType;
+  data: ICBDataType;
 };
 
-const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
-  const ccgPractices =
+const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
+  const icbPractices =
     data.allFile.edges[0].node.childOrganisationsJson.practices;
-  const { name, odsCode: ccgOdsCode } =
-    data.allFile.edges[0].node.childOrganisationsJson.ccgs[0];
+  const { name, odsCode: icbOdsCode } =
+    data.allFile.edges[0].node.childOrganisationsJson.icbs[0];
 
   const { dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(name);
@@ -45,30 +45,30 @@ const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
   const contentListItems = [
     {
       text: "Integration times",
-      href: `/ccg/${ccgOdsCode}/integration-times`,
+      href: `/icb/${icbOdsCode}/integration-times`,
     },
     {
       text: "GP2GP transfers requested",
     },
     {
       text: "Download data",
-      href: `/ccg/${ccgOdsCode}/download-data`,
+      href: `/icb/${icbOdsCode}/download-data`,
     },
   ];
 
   return (
     <>
       <Helmet>
-        <title>{`${formattedName} - ${ccgOdsCode} - GP Registrations Data`}</title>
+        <title>{`${formattedName} - ${icbOdsCode} - GP Registrations Data`}</title>
         <meta
           name="description"
-          content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+          content="Monthly data about GP2GP transfers for practices within this integrated care board"
         />
         <noscript>{`<style>.gp2gp-sort, .gp2gp-tabs, .gp2gp-open-modal-btn {display: none}</style>`}</noscript>
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-          {formattedName ? `${formattedName} - ${ccgOdsCode}` : ccgOdsCode}
+          {formattedName ? `${formattedName} - ${icbOdsCode}` : icbOdsCode}
           <span className="nhsuk-u-visually-hidden">
             {" "}
             GP2GP transfers requested
@@ -101,7 +101,7 @@ const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
           dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <PracticeTableWithSort
-              ccgPractices={ccgPractices}
+              icbPractices={icbPractices}
               headers={[
                 { title: "Registering practice name " },
                 {
@@ -160,15 +160,15 @@ const CcgTransfersRequested: FC<CcgProps> = ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query CcgTransfersRequestedQuery($ccgOdsCode: String) {
+  query ICBTransfersRequestedQuery($icbOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            ccgs(ccgOdsCode: $ccgOdsCode) {
-              ...CcgQueryFragment
+            icbs(icbOdsCode: $icbOdsCode) {
+              ...ICBQueryFragment
             }
-            practices(ccgOdsCode: $ccgOdsCode) {
+            practices(icbOdsCode: $icbOdsCode) {
               ...PracticeTransfersRequestedFragment
             }
           }
@@ -178,4 +178,4 @@ export const query = graphql`
   }
 `;
 
-export default CcgTransfersRequested;
+export default ICBTransfersRequested;

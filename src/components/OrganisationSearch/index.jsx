@@ -40,7 +40,7 @@ export const OrganisationSearch = () => {
                   name
                   odsCode
                 }
-                ccgs {
+                icbs {
                   name
                   odsCode
                 }
@@ -55,12 +55,12 @@ export const OrganisationSearch = () => {
   const [practiceSearch] = useState(() =>
     initializeSearch(data.practices, "practice")
   );
-  const [ccgSearch] = useState(() => initializeSearch(data.ccgs, "ccg"));
+  const [icbSearch] = useState(() => initializeSearch(data.icbs, "icb"));
 
   const findSuggestions = (value) => [
     {
-      title: "Clinical Commissioning Group",
-      organisations: ccgSearch.search(value, 50),
+      title: "Integrated Care Board",
+      organisations: icbSearch.search(value, 50),
     },
     {
       title: "GP practice",

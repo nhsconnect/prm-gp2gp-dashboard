@@ -8,8 +8,8 @@ import { addPercentageSign } from "../../addPercentageSign";
 import { transformMetricsInCsvString } from "../transformMetricsInCsvString";
 
 function getTransfersRequestedRowValues(
-  ccgName: string,
-  ccgOdsCode: string,
+  icbName: string,
+  icbOdsCode: string,
   name: string,
   odsCode: string,
   month: number,
@@ -17,8 +17,8 @@ function getTransfersRequestedRowValues(
   requestedTransfers: RequestedTransfersType
 ) {
   return {
-    [TransfersRequestedRowHeadings.CCG_NAME]: `"${ccgName}"`,
-    [TransfersRequestedRowHeadings.CCG_ODS]: ccgOdsCode,
+    [TransfersRequestedRowHeadings.ICB_NAME]: `"${icbName}"`,
+    [TransfersRequestedRowHeadings.ICB_ODS]: icbOdsCode,
     [TransfersRequestedRowHeadings.REQUESTING_PRACTICE_NAME]: `"${name}"`,
     [TransfersRequestedRowHeadings.PRACTICE_ODS]: odsCode,
     [TransfersRequestedRowHeadings.MONTH_AND_YEAR]:
@@ -37,11 +37,11 @@ function getTransfersRequestedRowValues(
 }
 
 export function getTransfersRequestedCsv(
-  ccgPractices: PracticeType[],
+  icbPractices: PracticeType[],
   timeframe: string
 ) {
   return transformMetricsInCsvString(
-    ccgPractices,
+    icbPractices,
     timeframe,
     getTransfersRequestedRowValues
   );

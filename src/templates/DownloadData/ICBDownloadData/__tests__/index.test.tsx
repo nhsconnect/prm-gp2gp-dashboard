@@ -2,12 +2,12 @@ import React from "react";
 
 import { render } from "@testing-library/react";
 
-import CcgDownloadData from "../index";
+import ICBDownloadData from "../index";
 import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
 jest.mock("no-scroll");
 
-function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
+function queryResult(name: string = "BURTON ICB", odsCode: string = "12A") {
   return {
     allFile: {
       edges: [
@@ -15,7 +15,7 @@ function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
           node: {
             childOrganisationsJson: {
               practices: practiceMetricsMock,
-              ccgs: [
+              icbs: [
                 {
                   name: name,
                   odsCode: odsCode,
@@ -29,54 +29,54 @@ function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
   };
 }
 
-describe("CCGDownloadData template", () => {
-  const pipelineCCGData = {
-    ccgOdsCode: "12A",
+describe("ICBDownloadData template", () => {
+  const pipelineICBData = {
+    icbOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const ccgWithoutNameData = {
-      ccgOdsCode: odsCode,
+    const icbWithoutNameData = {
+      icbOdsCode: odsCode,
       layout: "general",
       dataUpdatedDate: "",
     };
 
     const { getByRole } = render(
-      <CcgDownloadData
-        pageContext={ccgWithoutNameData}
+      <ICBDownloadData
+        pageContext={icbWithoutNameData}
         data={queryResult("", odsCode)}
       />
     );
 
-    const expectedCcgHeading = getByRole("heading", {
+    const expectedICBHeading = getByRole("heading", {
       name: "Y00159 download data",
       level: 1,
     });
 
-    expect(expectedCcgHeading).toBeInTheDocument();
+    expect(expectedICBHeading).toBeInTheDocument();
   });
 
-  it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = "Burton CCG - 12A download data";
+  it("renders ICB name and ODS code title correctly", () => {
+    const icbHeadingText = "Burton ICB - 12A download data";
 
     const { getByRole } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
+      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
     );
 
-    const expectedCcgHeading = getByRole("heading", {
-      name: ccgHeadingText,
+    const expectedICBHeading = getByRole("heading", {
+      name: icbHeadingText,
       level: 1,
     });
 
-    expect(expectedCcgHeading).toBeInTheDocument();
+    expect(expectedICBHeading).toBeInTheDocument();
   });
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
+      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
     );
 
     const pageTitle = getByRole("heading", {
@@ -89,11 +89,11 @@ describe("CCGDownloadData template", () => {
 
   it("renders page description correctly", () => {
     const { getByText } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
+      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
     );
 
     const pageDescription = getByText(
-      /To download data for this CCG in CSV format/
+      /To download data for this ICB in CSV format/
     );
 
     expect(pageDescription).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe("CCGDownloadData template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <CcgDownloadData pageContext={pipelineCCGData} data={queryResult()} />
+      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
     );
 
     const contentsHeader = getByRole("heading", {

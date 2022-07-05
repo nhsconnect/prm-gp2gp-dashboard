@@ -1,6 +1,6 @@
 {
-  "inputLabel": "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name",
-  "inputErrorMessage": "Please enter a valid ODS code, practice name or CCG name",
+  "inputLabel": "Enter an ODS code, practice name or Integrated Care Board (ICB) name",
+  "inputErrorMessage": "Please enter a valid ODS code, practice name or ICB name",
   "buttonLabel": "Search",
   "heading": "Search"
 }

@@ -8,8 +8,8 @@ import { addPercentageSign } from "../../addPercentageSign";
 import { transformMetricsInCsvString } from "../transformMetricsInCsvString";
 
 function getIntegrationTimesRowValues(
-  ccgName: string,
-  ccgOdsCode: string,
+  icbName: string,
+  icbOdsCode: string,
   name: string,
   odsCode: string,
   month: number,
@@ -17,8 +17,8 @@ function getIntegrationTimesRowValues(
   requestedTransfers: RequestedTransfersType
 ) {
   return {
-    [IntegrationRowHeadings.CCG_NAME]: `"${ccgName}"`,
-    [IntegrationRowHeadings.CCG_ODS]: ccgOdsCode,
+    [IntegrationRowHeadings.ICB_NAME]: `"${icbName}"`,
+    [IntegrationRowHeadings.ICB_ODS]: icbOdsCode,
     [IntegrationRowHeadings.REQUESTING_PRACTICE_NAME]: `"${name}"`,
     [IntegrationRowHeadings.PRACTICE_ODS]: odsCode,
     [IntegrationRowHeadings.MONTH_AND_YEAR]:
@@ -47,11 +47,11 @@ function getIntegrationTimesRowValues(
 }
 
 export function getIntegrationTimesCsv(
-  ccgPractices: PracticeType[],
+  icbPractices: PracticeType[],
   timeframe: string
 ) {
   return transformMetricsInCsvString(
-    ccgPractices,
+    icbPractices,
     timeframe,
     getIntegrationTimesRowValues
   );

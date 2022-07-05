@@ -1,7 +1,7 @@
 import { graphql } from "gatsby";
 
-export const ccgQueryFragment = graphql`
-  fragment CcgQueryFragment on OrganisationsJsonCcgs {
+export const icbQueryFragment = graphql`
+  fragment ICBQueryFragment on OrganisationsJsonIcbs {
     name
     odsCode
   }
@@ -11,8 +11,8 @@ export const practiceOrganisationMetadataFragment = graphql`
   fragment PracticeOrganisationMetadataFragment on OrganisationsJsonPractices {
     name
     odsCode
-    ccgName
-    ccgOdsCode
+    icbName
+    icbOdsCode
   }
 `;
 

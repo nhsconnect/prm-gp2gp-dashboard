@@ -12,8 +12,8 @@ import { addPercentageSign } from "../../addPercentageSign";
 import { transformMetricsInCsvString } from "../transformMetricsInCsvString";
 
 function getAllDataRowValues(
-  ccgName: string,
-  ccgOdsCode: string,
+  icbName: string,
+  icbOdsCode: string,
   name: string,
   odsCode: string,
   month: number,
@@ -21,8 +21,8 @@ function getAllDataRowValues(
   requestedTransfers: RequestedTransfersType
 ) {
   return {
-    [AllCSVHeadings.CCG_NAME]: `"${ccgName}"`,
-    [AllCSVHeadings.CCG_ODS]: ccgOdsCode,
+    [AllCSVHeadings.ICB_NAME]: `"${icbName}"`,
+    [AllCSVHeadings.ICB_ODS]: icbOdsCode,
     [AllCSVHeadings.REQUESTING_PRACTICE_NAME]: `"${name}"`,
     [AllCSVHeadings.PRACTICE_ODS]: odsCode,
     [AllCSVHeadings.MONTH_AND_YEAR]:
@@ -64,9 +64,9 @@ function getAllDataRowValues(
   };
 }
 
-export function getAllDataCsv(ccgPractices: PracticeType[], timeframe: string) {
+export function getAllDataCsv(icbPractices: PracticeType[], timeframe: string) {
   return transformMetricsInCsvString(
-    ccgPractices,
+    icbPractices,
     timeframe,
     getAllDataRowValues
   );

@@ -12,8 +12,8 @@ const filterMetricsByMonth = (
 ) => metrics.filter((metric) => metric.month === month && metric.year === year);
 
 type GetRowValuesType = (
-  ccgName: string,
-  ccgOdsCode: string,
+  icbName: string,
+  icbOdsCode: string,
   name: string,
   odsCode: string,
   month: number,
@@ -22,21 +22,21 @@ type GetRowValuesType = (
 ) => {};
 
 export function transformMetricsInCsvString(
-  ccgPractices: PracticeType[],
+  icbPractices: PracticeType[],
   timeframe: string,
   getRowValues: GetRowValuesType
 ) {
-  return ccgPractices.reduce((acc: string[], practice: PracticeType) => {
+  return icbPractices.reduce((acc: string[], practice: PracticeType) => {
     const allMetrics = practice.metrics;
-    const { year: latestYear, month: latestMonth } = ccgPractices[0].metrics[0];
+    const { year: latestYear, month: latestMonth } = icbPractices[0].metrics[0];
     const metrics =
       timeframe === TimeframeOptions.LatestMonth
         ? filterMetricsByMonth(allMetrics, latestMonth, latestYear)
         : allMetrics;
     const rows = metrics.map((metric: PracticeMetricsType) => {
       const row = getRowValues(
-        practice.ccgName,
-        practice.ccgOdsCode,
+        practice.icbName,
+        practice.icbOdsCode,
         practice.name,
         practice.odsCode,
         metric.month,

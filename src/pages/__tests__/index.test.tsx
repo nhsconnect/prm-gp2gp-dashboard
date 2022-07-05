@@ -16,9 +16,9 @@ describe("Homepage", () => {
                   { odsCode: "A12345", name: "Test Practice" },
                   { odsCode: "X99999", name: "Second Practice" },
                 ],
-                ccgs: [
-                  { odsCode: "12A", name: "Test CCG" },
-                  { odsCode: "13B", name: "Second CCG" },
+                icbs: [
+                  { odsCode: "12A", name: "Test ICB" },
+                  { odsCode: "13B", name: "Second ICB" },
                 ],
               },
             },

@@ -2,26 +2,26 @@ import React, { FC, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
 import { sortOrganisationsAlphabetically } from "../../library/utils/sortOrganisationsAlphabetically";
-import { AlphabeticalCcgList } from "../AlphabeticalCcgList";
+import { AlphabeticalICBList } from "../AlphabeticalIcbList";
 import { AlphabeticalNav } from "../AlphabeticalNav";
-import ccgDirectoryContent from "../../data/content/ccgDirectory.json";
+import icbDirectoryContent from "../../data/content/icbDirectory.json";
 import "./index.scss";
 
-type CcgDirectoryProps = {
+type ICBDirectoryProps = {
   headingPriority: number;
 };
 
-export const CcgDirectory: FC<CcgDirectoryProps> = ({ headingPriority }) => {
+export const ICBDirectory: FC<ICBDirectoryProps> = ({ headingPriority }) => {
   const CustomHeadingTag = `h${headingPriority}` as keyof JSX.IntrinsicElements;
 
-  const ccgs = useStaticQuery(
+  const icbs = useStaticQuery(
     graphql`
       query {
         allFile(filter: { name: { eq: "practiceMetrics" } }) {
           edges {
             node {
               childOrganisationsJson {
-                ccgs {
+                icbs {
                   name
                   odsCode
                 }
@@ -31,17 +31,17 @@ export const CcgDirectory: FC<CcgDirectoryProps> = ({ headingPriority }) => {
         }
       }
     `
-  ).allFile.edges[0].node.childOrganisationsJson.ccgs;
+  ).allFile.edges[0].node.childOrganisationsJson.icbs;
 
-  const [sortedCcgs] = useState(() => sortOrganisationsAlphabetically(ccgs));
+  const [sortedICBs] = useState(() => sortOrganisationsAlphabetically(icbs));
 
   return (
     <>
       <CustomHeadingTag className="nhsuk-u-margin-top-5">
-        {ccgDirectoryContent.heading}
+        {icbDirectoryContent.heading}
       </CustomHeadingTag>
-      <AlphabeticalNav sortedItems={sortedCcgs} />
-      <AlphabeticalCcgList sortedCcgs={sortedCcgs} />
+      <AlphabeticalNav sortedItems={sortedICBs} />
+      <AlphabeticalICBList sortedICBs={sortedICBs} />
     </>
   );
 };

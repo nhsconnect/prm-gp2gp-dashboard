@@ -75,9 +75,8 @@ const YourPrivacy: FC = () => {
         <h2>Data sharing</h2>
         <p>
           NHS Digital may share anonymous information on how the service is used
-          with the Department of Health and Social Care, NHS England, clinical
-          commissioning groups (CCGs), and the National Clinical Governance
-          Group.
+          with the Department of Health and Social Care, NHS England, Integrated
+          Care Boards (ICBs), and the National Clinical Governance Group.
         </p>
         <h3>Legal powers</h3>
         <p>

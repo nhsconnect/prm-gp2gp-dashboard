@@ -36,7 +36,7 @@ describe("PracticeTableWithSort component", () => {
 
     const { getByText } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        icbPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         tableCaption={tableCaptionText}
@@ -55,7 +55,7 @@ describe("PracticeTableWithSort component", () => {
 
     const { getByText } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        icbPractices={practiceMetricsMock}
         headers={transfersRequestedTableHeaders}
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         tableCaption={tableCaptionText}
@@ -70,7 +70,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices ordered by GP2GP technical failures by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        icbPractices={practiceMetricsMock}
         headers={transfersRequestedTableHeaders}
         sortBySelect={practiceTransfersRequestedSortOptions.sortBySelect}
         tableCaption={"Some title"}
@@ -101,7 +101,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices ordered by Not integrated within 8 days Percentage SLA by default in descending order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        icbPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         tableCaption={"Some table title"}
@@ -134,7 +134,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices data for default first month, then the next month when selected, with sorting maintained", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={[
+        icbPractices={[
           practiceWithThreeMonthsMetrics,
           anotherPracticeWithThreeMonthsMetrics,
         ]}
@@ -169,7 +169,7 @@ describe("PracticeTableWithSort component", () => {
   it("displays practices data as percentages by default, then as numbers when selected and updates sort order", () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        icbPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         tableCaption={"Some table title"}
@@ -218,7 +218,7 @@ describe("PracticeTableWithSort component", () => {
   it("navigates to a practice page when a link is clicked", () => {
     const { getByRole } = render(
       <PracticeTableWithSort
-        ccgPractices={practiceMetricsMock}
+        icbPractices={practiceMetricsMock}
         headers={integrationTableHeaders}
         sortBySelect={practiceIntegrationSortOptions.sortBySelect}
         tableCaption={"Some table title"}
@@ -344,7 +344,7 @@ describe("PracticeTableWithSort component", () => {
       (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
-            ccgPractices={practiceMetricsMock}
+            icbPractices={practiceMetricsMock}
             headers={integrationTableHeaders}
             sortBySelect={practiceIntegrationSortOptions.sortBySelect}
             tableCaption={"Some table title"}

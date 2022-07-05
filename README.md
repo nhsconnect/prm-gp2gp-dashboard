@@ -23,7 +23,7 @@ GP2GP metrics JSON files are then required to build the dashboard. There are two
 2. Look inside `src/data/organisations` and there should be the following JSON files - nationalMetrics.json and practiceMetrics.json
 3. Run `npm run develop`
    - This will run a local mock server that will mock API calls made dynamically on page load.
-   - It will then build, with hot-reloading enabled and with test CCG and GP practices.
+   - It will then build, with hot-reloading enabled and with test ICB and GP practices.
    - E2E tests are configured to test against this stubbed data.
 
 #### Retrieving required JSON files from S3

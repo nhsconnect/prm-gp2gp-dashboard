@@ -1,4 +1,4 @@
-import { CcgType, PracticeType } from "./practice.types";
+import { ICBType, PracticeType } from "./practice.types";
 
 type ChildOrganisationsJsonType = {
   practices: PracticeType[];
@@ -19,21 +19,21 @@ export type PracticeDownloadDataType = {
   allFile: AllFileType;
 };
 
-type CcgChildOrganisationsJsonType = ChildOrganisationsJsonType & {
-  ccgs: CcgType[];
+type ICBChildOrganisationsJsonType = ChildOrganisationsJsonType & {
+  icbs: ICBType[];
 };
 
-type CcgNodeType = {
-  childOrganisationsJson: CcgChildOrganisationsJsonType;
+type ICBNodeType = {
+  childOrganisationsJson: ICBChildOrganisationsJsonType;
 };
-type CcgEdgesType = {
-  node: CcgNodeType;
-};
-
-type CcgAllFileType = {
-  edges: CcgEdgesType[];
+type ICBEdgesType = {
+  node: ICBNodeType;
 };
 
-export type CcgDownloadDataType = {
-  allFile: CcgAllFileType;
+type ICBAllFileType = {
+  edges: ICBEdgesType[];
+};
+
+export type ICBDownloadDataType = {
+  allFile: ICBAllFileType;
 };

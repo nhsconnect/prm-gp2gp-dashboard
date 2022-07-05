@@ -1,8 +1,8 @@
 export const practiceWithOneMonthMetrics = {
   odsCode: "A12345",
   name: "GP Practice",
-  ccgOdsCode: "11D",
-  ccgName: "Some CCG",
+  icbOdsCode: "11D",
+  icbName: "Some ICB",
   metrics: [
     {
       year: 2020,
@@ -27,8 +27,8 @@ export const practiceWithOneMonthMetrics = {
 export const practiceWithTwoMonths = {
   odsCode: "A12346",
   name: "Second GP Practice",
-  ccgOdsCode: "10E",
-  ccgName: "Another CCG",
+  icbOdsCode: "10E",
+  icbName: "Another ICB",
   metrics: [
     {
       year: 2020,
@@ -70,8 +70,8 @@ export const practiceWithTwoMonths = {
 export const practiceWithThreeMonthsMetrics = {
   odsCode: "B86030",
   name: "BURTON CROFT SURGERY",
-  ccgOdsCode: "11D",
-  ccgName: "Test ccg",
+  icbOdsCode: "11D",
+  icbName: "Test icb",
   metrics: [
     {
       year: 2019,
@@ -130,8 +130,8 @@ export const practiceWithThreeMonthsMetrics = {
 export const anotherPracticeWithThreeMonthsMetrics = {
   odsCode: "C123888",
   name: "ANOTHER CROFT SURGERY",
-  ccgOdsCode: "11D",
-  ccgName: "Test ccg",
+  icbOdsCode: "11D",
+  icbName: "Test icb",
   metrics: [
     {
       year: 2019,
@@ -190,8 +190,8 @@ export const anotherPracticeWithThreeMonthsMetrics = {
 export const practiceWithCommasInTheName = {
   odsCode: "A12345",
   name: "Dr GP1, Dr GP2, Practice",
-  ccgOdsCode: "11D",
-  ccgName: "Test, and test ccg",
+  icbOdsCode: "11D",
+  icbName: "Test, and test icb",
   metrics: [
     {
       year: 2020,
@@ -216,8 +216,8 @@ export const practiceWithCommasInTheName = {
 export const practiceWithNoName = {
   odsCode: "NONAME123",
   name: "",
-  ccgOdsCode: "11D",
-  ccgName: "Test, and test ccg",
+  icbOdsCode: "11D",
+  icbName: "Test, and test icb",
   metrics: [
     {
       year: 2020,

@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe("CCG Download Data page", () => {
+describe("ICB Download Data page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
@@ -9,15 +9,15 @@ describe("CCG Download Data page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual CCG integration times page, navigates to CCG download data page via contents menu and downloads CSV files", () => {
+      it("searches, navigates to an individual ICB integration times page, navigates to ICB download data page via contents menu and downloads CSV files", () => {
         cy.findByLabelText(
-          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
-        ).type("Test CCG 10D");
-        cy.contains("li", "Test CCG").parent().parent().click();
+          "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
+        ).type("Test ICB 10D");
+        cy.contains("li", "Test ICB").parent().parent().click();
 
         cy.contains("button", "Search").click();
 
-        cy.contains("h1", "Test CCG - 10D");
+        cy.contains("h1", "Test ICB - 10D");
 
         cy.contains("h2", "Contents");
         cy.contains("li", "Integration times");
@@ -26,15 +26,15 @@ describe("CCG Download Data page", () => {
 
         cy.contains("h2", "Download data");
 
-        cy.title().should("eq", "Test CCG - 10D - GP Registrations Data");
+        cy.title().should("eq", "Test ICB - 10D - GP Registrations Data");
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+          "Monthly data about GP2GP transfers for practices within this integrated care board"
         );
 
         cy.contains(
-          "To download data for this CCG in CSV format select from the options below"
+          "To download data for this ICB in CSV format select from the options below"
         );
 
         cy.get("[data-testid=gp2gp-download-data]").within(() => {
@@ -55,7 +55,7 @@ describe("CCG Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const transfersRequestedLatestMonth = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test CCG transfers-requested-latest-month.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB transfers-requested-latest-month.csv"
         );
         transfersRequestedLatestMonth.should(
           "contain",
@@ -70,7 +70,7 @@ describe("CCG Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const integrationTimesLast6Months = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test CCG integration-times-last-6-months.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB integration-times-last-6-months.csv"
         );
         integrationTimesLast6Months.should(
           "contain",
@@ -85,7 +85,7 @@ describe("CCG Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const allLast6Months = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test CCG all-last-6-months.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB all-last-6-months.csv"
         );
         allLast6Months.should(
           "contain",
@@ -101,7 +101,7 @@ describe("CCG Download Data page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/ccg/11D/download-data");
+        cy.visit("/icb/11D/download-data");
         cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

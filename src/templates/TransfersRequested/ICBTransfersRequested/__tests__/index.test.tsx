@@ -2,14 +2,14 @@ import React from "react";
 
 import { findByLabelText, render, within } from "@testing-library/react";
 
-import CcgTransfersRequested from "../index";
+import ICBTransfersRequested from "../index";
 import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
 import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");
 
-function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
+function queryResult(name: string = "BURTON ICB", odsCode: string = "12A") {
   return {
     allFile: {
       edges: [
@@ -17,7 +17,7 @@ function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
           node: {
             childOrganisationsJson: {
               practices: practiceMetricsMock,
-              ccgs: [
+              icbs: [
                 {
                   name: name,
                   odsCode: odsCode,
@@ -31,58 +31,58 @@ function queryResult(name: string = "BURTON CCG", odsCode: string = "12A") {
   };
 }
 
-describe("CCG Transfers Requested template", () => {
-  const pipelineCCGData = {
-    ccgOdsCode: "12A",
+describe("ICB Transfers Requested template", () => {
+  const pipelineICBData = {
+    icbOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const ccgWithoutNameData = {
-      ccgOdsCode: odsCode,
+    const icbWithoutNameData = {
+      icbOdsCode: odsCode,
       layout: "general",
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
     };
 
     const { getByRole } = render(
-      <CcgTransfersRequested
-        pageContext={ccgWithoutNameData}
+      <ICBTransfersRequested
+        pageContext={icbWithoutNameData}
         data={queryResult("", odsCode)}
       />
     );
 
-    const expectedCcgHeading = getByRole("heading", {
+    const expectedICBHeading = getByRole("heading", {
       name: "Y00159 GP2GP transfers requested",
       level: 1,
     });
 
-    expect(expectedCcgHeading).toBeInTheDocument();
+    expect(expectedICBHeading).toBeInTheDocument();
   });
 
-  it("renders CCG name and ODS code title correctly", () => {
-    const ccgHeadingText = "Burton CCG - 12A GP2GP transfers requested";
+  it("renders ICB name and ODS code title correctly", () => {
+    const icbHeadingText = "Burton ICB - 12A GP2GP transfers requested";
 
     const { getByRole } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
 
-    const expectedCcgHeading = getByRole("heading", {
-      name: ccgHeadingText,
+    const expectedICBHeading = getByRole("heading", {
+      name: icbHeadingText,
       level: 1,
     });
 
-    expect(expectedCcgHeading).toBeInTheDocument();
+    expect(expectedICBHeading).toBeInTheDocument();
   });
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -97,8 +97,8 @@ describe("CCG Transfers Requested template", () => {
 
   it("renders table caption correctly", () => {
     const { getByText } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -112,8 +112,8 @@ describe("CCG Transfers Requested template", () => {
 
   it("renders page description correctly", () => {
     const { getByText } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -134,8 +134,8 @@ describe("CCG Transfers Requested template", () => {
       queryAllByText,
       getByRole,
     } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -170,8 +170,8 @@ describe("CCG Transfers Requested template", () => {
 
   it("displays help icons for all relevant headers", () => {
     const { getAllByRole } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -196,8 +196,8 @@ describe("CCG Transfers Requested template", () => {
 
   it("labels modal with content title", async () => {
     const { getByRole, findByLabelText } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -215,13 +215,13 @@ describe("CCG Transfers Requested template", () => {
     expect(within8DaysModal).toBeInTheDocument();
   });
 
-  it("displays CCG practices and hides about and definitions content", () => {
+  it("displays ICB practices and hides about and definitions content", () => {
     const definitionsText =
       "Percentage of GP2GP transfers between the 1st and last day of the month that were successfully received by the registering practice.";
 
     const { getByText, queryByText, getAllByRole } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );
@@ -251,8 +251,8 @@ describe("CCG Transfers Requested template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <CcgTransfersRequested
-        pageContext={pipelineCCGData}
+      <ICBTransfersRequested
+        pageContext={pipelineICBData}
         data={queryResult()}
       />
     );

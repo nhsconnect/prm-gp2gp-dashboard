@@ -14,7 +14,7 @@ describe("Home page", () => {
         cy.contains("h2", "About");
         cy.contains("h2", "Search");
         cy.findByLabelText(
-          "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name"
+          "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
         );
         cy.contains("button", "Search");
         cy.contains("h2", "What you can find out");
@@ -24,7 +24,7 @@ describe("Home page", () => {
 
       it("displays the validation error when there is no input", () => {
         cy.contains("button", "Search").click();
-        cy.contains("Please enter a valid ODS code, practice name or CCG name");
+        cy.contains("Please enter a valid ODS code, practice name or ICB name");
         cy.checkAccessibility();
       });
 

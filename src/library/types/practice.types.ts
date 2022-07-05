@@ -42,18 +42,18 @@ export type PracticeMetricsType = {
 export type PracticeType = {
   odsCode: string;
   name: string;
-  ccgOdsCode: string;
-  ccgName: string;
+  icbOdsCode: string;
+  icbName: string;
   metrics: PracticeMetricsType[];
 };
 
-export type CcgPracticeType = {
+export type ICBPracticeType = {
   odsCode: string;
   name: string;
   metrics: PracticeMetricsType[];
 };
 
-export type CcgType = {
+export type ICBType = {
   name: string;
   odsCode: string;
 };

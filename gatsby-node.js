@@ -9,7 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             childOrganisationsJson {
-              ccgs {
+              icbs {
                 odsCode
                 name
               }
@@ -25,7 +25,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  const { practices, ccgs, generatedOn } =
+  const { practices, icbs, generatedOn } =
     pageData.data.allFile.edges[0].node.childOrganisationsJson;
 
   practices.forEach((practice) => {
@@ -66,38 +66,38 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  ccgs.forEach((ccg) => {
+  icbs.forEach((icb) => {
     createPage({
-      path: `/ccg/${ccg.odsCode}/integration-times`,
+      path: `/icb/${icb.odsCode}/integration-times`,
       component: path.resolve(
-        "src/templates/IntegrationTimes/CcgIntegrationTimes/index.tsx"
+        "src/templates/IntegrationTimes/ICBIntegrationTimes/index.tsx"
       ),
       context: {
-        ccgOdsCode: ccg.odsCode,
+        icbOdsCode: icb.odsCode,
         dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
 
     createPage({
-      path: `/ccg/${ccg.odsCode}/gp2gp-transfers-requested`,
+      path: `/icb/${icb.odsCode}/gp2gp-transfers-requested`,
       component: path.resolve(
-        "src/templates/TransfersRequested/CcgTransfersRequested/index.tsx"
+        "src/templates/TransfersRequested/ICBTransfersRequested/index.tsx"
       ),
       context: {
-        ccgOdsCode: ccg.odsCode,
+        icbOdsCode: icb.odsCode,
         dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
 
     createPage({
-      path: `/ccg/${ccg.odsCode}/download-data`,
+      path: `/icb/${icb.odsCode}/download-data`,
       component: path.resolve(
-        "src/templates/DownloadData/CcgDownloadData/index.tsx"
+        "src/templates/DownloadData/ICBDownloadData/index.tsx"
       ),
       context: {
-        ccgOdsCode: ccg.odsCode,
+        icbOdsCode: icb.odsCode,
         layout: "navigation-contents",
         dataUpdatedDate: generatedOn,
       },
@@ -124,9 +124,9 @@ function practiceResolver(args, practices) {
     return practices.filter(
       (practice) => practice.odsCode === args.practiceOdsCode
     );
-  if (args.ccgOdsCode) {
+  if (args.icbOdsCode) {
     return practices.filter(
-      (practice) => practice.ccgOdsCode === args.ccgOdsCode
+      (practice) => practice.icbOdsCode === args.icbOdsCode
     );
   }
   return practices;
@@ -137,22 +137,22 @@ exports.createResolvers = ({ createResolvers }) => {
     OrganisationsJson: {
       practices: {
         type: ["OrganisationsJsonPractices"],
-        args: { practiceOdsCode: "String", ccgOdsCode: "String" },
+        args: { practiceOdsCode: "String", icbOdsCode: "String" },
         resolve: async (root, args, context, info) => {
           const practices =
             (await info.originalResolver(root, args, context, info)) || [];
           return practiceResolver(args, practices);
         },
       },
-      ccgs: {
-        type: ["OrganisationsJsonCcgs"],
-        args: { ccgOdsCode: "String" },
+      icbs: {
+        type: ["OrganisationsJsonIcbs"],
+        args: { icbOdsCode: "String" },
         resolve: async (root, args, context, info) => {
-          const ccgs =
+          const icbs =
             (await info.originalResolver(root, args, context, info)) || [];
-          return args.ccgOdsCode
-            ? ccgs.filter((ccg) => ccg.odsCode === args.ccgOdsCode)
-            : ccgs;
+          return args.icbOdsCode
+            ? icbs.filter((icb) => icb.odsCode === args.icbOdsCode)
+            : icbs;
         },
       },
     },

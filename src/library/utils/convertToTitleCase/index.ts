@@ -1,7 +1,7 @@
 import capitalize from "lodash/capitalize";
 
 export const convertToTitleCase = (string: string): string => {
-  const acronyms = ["NHS", "CCG", "GP"];
+  const acronyms = ["NHS", "ICB", "GP"];
 
   return string
     .split(" ")

@@ -8,9 +8,9 @@ describe("OrganisationSearch component", () => {
   const validPracticeOdsCode = "A12345";
   const validPracticeName = "Test Practice";
   const inputLabelText =
-    "Enter an ODS code, practice name or Clinical Commissioning Group (CCG) name";
-  const validCCGOdsCode = "12A";
-  const validCCGName = "Test CCG";
+    "Enter an ODS code, practice name or Integrated Care Board (ICB) name";
+  const validICBOdsCode = "12A";
+  const validICBName = "Test ICB";
 
   beforeAll(() => {
     const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
@@ -24,9 +24,9 @@ describe("OrganisationSearch component", () => {
                   { odsCode: "A12345", name: "Test Practice" },
                   { odsCode: "X99999", name: "Second Practice" },
                 ],
-                ccgs: [
-                  { odsCode: "12A", name: "Test CCG" },
-                  { odsCode: "13B", name: "Second CCG" },
+                icbs: [
+                  { odsCode: "12A", name: "Test ICB" },
+                  { odsCode: "13B", name: "Second ICB" },
                 ],
               },
             },
@@ -112,16 +112,16 @@ describe("OrganisationSearch component", () => {
     });
   });
 
-  describe("navigation to CCG page", () => {
+  describe("navigation to ICB page", () => {
     it("when searching for and selecting an ods code", async () => {
       const { getByLabelText, getByText, getByRole } = render(
         <OrganisationSearch />
       );
 
       const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validCCGOdsCode);
+      await userEvent.type(input, validICBOdsCode);
 
-      const suggestion = getByText(`${validCCGName} -`);
+      const suggestion = getByText(`${validICBName} -`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -129,19 +129,19 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/ccg/${validCCGOdsCode}/integration-times`
+        `/icb/${validICBOdsCode}/integration-times`
       );
     });
 
-    it("on existing CCG name input", async () => {
+    it("on existing ICB name input", async () => {
       const { getByLabelText, getByText, getByRole } = render(
         <OrganisationSearch />
       );
 
       const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validCCGName);
+      await userEvent.type(input, validICBName);
 
-      const suggestion = getByText(`- ${validCCGOdsCode}`);
+      const suggestion = getByText(`- ${validICBOdsCode}`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
@@ -149,7 +149,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/ccg/${validCCGOdsCode}/integration-times`
+        `/icb/${validICBOdsCode}/integration-times`
       );
     });
 
@@ -157,14 +157,14 @@ describe("OrganisationSearch component", () => {
       const { getByLabelText, getByRole } = render(<OrganisationSearch />);
 
       const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validCCGOdsCode);
+      await userEvent.type(input, validICBOdsCode);
 
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/ccg/${validCCGOdsCode}/integration-times`
+        `/icb/${validICBOdsCode}/integration-times`
       );
     });
 
@@ -179,7 +179,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        "/ccg/13B/integration-times"
+        "/icb/13B/integration-times"
       );
     });
   });
@@ -201,7 +201,7 @@ describe("OrganisationSearch component", () => {
     userEvent.click(submitButton);
 
     expect(
-      getByText("Please enter a valid ODS code, practice name or CCG name")
+      getByText("Please enter a valid ODS code, practice name or ICB name")
     ).toBeInTheDocument();
     expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
   });
@@ -218,7 +218,7 @@ describe("OrganisationSearch component", () => {
     userEvent.click(submitButton);
 
     expect(
-      getByText("Please enter a valid ODS code, practice name or CCG name")
+      getByText("Please enter a valid ODS code, practice name or ICB name")
     ).toBeInTheDocument();
     expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
   });

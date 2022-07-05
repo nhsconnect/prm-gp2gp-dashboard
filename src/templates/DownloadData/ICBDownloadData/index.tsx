@@ -5,35 +5,35 @@ import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
 import { graphql } from "gatsby";
-import { CcgDownloadDataType } from "../../../library/types/queryResultDownloadData.types";
+import { ICBDownloadDataType } from "../../../library/types/queryResultDownloadData.types";
 
 type PageContext = {
-  ccgOdsCode: string;
+  icbOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
-type CcgProps = {
+type ICBProps = {
   pageContext: PageContext;
-  data: CcgDownloadDataType;
+  data: ICBDownloadDataType;
 };
 
-const CcgDownloadData: FC<CcgProps> = ({ data, pageContext }) => {
-  const ccgPractices =
+const ICBDownloadData: FC<ICBProps> = ({ data, pageContext }) => {
+  const icbPractices =
     data.allFile.edges[0].node.childOrganisationsJson.practices;
-  const { name: ccgName, odsCode: ccgOdsCode } =
-    data.allFile.edges[0].node.childOrganisationsJson.ccgs[0];
+  const { name: icbName, odsCode: icbOdsCode } =
+    data.allFile.edges[0].node.childOrganisationsJson.icbs[0];
 
   const { dataUpdatedDate } = pageContext;
-  const formattedName: string = convertToTitleCase(ccgName);
+  const formattedName: string = convertToTitleCase(icbName);
   const contentListItems = [
     {
       text: "Integration times",
-      href: `/ccg/${ccgOdsCode}/integration-times`,
+      href: `/icb/${icbOdsCode}/integration-times`,
     },
     {
       text: "GP2GP transfers requested",
-      href: `/ccg/${ccgOdsCode}/gp2gp-transfers-requested`,
+      href: `/icb/${icbOdsCode}/gp2gp-transfers-requested`,
     },
     {
       text: "Download data",
@@ -43,16 +43,16 @@ const CcgDownloadData: FC<CcgProps> = ({ data, pageContext }) => {
   return (
     <>
       <Helmet>
-        <title>{`${formattedName} - ${ccgOdsCode} - GP Registrations Data`}</title>
+        <title>{`${formattedName} - ${icbOdsCode} - GP Registrations Data`}</title>
         <meta
           name="description"
-          content="Monthly data about GP2GP transfers for practices within this clinical commissioning group"
+          content="Monthly data about GP2GP transfers for practices within this integrated care board"
         />
         <noscript>{`<style>.gp2gp-download-data {display: none}</style>`}</noscript>
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-          {formattedName ? `${formattedName} - ${ccgOdsCode}` : ccgOdsCode}
+          {formattedName ? `${formattedName} - ${icbOdsCode}` : icbOdsCode}
           <span className="nhsuk-u-visually-hidden"> download data</span>
         </h1>
         <div className="gp2gp-side-nav">
@@ -61,9 +61,9 @@ const CcgDownloadData: FC<CcgProps> = ({ data, pageContext }) => {
         <DownloadData
           className="gp2gp-page-contents"
           dataFor={formattedName}
-          data={ccgPractices}
+          data={icbPractices}
           pageDescription={
-            "To download data for this CCG in CSV format select from the options below and click 'Download'."
+            "To download data for this ICB in CSV format select from the options below and click 'Download'."
           }
           dataUpdatedDate={dataUpdatedDate}
         />
@@ -73,15 +73,15 @@ const CcgDownloadData: FC<CcgProps> = ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query CcgDownloadDataQuery($ccgOdsCode: String) {
+  query ICBDownloadDataQuery($icbOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            ccgs(ccgOdsCode: $ccgOdsCode) {
-              ...CcgQueryFragment
+            icbs(icbOdsCode: $icbOdsCode) {
+              ...ICBQueryFragment
             }
-            practices(ccgOdsCode: $ccgOdsCode) {
+            practices(icbOdsCode: $icbOdsCode) {
               ...PracticeDownloadFragment
             }
           }
@@ -91,4 +91,4 @@ export const query = graphql`
   }
 `;
 
-export default CcgDownloadData;
+export default ICBDownloadData;
