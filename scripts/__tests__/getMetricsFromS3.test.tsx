@@ -25,7 +25,7 @@ describe("getMetricsFromS3", () => {
     expect(getS3data).toHaveBeenCalledWith(
       {
         Bucket: "prm-gp2gp-metrics-TEST_ENV",
-        Key: `v11/someValue`,
+        Key: `v12/someValue`,
       },
       "src/data/organisations/practiceMetrics.json"
     );
