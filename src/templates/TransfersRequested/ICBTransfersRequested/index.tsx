@@ -18,7 +18,6 @@ import practiceTableContent from "../../../data/content/practiceTransfersRequest
 import "../../index.scss";
 import { graphql } from "gatsby";
 import { ICBDataType } from "../../../library/types/queryResults.types";
-import { ICBPracticeType } from "../../../library/types/practice.types";
 
 type PageContext = {
   icbOdsCode: string;
@@ -59,7 +58,7 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
   return (
     <>
       <Helmet>
-        <title>{`${formattedName} - ${icbOdsCode} - GP Registrations Data`}</title>
+        <title>{`${formattedName} - GP Registrations Data`}</title>
         <meta
           name="description"
           content="Monthly data about GP2GP transfers for practices within this integrated care board"
@@ -68,7 +67,7 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-          {formattedName ? `${formattedName} - ${icbOdsCode}` : icbOdsCode}
+          {formattedName ? formattedName : icbOdsCode}
           <span className="nhsuk-u-visually-hidden">
             {" "}
             GP2GP transfers requested

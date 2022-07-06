@@ -17,8 +17,8 @@ describe("Homepage", () => {
                   { odsCode: "X99999", name: "Second Practice" },
                 ],
                 icbs: [
-                  { odsCode: "12A", name: "Test ICB" },
-                  { odsCode: "13B", name: "Second ICB" },
+                  { odsCode: "12A", name: "Test ICB - 12A" },
+                  { odsCode: "13B", name: "Second ICB - 13B" },
                 ],
               },
             },

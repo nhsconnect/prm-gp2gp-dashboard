@@ -14,9 +14,9 @@ describe("getIntegrationTimesCsv", () => {
       TimeframeOptions.Last6Months
     );
     const expected = [
-      '"Some ICB",11D,"GP Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
-      '"Another ICB",10E,"Second GP Practice",A12346,February 2020,22,5,22.7%,6,27.3%,11,50%',
-      '"Another ICB",10E,"Second GP Practice",A12346,January 2020,22,5,22.7%,6,27.3%,11,50%',
+      '"Some ICB - 11D",11D,"GP Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
+      '"Another ICB - 10E",10E,"Second GP Practice",A12346,February 2020,22,5,22.7%,6,27.3%,11,50%',
+      '"Another ICB - 10E",10E,"Second GP Practice",A12346,January 2020,22,5,22.7%,6,27.3%,11,50%',
     ];
 
     expect(actual).toEqual(expected);
@@ -29,8 +29,8 @@ describe("getIntegrationTimesCsv", () => {
       TimeframeOptions.LatestMonth
     );
     const expected = [
-      '"Some ICB",11D,"GP Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
-      '"Another ICB",10E,"Second GP Practice",A12346,February 2020,22,5,22.7%,6,27.3%,11,50%',
+      '"Some ICB - 11D",11D,"GP Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
+      '"Another ICB - 10E",10E,"Second GP Practice",A12346,February 2020,22,5,22.7%,6,27.3%,11,50%',
     ];
 
     expect(actual).toEqual(expected);
@@ -43,7 +43,7 @@ describe("getIntegrationTimesCsv", () => {
       TimeframeOptions.LatestMonth
     );
     const expected = [
-      '"Test, and test icb",11D,"Dr GP1, Dr GP2, Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
+      '"Test, and test icb - 11D",11D,"Dr GP1, Dr GP2, Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
     ];
 
     expect(actual).toEqual(expected);

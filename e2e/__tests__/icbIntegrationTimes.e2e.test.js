@@ -12,8 +12,8 @@ describe("ICB Integration Times page", () => {
       it("searches, navigates to an individual ICB integration times page and goes back to home page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
-        ).type("Test ICB 10D");
-        cy.contains("li", "Test ICB").parent().parent().click();
+        ).type("Test ICB - 10D");
+        cy.contains("li", "Test ICB - 10D").parent().parent().click();
 
         cy.contains("button", "Search").click();
 

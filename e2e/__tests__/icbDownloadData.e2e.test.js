@@ -13,7 +13,7 @@ describe("ICB Download Data page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
         ).type("Test ICB 10D");
-        cy.contains("li", "Test ICB").parent().parent().click();
+        cy.contains("li", "Test icb - 10D").parent().parent().click();
 
         cy.contains("button", "Search").click();
 

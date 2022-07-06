@@ -6,9 +6,9 @@ import { AlphabeticalICBList } from "../";
 describe("AlphabeticalICBList component", () => {
   const alphabetisedICBs = new Map();
   alphabetisedICBs.set("N", [
-    { odsCode: "14A", name: "NINE ICB" },
-    { odsCode: "17A", name: "NO ICB" },
-    { odsCode: "6A", name: "NORTH ICB" },
+    { odsCode: "14A", name: "NINE ICB - 14A" },
+    { odsCode: "17A", name: "NO ICB - 17A" },
+    { odsCode: "6A", name: "NORTH ICB - 6A" },
   ]);
 
   it("displays icbs under correct letter", () => {
@@ -43,9 +43,9 @@ describe("AlphabeticalICBList component", () => {
 
   it("has a back to top link for each letter", () => {
     const alphabetisedICBs2 = new Map();
-    alphabetisedICBs2.set("E", [{ odsCode: "13A", name: "EAST ICB" }]);
-    alphabetisedICBs2.set("N", [{ odsCode: "14A", name: "NORTH ICB" }]);
-    alphabetisedICBs2.set("W", [{ odsCode: "8A", name: "WEST ICB" }]);
+    alphabetisedICBs2.set("E", [{ odsCode: "13A", name: "EAST ICB - 13A" }]);
+    alphabetisedICBs2.set("N", [{ odsCode: "14A", name: "NORTH ICB - 14A" }]);
+    alphabetisedICBs2.set("W", [{ odsCode: "8A", name: "WEST ICB - 8A" }]);
 
     const { getAllByRole } = render(
       <AlphabeticalICBList sortedICBs={alphabetisedICBs2} />

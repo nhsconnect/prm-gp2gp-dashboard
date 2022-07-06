@@ -14,9 +14,9 @@ describe("ICBDirectory component", () => {
             node: {
               childOrganisationsJson: {
                 icbs: [
-                  { odsCode: "1A", name: "WING ICB" },
-                  { odsCode: "3A", name: "NHS WEST ICB" },
-                  { odsCode: "15A", name: "SOUTH ICB" },
+                  { odsCode: "1A", name: "WING ICB - 1A" },
+                  { odsCode: "3A", name: "NHS WEST ICB - 3A" },
+                  { odsCode: "15A", name: "SOUTH ICB - 15A" },
                 ],
               },
             },

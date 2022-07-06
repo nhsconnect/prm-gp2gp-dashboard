@@ -9,7 +9,10 @@ import userEvent from "@testing-library/user-event";
 
 jest.mock("no-scroll");
 
-function queryResult(name: string = "BURTON ICB", odsCode: string = "12A") {
+function queryResult(
+  name: string = "BURTON ICB - 12A",
+  odsCode: string = "12A"
+) {
   return {
     allFile: {
       edges: [

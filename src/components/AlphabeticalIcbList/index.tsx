@@ -28,7 +28,9 @@ export const AlphabeticalICBList: FC<AlphabeticalICBProps> = ({
                     <Link
                       to={`/icb/${icb.odsCode}/integration-times`}
                       className="gp2gp-list-panel__link"
-                    >{`${convertToTitleCase(icb.name)} - ${icb.odsCode}`}</Link>
+                    >
+                      {convertToTitleCase(icb.name)}
+                    </Link>
                   </li>
                 ))}
               </ul>

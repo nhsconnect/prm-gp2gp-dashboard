@@ -5,7 +5,7 @@ import { AlphabeticalNav } from "../";
 
 describe("AlphabeticalNav component", () => {
   const alphabetisedItems = new Map();
-  alphabetisedItems.set("N", [{ odsCode: "14A", name: "NORTH ICB" }]);
+  alphabetisedItems.set("N", [{ odsCode: "14A", name: "NORTH ICB - 14A" }]);
 
   it("displays all letters in the alphabet", () => {
     const { getAllByRole } = render(

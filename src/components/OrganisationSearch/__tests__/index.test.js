@@ -10,6 +10,7 @@ describe("OrganisationSearch component", () => {
   const inputLabelText =
     "Enter an ODS code, practice name or Integrated Care Board (ICB) name";
   const validICBOdsCode = "12A";
+  //TODO: Update when removing duplicate ODS from search
   const validICBName = "Test ICB";
 
   beforeAll(() => {
@@ -25,8 +26,8 @@ describe("OrganisationSearch component", () => {
                   { odsCode: "X99999", name: "Second Practice" },
                 ],
                 icbs: [
-                  { odsCode: "12A", name: "Test ICB" },
-                  { odsCode: "13B", name: "Second ICB" },
+                  { odsCode: "12A", name: "Test ICB - 12A" },
+                  { odsCode: "13B", name: "Second ICB - 13B" },
                 ],
               },
             },
@@ -121,27 +122,8 @@ describe("OrganisationSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validICBOdsCode);
 
+      //TODO: Update when removing duplicate ODS from search
       const suggestion = getByText(`${validICBName} -`);
-      userEvent.click(suggestion);
-
-      const submitButton = getByRole("button", { name: "Search" });
-      userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/icb/${validICBOdsCode}/integration-times`
-      );
-    });
-
-    it("on existing ICB name input", async () => {
-      const { getByLabelText, getByText, getByRole } = render(
-        <OrganisationSearch />
-      );
-
-      const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validICBName);
-
-      const suggestion = getByText(`- ${validICBOdsCode}`);
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
