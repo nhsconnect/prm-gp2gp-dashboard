@@ -14,7 +14,7 @@ export const convertToTitleCase = (string: string): string => {
       .split(" ")
       .map((word) => (["NHS", "ICB"].includes(word) ? word : capitalize(word)))
       .join(" ");
-    return `${icbNameWithoutOds} - ${icbOdsCode}`;
+    return `${icbNameWithoutOds} - ${icbOdsCode?.toUpperCase()}`;
   }
 
   return string

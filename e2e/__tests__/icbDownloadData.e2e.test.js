@@ -12,8 +12,8 @@ describe("ICB Download Data page", () => {
       it("searches, navigates to an individual ICB integration times page, navigates to ICB download data page via contents menu and downloads CSV files", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
-        ).type("Test ICB 10D");
-        cy.contains("li", "Test icb - 10D").parent().parent().click();
+        ).type("Test ICB");
+        cy.contains("li", "Test ICB - 10D").parent().parent().click();
 
         cy.contains("button", "Search").click();
 
@@ -55,7 +55,7 @@ describe("ICB Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const transfersRequestedLatestMonth = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test ICB transfers-requested-latest-month.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB  -  10D transfers-requested-latest-month.csv"
         );
         transfersRequestedLatestMonth.should(
           "contain",
@@ -70,7 +70,7 @@ describe("ICB Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const integrationTimesLast6Months = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test ICB integration-times-last-6-months.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB  -  10D integration-times-last-6-months.csv"
         );
         integrationTimesLast6Months.should(
           "contain",
@@ -85,7 +85,7 @@ describe("ICB Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const allLast6Months = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test ICB all-last-6-months.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB  -  10D all-last-6-months.csv"
         );
         allLast6Months.should(
           "contain",
