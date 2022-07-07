@@ -69,11 +69,19 @@ export const OrganisationSearch = () => {
   ];
 
   const getSuggestionListItemText = (suggestion) => {
+    if (suggestion.name.includes("ICB")) {
+      return convertToTitleCase(suggestion.name);
+    }
+
     return `${convertToTitleCase(suggestion.name)} - ${suggestion.odsCode}`;
   };
 
   const getFormattedSelectionText = (value) => {
     setSelectedOdsCode(value.odsCode);
+    if (value.name.includes("ICB")) {
+      return convertToTitleCase(value.name);
+    }
+
     return `${convertToTitleCase(value.name)} - ${value.odsCode}`;
   };
 
