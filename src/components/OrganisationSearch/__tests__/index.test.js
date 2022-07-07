@@ -10,8 +10,6 @@ describe("OrganisationSearch component", () => {
   const inputLabelText =
     "Enter an ODS code, practice name or Integrated Care Board (ICB) name";
   const validICBOdsCode = "12A";
-  //TODO: Update when removing duplicate ODS from search
-  const validICBName = "Test ICB";
 
   beforeAll(() => {
     const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
@@ -122,8 +120,8 @@ describe("OrganisationSearch component", () => {
       const input = getByLabelText(inputLabelText);
       await userEvent.type(input, validICBOdsCode);
 
-      //TODO: Update when removing duplicate ODS from search
-      const suggestion = getByText(`${validICBName} -`);
+      expect(getByText("12A")).toBeInTheDocument(); // expect to appear only once - from the name and not odsCode
+      const suggestion = getByText("Test ICB", { exact: false });
       userEvent.click(suggestion);
 
       const submitButton = getByRole("button", { name: "Search" });
