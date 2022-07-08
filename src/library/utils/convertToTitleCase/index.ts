@@ -1,24 +1,23 @@
 import capitalize from "lodash/capitalize";
 
 export const convertToTitleCase = (string: string): string => {
-  if (string.includes("ICB")) {
-    const icbName = string.split("-");
+  const ICB_SUFFIX = "ICB -";
+  if (string.includes(ICB_SUFFIX)) {
+    const icbName = string.split(ICB_SUFFIX);
+    const icbOdsCode = icbName.pop()?.toUpperCase();
+    const icbNameWithoutOds = capitaliseNonNHSAcronyms(icbName.toString());
 
-    if (icbName.length == 1) {
-      return string;
-    }
-
-    const icbOdsCode = icbName.pop();
-    const icbNameWithoutOds = icbName
-      .toString()
-      .split(" ")
-      .map((word) => (["NHS", "ICB"].includes(word) ? word : capitalize(word)))
-      .join(" ");
-    return `${icbNameWithoutOds} - ${icbOdsCode?.toUpperCase()}`;
+    return `${icbNameWithoutOds}${ICB_SUFFIX}${icbOdsCode}`;
   }
 
+  return capitaliseNonNHSAcronyms(string);
+};
+
+const capitaliseNonNHSAcronyms = (string: string): string => {
   return string
     .split(" ")
-    .map((word) => (["NHS", "GP"].includes(word) ? word : capitalize(word)))
+    .map((word) =>
+      ["NHS", "GP", "ICB"].includes(word) ? word : capitalize(word)
+    )
     .join(" ");
 };

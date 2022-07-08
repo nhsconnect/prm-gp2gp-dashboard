@@ -55,7 +55,7 @@ describe("ICB Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const transfersRequestedLatestMonth = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test ICB  -  10D transfers-requested-latest-month.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB - 10D transfers-requested-latest-month.csv"
         );
         transfersRequestedLatestMonth.should(
           "contain",
@@ -70,7 +70,7 @@ describe("ICB Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const integrationTimesLast6Months = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test ICB  -  10D integration-times-last-6-months.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB - 10D integration-times-last-6-months.csv"
         );
         integrationTimesLast6Months.should(
           "contain",
@@ -85,7 +85,7 @@ describe("ICB Download Data page", () => {
         cy.contains("button", "Download").click();
 
         const allLast6Months = cy.readFile(
-          "./e2e/downloads/GP Registrations Data Test ICB  -  10D all-last-6-months.csv"
+          "./e2e/downloads/GP Registrations Data Test ICB - 10D all-last-6-months.csv"
         );
         allLast6Months.should(
           "contain",
