@@ -17,7 +17,7 @@ describe("Practice transfers requested page", () => {
         );
 
         cy.findByLabelText(
-          "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
+          "Enter an ODS code, practice name or Sub ICB Location name"
         ).type("Test GP Practice With Some Integrations A12347");
         cy.contains("li", "Test GP Practice With Some Integrations")
           .parent()

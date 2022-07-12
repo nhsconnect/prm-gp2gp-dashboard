@@ -76,7 +76,7 @@ const YourPrivacy: FC = () => {
         <p>
           NHS Digital may share anonymous information on how the service is used
           with the Department of Health and Social Care, NHS England, Integrated
-          Care Boards (ICBs), and the National Clinical Governance Group.
+          Care Boards (SICBLs), and the National Clinical Governance Group.
         </p>
         <h3>Legal powers</h3>
         <p>

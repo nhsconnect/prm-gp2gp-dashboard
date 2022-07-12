@@ -1,6 +1,6 @@
 {
-  "inputLabel": "Enter an ODS code, practice name or Integrated Care Board (ICB) name",
-  "inputErrorMessage": "Please enter a valid ODS code, practice name or ICB name",
+  "inputLabel": "Enter an ODS code, practice name or Sub ICB Location name",
+  "inputErrorMessage": "Please enter a valid ODS code, practice name or Sub ICB Location name",
   "buttonLabel": "Search",
   "heading": "Search"
 }

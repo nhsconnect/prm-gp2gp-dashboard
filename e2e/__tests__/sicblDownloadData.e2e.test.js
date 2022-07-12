@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe("ICB Download Data page", () => {
+describe("SICBL Download Data page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
@@ -9,9 +9,9 @@ describe("ICB Download Data page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual ICB integration times page, navigates to ICB download data page via contents menu and downloads CSV files", () => {
+      it("searches, navigates to an individual SICBL integration times page, navigates to SICBL download data page via contents menu and downloads CSV files", () => {
         cy.findByLabelText(
-          "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
+          "Enter an ODS code, practice name or Sub ICB Location name"
         ).type("Test ICB");
         cy.contains("li", "Test ICB - 10D").parent().parent().click();
 
@@ -34,7 +34,7 @@ describe("ICB Download Data page", () => {
         );
 
         cy.contains(
-          "To download data for this ICB in CSV format select from the options below"
+          "To download data for this Sub ICB Location in CSV format select from the options below"
         );
 
         cy.get("[data-testid=gp2gp-download-data]").within(() => {
@@ -101,7 +101,7 @@ describe("ICB Download Data page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/icb/11D/download-data");
+        cy.visit("/sub-ICB-location/11D/download-data");
         cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

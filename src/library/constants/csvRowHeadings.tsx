@@ -1,6 +1,6 @@
 const baseHeadings = {
-  ICB_NAME: "ICB name",
-  ICB_ODS: "ICB ODS",
+  SICBL_NAME: "Sub ICB Location name",
+  SICBL_ODS: "Sub ICB Location ODS",
   REQUESTING_PRACTICE_NAME: "Requesting practice name",
   PRACTICE_ODS: "Practice ODS",
   MONTH_AND_YEAR: "Month",

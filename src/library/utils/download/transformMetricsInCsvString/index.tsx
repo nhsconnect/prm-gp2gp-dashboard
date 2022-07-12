@@ -12,8 +12,8 @@ const filterMetricsByMonth = (
 ) => metrics.filter((metric) => metric.month === month && metric.year === year);
 
 type GetRowValuesType = (
-  icbName: string,
-  icbOdsCode: string,
+  sicblName: string,
+  sicblOdsCode: string,
   name: string,
   odsCode: string,
   month: number,
@@ -22,21 +22,22 @@ type GetRowValuesType = (
 ) => {};
 
 export function transformMetricsInCsvString(
-  icbPractices: PracticeType[],
+  sicblPractices: PracticeType[],
   timeframe: string,
   getRowValues: GetRowValuesType
 ) {
-  return icbPractices.reduce((acc: string[], practice: PracticeType) => {
+  return sicblPractices.reduce((acc: string[], practice: PracticeType) => {
     const allMetrics = practice.metrics;
-    const { year: latestYear, month: latestMonth } = icbPractices[0].metrics[0];
+    const { year: latestYear, month: latestMonth } =
+      sicblPractices[0].metrics[0];
     const metrics =
       timeframe === TimeframeOptions.LatestMonth
         ? filterMetricsByMonth(allMetrics, latestMonth, latestYear)
         : allMetrics;
     const rows = metrics.map((metric: PracticeMetricsType) => {
       const row = getRowValues(
-        practice.icbName,
-        practice.icbOdsCode,
+        practice.sicblName,
+        practice.sicblOdsCode,
         practice.name,
         practice.odsCode,
         metric.month,

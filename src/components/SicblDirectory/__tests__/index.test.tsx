@@ -2,9 +2,9 @@ import React from "react";
 import { render } from "@testing-library/react";
 import * as Gatsby from "gatsby";
 
-import { ICBDirectory } from "../";
+import { SICBLDirectory } from "../";
 
-describe("ICBDirectory component", () => {
+describe("SICBLDirectory component", () => {
   beforeAll(() => {
     const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
     useStaticQuery.mockImplementation(() => ({
@@ -13,7 +13,7 @@ describe("ICBDirectory component", () => {
           {
             node: {
               childOrganisationsJson: {
-                icbs: [
+                sicbls: [
                   { odsCode: "1A", name: "WING ICB - 1A" },
                   { odsCode: "3A", name: "NHS WEST ICB - 3A" },
                   { odsCode: "15A", name: "SOUTH ICB - 15A" },
@@ -31,10 +31,10 @@ describe("ICBDirectory component", () => {
   });
 
   it("displays the relevant heading with correct priority for the page", () => {
-    const { getByRole } = render(<ICBDirectory headingPriority={1} />);
+    const { getByRole } = render(<SICBLDirectory headingPriority={1} />);
 
     const heading = getByRole("heading", {
-      name: "ICB A to Z",
+      name: "Sub ICB Location A to Z",
       level: 1,
     });
 
@@ -42,15 +42,15 @@ describe("ICBDirectory component", () => {
   });
 
   it("displays the navigation component for the page", () => {
-    const { getByRole } = render(<ICBDirectory headingPriority={1} />);
+    const { getByRole } = render(<SICBLDirectory headingPriority={1} />);
 
     const navigation = getByRole("navigation");
 
     expect(navigation).toBeInTheDocument();
   });
 
-  it("displays the nav letters and alphabetical ICB list in the correct order", () => {
-    const { getAllByRole } = render(<ICBDirectory headingPriority={1} />);
+  it("displays the nav letters and alphabetical SICBL list in the correct order", () => {
+    const { getAllByRole } = render(<SICBLDirectory headingPriority={1} />);
     const allLinks = getAllByRole("link");
     expect(allLinks[0]).toHaveTextContent("S");
     expect(allLinks[1]).toHaveTextContent("W");

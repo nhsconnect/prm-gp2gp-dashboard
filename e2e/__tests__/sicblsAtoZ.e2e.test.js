@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe("ICB A to Z page", () => {
+describe("Sub ICB Location A to Z page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
@@ -9,16 +9,19 @@ describe("ICB A to Z page", () => {
         cy.injectAxe();
       });
 
-      it("displays ICB A to Z page and navigates to a selected ICB", () => {
-        cy.contains("a", "ICB A to Z").click();
-        cy.contains("h1", "ICB A to Z");
+      it("displays Sub ICB Location A to Z page and navigates to a selected Sub ICB Locations", () => {
+        cy.contains("a", "Sub ICB Location A to Z").click();
+        cy.contains("h1", "Sub ICB Location A to Z");
         cy.checkAccessibility();
 
-        cy.title().should("eq", "ICB A to Z - GP Registrations Data");
+        cy.title().should(
+          "eq",
+          "Sub ICB Location A to Z - GP Registrations Data"
+        );
         cy.get('meta[name="description"]').should(
           "have.attr",
           "content",
-          "Alphabetical list of all ICBs in England"
+          "Alphabetical list of all Sub ICB Locations in England"
         );
 
         cy.contains("a", "T").click();
@@ -27,7 +30,7 @@ describe("ICB A to Z page", () => {
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/icbs");
+        cy.visit("/sub-ICB-locations");
         cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

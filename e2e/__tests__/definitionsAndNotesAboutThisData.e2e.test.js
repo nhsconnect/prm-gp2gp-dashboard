@@ -36,7 +36,7 @@ describe("Definitions and notes about this data page", () => {
       });
 
       it("navigates from download data page to definitions and notes page new a new tab", () => {
-        cy.visit("/icb/10D/download-data");
+        cy.visit("/sub-ICB-location/10D/download-data");
         cy.contains("h2", "Download data");
         cy.contains(
           "Definitions and notes about this data (opens in a new tab)"

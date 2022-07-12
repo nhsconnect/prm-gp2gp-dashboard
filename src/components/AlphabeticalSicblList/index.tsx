@@ -4,32 +4,32 @@ import "./index.scss";
 import UpArrow from "../../assets/upArrow.svg";
 
 import { convertToTitleCase } from "../../library/utils/convertToTitleCase";
-import icbDirectoryContent from "../../data/content/icbDirectory.json";
+import sicblDirectoryContent from "../../data/content/sicblDirectory.json";
 
-type AlphabeticalICBProps = {
-  sortedICBs: Map<string, { name: string; odsCode: string }[]>;
+type AlphabeticalSICBLProps = {
+  sortedSICBLs: Map<string, { name: string; odsCode: string }[]>;
 };
 
-export const AlphabeticalICBList: FC<AlphabeticalICBProps> = ({
-  sortedICBs,
+export const AlphabeticalSICBLList: FC<AlphabeticalSICBLProps> = ({
+  sortedSICBLs,
 }) => {
   return (
     <ol className="nhsuk-list">
-      {[...sortedICBs.entries()].map(
-        ([alphabetLetter, icbsBeginningWithLetter]) => (
+      {[...sortedSICBLs.entries()].map(
+        ([alphabetLetter, sicblsBeginningWithLetter]) => (
           <li key={alphabetLetter}>
             <div className="nhsuk-list-panel">
               <h2 className="nhsuk-list-panel__label" id={alphabetLetter}>
                 {alphabetLetter}
               </h2>
               <ul className="nhsuk-list-panel__list nhsuk-list-panel__list--with-label">
-                {icbsBeginningWithLetter.map((icb) => (
-                  <li className="nhsuk-list-panel__item" key={icb.odsCode}>
+                {sicblsBeginningWithLetter.map((sicbl) => (
+                  <li className="nhsuk-list-panel__item" key={sicbl.odsCode}>
                     <Link
-                      to={`/icb/${icb.odsCode}/integration-times`}
+                      to={`/sub-ICB-location/${sicbl.odsCode}/integration-times`}
                       className="gp2gp-list-panel__link"
                     >
-                      {convertToTitleCase(icb.name)}
+                      {convertToTitleCase(sicbl.name)}
                     </Link>
                   </li>
                 ))}
@@ -37,7 +37,7 @@ export const AlphabeticalICBList: FC<AlphabeticalICBProps> = ({
               <div className="nhsuk-back-to-top">
                 <Link to="#nhsuk-nav-a-z" className="nhsuk-back-to-top__link">
                   <UpArrow />
-                  {icbDirectoryContent.linkText}
+                  {sicblDirectoryContent.linkText}
                 </Link>
               </div>
             </div>

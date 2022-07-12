@@ -2,56 +2,58 @@ import React, { FC } from "react";
 import { Helmet } from "react-helmet";
 
 import { convertToTitleCase } from "../../../library/utils/convertToTitleCase";
-import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { PageContent } from "../../../components/PageContent";
 import { PracticeTableWithSort } from "../../../components/PracticeTableWithSort";
+import practiceTableContent from "../../../data/content/practiceIntegrationsSortOptions.json";
+
 import { HelpModal } from "../../../components/common/HelpModal";
-import { ContentsList } from "../../../components/common/ContentsList";
 import {
-  GP2GPTechnicalFailuresDefinition,
-  RegistrationsTriggeredByGP2GPDefinition,
-  TransfersReceivedPercentageDefinition,
-  TransfersRequestedDefinitionsContent,
-  WhatHappensWhenAGP2GPTransferFails,
+  IntegratedWithin3DaysDefinition,
+  IntegratedWithin8DaysDefinition,
+  IntegrationsDefinitionsContent,
+  NotIntegratedWithin8DaysDefinition,
+  TransfersReceivedDefinition,
+  WhyIntegrateWithin8Days,
 } from "../../../components/Definitions";
-import practiceTableContent from "../../../data/content/practiceTransfersRequestedSortOptions.json";
+import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
+import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 import { graphql } from "gatsby";
-import { ICBDataType } from "../../../library/types/queryResults.types";
+import { SICBLDataType } from "../../../library/types/queryResults.types";
 
 type PageContext = {
-  icbOdsCode: string;
+  sicblOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
-type ICBProps = {
+type SICBLProps = {
   pageContext: PageContext;
-  data: ICBDataType;
+  data: SICBLDataType;
 };
 
-const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
-  const icbPractices =
+const SICBLIntegrationTimes: FC<SICBLProps> = ({ data, pageContext }) => {
+  const sicblPractices =
     data.allFile.edges[0].node.childOrganisationsJson.practices;
-  const { name, odsCode: icbOdsCode } =
-    data.allFile.edges[0].node.childOrganisationsJson.icbs[0];
+  const { name, odsCode: sicblOdsCode } =
+    data.allFile.edges[0].node.childOrganisationsJson.sicbls[0];
 
   const { dataUpdatedDate } = pageContext;
   const formattedName: string = convertToTitleCase(name);
 
-  const pageTitle = `GP2GP transfers requested for registering practices`;
+  const pageTitle = `Integration times for registering practices`;
 
   const contentListItems = [
     {
       text: "Integration times",
-      href: `/icb/${icbOdsCode}/integration-times`,
     },
     {
       text: "GP2GP transfers requested",
+      href: `/sub-ICB-location/${sicblOdsCode}/gp2gp-transfers-requested`,
     },
     {
       text: "Download data",
-      href: `/icb/${icbOdsCode}/download-data`,
+      href: `/sub-ICB-location/${sicblOdsCode}/download-data`,
     },
   ];
 
@@ -67,11 +69,8 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-          {formattedName ? formattedName : icbOdsCode}
-          <span className="nhsuk-u-visually-hidden">
-            {" "}
-            GP2GP transfers requested
-          </span>
+          {formattedName ? formattedName : sicblOdsCode}
+          <span className="nhsuk-u-visually-hidden"> integration times</span>
         </h1>
         <div className="gp2gp-side-nav">
           <ContentsList items={contentListItems} />
@@ -80,41 +79,20 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
           className="gp2gp-page-contents"
           title={pageTitle}
           tableDescription={
-            <>
-              <p>The table below shows the</p>
-              <ul>
-                <li>number of registrations that triggered a GP2GP transfer</li>
-                <li>
-                  percentage of GP2GP transfers that were successfully received
-                </li>
-                <li>
-                  percentage of GP2GP transfers that failed for a technical
-                  reason
-                </li>
-              </ul>
-            </>
+            <p>
+              The table below shows the integration times for GP2GP transfers
+              received.
+            </p>
           }
-          expanderTitle="What happens when a GP2GP transfer fails?"
-          expanderContent={<WhatHappensWhenAGP2GPTransferFails />}
-          definitionsContent={<TransfersRequestedDefinitionsContent />}
+          expanderTitle="Why integrate within 8 days?"
+          expanderContent={<WhyIntegrateWithin8Days />}
+          definitionsContent={<IntegrationsDefinitionsContent />}
           dataUpdatedDate={dataUpdatedDate}
           tableContent={
             <PracticeTableWithSort
-              icbPractices={icbPractices}
+              sicblPractices={sicblPractices}
               headers={[
                 { title: "Registering practice name " },
-                {
-                  title: "Registrations that triggered GP2GP transfer ",
-                  extra: (
-                    <HelpModal
-                      ariaLabelledBy="triggered-transfers-modal-title"
-                      iconHiddenDescription="Open modal with definition"
-                      content={
-                        <RegistrationsTriggeredByGP2GPDefinition ariaLabelId="triggered-transfers-modal-title" />
-                      }
-                    />
-                  ),
-                },
                 {
                   title: "GP2GP transfers received ",
                   extra: (
@@ -122,7 +100,31 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
                       ariaLabelledBy="transfers-received-modal-title"
                       iconHiddenDescription="Open modal with definition"
                       content={
-                        <TransfersReceivedPercentageDefinition ariaLabelId="transfers-received-modal-title" />
+                        <TransfersReceivedDefinition ariaLabelId="transfers-received-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "Integrated within 3 days ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="integrated-within-3-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <IntegratedWithin3DaysDefinition ariaLabelId="integrated-within-3-days-modal-title" />
+                      }
+                    />
+                  ),
+                },
+                {
+                  title: "Integrated within 8 days ",
+                  extra: (
+                    <HelpModal
+                      ariaLabelledBy="integrated-within-8-days-modal-title"
+                      iconHiddenDescription="Open modal with definition"
+                      content={
+                        <IntegratedWithin8DaysDefinition ariaLabelId="integrated-within-8-days-modal-title" />
                       }
                     />
                   ),
@@ -130,7 +132,7 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
                 {
                   title: (
                     <>
-                      GP2GP technical failures{" "}
+                      Not integrated within 8 days{" "}
                       <div className="gp2gp-title-emphasis">
                         (paper copy requested){" "}
                       </div>
@@ -138,16 +140,19 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
                   ),
                   extra: (
                     <HelpModal
-                      ariaLabelledBy="technical-failures-modal-title"
+                      ariaLabelledBy="not-integrated-within-8-days-modal-title"
                       iconHiddenDescription="Open modal with definition"
                       content={
-                        <GP2GPTechnicalFailuresDefinition ariaLabelId="technical-failures-modal-title" />
+                        <>
+                          <NotIntegratedWithin8DaysDefinition ariaLabelId="not-integrated-within-8-days-modal-title" />
+                          <WhyIntegrateWithin8Days title="Why integrate within 8 days?" />
+                        </>
                       }
                     />
                   ),
                 },
               ]}
-              pageTemplatePath={PageTemplatePath.GP2GPTransfersRequested}
+              pageTemplatePath={PageTemplatePath.IntegrationTimes}
               sortBySelect={practiceTableContent.sortBySelect}
               tableCaption={pageTitle}
             />
@@ -159,16 +164,16 @@ const ICBTransfersRequested: FC<ICBProps> = ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query ICBTransfersRequestedQuery($icbOdsCode: String) {
+  query SICBLIntegrationTimesQuery($sicblOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            icbs(icbOdsCode: $icbOdsCode) {
-              ...ICBQueryFragment
+            sicbls(sicblOdsCode: $sicblOdsCode) {
+              ...SICBLQueryFragment
             }
-            practices(icbOdsCode: $icbOdsCode) {
-              ...PracticeTransfersRequestedFragment
+            practices(sicblOdsCode: $sicblOdsCode) {
+              ...PracticeIntegrationTimesFragment
             }
           }
         }
@@ -177,4 +182,4 @@ export const query = graphql`
   }
 `;
 
-export default ICBTransfersRequested;
+export default SICBLIntegrationTimes;

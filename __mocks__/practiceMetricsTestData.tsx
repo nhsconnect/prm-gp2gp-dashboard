@@ -1,8 +1,8 @@
 export const practiceWithOneMonthMetrics = {
   odsCode: "A12345",
   name: "GP Practice",
-  icbOdsCode: "11D",
-  icbName: "Some ICB - 11D",
+  sicblOdsCode: "11D",
+  sicblName: "Some ICB - 11D",
   metrics: [
     {
       year: 2020,
@@ -27,8 +27,8 @@ export const practiceWithOneMonthMetrics = {
 export const practiceWithTwoMonths = {
   odsCode: "A12346",
   name: "Second GP Practice",
-  icbOdsCode: "10E",
-  icbName: "Another ICB - 10E",
+  sicblOdsCode: "10E",
+  sicblName: "Another ICB - 10E",
   metrics: [
     {
       year: 2020,
@@ -70,8 +70,8 @@ export const practiceWithTwoMonths = {
 export const practiceWithThreeMonthsMetrics = {
   odsCode: "B86030",
   name: "BURTON CROFT SURGERY",
-  icbOdsCode: "11D",
-  icbName: "Test icb - 11D",
+  sicblOdsCode: "11D",
+  sicblName: "Test ICB - 11D",
   metrics: [
     {
       year: 2019,
@@ -130,8 +130,8 @@ export const practiceWithThreeMonthsMetrics = {
 export const anotherPracticeWithThreeMonthsMetrics = {
   odsCode: "C123888",
   name: "ANOTHER CROFT SURGERY",
-  icbOdsCode: "11D",
-  icbName: "Test icb - 11D",
+  sicblOdsCode: "11D",
+  sicblName: "Test ICB - 11D",
   metrics: [
     {
       year: 2019,
@@ -190,8 +190,8 @@ export const anotherPracticeWithThreeMonthsMetrics = {
 export const practiceWithCommasInTheName = {
   odsCode: "A12345",
   name: "Dr GP1, Dr GP2, Practice",
-  icbOdsCode: "11D",
-  icbName: "Test, and test icb - 11D",
+  sicblOdsCode: "11D",
+  sicblName: "Test, and test sicbl - 11D",
   metrics: [
     {
       year: 2020,
@@ -216,8 +216,8 @@ export const practiceWithCommasInTheName = {
 export const practiceWithNoName = {
   odsCode: "NONAME123",
   name: "",
-  icbOdsCode: "11D",
-  icbName: "Test, and test icb - 11D",
+  sicblOdsCode: "11D",
+  sicblName: "Test, and test sicbl - 11D",
   metrics: [
     {
       year: 2020,

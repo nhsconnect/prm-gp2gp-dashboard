@@ -8,8 +8,8 @@ describe("OrganisationSearch component", () => {
   const validPracticeOdsCode = "A12345";
   const validPracticeName = "Test Practice";
   const inputLabelText =
-    "Enter an ODS code, practice name or Integrated Care Board (ICB) name";
-  const validICBOdsCode = "12A";
+    "Enter an ODS code, practice name or Sub ICB Location name";
+  const validSICBLOdsCode = "12A";
 
   beforeAll(() => {
     const useStaticQuery = jest.spyOn(Gatsby, "useStaticQuery");
@@ -23,7 +23,7 @@ describe("OrganisationSearch component", () => {
                   { odsCode: "A12345", name: "Test Practice" },
                   { odsCode: "X99999", name: "Second Practice" },
                 ],
-                icbs: [
+                sicbls: [
                   { odsCode: "12A", name: "Test ICB - 12A" },
                   { odsCode: "13B", name: "Second ICB - 13B" },
                 ],
@@ -111,14 +111,14 @@ describe("OrganisationSearch component", () => {
     });
   });
 
-  describe("navigation to ICB page", () => {
+  describe("navigation to SICBL page", () => {
     it("when searching for and selecting an ods code", async () => {
       const { getByLabelText, getByText, getByRole } = render(
         <OrganisationSearch />
       );
 
       const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validICBOdsCode);
+      await userEvent.type(input, validSICBLOdsCode);
 
       expect(getByText("12A")).toBeInTheDocument(); // expect to appear only once - from the name and not odsCode
       const suggestion = getByText("Test ICB", { exact: false });
@@ -129,7 +129,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/icb/${validICBOdsCode}/integration-times`
+        `/sub-ICB-location/${validSICBLOdsCode}/integration-times`
       );
     });
 
@@ -137,14 +137,14 @@ describe("OrganisationSearch component", () => {
       const { getByLabelText, getByRole } = render(<OrganisationSearch />);
 
       const input = getByLabelText(inputLabelText);
-      await userEvent.type(input, validICBOdsCode);
+      await userEvent.type(input, validSICBLOdsCode);
 
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/icb/${validICBOdsCode}/integration-times`
+        `/sub-ICB-location/${validSICBLOdsCode}/integration-times`
       );
     });
 
@@ -159,7 +159,7 @@ describe("OrganisationSearch component", () => {
 
       expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
       expect(Gatsby.navigate).toHaveBeenCalledWith(
-        "/icb/13B/integration-times"
+        "/sub-ICB-location/13B/integration-times"
       );
     });
   });
@@ -181,7 +181,9 @@ describe("OrganisationSearch component", () => {
     userEvent.click(submitButton);
 
     expect(
-      getByText("Please enter a valid ODS code, practice name or ICB name")
+      getByText(
+        "Please enter a valid ODS code, practice name or Sub ICB Location name"
+      )
     ).toBeInTheDocument();
     expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
   });
@@ -198,7 +200,9 @@ describe("OrganisationSearch component", () => {
     userEvent.click(submitButton);
 
     expect(
-      getByText("Please enter a valid ODS code, practice name or ICB name")
+      getByText(
+        "Please enter a valid ODS code, practice name or Sub ICB Location name"
+      )
     ).toBeInTheDocument();
     expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
   });

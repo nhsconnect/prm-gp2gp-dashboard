@@ -40,7 +40,7 @@ export const OrganisationSearch = () => {
                   name
                   odsCode
                 }
-                icbs {
+                sicbls {
                   name
                   odsCode
                 }
@@ -55,12 +55,14 @@ export const OrganisationSearch = () => {
   const [practiceSearch] = useState(() =>
     initializeSearch(data.practices, "practice")
   );
-  const [icbSearch] = useState(() => initializeSearch(data.icbs, "icb"));
+  const [sicblSearch] = useState(() =>
+    initializeSearch(data.sicbls, "sub-ICB-location")
+  );
 
   const findSuggestions = (value) => [
     {
-      title: "Integrated Care Board",
-      organisations: icbSearch.search(value, 50),
+      title: "Sub ICB Location",
+      organisations: sicblSearch.search(value, 50),
     },
     {
       title: "GP practice",

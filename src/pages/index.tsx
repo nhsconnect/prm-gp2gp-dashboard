@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { OrganisationSearch } from "../components/OrganisationSearch";
 import { Helmet } from "react-helmet";
-import { ICBDirectory } from "../components/IcbDirectory";
+import { SICBLDirectory } from "../components/SicblDirectory";
 
 const Index: FC = () => {
   return (
@@ -21,7 +21,7 @@ const Index: FC = () => {
         <p>
           This site provides monthly data about GP2GP transfers requested by
           practices in England. The data can be viewed for individual practices
-          or grouped by Integrated Care Board (ICB).
+          or grouped by Sub Integrated Care Board (ICB) Location.
         </p>
       </div>
       <OrganisationSearch />
@@ -65,7 +65,7 @@ const Index: FC = () => {
         </ul>
       </div>
       <noscript>
-        <ICBDirectory headingPriority={2} />
+        <SICBLDirectory headingPriority={2} />
       </noscript>
     </>
   );

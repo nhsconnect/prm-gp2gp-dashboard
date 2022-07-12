@@ -12,12 +12,12 @@ import "../common/Table/index.scss";
 import { PageTemplatePath } from "../../library/enums/pageTemplatePath";
 import { convertMonthNumberToText } from "../../library/utils/convertMonthNumberToText";
 import { getPreviousMonths } from "../../library/utils/getPreviousMonths";
-import { ICBPracticeType } from "../../library/types/practice.types";
+import { SICBLPracticeType } from "../../library/types/practice.types";
 import { getTableRowFromMetrics } from "../../library/utils/getTableRowFromMetrics";
 import { Units } from "../../library/enums/units";
 
 type TableWithSortProps = {
-  icbPractices: ICBPracticeType[];
+  sicblPractices: SICBLPracticeType[];
   headers: { title: ReactNode; extra?: ReactNode }[];
   sortBySelect: SelectType;
   tableCaption: string;
@@ -56,7 +56,7 @@ const PracticeLink = ({
 };
 
 const sortPractices = (
-  practices: ICBPracticeType[],
+  practices: SICBLPracticeType[],
   fieldName: string,
   order: string,
   monthIndex: number
@@ -89,13 +89,13 @@ const sortPractices = (
 };
 
 export const PracticeTableWithSort: FC<TableWithSortProps> = ({
-  icbPractices,
+  sicblPractices,
   headers,
   sortBySelect,
   tableCaption,
   pageTemplatePath,
 }) => {
-  const metrics = icbPractices[0].metrics;
+  const metrics = sicblPractices[0].metrics;
   const monthSelect = getPreviousMonths(
     metrics[0].month,
     metrics[0].year,
@@ -118,13 +118,13 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
 
   const sortedPractices = useMemo(() => {
     return sortPractices(
-      icbPractices,
+      sicblPractices,
       selectedField,
       selectedOrder,
       selectedMonth
     );
   }, [
-    icbPractices,
+    sicblPractices,
     selectedField,
     selectedOrder,
     selectedMonth,
@@ -132,7 +132,7 @@ export const PracticeTableWithSort: FC<TableWithSortProps> = ({
   ]);
 
   const practiceTableRows = sortedPractices.map(
-    ({ odsCode, name, metrics }: ICBPracticeType) => {
+    ({ odsCode, name, metrics }: SICBLPracticeType) => {
       return getTableRowFromMetrics(
         <PracticeLink
           odsCode={odsCode}

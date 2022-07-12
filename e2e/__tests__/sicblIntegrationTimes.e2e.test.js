@@ -1,6 +1,6 @@
 const { viewPorts } = require("../support/common");
 
-describe("ICB Transfers Requested page", () => {
+describe("SICBL Integration Times page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
@@ -9,32 +9,15 @@ describe("ICB Transfers Requested page", () => {
         cy.injectAxe();
       });
 
-      it("searches, navigates to an individual ICB integration times page, navigates to ICB transfers requested page via contents menu and goes back to home page", () => {
+      it("searches, navigates to an individual SICBL integration times page and goes back to home page", () => {
         cy.findByLabelText(
-          "Enter an ODS code, practice name or Integrated Care Board (ICB) name"
+          "Enter an ODS code, practice name or Sub ICB Location name"
         ).type("Test ICB - 10D");
         cy.contains("li", "Test ICB - 10D").parent().parent().click();
 
         cy.contains("button", "Search").click();
 
         cy.contains("h1", "Test ICB - 10D");
-
-        cy.contains("h2", "Contents");
-        cy.contains("li", "Integration times");
-        cy.contains("li", "GP2GP transfers requested").click();
-        cy.contains(
-          "h2",
-          "GP2GP transfers requested for registering practices"
-        );
-
-        cy.contains("li", "Integration times").click();
-        cy.contains("Integration times for registering practice");
-        cy.contains("li", "GP2GP transfers requested").click();
-        cy.contains(
-          "h2",
-          "GP2GP transfers requested for registering practices"
-        );
-
         cy.title().should("eq", "Test ICB - 10D - GP Registrations Data");
         cy.get('meta[name="description"]').should(
           "have.attr",
@@ -42,13 +25,13 @@ describe("ICB Transfers Requested page", () => {
           "Monthly data about GP2GP transfers for practices within this integrated care board"
         );
 
-        cy.contains("What happens when a GP2GP transfer fails?").click();
-        cy.contains(
-          "A task will automatically be created for the sending practice"
-        );
+        cy.contains("h2", "Contents");
+        cy.contains("li", "Integration times");
 
+        cy.contains("Why integrate within 8 days").click();
+        cy.contains("If transfers are not integrated within 8 days");
         cy.contains(
-          "GP2GP transfers requested for registering practices - December 2019"
+          "Integration times for registering practices - December 2019"
         );
 
         cy.get("[data-testid=gp2gp-table]").within(() => {
@@ -57,22 +40,25 @@ describe("ICB Transfers Requested page", () => {
             "Test GP Practice With Integrations - A12345"
           );
 
-          cy.contains("GP2GP transfers requested");
-          cy.get("[data-testid=table__cell--row-0-col-1]").contains(8);
-
           cy.contains("GP2GP transfers received");
-          cy.get("[data-testid=table__cell--row-0-col-2]").contains("75%");
+          cy.get('[data-testid="table__cell--row-0-col-1"]').contains(6);
 
-          cy.contains("GP2GP technical failures");
-          cy.get("[data-testid=table__cell--row-0-col-3]").contains("25%");
+          cy.contains("Integrated within 3 days");
+          cy.get('[data-testid="table__cell--row-0-col-2"]').contains("16.7%");
+
+          cy.contains("Integrated within 8 days");
+          cy.get('[data-testid="table__cell--row-0-col-3"]').contains("16.7%");
+
+          cy.contains("Not integrated within 8 days");
+          cy.get('[data-testid="table__cell--row-0-col-4"]').contains("66.7%");
         });
 
         cy.get("[data-testid=gp2gp-open-modal-btn]")
           .filter(":visible")
-          .eq(0)
+          .eq(1)
           .click();
         cy.contains(
-          "Total number of registrations that triggered a GP2GP transfer"
+          "The percentage of transfers received that were integrated (filed or suppressed) within 3 days"
         );
         cy.contains("button", "Close").click();
 
@@ -95,7 +81,9 @@ describe("ICB Transfers Requested page", () => {
 
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");
+
         cy.contains("Data updated: February 2020");
+
         cy.checkAccessibility();
 
         cy.contains(
@@ -106,7 +94,7 @@ describe("ICB Transfers Requested page", () => {
       });
 
       it("sort practice performance table and link to the individual practices", () => {
-        cy.visit("/icb/11D/gp2gp-transfers-requested");
+        cy.visit("/sub-ICB-location/11D/integration-times");
         cy.contains("h1", "Another Test ICB - 11D");
 
         cy.contains("Requesting practice name");
@@ -120,7 +108,7 @@ describe("ICB Transfers Requested page", () => {
         cy.contains("Sort by");
         cy.get("select#sortBySelect option:selected").should(
           "have.text",
-          "GP2GP technical failures"
+          "Not integrated within 8 days"
         );
 
         cy.contains("Order");
@@ -146,11 +134,9 @@ describe("ICB Transfers Requested page", () => {
         cy.get('[data-testid="table__cell--row-0-col-0"]').contains(
           "Test GP Practice With An Integration - Z12347"
         );
-        cy.get('[data-testid="table__cell--row-0-col-1"]').contains(1);
         cy.get('[data-testid="table__cell--row-1-col-0"]').contains(
           "Test GP Practice With Some Integrations - A12347"
         );
-        cy.get('[data-testid="table__cell--row-1-col-1"]').contains(3);
 
         cy.contains("a", "Test GP Practice With An Integration - Z12347")
           .should("have.attr", "href")
@@ -158,7 +144,7 @@ describe("ICB Transfers Requested page", () => {
       });
 
       it("display percentages on practice performance table, change to numbers when selected", () => {
-        cy.visit("/icb/11D/gp2gp-transfers-requested");
+        cy.visit("/sub-ICB-location/11D/integration-times");
         cy.contains("h1", "Another Test ICB - 11D");
 
         cy.get("select#unitsSelect option:selected").should(
@@ -166,7 +152,7 @@ describe("ICB Transfers Requested page", () => {
           "Percentages"
         );
 
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("66.7%");
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("50%");
 
         cy.get("select#unitsSelect").select("Numbers");
         cy.get("select#unitsSelect option:selected").should(
@@ -174,11 +160,11 @@ describe("ICB Transfers Requested page", () => {
           "Numbers"
         );
 
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("2");
+        cy.get('[data-testid="table__cell--row-1-col-2"]').contains("1");
       });
 
       it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/icb/11D/gp2gp-transfers-requested");
+        cy.visit("/sub-ICB-location/11D/integration-times");
         cy.contains("h3", "Feedback");
         cy.contains("Take our survey").click();
         cy.contains("Feedback form for GP registrations data platform");

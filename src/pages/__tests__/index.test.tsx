@@ -16,7 +16,7 @@ describe("Homepage", () => {
                   { odsCode: "A12345", name: "Test Practice" },
                   { odsCode: "X99999", name: "Second Practice" },
                 ],
-                icbs: [
+                sicbls: [
                   { odsCode: "12A", name: "Test ICB - 12A" },
                   { odsCode: "13B", name: "Second ICB - 13B" },
                 ],

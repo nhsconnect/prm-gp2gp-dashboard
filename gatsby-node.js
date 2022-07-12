@@ -9,7 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             childOrganisationsJson {
-              icbs {
+              sicbls {
                 odsCode
                 name
               }
@@ -25,7 +25,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  const { practices, icbs, generatedOn } =
+  const { practices, sicbls, generatedOn } =
     pageData.data.allFile.edges[0].node.childOrganisationsJson;
 
   practices.forEach((practice) => {
@@ -66,38 +66,38 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  icbs.forEach((icb) => {
+  sicbls.forEach((sicbl) => {
     createPage({
-      path: `/icb/${icb.odsCode}/integration-times`,
+      path: `/sub-ICB-location/${sicbl.odsCode}/integration-times`,
       component: path.resolve(
-        "src/templates/IntegrationTimes/ICBIntegrationTimes/index.tsx"
+        "src/templates/IntegrationTimes/SICBLIntegrationTimes/index.tsx"
       ),
       context: {
-        icbOdsCode: icb.odsCode,
+        sicblOdsCode: sicbl.odsCode,
         dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
 
     createPage({
-      path: `/icb/${icb.odsCode}/gp2gp-transfers-requested`,
+      path: `/sub-ICB-location/${sicbl.odsCode}/gp2gp-transfers-requested`,
       component: path.resolve(
-        "src/templates/TransfersRequested/ICBTransfersRequested/index.tsx"
+        "src/templates/TransfersRequested/SICBLTransfersRequested/index.tsx"
       ),
       context: {
-        icbOdsCode: icb.odsCode,
+        sicblOdsCode: sicbl.odsCode,
         dataUpdatedDate: generatedOn,
         layout: "navigation-contents",
       },
     });
 
     createPage({
-      path: `/icb/${icb.odsCode}/download-data`,
+      path: `/sub-ICB-location/${sicbl.odsCode}/download-data`,
       component: path.resolve(
-        "src/templates/DownloadData/ICBDownloadData/index.tsx"
+        "src/templates/DownloadData/SICBLDownloadData/index.tsx"
       ),
       context: {
-        icbOdsCode: icb.odsCode,
+        sicblOdsCode: sicbl.odsCode,
         layout: "navigation-contents",
         dataUpdatedDate: generatedOn,
       },
@@ -124,9 +124,9 @@ function practiceResolver(args, practices) {
     return practices.filter(
       (practice) => practice.odsCode === args.practiceOdsCode
     );
-  if (args.icbOdsCode) {
+  if (args.sicblOdsCode) {
     return practices.filter(
-      (practice) => practice.icbOdsCode === args.icbOdsCode
+      (practice) => practice.sicblOdsCode === args.sicblOdsCode
     );
   }
   return practices;
@@ -137,22 +137,22 @@ exports.createResolvers = ({ createResolvers }) => {
     OrganisationsJson: {
       practices: {
         type: ["OrganisationsJsonPractices"],
-        args: { practiceOdsCode: "String", icbOdsCode: "String" },
+        args: { practiceOdsCode: "String", sicblOdsCode: "String" },
         resolve: async (root, args, context, info) => {
           const practices =
             (await info.originalResolver(root, args, context, info)) || [];
           return practiceResolver(args, practices);
         },
       },
-      icbs: {
-        type: ["OrganisationsJsonIcbs"],
-        args: { icbOdsCode: "String" },
+      sicbls: {
+        type: ["OrganisationsJsonSicbls"],
+        args: { sicblOdsCode: "String" },
         resolve: async (root, args, context, info) => {
-          const icbs =
+          const sicbls =
             (await info.originalResolver(root, args, context, info)) || [];
-          return args.icbOdsCode
-            ? icbs.filter((icb) => icb.odsCode === args.icbOdsCode)
-            : icbs;
+          return args.sicblOdsCode
+            ? sicbls.filter((sicbl) => sicbl.odsCode === args.sicblOdsCode)
+            : sicbls;
         },
       },
     },

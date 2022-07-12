@@ -8,9 +8,9 @@ import { TimeframeOptions } from "../../../../enums/datasetTypeOptions";
 
 describe("getIntegrationTimesCsv", () => {
   it("transforms practice metrics into csv rows for 6 months for integration times", async () => {
-    const icbPractices = [practiceWithOneMonthMetrics, practiceWithTwoMonths];
+    const sicblPractices = [practiceWithOneMonthMetrics, practiceWithTwoMonths];
     const actual = getIntegrationTimesCsv(
-      icbPractices,
+      sicblPractices,
       TimeframeOptions.Last6Months
     );
     const expected = [
@@ -23,9 +23,9 @@ describe("getIntegrationTimesCsv", () => {
   });
 
   it("transforms practice metrics into csv rows for latest month for integration times", async () => {
-    const icbPractices = [practiceWithOneMonthMetrics, practiceWithTwoMonths];
+    const sicblPractices = [practiceWithOneMonthMetrics, practiceWithTwoMonths];
     const actual = getIntegrationTimesCsv(
-      icbPractices,
+      sicblPractices,
       TimeframeOptions.LatestMonth
     );
     const expected = [
@@ -37,13 +37,13 @@ describe("getIntegrationTimesCsv", () => {
   });
 
   it("transforms practice metrics when names contain commas", async () => {
-    const icbPractices = [practiceWithCommasInTheName];
+    const sicblPractices = [practiceWithCommasInTheName];
     const actual = getIntegrationTimesCsv(
-      icbPractices,
+      sicblPractices,
       TimeframeOptions.LatestMonth
     );
     const expected = [
-      '"Test, and test icb - 11D",11D,"Dr GP1, Dr GP2, Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
+      '"Test, and test sicbl - 11D",11D,"Dr GP1, Dr GP2, Practice",A12345,February 2020,5,3,60%,2,40%,0,0%',
     ];
 
     expect(actual).toEqual(expected);

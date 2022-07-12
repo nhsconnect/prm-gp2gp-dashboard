@@ -4,14 +4,14 @@ import { render } from "@testing-library/react";
 import { Footer } from "../";
 
 describe("Footer component", () => {
-  it("displays ICB A to Z link in footer", () => {
+  it("displays Sub ICB Location A to Z link in footer", () => {
     const { getByRole } = render(<Footer />);
 
-    const icbAtoZLink = getByRole("link", {
-      name: "ICB A to Z",
+    const sicblAtoZLink = getByRole("link", {
+      name: "Sub ICB Location A to Z",
     });
-    expect(icbAtoZLink).toBeInTheDocument();
-    expect(icbAtoZLink.getAttribute("href")).toBe("/icbs");
+    expect(sicblAtoZLink).toBeInTheDocument();
+    expect(sicblAtoZLink.getAttribute("href")).toBe("/sub-ICB-locations");
   });
 
   it("displays Definitions and notes about this data link in footer", () => {

@@ -39,8 +39,11 @@ export const Footer = () => {
               </Link>
             </li>
             <li className="nhsuk-footer__list-item">
-              <Link className="nhsuk-footer__list-item-link" to="/icbs">
-                ICB A to Z
+              <Link
+                className="nhsuk-footer__list-item-link"
+                to="/sub-ICB-locations"
+              >
+                Sub ICB Location A to Z
               </Link>
             </li>
             <li className="nhsuk-footer__list-item">

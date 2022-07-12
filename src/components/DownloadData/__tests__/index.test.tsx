@@ -66,7 +66,7 @@ describe("Download data component", () => {
       <DownloadData
         data={[]}
         pageDescription={""}
-        dataFor="Test GP ICB"
+        dataFor="Test GP SICBL"
         dataUpdatedDate=""
       />
     );
@@ -111,7 +111,7 @@ describe("Download data component", () => {
       <DownloadData
         data={[]}
         pageDescription=""
-        dataFor="Test GP ICB"
+        dataFor="Test GP SICBL"
         dataUpdatedDate=""
       />
     );

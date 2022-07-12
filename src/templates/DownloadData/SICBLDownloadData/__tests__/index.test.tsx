@@ -2,7 +2,7 @@ import React from "react";
 
 import { render } from "@testing-library/react";
 
-import ICBDownloadData from "../index";
+import SICBLDownloadData from "../index";
 import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
 jest.mock("no-scroll");
@@ -18,7 +18,7 @@ function queryResult(
           node: {
             childOrganisationsJson: {
               practices: practiceMetricsMock,
-              icbs: [
+              sicbls: [
                 {
                   name: name,
                   odsCode: odsCode,
@@ -32,54 +32,54 @@ function queryResult(
   };
 }
 
-describe("ICBDownloadData template", () => {
-  const pipelineICBData = {
-    icbOdsCode: "12A",
+describe("SICBLDownloadData template", () => {
+  const pipelineSICBLData = {
+    sicblOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const icbWithoutNameData = {
-      icbOdsCode: odsCode,
+    const sicblWithoutNameData = {
+      sicblOdsCode: odsCode,
       layout: "general",
       dataUpdatedDate: "",
     };
 
     const { getByRole } = render(
-      <ICBDownloadData
-        pageContext={icbWithoutNameData}
+      <SICBLDownloadData
+        pageContext={sicblWithoutNameData}
         data={queryResult("", odsCode)}
       />
     );
 
-    const expectedICBHeading = getByRole("heading", {
+    const expectedSICBLHeading = getByRole("heading", {
       name: "Y00159 download data",
       level: 1,
     });
 
-    expect(expectedICBHeading).toBeInTheDocument();
+    expect(expectedSICBLHeading).toBeInTheDocument();
   });
 
-  it("renders ICB name and ODS code title correctly", () => {
-    const icbHeadingText = "Burton ICB - 12A download data";
+  it("renders Sub ICB Location name and ODS code title correctly", () => {
+    const sicblHeadingText = "Burton ICB - 12A download data";
 
     const { getByRole } = render(
-      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
+      <SICBLDownloadData pageContext={pipelineSICBLData} data={queryResult()} />
     );
 
-    const expectedICBHeading = getByRole("heading", {
-      name: icbHeadingText,
+    const expectedSICBLHeading = getByRole("heading", {
+      name: sicblHeadingText,
       level: 1,
     });
 
-    expect(expectedICBHeading).toBeInTheDocument();
+    expect(expectedSICBLHeading).toBeInTheDocument();
   });
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
+      <SICBLDownloadData pageContext={pipelineSICBLData} data={queryResult()} />
     );
 
     const pageTitle = getByRole("heading", {
@@ -92,11 +92,11 @@ describe("ICBDownloadData template", () => {
 
   it("renders page description correctly", () => {
     const { getByText } = render(
-      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
+      <SICBLDownloadData pageContext={pipelineSICBLData} data={queryResult()} />
     );
 
     const pageDescription = getByText(
-      /To download data for this ICB in CSV format/
+      /To download data for this Sub ICB Location in CSV format/
     );
 
     expect(pageDescription).toBeInTheDocument();
@@ -104,7 +104,7 @@ describe("ICBDownloadData template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <ICBDownloadData pageContext={pipelineICBData} data={queryResult()} />
+      <SICBLDownloadData pageContext={pipelineSICBLData} data={queryResult()} />
     );
 
     const contentsHeader = getByRole("heading", {

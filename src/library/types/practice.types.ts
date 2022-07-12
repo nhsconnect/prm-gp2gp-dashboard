@@ -42,18 +42,18 @@ export type PracticeMetricsType = {
 export type PracticeType = {
   odsCode: string;
   name: string;
-  icbOdsCode: string;
-  icbName: string;
+  sicblOdsCode: string;
+  sicblName: string;
   metrics: PracticeMetricsType[];
 };
 
-export type ICBPracticeType = {
+export type SICBLPracticeType = {
   odsCode: string;
   name: string;
   metrics: PracticeMetricsType[];
 };
 
-export type ICBType = {
+export type SICBLType = {
   name: string;
   odsCode: string;
 };

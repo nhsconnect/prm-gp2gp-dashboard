@@ -5,35 +5,35 @@ import { ContentsList } from "../../../components/common/ContentsList";
 import "../../index.scss";
 import { DownloadData } from "../../../components/DownloadData";
 import { graphql } from "gatsby";
-import { ICBDownloadDataType } from "../../../library/types/queryResultDownloadData.types";
+import { SICBLDownloadDataType } from "../../../library/types/queryResultDownloadData.types";
 
 type PageContext = {
-  icbOdsCode: string;
+  sicblOdsCode: string;
   layout: string;
   dataUpdatedDate: string;
 };
 
-type ICBProps = {
+type SICBLProps = {
   pageContext: PageContext;
-  data: ICBDownloadDataType;
+  data: SICBLDownloadDataType;
 };
 
-const ICBDownloadData: FC<ICBProps> = ({ data, pageContext }) => {
-  const icbPractices =
+const SICBLDownloadData: FC<SICBLProps> = ({ data, pageContext }) => {
+  const sicblPractices =
     data.allFile.edges[0].node.childOrganisationsJson.practices;
-  const { name: icbName, odsCode: icbOdsCode } =
-    data.allFile.edges[0].node.childOrganisationsJson.icbs[0];
+  const { name: sicblName, odsCode: sicblOdsCode } =
+    data.allFile.edges[0].node.childOrganisationsJson.sicbls[0];
 
   const { dataUpdatedDate } = pageContext;
-  const formattedName: string = convertToTitleCase(icbName);
+  const formattedName: string = convertToTitleCase(sicblName);
   const contentListItems = [
     {
       text: "Integration times",
-      href: `/icb/${icbOdsCode}/integration-times`,
+      href: `/sub-ICB-location/${sicblOdsCode}/integration-times`,
     },
     {
       text: "GP2GP transfers requested",
-      href: `/icb/${icbOdsCode}/gp2gp-transfers-requested`,
+      href: `/sub-ICB-location/${sicblOdsCode}/gp2gp-transfers-requested`,
     },
     {
       text: "Download data",
@@ -52,7 +52,7 @@ const ICBDownloadData: FC<ICBProps> = ({ data, pageContext }) => {
       </Helmet>
       <div className="gp2gp-page-content-wrapper">
         <h1 className="nhsuk-u-margin-bottom-5 gp2gp-page-heading">
-          {formattedName ? formattedName : icbOdsCode}
+          {formattedName ? formattedName : sicblOdsCode}
           <span className="nhsuk-u-visually-hidden"> download data</span>
         </h1>
         <div className="gp2gp-side-nav">
@@ -61,9 +61,9 @@ const ICBDownloadData: FC<ICBProps> = ({ data, pageContext }) => {
         <DownloadData
           className="gp2gp-page-contents"
           dataFor={formattedName}
-          data={icbPractices}
+          data={sicblPractices}
           pageDescription={
-            "To download data for this ICB in CSV format select from the options below and click 'Download'."
+            "To download data for this Sub ICB Location in CSV format select from the options below and click 'Download'."
           }
           dataUpdatedDate={dataUpdatedDate}
         />
@@ -73,15 +73,15 @@ const ICBDownloadData: FC<ICBProps> = ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query ICBDownloadDataQuery($icbOdsCode: String) {
+  query SICBLDownloadDataQuery($sicblOdsCode: String) {
     allFile(filter: { name: { eq: "practiceMetrics" } }) {
       edges {
         node {
           childOrganisationsJson {
-            icbs(icbOdsCode: $icbOdsCode) {
-              ...ICBQueryFragment
+            sicbls(sicblOdsCode: $sicblOdsCode) {
+              ...SICBLQueryFragment
             }
-            practices(icbOdsCode: $icbOdsCode) {
+            practices(sicblOdsCode: $sicblOdsCode) {
               ...PracticeDownloadFragment
             }
           }
@@ -91,4 +91,4 @@ export const query = graphql`
   }
 `;
 
-export default ICBDownloadData;
+export default SICBLDownloadData;

@@ -1,4 +1,4 @@
-import { ICBType, PracticeType } from "./practice.types";
+import { SICBLType, PracticeType } from "./practice.types";
 
 type ChildOrganisationsJsonType = {
   practices: PracticeType[];
@@ -19,21 +19,21 @@ export type PracticeDownloadDataType = {
   allFile: AllFileType;
 };
 
-type ICBChildOrganisationsJsonType = ChildOrganisationsJsonType & {
-  icbs: ICBType[];
+type SICBLChildOrganisationsJsonType = ChildOrganisationsJsonType & {
+  sicbls: SICBLType[];
 };
 
-type ICBNodeType = {
-  childOrganisationsJson: ICBChildOrganisationsJsonType;
+type SICBLNodeType = {
+  childOrganisationsJson: SICBLChildOrganisationsJsonType;
 };
-type ICBEdgesType = {
-  node: ICBNodeType;
-};
-
-type ICBAllFileType = {
-  edges: ICBEdgesType[];
+type SICBLEdgesType = {
+  node: SICBLNodeType;
 };
 
-export type ICBDownloadDataType = {
-  allFile: ICBAllFileType;
+type SICBLAllFileType = {
+  edges: SICBLEdgesType[];
+};
+
+export type SICBLDownloadDataType = {
+  allFile: SICBLAllFileType;
 };

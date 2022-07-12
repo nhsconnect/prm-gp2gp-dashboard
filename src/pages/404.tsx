@@ -8,13 +8,13 @@ const NotFound: FC = () => {
         <title>Page not found.</title>
         <meta
           name="description"
-          content="This page may have been moved. You can find ICBs and practices using the Homepage - search."
+          content="This page may have been moved. You can find Sub ICB Locations and practices using the Homepage - search."
         />
       </Helmet>
       <h1>Page not found.</h1>
       <p>
-        This page may have been moved. You can find ICBs and practices using the{" "}
-        <a href="/">Homepage - search</a>.
+        This page may have been moved. You can find Sub ICB Locations and
+        practices using the <a href="/">Homepage - search</a>.
       </p>
     </>
   );

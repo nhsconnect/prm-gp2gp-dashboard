@@ -2,8 +2,8 @@
   {
     "odsCode": "A12345",
     "name": "GP Practice",
-    "icbOdsCode": "11D",
-    "icbName": "Test icb - 11D",
+    "sicblOdsCode": "11D",
+    "sicblName": "Test ICB - 11D",
     "metrics": [
       {
         "year": 2020,
@@ -27,8 +27,8 @@
   {
     "odsCode": "A12346",
     "name": "Second GP Practice",
-    "icbOdsCode": "11D",
-    "icbName": "Test icb - 11D",
+    "sicblOdsCode": "11D",
+    "sicblName": "Test ICB - 11D",
     "metrics": [
       {
         "year": 2020,
@@ -52,8 +52,8 @@
   {
     "odsCode": "A12347",
     "name": "Third GP Practice",
-    "icbOdsCode": "11D",
-    "icbName": "Test icb - 11D",
+    "sicblOdsCode": "11D",
+    "sicblName": "Test ICB - 11D",
     "metrics": [
       {
         "year": 2020,
@@ -77,8 +77,8 @@
   {
     "odsCode": "A12348",
     "name": "Fourth GP Practice",
-    "icbOdsCode": "11D",
-    "icbName": "Test icb - 11D",
+    "sicblOdsCode": "11D",
+    "sicblName": "Test ICB - 11D",
     "metrics": [
       {
         "year": 2020,
@@ -102,8 +102,8 @@
   {
     "odsCode": "A12349",
     "name": "Fifth GP Practice",
-    "icbOdsCode": "11D",
-    "icbName": "Test icb - 11D",
+    "sicblOdsCode": "11D",
+    "sicblName": "Test ICB - 11D",
     "metrics": [
       {
         "year": 2020,
@@ -127,8 +127,8 @@
   {
     "odsCode": "A12350",
     "name": "Sixth GP Practice",
-    "icbOdsCode": "11D",
-    "icbName": "Test icb - 11D",
+    "sicblOdsCode": "11D",
+    "sicblName": "Test ICB - 11D",
     "metrics": [
       {
         "year": 2020,

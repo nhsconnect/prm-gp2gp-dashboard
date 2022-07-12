@@ -9,7 +9,7 @@ describe("404 NotFound Page", () => {
     await waitFor(() => {
       expect(document.title).toEqual("Page not found.");
       expect(getMeta("description")).toEqual(
-        "This page may have been moved. You can find ICBs and practices using the Homepage - search."
+        "This page may have been moved. You can find Sub ICB Locations and practices using the Homepage - search."
       );
     });
   });

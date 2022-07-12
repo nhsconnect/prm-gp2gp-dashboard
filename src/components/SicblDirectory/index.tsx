@@ -2,26 +2,28 @@ import React, { FC, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
 import { sortOrganisationsAlphabetically } from "../../library/utils/sortOrganisationsAlphabetically";
-import { AlphabeticalICBList } from "../AlphabeticalIcbList";
+import { AlphabeticalSICBLList } from "../AlphabeticalSicblList";
 import { AlphabeticalNav } from "../AlphabeticalNav";
-import icbDirectoryContent from "../../data/content/icbDirectory.json";
+import sicblDirectoryContent from "../../data/content/sicblDirectory.json";
 import "./index.scss";
 
-type ICBDirectoryProps = {
+type SICBLDirectoryProps = {
   headingPriority: number;
 };
 
-export const ICBDirectory: FC<ICBDirectoryProps> = ({ headingPriority }) => {
+export const SICBLDirectory: FC<SICBLDirectoryProps> = ({
+  headingPriority,
+}) => {
   const CustomHeadingTag = `h${headingPriority}` as keyof JSX.IntrinsicElements;
 
-  const icbs = useStaticQuery(
+  const sicbls = useStaticQuery(
     graphql`
       query {
         allFile(filter: { name: { eq: "practiceMetrics" } }) {
           edges {
             node {
               childOrganisationsJson {
-                icbs {
+                sicbls {
                   name
                   odsCode
                 }
@@ -31,17 +33,19 @@ export const ICBDirectory: FC<ICBDirectoryProps> = ({ headingPriority }) => {
         }
       }
     `
-  ).allFile.edges[0].node.childOrganisationsJson.icbs;
+  ).allFile.edges[0].node.childOrganisationsJson.sicbls;
 
-  const [sortedICBs] = useState(() => sortOrganisationsAlphabetically(icbs));
+  const [sortedSICBLs] = useState(() =>
+    sortOrganisationsAlphabetically(sicbls)
+  );
 
   return (
     <>
       <CustomHeadingTag className="nhsuk-u-margin-top-5">
-        {icbDirectoryContent.heading}
+        {sicblDirectoryContent.heading}
       </CustomHeadingTag>
-      <AlphabeticalNav sortedItems={sortedICBs} />
-      <AlphabeticalICBList sortedICBs={sortedICBs} />
+      <AlphabeticalNav sortedItems={sortedSICBLs} />
+      <AlphabeticalSICBLList sortedSICBLs={sortedSICBLs} />
     </>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 
 import { findByLabelText, render, within } from "@testing-library/react";
 
-import ICBTransfersRequested from "../index";
+import IntegrationTimesSICBL from "../index";
 import practiceMetricsMock from "../../../../../__mocks__/practiceMetricsMock.json";
 
 import userEvent from "@testing-library/user-event";
@@ -20,7 +20,7 @@ function queryResult(
           node: {
             childOrganisationsJson: {
               practices: practiceMetricsMock,
-              icbs: [
+              sicbls: [
                 {
                   name: name,
                   odsCode: odsCode,
@@ -33,65 +33,64 @@ function queryResult(
     },
   };
 }
-
-describe("ICB Transfers Requested template", () => {
-  const pipelineICBData = {
-    icbOdsCode: "12A",
+describe("SICBL Integration Times template", () => {
+  const pipelineSICBLData = {
+    sicblOdsCode: "12A",
     layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
   it("displays only organisation ODS code when the name is not provided", () => {
     const odsCode = "Y00159";
-    const icbWithoutNameData = {
-      icbOdsCode: odsCode,
-      layout: "general",
+    const sicblWithoutNameData = {
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
+      sicblOdsCode: odsCode,
+      layout: "general",
     };
 
     const { getByRole } = render(
-      <ICBTransfersRequested
-        pageContext={icbWithoutNameData}
+      <IntegrationTimesSICBL
+        pageContext={sicblWithoutNameData}
         data={queryResult("", odsCode)}
       />
     );
 
-    const expectedICBHeading = getByRole("heading", {
-      name: "Y00159 GP2GP transfers requested",
+    const expectedSICBLHeading = getByRole("heading", {
+      name: "Y00159 integration times",
       level: 1,
     });
 
-    expect(expectedICBHeading).toBeInTheDocument();
+    expect(expectedSICBLHeading).toBeInTheDocument();
   });
 
-  it("renders ICB name and ODS code title correctly", () => {
-    const icbHeadingText = "Burton ICB - 12A GP2GP transfers requested";
+  it("renders Sub ICB Location name and ODS code title correctly", () => {
+    const sicblHeadingText = "Burton ICB - 12A integration times";
 
     const { getByRole } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
 
-    const expectedICBHeading = getByRole("heading", {
-      name: icbHeadingText,
+    const expectedSICBLHeading = getByRole("heading", {
+      name: sicblHeadingText,
       level: 1,
     });
 
-    expect(expectedICBHeading).toBeInTheDocument();
+    expect(expectedSICBLHeading).toBeInTheDocument();
   });
 
   it("renders page title correctly", () => {
     const { getByRole } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
 
     const pageTitle = getByRole("heading", {
-      name: "GP2GP transfers requested for registering practices",
+      name: "Integration times for registering practices",
       level: 2,
     });
 
@@ -100,29 +99,29 @@ describe("ICB Transfers Requested template", () => {
 
   it("renders table caption correctly", () => {
     const { getByText } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
 
     const tableCaption = getByText(
-      "GP2GP transfers requested for registering practices - February 2020"
+      "Integration times for registering practices - February 2020"
     );
 
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("renders page description correctly", () => {
+  it("renders table description correctly", () => {
     const { getByText } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
 
     const tableDescription = getByText(
-      "number of registrations that triggered a GP2GP transfer",
+      "The table below shows the integration times for GP2GP transfers received.",
       { exact: false }
     );
 
@@ -137,23 +136,21 @@ describe("ICB Transfers Requested template", () => {
       queryAllByText,
       getByRole,
     } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
 
     expect(
-      queryByText(
-        /GP2GP transfers requested between the 1st and last day of the month that failed for a technical reason/
-      )
+      queryByText(/transfers received that were not integrated within 8 days/)
     ).not.toBeInTheDocument();
     expect(
-      queryAllByText(/and should be reported to the system supplier/)
+      queryAllByText(/Unnecessary printing causes avoidable work/)
     ).toHaveLength(1);
 
     const transfersReceivedHeader = getByRole("columnheader", {
-      name: /GP2GP technical failures/,
+      name: /Not integrated within 8 days/,
     });
 
     const transfersReceivedModalButton = within(
@@ -163,18 +160,18 @@ describe("ICB Transfers Requested template", () => {
 
     expect(
       await findByText(
-        /GP2GP transfers requested between the 1st and last day of the month that failed for a technical reason/
+        /transfers received that were not integrated within 8 days/
       )
     ).toBeInTheDocument();
     expect(
-      await findAllByText(/and should be reported to the system supplier/)
+      await findAllByText(/Unnecessary printing causes avoidable work/)
     ).toHaveLength(2);
   });
 
   it("displays help icons for all relevant headers", () => {
     const { getAllByRole } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
@@ -195,36 +192,38 @@ describe("ICB Transfers Requested template", () => {
     expect(
       within(allColumnHeaders[3]).getByRole("button", buttonOptions)
     ).toBeInTheDocument();
+    expect(
+      within(allColumnHeaders[4]).getByRole("button", buttonOptions)
+    ).toBeInTheDocument();
   });
 
   it("labels modal with content title", async () => {
     const { getByRole, findByLabelText } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
 
-    const transfersReceivedHeader = getByRole("columnheader", {
-      name: /GP2GP transfers received/,
+    const within8DaysHeader = getByRole("columnheader", {
+      name: /Integrated within 8 days/,
     });
 
-    const transfersReceivedHeaderButton = within(
-      transfersReceivedHeader
-    ).getByRole("button");
-    userEvent.click(transfersReceivedHeaderButton);
+    const within8DaysHeaderButton =
+      within(within8DaysHeader).getByRole("button");
+    userEvent.click(within8DaysHeaderButton);
 
-    const within8DaysModal = await findByLabelText("GP2GP transfers received");
+    const within8DaysModal = await findByLabelText("Integrated within 8 days");
     expect(within8DaysModal).toBeInTheDocument();
   });
 
-  it("displays ICB practices and hides about and definitions content", () => {
+  it("displays SICBL practices and hides about and definitions content", () => {
     const definitionsText =
-      "Percentage of GP2GP transfers between the 1st and last day of the month that were successfully received by the registering practice.";
+      "The percentage of transfers received that were integrated (filed or suppressed) within 3 days of the record being sent.";
 
     const { getByText, queryByText, getAllByRole } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
@@ -233,11 +232,12 @@ describe("ICB Transfers Requested template", () => {
 
     expect(getByText("GP Practice - A12345")).toBeInTheDocument();
     expect(getByText("Second GP Practice - A12346")).toBeInTheDocument();
+    expect(allRows[1]).toHaveTextContent(/GP2GP transfers received(.*)22/);
+    expect(allRows[1]).toHaveTextContent(/Integrated within 3 days(.*)22.7%/);
+    expect(allRows[1]).toHaveTextContent(/Integrated within 8 days(.*)27.3%/);
     expect(allRows[1]).toHaveTextContent(
-      /Registrations that triggered GP2GP transfer(.*)7/
+      /Not integrated within 8 days \(paper copy requested\)(.*)50%/
     );
-    expect(allRows[1]).toHaveTextContent(/GP2GP transfers received(.*)71.42%/);
-    expect(allRows[1]).toHaveTextContent(/GP2GP technical failures(.*)28.6%/);
 
     expect(
       queryByText("This site is updated 15 days after the end of each month.", {
@@ -254,8 +254,8 @@ describe("ICB Transfers Requested template", () => {
 
   it("displays contents navigation", async () => {
     const { getByRole } = render(
-      <ICBTransfersRequested
-        pageContext={pipelineICBData}
+      <IntegrationTimesSICBL
+        pageContext={pipelineSICBLData}
         data={queryResult()}
       />
     );
@@ -266,7 +266,7 @@ describe("ICB Transfers Requested template", () => {
     });
 
     const contentsLink = getByRole("link", {
-      name: "Integration times",
+      name: "GP2GP transfers requested",
     });
 
     expect(contentsHeader).toBeInTheDocument();
