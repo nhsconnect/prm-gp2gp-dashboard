@@ -10,7 +10,7 @@ function assume_role {
     if [ "${deployment_env}" == "dev" ]; then
       export AWS_ACCOUNT="dev"
     elif [ "${deployment_env}" == "prod" ]; then
-      export AWS_ACCOUNT="preprod"
+      export AWS_ACCOUNT="prod"
     else
       echo "deployment_env=${deployment_env} is not supported"
       exit 2
@@ -56,7 +56,7 @@ function setup_env {
     if [ "${deployment_env}" == "dev" ]; then
       export DATA_BUCKET_ENV="dev"
     elif [ "${deployment_env}" == "prod" ]; then
-      export DATA_BUCKET_ENV="preprod"
+      export DATA_BUCKET_ENV="prod"
     fi
 }
 
