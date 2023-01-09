@@ -143,7 +143,7 @@ case "${task}" in
       dojo "npx npm-check-updates -u --target minor"
       ;;
   publish-docker)
-      npm i -g aws-cli
+      dojo "npm i -g aws-cli"
       if [ -z $IMAGE_TAG ]; then
           echo "Please set IMAGE_TAG environment variable"
           exit 1
