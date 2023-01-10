@@ -9,7 +9,7 @@ ENV DATA_BUCKET_ENV="dev"
 #ENTRYPOINT ["npm", "run", "getPracticeMetrics:stub"]
 
 WORKDIR /tmp
-CMD ["node", "./scripts/testLog.js"]
+RUN dir -s
 
 ENTRYPOINT ["npm", "run", "getPracticeMetrics:stub"]
 RUN dir -s
