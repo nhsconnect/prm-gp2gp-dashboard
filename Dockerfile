@@ -8,4 +8,8 @@ ENV DATA_BUCKET_ENV="dev"
 #RUN npm run build:ci
 #ENTRYPOINT ["npm", "run", "getPracticeMetrics:stub"]
 
-ENTRYPOINT ["node", "/tmp/scripts/testLog.js"]
+WORKDIR /tmp
+CMD ["node", "./scripts/testLog.js"]
+
+ENTRYPOINT ["npm", "run", "getPracticeMetrics:stub"]
+RUN dir -s
