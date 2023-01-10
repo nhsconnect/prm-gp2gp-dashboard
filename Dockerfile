@@ -7,7 +7,4 @@ ENV DATA_BUCKET_ENV="dev"
 
 WORKDIR /tmp
 
-CMD ["npm", "run", "getNationalMetrics:ci"]
-CMD ["npm", "run", "getPracticeMetrics:stub"]
-CMD ["npm", "run", "build:ci"]
-CMD ["npm", "run", "deploy"]
+CMD npm run getNationalMetrics:ci && npm run getPracticeMetrics:stub && npm run build:ci && npm run deploy
