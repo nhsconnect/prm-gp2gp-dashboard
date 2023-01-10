@@ -149,7 +149,7 @@ case "${task}" in
       fi
       ecr_login=$(dojo -c Dojofile-infra "./scripts/ecr-helper get-login")
       ecr_repo_uri=$(dojo -c Dojofile-infra "./scripts/ecr-helper get-repo-uri")
-      npm ci -y
+      dojo "npm ci -y"
       docker build -t ${ecr_repo_uri}:latest -t ${ecr_repo_uri}:${IMAGE_TAG} --build-arg IMAGE_TAG=$IMAGE_TAG .
       eval $ecr_login
       docker push ${ecr_repo_uri}:${IMAGE_TAG}
