@@ -4,12 +4,10 @@ COPY . /tmp
 ARG IMAGE_TAG
 ENV BUILD_TAG=${IMAGE_TAG}
 ENV DATA_BUCKET_ENV="dev"
-#RUN cd /tmp && npm run ci --production -y
-#RUN npm run build:ci
-#ENTRYPOINT ["npm", "run", "getPracticeMetrics:stub"]
 
 WORKDIR /tmp
-RUN dir -s
 
-ENTRYPOINT ["npm", "run", "getPracticeMetrics:stub"]
-RUN dir -s
+CMD ["npm", "run", "getNationalMetrics:ci"]
+CMD ["npm", "run", "getPracticeMetrics:stub"]
+CMD ["npm", "run", "build:ci"]
+CMD ["npm", "run", "deploy"]
