@@ -3,4 +3,4 @@ COPY . /tmp
 
 WORKDIR /tmp
 
-CMD npm run getNationalMetrics:stub && npm run getPracticeMetrics:stub && npm run build:ci && npm run deploy
+CMD npm run getNationalMetrics:stub && npm run getPracticeMetrics:stub && npm run build:ci && npm run deploy:ci
