@@ -147,15 +147,10 @@ case "${task}" in
           echo "Please set IMAGE_TAG environment variable"
           exit 1
       fi
-      setup_env ${deployment_env}
       ecr_login=$(dojo -c Dojofile-infra "./scripts/ecr-helper get-login")
       ecr_repo_uri=$(dojo -c Dojofile-infra "./scripts/ecr-helper get-repo-uri")
       dojo "npm ci -y"
-      docker build -t ${ecr_repo_uri}:latest -t ${ecr_repo_uri}:${IMAGE_TAG} \
-        --build-arg BUILD_TAG=$IMAGE_TAG \
-        --build-arg DATA_BUCKET_ENV=$DATA_BUCKET_ENV \
-        --build-arg DEPLOYMENT_BUCKET=$DEPLOYMENT_BUCKET \
-        --build-arg GATSBY_ENV=$GATSBY_ENV .
+      docker build -t ${ecr_repo_uri}:latest -t ${ecr_repo_uri}:${IMAGE_TAG} --build-arg BUILD_TAG=$IMAGE_TAG .
       eval $ecr_login
       docker push ${ecr_repo_uri}:${IMAGE_TAG}
       ;;
