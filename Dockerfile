@@ -12,7 +12,7 @@ COPY package-lock.json /tmp/package-lock.json
 COPY package.json /tmp/package.json
 COPY s3-config.js /tmp/s3-config.js
 COPY src /tmp/src
-COPY scripts/*.js /tmp/scripts
+COPY scripts/*.js /tmp/scripts/
 COPY static /tmp/static
 COPY tsconfig.json /tmp/tsconfig.json
 
