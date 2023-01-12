@@ -19,5 +19,5 @@ module.exports = {
 };
 
 process.env = Object.assign(process.env, {
-  DATA_BUCKET_ENV: "TEST_ENV",
+  DEPLOYMENT_ENV: "TEST_ENV",
 });
