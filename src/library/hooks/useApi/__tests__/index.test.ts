@@ -1,8 +1,9 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import moxios from "moxios";
 import { mockAPIResponse } from "../../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { useApi } from "../index";
+import {waitFor} from "@testing-library/dom";
 
 describe("useApi", () => {
   beforeAll(() => {
@@ -16,12 +17,12 @@ describe("useApi", () => {
   it("returns a loading state for a pending api call", async () => {
     mockAPIResponse();
 
-    const { result, waitForNextUpdate } = renderHook(() =>
+    const { result } = renderHook(() =>
       useApi("http://test.com/")
     );
     expect(result.current.isLoading).toBeTruthy();
 
-    await waitForNextUpdate();
+	await waitFor(() => {})
   });
 
   it("returns mock on a successful api call", async () => {
@@ -30,10 +31,10 @@ describe("useApi", () => {
     const mockedResponse = practiceDataBuilder();
     mockAPIResponse(statusCode, mockedResponse);
 
-    const { result, waitForNextUpdate } = renderHook(() =>
+    const { result } = renderHook(() =>
       useApi(`http://test.com/${odsCode}`)
     );
-    await waitForNextUpdate();
+	await waitFor(() => {})
 
     const { isLoading, data, error } = result.current;
 
@@ -46,11 +47,11 @@ describe("useApi", () => {
     const statusCode = 404;
     mockAPIResponse(statusCode);
 
-    const { result, waitForNextUpdate } = renderHook(() =>
+    const { result } = renderHook(() =>
       useApi("http://test.com/")
     );
 
-    await waitForNextUpdate();
+	await waitFor(() => {})
 
     const { isLoading, data, error } = result.current;
 
