@@ -1,4 +1,4 @@
-FROM node:16.14.2-buster
+FROM node:18.13-bullseye-slim
 
 # Copy only required files for building and deploying pipeline
 COPY analytics-config.json /tmp/analytics-config.json

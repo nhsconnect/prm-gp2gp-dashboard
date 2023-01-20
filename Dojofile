@@ -1,1 +1,1 @@
-DOJO_DOCKER_IMAGE="nhsdev/prm-docker-gp2gp-front-end-dojo:c80961f480e8556da6be5c6af71c1c41342ba5bf"
+DOJO_DOCKER_IMAGE="nhsdev/prm-docker-gp2gp-front-end-dojo c9171a9ef8de35699c6f3073863490296b579f08"
