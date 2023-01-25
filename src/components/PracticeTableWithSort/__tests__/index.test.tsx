@@ -14,6 +14,7 @@ import {
   anotherPracticeWithThreeMonthsMetrics,
   practiceWithThreeMonthsMetrics,
 } from "../../../../__mocks__/practiceMetricsTestData";
+import { waitFor } from "@testing-library/dom";
 
 const integrationTableHeaders = [
   { title: "Requesting practice name " },
@@ -131,7 +132,7 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows.length).toBe(7);
   });
 
-  it("displays practices data for default first month, then the next month when selected, with sorting maintained", () => {
+  it("displays practices data for default first month, then the next month when selected, with sorting maintained", async () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         sicblPractices={[
@@ -160,13 +161,15 @@ describe("PracticeTableWithSort component", () => {
 
     userEvent.selectOptions(monthSelect, "1");
 
-    expect(monthSelect).toHaveValue("1");
+    await waitFor(() => {
+      expect(monthSelect).toHaveValue("1");
 
-    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 40%");
-    expect(allRows.length).toBe(3);
+      expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 40%");
+      expect(allRows.length).toBe(3);
+    });
   });
 
-  it("displays practices data as percentages by default, then as numbers when selected and updates sort order", () => {
+  it("displays practices data as percentages by default, then as numbers when selected and updates sort order", async () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTableWithSort
         sicblPractices={practiceMetricsMock}
@@ -199,20 +202,22 @@ describe("PracticeTableWithSort component", () => {
     expect(allRows[6]).toHaveTextContent("GP Practice - A12345");
 
     userEvent.selectOptions(unitsSelect, "numbers");
-    expect(unitsSelect).toHaveValue("numbers");
 
-    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 11");
-    expect(allRows[1]).toHaveTextContent("Second GP Practice - A12346");
-    expect(allRows[2]).toHaveTextContent("Not integrated within 8 days 5");
-    expect(allRows[2]).toHaveTextContent("Fifth GP Practice - A12349");
-    expect(allRows[3]).toHaveTextContent("Not integrated within 8 days 3");
-    expect(allRows[3]).toHaveTextContent("Third GP Practice - A12347");
-    expect(allRows[4]).toHaveTextContent("Not integrated within 8 days 3");
-    expect(allRows[4]).toHaveTextContent("Sixth GP Practice - A12350");
-    expect(allRows[5]).toHaveTextContent("Not integrated within 8 days 0");
-    expect(allRows[5]).toHaveTextContent("GP Practice - A12345");
-    expect(allRows[6]).toHaveTextContent("Not integrated within 8 days 0");
-    expect(allRows[6]).toHaveTextContent("Fourth GP Practice - A12348");
+    await waitFor(() => {
+      expect(unitsSelect).toHaveValue("numbers");
+      expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 11");
+      expect(allRows[1]).toHaveTextContent("Second GP Practice - A12346");
+      expect(allRows[2]).toHaveTextContent("Not integrated within 8 days 5");
+      expect(allRows[2]).toHaveTextContent("Fifth GP Practice - A12349");
+      expect(allRows[3]).toHaveTextContent("Not integrated within 8 days 3");
+      expect(allRows[3]).toHaveTextContent("Third GP Practice - A12347");
+      expect(allRows[4]).toHaveTextContent("Not integrated within 8 days 3");
+      expect(allRows[4]).toHaveTextContent("Sixth GP Practice - A12350");
+      expect(allRows[5]).toHaveTextContent("Not integrated within 8 days 0");
+      expect(allRows[5]).toHaveTextContent("GP Practice - A12345");
+      expect(allRows[6]).toHaveTextContent("Not integrated within 8 days 0");
+      expect(allRows[6]).toHaveTextContent("Fourth GP Practice - A12348");
+    });
   });
 
   it("navigates to a practice page when a link is clicked", () => {
@@ -341,7 +346,7 @@ describe("PracticeTableWithSort component", () => {
 
     it.each(cases)(
       "displays practices ordered by %p field and %p %p order when selected",
-      (columnHeader, fieldName, order, expectedSortOrder) => {
+      async (columnHeader, fieldName, order, expectedSortOrder) => {
         const { getAllByRole, getByRole, queryAllByRole } = render(
           <PracticeTableWithSort
             sicblPractices={practiceMetricsMock}
@@ -364,30 +369,32 @@ describe("PracticeTableWithSort component", () => {
         userEvent.selectOptions(sortBySelect, fieldName);
         userEvent.selectOptions(orderSelect, order);
 
-        expect(sortBySelect).toHaveValue(fieldName);
-        expect(orderSelect).toHaveValue(order);
+        await waitFor(() => {
+          expect(sortBySelect).toHaveValue(fieldName);
+          expect(orderSelect).toHaveValue(order);
 
-        (expectedSortOrder as string[]).forEach((cell, index) => {
-          const sortedCell = queryAllByRole("cell", {
-            name: cell,
+          (expectedSortOrder as string[]).forEach((cell, index) => {
+            const sortedCell = queryAllByRole("cell", {
+              name: cell,
+            });
+
+            const sortedRowheader = queryAllByRole("rowheader");
+
+            const expectedSortedCell = sortedCell[0] || sortedRowheader[index];
+
+            expect(expectedSortedCell).toHaveClass("sorted");
           });
 
-          const sortedRowheader = queryAllByRole("rowheader");
+          const sortedColumnHeader = getByRole("columnheader", {
+            name: columnHeader as string,
+          });
+          expect(sortedColumnHeader.getAttribute("aria-sort")).toBe(order);
 
-          const expectedSortedCell = sortedCell[0] || sortedRowheader[index];
-
-          expect(expectedSortedCell).toHaveClass("sorted");
+          expect(allRows[1]).toHaveTextContent(expectedSortOrder[0]);
+          expect(allRows[2]).toHaveTextContent(expectedSortOrder[1]);
+          expect(allRows[3]).toHaveTextContent(expectedSortOrder[2]);
+          expect(allRows.length).toBe(7);
         });
-
-        const sortedColumnHeader = getByRole("columnheader", {
-          name: columnHeader as string,
-        });
-        expect(sortedColumnHeader.getAttribute("aria-sort")).toBe(order);
-
-        expect(allRows[1]).toHaveTextContent(expectedSortOrder[0]);
-        expect(allRows[2]).toHaveTextContent(expectedSortOrder[1]);
-        expect(allRows[3]).toHaveTextContent(expectedSortOrder[2]);
-        expect(allRows.length).toBe(7);
       }
     );
   });

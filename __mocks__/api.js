@@ -9,3 +9,13 @@ export const mockAPIResponse = (status, response) => {
     });
   });
 };
+
+export const mockAPIResponseRejection = (status, errorResp) => {
+  moxios.wait(() => {
+    let request = moxios.requests.mostRecent();
+    request.reject({
+      status,
+      response: errorResp,
+    });
+  });
+};

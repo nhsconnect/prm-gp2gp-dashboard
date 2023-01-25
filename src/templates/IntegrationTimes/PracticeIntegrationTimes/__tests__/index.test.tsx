@@ -209,7 +209,7 @@ describe("PracticeIntegrationTimes template", () => {
     expect(getByText("13.6%")).toBeInTheDocument();
   });
 
-  it("displays expander with the correct content", () => {
+  it("displays expander with the correct content", async () => {
     const { getByText } = render(
       <PracticeIntegrationTimes
         pageContext={practicePageContext}
@@ -226,7 +226,9 @@ describe("PracticeIntegrationTimes template", () => {
     expect(expanderContent).not.toBeVisible();
 
     userEvent.click(expanderTitle);
-    expect(expanderContent).toBeVisible();
+    await waitFor(() => {
+      expect(expanderContent).toBeVisible();
+    });
   });
 
   it("displays table headers correctly", () => {

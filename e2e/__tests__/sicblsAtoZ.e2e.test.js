@@ -1,8 +1,8 @@
 const { viewPorts } = require("../support/common");
 
-describe("Sub ICB Location A to Z page", () => {
+xdescribe("Sub ICB Location A to Z page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");

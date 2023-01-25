@@ -3,6 +3,7 @@ import * as Gatsby from "gatsby";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { OrganisationSearch } from "../";
+import { waitFor } from "@testing-library/dom";
 
 describe("OrganisationSearch component", () => {
   const validPracticeOdsCode = "A12345";
@@ -53,11 +54,12 @@ describe("OrganisationSearch component", () => {
 
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}/integration-times`
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          `/practice/${validPracticeOdsCode}/integration-times`
+        );
+      });
     });
 
     it("on existing practice name input", async () => {
@@ -73,11 +75,12 @@ describe("OrganisationSearch component", () => {
 
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}/integration-times`
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          `/practice/${validPracticeOdsCode}/integration-times`
+        );
+      });
     });
 
     it("when typing valid ods code and not selecting", async () => {
@@ -89,10 +92,12 @@ describe("OrganisationSearch component", () => {
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
 
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}/integration-times`
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          `/practice/${validPracticeOdsCode}/integration-times`
+        );
+      });
     });
 
     it("entering partial search with one result", async () => {
@@ -103,11 +108,12 @@ describe("OrganisationSearch component", () => {
 
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/practice/${validPracticeOdsCode}/integration-times`
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          `/practice/${validPracticeOdsCode}/integration-times`
+        );
+      });
     });
   });
 
@@ -126,11 +132,12 @@ describe("OrganisationSearch component", () => {
 
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
-
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/sub-ICB-location/${validSICBLOdsCode}/integration-times`
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          `/sub-ICB-location/${validSICBLOdsCode}/integration-times`
+        );
+      });
     });
 
     it("when typing valid ods code and not selecting", async () => {
@@ -142,10 +149,12 @@ describe("OrganisationSearch component", () => {
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
 
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        `/sub-ICB-location/${validSICBLOdsCode}/integration-times`
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          `/sub-ICB-location/${validSICBLOdsCode}/integration-times`
+        );
+      });
     });
 
     it("entering partial search with one result", async () => {
@@ -157,10 +166,12 @@ describe("OrganisationSearch component", () => {
       const submitButton = getByRole("button", { name: "Search" });
       userEvent.click(submitButton);
 
-      expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
-      expect(Gatsby.navigate).toHaveBeenCalledWith(
-        "/sub-ICB-location/13B/integration-times"
-      );
+      await waitFor(() => {
+        expect(Gatsby.navigate).toHaveBeenCalledTimes(1);
+        expect(Gatsby.navigate).toHaveBeenCalledWith(
+          "/sub-ICB-location/13B/integration-times"
+        );
+      });
     });
   });
 
@@ -180,12 +191,14 @@ describe("OrganisationSearch component", () => {
     const submitButton = getByRole("button", { name: "Search" });
     userEvent.click(submitButton);
 
-    expect(
-      getByText(
-        "Please enter a valid ODS code, practice name or Sub ICB Location name"
-      )
-    ).toBeInTheDocument();
-    expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    await waitFor(() => {
+      expect(
+        getByText(
+          "Please enter a valid ODS code, practice name or Sub ICB Location name"
+        )
+      ).toBeInTheDocument();
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    });
   });
 
   it("displays an error on invalid ODS code input", async () => {
@@ -199,12 +212,14 @@ describe("OrganisationSearch component", () => {
     const submitButton = getByRole("button", { name: "Search" });
     userEvent.click(submitButton);
 
-    expect(
-      getByText(
-        "Please enter a valid ODS code, practice name or Sub ICB Location name"
-      )
-    ).toBeInTheDocument();
-    expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    await waitFor(() => {
+      expect(
+        getByText(
+          "Please enter a valid ODS code, practice name or Sub ICB Location name"
+        )
+      ).toBeInTheDocument();
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    });
   });
 
   it("displays an error when search returns multiple results", async () => {
@@ -218,11 +233,13 @@ describe("OrganisationSearch component", () => {
     const submitButton = getByRole("button", { name: "Search" });
     userEvent.click(submitButton);
 
-    expect(
-      getByText(
-        "Multiple results matching 'Practice'. Please select an option from the dropdown."
-      )
-    ).toBeInTheDocument();
-    expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    await waitFor(() => {
+      expect(
+        getByText(
+          "Multiple results matching 'Practice'. Please select an option from the dropdown."
+        )
+      ).toBeInTheDocument();
+      expect(Gatsby.navigate).toHaveBeenCalledTimes(0);
+    });
   });
 });

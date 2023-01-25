@@ -65,8 +65,8 @@ describe("PageContent component", () => {
     expect(tableDescription).toBeInTheDocument();
   });
 
-  it("displays expander with the correct content", () => {
-    const { getByText } = render(
+  it("displays expander with the correct content", async () => {
+    const { getByText, debug } = render(
       <PageContent
         title=""
         tableDescription=""
@@ -87,7 +87,10 @@ describe("PageContent component", () => {
     expect(expanderContent).not.toBeVisible();
 
     userEvent.click(expanderTitle);
-    expect(expanderContent).toBeVisible();
+
+    await waitFor(() => {
+      expect(expanderContent).toBeVisible();
+    });
   });
 
   it("displays tab titles correctly", () => {

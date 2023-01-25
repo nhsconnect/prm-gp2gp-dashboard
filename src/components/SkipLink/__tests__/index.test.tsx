@@ -2,9 +2,10 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { SkipLink } from "../";
 import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/dom";
 
 describe("SkipLink component", () => {
-  it("focuses on the heading when skip link is clicked", () => {
+  it("focuses on the heading when skip link is clicked", async () => {
     const { getByRole } = render(
       <>
         <SkipLink />
@@ -22,11 +23,14 @@ describe("SkipLink component", () => {
     expect(headingElement).not.toHaveAttribute("tabindex");
 
     userEvent.click(skipLink);
-    expect(headingElement).toHaveFocus();
-    expect(headingElement).toHaveAttribute("tabindex", "-1");
+
+    await waitFor(() => {
+      expect(headingElement).toHaveFocus();
+      expect(headingElement).toHaveAttribute("tabindex", "-1");
+    });
   });
 
-  it("focuses on the heading when skip link is tabbed and entered using keyboard", () => {
+  it("focuses on the heading when skip link is tabbed and entered using keyboard", async () => {
     const { getByRole } = render(
       <>
         <SkipLink />
@@ -45,18 +49,23 @@ describe("SkipLink component", () => {
 
     userEvent.tab();
     userEvent.type(skipLink, "{enter}");
-    expect(headingElement).toHaveFocus();
-    expect(headingElement).toHaveAttribute("tabindex", "-1");
+
+    await waitFor(() => {
+      expect(headingElement).toHaveFocus();
+      expect(headingElement).toHaveAttribute("tabindex", "-1");
+    });
   });
 
-  it("doesnt set tab index anywhere if there is no heading", () => {
+  it("doesnt set tab index anywhere if there is no heading", async () => {
     const { getByRole } = render(<SkipLink />);
 
     const skipLink = getByRole("link", { name: "Skip to main content" });
     userEvent.click(skipLink);
 
-    expect(
-      getByRole("link", { name: "Skip to main content" })
-    ).not.toHaveFocus();
+    await waitFor(() => {
+      expect(
+        getByRole("link", { name: "Skip to main content" })
+      ).not.toHaveFocus();
+    });
   });
 });

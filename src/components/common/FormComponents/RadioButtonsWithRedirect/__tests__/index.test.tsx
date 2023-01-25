@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { RadioButtonsWithRedirect } from "../";
+import { waitFor } from "@testing-library/dom";
 
 describe("Radios component", () => {
   it("displays the title", () => {
@@ -63,7 +64,7 @@ describe("Radios component", () => {
     expect(radioOptions[2].nextSibling).toHaveTextContent("Third option");
   });
 
-  it("calls callback with default option value when button pressed", () => {
+  it("calls callback with default option value when button pressed", async () => {
     const options = [{ displayValue: "First option", value: "on" }];
     const callback = jest.fn();
 
@@ -81,8 +82,10 @@ describe("Radios component", () => {
     const submitSettingsLink = getByRole("link", { name: "Submit setting" });
     userEvent.click(submitSettingsLink);
 
-    expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith("on");
+    await waitFor(() => {
+      expect(callback).toHaveBeenCalledTimes(1);
+      expect(callback).toHaveBeenCalledWith("on");
+    });
   });
 
   it("calls callback with selected value when button pressed", async () => {
@@ -108,9 +111,10 @@ describe("Radios component", () => {
 
     userEvent.click(secondOption);
     userEvent.click(submitSettingsLink);
-
-    expect(callback).toHaveBeenCalledTimes(1);
-    expect(callback).toHaveBeenCalledWith("off");
+    await waitFor(() => {
+      expect(callback).toHaveBeenCalledTimes(1);
+      expect(callback).toHaveBeenCalledWith("off");
+    });
   });
 
   it("navigates to redirect URL", () => {

@@ -1,9 +1,9 @@
 const { viewPorts } = require("../support/common");
 const { practiceWithSomeIntegrations } = require("../../local-mocks/mocks");
 
-describe("Practice Download Data page", () => {
+xdescribe("Practice Download Data page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");

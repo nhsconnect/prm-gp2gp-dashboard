@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Select } from "../";
+import { waitFor } from "@testing-library/dom";
 
 describe("Select component", () => {
   const fruitOptions = [
@@ -28,7 +29,7 @@ describe("Select component", () => {
     expect(fruitSelect).toHaveValue("pomegranate");
   });
 
-  it("selects value when clicked", () => {
+  it("selects value when clicked", async () => {
     const { getByRole } = render(
       <Select
         label="Select fruit"
@@ -47,10 +48,12 @@ describe("Select component", () => {
 
     userEvent.selectOptions(fruitSelect, "blueberry");
 
-    expect(fruitSelect).toHaveValue("blueberry");
+    await waitFor(() => {
+      expect(fruitSelect).toHaveValue("blueberry");
+    });
   });
 
-  it("calls handleValueChange when value changed", () => {
+  it("calls handleValueChange when value changed", async () => {
     const handleValueChange = jest.fn();
 
     const { getByRole } = render(
@@ -69,7 +72,9 @@ describe("Select component", () => {
 
     userEvent.selectOptions(fruitSelect, "blueberry");
 
-    expect(handleValueChange).toHaveBeenCalledWith("blueberry");
+    await waitFor(() => {
+      expect(handleValueChange).toHaveBeenCalledWith("blueberry");
+    });
   });
 
   it("adds hidden label to the document when passed", () => {

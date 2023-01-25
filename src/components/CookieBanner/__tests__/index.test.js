@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as cookies from "react-cookie";
 import { CookieBanner } from "../";
+import { waitFor } from "@testing-library/dom";
 
 jest.mock("react-cookie", () => ({
   useCookies: jest.fn(),
@@ -33,7 +34,7 @@ describe("CookieBanner component", () => {
     expect(queryByLabelText("Cookie banner")).not.toBeInTheDocument();
   });
 
-  it("sets consent to true and the cookie expiry date if agree button pressed", () => {
+  it("sets consent to true and the cookie expiry date if agree button pressed", async () => {
     const mockSetCookie = jest.fn();
     jest
       .spyOn(cookies, "useCookies")
@@ -46,15 +47,19 @@ describe("CookieBanner component", () => {
     });
     userEvent.click(agreeButton);
 
-    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true", {
-      expires: new Date(2021, 2, 8, 10, 30),
-    });
+    await waitFor(() => {
+      expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "true", {
+        expires: new Date(2021, 2, 8, 10, 30),
+      });
 
-    const confirmationBanner = getByLabelText("Cookie setting success banner");
-    expect(confirmationBanner).toBeInTheDocument();
+      const confirmationBanner = getByLabelText(
+        "Cookie setting success banner"
+      );
+      expect(confirmationBanner).toBeInTheDocument();
+    });
   });
 
-  it("sets consent to false and the cookie expiry date if disagree button pressed", () => {
+  it("sets consent to false and the cookie expiry date if disagree button pressed", async () => {
     const mockSetCookie = jest.fn();
     jest
       .spyOn(cookies, "useCookies")
@@ -67,12 +72,16 @@ describe("CookieBanner component", () => {
     });
     userEvent.click(disagreeButton);
 
-    expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false", {
-      expires: new Date(2021, 2, 8, 10, 30),
-    });
+    await waitFor(() => {
+      expect(mockSetCookie).toBeCalledWith("nhsuk-cookie-consent", "false", {
+        expires: new Date(2021, 2, 8, 10, 30),
+      });
 
-    const confirmationBanner = getByLabelText("Cookie setting success banner");
-    expect(confirmationBanner).toBeInTheDocument();
+      const confirmationBanner = getByLabelText(
+        "Cookie setting success banner"
+      );
+      expect(confirmationBanner).toBeInTheDocument();
+    });
   });
 
   it("navigates to cookies policy page when read more link is clicked", () => {
@@ -98,7 +107,7 @@ describe("CookieBanner component", () => {
     userEvent.click(agreeButton);
 
     const cookiePageLink = getByRole("link", {
-      name: "cookies page",
+      name: "read more about our cookies",
     });
 
     expect(cookiePageLink.getAttribute("href")).toBe("/cookies-policy");

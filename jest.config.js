@@ -5,7 +5,6 @@ module.exports = {
   },
   moduleNameMapper: {
     ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
-    "^gatsby-page-utils/(.*)$": "gatsby-page-utils/dist/$1",
   },
   testPathIgnorePatterns: ["node_modules", ".cache", "public", "e2e"],
   transformIgnorePatterns: ["node_modules/(?!(gatsby)/)"],

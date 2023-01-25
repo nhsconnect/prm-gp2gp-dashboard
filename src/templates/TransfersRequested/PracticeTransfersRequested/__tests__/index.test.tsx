@@ -216,7 +216,7 @@ describe("PracticeTransfersRequested template", () => {
     });
   });
 
-  it("displays expander with the correct content", () => {
+  it("displays expander with the correct content", async () => {
     const { getByText } = render(
       <PracticeTransfersRequested
         pageContext={practicePageContext}
@@ -235,7 +235,10 @@ describe("PracticeTransfersRequested template", () => {
     expect(expanderContent).not.toBeVisible();
 
     userEvent.click(expanderTitle);
-    expect(expanderContent).toBeVisible();
+
+    await waitFor(() => {
+      expect(expanderContent).toBeVisible();
+    });
   });
 
   it("displays table headers correctly", () => {

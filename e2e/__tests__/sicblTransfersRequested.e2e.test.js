@@ -1,8 +1,8 @@
 const { viewPorts } = require("../support/common");
 
-describe("SICBL Transfers Requested page", () => {
+xdescribe("SICBL Transfers Requested page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");

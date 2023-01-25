@@ -6,6 +6,7 @@ import { PracticeTable } from "../";
 import practiceMetricsMock from "../../../../__mocks__/practiceMetricsMock.json";
 import unitsContent from "../../../data/content/unitsOptions.json";
 import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
+import { waitFor } from "@testing-library/dom";
 
 const integrationTableHeaders = [
   { title: "Requesting practice name " },
@@ -33,7 +34,7 @@ describe("PracticeTable component", () => {
     expect(tableCaption).toBeInTheDocument();
   });
 
-  it("displays practices data as percentages by default, then as numbers when selected", () => {
+  it("displays practices data as percentages by default, then as numbers when selected", async () => {
     const { getAllByRole, getByRole } = render(
       <PracticeTable
         metrics={practiceMetricsMock[0].metrics}
@@ -54,8 +55,11 @@ describe("PracticeTable component", () => {
     expect(allRows[1]).toHaveTextContent("Not integrated within 8 days n/a");
 
     userEvent.selectOptions(unitsSelect, "numbers");
-    expect(unitsSelect).toHaveValue("numbers");
 
-    expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 0");
+    await waitFor(() => {
+      expect(unitsSelect).toHaveValue("numbers");
+
+      expect(allRows[1]).toHaveTextContent("Not integrated within 8 days 0");
+    });
   });
 });

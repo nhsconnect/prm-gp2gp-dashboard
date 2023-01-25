@@ -2,9 +2,10 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { Expander } from "../";
 import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/dom";
 
 describe("Expander", () => {
-  it("displays title and content after clicking the title", () => {
+  it("displays title and content after clicking the title", async () => {
     const { getByText } = render(
       <Expander title="This is title" content={"Some content"} />
     );
@@ -16,6 +17,9 @@ describe("Expander", () => {
     expect(byText).not.toBeVisible();
 
     userEvent.click(elementTitle);
-    expect(byText).toBeVisible();
+
+    await waitFor(() => {
+      expect(byText).toBeVisible();
+    });
   });
 });

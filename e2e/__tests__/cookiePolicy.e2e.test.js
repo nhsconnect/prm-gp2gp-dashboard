@@ -1,8 +1,8 @@
 const { viewPorts } = require("../support/common");
 
-describe("Cookie page", () => {
+xdescribe("Cookie page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");

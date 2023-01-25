@@ -1,61 +1,66 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import moxios from "moxios";
 import { mockAPIResponse } from "../../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { useApi } from "../index";
+import { waitFor } from "@testing-library/dom";
 
 describe("useApi", () => {
-  beforeAll(() => {
-    moxios.install();
+  describe("useApiSuccess", () => {
+    beforeEach(() => {
+      moxios.install();
+    });
+
+    afterEach(() => {
+      moxios.uninstall();
+    });
+
+    it("returns mock on a successful api call", async () => {
+      const odsCode = "B86030";
+      const statusCode = 200;
+      const mockedResponse = practiceDataBuilder();
+      mockAPIResponse(statusCode, mockedResponse);
+
+      const { result } = renderHook(() => useApi(`http://test.com/${odsCode}`));
+
+      await waitFor(() => {
+        const { isLoading, data, error } = result.current;
+
+        expect(isLoading).toBeFalsy();
+        expect(data).toEqual(mockedResponse);
+        expect(error).toBeNull();
+      });
+    });
+
+    it("returns a loading state for a pending api call", async () => {
+      mockAPIResponse();
+
+      const { result } = renderHook(() => useApi("http://test.com/"));
+      expect(result.current.isLoading).toBeTruthy();
+    });
   });
 
-  afterAll(() => {
-    moxios.uninstall();
-  });
+  describe("useApiFailure", () => {
+    beforeEach(() => {
+      moxios.install();
+    });
 
-  it("returns a loading state for a pending api call", async () => {
-    mockAPIResponse();
+    afterEach(() => {
+      moxios.uninstall();
+    });
 
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useApi("http://test.com/")
-    );
-    expect(result.current.isLoading).toBeTruthy();
+    it("returns an error from a failed api call", async () => {
+      const statusCode = 404;
+      mockAPIResponse(statusCode);
 
-    await waitForNextUpdate();
-  });
+      const { result } = renderHook(() => useApi("http://test.com/"));
 
-  it("returns mock on a successful api call", async () => {
-    const odsCode = "B86030";
-    const statusCode = 200;
-    const mockedResponse = practiceDataBuilder();
-    mockAPIResponse(statusCode, mockedResponse);
+      await waitFor(() => {
+        const { isLoading, error } = result.current;
 
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useApi(`http://test.com/${odsCode}`)
-    );
-    await waitForNextUpdate();
-
-    const { isLoading, data, error } = result.current;
-
-    expect(isLoading).toBeFalsy();
-    expect(data).toEqual(mockedResponse);
-    expect(error).toBeNull();
-  });
-
-  it("returns an error from a failed api call", async () => {
-    const statusCode = 404;
-    mockAPIResponse(statusCode);
-
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useApi("http://test.com/")
-    );
-
-    await waitForNextUpdate();
-
-    const { isLoading, data, error } = result.current;
-
-    expect(isLoading).toBeFalsy();
-    expect(data).toBeNull();
-    expect(error).toBeDefined();
+        expect(isLoading).toBeFalsy();
+        expect(error).toBeDefined();
+      });
+    });
   });
 });

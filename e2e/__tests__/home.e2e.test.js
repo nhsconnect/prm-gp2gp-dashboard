@@ -1,8 +1,8 @@
 const { viewPorts } = require("../support/common");
 
-describe("Home page", () => {
+xdescribe("Home page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");

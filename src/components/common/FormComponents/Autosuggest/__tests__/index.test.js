@@ -3,11 +3,12 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { Autosuggest } from "../";
+import { waitFor } from "@testing-library/dom";
 
 describe("Autosuggest component", () => {
   const inputLabelText = "Enter value";
 
-  it("updates input value with text that the user has inputted", () => {
+  it("updates input value with text that the user has inputted", async () => {
     const mockSetInputValue = jest.fn();
     const { getByLabelText } = render(
       <Autosuggest
@@ -20,21 +21,24 @@ describe("Autosuggest component", () => {
     );
     const input = getByLabelText(inputLabelText);
     userEvent.type(input, "app");
-    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
-      method: expect.anything(),
-      newValue: "a",
-    });
-    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
-      method: expect.anything(),
-      newValue: "p",
-    });
-    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
-      method: expect.anything(),
-      newValue: "p",
+
+    await waitFor(() => {
+      expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+        method: expect.anything(),
+        newValue: "a",
+      });
+      expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+        method: expect.anything(),
+        newValue: "p",
+      });
+      expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+        method: expect.anything(),
+        newValue: "p",
+      });
     });
   });
 
-  it("sets input value when selecting value from suggestion list", () => {
+  it("sets input value when selecting value from suggestion list", async () => {
     const mockSetInputValue = jest.fn();
     const { getByLabelText, getByRole } = render(
       <Autosuggest
@@ -50,17 +54,24 @@ describe("Autosuggest component", () => {
     const input = getByLabelText(inputLabelText);
     userEvent.click(input);
 
-    const suggestion = getByRole("option");
+    let suggestion;
+
+    await waitFor(() => {
+      suggestion = getByRole("option");
+    });
+
     userEvent.click(suggestion);
 
-    expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
-      method: expect.anything(),
-      newValue: "apple",
+    await waitFor(() => {
+      expect(mockSetInputValue).toHaveBeenCalledWith(expect.anything(), {
+        method: expect.anything(),
+        newValue: "apple",
+      });
     });
   });
 
   describe("when multiSection is true", () => {
-    it("will display section title and suggestion", () => {
+    it("will display section title and suggestion", async () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText, getByRole } = render(
         <Autosuggest
@@ -84,13 +95,15 @@ describe("Autosuggest component", () => {
       const input = getByLabelText(inputLabelText);
       userEvent.click(input);
 
-      const sectionTitleComponent = getByText("fruits");
-      expect(sectionTitleComponent).toBeInTheDocument();
-      const suggestion = getByRole("option", { name: "a pple" });
-      expect(suggestion).toBeInTheDocument();
+      await waitFor(() => {
+        const sectionTitleComponent = getByText("fruits");
+        expect(sectionTitleComponent).toBeInTheDocument();
+        const suggestion = getByRole("option", { name: "a pple" });
+        expect(suggestion).toBeInTheDocument();
+      });
     });
 
-    it("will display each section title and associated suggestions", () => {
+    it("will display each section title and associated suggestions", async () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText, getByRole } = render(
         <Autosuggest
@@ -118,14 +131,16 @@ describe("Autosuggest component", () => {
       const input = getByLabelText(inputLabelText);
       userEvent.click(input);
 
-      expect(getByText("fruits")).toBeInTheDocument();
-      expect(getByText("clothes")).toBeInTheDocument();
-      expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
-      expect(getByRole("option", { name: "trous e rs" })).toBeInTheDocument();
-      expect(getByRole("option", { name: "blous e" })).toBeInTheDocument();
+      await waitFor(() => {
+        expect(getByText("fruits")).toBeInTheDocument();
+        expect(getByText("clothes")).toBeInTheDocument();
+        expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
+        expect(getByRole("option", { name: "trous e rs" })).toBeInTheDocument();
+        expect(getByRole("option", { name: "blous e" })).toBeInTheDocument();
+      });
     });
 
-    it("will not display section title when there are no suggestions", () => {
+    it("will not display section title when there are no suggestions", async () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText, getByRole, queryByText } = render(
         <Autosuggest
@@ -153,14 +168,16 @@ describe("Autosuggest component", () => {
       const input = getByLabelText(inputLabelText);
       userEvent.click(input);
 
-      expect(getByText("fruits")).toBeInTheDocument();
-      expect(queryByText("clothes")).toBeNull();
-      expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
+      await waitFor(() => {
+        expect(getByText("fruits")).toBeInTheDocument();
+        expect(queryByText("clothes")).toBeNull();
+        expect(getByRole("option", { name: "appl e" })).toBeInTheDocument();
+      });
     });
   });
 
   describe("text substring highlighting", () => {
-    it("applies text-match--highlighted class to substring of suggestion that matches input text", () => {
+    it("applies text-match--highlighted class to substring of suggestion that matches input text", async () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText } = render(
         <Autosuggest
@@ -175,14 +192,17 @@ describe("Autosuggest component", () => {
 
       const input = getByLabelText(inputLabelText);
       userEvent.click(input);
-      const suggestionSubstring = getByText("app");
-      expect(suggestionSubstring).toBeInTheDocument();
-      expect(suggestionSubstring.className).toContain(
-        "text-match--highlighted"
-      );
+
+      await waitFor(() => {
+        const suggestionSubstring = getByText("app");
+        expect(suggestionSubstring).toBeInTheDocument();
+        expect(suggestionSubstring.className).toContain(
+          "text-match--highlighted"
+        );
+      });
     });
 
-    it("applies text-match--highlighted class despite different casing", () => {
+    it("applies text-match--highlighted class despite different casing", async () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText } = render(
         <Autosuggest
@@ -197,14 +217,17 @@ describe("Autosuggest component", () => {
 
       const input = getByLabelText(inputLabelText);
       userEvent.click(input);
-      const suggestionSubstring = getByText("app");
-      expect(suggestionSubstring).toBeInTheDocument();
-      expect(suggestionSubstring.className).toContain(
-        "text-match--highlighted"
-      );
+
+      await waitFor(() => {
+        const suggestionSubstring = getByText("app");
+        expect(suggestionSubstring).toBeInTheDocument();
+        expect(suggestionSubstring.className).toContain(
+          "text-match--highlighted"
+        );
+      });
     });
 
-    it("returns two text-match--highlighted spans that match text input with multiple words", () => {
+    it("returns two text-match--highlighted spans that match text input with multiple words", async () => {
       const mockSetInputValue = jest.fn();
       const { getByLabelText, getByText } = render(
         <Autosuggest
@@ -219,17 +242,20 @@ describe("Autosuggest component", () => {
 
       const input = getByLabelText(inputLabelText);
       userEvent.click(input);
-      const suggestionSubstring = getByText("ap");
-      expect(suggestionSubstring).toBeInTheDocument();
-      expect(suggestionSubstring.className).toContain(
-        "text-match--highlighted"
-      );
 
-      const suggestionSubstringSecond = getByText("le");
-      expect(suggestionSubstringSecond).toBeInTheDocument();
-      expect(suggestionSubstringSecond.className).toContain(
-        "text-match--highlighted"
-      );
+      await waitFor(() => {
+        const suggestionSubstring = getByText("ap");
+        expect(suggestionSubstring).toBeInTheDocument();
+        expect(suggestionSubstring.className).toContain(
+          "text-match--highlighted"
+        );
+
+        const suggestionSubstringSecond = getByText("le");
+        expect(suggestionSubstringSecond).toBeInTheDocument();
+        expect(suggestionSubstringSecond.className).toContain(
+          "text-match--highlighted"
+        );
+      });
     });
 
     it("passes down custom input props", () => {

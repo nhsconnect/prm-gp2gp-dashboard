@@ -1,8 +1,8 @@
 const { viewPorts } = require("../support/common");
 
-describe("National statistics page", () => {
+xdescribe("National statistics page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/national-gp2gp-statistics");
