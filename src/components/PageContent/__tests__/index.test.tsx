@@ -66,7 +66,7 @@ describe("PageContent component", () => {
   });
 
   it("displays expander with the correct content", async () => {
-    const { getByText, debug } = render(
+    const { getByText } = render(
       <PageContent
         title=""
         tableDescription=""

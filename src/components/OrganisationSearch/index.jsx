@@ -52,9 +52,6 @@ export const OrganisationSearch = () => {
     `
   ).allFile.edges[0].node.childOrganisationsJson;
 
-  console.log("DDDDDDDAAAAAAAAAATAAAAAAAAAAAAAAA");
-  console.log(data);
-
   const [practiceSearch] = useState(() =>
     initializeSearch(data.practices, "practice")
   );

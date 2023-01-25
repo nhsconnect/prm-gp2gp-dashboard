@@ -5,7 +5,6 @@
   "version": "1.0.0",
   "scripts": {
     "mockServer": "node local-mocks/mockServer.js",
-    "gatsby:develop": "gatsby develop",
     "develop": "GATSBY_ODS_PORTAL_URL=http://localhost:3000/ORD/2-0-0/organisations concurrently --kill-others \"npm run mockServer\" \"gatsby develop\"",
     "develop:ci": "gatsby develop",
     "build": "GATSBY_ODS_PORTAL_URL=http://localhost:3000/ORD/2-0-0/organisations gatsby build",

@@ -93,7 +93,7 @@ describe("PracticeTransfersRequested template", () => {
     mockAPIResponse(statusCode, mockedResponse);
   });
 
-  afterAll(() => {
+  afterEach(() => {
     moxios.uninstall();
   });
 
