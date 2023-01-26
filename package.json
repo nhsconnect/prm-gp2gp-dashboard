@@ -30,7 +30,6 @@
     "enableGitHooks": "husky install",
     "pre-commit": "lint-staged && npm test",
     "pre-push": "npm run build && npm run test:e2e:built",
-    "preinstall": "npx npm-force-resolutions",
     "getStubs": "npm run getPracticeMetrics:stub && npm run getNationalMetrics:stub && npm run clean"
   },
   "lint-staged": {
@@ -48,7 +47,7 @@
     "gatsby-plugin-layout": "^4.4.0",
     "gatsby-plugin-react-helmet": "^6.4.0",
     "gatsby-plugin-react-svg": "^3.1.0",
-    "gatsby-plugin-s3": "^0.2.4",
+    "gatsby-plugin-s3": "^0.3.8",
     "gatsby-plugin-sass": "^6.4.0",
     "gatsby-plugin-ts-checker": "^1.1.0",
     "gatsby-source-filesystem": "^5.4.0",
@@ -98,5 +97,13 @@
     "start-server-and-test": "^1.14.0",
     "ts-jest": "^29.0.5",
     "typescript": "^4.6.3"
+  },
+  "overrides": {
+    "loader-utils": "3.2.1",
+    "netmask": "2.0.2",
+    "degenerator": "3.0.2",
+    "pac-resolver": "5.0.1",
+    "mem": "9.0.2",
+    "got": "12.5.3"
   }
 }
