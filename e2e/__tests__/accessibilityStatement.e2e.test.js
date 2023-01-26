@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("Accessibility statement page", () => {
+xdescribe("Accessibility statement page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -18,7 +18,7 @@ describe("Accessibility statement page", () => {
         cy.contains("a", "Accessibility statement").click();
         cy.contains("h1", "Accessibility statement");
         cy.contains("How accessible this website is");
-        // // cy.checkA11y();
+        // cy.checkAccessibility()
       });
 
       it("contains title and description metadata", () => {

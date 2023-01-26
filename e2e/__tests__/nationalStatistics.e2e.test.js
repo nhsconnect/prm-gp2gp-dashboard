@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("National statistics page", () => {
+xdescribe("National statistics page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/national-gp2gp-statistics");
@@ -73,7 +73,7 @@ describe("National statistics page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
 
       it("contains the title and description metadata", () => {

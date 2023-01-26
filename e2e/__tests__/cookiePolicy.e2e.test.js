@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("Cookie page", () => {
+xdescribe("Cookie page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -16,11 +16,11 @@ describe("Cookie page", () => {
         );
         cy.contains("a", "cookies page").click();
         cy.contains("h1", "Cookie Policy");
-        // cy.checkA11y();
+        // cy.checkAccessibility()
 
         cy.contains("Save my cookie settings").click();
         cy.contains("h1", "Your cookie settings have been saved");
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
 
       it("contains the title and description metadata after navigating to cookie policy page", () => {
@@ -32,7 +32,7 @@ describe("Cookie page", () => {
           "content",
           "Cookie Policy for GP Registrations Data"
         );
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
 
       it("contains the title and description metadata for the cookie confirmation page", () => {

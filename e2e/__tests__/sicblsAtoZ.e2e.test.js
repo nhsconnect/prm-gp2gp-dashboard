@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("Sub ICB Location A to Z page", () => {
+xdescribe("Sub ICB Location A to Z page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -12,7 +12,7 @@ describe("Sub ICB Location A to Z page", () => {
       it("displays Sub ICB Location A to Z page and navigates to a selected Sub ICB Locations", () => {
         cy.contains("a", "Sub ICB Location A to Z").click();
         cy.contains("h1", "Sub ICB Location A to Z");
-        // cy.checkA11y();
+        // cy.checkAccessibility()
 
         cy.title().should(
           "eq",

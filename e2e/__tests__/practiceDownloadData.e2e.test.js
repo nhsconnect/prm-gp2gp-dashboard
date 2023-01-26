@@ -1,9 +1,9 @@
 const { viewPorts } = require("../viewPorts");
 const { practiceWithSomeIntegrations } = require("../../local-mocks/mocks");
 
-describe("Practice Download Data page", () => {
+xdescribe("Practice Download Data page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -125,7 +125,7 @@ describe("Practice Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
     });
   });

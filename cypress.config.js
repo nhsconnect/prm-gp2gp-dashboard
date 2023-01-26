@@ -11,7 +11,7 @@ module.exports = defineConfig({
     screenshotsFolder: "e2e/screenshots",
     chromeWebSecurity: false, // ?
     video: true,
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on) {
       on("task", {
         table(message) {
           console.table(message);

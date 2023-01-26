@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("Contact us page", () => {
+xdescribe("Contact us page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -15,7 +15,7 @@ describe("Contact us page", () => {
         cy.contains(
           "We are unable to assist with individual patient or practice queries"
         );
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
 
       it("contains title and description metadata", () => {

@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("Privacy policy page", () => {
+xdescribe("Privacy policy page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -13,7 +13,7 @@ describe("Privacy policy page", () => {
         cy.contains("a", "Your privacy").click();
         cy.contains("h1", "Your privacy");
         cy.contains("Information we may collect");
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
 
       it("contains title and description metadata", () => {

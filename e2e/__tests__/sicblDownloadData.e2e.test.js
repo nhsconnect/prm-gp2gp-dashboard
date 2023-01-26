@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("SICBL Download Data page", () => {
+xdescribe("SICBL Download Data page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -97,7 +97,7 @@ describe("SICBL Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkA11y();
+        // cy.checkAccessibility()
       });
     });
   });

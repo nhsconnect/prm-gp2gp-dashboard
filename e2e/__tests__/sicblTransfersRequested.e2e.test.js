@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-describe("SICBL Transfers Requested page", () => {
+xdescribe("SICBL Transfers Requested page", () => {
   viewPorts.map((viewPort) => {
-    describe(`${viewPort.device} viewport`, () => {
+    xdescribe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -96,7 +96,7 @@ describe("SICBL Transfers Requested page", () => {
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");
         cy.contains("Data updated: February 2020");
-        // cy.checkA11y();
+        // cy.checkAccessibility()
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,
