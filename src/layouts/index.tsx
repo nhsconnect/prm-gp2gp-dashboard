@@ -6,7 +6,6 @@ import { Link } from "gatsby";
 import { CookieBanner } from "../components/CookieBanner";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { FeedbackBanner } from "../components/FeedbackBanner";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 import { HeroBanner } from "../components/common/HeroBanner";
 import { setupAnalytics } from "../library/setupAnalytics";
@@ -28,7 +27,7 @@ type LayoutProps = {
   path: string;
   children: ReactNode;
   pageContext: {
-    layout: "general" | "homepage" | "navigation-contents";
+    layout?: "general" | "homepage";
   };
 };
 
@@ -82,25 +81,9 @@ const GeneralContent: FC<ContentProps> = ({ children }) => (
     <BackToLink link="/" text="Back to search" />
     <main className="nhsuk-main-wrapper nhsuk-u-padding-top-2" id="maincontent">
       {children}
-      <FeedbackBanner />
     </main>
   </div>
 );
-
-const NavigationContents: FC<ContentProps> = ({ children }) => {
-  return (
-    <div className="gp2gp-width-container">
-      <BackToLink link="/" text="Back to search" />
-      <main
-        className="nhsuk-main-wrapper nhsuk-u-padding-top-2"
-        id="maincontent"
-      >
-        {children}
-        <FeedbackBanner className="gp2gp-page-contents-feedback" />
-      </main>
-    </div>
-  );
-};
 
 const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
   const [cookies] = useCookies([NHS_COOKIE_NAME]);
@@ -132,11 +115,9 @@ const Layout: FC<LayoutProps> = ({ path, children, pageContext }) => {
           <Header />
           {pageContext.layout === "homepage" ? (
             <HomepageContent>{children}</HomepageContent>
-          ) : pageContext.layout === "navigation-contents" ? (
-            <NavigationContents>{children}</NavigationContents>
-          ) : (
+          ) :
             <GeneralContent>{children}</GeneralContent>
-          )}
+          }
           <Footer />
         </ErrorBoundary>
       </FeatureTogglesContext.Provider>

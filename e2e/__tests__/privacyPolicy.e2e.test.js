@@ -25,13 +25,6 @@ xdescribe("Privacy policy page", () => {
           "Privacy Policy for GP Registrations Data"
         );
       });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/your-privacy");
-        cy.contains("h3", "Feedback");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
     });
   });
 });

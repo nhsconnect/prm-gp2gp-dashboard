@@ -28,13 +28,6 @@ xdescribe("Sub ICB Location A to Z page", () => {
         cy.contains("a", "Test ICB - 10D").click();
         cy.contains("h1", "Test ICB - 10D");
       });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/sub-ICB-locations");
-        cy.contains("h3", "Feedback");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
     });
   });
 });

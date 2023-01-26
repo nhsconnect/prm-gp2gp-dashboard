@@ -37,7 +37,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         practiceOdsCode: practice.odsCode,
         dataUpdatedDate: generatedOn,
-        layout: "navigation-contents",
       },
     });
 
@@ -49,7 +48,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         practiceOdsCode: practice.odsCode,
         dataUpdatedDate: generatedOn,
-        layout: "navigation-contents",
       },
     });
 
@@ -60,7 +58,6 @@ exports.createPages = async ({ graphql, actions }) => {
       ),
       context: {
         practiceOdsCode: practice.odsCode,
-        layout: "navigation-contents",
         dataUpdatedDate: generatedOn,
       },
     });
@@ -75,7 +72,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         sicblOdsCode: sicbl.odsCode,
         dataUpdatedDate: generatedOn,
-        layout: "navigation-contents",
       },
     });
 
@@ -87,7 +83,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         sicblOdsCode: sicbl.odsCode,
         dataUpdatedDate: generatedOn,
-        layout: "navigation-contents",
       },
     });
 
@@ -98,7 +93,6 @@ exports.createPages = async ({ graphql, actions }) => {
       ),
       context: {
         sicblOdsCode: sicbl.odsCode,
-        layout: "navigation-contents",
         dataUpdatedDate: generatedOn,
       },
     });

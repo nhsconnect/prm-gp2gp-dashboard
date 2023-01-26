@@ -36,7 +36,6 @@ function queryResult(
 describe("SICBL Integration Times template", () => {
   const pipelineSICBLData = {
     sicblOdsCode: "12A",
-    layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
@@ -45,7 +44,6 @@ describe("SICBL Integration Times template", () => {
     const sicblWithoutNameData = {
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
       sicblOdsCode: odsCode,
-      layout: "general",
     };
 
     const { getByRole } = render(

@@ -34,9 +34,3 @@
     width: 80%;
   }
 }
-
-.gp2gp-page-contents-feedback {
-  @include mq($from: large-desktop) {
-    margin-left: 20%;
-  }
-}

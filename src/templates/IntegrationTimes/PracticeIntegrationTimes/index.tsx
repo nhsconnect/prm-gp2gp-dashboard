@@ -23,7 +23,7 @@ import { PracticeDataType } from "../../../library/types/queryResults.types";
 
 type PageContext = {
   practiceOdsCode: string;
-  layout: string;
+  layout?: string;
   dataUpdatedDate: string;
 };
 

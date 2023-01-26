@@ -136,18 +136,6 @@ xdescribe("Practice transfers requested page", () => {
 
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("2");
       });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.intercept(
-          "/ORD/2-0-0/organisations/A12347",
-          practiceWithSomeIntegrations
-        );
-
-        cy.visit("/practice/A12347/gp2gp-transfers-requested");
-        cy.contains("h3", "Feedback");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
     });
   });
 });

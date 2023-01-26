@@ -35,6 +35,23 @@ describe("General layout", () => {
     });
   });
 
+	it("displays children when layout not provided", async () => {
+		const { getByTestId, getByText } = render(
+			<Layout path="/cookies-policy/" pageContext={{}}>
+				<div data-testid="test-div">
+					<h1>This is title</h1>
+				</div>
+			</Layout>
+		);
+
+		await waitFor(() => {
+			const testDiv = getByTestId("test-div");
+
+			expect(testDiv).toBeInTheDocument();
+			expect(getByText("This is title")).toBeInTheDocument();
+		});
+	});
+
   it("does not display cookie banner on cookie policy page", async () => {
     const { queryByLabelText } = render(
       <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
@@ -62,22 +79,6 @@ describe("General layout", () => {
       const cookieBanner = getByLabelText("Cookie banner");
 
       expect(cookieBanner).toBeInTheDocument();
-    });
-  });
-
-  it("displays feedback heading", async () => {
-    const { getByRole } = render(
-      <Layout path="/cookies-policy/" pageContext={{ layout: "general" }}>
-        <p>This is a paragraph.</p>
-      </Layout>
-    );
-
-    await waitFor(() => {
-      const feedbackHeading = getByRole("heading", {
-        name: "Feedback",
-        level: 3,
-      });
-      expect(feedbackHeading).toBeInTheDocument();
     });
   });
 

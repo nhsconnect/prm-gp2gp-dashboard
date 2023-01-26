@@ -9,7 +9,7 @@ import { SICBLDownloadDataType } from "../../../library/types/queryResultDownloa
 
 type PageContext = {
   sicblOdsCode: string;
-  layout: string;
+  layout?: string;
   dataUpdatedDate: string;
 };
 

@@ -42,7 +42,6 @@ const ODSPracticeData = {
 
 const practicePageContext = {
   practiceOdsCode: "B86030",
-  layout: "navigation-contents",
   dataUpdatedDate: "2020-02-24 16:51:21.353977",
 };
 

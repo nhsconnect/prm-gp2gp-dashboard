@@ -22,7 +22,7 @@ import { PageTemplatePath } from "../../../library/enums/pageTemplatePath";
 
 type PageContext = {
   practiceOdsCode: string;
-  layout: string;
+  layout?: string;
   dataUpdatedDate: string;
 };
 

@@ -88,7 +88,6 @@ function queryResult(
 const practicePageContext = {
   dataUpdatedDate: "2020-02-24 16:51:21.353977",
   practiceOdsCode: "B86030",
-  layout: "navigation-contents",
 };
 
 describe("PracticeIntegrationTimes template", () => {
@@ -371,7 +370,6 @@ describe("PracticeIntegrationTimes template", () => {
     const practicePageContextNoTransferData = {
       dataUpdatedDate: "2020-02-24 16:51:21.353977",
       practiceOdsCode: "B86030",
-      layout: "general",
     };
 
     const { getAllByText } = render(

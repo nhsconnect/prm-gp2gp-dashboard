@@ -27,13 +27,6 @@ xdescribe("Contact us page", () => {
           "If you are a patient and you need medical advice, you should call 111. The GP Registrations Data team can help with enquiries about the data displayed on this site, not with individual patient or practice queries."
         );
       });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/contact-us");
-        cy.contains("h3", "Feedback");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
     });
   });
 });

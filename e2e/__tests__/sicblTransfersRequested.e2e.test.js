@@ -176,13 +176,6 @@ xdescribe("SICBL Transfers Requested page", () => {
 
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("2");
       });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/sub-ICB-location/11D/gp2gp-transfers-requested");
-        cy.contains("h3", "Feedback");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
     });
   });
 });

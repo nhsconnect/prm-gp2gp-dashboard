@@ -35,7 +35,6 @@ function queryResult(
 describe("SICBLDownloadData template", () => {
   const pipelineSICBLData = {
     sicblOdsCode: "12A",
-    layout: "general",
     dataUpdatedDate: "2020-02-24 16:51:21.353977",
   };
 
@@ -43,7 +42,6 @@ describe("SICBLDownloadData template", () => {
     const odsCode = "Y00159";
     const sicblWithoutNameData = {
       sicblOdsCode: odsCode,
-      layout: "general",
       dataUpdatedDate: "",
     };
 

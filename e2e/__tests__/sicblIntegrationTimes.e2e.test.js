@@ -162,13 +162,6 @@ xdescribe("SICBL Integration Times page", () => {
 
         cy.get('[data-testid="table__cell--row-1-col-2"]').contains("1");
       });
-
-      it("displays the feedback section that links to feedback survey", () => {
-        cy.visit("/sub-ICB-location/11D/integration-times");
-        cy.contains("h3", "Feedback");
-        cy.contains("Take our survey").click();
-        cy.contains("Feedback form for GP registrations data platform");
-      });
     });
   });
 });

@@ -29,11 +29,6 @@ const YourPrivacy: FC = () => {
           </li>
         </ul>
         <h2>Information we may collect</h2>
-        <p>
-          You can leave feedback on some pages of the website or on a user
-          survey. You can choose to share your email address if you want a
-          reply. Otherwise, we collect and store feedback anonymously.
-        </p>
         <h3>Cookies</h3>
         <p>
           Our website uses cookies. These are small files saved on your phone,
@@ -57,20 +52,7 @@ const YourPrivacy: FC = () => {
         </p>
         <p>
           We sometimes use tools on other organisations' websites to collect
-          data or to ask for feedback. These tools set their own cookies.
-        </p>
-        <h2>Keeping your personal data secure</h2>
-        <p>
-          We store your data on secure servers in England. A partner
-          organisation is providing hosting services but has no say in how the
-          information is used. There are no legal ways for their employees to
-          see the data. Only approved people in the NHS GP Registrations Data
-          team can see it.
-        </p>
-        <p>
-          If you shared your email with us as part of a survey, we will delete
-          it after 2 years. At that point no one can identify you in the survey
-          data.
+          data. These tools set their own cookies.
         </p>
         <h2>Data sharing</h2>
         <p>

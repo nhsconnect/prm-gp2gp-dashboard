@@ -23,7 +23,7 @@ import { SICBLDataType } from "../../../library/types/queryResults.types";
 
 type PageContext = {
   sicblOdsCode: string;
-  layout: string;
+  layout?: string;
   dataUpdatedDate: string;
 };
 
