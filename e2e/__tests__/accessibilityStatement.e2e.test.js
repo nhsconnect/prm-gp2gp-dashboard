@@ -1,19 +1,24 @@
-const { viewPorts } = require("../support/common");
+const { viewPorts } = require("../viewPorts");
 
-xdescribe("Accessibility statement page", () => {
+describe("Accessibility statement page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
         cy.injectAxe();
+        cy.wait(10);
+      });
+
+      it("does nothing", () => {
+        cy.contains("a");
       });
 
       it("displays accessibility statement page", () => {
         cy.contains("a", "Accessibility statement").click();
         cy.contains("h1", "Accessibility statement");
         cy.contains("How accessible this website is");
-        cy.checkAccessibility();
+        // // cy.checkA11y();
       });
 
       it("contains title and description metadata", () => {

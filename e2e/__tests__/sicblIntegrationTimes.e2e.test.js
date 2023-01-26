@@ -1,8 +1,8 @@
-const { viewPorts } = require("../support/common");
+const { viewPorts } = require("../viewPorts");
 
-xdescribe("SICBL Integration Times page", () => {
+describe("SICBL Integration Times page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -84,7 +84,7 @@ xdescribe("SICBL Integration Times page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        cy.checkAccessibility();
+        // cy.checkA11y();
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

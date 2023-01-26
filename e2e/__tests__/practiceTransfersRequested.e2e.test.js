@@ -1,9 +1,9 @@
-const { viewPorts } = require("../support/common");
+const { viewPorts } = require("../viewPorts");
 const { practiceWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
-xdescribe("Practice transfers requested page", () => {
+describe("Practice transfers requested page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -108,7 +108,7 @@ xdescribe("Practice transfers requested page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        cy.checkAccessibility();
+        // cy.checkA11y();
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

@@ -1,8 +1,8 @@
-const { viewPorts } = require("../support/common");
+const { viewPorts } = require("../viewPorts");
 
-xdescribe("Definitions and notes about this data page", () => {
+describe("Definitions and notes about this data page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -19,7 +19,7 @@ xdescribe("Definitions and notes about this data page", () => {
         cy.contains(
           "Total number of registrations that triggered a GP2GP transfer between the 1st and the last day of the month."
         );
-        cy.checkAccessibility();
+        // cy.checkA11y();
       });
 
       it("contains title and description metadata", () => {

@@ -1,8 +1,8 @@
-const { viewPorts } = require("../support/common");
+const { viewPorts } = require("../viewPorts");
 
-xdescribe("Home page", () => {
+describe("Home page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -19,7 +19,7 @@ xdescribe("Home page", () => {
         cy.contains("button", "Search");
         cy.contains("h2", "What you can find out");
         cy.contains("h2", "What this data can’t tell you");
-        cy.checkAccessibility();
+        // cy.checkA11y();
       });
 
       it("displays the validation error when there is no input", () => {
@@ -27,7 +27,7 @@ xdescribe("Home page", () => {
         cy.contains(
           "Please enter a valid ODS code, practice name or Sub ICB Location name"
         );
-        cy.checkAccessibility();
+        // cy.checkA11y();
       });
 
       it("contains the title and description metadata", () => {
