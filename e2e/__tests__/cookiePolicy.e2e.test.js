@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-xdescribe("Cookie page", () => {
+describe("Cookie page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -14,7 +14,7 @@ xdescribe("Cookie page", () => {
         cy.contains(
           "You can change your cookie settings at any time using our cookies page."
         );
-        cy.contains("a", "cookies page").click();
+        cy.contains("a", "cookies page").scrollIntoView().click();
         cy.contains("h1", "Cookie Policy");
         // cy.checkAccessibility()
 

@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-xdescribe("Contact us page", () => {
+describe("Contact us page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -10,7 +10,7 @@ xdescribe("Contact us page", () => {
       });
 
       it("displays Contact us page", () => {
-        cy.contains("a", "Contact us").click();
+        cy.contains("a", "Contact us").scrollIntoView().click();
         cy.contains("h1", "Contact us");
         cy.contains(
           "We are unable to assist with individual patient or practice queries"

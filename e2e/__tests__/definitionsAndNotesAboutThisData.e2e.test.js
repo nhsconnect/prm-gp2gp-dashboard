@@ -1,8 +1,8 @@
 const { viewPorts } = require("../viewPorts");
 
-xdescribe("Definitions and notes about this data page", () => {
+describe("Definitions and notes about this data page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
@@ -10,7 +10,9 @@ xdescribe("Definitions and notes about this data page", () => {
       });
 
       it("displays Definitions and notes about this data page", () => {
-        cy.contains("a", "Definitions and notes about this data").click();
+        cy.contains("a", "Definitions and notes about this data")
+          .scrollIntoView()
+          .click();
         cy.contains("h1", "Definitions and notes about this data");
         cy.contains("h2", "Definitions");
         cy.contains("h2", "About this data");

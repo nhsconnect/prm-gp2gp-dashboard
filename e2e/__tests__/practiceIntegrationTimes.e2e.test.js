@@ -1,9 +1,9 @@
 const { viewPorts } = require("../viewPorts");
 const { practiceWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
-xdescribe("Practice Integration Times page", () => {
+describe("Practice Integration Times page", () => {
   viewPorts.map((viewPort) => {
-    xdescribe(`${viewPort.device} viewport`, () => {
+    describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
