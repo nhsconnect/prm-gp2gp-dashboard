@@ -6,8 +6,8 @@ describe("Practice Download Data page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("searches, navigates to an individual practice integration times page, navigates to practice download data page via contents menu and downloads CSV file", () => {
@@ -18,7 +18,7 @@ describe("Practice Download Data page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Sub ICB Location name"
         )
-          .type("Test GP Practice With Some Integrations - A12347")
+          .type("Test GP Practice With Some Integrations A12347")
           .click();
         // cy.contains("Test GP Practice With Some Integrations");
 

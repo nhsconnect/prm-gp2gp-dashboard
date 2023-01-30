@@ -6,8 +6,8 @@ describe("Practice transfers requested page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents menu and goes back to home page and goes back to home page", () => {
@@ -19,7 +19,7 @@ describe("Practice transfers requested page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Sub ICB Location name"
         )
-          .type("Test GP Practice With Some Integrations - A12347")
+          .type("Test GP Practice With Some Integrations A12347")
           .click();
 
         cy.contains("button", "Search").click({ force: true });

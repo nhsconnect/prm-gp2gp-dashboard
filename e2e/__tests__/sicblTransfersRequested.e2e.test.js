@@ -5,8 +5,8 @@ describe("SICBL Transfers Requested page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("searches, navigates to an individual SICBL integration times page, navigates to SICBL transfers requested page via contents menu and goes back to home page", () => {

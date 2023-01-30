@@ -5,15 +5,12 @@ describe("Accessibility statement page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
-        cy.wait(10);
+        cy.visit("/");
       });
 
       it("displays accessibility statement page", () => {
-        cy.contains("a", "Accessibility statement")
-          .scrollIntoView()
-          .click({ force: true });
+        cy.contains("a", "Accessibility statement").scrollIntoView().click();
         cy.contains("h1", "Accessibility statement");
         cy.contains("How accessible this website is");
         // cy.checkAccessibility()

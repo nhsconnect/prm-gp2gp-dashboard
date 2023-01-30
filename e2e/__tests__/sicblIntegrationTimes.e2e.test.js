@@ -5,8 +5,8 @@ describe("SICBL Integration Times page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("searches, navigates to an individual SICBL integration times page and goes back to home page", () => {

@@ -5,14 +5,12 @@ describe("Privacy policy page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("displays your privacy page", () => {
-        cy.contains("a", "Your privacy")
-          .scrollIntoView()
-          .click({ force: true });
+        cy.contains("a", "Your privacy").scrollIntoView().click();
         cy.contains("h1", "Your privacy");
         cy.contains("Information we may collect");
         // cy.checkAccessibility()

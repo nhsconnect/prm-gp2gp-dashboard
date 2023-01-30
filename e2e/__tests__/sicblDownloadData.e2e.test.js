@@ -5,8 +5,8 @@ describe("SICBL Download Data page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("searches, navigates to an individual SICBL integration times page, navigates to SICBL download data page via contents menu and downloads CSV files", () => {

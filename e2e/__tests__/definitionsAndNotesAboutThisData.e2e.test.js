@@ -5,8 +5,8 @@ describe("Definitions and notes about this data page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("displays Definitions and notes about this data page", () => {

@@ -5,12 +5,12 @@ describe("Contact us page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.visit("/");
         cy.injectAxe();
+        cy.visit("/");
       });
 
       it("displays Contact us page", () => {
-        cy.contains("a", "Contact us").scrollIntoView().click({ force: true });
+        cy.contains("a", "Contact us").scrollIntoView().click();
         cy.contains("h1", "Contact us");
         cy.contains(
           "We are unable to assist with individual patient or practice queries"
