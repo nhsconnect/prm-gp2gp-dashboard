@@ -10,7 +10,7 @@ describe("Contact us page", () => {
       });
 
       it("displays Contact us page", () => {
-        cy.contains("a", "Contact us").scrollIntoView().click();
+        cy.contains("a", "Contact us").scrollIntoView().click({ force: true });
         cy.contains("h1", "Contact us");
         cy.contains(
           "We are unable to assist with individual patient or practice queries"

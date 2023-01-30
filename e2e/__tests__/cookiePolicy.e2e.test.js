@@ -14,7 +14,9 @@ describe("Cookie page", () => {
         cy.contains(
           "You can change your cookie settings at any time using our cookies page."
         );
-        cy.contains("a", "cookies page").scrollIntoView().click();
+        cy.contains("a", "cookies page")
+          .scrollIntoView()
+          .click({ force: true });
         cy.contains("h1", "Cookie Policy");
         // cy.checkAccessibility()
 

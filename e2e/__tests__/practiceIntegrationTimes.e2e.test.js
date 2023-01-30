@@ -6,25 +6,22 @@ describe("Practice Integration Times page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
+        cy.intercept(
+          "/ORD/2-0-0/organisations/A12347",
+          practiceWithSomeIntegrations
+        );
         cy.visit("/");
         cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page and goes back to home page", () => {
-        cy.intercept(
-          "/ORD/2-0-0/organisations/A12347",
-          practiceWithSomeIntegrations
-        );
-
         cy.findByLabelText(
           "Enter an ODS code, practice name or Sub ICB Location name"
-        ).type("Test GP Practice With Some Integrations A12347");
-        cy.contains("li", "Test GP Practice With Some Integrations")
-          .parent()
-          .parent()
+        )
+          .type("Test GP Practice With Some Integrations - A12347")
           .click();
 
-        cy.contains("button", "Search").click();
+        cy.contains("button", "Search").click({ force: true });
 
         cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
 

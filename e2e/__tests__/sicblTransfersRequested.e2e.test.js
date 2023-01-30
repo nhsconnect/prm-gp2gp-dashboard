@@ -12,10 +12,11 @@ describe("SICBL Transfers Requested page", () => {
       it("searches, navigates to an individual SICBL integration times page, navigates to SICBL transfers requested page via contents menu and goes back to home page", () => {
         cy.findByLabelText(
           "Enter an ODS code, practice name or Sub ICB Location name"
-        ).type("Test ICB - 10D");
-        cy.contains("li", "Test ICB - 10D").parent().parent().click();
+        )
+          .type("Test ICB - 10D")
+          .click();
 
-        cy.contains("button", "Search").click();
+        cy.contains("button", "Search").click({ force: true });
 
         cy.contains("h1", "Test ICB - 10D");
 

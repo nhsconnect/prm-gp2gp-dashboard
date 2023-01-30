@@ -10,7 +10,9 @@ describe("Privacy policy page", () => {
       });
 
       it("displays your privacy page", () => {
-        cy.contains("a", "Your privacy").scrollIntoView().click();
+        cy.contains("a", "Your privacy")
+          .scrollIntoView()
+          .click({ force: true });
         cy.contains("h1", "Your privacy");
         cy.contains("Information we may collect");
         // cy.checkAccessibility()

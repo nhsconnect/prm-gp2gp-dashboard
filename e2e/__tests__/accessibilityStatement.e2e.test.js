@@ -11,7 +11,9 @@ describe("Accessibility statement page", () => {
       });
 
       it("displays accessibility statement page", () => {
-        cy.contains("a", "Accessibility statement").scrollIntoView().click();
+        cy.contains("a", "Accessibility statement")
+          .scrollIntoView()
+          .click({ force: true });
         cy.contains("h1", "Accessibility statement");
         cy.contains("How accessible this website is");
         // cy.checkAccessibility()

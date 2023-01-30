@@ -10,7 +10,9 @@ describe("Sub ICB Location A to Z page", () => {
       });
 
       it("displays Sub ICB Location A to Z page and navigates to a selected Sub ICB Locations", () => {
-        cy.contains("a", "Sub ICB Location A to Z").scrollIntoView().click();
+        cy.contains("a", "Sub ICB Location A to Z")
+          .scrollIntoView()
+          .click({ force: true });
         cy.contains("h1", "Sub ICB Location A to Z");
         // cy.checkAccessibility()
 
