@@ -1,12 +1,13 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("Definitions and notes about this data page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("displays Definitions and notes about this data page", () => {
@@ -21,7 +22,16 @@ describe("Definitions and notes about this data page", () => {
         cy.contains(
           "Total number of registrations that triggered a GP2GP transfer between the 1st and the last day of the month."
         );
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("contains title and description metadata", () => {

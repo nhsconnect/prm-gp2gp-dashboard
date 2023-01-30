@@ -1,4 +1,5 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 const { practiceWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
 describe("Practice Integration Times page", () => {
@@ -10,8 +11,8 @@ describe("Practice Integration Times page", () => {
           "/ORD/2-0-0/organisations/A12347",
           practiceWithSomeIntegrations
         );
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page and goes back to home page", () => {
@@ -102,7 +103,16 @@ describe("Practice Integration Times page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

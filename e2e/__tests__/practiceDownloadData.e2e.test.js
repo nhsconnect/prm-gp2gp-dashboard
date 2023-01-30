@@ -1,4 +1,5 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 const { practiceWithSomeIntegrations } = require("../../local-mocks/mocks");
 
 describe("Practice Download Data page", () => {
@@ -6,8 +7,8 @@ describe("Practice Download Data page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page, navigates to practice download data page via contents menu and downloads CSV file", () => {
@@ -124,7 +125,16 @@ describe("Practice Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
     });
   });

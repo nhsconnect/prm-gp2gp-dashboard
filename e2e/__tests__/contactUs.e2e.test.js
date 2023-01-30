@@ -1,12 +1,13 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("Contact us page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("displays Contact us page", () => {
@@ -15,7 +16,16 @@ describe("Contact us page", () => {
         cy.contains(
           "We are unable to assist with individual patient or practice queries"
         );
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("contains title and description metadata", () => {

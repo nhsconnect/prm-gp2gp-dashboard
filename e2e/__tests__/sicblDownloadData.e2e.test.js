@@ -1,12 +1,13 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("SICBL Download Data page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual SICBL integration times page, navigates to SICBL download data page via contents menu and downloads CSV files", () => {
@@ -98,7 +99,16 @@ describe("SICBL Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
     });
   });

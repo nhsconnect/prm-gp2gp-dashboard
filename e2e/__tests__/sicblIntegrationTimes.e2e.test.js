@@ -1,12 +1,13 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("SICBL Integration Times page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual SICBL integration times page and goes back to home page", () => {
@@ -85,7 +86,16 @@ describe("SICBL Integration Times page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

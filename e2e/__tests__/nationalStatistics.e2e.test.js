@@ -1,4 +1,5 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("National statistics page", () => {
   viewPorts.map((viewPort) => {
@@ -73,7 +74,16 @@ describe("National statistics page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("contains the title and description metadata", () => {

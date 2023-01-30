@@ -1,12 +1,13 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("Home page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("displays the home page with the search input", () => {
@@ -19,7 +20,16 @@ describe("Home page", () => {
         cy.contains("button", "Search");
         cy.contains("h2", "What you can find out");
         cy.contains("h2", "What this data can’t tell you");
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("displays the validation error when there is no input", () => {
@@ -27,7 +37,16 @@ describe("Home page", () => {
         cy.contains(
           "Please enter a valid ODS code, practice name or Sub ICB Location name"
         );
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("contains the title and description metadata", () => {

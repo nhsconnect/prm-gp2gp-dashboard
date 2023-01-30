@@ -1,4 +1,5 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 const { practiceWithSomeIntegrations } = require("/local-mocks/mocks.js");
 
 describe("Practice transfers requested page", () => {
@@ -6,8 +7,8 @@ describe("Practice transfers requested page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents menu and goes back to home page and goes back to home page", () => {
@@ -106,7 +107,16 @@ describe("Practice transfers requested page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

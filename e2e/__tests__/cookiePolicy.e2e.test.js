@@ -1,12 +1,13 @@
 const { viewPorts } = require("../viewPorts");
+const { terminalLog } = require("../axeLog");
 
 describe("Cookie page", () => {
   viewPorts.map((viewPort) => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
         cy.visit("/");
+        cy.injectAxe();
       });
 
       it("displays the cookie banner and navigates to the cookie policy page", () => {
@@ -16,11 +17,29 @@ describe("Cookie page", () => {
         );
         cy.contains("a", "cookies page").click();
         cy.contains("h1", "Cookie Policy");
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
 
         cy.contains("Save my cookie settings").click();
         cy.contains("h1", "Your cookie settings have been saved");
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("contains the title and description metadata after navigating to cookie policy page", () => {
@@ -32,7 +51,16 @@ describe("Cookie page", () => {
           "content",
           "Cookie Policy for GP Registrations Data"
         );
-        // cy.checkAccessibility()
+        cy.checkA11y(
+          null,
+          {
+            rules: {
+              "landmark-unique": { enabled: false },
+              region: { enabled: false },
+            },
+          },
+          terminalLog
+        );
       });
 
       it("contains the title and description metadata for the cookie confirmation page", () => {
