@@ -14,16 +14,7 @@ describe("Privacy policy page", () => {
         cy.contains("a", "Your privacy").scrollIntoView().click();
         cy.contains("h1", "Your privacy");
         cy.contains("Information we may collect");
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
       });
 
       it("contains title and description metadata", () => {

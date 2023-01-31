@@ -98,16 +98,7 @@ describe("SICBL Transfers Requested page", () => {
         cy.contains("button", "Data table").click();
         cy.contains("Test GP Practice With Integrations - A12345");
         cy.contains("Data updated: February 2020");
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

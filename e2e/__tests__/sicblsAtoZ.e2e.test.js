@@ -13,16 +13,7 @@ describe("Sub ICB Location A to Z page", () => {
       it("displays Sub ICB Location A to Z page and navigates to a selected Sub ICB Locations", () => {
         cy.contains("a", "Sub ICB Location A to Z").scrollIntoView().click();
         cy.contains("h1", "Sub ICB Location A to Z");
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
 
         cy.title().should(
           "eq",

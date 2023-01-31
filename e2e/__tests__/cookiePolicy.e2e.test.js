@@ -17,29 +17,11 @@ describe("Cookie page", () => {
         );
         cy.contains("a", "cookies page").click();
         cy.contains("h1", "Cookie Policy");
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
 
         cy.contains("Save my cookie settings").click();
         cy.contains("h1", "Your cookie settings have been saved");
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
       });
 
       it("contains the title and description metadata after navigating to cookie policy page", () => {
@@ -51,16 +33,7 @@ describe("Cookie page", () => {
           "content",
           "Cookie Policy for GP Registrations Data"
         );
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
       });
 
       it("contains the title and description metadata for the cookie confirmation page", () => {

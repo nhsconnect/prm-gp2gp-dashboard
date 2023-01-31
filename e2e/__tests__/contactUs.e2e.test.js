@@ -16,16 +16,7 @@ describe("Contact us page", () => {
         cy.contains(
           "We are unable to assist with individual patient or practice queries"
         );
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
       });
 
       it("contains title and description metadata", () => {

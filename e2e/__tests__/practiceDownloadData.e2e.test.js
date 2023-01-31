@@ -125,16 +125,7 @@ describe("Practice Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        cy.checkA11y(
-          null,
-          {
-            rules: {
-              "landmark-unique": { enabled: false },
-              region: { enabled: false },
-            },
-          },
-          terminalLog
-        );
+        cy.checkA11y(null, {}, terminalLog);
       });
     });
   });
