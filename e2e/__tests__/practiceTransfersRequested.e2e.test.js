@@ -126,7 +126,7 @@ describe("Practice transfers requested page", () => {
 
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("66.7%");
 
-        cy.get("select#unitsSelect").scrollIntoView().select("Numbers", { force: true });
+        cy.get("select#unitsSelect").scrollIntoView().select("numbers", { force: true });
 
         cy.get("select#unitsSelect option:selected").should(
           "have.text",

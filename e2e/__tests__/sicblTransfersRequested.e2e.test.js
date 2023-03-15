@@ -169,7 +169,7 @@ describe("SICBL Transfers Requested page", () => {
 
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("66.7%");
 
-        cy.get("select#unitsSelect").select("Numbers");
+        cy.get("select#unitsSelect").select("numbers");
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
           "Numbers"
