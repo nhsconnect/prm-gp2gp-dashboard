@@ -1,7 +1,1 @@
-{
-  "1088948": {
-    "active": true,
-    "notes": "Ignored as the current versions don't compile with gatsby due to ERR_REQUIRE_ESM imports - and it is a moderate vulnerability",
-    "expiry": 1678953480000
-  }
-}
+{}
