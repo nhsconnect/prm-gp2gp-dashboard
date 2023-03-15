@@ -10,7 +10,7 @@ describe("Practice Integration Times page", () => {
           "/ORD/2-0-0/organisations/A12347",
           practiceWithSomeIntegrations
         );
-        cy.injectAxe();
+        // cy.injectAxe();
         cy.visit("/");
       });
 

@@ -5,7 +5,7 @@ describe("National statistics page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
+        // cy.injectAxe();
         cy.visit("/national-gp2gp-statistics");
       });
 

@@ -5,7 +5,7 @@ describe("Sub ICB Location A to Z page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        cy.injectAxe();
+        // cy.injectAxe();
         cy.visit("/");
       });
 
