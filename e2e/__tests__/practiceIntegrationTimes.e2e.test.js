@@ -122,7 +122,8 @@ describe("Practice Integration Times page", () => {
 
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("50%");
 
-        cy.get("select#unitsSelect").select("Numbers");
+        cy.get("select#unitsSelect").scrollIntoView().select("Numbers", { force: true });
+
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
           "Numbers"
