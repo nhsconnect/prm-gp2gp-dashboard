@@ -1,5 +1,5 @@
 const { viewPorts } = require("../viewPorts");
-const { practiceWithSomeIntegrations } = require("/local-mocks/mocks.js");
+const { practiceWithIntegrations } = require("../../local-mocks/mocks");
 
 describe("Practice transfers requested page", () => {
   viewPorts.map((viewPort) => {
@@ -12,19 +12,19 @@ describe("Practice transfers requested page", () => {
 
       it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents menu and goes back to home page and goes back to home page", () => {
         cy.intercept(
-          "/ORD/2-0-0/organisations/A12347",
-          practiceWithSomeIntegrations
+          "/ORD/2-0-0/organisations/A12345",
+          practiceWithIntegrations
         );
 
         cy.findByLabelText(
           "Enter an ODS code, practice name or Sub ICB Location name"
         )
-          .type("Test GP Practice With Some Integrations A12347")
+          .type("Test GP Practice With Integrations A12345")
           .click();
 
         cy.contains("button", "Search").click({ force: true });
 
-        cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
+        cy.contains("h1", "Test GP Practice With Integrations - A12345");
 
         cy.contains("h2", "Contents");
         cy.contains("li", "Integration times");
@@ -38,7 +38,7 @@ describe("Practice transfers requested page", () => {
 
         cy.title().should(
           "eq",
-          "Test GP Practice With Some Integrations - A12347 - GP Registrations Data"
+          "Test GP Practice With Integrations - A12345 - GP Registrations Data"
         );
         cy.get('meta[name="description"]').should(
           "have.attr",
@@ -46,8 +46,8 @@ describe("Practice transfers requested page", () => {
           "Monthly data about GP2GP transfers for this practice"
         );
 
-        cy.contains("A12347");
-        cy.contains("123 Some Address");
+        cy.contains("A12345");
+        cy.contains("125 Some Address");
         cy.contains("Some Town");
         cy.contains("BL3 5DP");
 
@@ -63,20 +63,20 @@ describe("Practice transfers requested page", () => {
           );
 
           cy.contains("GP2GP transfers requested");
-          cy.get("[data-testid=table__cell--row-0-col-1]").contains(3);
+          cy.get("[data-testid=table__cell--row-0-col-1]").contains(8);
 
           cy.contains("GP2GP transfers received");
-          cy.get("[data-testid=table__cell--row-0-col-2]").contains("66.7%");
+          cy.get("[data-testid=table__cell--row-0-col-2]").contains("75%");
 
           cy.contains("GP2GP technical failures");
-          cy.get("[data-testid=table__cell--row-0-col-3]").contains("33.3%");
+          cy.get("[data-testid=table__cell--row-0-col-3]").contains("25%");
 
           cy.get("[data-testid=table__cell--row-1-col-0]").contains(
             "November 2019"
           );
-          cy.get("[data-testid=table__cell--row-1-col-1]").contains(0);
-          cy.get("[data-testid=table__cell--row-1-col-2]").contains("n/a");
-          cy.get("[data-testid=table__cell--row-1-col-3]").contains("n/a");
+          cy.get("[data-testid=table__cell--row-1-col-1]").contains(1);
+          cy.get("[data-testid=table__cell--row-1-col-2]").contains("100%");
+          cy.get("[data-testid=table__cell--row-1-col-3]").contains("0%");
         });
 
         cy.get("[data-testid=gp2gp-open-modal-btn]")
@@ -116,24 +116,26 @@ describe("Practice transfers requested page", () => {
       });
 
       it("display percentages on practice performance table, change to numbers when selected", () => {
-        cy.visit("/practice/A12347/gp2gp-transfers-requested");
-        cy.contains("h1", "Test GP Practice With Some Integrations - A12347");
+        cy.visit("/practice/A12345/gp2gp-transfers-requested");
+        cy.contains("h1", "Test GP Practice With Integrations - A12345");
 
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
           "Percentages"
         );
 
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("66.7%");
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("75%");
 
-        cy.get("select#unitsSelect").scrollIntoView().select("numbers", { force: true });
+        cy.get("select#unitsSelect")
+          .scrollIntoView()
+          .select("numbers", { force: true });
 
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
           "Numbers"
         );
 
-        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("2");
+        cy.get('[data-testid="table__cell--row-0-col-2"]').contains("6");
       });
     });
   });
