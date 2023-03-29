@@ -170,6 +170,9 @@ describe("SICBL Transfers Requested page", () => {
         cy.get('[data-testid="table__cell--row-0-col-2"]').contains("66.7%");
 
         cy.get("select#unitsSelect").select("numbers");
+
+        cy.get("#table-title").click(); // click away to make sure select dropdown is updated
+
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
           "Numbers"

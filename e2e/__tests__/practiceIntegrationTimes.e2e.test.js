@@ -126,6 +126,8 @@ describe("Practice Integration Times page", () => {
           .scrollIntoView()
           .select("numbers", { force: true });
 
+        cy.get("#table-title").click(); // click away to make sure select dropdown is updated
+
         cy.get("select#unitsSelect option:selected").should(
           "have.text",
           "Numbers"
