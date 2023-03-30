@@ -5,8 +5,8 @@ describe("Home page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        // cy.injectAxe();
         cy.visit("/");
+        // cy.injectAxe();
       });
 
       it("displays the home page with the search input", () => {

@@ -5,8 +5,8 @@ describe("Accessibility statement page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        // cy.injectAxe();
         cy.visit("/");
+        // cy.injectAxe();
       });
 
       it("displays accessibility statement page", () => {
