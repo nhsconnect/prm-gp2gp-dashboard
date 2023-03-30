@@ -6,7 +6,7 @@ describe("Contact us page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        // cy.injectAxe();
+        cy.injectAxe();
       });
 
       it("displays Contact us page", () => {
@@ -15,7 +15,7 @@ describe("Contact us page", () => {
         cy.contains(
           "We are unable to assist with individual patient or practice queries"
         );
-        // cy.checkAccessibility()
+        cy.checkAccessibility();
       });
 
       it("contains title and description metadata", () => {

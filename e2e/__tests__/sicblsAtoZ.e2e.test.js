@@ -6,13 +6,13 @@ describe("Sub ICB Location A to Z page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        // cy.injectAxe();
+        cy.injectAxe();
       });
 
       it("displays Sub ICB Location A to Z page and navigates to a selected Sub ICB Locations", () => {
         cy.contains("a", "Sub ICB Location A to Z").scrollIntoView().click();
         cy.contains("h1", "Sub ICB Location A to Z");
-        // cy.checkAccessibility()
+        cy.checkAccessibility();
 
         cy.title().should(
           "eq",

@@ -7,7 +7,7 @@ describe("Practice Download Data page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        // cy.injectAxe();
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page, navigates to practice download data page via contents menu and downloads CSV file", () => {
@@ -124,7 +124,7 @@ describe("Practice Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkAccessibility();
       });
     });
   });

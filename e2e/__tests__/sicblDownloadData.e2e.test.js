@@ -6,7 +6,7 @@ describe("SICBL Download Data page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        // cy.injectAxe();
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual SICBL integration times page, navigates to SICBL download data page via contents menu and downloads CSV files", () => {
@@ -98,7 +98,7 @@ describe("SICBL Download Data page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkAccessibility();
       });
     });
   });

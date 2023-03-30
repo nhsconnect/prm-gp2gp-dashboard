@@ -6,7 +6,7 @@ describe("SICBL Integration Times page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        // cy.injectAxe();
+        cy.injectAxe();
       });
 
       it("searches, navigates to an individual SICBL integration times page and goes back to home page", () => {
@@ -85,7 +85,7 @@ describe("SICBL Integration Times page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkAccessibility();
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,
