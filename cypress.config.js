@@ -12,7 +12,7 @@ module.exports = defineConfig({
     chromeWebSecurity: false, // ?
     video: true,
     retries: {
-      runMode: 2,
+      runMode: 4,
       openMode: 0,
     },
     setupNodeEvents(on) {
