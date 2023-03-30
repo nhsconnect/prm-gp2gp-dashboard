@@ -5,8 +5,8 @@ describe("National statistics page", () => {
     describe(`${viewPort.device} viewport`, () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
-        // cy.injectAxe();
         cy.visit("/national-gp2gp-statistics");
+        // cy.injectAxe();
       });
 
       it("displays national metrics contents", () => {
@@ -73,7 +73,7 @@ describe("National statistics page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        // cy.checkAccessibility()
+        cy.checkAccessibility()
       });
 
       it("contains the title and description metadata", () => {
