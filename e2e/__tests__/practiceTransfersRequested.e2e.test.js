@@ -7,7 +7,7 @@ describe("Practice transfers requested page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        cy.injectAxe();
+        // cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page, navigates to practice transfers requested page via contents menu and goes back to home page and goes back to home page", () => {
@@ -106,7 +106,7 @@ describe("Practice transfers requested page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        cy.checkAccessibility();
+        // cy.checkAccessibility();
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

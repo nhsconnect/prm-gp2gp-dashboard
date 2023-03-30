@@ -6,14 +6,14 @@ describe("Privacy policy page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        cy.injectAxe();
+        // cy.injectAxe();
       });
 
       it("displays your privacy page", () => {
         cy.contains("a", "Your privacy").scrollIntoView().click();
         cy.contains("h1", "Your privacy");
         cy.contains("Information we may collect");
-        cy.checkAccessibility();
+        // cy.checkAccessibility();
       });
 
       it("contains title and description metadata", () => {

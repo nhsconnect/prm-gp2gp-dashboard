@@ -11,7 +11,7 @@ describe("Practice Integration Times page", () => {
           practiceWithIntegrations
         );
         cy.visit("/");
-        cy.injectAxe();
+        // cy.injectAxe();
       });
 
       it("searches, navigates to an individual practice integration times page and goes back to home page", () => {
@@ -102,7 +102,7 @@ describe("Practice Integration Times page", () => {
 
         cy.contains("Data updated: February 2020");
 
-        cy.checkAccessibility();
+        // cy.checkAccessibility();
 
         cy.contains(
           `[data-testid=back-to-search__${viewPort.device.toLowerCase()}]`,

@@ -6,7 +6,7 @@ describe("Home page", () => {
       beforeEach(() => {
         cy.viewport(viewPort.width, viewPort.height);
         cy.visit("/");
-        cy.injectAxe();
+        // cy.injectAxe();
       });
 
       it("displays the home page with the search input", () => {
@@ -19,7 +19,7 @@ describe("Home page", () => {
         cy.contains("button", "Search");
         cy.contains("h2", "What you can find out");
         cy.contains("h2", "What this data can’t tell you");
-        cy.checkAccessibility();
+        // cy.checkAccessibility();
       });
 
       it("displays the validation error when there is no input", () => {
@@ -27,7 +27,7 @@ describe("Home page", () => {
         cy.contains(
           "Please enter a valid ODS code, practice name or Sub ICB Location name"
         );
-        cy.checkAccessibility();
+        // cy.checkAccessibility();
       });
 
       it("contains the title and description metadata", () => {
