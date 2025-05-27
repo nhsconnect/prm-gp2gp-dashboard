@@ -4,6 +4,15 @@ import util from "util";
 
 jest.mock("fs");
 
+jest.mock("aws-sdk", () => {
+  return {
+    S3: jest.fn(() => ({
+      getObject: jest.fn().mockReturnThis(),
+      promise: jest.fn().mockRejectedValue(new Error("S3 fetch failed")),
+    })),
+  };
+});
+
 // couldn't easily mock promisify success/failure in the same test file
 jest.mock("util", () => ({
   promisify: jest.fn(() => jest.fn().mockRejectedValue("failure")),
