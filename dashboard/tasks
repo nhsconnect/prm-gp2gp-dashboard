@@ -59,16 +59,10 @@ case "${task}" in
       npm i
       npm run test
       ;;
-  canary-dojo-test)
-      dojo "./tasks canary-test"
-      ;;
   canary-test-e2e)
       npm i
       npm run e2e:install
       npm run test:e2e:built
-      ;;
-  canary-dojo-test-e2e)
-      dojo "./tasks test-e2e-canary"
       ;;
   test)
       npm ci -y
@@ -98,15 +92,9 @@ case "${task}" in
       npm ci --production -y
       npm run build:ci
       ;;
-  dojo-build)
-      dojo "./tasks build ${deployment_env}"
-      ;;
   get-stubs)
       npm ci --production -y
       npm run getStubs
-      ;;
-  dojo-get-stubs)
-      dojo "./tasks get-stubs"
       ;;
   get-metrics)
       setup_env ${deployment_env}
