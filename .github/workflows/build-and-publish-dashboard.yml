@@ -6,15 +6,19 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  pull-requests: write
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
 jobs:
   test:
     runs-on: ubuntu-latest
-      
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: 'dashboard/.nvmrc'
+          node-version-file: .nvmrc
           cache: 'npm'
           
   #     - name: Install dependencies
