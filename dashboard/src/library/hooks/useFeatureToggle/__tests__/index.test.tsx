@@ -52,24 +52,32 @@ jest.mock("../../../../../featureToggles.json", () => ({
 }));
 
 describe("Feature Toggling Functionality", () => {
-  const ORIGINAL_LOCATION = global.window.location;
+const ORIGINAL_LOCATION = window.location;
 
-  beforeEach(() => {
-    // @ts-ignore
-    delete global.window.location;
-    global.window = Object.create(window);
-    // @ts-ignore
-    global.window.location = {
-      hostname: "localhost",
-      search: "",
-    };
+beforeEach(() => {
+  const locationMock = {
+    ...ORIGINAL_LOCATION,
+    hostname: "localhost",
+    search: "",
+  };
 
-    process.env.GATSBY_ENV = "dev";
+  Object.defineProperty(window, "location", {
+    writable: true,
+    configurable: true,
+    value: locationMock,
   });
 
-  afterAll(() => {
-    global.window.location = ORIGINAL_LOCATION;
+  process.env.GATSBY_ENV = "dev";
+});
+
+afterAll(() => {
+  Object.defineProperty(window, "location", {
+    writable: true,
+    configurable: true,
+    value: ORIGINAL_LOCATION,
   });
+});
+
 
   describe("useFeatureToggles", () => {
     it("does not display features when no feature toggles are on", () => {
