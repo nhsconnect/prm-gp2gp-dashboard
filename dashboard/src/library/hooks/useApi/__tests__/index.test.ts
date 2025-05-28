@@ -1,5 +1,4 @@
 import { renderHook } from "@testing-library/react";
-import moxios from "moxios";
 import { mockAPIResponse } from "../../../../../__mocks__/api";
 import { practiceDataBuilder } from "../../../../../__mocks__/ODSPortalBuilder";
 import { useApi } from "../index";
@@ -7,14 +6,6 @@ import { waitFor } from "@testing-library/dom";
 
 describe("useApi", () => {
   describe("useApiSuccess", () => {
-    beforeEach(() => {
-      moxios.install();
-    });
-
-    afterEach(() => {
-      moxios.uninstall();
-    });
-
     it("returns mock on a successful api call", async () => {
       const odsCode = "B86030";
       const statusCode = 200;
@@ -41,14 +32,6 @@ describe("useApi", () => {
   });
 
   describe("useApiFailure", () => {
-    beforeEach(() => {
-      moxios.install();
-    });
-
-    afterEach(() => {
-      moxios.uninstall();
-    });
-
     it("returns an error from a failed api call", async () => {
       const statusCode = 404;
       mockAPIResponse(statusCode);
