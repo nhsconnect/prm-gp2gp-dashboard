@@ -51,7 +51,7 @@ jobs:
         id: ecr-repo
         run: |
           uri=$(aws ssm get-parameter \
-          --name "/registrations/dev/data-pipeline/ecr/url/gp2gp-dashboard" \
+          --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/gp2gp-dashboard" \
           --query "Parameter.Value" --output text)
           echo "uri=$uri" >> $GITHUB_OUTPUT
 
