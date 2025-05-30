@@ -18,6 +18,9 @@ on:
         required: true
         type: string
         default: "dev"
+    secrets:
+      AWS_ASSUME_ROLE:
+        required: true
 
 
 permissions:
@@ -27,6 +30,7 @@ permissions:
 
 jobs:
   build-and-publish-ui:
+    environment: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     defaults:
       run:
