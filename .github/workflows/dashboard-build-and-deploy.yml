@@ -29,58 +29,58 @@ permissions:
   contents: read
 
 jobs:
-  build-and-publish-ui:
-    environment: ${{ github.event.inputs.environment }}
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./dashboard
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+#   build-and-publish-ui:
+#     environment: ${{ github.event.inputs.environment }}
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: ./dashboard
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          mask-aws-account-id: true
-          role-to-assume: ${{ secrets.AWS_ASSUME_ROLE }}
-          role-skip-session-tagging: true
-          aws-region: ${{ vars.AWS_REGION }}
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           mask-aws-account-id: true
+#           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE }}
+#           role-skip-session-tagging: true
+#           aws-region: ${{ vars.AWS_REGION }}
  
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Get ECR repository URI from SSM
-        id: ecr-repo
-        run: |
-          uri=$(aws ssm get-parameter \
-          --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/gp2gp-dashboard" \
-          --query "Parameter.Value" --output text)
-          echo "uri=$uri" >> $GITHUB_OUTPUT
+#       - name: Get ECR repository URI from SSM
+#         id: ecr-repo
+#         run: |
+#           uri=$(aws ssm get-parameter \
+#           --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/gp2gp-dashboard" \
+#           --query "Parameter.Value" --output text)
+#           echo "uri=$uri" >> $GITHUB_OUTPUT
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: dashboard/.nvmrc
-          cache: 'npm'
-          cache-dependency-path: dashboard/package-lock.json
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version-file: dashboard/.nvmrc
+#           cache: 'npm'
+#           cache-dependency-path: dashboard/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
+#       - name: Install dependencies
+#         run: npm ci
 
-      - name: Build and Push Docker Image
-        env:
-          ECR_URI: ${{ steps.ecr-repo.outputs.uri }}
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
-          docker push $ECR_URI:$IMAGE_TAG
-          docker push $ECR_URI:latest
+#       - name: Build and Push Docker Image
+#         env:
+#           ECR_URI: ${{ steps.ecr-repo.outputs.uri }}
+#           IMAGE_TAG: ${{ github.sha }}
+#         run: |
+#           docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
+#           docker push $ECR_URI:$IMAGE_TAG
+#           docker push $ECR_URI:latest
 
   redeploy_gp2gp_infrastructure_dashboard:
     name: Redeploy gp2gp infrastructure dashboard
-    needs: [build-and-publish-ui]
+    # needs: [build-and-publish-ui]
     uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@PRM-308
     with:
       environment: dev
