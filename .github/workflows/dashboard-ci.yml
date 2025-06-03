@@ -66,7 +66,7 @@ jobs:
         run: ./tasks canary-test-e2e
     
   build-and-publish-ui:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && false
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     uses: ./.github/workflows/dashboard-build-and-deploy.yml
     with:
       environment: dev

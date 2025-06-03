@@ -1,4 +1,4 @@
-name: Dashboard Build and Deploy
+name: Dashboard Build and Deploy to Dev
 
 on:
   workflow_dispatch:
@@ -7,9 +7,7 @@ on:
         default: "dev"
         description: "Which environment should this run against"
         required: true
-        type: choice
-        options:
-          - dev
+        type: string
           
   workflow_call:
     inputs:
@@ -18,7 +16,9 @@ on:
         required: true
         type: string
         default: "dev"
-
+    secrets:
+      AWS_ASSUME_ROLE:
+        required: true
 
 permissions:
   pull-requests: write
@@ -27,6 +27,7 @@ permissions:
 
 jobs:
   build-and-publish-ui:
+    environment: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -73,3 +74,25 @@ jobs:
           docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
           docker push $ECR_URI:$IMAGE_TAG
           docker push $ECR_URI:latest
+
+  redeploy_gp2gp_infrastructure_dashboard:
+    name: Redeploy gp2gp infrastructure dashboard
+    needs: [build-and-publish-ui]
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@PRM-308
+    with:
+      environment: ${{ github.event.inputs.environment }}
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      terraform_stack: gp2gp-dashboard
+      image_tag: gp2gp_dashboard
+      build_lambda: true
+    secrets: inherit
+
+  redeploy_gp2gp_infrastructure_step_functions:
+    name: Redeploy gp2gp infrastructure step functions
+    needs: [redeploy_gp2gp_infrastructure_dashboard]
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@PRM-308
+    with:
+      environment: ${{ github.event.inputs.environment }}
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      terraform_stack: step-function
+    secrets: inherit
