@@ -5,13 +5,15 @@ on:
     branches: [ main ]
     paths:
       - 'dashboard/**'
-      - '.github/workflows/build-and-publish-dashboard.yml'
+      - '.github/workflows/dashboard-build-and-deploy.yml'
+      - '.github/workflows/dashboard-ci.yml'
 
   pull_request:
     branches: [ main ]
     paths:
       - 'dashboard/**'
-      - '.github/workflows/build-and-publish-dashboard.yml'
+      - '.github/workflows/dashboard-build-and-deploy.yml'
+      - '.github/workflows/dashboard-ci.yml'
 
 permissions:
   pull-requests: write
