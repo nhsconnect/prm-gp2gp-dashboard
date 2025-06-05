@@ -1,21 +1,19 @@
-name: Dashboard CI
+name: Services CI
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'dashboard/**'
       - 'services/**'
-      - '.github/workflows/dashboard-build-and-deploy.yml'
-      - '.github/workflows/dashboard-ci.yml'
+      - '.github/workflows/services-build-and-deploy.yml'
+      - '.github/workflows/services-ci.yml'
 
   pull_request:
     branches: [ main ]
     paths:
-      - 'dashboard/**'
       - 'services/**'
-      - '.github/workflows/dashboard-build-and-deploy.yml'
-      - '.github/workflows/dashboard-ci.yml'
+      - '.github/workflows/services-build-and-deploy.yml'
+      - '.github/workflows/services-ci.yml'
 
 permissions:
   pull-requests: write
@@ -70,8 +68,6 @@ jobs:
         
       - name: Run E2E tests
         run: ./tasks canary-test-e2e
-    
-  
 
   build-and-publish-ui:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && contains(github.event.pull_request.changed_files, 'dashboard/')

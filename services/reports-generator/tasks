@@ -48,15 +48,9 @@ do
     validate)
       ./tasks format typecheck lint test
       ;;
-    dojo-validate)
-      dojo "./tasks devenv validate"
-      ;;
     dep)
       ./tasks output-versions
       ./tasks check-deps > audit-output.txt
-      ;;
-    dojo-dep)
-      dojo "./tasks devenv dep"
       ;;
     publish-docker)
       if [ -z $IMAGE_TAG ]; then

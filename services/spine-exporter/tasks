@@ -48,9 +48,6 @@ do
     validate)
         ./tasks check-format typecheck lint test
         ;;
-    dojo-validate)
-        dojo "./tasks devenv validate"
-        ;;
     publish-docker)
         if [ -z $IMAGE_TAG ]; then
             echo "Please set IMAGE_TAG environment variable"
