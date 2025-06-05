@@ -1,0 +1,40 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+prm-spine-exporter = {editable = true, path = "."}
+
+[dev-packages]
+black = "==22.3.0"
+bandit = "~=1.7"
+flake8 = "~=3.9"
+flake8-bugbear="~=21.9"
+flake8-comprehensions="~=3.6"
+mccabe="~=0.6"
+flake8-builtins="~=1.5"
+flake8-print="~=4.0"
+freezegun = "~=1.1"
+isort = "~=5.9"
+moto = {version = "~=4.1.4", extras = ["server"]}
+mypy = "~=0.9"
+pytest-cov = "~=3.0"
+pytest = "~=6.2"
+types-freezegun = "~=1.1"
+types-requests = "~=2.26"
+types-python-dateutil = "~=2.8"
+urllib3 = "==1.26.18"
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+test = "pytest --cov=prmexporter --cov-report=term-missing tests/unit tests/e2e"
+e2etest-verbose = "pytest  -p no:logging -rA tests/e2e"
+format-import = "isort src/ tests/ setup.py"
+format = "black -t py39 -l100 src/ scripts/ tests/ setup.py"
+check-format = "black --check -t py39 -l100 src/ tests/ setup.py"
+typecheck = "mypy src/ tests/"
+lint-flake8 = "flake8 src/ tests/ setup.py"
+lint-bandit = "bandit -r src/"

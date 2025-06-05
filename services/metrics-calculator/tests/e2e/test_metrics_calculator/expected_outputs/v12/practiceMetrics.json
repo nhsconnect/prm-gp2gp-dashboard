@@ -1,0 +1,148 @@
+{
+  "generatedOn": "2020-02-24 16:51:21.353977",
+  "practices": [
+    {
+      "metrics": [
+        {
+          "month": 12,
+          "requestedTransfers": {
+            "requestedCount": 8,
+            "receivedCount": 6,
+            "receivedPercentOfRequested": 75.0,
+            "integratedWithin3DaysCount": 1,
+            "integratedWithin3DaysPercentOfReceived": 16.7,
+            "integratedWithin8DaysCount": 1,
+            "integratedWithin8DaysPercentOfReceived": 16.7,
+            "notIntegratedWithin8DaysPercentOfReceived": 66.7,
+            "notIntegratedWithin8DaysTotal": 4,
+            "failuresTotalCount": 2,
+            "failuresTotalPercentOfRequested": 25.0
+          },
+          "year": 2019
+        },
+        {
+          "month": 11,
+          "requestedTransfers": {
+            "failuresTotalCount": 0,
+            "failuresTotalPercentOfRequested": 0.0,
+            "integratedWithin3DaysCount": 0,
+            "integratedWithin3DaysPercentOfReceived": 0.0,
+            "integratedWithin8DaysCount": 1,
+            "integratedWithin8DaysPercentOfReceived": 100.0,
+            "notIntegratedWithin8DaysPercentOfReceived": 0.0,
+            "notIntegratedWithin8DaysTotal": 0,
+            "receivedCount": 1,
+            "receivedPercentOfRequested": 100.0,
+            "requestedCount": 1
+          },
+          "year": 2019
+        }
+      ],
+      "name": "Test GP Practice with Integrations",
+      "odsCode": "A12345",
+      "sicblOdsCode": "10D",
+      "sicblName": "Test ICB - 10D"
+    },
+    {
+      "metrics": [
+        {
+          "month": 12,
+          "requestedTransfers": {
+            "requestedCount": 3,
+            "failuresTotalCount": 1,
+            "failuresTotalPercentOfRequested": 33.3,
+            "integratedWithin3DaysCount": 1,
+            "integratedWithin3DaysPercentOfReceived": 50.0,
+            "integratedWithin8DaysCount": 1,
+            "integratedWithin8DaysPercentOfReceived": 50.0,
+            "notIntegratedWithin8DaysPercentOfReceived": 0.0,
+            "notIntegratedWithin8DaysTotal": 0,
+            "receivedCount": 2,
+            "receivedPercentOfRequested": 66.7
+          },
+          "year": 2019
+        },
+        {
+          "month": 11,
+          "requestedTransfers": {
+            "failuresTotalCount": 0,
+            "failuresTotalPercentOfRequested": null,
+            "integratedWithin3DaysCount": 0,
+            "integratedWithin3DaysPercentOfReceived": null,
+            "integratedWithin8DaysCount": 0,
+            "integratedWithin8DaysPercentOfReceived": null,
+            "notIntegratedWithin8DaysPercentOfReceived": null,
+            "notIntegratedWithin8DaysTotal": 0,
+            "receivedCount": 0,
+            "receivedPercentOfRequested": null,
+            "requestedCount": 0
+          },
+          "year": 2019
+        }
+      ],
+      "name": "Test GP Practice with some Integrations",
+      "odsCode": "A12347",
+      "sicblOdsCode": "11D",
+      "sicblName": "Another Test ICB - 11D"
+    },
+    {
+      "metrics": [
+        {
+          "month": 12,
+          "requestedTransfers": {
+            "requestedCount": 1,
+            "failuresTotalCount": 0,
+            "failuresTotalPercentOfRequested": 0,
+            "integratedWithin3DaysCount": 1,
+            "integratedWithin3DaysPercentOfReceived": 100.0,
+            "integratedWithin8DaysCount": 0,
+            "integratedWithin8DaysPercentOfReceived": 0,
+            "notIntegratedWithin8DaysPercentOfReceived": 0,
+            "notIntegratedWithin8DaysTotal": 0,
+            "receivedCount": 1,
+            "receivedPercentOfRequested": 100.0
+          },
+          "year": 2019
+        },
+        {
+          "month": 11,
+          "requestedTransfers": {
+            "failuresTotalCount": 0,
+            "failuresTotalPercentOfRequested": null,
+            "integratedWithin3DaysCount": 0,
+            "integratedWithin3DaysPercentOfReceived": null,
+            "integratedWithin8DaysCount": 0,
+            "integratedWithin8DaysPercentOfReceived": null,
+            "notIntegratedWithin8DaysPercentOfReceived": null,
+            "notIntegratedWithin8DaysTotal": 0,
+            "receivedCount": 0,
+            "receivedPercentOfRequested": null,
+            "requestedCount": 0
+          },
+          "year": 2019
+        }
+      ],
+      "name": "Test GP Practice with an Integration",
+      "odsCode": "Z12347",
+      "sicblOdsCode": "11D",
+      "sicblName": "Another Test ICB - 11D"
+    }
+  ],
+  "sicbls": [
+    {
+      "odsCode": "10D",
+      "name": "Test ICB - 10D",
+      "practices": [
+        "A12345"
+      ]
+    },
+    {
+      "odsCode": "11D",
+      "name": "Another Test ICB - 11D",
+      "practices": [
+        "A12347",
+        "Z12347"
+      ]
+    }
+  ]
+}

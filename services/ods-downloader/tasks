@@ -1,0 +1,79 @@
+#!/bin/bash
+
+set -Eeo pipefail
+
+for command in "$@"
+do
+  echo "--- ${command} ---"
+  case "${command}" in
+    test)
+      pipenv run test
+      ;;
+    format)
+      pipenv run format-import
+      pipenv run format
+      ;;
+    check-format)
+      pipenv run check-format
+      ;;
+    lint)
+      pipenv run lint-flake8
+      pipenv run lint-bandit
+      ;;
+    typecheck)
+      pipenv run typecheck
+      ;;
+    output-versions)
+      pip --version
+      python --version
+      pipenv --version
+      ;;
+    check-deps)
+      pipenv check
+      ;;
+    clean)
+      find ./tests -type f -name "*.pyc" -delete
+      find ./tests -type d -name "__pycache__" -delete
+      find ./src -type f -name "*.pyc" -delete
+      find ./src -type d -name "__pycache__" -delete
+      find ./src -type f -path "*.egg-info*" -delete
+      find ./src -type d -path "*.egg-info" -delete
+      rm -rf build/ dist/ .pytest_cache/
+      ;;
+    devenv)
+      echo "./tasks validate" > .git/hooks/pre-commit
+      chmod +x .git/hooks/pre-commit
+      pipenv install -d
+      ;;
+    validate)
+      ./tasks check-format typecheck lint test
+      ;;
+    dojo-validate)
+      dojo "./tasks devenv validate"
+      ;;
+    dep)
+        ./tasks output-versions
+        ./tasks check-deps > audit-output.txt
+        ;;
+    dojo-dep)
+        dojo "./tasks devenv dep"
+        ;;
+    publish-docker)
+      if [ -z $IMAGE_TAG ]; then
+          echo "Please set IMAGE_TAG environment variable"
+          exit 1
+      fi
+      ecr_login=$(dojo "./scripts/ecr-helper get-login")
+      ecr_repo_uri=$(dojo "./scripts/ecr-helper get-repo-uri")
+      docker build -t ${ecr_repo_uri}:latest -t ${ecr_repo_uri}:${IMAGE_TAG} --build-arg IMAGE_TAG=$IMAGE_TAG .
+      eval $ecr_login
+      docker push ${ecr_repo_uri}:${IMAGE_TAG}
+      ;;
+    *)
+      echo "Invalid command: '${command}'"
+      exit 1
+      ;;
+  esac
+done
+
+set +e

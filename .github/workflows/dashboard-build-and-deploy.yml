@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   build-and-publish-ui:
-    environment: ${{ inputs.environment || github.event.inputs.environment }}
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -77,7 +77,7 @@ jobs:
     needs: [build-and-publish-ui]
     uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@main
     with:
-      environment: ${{ inputs.environment || github.event.inputs.environment }}
+      environment: ${{ inputs.environment }}
       is_deployment: ${{ github.ref == 'refs/heads/main' }}
       terraform_stack: gp2gp-dashboard
       image_tag: gp2gp_dashboard
@@ -89,7 +89,7 @@ jobs:
     needs: [redeploy_gp2gp_infrastructure_dashboard]
     uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@main
     with:
-      environment: ${{ inputs.environment || github.event.inputs.environment }}
+      environment: ${{ inputs.environment }}
       is_deployment: ${{ github.ref == 'refs/heads/main' }}
       terraform_stack: step-function
     secrets: inherit
