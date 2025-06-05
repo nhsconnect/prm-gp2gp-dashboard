@@ -58,9 +58,6 @@ jobs:
           python -m pip install -U pipenv
           ./tasks devenv
 
-      - name: Install dependencies
-        run: pipenv install --dev
-
       - name: Check formatting
         run: pipenv run check-format
 

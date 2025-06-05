@@ -41,9 +41,7 @@ class SICBLLevelIntegrationTimesReportsGenerator(ReportsGenerator):
 
     def _calculate_sla_band(self, transfer_dataframe: DataFrame) -> DataFrame:
         return transfer_dataframe.with_columns(
-            col("sla_duration")
-            .apply(assign_to_sla_band, return_dtype=pl.Utf8)
-            .alias("sla_band")
+            col("sla_duration").apply(assign_to_sla_band, return_dtype=pl.Utf8).alias("sla_band")
         )
 
     def _calculate_integrated_within_3_days(self, transfer_dataframe: DataFrame) -> DataFrame:
