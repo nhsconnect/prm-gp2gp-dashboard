@@ -1,0 +1,69 @@
+{
+  "conversation_id": [
+    "failed--A12345"
+  ],
+  "date_requested": [
+    "2019-12-19T18:02:29.985000"
+  ],
+  "last_sender_message_timestamp": [
+    "2019-12-19T18:03:29.985000"
+  ],
+  "requesting_practice_asid": [
+    "123456789123"
+  ],
+  "requesting_practice_name": [
+    "Test GP Practice D"
+  ],
+  "requesting_supplier": [
+    "SupplierB"
+  ],
+  "requesting_practice_ods_code": [
+    "A12347"
+  ],
+  "requesting_practice_sicbl_ods_code": [
+    "10D"
+  ],
+  "requesting_practice_sicbl_name": [
+    "Test ICB 1"
+  ],
+  "sending_practice_asid": [
+    "987654321242"
+  ],
+  "sending_practice_name": [
+    "Test GP Practice C"
+  ],
+  "sending_supplier": [
+    "SupplierC"
+  ],
+  "sending_practice_ods_code": [
+    "G54637"
+  ],
+  "sending_practice_sicbl_ods_code": [
+    "33A"
+  ],
+  "sending_practice_sicbl_name": [
+    "Test ICB 5"
+  ],
+  "sla_duration": [
+    52706
+  ],
+  "status": [
+    "Technical failure"
+  ],
+  "failure_reason": [
+    "Final error"
+  ],
+  "final_error_codes": [
+    [
+      26,
+      26
+    ]
+  ],
+  "sender_error_codes": [
+    []
+  ],
+  "intermediate_error_codes": [
+    []
+  ]
+}
+

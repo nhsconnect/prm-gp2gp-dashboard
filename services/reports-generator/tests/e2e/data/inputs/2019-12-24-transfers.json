@@ -1,0 +1,66 @@
+{
+  "conversation_id": [
+    "awaiting-integration2--A12345"
+  ],
+  "date_requested": [
+    "2019-12-24T18:02:29.985000"
+  ],
+  "last_sender_message_timestamp": [
+    "2019-12-24T18:03:29.985000"
+  ],
+  "requesting_practice_asid": [
+    "123456789123"
+  ],
+  "requesting_practice_name": [
+    "Test GP Practice D"
+  ],
+  "requesting_supplier": [
+    "SupplierA"
+  ],
+  "requesting_practice_ods_code": [
+    "A12347"
+  ],
+  "requesting_practice_sicbl_ods_code": [
+    "10D"
+  ],
+  "requesting_practice_sicbl_name": [
+    "Test ICB 1"
+  ],
+  "sending_practice_asid": [
+    "987654321241"
+  ],
+  "sending_practice_name": [
+    "Test GP Practice E"
+  ],
+  "sending_supplier": [
+    "SupplierC"
+  ],
+  "sending_practice_ods_code": [
+    null
+  ],
+  "sending_practice_sicbl_ods_code": [
+    null
+  ],
+  "sending_practice_sicbl_name": [
+    null
+  ],
+  "sla_duration": [
+    null
+  ],
+  "status": [
+    "Process failure"
+  ],
+  "failure_reason": [
+    "Transferred, not integrated"
+  ],
+  "final_error_codes": [
+    []
+  ],
+  "sender_error_codes": [
+    []
+  ],
+  "intermediate_error_codes": [
+    []
+  ]
+}
+
