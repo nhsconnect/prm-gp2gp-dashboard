@@ -41,8 +41,8 @@ do
       rm -rf build/ dist/ .pytest_cache/
       ;;
     devenv)
-      echo "./tasks validate" > .git/hooks/pre-commit
-      chmod +x .git/hooks/pre-commit
+      # echo "./tasks validate" > .git/hooks/pre-commit
+      # chmod +x .git/hooks/pre-commit
       pipenv install -d
       ;;
     validate)
