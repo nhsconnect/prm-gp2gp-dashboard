@@ -42,7 +42,7 @@ do
         ;;
     devenv)
         # echo "./tasks validate" > .git/hooks/pre-commit
-        chmod +x .git/hooks/pre-commit
+        # chmod +x .git/hooks/pre-commit
         pipenv install -d
         ;;
     validate)
