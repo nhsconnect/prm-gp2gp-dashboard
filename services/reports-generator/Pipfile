@@ -36,6 +36,6 @@ test = "pytest --cov=prmreportsgenerator --cov-report=term-missing tests/unit te
 format-import = "isort src/ tests/ setup.py"
 format = "black -t py39 -l100 src/ tests/ setup.py"
 check-format = "black --check -t py39 -l100 src/ tests/ setup.py"
-typecheck = "mypy src/ tests/ --warn-unused-ignores"
+typecheck = "mypy --strict --no-warn-unused-ignores src/ tests/"
 lint-flake8 = "flake8 src/ tests/ setup.py"
 lint-bandit = "bandit -r src/"
