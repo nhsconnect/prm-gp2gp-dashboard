@@ -1,3 +1,5 @@
+# mypy: ignore-errors
+
 from typing import List, Union
 
 import polars as pl

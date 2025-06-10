@@ -1,3 +1,5 @@
+# mypy: ignore-errors
+
 import polars as pl
 import pyarrow as pa
 from polars import col

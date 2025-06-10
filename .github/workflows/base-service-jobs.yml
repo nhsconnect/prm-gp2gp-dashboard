@@ -80,8 +80,12 @@ jobs:
       run:
         working-directory: ./services/${{ inputs.service_name }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+             
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -103,15 +107,10 @@ jobs:
           --query "Parameter.Value" --output text)
           echo "uri=$uri" >> $GITHUB_OUTPUT
 
-      # - name: Setup Node
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version-file: dashboard/.nvmrc
-      #     cache: 'npm'
-      #     cache-dependency-path: dashboard/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Make virtual environment
+        run: |
+          python -m pip install -U pipenv
+          ./tasks devenv
 
       - name: Build and Push Docker Image
         env:
