@@ -103,7 +103,7 @@ jobs:
         id: ecr-repo
         run: |
           uri=$(aws ssm get-parameter \
-          --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/gp2gp-dashboard" \
+          --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/${{ inputs.service_name }}" \
           --query "Parameter.Value" --output text)
           echo "uri=$uri" >> $GITHUB_OUTPUT
 
@@ -120,3 +120,35 @@ jobs:
           docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
           docker push $ECR_URI:$IMAGE_TAG
           docker push $ECR_URI:latest
+
+  transform-service-name:
+    name: Transform Service Name
+    needs: [build-and-publish-ui]
+    runs-on: ubuntu-latest
+    outputs:
+      sanitized_service_name: ${{ steps.set.outputs.sanitized }}
+    steps:
+      - id: set
+        run: echo "sanitized=${{ inputs.service_name }}" | sed 's/-/_/g' >> "$GITHUB_OUTPUT"
+
+  redeploy_image_on_infra:
+    name: Redeploy image on Infrastructure
+    needs: [transform-service-name]
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      terraform_stack: ${{ inputs.service_name }}
+      image_tag: ${{ needs.transform-service-name.outputs.sanitized_service_name }}
+      build_lambda: true
+    secrets: inherit
+
+  redeploy_step_functions_on_infra:
+    name: Redeploy step functions on infrastructure 
+    needs: [redeploy_image_on_infra]
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@main
+    with:
+      environment: ${{ inputs.environment }}
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      terraform_stack: step-function
+    secrets: inherit
