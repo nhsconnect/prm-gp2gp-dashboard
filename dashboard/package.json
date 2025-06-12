@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1103.0",
-    "axios": "1.2.3",
+    "axios": "1.9.0",
     "better-npm-audit": "^3.7.3",
     "classnames": "^2.3.1",
     "date-fns": "^2.28.0",
@@ -75,7 +75,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.14",
     "@types/jest-when": "^3.5.2",
-    "@types/moxios": "^0.4.15",
+    "@types/moxios": "^0.4.17",
     "@types/no-scroll": "^2.1.0",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
