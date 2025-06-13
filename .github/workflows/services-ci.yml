@@ -5,14 +5,14 @@ on:
     branches: [ main ]
     paths:
       - 'services/**'
-      - '.github/workflows/services-build-and-deploy.yml'
+      - '.github/workflows/base-service-jobs.yml'
       - '.github/workflows/services-ci.yml'
 
   pull_request:
     branches: [ main ]
     paths:
       - 'services/**'
-      - '.github/workflows/services-build-and-deploy.yml'
+      - '.github/workflows/base-service-jobs.yml'
       - '.github/workflows/services-ci.yml'
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
 
    metrics-calculator:
     needs: get-changed-files
-    if: contains(needs.get-changed-files.outputs.changed, 'services/metrics-calculator/')
+    if: contains(needs.get-changed-files.outputs.changed, 'services/metrics-calculator/') || contains(needs.get-changed-files.outputs.changed, '.github/')
     uses: ./.github/workflows/base-service-jobs.yml
     with:
       environment: dev
@@ -49,7 +49,7 @@ jobs:
 
    ods-downloader:
     needs: get-changed-files
-    if: contains(needs.get-changed-files.outputs.changed, 'services/ods-downloader/')
+    if: contains(needs.get-changed-files.outputs.changed, 'services/ods-downloader/') || contains(needs.get-changed-files.outputs.changed, '.github/')
     uses: ./.github/workflows/base-service-jobs.yml
     with:
       environment: dev
@@ -59,7 +59,7 @@ jobs:
 
    reports-generator:
     needs: get-changed-files
-    if: contains(needs.get-changed-files.outputs.changed, 'services/reports-generator/')
+    if: contains(needs.get-changed-files.outputs.changed, 'services/reports-generator/') || contains(needs.get-changed-files.outputs.changed, '.github/')
     uses: ./.github/workflows/base-service-jobs.yml
     with:
       environment: dev
@@ -69,7 +69,7 @@ jobs:
 
    spine-exporter:
     needs: get-changed-files
-    if: contains(needs.get-changed-files.outputs.changed, 'services/spine-exporter/')
+    if: contains(needs.get-changed-files.outputs.changed, 'services/spine-exporter/') || contains(needs.get-changed-files.outputs.changed, '.github/')
     uses: ./.github/workflows/base-service-jobs.yml
     with:
       environment: dev
@@ -79,7 +79,7 @@ jobs:
 
    transfer-classifier:
     needs: get-changed-files
-    if: contains(needs.get-changed-files.outputs.changed, 'services/transfer-classifier/')
+    if: contains(needs.get-changed-files.outputs.changed, 'services/transfer-classifier/') || contains(needs.get-changed-files.outputs.changed, '.github/')
     uses: ./.github/workflows/base-service-jobs.yml
     with:
       environment: dev

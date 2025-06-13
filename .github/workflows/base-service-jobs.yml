@@ -7,11 +7,19 @@ on:
         default: "dev"
         description: "Which environment should this run against"
         required: true
-        type: string
+        type: choice
+        options:
+          - dev
       service_name:
         description: "Which Service are we running against?"
         required: true
-        type: string  
+        type: choice
+        options:
+          - spine-exporter
+          - ods-downloader
+          - transfer-classifier
+          - metrics-calculator
+          - reports-generator
       is_deployment:
         description: "Do you want changes deployed?"
         required: true
@@ -43,8 +51,8 @@ jobs:
   test-environment:
     runs-on: ubuntu-latest
     defaults:
-          run:
-            working-directory: ./services/${{ inputs.service_name }}
+      run:
+        working-directory: ./services/${{ inputs.service_name }}
     steps:
       - uses: actions/checkout@v4
              
@@ -105,6 +113,7 @@ jobs:
           uri=$(aws ssm get-parameter \
           --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/${{ inputs.service_name }}" \
           --query "Parameter.Value" --output text)
+          echo "::add-mask::$uri"
           echo "uri=$uri" >> $GITHUB_OUTPUT
 
       - name: Make virtual environment

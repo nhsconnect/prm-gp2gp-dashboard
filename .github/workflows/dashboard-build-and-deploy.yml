@@ -7,7 +7,9 @@ on:
         default: "dev"
         description: "Which environment should this run against"
         required: true
-        type: string
+        type: choice
+        options:
+          - dev
           
   workflow_call:
     inputs:
@@ -24,6 +26,7 @@ permissions:
 
 jobs:
   build-and-publish-ui:
+    if: inputs.environment == 'dev'
     environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     defaults:
@@ -51,6 +54,7 @@ jobs:
           uri=$(aws ssm get-parameter \
           --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/gp2gp-dashboard" \
           --query "Parameter.Value" --output text)
+          echo "::add-mask::$uri"
           echo "uri=$uri" >> $GITHUB_OUTPUT
 
       - name: Setup Node
