@@ -1,0 +1,28 @@
+{
+    "conversation_id": [
+        "integrated-within-8-days-in-nov--A12345"
+    ],
+    "date_requested": [
+        "2019-11-01T18:02:29.985000"
+    ],
+    "last_sender_message_timestamp": [
+        "2019-11-01T18:03:29.985000"
+    ],
+    "requesting_practice_asid": [
+        "123456789123"
+    ],
+    "requesting_supplier": [""],
+    "sending_supplier": ["SupplierA"],
+    "sla_duration": [398306],
+    "status": [
+        "Integrated on time"
+    ],
+    "failure_reason": [""],
+    "final_error_codes": [[0]],
+    "sender_error_codes": [[0]],
+    "intermediate_error_codes": [[0]],
+    "requesting_practice_ods_code": ["A12345"],
+    "requesting_practice_name": ["Test GP Practice with Integrations"],
+    "requesting_practice_sicbl_ods_code": ["10D"],
+    "requesting_practice_sicbl_name": ["Test ICB - 10D"]
+}
