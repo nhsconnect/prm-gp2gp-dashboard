@@ -1,0 +1,36 @@
+{
+  "generatedOn": "2020-02-24 16:51:21.353977",
+  "metrics": [
+    {
+      "integratedOnTime": {
+        "transferCount": 5,
+        "transferPercentage": 41.67
+      },
+      "month": 12,
+      "transferCount": 12,
+      "year": 2019,
+      "paperFallback": {
+        "processFailure": {
+          "integratedLate": {
+            "transferCount": 1,
+            "transferPercentage": 8.33
+          },
+          "transferredNotIntegrated": {
+            "transferCount": 3,
+            "transferPercentage": 25.0
+          }
+        },
+        "technicalFailure": {
+          "transferCount": 2,
+          "transferPercentage": 16.67
+        },
+        "transferCount": 7,
+        "transferPercentage": 58.33,
+        "unclassifiedFailure": {
+          "transferCount": 1,
+          "transferPercentage": 8.33
+        }
+      }
+    }
+  ]
+}

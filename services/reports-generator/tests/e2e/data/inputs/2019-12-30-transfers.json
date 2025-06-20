@@ -1,0 +1,66 @@
+{
+  "conversation_id": [
+    "completed-within-3-days-in-jan--A12345"
+  ],
+  "date_requested": [
+    "2019-12-30T18:02:29.985000"
+  ],
+  "last_sender_message_timestamp": [
+    "2019-12-30T18:03:29.985000"
+  ],
+  "requesting_practice_asid": [
+    "123456789123"
+  ],
+  "requesting_practice_name": [
+    "Test GP Practice D"
+  ],
+  "requesting_supplier": [
+    "SupplierC"
+  ],
+  "requesting_practice_ods_code": [
+    "A12347"
+  ],
+  "requesting_practice_sicbl_ods_code": [
+    "10D"
+  ],
+  "requesting_practice_sicbl_name": [
+    "Test ICB 1"
+  ],
+  "sending_practice_asid": [
+    "987654321245"
+  ],
+  "sending_practice_name": [
+    "Test GP Practice BB"
+  ],
+  "sending_supplier": [
+    "SupplierA"
+  ],
+  "sending_practice_ods_code": [
+    "B22345"
+  ],
+  "sending_practice_sicbl_ods_code": [
+    "14A"
+  ],
+  "sending_practice_sicbl_name": [
+    "Test ICB 2"
+  ],
+  "sla_duration": [
+    139106
+  ],
+  "status": [
+    "Integrated on time"
+  ],
+  "failure_reason": [
+    null
+  ],
+  "final_error_codes": [
+    []
+  ],
+  "sender_error_codes": [
+    []
+  ],
+  "intermediate_error_codes": [
+    []
+  ]
+}
+

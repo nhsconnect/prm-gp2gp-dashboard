@@ -1,0 +1,91 @@
+{
+  "conversation_id": [
+    "integrated-within-8-days--A12345",
+    "slow-transferred-integrated-within-8-days--A12345"
+  ],
+  "date_requested": [
+    "2019-12-01T18:02:29.985000",
+    "2019-12-01T18:02:29.985000"
+  ],
+  "last_sender_message_timestamp": [
+    "2019-12-01T18:03:29.985000",
+    "2019-12-04T18:03:29.985000"
+  ],
+  "requesting_practice_asid": [
+    "123456789123",
+    "123456789123"
+  ],
+  "requesting_practice_name": [
+    "Test GP Practice D",
+    "Test GP Practice D"
+  ],
+  "requesting_supplier": [
+    "",
+    ""
+  ],
+  "requesting_practice_ods_code": [
+    "A12347",
+    "A12347"
+  ],
+  "requesting_practice_sicbl_ods_code": [
+    "10D",
+    "10D"
+  ],
+  "requesting_practice_sicbl_name": [
+    "Test ICB 1",
+    "Test ICB 1"
+  ],
+  "sending_practice_asid": [
+    "987654321245",
+    "987654321245"
+  ],
+  "sending_practice_name": [
+    "Test GP Practice BB",
+    "Test GP Practice BB"
+  ],
+  "sending_practice_ods_code": [
+    "B22345",
+    "B22345"
+  ],
+  "sending_practice_sicbl_ods_code": [
+    "14A",
+    "14A"
+  ],
+  "sending_practice_sicbl_name": [
+    "Test ICB 2",
+    "Test ICB 2"
+  ],
+  "sending_supplier": [
+    "",
+    ""
+  ],
+  "sla_duration": [
+    398306,
+    598306
+  ],
+  "status": [
+    "Integrated on time",
+    "Integrated on time"
+  ],
+  "failure_reason": [
+    null,
+    null
+  ],
+  "final_error_codes": [
+    [],
+    []
+  ],
+  "sender_error_codes": [
+    [
+      25
+    ],
+    [
+      25
+    ]
+  ],
+  "intermediate_error_codes": [
+    [],
+    []
+  ]
+}
+
