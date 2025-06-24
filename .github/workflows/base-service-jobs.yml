@@ -80,7 +80,7 @@ jobs:
       - name: Run tests
         run: pipenv run test
               
-  build-and-publish-ui:
+  build-and-publish-service:
     if: inputs.is_deployment
     environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
@@ -132,7 +132,7 @@ jobs:
 
   transform-service-name:
     name: Transform Service Name
-    needs: [build-and-publish-ui]
+    needs: [build-and-publish-service]
     runs-on: ubuntu-latest
     outputs:
       sanitized_service_name: ${{ steps.set.outputs.sanitized }}
