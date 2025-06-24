@@ -143,7 +143,7 @@ jobs:
   redeploy_image_on_infra:
     name: Redeploy image on Infrastructure
     needs: [transform-service-name]
-    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@bd3de453ac2c7477e375809df5955d2a5adc461c
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@v2
     with:
       environment: ${{ inputs.environment }}
       is_deployment: ${{ github.ref == 'refs/heads/main' }}
@@ -155,7 +155,7 @@ jobs:
   redeploy_step_functions_on_infra:
     name: Redeploy step functions on infrastructure 
     needs: [redeploy_image_on_infra]
-    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@bd3de453ac2c7477e375809df5955d2a5adc461c
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@v2
     with:
       environment: ${{ inputs.environment }}
       is_deployment: ${{ github.ref == 'refs/heads/main' }}
