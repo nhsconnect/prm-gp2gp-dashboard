@@ -1,0 +1,163 @@
+name: Services Build and Deploy to Dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        default: "dev"
+        description: "Which environment should this run against"
+        required: true
+        type: choice
+        options:
+          - dev
+      service_name:
+        description: "Which Service are we running against?"
+        required: true
+        type: choice
+        options:
+          - spine-exporter
+          - ods-downloader
+          - transfer-classifier
+          - metrics-calculator
+          - reports-generator
+      is_deployment:
+        description: "Do you want changes deployed?"
+        required: true
+        type: boolean
+        default: false    
+  workflow_call:
+    inputs:
+      environment:
+        description: "Which Environment settings to use."
+        required: true
+        type: string
+        default: "dev"
+      service_name:
+        description: "Which Service are we running against?"
+        required: true
+        type: string
+      is_deployment:
+        description: "Do you want changes deployed?"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  pull-requests: write
+  id-token: write
+  contents: read
+
+jobs:
+  test-environment:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/${{ inputs.service_name }}
+    steps:
+      - uses: actions/checkout@v4
+             
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - name: Make virtual environment
+        run: |
+          python -m pip install -U pipenv
+          ./tasks devenv
+
+      - name: Check formatting
+        run: pipenv run check-format
+
+      - name: Run linters
+        run: |
+          pipenv run lint-flake8
+          pipenv run lint-bandit
+
+      - name: Type check
+        run: pipenv run typecheck
+
+      - name: Run tests
+        run: pipenv run test
+              
+  build-and-publish-service:
+    if: inputs.is_deployment
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/${{ inputs.service_name }}
+    steps:
+      - uses: actions/checkout@v4
+             
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          mask-aws-account-id: true
+          role-to-assume: ${{ secrets.AWS_ASSUME_ROLE }}
+          role-skip-session-tagging: true
+          aws-region: ${{ vars.AWS_REGION }}
+ 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get ECR repository URI from SSM
+        id: ecr-repo
+        run: |
+          uri=$(aws ssm get-parameter \
+          --name "/registrations/${{ vars.AWS_ENVIRONMENT }}/data-pipeline/ecr/url/${{ inputs.service_name }}" \
+          --query "Parameter.Value" --output text)
+          echo "::add-mask::$uri"
+          echo "uri=$uri" >> $GITHUB_OUTPUT
+
+      - name: Make virtual environment
+        run: |
+          python -m pip install -U pipenv
+          ./tasks devenv
+
+      - name: Build and Push Docker Image
+        env:
+          ECR_URI: ${{ steps.ecr-repo.outputs.uri }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
+          docker push $ECR_URI:$IMAGE_TAG
+          docker push $ECR_URI:latest
+
+  transform-service-name:
+    name: Transform Service Name
+    needs: [build-and-publish-service]
+    runs-on: ubuntu-latest
+    outputs:
+      sanitized_service_name: ${{ steps.set.outputs.sanitized }}
+    steps:
+      - id: set
+        run: echo "sanitized=${{ inputs.service_name }}" | sed 's/-/_/g' >> "$GITHUB_OUTPUT"
+
+  redeploy_image_on_infra:
+    name: Redeploy image on Infrastructure
+    needs: [transform-service-name]
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@v2
+    with:
+      environment: ${{ inputs.environment }}
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      terraform_stack: ${{ inputs.service_name }}
+      image_tag: ${{ needs.transform-service-name.outputs.sanitized_service_name }}
+      build_lambda: true
+    secrets: inherit
+
+  redeploy_step_functions_on_infra:
+    name: Redeploy step functions on infrastructure 
+    needs: [redeploy_image_on_infra]
+    uses: nhsconnect/prm-gp2gp-data-pipeline-infra/.github/workflows/base-terraform-plan-and-apply.yml@v2
+    with:
+      environment: ${{ inputs.environment }}
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      terraform_stack: step-function
+    secrets: inherit

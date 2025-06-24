@@ -1,0 +1,19 @@
+{
+  "conversation_id": [],
+  "date_requested": [],
+  "last_sender_message_timestamp": [],
+  "requesting_practice_asid": [],
+  "requesting_supplier": [],
+  "sending_supplier": [],
+  "sla_duration": [],
+  "status": [],
+  "failure_reason": [],
+  "final_error_codes": [],
+  "sender_error_codes": [],
+  "intermediate_error_codes": [],
+  "requesting_practice_ods_code": [],
+  "requesting_practice_name": [],
+  "requesting_practice_sicbl_ods_code": [],
+  "requesting_practice_sicbl_name": []
+}
+

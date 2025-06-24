@@ -26,3 +26,16 @@ dashboard/src/data/organisations/
 dashboard/e2e/screenshots/
 dashboard/e2e/videos/
 dashboard/e2e/downloads/
+
+*build/
+*dist/
+*venv/*
+*.mypy_cache/
+*.pyc
+*.egg-info
+*.tox
+gp2gp_reports_generator.egg-info
+.coverage
+audit-output.txt
+typings
+gp2gp_examples.md

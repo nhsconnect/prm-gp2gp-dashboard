@@ -1,0 +1,3 @@
+sending practice ASID, sending supplier, sending practice ODS code, sending practice Sub ICB Location ODS code, requesting practice ASID, requesting supplier, requesting practice ODS code, requesting practice Sub ICB Location ODS code, conversation ID, date requested, status, failure reason, unique final errors, unique sender errors, unique intermediate errors
+"987654321242", "SupplierC", "G54637", "33A", "123456789123", "SupplierB", "A12347", "10D", "failed--A12345", "2019-12-19 18:02:29.985000", "Technical failure", "Final error", "26 - Filed as attachment", "", ""
+"987654321241", "SupplierB", "", "", "123456789123", "SupplierA", "A12347", "10D", "failed2--A12345", "2019-12-20 18:02:29.985000", "Technical failure", "Final error", "19 - Unauthorised req", "", ""

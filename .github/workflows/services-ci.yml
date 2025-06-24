@@ -1,0 +1,88 @@
+name: Services CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'services/**'
+      - '.github/workflows/base-service-jobs.yml'
+      - '.github/workflows/services-ci.yml'
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'services/**'
+      - '.github/workflows/base-service-jobs.yml'
+      - '.github/workflows/services-ci.yml'
+
+permissions:
+  pull-requests: write
+  id-token: write
+  contents: read
+
+jobs:
+   get-changed-files:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.get-changes.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: get-changes
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          changed=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD | tr '\n' ' ')
+          echo "changed=$changed" >> $GITHUB_OUTPUT
+
+   metrics-calculator:
+    needs: get-changed-files
+    if: contains(needs.get-changed-files.outputs.changed, 'services/metrics-calculator/') || contains(needs.get-changed-files.outputs.changed, '.github/')
+    uses: ./.github/workflows/base-service-jobs.yml
+    with:
+      environment: dev
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      service_name: metrics-calculator
+    secrets: inherit
+
+   ods-downloader:
+    needs: get-changed-files
+    if: contains(needs.get-changed-files.outputs.changed, 'services/ods-downloader/') || contains(needs.get-changed-files.outputs.changed, '.github/')
+    uses: ./.github/workflows/base-service-jobs.yml
+    with:
+      environment: dev
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      service_name: ods-downloader
+    secrets: inherit
+
+   reports-generator:
+    needs: get-changed-files
+    if: contains(needs.get-changed-files.outputs.changed, 'services/reports-generator/') || contains(needs.get-changed-files.outputs.changed, '.github/')
+    uses: ./.github/workflows/base-service-jobs.yml
+    with:
+      environment: dev
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      service_name: reports-generator
+    secrets: inherit
+
+   spine-exporter:
+    needs: get-changed-files
+    if: contains(needs.get-changed-files.outputs.changed, 'services/spine-exporter/') || contains(needs.get-changed-files.outputs.changed, '.github/')
+    uses: ./.github/workflows/base-service-jobs.yml
+    with:
+      environment: dev
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      service_name: spine-exporter
+    secrets: inherit
+
+   transfer-classifier:
+    needs: get-changed-files
+    if: contains(needs.get-changed-files.outputs.changed, 'services/transfer-classifier/') || contains(needs.get-changed-files.outputs.changed, '.github/')
+    uses: ./.github/workflows/base-service-jobs.yml
+    with:
+      environment: dev
+      is_deployment: ${{ github.ref == 'refs/heads/main' }}
+      service_name: transfer-classifier
+    secrets: inherit

@@ -1,0 +1,24 @@
+{
+  "conversation_id": [],
+  "date_requested": [],
+  "last_sender_message_timestamp": [],
+  "requesting_practice_asid": [],
+  "requesting_practice_name": [],
+  "requesting_supplier": [],
+  "requesting_practice_ods_code": [],
+  "requesting_practice_sicbl_ods_code": [],
+  "requesting_practice_sicbl_name": [],
+  "sending_practice_asid": [],
+  "sending_practice_name": [],
+  "sending_supplier": [],
+  "sending_practice_ods_code": [],
+  "sending_practice_sicbl_ods_code": [],
+  "sending_practice_sicbl_name": [],
+  "sla_duration": [],
+  "status": [],
+  "failure_reason": [],
+  "final_error_codes": [],
+  "sender_error_codes": [],
+  "intermediate_error_codes": []
+}
+
