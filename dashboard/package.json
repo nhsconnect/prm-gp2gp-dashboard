@@ -103,7 +103,6 @@
     "got": "11.8.6",
     "loader-utils": "2.0.4",
     "netmask": "2.0.2",
-    "degenerator": "5.0.1",
     "pac-resolver": "5.0.1"
   }
 }
