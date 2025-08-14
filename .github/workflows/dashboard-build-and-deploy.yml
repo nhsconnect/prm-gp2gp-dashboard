@@ -75,7 +75,8 @@ jobs:
           docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
           docker push $ECR_URI:$IMAGE_TAG
           docker push $ECR_URI:latest
-
+          docker push $ECR_URI:${{ github.ref_name }}
+          
   redeploy_gp2gp_infrastructure_dashboard:
     name: Redeploy gp2gp infrastructure dashboard
     needs: [build-and-publish-ui]
