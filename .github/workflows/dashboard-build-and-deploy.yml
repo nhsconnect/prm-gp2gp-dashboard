@@ -72,7 +72,7 @@ jobs:
           ECR_URI: ${{ steps.ecr-repo.outputs.uri }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest --build-arg BUILD_TAG=$IMAGE_TAG .
+          docker build -t $ECR_URI:$IMAGE_TAG -t $ECR_URI:latest -t $ECR_URI:${{ github.ref_name }} --build-arg BUILD_TAG=$IMAGE_TAG .
           docker push $ECR_URI:$IMAGE_TAG
           docker push $ECR_URI:latest
           docker push $ECR_URI:${{ github.ref_name }}
