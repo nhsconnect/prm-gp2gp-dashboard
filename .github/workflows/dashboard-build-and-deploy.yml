@@ -78,7 +78,7 @@ jobs:
             REF_TAG="${REF_NAME//\//-}"
             TAG_ARGS+=(-t "$ECR_URI:$REF_TAG")
           fi
-          docker build "${TAG_ARGS[@]}" --build-arg BUILD_TAG="$IMAGE_TAG" 
+          docker build "${TAG_ARGS[@]}" --build-arg BUILD_TAG="$IMAGE_TAG" .
           docker push "$ECR_URI:$IMAGE_TAG"
           docker push "$ECR_URI:latest"
           if [ -n "${GITHUB_REF_NAME:-}" ]; then
