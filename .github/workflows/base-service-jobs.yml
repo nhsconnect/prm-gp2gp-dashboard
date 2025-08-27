@@ -123,6 +123,7 @@ jobs:
 
       - name: Build and Push Docker Image
         env:
+          REF_NAME: ${{ github.ref_name }}
           ECR_URI: ${{ steps.ecr-repo.outputs.uri }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
